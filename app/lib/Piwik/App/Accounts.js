@@ -6,17 +6,11 @@
  * @version $Id$
  */
 
-console.debug("1");
-
 /** @private */
 var Piwik   = require('Piwik');
 
-console.debug("2");
-
 /** @private */
 var storage = require('Piwik/App/Storage');
-
-console.debug("3");
 
 /**
  * @class   Provides the ability to manage multiple user accounts of multiple piwik server installations. Each created

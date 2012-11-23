@@ -75,7 +75,7 @@ function Storage () {
      */
     this.set = function (key, value) {
 
-        Piwik.getLog().debug('' + key + value, 'Piwik.App.Storage::set');
+        console.debug('' + key + value, 'Piwik.App.Storage::set');
 
         if (!key) {
 
@@ -105,7 +105,7 @@ function Storage () {
      */
     this.get = function (key) {
 
-        Piwik.getLog().debug('' + key, 'Piwik.App.Storage::get');
+        console.debug('' + key, 'Piwik.App.Storage::get');
 
         if (!key) {
 
@@ -125,7 +125,7 @@ function Storage () {
             if ((!storeEntry.version || Ti.App.version !== storeEntry.version)
                  && 0 !== key.indexOf(this._addStorageKeyPrefix('account'))) {
 
-                Piwik.getLog().debug('Store invalid because of new app version' + Ti.App.version, 
+                console.debug('Store invalid because of new app version' + Ti.App.version, 
                                      'Piwik.App.Storage::get#invalid');
 
                 // clear stored entry because entry is not in valid time range
@@ -137,7 +137,7 @@ function Storage () {
             return storeEntry.value;
         }
 
-        Piwik.getLog().debug('Not existing key ' + key, 'Piwik.App.Storage::get#notExisting');
+        console.debug('Not existing key ' + key, 'Piwik.App.Storage::get#notExisting');
 
         return this.KEY_NOT_FOUND;
     };
@@ -153,7 +153,7 @@ function Storage () {
      */
     this.remove = function (key) {
 
-        Piwik.getLog().debug('' + key, 'Piwik.App.Storage::remove');
+        console.debug('' + key, 'Piwik.App.Storage::remove');
 
         if (!key) {
 

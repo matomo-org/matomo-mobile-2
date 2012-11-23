@@ -1,9 +1,12 @@
-console.log("Bar");
-
 require("Piwik");
-require("Piwik/App/Accounts");
 
-console.log("Foo");
+var Accounts = require("Piwik/App/Accounts");
+var acc = new Accounts();
+
+var configuredAccounts = acc.getAccounts();
+if (configuredAccounts == 0) {
+	$.index.open();
+}
 
 function login() 
 {
@@ -21,7 +24,4 @@ function login()
     
 }
 
-/*var configuredAccounts = accounts.getAccounts();
-if (configuredAccounts == 0) {
-	$.index.open();
-}*/
+
