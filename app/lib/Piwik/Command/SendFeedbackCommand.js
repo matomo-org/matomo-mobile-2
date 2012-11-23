@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class     Send us feedback via email command.

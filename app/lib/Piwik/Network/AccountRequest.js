@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik  = require('library/Piwik');
+var Piwik  = require('Piwik');
 
 /**
  * @class     Validates, verifies and saves given account information. Use this class if you want to add or update

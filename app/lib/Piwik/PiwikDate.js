@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik   = require('library/Piwik');
+var Piwik   = require('Piwik');
  
 /**
  * @class    The PiwikDate class provides some useful methods to handle the Piwik Date/Period. For example converting

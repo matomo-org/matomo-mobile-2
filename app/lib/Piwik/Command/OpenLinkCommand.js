@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class     Opens any URL, for example a website. It does also automatically track the given url.

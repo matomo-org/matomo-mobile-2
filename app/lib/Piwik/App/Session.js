@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
  
 /**
  * @class    This simple session manager preserves certain data across multiple Piwik.UI.Windows. Each session entry is

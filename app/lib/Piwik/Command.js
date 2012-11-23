@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class    The top level Command module. The module contains methods to create commands.

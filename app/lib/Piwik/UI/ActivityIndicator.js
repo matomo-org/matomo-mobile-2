@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class     An Activity Indicator is created by the method Piwik.UI.createActivityIndicator. An activity indicator can

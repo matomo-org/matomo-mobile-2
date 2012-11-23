@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /** 
  * @class    Creates and returns an instance of a Titanium TableViewSection. It does automatically set theme related 

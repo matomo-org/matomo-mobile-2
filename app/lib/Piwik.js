@@ -30,7 +30,7 @@ var Piwik        = {};
  */
 Piwik.require = function (module) {
 
-    var file   = 'library/Piwik/' + module;
+    var file   = 'Piwik/' + module;
     
     var target = require(file);
     

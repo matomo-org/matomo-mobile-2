@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class     A modal window is created by the method Piwik.UI.createModalWindow. The modal window UI widget

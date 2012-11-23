@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik   = require('library/Piwik');
+var Piwik   = require('Piwik');
 
 /**
  * @class    Can be used to send a GET http request to any url. Attend that synchronous requests are not supported at 

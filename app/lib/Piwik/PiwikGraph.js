@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik   = require('library/Piwik');
+var Piwik   = require('Piwik');
  
 /**
  * @class    This graph object provides some useful methods to assemble Piwik graph urls which can be displayed using a

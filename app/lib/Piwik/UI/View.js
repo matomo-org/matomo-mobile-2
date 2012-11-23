@@ -121,7 +121,7 @@ UiView.prototype.fireEventInWindow = function (name, event) {
     var window = this.getParam('window');
     
     if (!window) {
-        var Piwik = require('library/Piwik');
+        var Piwik = require('Piwik');
         Piwik.getLog().warn('Failed to fireEventInWindowContext: + ' + name + ' . Window does not exist', 
                             'Piwik.UI.View::fireEventInWindowContext');
         window = null;

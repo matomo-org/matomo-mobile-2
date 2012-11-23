@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class     A header is created by the method Piwik.UI.createrHeader. Creates a header view or uses the native header

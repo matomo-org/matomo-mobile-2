@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik       = require('library/Piwik');
+var Piwik       = require('Piwik');
 
 /**
  * @class     A statistic list is created by the method Piwik.UI.createStatisticList. It displays a list of all given

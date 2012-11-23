@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class     A live overview is created by the method Piwik.UI.createLiveOverview. The live overview UI widget displays

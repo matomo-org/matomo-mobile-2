@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik  = require('library/Piwik');
+var Piwik  = require('Piwik');
 
 /**
  * @class     An error UI widget is created by the method Piwik.UI.createError. The error UI widget is intended to

@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * Whether the user wants to be reminded after the next 40th app start. If this is false, we should make sure

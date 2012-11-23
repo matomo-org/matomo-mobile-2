@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class    Provides methods needed in most Network Requests. Serves as a base class for network classes. A request

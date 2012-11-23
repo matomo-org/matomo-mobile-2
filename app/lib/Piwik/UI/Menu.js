@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class     A menu is created by the method Piwik.UI.createMenu. Therefore, the menu adds buttons, icons, option menus

@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class     A graph is created by the method Piwik.UI.createGraph. The graph UI widget displays a rendered graph.

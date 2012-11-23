@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class    The top level UI module. The module contains methods to create UI widgets and to handle the layout as well

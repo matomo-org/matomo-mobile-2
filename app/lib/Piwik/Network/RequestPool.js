@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
 
 /**
  * @class    The RequestPool can be used to send multiple http requests in parallel. It is possible to specify

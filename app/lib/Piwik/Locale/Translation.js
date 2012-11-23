@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
  
 /**
  * @class    Provides some translation related methods. The translations for each language are stored within the

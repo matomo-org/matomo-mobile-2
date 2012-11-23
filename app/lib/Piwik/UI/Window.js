@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Piwik = require('library/Piwik');
+var Piwik = require('Piwik');
  
 /**
  * @class     Adds some further utilities like 'close' to a Titanium.UI.View.
