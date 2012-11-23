@@ -8,6 +8,3 @@ Resources/*
 
 !Resources/app.js
 !Resources/alloy.js
-!Resources/android/README.md
-!Resources/iphone/README.md
-!Resources/mobileweb/README.md
