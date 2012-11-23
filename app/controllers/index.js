@@ -1,6 +1,9 @@
 require("Piwik");
 
 var Accounts = require("Piwik/App/Accounts");
+var AccountRequest = require("Piwik/Network/AccountRequest");
+
+
 var acc = new Accounts();
 
 if (acc.hasActivedAccount()) {
@@ -24,21 +27,38 @@ function login()
 	var newAccount = {
 		accessUrl: $.url.value,
 		username: $.username.value,
-		tokenAuth: $.password.value
+		password: $.password.value,
+		anonymous: false,
+		name: $.url.value
 	};
 	
-	var id = acc.createAccount(newAccount);
-    
-    if (id == null) {
-    	
-    	console.debug("Could not create account");
-    	
-    } else {
-    	
-    	console.debug("Account created with id " + id);
-    	Alloy.createController('statistics');
-    	
-    } 
+	var request = new AccountRequest();
+	
+	request.addEventListener("onInvalidUrl", function() {
+		console.debug("onInvalidUrl");
+	});
+	
+	request.addEventListener("onMissingUsername", function() {
+		console.debug("onMissingUsername");
+	});
+
+	request.addEventListener("onMissingPassword", function() {
+		console.debug("onMissingPassword");
+	});
+
+	request.addEventListener("onReceiveAuthTokenError", function() {
+		console.debug("onReceiveAuthTokenError");
+	});
+	
+	request.addEventListener("onNoViewAccess", function() {
+		console.debug("onNoViewAccess");
+	});
+	
+	request.addEventListener("onload", function() {
+		console.debug("onload");
+	});
+		
+	request.send({account: newAccount}); 
     
 }
 
