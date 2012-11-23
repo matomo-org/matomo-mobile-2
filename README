@@ -4,4 +4,4 @@ Resources/iphone
 Resources/android
 Resources/mobileweb
 
-or run setup.sh
+or run setup.sh (or setup.cmd on Windows).
