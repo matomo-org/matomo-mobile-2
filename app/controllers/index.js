@@ -3,24 +3,42 @@ require("Piwik");
 var Accounts = require("Piwik/App/Accounts");
 var acc = new Accounts();
 
-var configuredAccounts = acc.getAccounts();
-if (configuredAccounts == 0) {
+if (acc.hasActivedAccount()) {
+	Alloy.createController('statistics');
+} else {
 	$.index.open();
 }
 
 function login() 
 {
 	
-	var url      = $.url.value;
-	var username = $.username.value;
-	var password = $.password.value; 
-
-	console.debug("Login with " + username + " / " + password + " on " + url);
+	console.debug(
+		"Creating account with " 
+		+ $.username.value 
+		+ " / " 
+		+ $.password.value 
+		+ " on " 
+		+ $.url.value
+	);
+	
+	var newAccount = {
+		accessUrl: $.url.value,
+		username: $.username.value,
+		tokenAuth: $.password.value
+	};
+	
+	var id = acc.createAccount(newAccount);
     
-    piwik.login(url, username, password);
-    
-    return;
-    Alloy.createController('statistics');
+    if (id == null) {
+    	
+    	console.debug("Could not create account");
+    	
+    } else {
+    	
+    	console.debug("Account created with id " + id);
+    	Alloy.createController('statistics');
+    	
+    } 
     
 }
 
