@@ -1,0 +1,86 @@
+".container": {
+    backgroundColor: "#F5F5F5"
+},
+
+"Label": {
+    color: "#333333"
+},
+
+"#imageview": {
+    image:"logo-png-page.png",
+    width: 280,
+    height:165,
+    top:10,
+    zIndex: 1
+},
+
+"#footerContainer": {
+    bottom: 10,
+    left: 0,
+    width: 320
+},
+
+"#tryit": {
+    left: 20,
+    bottom: 0,
+    font: { 
+        fontSize: 14,
+        fontWeight: 'bold'
+    }
+},
+
+"#faq": {
+    right: 20,
+    bottom: 0,
+    font: { 
+        fontSize: 14,
+        fontWeight: 'bold'
+    }
+},
+
+"#accounts": {
+    headerTitle: 'Choose your account',
+    top: 190,
+    height: 120
+},
+
+"#actions": {
+    height: 80,
+    bottom: 40
+},
+
+".accountsContainer": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    left: 10,
+    right: 10,
+    backgroundColor:'transparent',
+            rowBackgroundColor:'#eee',
+            style: Titanium.UI.iPhone.TableViewStyle.GROUPED
+},
+
+".addAccountButton": {
+    style:Ti.UI.iPhone.SystemButton.CONTACT_ADD,
+    right: 10
+},
+
+".accountRow": {
+    hasChild: true,
+    height: 30,
+    textAlign: "left"
+},
+
+".addAccountRow": {
+    textAlign: "center",
+    height: 40
+},
+
+".masterPasswordInfoButton": {
+    style:Ti.UI.iPhone.SystemButton.INFO_DARK,
+    right: 10
+},
+
+".masterPasswordRow": {
+    textAlign: "center",
+    height: 40
+}

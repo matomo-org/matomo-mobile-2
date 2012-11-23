@@ -1,0 +1,15 @@
+<Alloy>
+	<Window class="container">
+	    <ImageView id="imageview" class="test"/>
+        <View id="footerContainer">
+            <Label id="tryit">Try it!</Label>
+            <Label id="faq">FAQ</Label>
+        </View>
+		<View id="loginContainer">
+    		<TextField id="url" class="textfield"/>
+    		<TextField id="username" class="textfield"/>
+    		<TextField id="password" class="textfield"/>
+    		<Button id="loginbutton" onClick="login">Login</Button>
+		</View>
+	</Window>
+</Alloy>
