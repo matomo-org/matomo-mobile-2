@@ -22,46 +22,45 @@ $.index.open();
 var site   = null;
 var report = null;
 
-var AppAccounts = require("Piwik/App/Accounts");
-// TODO we need a central storage for current selected account
-var accounts    = new AppAccounts().getAccounts();
 
-// TODO create a Backbone.js Sync Adapter for API Requests.
-// fetch first website
-var PiwikApiRequest = require('Piwik/Network/PiwikApiRequest');
-var sitesRequest    = new PiwikApiRequest();
-sitesRequest.setMethod('SitesManager.getSitesWithAtLeastViewAccess');
-sitesRequest.setParameter({accountId: accounts[0].id, limit: 1});
-sitesRequest.setAccount(accounts[0]);
-sitesRequest.setCallback(this, function (response) {
-    site = response[0];
-    
-    
-    var reportsRequest  = new PiwikApiRequest();
-    reportsRequest.setMethod('API.getReportMetadata');
-    reportsRequest.setParameter({accountId: accounts[0].id, showSubtableReports: 0, hideMetricsDoc: 1, idSites: site.idsite});
-    reportsRequest.setAccount(accounts[0]);
-    reportsRequest.setCallback(this, function (reports) {
-        var reports = response;
+var site = Alloy.createCollection('piwikEntrySite');
+site.fetch({
+    success : function(model, sites) {
+        site = sites[0];
         
-        // TODO Detect if all websites dashboard is available
         
-        var statisticsRequest  = new PiwikApiRequest();
-        statisticsRequest.setMethod('API.getProcessedReport');
-        statisticsRequest.setParameter({accountId: accounts[0].id, period: 'day', date: 'today', hideMetricsDoc: 1, showTimer: 0, idSite: site.idsite, apiModule: 'MultiSites', apiAction:'getAll'});
-        statisticsRequest.setAccount(accounts[0]);
-        statisticsRequest.setCallback(this, function (processedReport) {
-            alert(processedReport);
+        
+        var reports = Alloy.createCollection('piwikReportsList');
+        reports.fetch({
+            params: {idSites: site.idsite},
+            success : function(model, reports) {
+               
+                // model.getEntryReport(reports);
+                
+                var statistics = Alloy.createCollection('piwikProcessedReport');
+                statistics.fetch({
+                    params: {period: 'day', date: 'today', idSite: site.idsite, apiModule: 'MultiSites', apiAction:'getAll'},
+                    success : function(model, processedReport) {
+                        alert(processedReport);
+                    },
+                    error : function(model, resp) {
+                        alert('Error 3');
+                    }
+                });
+                    
+               
+            },
+            error : function(model, resp) {
+                alert('Error 2');
+            }
         });
-        statisticsRequest.send();
-    });
-    
-    reportsRequest.send();
-    
-    
-    
+        
+        
+    },
+    error : function(model, resp) {
+        alert('Error 1');
+    }
 });
-sitesRequest.send();
 
 
 
