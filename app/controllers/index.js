@@ -12,17 +12,25 @@ if (acc.hasActivedAccount()) {
 	$.index.open();
 }
 
-function login() 
+function onUrlReturn () {
+    if ($.url.value && -1 === $.url.value.indexOf('http')) {
+        // user has not specified any http protocol. automatically prepend 'http'.
+        $.url.value = 'http://' + $.url.value;
+    }
+    
+    $.username.focus();
+}
+
+function onUsernameReturn () {
+    $.password.focus();
+}
+
+function login () 
 {
-	
-	console.debug(
-		"Creating account with " 
-		+ $.username.value 
-		+ " / " 
-		+ $.password.value 
-		+ " on " 
-		+ $.url.value
-	);
+	var anonymous = false;
+	if ($.username.value && !$.password.value) {
+	    anonymous = true;
+	}
 	
 	var newAccount = {
 		accessUrl: $.url.value,
@@ -35,31 +43,39 @@ function login()
 	var request = new AccountRequest();
 	
 	request.addEventListener("onInvalidUrl", function() {
-		console.debug("onInvalidUrl");
+		alert("onInvalidUrl");
 	});
 	
 	request.addEventListener("onMissingUsername", function() {
-		console.debug("onMissingUsername");
+		alert("onMissingUsername");
 	});
 
 	request.addEventListener("onMissingPassword", function() {
-		console.debug("onMissingPassword");
+		alert("onMissingPassword");
 	});
 
 	request.addEventListener("onReceiveAuthTokenError", function() {
-		console.debug("onReceiveAuthTokenError");
+		alert("onReceiveAuthTokenError");
 	});
 	
 	request.addEventListener("onNoViewAccess", function() {
-		console.debug("onNoViewAccess");
+		alert("onNoViewAccess");
 	});
 	
 	request.addEventListener("onload", function() {
-		console.debug("onload");
-	});
+        var alertDialog = Ti.UI.createAlertDialog({
+            title: _('General_Done'),
+            message: _('General_YourChangesHaveBeenSaved'),
+            buttonNames: [_('General_Ok')]
+        });
+        
+        alertDialog.addEventListener('click', function () {
+            Alloy.createController('statistics');
+        });
+        
+        alertDialog.show();
+    });
 		
-	request.send({account: newAccount}); 
-    
+	request.send({account: newAccount});
 }
-
 

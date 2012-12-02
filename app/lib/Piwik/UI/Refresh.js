@@ -9,7 +9,7 @@
 /** @private */
 var Piwik     = require('Piwik');
 /** @private */
-var _         = require('library/underscore');
+var _         = require('underscore');
 
 /**
  * @class     A refresh UI widget is created by the method Piwik.UI.createRefresh. The refresh widget adds the

@@ -21,7 +21,6 @@
     borderRadius: 3,
     height: 40,
     top: 2,
-    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
     color: '#ffffff',
     left: 20,
     right: 20,
@@ -29,6 +28,11 @@
         fontWeight: "bold"
     }
 },
+
+"#loginbutton[platform=android]": {
+    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+},
+
 
 "#loginContainer": {
     top: 190,
@@ -71,17 +75,25 @@
     height: 40,
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL,
     borderRadius: 3,
-    borderColor: '#B8B8B8'
+    borderColor: '#B8B8B8',
+    autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    autocorrect: false,
 },
 
 "#url": {
-    hintText: "URL eg http://demo.piwik.org"
+    hintText: "URL eg http://demo.piwik.org",
+    keyboardType: Ti.UI.KEYBOARD_URL,
+    returnKeyType: Ti.UI.RETURNKEY_NEXT
 },
 
 "#username": {
-    hintText: "Username"
+    hintText: "Username",
+    keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+    returnKeyType: Ti.UI.RETURNKEY_NEXT
 },
 
 "#password": {
-    hintText: "Password"
+    hintText: "Password",
+    returnKeyType: Ti.UI.RETURNKEY_DONE,
+    passwordMask: true
 }

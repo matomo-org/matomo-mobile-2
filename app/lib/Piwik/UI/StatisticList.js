@@ -102,7 +102,7 @@ StatisticList.prototype.renderList = function () {
     if (!values || !Piwik.isArray(values) || 0 === values.length) {
         // no values defined, display at least an information about this
 
-        var _   = require('library/underscore');
+        var _   = require('underscore');
         var row = Ti.UI.createTableViewRow({className: 'statisticListNoDataTableViewRow',
                                             title: _('CoreHome_TableNoData')});
 
@@ -152,7 +152,7 @@ StatisticList.prototype.renderPaginator = function () {
     }
     
     config           = null;
-    var _            = require('library/underscore');
+    var _            = require('underscore');
     var showAll      = this.getParam('showAll', false);
     
     var paginatorRow = Ti.UI.createTableViewRow({

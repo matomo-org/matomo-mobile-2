@@ -53,7 +53,7 @@ ChooseSiteCommand.prototype.getId = function () {
  */
 ChooseSiteCommand.prototype.getLabel = function () {
 
-    var _ = require('library/underscore');
+    var _ = require('underscore');
 
     return _('General_ChooseWebsite');
 };
@@ -93,7 +93,7 @@ ChooseSiteCommand.prototype.execute = function (params) {
         params = {};
     }
 
-    var _    = require('library/underscore');
+    var _    = require('underscore');
     var win  = this.create('ModalWindow', {openView: params.source ? params.source : null, 
                                            title: _('General_ChooseWebsite')});
 

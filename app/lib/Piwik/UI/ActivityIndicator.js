@@ -118,7 +118,7 @@ ActivityIndicator.prototype.show = function (message) {
     switch (this.style) {
         case 'loading':
 
-            var _  = require('library/underscore');
+            var _  = require('underscore');
 
             if (this._numRequests > 1) {
                 // just update the text cause loading message is already visible

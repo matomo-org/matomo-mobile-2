@@ -9,7 +9,7 @@
 /** @private */
 var Piwik = require('Piwik');
 /** @private */
-var _     = require('library/underscore');
+var _     = require('underscore');
  
 /**
  * @class     A date picker is created by the method Piwik.UI.createDatePicker. A date picker can be used to select a

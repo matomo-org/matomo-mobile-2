@@ -9,7 +9,7 @@
 /** @private */
 var Piwik = require('Piwik');
 /** @private */
-var _     = require('library/underscore');
+var _     = require('underscore');
 
 /**
  * @class     A switch graph is created by the method Piwik.UI.createSwitchGraph. The switch graph UI widget adds a

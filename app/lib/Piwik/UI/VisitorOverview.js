@@ -9,7 +9,7 @@
 /** @private */
 var Piwik = require('Piwik');
 /** @private */
-var _     = require('library/underscore');
+var _     = require('underscore');
 
 /**
  * @class     A visitor overview is created by the method Piwik.UI.createVisitorOverview. The visitor overview UI widget

@@ -83,7 +83,7 @@ SendFeedbackCommand.prototype.execute = function () {
     }
 
     if (!emailDialog.isSupported()) {
-        var _ = require('library/underscore');
+        var _ = require('underscore');
         Ti.UI.createAlertDialog({message: 'Please install an email app', ok: _('General_Ok')}).show();
         _ = null;
 
@@ -119,7 +119,7 @@ SendFeedbackCommand.prototype.execute = function () {
         if (Piwik.getPlatform().isIos && event && event.result && event.result == emailDialog.SENT) {
             // android doesn't give us useful result codes. it anyway shows a toast.
             
-            var _ = require('library/underscore');
+            var _ = require('underscore');
     
             Ti.UI.createAlertDialog({message: _('Feedback_ThankYou'), ok: _('General_Ok')}).show();
         }

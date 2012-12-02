@@ -60,8 +60,11 @@
 },
 
 ".addAccountButton": {
-    style:Ti.UI.iPhone.SystemButton.CONTACT_ADD,
     right: 10
+},
+
+".addAccountButton[platform=android]": {
+    style:Ti.UI.iPhone.SystemButton.CONTACT_ADD
 },
 
 ".accountRow": {
@@ -76,8 +79,11 @@
 },
 
 ".masterPasswordInfoButton": {
-    style:Ti.UI.iPhone.SystemButton.INFO_DARK,
     right: 10
+},
+
+".masterPasswordInfoButton[platform=android]": {
+    style:Ti.UI.iPhone.SystemButton.INFO_DARK
 },
 
 ".masterPasswordRow": {

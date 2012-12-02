@@ -39,7 +39,7 @@ OpenSettingsCommand.prototype.getId = function () {
  */
 OpenSettingsCommand.prototype.getLabel = function () {
     
-    var _ = require('library/underscore');
+    var _ = require('underscore');
     
     return _('General_Settings');
 };

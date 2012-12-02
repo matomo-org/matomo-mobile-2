@@ -9,7 +9,7 @@
 /** @private */
 var Piwik  = require('Piwik');
 /** @private */
-var _      = require('library/underscore');
+var _      = require('underscore');
 
 /**
  * @class     A websites list is created by the method Piwik.UI.createWebsiteList. It displays a list of all available

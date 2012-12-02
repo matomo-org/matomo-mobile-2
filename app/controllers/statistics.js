@@ -1,4 +1,5 @@
-
+/*
+ * 
 var leftButtons = [
     {image:'ic_action_settings.png', width:32},
     {image:'ic_action_accounts.png', width:32}
@@ -16,4 +17,5 @@ $.win1.leftNavButton = bar;
 
 $.win1.rightNavButton = Ti.UI.createButton({image:'ic_action_website.png', width:32});
 
+ */
 $.index.open();

@@ -83,7 +83,7 @@ Graph.prototype.init = function () {
     if (!this.graphUrls.currentGraphUrl()) {
         Piwik.getLog().debug('No graphUrl given', 'Piwik.UI.Graph::init');
 
-        var _    = require('library/underscore');
+        var _    = require('underscore');
         this.row = Ti.UI.createTableViewRow({className: 'noDataForGraphTableViewRow',
                                              title: _('General_NoDataForGraph')});
         

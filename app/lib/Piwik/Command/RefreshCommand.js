@@ -39,7 +39,7 @@ RefreshCommand.prototype.getId = function () {
  */
 RefreshCommand.prototype.getLabel = function () {
 
-    var _ = require('library/underscore');
+    var _ = require('underscore');
 
     return _('Mobile_Refresh');
 };

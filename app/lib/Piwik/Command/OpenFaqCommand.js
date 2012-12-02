@@ -39,7 +39,7 @@ OpenFaqCommand.prototype.getId = function () {
  */
 OpenFaqCommand.prototype.getLabel = function () {
     
-    var _ = require('library/underscore');
+    var _ = require('underscore');
 
     return _('General_Faq');
 };

@@ -49,7 +49,7 @@ ChooseMetricCommand.prototype.getId = function () {
  */
 ChooseMetricCommand.prototype.getLabel = function () {
     
-    var _  = require('library/underscore');
+    var _  = require('underscore');
     
     return _('Mobile_ChooseMetric');
 };
@@ -101,7 +101,7 @@ ChooseMetricCommand.prototype.execute = function () {
         internalNames.push(String(metricInternalName));
     }
     
-    var _  = require('library/underscore');
+    var _  = require('underscore');
     
     options.push(_('SitesManager_Cancel_js'));
     

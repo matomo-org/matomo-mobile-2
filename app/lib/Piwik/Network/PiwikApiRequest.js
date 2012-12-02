@@ -210,7 +210,7 @@ PiwikApiRequest.prototype.isValidResponse = function (response) {
         
         this.errorMessageSent = true;
 
-        var _       = require('library/underscore');
+        var _       = require('underscore');
         
         var message = _('General_InvalidResponse');
         if (response.message) {

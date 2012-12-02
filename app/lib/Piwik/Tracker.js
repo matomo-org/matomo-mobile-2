@@ -530,7 +530,7 @@ function Tracker () {
             return;
         }
 
-        var _ = require('library/underscore');
+        var _ = require('underscore');
 
         // uuid does not exist, this means user starts the app the first time.
         // ask user whether he wants to enable or disable tracking
