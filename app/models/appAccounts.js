@@ -28,60 +28,38 @@ exports.definition = {
     extendModel: function(Model) {      
         _.extend(Model.prototype, {
 
-            getAccountById: function (id) {
-            
-                if (!id) {
+            activateAccount: function () {
                 
-                    return;
-                }
+                this.set({active: 1});
+                this.save();
                 
-                var account = storage.get('account_' + id);
-                   
-                if (!account || storage.KEY_NOT_FOUND == account) {
-                    
-                    return;
-                }
-                
-                return account;
-            },
-            
-            activateAccount: function (id) {
-                
-                return this.updateAccount(id, {active: 1});
+                return this;
             },
 
-            deactivateAccount: function (id) {
+            deactivateAccount: function () {
                 
-                return this.updateAccount(id, {active: 0});
+                this.set({active: 0});
+                this.save();
+                
+                return this;
             },
 
-            resetPiwikVersion: function (account) {
+            resetPiwikVersion: function () {
                 
-                if (!account) {
-                    
-                    return account;
-                }
+                this.set({version: 0, dateVersionUpdated: null});
                 
-                account.version            = 0;
-                account.dateVersionUpdated = null;
-                
-                return account;
+                return this;
             },
 
-            updatePiwikVersion: function(account) {
+            updatePiwikVersion: function() {
                 
-                if (!account) {
-                    
-                    return;
-                }
-                
-                if (!account.dateVersionUpdated) {
+                if (!this.get('dateVersionUpdated')) {
                     // version not updated yet. Set it to null. new Date(null) will be Jan 01 1970 and therefore force an update
-                    account.dateVersionUpdated = null;
+                    this.set({'dateVersionUpdated': null});
                 }
             
                 var dateNow             = (new Date()).toDateString();
-                var lastUpdatedDate     = new Date(account.dateVersionUpdated);
+                var lastUpdatedDate     = new Date(this.get('dateVersionUpdated'));
                 var alreadyUpdatedToday = dateNow == lastUpdatedDate.toDateString();
             
                 if (alreadyUpdatedToday) {
@@ -89,55 +67,32 @@ exports.definition = {
                     
                     return;
                 }
-            
-                var piwikRequest = Piwik.require('Network/PiwikApiRequest');
-            
-                piwikRequest.setMethod('API.getPiwikVersion');
-                piwikRequest.setAccount(account);
-                piwikRequest.setCallback(this, function (response) {
-            
-                    if (!account) {
+                
+                var that = this;
+                var version = Alloy.createCollection('piwikVersion');
+                version.fetch({
+                    success : function(model, response) {
+
+                        that.set({dateVersionUpdated: (new Date()) + ''});
                         
-                        return;
+                        if (response) {
+                            var stringUtils = Piwik.require('Utils/String');
+                            that.set({version: stringUtils.toPiwikVersion(response.value)});
+                            stringUtils     = null;
+                        } else if (!account.version) {
+                            that.set({version: 0});
+                        } else {
+                            // there went something wrong with the request. For example the network connection broke up.
+                            // do not set account version to 0 in such a case. We would overwrite an existing version, eg 183
+                        }
+                        
+                        that.save();
+                    },
+                    error : function(model, resp) {
+                        alert('Error 1');
                     }
-              
-                    account.dateVersionUpdated = (new Date()) + '';
-                    
-                    if (response) {
-                        var stringUtils = Piwik.require('Utils/String');
-                        account.version = stringUtils.toPiwikVersion(response.value);
-                        stringUtils     = null;
-                    } else if (!account.version) {
-                        account.version = 0;
-                    } else {
-                        // there went something wrong with the request. For example the network connection broke up.
-                        // do not set account version to 0 in such a case. We would overwrite an existing version, eg 183
-                    }
-            
-                    var accountManager = Piwik.require('App/Accounts');
-                    accountManager.updateAccount(account.id, {version: account.version, 
-                                                              dateVersionUpdated: account.dateVersionUpdated});
-                    accountManager     = null;
-                    
-                    response = null;
                 });
-                
-                // older Piwik versions < 1.8 don't support API.getPiwikVersion. Makes sure those users won't get an error meesage.
-                piwikRequest.sendErrors = false;
-                
-                // execute the request directly. We don't have to add it to a request pool since it doesn't matter when the request
-                // finishes. In the worst case the Piwik server version could be outdated for a few seconds
-                piwikRequest.send();
-                
-                piwikRequest = null;
             }
-
-
-
-
-
-
-
 
         }); // end extend
         
@@ -145,44 +100,11 @@ exports.definition = {
     },
     
     
-    extendCollection: function(Collection) {        
+    extendCollection: function(Collection) {
         _.extend(Collection.prototype, {
-            
-            
-            getNumAccounts: function () {
 
-                var accounts = this.getAccounts();
-            
-                if (accounts && accounts.length) {
-            
-                    return accounts.length;
-                }
-            
-                return 0;
-            },
-            
-            hasActivedAccount: function () {
-                
-                var accountIds = storage.get('accounts_available');
-                
-                if (!accountIds || storage.KEY_NOT_FOUND == accountIds || 0 === accountIds.length) {
-                
-                    return false;
-                }
-                
-                var accounts   = [];
-                
-                for (var index = 0; index < accountIds.length; index++) {
-                    var accountId = accountIds[index];
-                    var account   = this.getAccountById(accountId);
-                    
-                    if (account && storage.KEY_NOT_FOUND !== account && Boolean(account.active)) {
-                        
-                        return true;
-                    }
-                }
-            
-                return false;
+            getNumAccounts: function () {
+                return this.length;
             }
 
             

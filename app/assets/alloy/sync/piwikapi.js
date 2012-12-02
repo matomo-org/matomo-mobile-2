@@ -40,7 +40,12 @@ function Sync(model, method, opts) {
                  }
             });
             
+            if (false === settings.displayErrors) {
+                request.sendErrors = false;
+            }
+            
             request.send();
+            request = null;
             
             break;
             
