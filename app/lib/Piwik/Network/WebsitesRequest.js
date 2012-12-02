@@ -131,8 +131,6 @@ WebsitesRequest.prototype.send = function (params) {
     }
 
     var piwikRequest  = null;
-    requestPool       = Piwik.require('Network/RequestPool');
-    requestPool.setContext(this);
 
     if (!this.accounts || !this.accounts.length) {
         // no accounts configured
