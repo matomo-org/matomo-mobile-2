@@ -2,14 +2,12 @@ exports.definition = {
 	
 	config: {
 		"columns": {
-			"category":"string",
-            "name":"string",
-            "module":"string",
-            "action":"string",
-            "dimension":"string",
-            "metrics":"string",
-            "metricsDocumentation":"string",
-			"uniqueId":"string"
+			"website":"string",
+            "prettyDate":"string",
+            "metadata":"string",
+            "columns":"string",
+            "reportData":"string",
+            "reportMetadata":"string"
 		},
 		"adapter": {
 			"type": "piwikapi",
@@ -27,12 +25,7 @@ exports.definition = {
 
 	extendModel: function(Model) {		
 		_.extend(Model.prototype, {
-		    getEntryReport: function (response) {
-		        // Has All Websites Dashboard report etc?
-		        return response[0];
-		    }
-		    
-	
+
 			// extended functions go here
 
 		}); // end extend
