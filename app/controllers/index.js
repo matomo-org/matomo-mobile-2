@@ -1,15 +1,14 @@
 require("Piwik");
 
-var Accounts = require("Piwik/App/Accounts");
-var AccountRequest = require("Piwik/Network/AccountRequest");
+var accounts =  Alloy.createCollection('AppAccounts');
+accounts.fetch();
 
-
-var acc = new Accounts();
-
-if (acc.hasActivedAccount()) {
+if (!accounts.length) {
+    $.index.open();
+} else if (1 == accounts.length) {
 	Alloy.createController('statistics');
 } else {
-	$.index.open();
+    Alloy.createController('accounts');
 }
 
 function onUrlReturn () {
@@ -27,55 +26,71 @@ function onUsernameReturn () {
 
 function login () 
 {
-	var anonymous = false;
-	if ($.username.value && !$.password.value) {
-	    anonymous = true;
-	}
-	
-	var newAccount = {
-		accessUrl: $.url.value,
-		username: $.username.value,
-		password: $.password.value,
-		anonymous: false,
-		name: $.url.value
-	};
-	
-	var request = new AccountRequest();
-	
-	request.addEventListener("onInvalidUrl", function() {
-		alert("onInvalidUrl");
-	});
-	
-	request.addEventListener("onMissingUsername", function() {
-		alert("onMissingUsername");
-	});
-
-	request.addEventListener("onMissingPassword", function() {
-		alert("onMissingPassword");
-	});
-
-	request.addEventListener("onReceiveAuthTokenError", function() {
-		alert("onReceiveAuthTokenError");
-	});
-	
-	request.addEventListener("onNoViewAccess", function() {
-		alert("onNoViewAccess");
-	});
-	
-	request.addEventListener("onload", function() {
-        var alertDialog = Ti.UI.createAlertDialog({
-            title: _('General_Done'),
-            message: _('General_YourChangesHaveBeenSaved'),
-            buttonNames: [_('General_Ok')]
-        });
+    var account = Alloy.createModel('AppAccounts', {
+        accessUrl: $.url.value,
+        username: $.username.value,
+        password: $.password.value,
+        name: $.url.value
+    });
+    
+    account.on('error', function (error) {
+        alert(error);
+        switch (error) {
+            case 'MissingUsername':
+                break;
+            case 'MissingPassword':
+                break;
+            case 'InvalidUrl':
+                break;
+            case 'ReceiveAuthTokenError':
+                break;
+            case 'NoViewAccess':
+                break;
+            case 'ReceiveAuthTokenError':
+                break;
+            default:
+                return;
+        }
+        // output message
+    });
+    
+    if (!account.isValid()) {
+        return;
+    }
+    
+    account.on('sync', function (accountModel) {
+        accountModel.updatePiwikVersion();
         
-        alertDialog.addEventListener('click', function () {
+        var dialog = Ti.UI.createAlertDialog({message: 'sync'});
+        dialog.addEventListener('click', function () {
             Alloy.createController('statistics');
         });
         
-        alertDialog.show();
+        dialog.show();
     });
-		
-	request.send({account: newAccount});
+    
+    account.on('change:tokenAuth', function (accountModel, tokenAuth) {
+
+        var site = Alloy.createModel('piwikEntrySite');
+        
+        site.fetch({
+            account: accountModel,
+            success: function (siteModel) {
+
+                if (!siteModel || !siteModel.id) {
+                    accountModel.clear();
+                    return accountModel.trigger('error', 'NoViewAccess');
+                }
+        
+                accountModel.save();
+                
+            }, error: function (accountModel) {
+                return accountModel.trigger('error', 'NoViewAccess');
+            }
+        });
+        
+    });
+    
+    account.requestAuthToken();
 }
 

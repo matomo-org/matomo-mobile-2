@@ -31,10 +31,16 @@ exports.definition = {
 
 	extendModel: function(Model) {		
 		_.extend(Model.prototype, {
-		    getEntrySite: function (response) {
-		        return response[0];
-		    }
 		    
+		    idAttribute: "idsite",
+
+            parse: function (response) {
+                if (response && response[0]) {
+                    return response[0];
+                }
+                
+                return null;
+            }
 	
 			// extended functions go here
 
@@ -46,7 +52,7 @@ exports.definition = {
 	
 	extendCollection: function(Collection) {		
 		_.extend(Collection.prototype, {
-			
+
 			// extended functions go here			
 			
 		}); // end extend

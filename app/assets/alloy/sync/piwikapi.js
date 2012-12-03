@@ -6,7 +6,7 @@ function InitAdapter(config) {
 function Sync(model, method, opts) {
     var name = model.config.adapter.name;
     var settings = model.config.settings;
-    var defaultParams = model.config.defaultParams;
+    var params = model.config.defaultParams;
 
     Ti.API.info("method " + method);
     
@@ -15,25 +15,31 @@ function Sync(model, method, opts) {
         
             // TODO CACHE IF ENABLED
                     
-            var AppAccounts = require("Piwik/App/Accounts");
             // TODO we need a central storage for current selected account
-            var accounts    = new AppAccounts().getAccounts();
+            var account = null;
             
+            var _ = require("alloy/underscore");
+
             if (opts.params) {
-                // TODO COPY DEFAULT PARAMS
-                for (var index in opts.params) {
-                    defaultParams[index] = opts.params[index];
-                }
+                params = _.extend(_.clone(params), opts.params);
             }
 
             var PiwikApiRequest = require('Piwik/Network/PiwikApiRequest');
             var request  = new PiwikApiRequest();
             request.setMethod(settings.method);
-            request.setParameter(defaultParams, opts);
-            request.setAccount(accounts[0]);
-            request.setCallback(this, function (reports) {
-                 if (null !== reports) {
-                    opts.success && opts.success(reports);
+            request.setParameter(params);
+            
+            if (opts && opts.account) {
+                request.setBaseUrl(opts.account.get('accessUrl'));
+                request.setUserAuthToken(opts.account.get('tokenAuth'));
+            } else if (account) {
+                request.setUserAuthToken(account.get('tokenAuth'));
+                request.setBaseUrl(account.get('accessUrl'));
+            }
+            
+            request.setCallback(this, function (response) {
+                 if (!_.isUndefined(response) && null !== response) {
+                    opts.success && opts.success(response);
                     model.trigger("fetch");
                  } else {
                     opts.error && opts.error(null);

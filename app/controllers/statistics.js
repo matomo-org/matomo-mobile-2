@@ -23,23 +23,20 @@ var site   = null;
 var report = null;
 
 
-var site = Alloy.createCollection('piwikEntrySite');
+var site = Alloy.createModel('piwikEntrySite');
 site.fetch({
-    success : function(model, sites) {
-        site = sites[0];
-        
-        
-        
+    success : function(siteModel) {
+
         var reports = Alloy.createCollection('piwikReportsList');
         reports.fetch({
-            params: {idSites: site.idsite},
+            params: {idSites: siteModel.id},
             success : function(model, reports) {
                
                 // model.getEntryReport(reports);
                 
                 var statistics = Alloy.createCollection('piwikProcessedReport');
                 statistics.fetch({
-                    params: {period: 'day', date: 'today', idSite: site.idsite, apiModule: 'MultiSites', apiAction:'getAll'},
+                    params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: 'MultiSites', apiAction:'getAll'},
                     success : function(model, processedReport) {
                         alert(processedReport);
                     },
