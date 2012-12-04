@@ -5,11 +5,7 @@
             <Label id="tryit">Give Feedback</Label>
             <Label id="faq">FAQ</Label>
         </View>
-        <TableView id="accounts" class="accountsContainer">
-            <TableViewRow class="accountRow"><Label>demo.piwik.org</Label></TableViewRow>
-            <TableViewRow class="accountRow"><Label>demo2.piwik.org</Label></TableViewRow>
-            <TableViewRow class="accountRow"><Label>demo3.piwik.org</Label></TableViewRow>
-        </TableView>
+        <TableView id="accounts" class="accountsContainer" />
         <TableView id="actions" class="accountsContainer">
             <TableViewRow class="addAccountRow">
                 <Label>Add account</Label>
