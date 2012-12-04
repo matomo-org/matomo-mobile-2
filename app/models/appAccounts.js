@@ -1,14 +1,11 @@
 
 /** @private */
-var storage = require('Piwik/App/Storage');
-var Piwik   = require('Piwik');
-
 
 exports.definition = {
 
     config: {
         "columns": {
-            "id":"string",
+            "id":"integer",
             "accessUrl":"string",
             "username":"string",
             "tokenAuth":"string",
@@ -22,18 +19,16 @@ exports.definition = {
         "adapter": {
             "type": "properties",
             "collection_name": "appaccounts"
+        },
+        defaults: {
+            active: true,
+            createVersionNumber: Ti.App.version,
+            changeVersionNumber: Ti.App.version,
         }
     },      
 
     extendModel: function(Model) {      
         _.extend(Model.prototype, {
-            
-            defaults: {
-              //  id: Ti.Platform.createUUID(),
-                active: true,
-                createVersionNumber: Ti.App.version,
-                changeVersionNumber: Ti.App.version,
-            },
             
             initialize: function () {
                 this.on('change:accessUrl', this.completeAccessUrl)
@@ -112,9 +107,7 @@ exports.definition = {
                         that.set({dateVersionUpdated: (new Date()) + ''});
                         
                         if (response) {
-                            var stringUtils = Piwik.require('Utils/String');
-                            that.set({version: stringUtils.toPiwikVersion(response.value)});
-                            stringUtils     = null;
+                            that.set({version: that.toPiwikVersion(response.value)});
                         } else if (!account.version) {
                             that.set({version: 0});
                         } else {
@@ -130,30 +123,59 @@ exports.definition = {
                 });
             },
             
+            toPiwikVersion: function (piwikVersion) {
+                
+                if (!piwikVersion) {
+                    
+                    return 0;
+                }
+                
+                piwikVersion = piwikVersion + '';
+            
+                // compare only first six chars and ignore all dots -> from 0.6.4-rc1 to 064
+                // if version was '1.4-rc1', it is '14-rc' now
+                piwikVersion = piwikVersion.substr(0, 5).replace(/\./g, '');
+                
+                // make sure they contain only numbers.
+                piwikVersion = piwikVersion.replace(/[^\d]/g, '');
+                
+                if ((piwikVersion + '').length == 2) {
+                    // if version is e.g. '0.7' it would be interpreted as 07 (7), but it should be 0.7.0 = 70.
+                    // Otherwise we run into a bug where 0.6.4 (64) is greater than 0.7 (7).
+                    piwikVersion = piwikVersion * 10;
+                }
+                
+                if ((piwikVersion + '').length == 1) {
+                    // if version is e.g. '2' it would be interpreted as 2, but it should be 2.0.0 = 200.
+                    // Otherwise we run into a bug where 0.6.4 (64) is greater than 2 (2).
+                    piwikVersion = piwikVersion * 100;
+                }
+                
+                // radix is very important in this case, otherwise eg. 064 octal is 52 decimal
+                piwikVersion = parseInt(piwikVersion, 10);
+                
+                return piwikVersion;
+            },
+            
             requestAuthToken: function () {
                 var username = this.get('username');
                 var password = this.get('password');
                 var account  = this;
-                
+
                 if (!username && !password) {
                     this.set({tokenAuth: 'anonymous'});
                 } else {
                     // fetch token via API
-                    var tokenAuth = Alloy.createCollection('piwikTokenAuth');
+                    var tokenAuth = Alloy.createModel('piwikTokenAuth');
                     tokenAuth.fetch({
                         account: this,
                         params: {userLogin: username, md5Password: Ti.Utils.md5HexDigest(password)},
                         success: function (model, response) {
-                            var _ = require("alloy/underscore");
-            
-                            if (!response || !_.isObject(response) || !response.value) {
-                    
-                                return account.trigger('error', 'ReceiveAuthTokenError');
-                            }
-                            
+
                             account.set({tokenAuth: response.value});
-                
-                        }, error: function () {
+
+                        }, error: function (model) {
+
                             return account.trigger('error', 'ReceiveAuthTokenError');
                         }
                     });

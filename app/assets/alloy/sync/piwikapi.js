@@ -16,7 +16,7 @@ function Sync(model, method, opts) {
             // TODO CACHE IF ENABLED
                     
             // TODO we need a central storage for current selected account
-            var account = null;
+            var account = require('state').account();
             
             var _ = require("alloy/underscore");
 
@@ -38,12 +38,14 @@ function Sync(model, method, opts) {
             }
             
             request.setCallback(this, function (response) {
-                 if (!_.isUndefined(response) && null !== response) {
+                if (_.isUndefined(response) || null === response) {
+                    opts.error && opts.error(null);
+                } else if (_.isFunction(model.validResponse) && !model.validResponse(response)) {
+                    opts.error && opts.error(null);
+                } else {
                     opts.success && opts.success(response);
                     model.trigger("fetch");
-                 } else {
-                    opts.error && opts.error(null);
-                 }
+                }
             });
             
             if (false === settings.displayErrors) {

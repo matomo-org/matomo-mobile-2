@@ -17,8 +17,17 @@ exports.definition = {
 
 	extendModel: function(Model) {		
 		_.extend(Model.prototype, {
-
-			// extended functions go here
+            
+            validResponse: function (response) {
+                var _ = require("alloy/underscore");
+                 
+                if (!response || !_.isObject(response) || !response.value) {
+        
+                    return false;
+                }
+                
+                return true;
+            }
 
 		}); // end extend
 		
@@ -28,8 +37,6 @@ exports.definition = {
 	
 	extendCollection: function(Collection) {		
 		_.extend(Collection.prototype, {
-			
-			// extended functions go here			
 			
 		}); // end extend
 		

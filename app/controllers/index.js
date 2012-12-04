@@ -6,6 +6,7 @@ accounts.fetch();
 if (!accounts.length) {
     $.index.open();
 } else if (1 == accounts.length) {
+    require('state').setAccount(accounts.first());
 	Alloy.createController('statistics');
 } else {
     Alloy.createController('accounts');
@@ -34,7 +35,7 @@ function login ()
     });
     
     account.on('error', function (error) {
-        alert(error);
+        console.log(error);
         switch (error) {
             case 'MissingUsername':
                 break;
@@ -59,6 +60,7 @@ function login ()
     }
     
     account.on('sync', function (accountModel) {
+        console.log('account synced');
         accountModel.updatePiwikVersion();
         
         var dialog = Ti.UI.createAlertDialog({message: 'sync'});
@@ -70,21 +72,19 @@ function login ()
     });
     
     account.on('change:tokenAuth', function (accountModel, tokenAuth) {
-
+        console.log('change:tokenAuth');
         var site = Alloy.createModel('piwikEntrySite');
         
         site.fetch({
             account: accountModel,
             success: function (siteModel) {
 
-                if (!siteModel || !siteModel.id) {
-                    accountModel.clear();
-                    return accountModel.trigger('error', 'NoViewAccess');
-                }
-        
                 accountModel.save();
+                accountModel.trigger('sync', accountModel);
                 
             }, error: function (accountModel) {
+
+                accountModel.clear();
                 return accountModel.trigger('error', 'NoViewAccess');
             }
         });

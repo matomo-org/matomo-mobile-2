@@ -40,7 +40,20 @@ exports.definition = {
                 }
                 
                 return null;
+            },
+            
+            validResponse: function (response) {
+                if (!response || !response[0]) {
+                    return false;
+                }
+                
+                if (!response[0].idsite) {
+                    return false;
+                }
+                
+                return true;
             }
+
 	
 			// extended functions go here
 
