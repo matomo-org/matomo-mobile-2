@@ -7,7 +7,7 @@ if (!accounts.length) {
     $.index.open();
 } else if (1 == accounts.length) {
     require('state').setAccount(accounts.first());
-	Alloy.createController('statistics');
+    Alloy.createController('statistics');
 } else {
     Alloy.createController('accounts');
 }
@@ -23,6 +23,13 @@ function onUrlReturn () {
 
 function onUsernameReturn () {
     $.password.focus();
+}
+
+function onTryIt () {
+    $.url.value = 'http://demo.piwik.org';
+    $.username.value = '';
+    $.password.value = '';
+    login();
 }
 
 function login () 

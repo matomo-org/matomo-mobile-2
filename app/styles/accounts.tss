@@ -55,15 +55,18 @@
     left: 10,
     right: 10,
     backgroundColor:'transparent',
-            rowBackgroundColor:'#eee',
-            style: Titanium.UI.iPhone.TableViewStyle.GROUPED
+    rowBackgroundColor:'#eee'
+},
+
+".accountsContainer[platform=ios]": {
+    style: Titanium.UI.iPhone.TableViewStyle.GROUPED
 },
 
 ".addAccountButton": {
     right: 10
 },
 
-".addAccountButton[platform=android]": {
+".addAccountButton[platform=ios]": {
     style:Ti.UI.iPhone.SystemButton.CONTACT_ADD
 },
 
@@ -82,7 +85,7 @@
     right: 10
 },
 
-".masterPasswordInfoButton[platform=android]": {
+".masterPasswordInfoButton[platform=ios]": {
     style:Ti.UI.iPhone.SystemButton.INFO_DARK
 },
 

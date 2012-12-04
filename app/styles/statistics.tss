@@ -1,7 +1,10 @@
 ".container": {
 	backgroundColor: "white",
-	layout: "vertical",
-	separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
+	layout: "vertical"
+},
+
+".container[platform=ios]": {
+    separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
 },
 
 "#navgroup": {

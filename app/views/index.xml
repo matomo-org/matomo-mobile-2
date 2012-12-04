@@ -9,7 +9,7 @@
         		<Button id="loginbutton" onClick="login">Login</Button>
     		</View>
             <View id="footerContainer">
-                <Label id="tryit">Try it!</Label>
+                <Label id="tryit" onClick="onTryIt">Try it!</Label>
                 <Label id="faq">FAQ</Label>
             </View>
         </ScrollView>
