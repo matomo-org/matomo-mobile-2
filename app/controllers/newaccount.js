@@ -1,16 +1,9 @@
 require("Piwik");
 
-var accounts =  Alloy.createCollection('AppAccounts');
-accounts.fetch();
+var args = arguments[0] || {};
+var accounts = args.accounts;
 
-if (!accounts.length) {
-    $.index.open();
-} else if (1 == accounts.length) {
-    require('state').setAccount(accounts.first());
-    Alloy.createController('statistics');
-} else {
-    Alloy.createController('accounts', {hideCloseButton: true});
-}
+$.index.open();
 
 function onUrlReturn () {
     if ($.url.value && -1 === $.url.value.indexOf('http')) {
@@ -25,11 +18,19 @@ function onUsernameReturn () {
     $.password.focus();
 }
 
-function onTryIt () {
-    $.url.value = 'http://demo.piwik.org';
-    $.username.value = '';
-    $.password.value = '';
-    login();
+if (OS_IOS) {
+
+    var closeButton = Ti.UI.createButton({
+        title: 'Close',
+        style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+    });
+
+    closeButton.addEventListener('click', function(){
+        $.index.close();
+    });
+
+    $.accountFormView.leftNavButton = closeButton;
+
 }
 
 function login () 
@@ -72,7 +73,9 @@ function login ()
         
         var dialog = Ti.UI.createAlertDialog({message: 'sync'});
         dialog.addEventListener('click', function () {
-            Alloy.createController('statistics');
+
+            $.index.close();
+
         });
         
         dialog.show();
@@ -88,6 +91,8 @@ function login ()
 
                 accountModel.save();
                 accountModel.trigger('sync', accountModel);
+                accounts.fetch();
+
                 
             }, error: function (accountModel) {
 

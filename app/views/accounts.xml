@@ -1,20 +1,15 @@
 <Alloy>
-    <Window class="container" id="index">
-        <ImageView id="imageview" class="test"/>
-        <View id="footerContainer">
-            <Label id="tryit">Give Feedback</Label>
-            <Label id="faq">FAQ</Label>
-        </View>
-        <TableView id="accounts" class="accountsContainer" />
-        <TableView id="actions" class="accountsContainer">
-            <TableViewRow class="addAccountRow">
-                <Label>Add account</Label>
-                <Button class="addAccountButton"></Button>
-                </TableViewRow>
-            <TableViewRow class="masterPasswordRow">
-                <Label>Master Password</Label>
-                <Button class="masterPasswordInfoButton"></Button>
-            </TableViewRow>
-        </TableView>
+    <Window id="index">
+        <NavigationGroup id="navgroup" platform="ios,mobileweb">
+            <Window class="container" id="accountView" title="Accounts">
+                <TableView id="accounts" class="accountsContainer" />
+                <TableView id="actions" class="accountsContainer">
+                    <TableViewRow class="masterPasswordRow">
+                        <Label>Master Password</Label>
+                        <Button class="masterPasswordInfoButton"></Button>
+                    </TableViewRow>
+                </TableView>
+            </Window>
+        </NavigationGroup>
     </Window>
 </Alloy>

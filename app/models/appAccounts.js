@@ -5,7 +5,6 @@ exports.definition = {
 
     config: {
         "columns": {
-            "id":"integer",
             "accessUrl":"string",
             "username":"string",
             "tokenAuth":"string",
@@ -17,13 +16,13 @@ exports.definition = {
             "dateVersionUpdated":"string"
         },
         "adapter": {
-            "type": "properties",
+            "type": "sql",
             "collection_name": "appaccounts"
         },
         defaults: {
             active: true,
             createVersionNumber: Ti.App.version,
-            changeVersionNumber: Ti.App.version,
+            changeVersionNumber: Ti.App.version
         }
     },      
 
