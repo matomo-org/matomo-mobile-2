@@ -11,12 +11,13 @@
     borderWidth: 1,
     borderRadius: 3,
     width: Ti.UI.FILL,
-    height: 40,
+    height: 50,
     left: 20,
     right: 20,
     top: 2,
     color: '#ffffff',
     font: { 
+    	fontSize: 24,
         fontWeight: "bold"
     }
 },
@@ -33,7 +34,6 @@
 },
 
 ".textfield": {
-    zIndex: 3,
     top: 2,
     left: 20,
     right: 20,

@@ -16,8 +16,8 @@ function onUsernameReturn () {
     $.password.focus();
 }
 
-function login () 
-{
+function doLogin () 
+{	
     var account = Alloy.createModel('AppAccounts', {
         accessUrl: $.url.value,
         username: $.username.value,
