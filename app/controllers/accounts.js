@@ -29,9 +29,9 @@ $.accounts.on('click', function(e) {
     selectAccount(account);
 });
 
-function selectAccount()
+function selectAccount(account)
 {
-    require('state').setAccount(accounts.first());
+    require('state').setAccount(account);
 
     // TODO Find a way to reuse the parent controller
     Alloy.createController('statistics');
