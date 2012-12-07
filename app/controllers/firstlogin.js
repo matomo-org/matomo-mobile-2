@@ -7,18 +7,22 @@ var loginform = Alloy.createController('loginform', {
 });
 $.loginform.add(loginform.getView());
 
-function onTryIt () {
-    $.url.value = 'http://demo.piwik.org';
-    $.username.value = '';
-    $.password.value = '';
-    // Call loginform.js
-    doLogin();
+function onTryIt ()
+{
+    require('login').login(
+        accounts,
+        'http://demo.piwik.org',
+        '',
+        ''
+    );
 }
 
-function onFaq () {
+function onFaq ()
+{
 	// not yet implemented
 }
 
-exports.open = function () {
+exports.open = function ()
+{
     $.firstlogin.open(); 
 };
