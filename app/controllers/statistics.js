@@ -22,8 +22,6 @@ if (OS_IOS) {
     $.win1.rightNavButton = Ti.UI.createButton({image:'ic_action_website.png', width:32});
 }
 
-$.index.open();
-
 var site   = null;
 var report = null;
 
