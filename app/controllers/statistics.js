@@ -83,11 +83,6 @@ site.fetch({
     }
 });
 
-
 exports.open = function () {
     $.index.open(); 
 };
-// fetch list of reports
-
-
-// fetch report data
