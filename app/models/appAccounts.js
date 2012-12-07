@@ -16,7 +16,7 @@ exports.definition = {
             "dateVersionUpdated":"string"
         },
         "adapter": {
-            "type": "sql",
+            "type": "properties",
             "collection_name": "appaccounts"
         },
         defaults: {
