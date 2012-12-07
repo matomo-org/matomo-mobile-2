@@ -1,4 +1,3 @@
-require("Piwik");
 
 var accounts =  Alloy.createCollection('AppAccounts');
 accounts.fetch();

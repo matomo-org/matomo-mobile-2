@@ -1,4 +1,3 @@
-require("Piwik");
 
 var args = arguments[0] || {};
 var accounts = args.accounts || false;
