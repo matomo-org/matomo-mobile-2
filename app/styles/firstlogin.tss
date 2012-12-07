@@ -28,8 +28,8 @@
 },
 
 "#footerView": {
-    bottom: 0,
-    height: 20,
+    bottom: 5,
+    height: 50,
     width: Ti.UI.FILL,
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL
 },
@@ -42,19 +42,23 @@
 },
 
 "#tryit": {
-    left: 20,
-    bottom: 0,
+    left: 10,
+	height: 40,
+	width: 60,
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     font: { 
-        fontSize: 14,
+        fontSize: 20,
         fontWeight: 'bold'
     }
 },
 
 "#faq": {
-    right: 20,
-    bottom: 0,
+    right: 10,
+    height: 40,
+	width: 60,
+	textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     font: { 
-        fontSize: 14,
+        fontSize: 20,
         fontWeight: 'bold'
     }
 }
