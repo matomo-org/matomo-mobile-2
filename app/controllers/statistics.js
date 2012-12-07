@@ -30,7 +30,7 @@ accounts.on('select', function (acc) {
     refresh();
 });
 
-var statistics = Alloy.createCollection('piwikProcessedReport');
+var statistics = Alloy.createModel('piwikProcessedReport');
 var reportController = null;
 
 function refresh() {
@@ -47,7 +47,7 @@ function refresh() {
                 reportController = null;
             }
             
-            reportController = Alloy.createController('processedreport', processedReport);
+            reportController = Alloy.createController('processedreport', {processedReport: model, account: account});
             $.win1.add(reportController.getView());
         },
         error : function(model, resp) {

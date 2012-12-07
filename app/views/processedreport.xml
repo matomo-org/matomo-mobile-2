@@ -19,8 +19,8 @@
                 </ScrollView>
                 <View class="menuSeparatorShadow"/>
                 <View class="reportInfo">
-                    <Label id="reportInfoName">Pageviews - All Websites Dashboard</Label>
-                    <Label id="reportInfoDate">Tuesday, 13th November 2012</Label>
+                    <Label id="reportInfoName"></Label>
+                    <Label id="reportInfoDate"></Label>
                     <View class="reportInfoSeparator"/>
                     <View class="menuSeparatorShadow2"/>
                 </View>
@@ -28,7 +28,7 @@
         </TableViewRow>
         <TableViewRow>
             <View class="reportGraph">
-                <ImageView class="reportGraphImageView"/>
+                <ImageView id="reportGraphImageView"/>
             </View>
         </TableViewRow>
         <TableViewRow>
