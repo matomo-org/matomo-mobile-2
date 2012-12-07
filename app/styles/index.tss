@@ -19,34 +19,56 @@
     borderColor: "#CB2026",
     borderWidth: 1,
     borderRadius: 3,
+    width: Ti.UI.FILL,
     height: 40,
-    top: 2,
-    color: '#ffffff',
     left: 20,
     right: 20,
+    top: 2,
+    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
+    color: '#ffffff',
     font: { 
         fontWeight: "bold"
     }
 },
 
-"#loginbutton[platform=ios]": {
-    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+"#mainView": {
+	layout: 'vertical',
+	top: 0,
+	bottom: 20
 },
 
+"#headerView": {
+	width: Ti.UI.FILL,
+	top: 0,
+    height: 200,
+    borderWidth: 3,
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL,
+    borderColor: '#00FF00'
+},
 
-"#loginContainer": {
-    top: 190,
+"#formView": {
     layout: "vertical",
-    width: 320,
-    height: 400,
-    left: 0,
-    zIndex: 2
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    borderWidth: 3,
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL,
+    borderColor: '#0000FF',
 },
 
-"#footerContainer": {
-    bottom: 10,
-    left: 0,
-    width: 320
+"#footerView": {
+	bottom: 0,
+	height: 20,
+    width: Ti.UI.FILL,
+    borderWidth: 3,
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL,
+    borderColor: '#FF0000'
+},
+
+"#logoImage": {
+	image:"logo-png-page.png",
+	top: 10,
+    width: 280,
+    height:165
 },
 
 "#tryit": {
@@ -70,30 +92,23 @@
 ".textfield": {
     zIndex: 3,
     top: 2,
-    left: 20,
-    width: 280,
-    height: 40,
+	left: 20,
+	right: 20,
+    height: 60,
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL,
     borderRadius: 3,
-    borderColor: '#B8B8B8',
-    autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
-    autocorrect: false,
+    borderColor: '#B8B8B8'
 },
 
 "#url": {
-    hintText: "URL eg http://demo.piwik.org",
-    keyboardType: Ti.UI.KEYBOARD_URL,
-    returnKeyType: Ti.UI.RETURNKEY_NEXT
+    hintText: "URL eg http://demo.piwik.org"
 },
 
 "#username": {
-    hintText: "Username",
-    keyboardType: Ti.UI.KEYBOARD_DEFAULT,
-    returnKeyType: Ti.UI.RETURNKEY_NEXT
+    hintText: "Username"
 },
 
 "#password": {
     hintText: "Password",
-    returnKeyType: Ti.UI.RETURNKEY_DONE,
     passwordMask: true
 }
