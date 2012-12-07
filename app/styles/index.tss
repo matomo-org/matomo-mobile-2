@@ -65,7 +65,7 @@
 },
 
 "#logoImage": {
-	image:"logo-png-page.png",
+	image:"/logo-png-page.png",
 	top: 10,
     width: 280,
     height:165
