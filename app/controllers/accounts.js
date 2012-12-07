@@ -3,13 +3,9 @@ var args = arguments[0] || {};
 var hideCloseButton = args.hideCloseButton || false;
 var accounts  = args.accounts || false;
 
-accounts.on('fetch', function() {
-    updateContent(accounts);
-});
+updateContent();
 
-accounts.fetch();
-
-function updateContent(accounts)
+function updateContent()
 {
     var rows = [];
     accounts.map(function(account) {
@@ -30,7 +26,6 @@ $.accounts.on('click', function(e) {
 function selectAccount(account)
 {
     $.index.close();
-    
     accounts.trigger('select', account);
 }
 
@@ -55,10 +50,18 @@ var addButton = Ti.UI.createButton({
 
 $.accountView.rightNavButton = addButton;
 
+var newAccountController = null;
+
 addButton.addEventListener('click', function() {
-
-    Alloy.createController('newaccount', {accounts: accounts});
-
+    newAccountController = Alloy.createController('newaccount', {accounts: accounts});
+    accounts.on('add', onCreatedAccount);
+    newAccountController.getView().open();
 });
+
+function onCreatedAccount() {
+    accounts.off("add", onCreatedAccount);
+    updateContent();
+    newAccountController.getView().close();
+}
 
 $.index.open();
