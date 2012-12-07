@@ -1,4 +1,3 @@
-require("Piwik");
 
 var args = arguments[0] || {};
 var hideCloseButton = args.hideCloseButton || false;
@@ -30,10 +29,9 @@ $.accounts.on('click', function(e) {
 
 function selectAccount(account)
 {
-    require('state').setAccount(account);
-
-    // TODO Find a way to reuse the parent controller
-    Alloy.createController('statistics');
+    $.index.close();
+    
+    accounts.trigger('select', account);
 }
 
 if (OS_IOS && !hideCloseButton) {

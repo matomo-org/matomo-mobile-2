@@ -22,13 +22,36 @@ if (OS_IOS) {
     $.win1.rightNavButton = Ti.UI.createButton({image:'ic_action_website.png', width:32});
 }
 
-var site   = null;
-var report = null;
+var siteModel = null;
+var report    = null;
+
+accounts.on('select', function (acc) {
+    account = acc;
+    refresh();
+});
+
+var statistics = Alloy.createCollection('piwikProcessedReport');
+
+function refresh() {
+    console.log('refresh');
+    
+    statistics.fetch({
+        account: account,
+        params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: 'MultiSites', apiAction:'getAll'},
+        success : function(model, processedReport) {
+            console.log(processedReport);
+        },
+        error : function(model, resp) {
+            console.log('Error 3');
+        }
+    });
+}
 
 var site = Alloy.createModel('piwikEntrySite');
 site.fetch({
     account: account,
-    success : function(siteModel) {
+    success : function(site) {
+        siteModel = site;
 
         var reports = Alloy.createCollection('piwikReportsList');
         reports.fetch({
@@ -36,21 +59,8 @@ site.fetch({
             params: {idSites: siteModel.id},
             success : function(model, reports) {
                
-                // model.getEntryReport(reports);
+                refresh();
                 
-                var statistics = Alloy.createCollection('piwikProcessedReport');
-                statistics.fetch({
-                    account: account,
-                    params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: 'MultiSites', apiAction:'getAll'},
-                    success : function(model, processedReport) {
-                        console.log(processedReport);
-                    },
-                    error : function(model, resp) {
-                        console.log('Error 3');
-                    }
-                });
-                    
-               
             },
             error : function(model, resp) {
                 console.log('Error 2');
