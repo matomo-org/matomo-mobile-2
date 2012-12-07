@@ -62,13 +62,6 @@ function doLogin ()
     account.on('sync', function (accountModel) {
         console.log('account synced');
         accountModel.updatePiwikVersion();
-        
-        var dialog = Ti.UI.createAlertDialog({message: 'sync'});
-        dialog.addEventListener('click', function () {
-            Alloy.createController('statistics');
-        });
-        
-        dialog.show();
     });
 
     account.on('change:tokenAuth', function (accountModel, tokenAuth) {
@@ -81,6 +74,7 @@ function doLogin ()
 
                 accountModel.save();
                 accountModel.trigger('sync', accountModel);
+		accounts.add(accountModel);
                 
             }, error: function (accountModel) {
 

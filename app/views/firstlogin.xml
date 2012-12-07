@@ -4,7 +4,7 @@
             <View id="headerView">
                 <ImageView id="logoImage"/>
             </View>
-        	<Require src="loginform" id="loginForm"/>
+		<View id="loginform" />
             <View id="footerView">
                 <Label id="tryit" onClick="onTryIt">Try it!</Label>
                 <Label id="faq" onClick="onFaq">FAQ</Label>
