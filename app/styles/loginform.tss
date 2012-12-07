@@ -1,0 +1,63 @@
+".container": {
+    backgroundColor: "#F5F5F5"
+},
+
+"Label": {
+    color: "#333333"
+},
+
+"#loginbutton": {
+    backgroundColor: "#F8981D",
+    borderWidth: 1,
+    borderRadius: 3,
+    width: Ti.UI.FILL,
+    height: 40,
+    left: 20,
+    right: 20,
+    top: 2,
+    color: '#ffffff',
+    font: { 
+        fontWeight: "bold"
+    }
+},
+
+"#loginbutton[platform=ios]": {
+    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+},
+
+"#formView": {
+    layout: "vertical",
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL
+},
+
+".textfield": {
+    zIndex: 3,
+    top: 2,
+    left: 20,
+    right: 20,
+    height: 60,
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL,
+    borderRadius: 3,
+    autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    autocorrect: false
+},
+
+"#url": {
+    hintText: "URL eg http://demo.piwik.org",
+    keyboardType: Ti.UI.KEYBOARD_URL,
+    returnKeyType: Ti.UI.RETURNKEY_NEXT
+},
+
+"#username": {
+    hintText: "Username",
+    keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+    returnKeyType: Ti.UI.RETURNKEY_NEXT
+},
+
+"#password": {
+    hintText: "Password",
+    passwordMask: true,
+    returnKeyType: Ti.UI.RETURNKEY_DONE
+}

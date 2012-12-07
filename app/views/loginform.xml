@@ -1,0 +1,8 @@
+<Alloy>
+    <View id="formView">
+        <TextField id="url" class="textfield" onReturn="onUrlReturn"/>
+        <TextField id="username" class="textfield" onReturn="onUsernameReturn"/>
+        <TextField id="password" class="textfield" onReturn="login"/>
+        <Button id="loginbutton" onClick="login">Login</Button>
+    </View>
+</Alloy>
