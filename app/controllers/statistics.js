@@ -1,3 +1,8 @@
+
+var args = arguments[0] || {};
+var accounts = args.accounts || false;
+var account = accounts.first();
+
 if (OS_IOS) {
     var leftButtons = [
         {image:'ic_action_settings.png', width:32},
@@ -9,7 +14,7 @@ if (OS_IOS) {
     });
     
     bar.addEventListener('click', function () {
-        Alloy.createController('accounts');
+        Alloy.createController('accounts', {accounts: accounts});
     });
     
     $.win1.leftNavButton = bar;
@@ -22,13 +27,14 @@ $.index.open();
 var site   = null;
 var report = null;
 
-
 var site = Alloy.createModel('piwikEntrySite');
 site.fetch({
+    account: account,
     success : function(siteModel) {
 
         var reports = Alloy.createCollection('piwikReportsList');
         reports.fetch({
+            account: account,
             params: {idSites: siteModel.id},
             success : function(model, reports) {
                
@@ -36,26 +42,27 @@ site.fetch({
                 
                 var statistics = Alloy.createCollection('piwikProcessedReport');
                 statistics.fetch({
+                    account: account,
                     params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: 'MultiSites', apiAction:'getAll'},
                     success : function(model, processedReport) {
-                        alert(processedReport);
+                        console.log(processedReport);
                     },
                     error : function(model, resp) {
-                        alert('Error 3');
+                        console.log('Error 3');
                     }
                 });
                     
                
             },
             error : function(model, resp) {
-                alert('Error 2');
+                console.log('Error 2');
             }
         });
         
         
     },
     error : function(model, resp) {
-        alert('Error 1');
+        console.log('Error 1');
     }
 });
 

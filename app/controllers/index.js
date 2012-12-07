@@ -4,11 +4,10 @@ var accounts =  Alloy.createCollection('AppAccounts');
 accounts.fetch();
 
 if (!accounts.length) {
-    var firstlogin = Alloy.createController('firstlogin');
+    var firstlogin = Alloy.createController('firstlogin', {accounts: accounts});
     firstlogin.open();
 } else {
-    require('state').setAccount(accounts.first());
-    var statistics = Alloy.createController('statistics');
+    var statistics = Alloy.createController('statistics', {accounts: accounts});
     statistics.open()
 } 
 

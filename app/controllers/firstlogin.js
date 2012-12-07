@@ -1,7 +1,7 @@
 require("Piwik");
 
-var accounts =  Alloy.createCollection('AppAccounts');
-accounts.fetch();
+var args = arguments[0] || {};
+var accounts = args.accounts || false;
 
 function onUrlReturn () {
     if ($.url.value && -1 === $.url.value.indexOf('http')) {

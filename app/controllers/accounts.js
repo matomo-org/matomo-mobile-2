@@ -2,8 +2,7 @@ require("Piwik");
 
 var args = arguments[0] || {};
 var hideCloseButton = args.hideCloseButton || false;
-
-var accounts =  Alloy.createCollection('AppAccounts');
+var accounts  = args.accounts || false;
 
 accounts.on('fetch', function() {
     updateContent(accounts);
