@@ -30,7 +30,8 @@ accounts.on('select', function (acc) {
     refresh();
 });
 
-var statistics = Alloy.createCollection('piwikProcessedReport');
+var statistics = Alloy.createModel('piwikProcessedReport');
+var reportController = null;
 
 function refresh() {
     console.log('refresh');
@@ -40,6 +41,14 @@ function refresh() {
         params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: 'MultiSites', apiAction:'getAll'},
         success : function(model, processedReport) {
             console.log(processedReport);
+
+            if (reportController) {
+                $.win1.remove(reportController.getView());
+                reportController = null;
+            }
+            
+            reportController = Alloy.createController('processedreport', {processedReport: model, account: account});
+            $.win1.add(reportController.getView());
         },
         error : function(model, resp) {
             console.log('Error 3');

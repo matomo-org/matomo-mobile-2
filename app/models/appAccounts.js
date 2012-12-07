@@ -156,6 +156,33 @@ exports.definition = {
                 return piwikVersion;
             },
             
+            getBasePath: function () {
+                var accessUrl = this.get('accessUrl');
+            
+                if (!accessUrl) {
+            
+                    return '';
+                }
+                
+                accessUrl = accessUrl + '';
+            
+                if ('/' == accessUrl.substr(accessUrl.length - 1, 1)) {
+            
+                    return accessUrl;
+                }
+            
+                if ('.php' == accessUrl.substr(accessUrl.length -4, 4).toLowerCase()) {
+                    var lastSlash = accessUrl.lastIndexOf('/');
+                    accessUrl     = accessUrl.substr(0, lastSlash + 1);
+            
+                    return accessUrl;
+                }
+            
+                accessUrl = accessUrl + '/';
+            
+                return accessUrl;
+            },
+            
             requestAuthToken: function () {
                 var username = this.get('username');
                 var password = this.get('password');

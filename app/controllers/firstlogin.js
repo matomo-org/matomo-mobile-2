@@ -4,7 +4,8 @@ function onTryIt () {
     $.url.value = 'http://demo.piwik.org';
     $.username.value = '';
     $.password.value = '';
-    login();
+    // Call loginform.js
+    doLogin();
 }
 
 function onFaq () {
