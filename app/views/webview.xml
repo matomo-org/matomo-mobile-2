@@ -1,0 +1,9 @@
+<Alloy>
+    <Window id="index">
+        <NavigationGroup id="navgroup" platform="ios,mobileweb">
+            <Window id="web" title=" ">
+                <WebView id="webview"></WebView>
+            </Window>
+        </NavigationGroup>
+    </Window>
+</Alloy>

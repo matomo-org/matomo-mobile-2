@@ -16,7 +16,9 @@ function onTryIt () {
 }
 
 function onFaq () {
-	// not yet implemented
+    var webview = {title: 'FAQ', url: 'http://piwik.org/mobile/faq/'};
+    var faq     = Alloy.createController('webview', webview)
+    faq.open();
 }
 
 exports.open = function () {
