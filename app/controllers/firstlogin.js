@@ -7,20 +7,24 @@ var loginform = Alloy.createController('loginform', {
 });
 $.loginform.add(loginform.getView());
 
-function onTryIt () {
-    $.url.value = 'http://demo.piwik.org';
-    $.username.value = '';
-    $.password.value = '';
-    // Call loginform.js
-    doLogin();
+function onTryIt ()
+{
+    require('login').login(
+        accounts,
+        'http://demo.piwik.org',
+        '',
+        ''
+    );
 }
 
-function onFaq () {
+function onFaq () 
+{
     var webview = {title: 'FAQ', url: 'http://piwik.org/mobile/faq/'};
     var faq     = Alloy.createController('webview', webview)
     faq.open();
 }
 
-exports.open = function () {
+exports.open = function ()
+{
     $.firstlogin.open(); 
 };
