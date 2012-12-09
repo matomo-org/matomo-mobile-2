@@ -1,0 +1,12 @@
+"Window": {
+    barColor: "#B2AEA5",
+    backgroundColor: "#FFFFFF"
+},
+
+"NavigationGroup": {
+    barColor: "#B2AEA5"
+},
+
+"Label": {
+    color: "#333333"
+}

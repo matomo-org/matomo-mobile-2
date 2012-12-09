@@ -2,10 +2,6 @@
     backgroundColor: "#F5F5F5"
 },
 
-"Label": {
-    color: "#333333"
-},
-
 "#loginbutton": {
     backgroundColor: "#F8981D",
     borderWidth: 1,

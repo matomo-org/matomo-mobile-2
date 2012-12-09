@@ -1,13 +1,5 @@
-"Window": {
-    barColor: "#B2AEA5"
-},
-
 ".container": {
-	backgroundColor: "#F5F5F5"
-},
-
-"Label": {
-    color: "#333333"
+    backgroundColor: "#F5F5F5"
 },
 
 "#loginbutton": {
@@ -28,7 +20,6 @@
 "#loginbutton[platform=ios]": {
     style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
 },
-
 
 "#loginContainer": {
     top: 10,

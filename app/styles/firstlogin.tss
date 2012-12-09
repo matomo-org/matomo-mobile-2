@@ -2,10 +2,6 @@
     backgroundColor: "#F5F5F5"
 },
 
-"Label": {
-    color: "#333333"
-},
-
 "#imageview": {
     image:"logo-png-page.png",
     width: 280,
