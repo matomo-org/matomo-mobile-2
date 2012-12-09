@@ -117,7 +117,7 @@ exports.definition = {
                         that.save();
                     },
                     error : function(model, resp) {
-                        alert('Error 1');
+                        // just ignore, piwik installation is too old
                     }
                 });
             },

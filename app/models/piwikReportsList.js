@@ -27,10 +27,6 @@ exports.definition = {
 
 	extendModel: function(Model) {		
 		_.extend(Model.prototype, {
-		    getEntryReport: function (response) {
-		        // Has All Websites Dashboard report etc?
-		        return response[0];
-		    }
 		    
 	
 			// extended functions go here
@@ -43,7 +39,11 @@ exports.definition = {
 	
 	extendCollection: function(Collection) {		
 		_.extend(Collection.prototype, {
-			
+			getEntryReport: function (response) {
+		        // Has All Websites Dashboard report etc?
+		        // Iterate over list to make sure all websites dashboard will be preferred
+		        return this.at(0);
+		    }
 			// extended functions go here			
 			
 		}); // end extend

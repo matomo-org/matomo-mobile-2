@@ -1,0 +1,10 @@
+<Alloy>
+    <Window id="index">
+        <NavigationGroup id="navgroup" platform="ios,mobileweb">
+            <Window id="reportsWindow">
+                <TableView id="reportsTable" onClick="selectReport">
+                </TableView>
+            </Window>
+        </NavigationGroup>
+    </Window>
+</Alloy>
