@@ -39,24 +39,28 @@ function refresh() {
     statistics.fetch({
         account: account,
         params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: 'MultiSites', apiAction:'getAll'},
-        success : function(model, processedReport) {
-            console.log(processedReport);
-
-            if (reportController) {
-                $.win1.remove(reportController.getView());
-                reportController = null;
-            }
-            
-            reportController = Alloy.createController('processedreport', {processedReport: model, account: account});
-            $.win1.add(reportController.getView());
-        },
         error : function(model, resp) {
             console.log('Error 3');
         }
     });
 }
 
+statistics.on('change', function (model) {
+    if (reportController) {
+        $.win1.remove(reportController.getView());
+        reportController = null;
+    }
+    
+    reportController = Alloy.createController('processedreport', {processedReport: model, account: account});
+    $.win1.add(reportController.getView());
+})
+
 var site = Alloy.createModel('piwikEntrySite');
+
+site.on('change', function (siteModel) {
+    $.win1.title = siteModel.get('name');
+})
+
 site.fetch({
     account: account,
     success : function(site) {
