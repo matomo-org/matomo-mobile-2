@@ -1,0 +1,11 @@
+".container": {
+    top: 15,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL
+},
+
+"#image": {
+    image: 'graph.png',
+    height: 150,
+    width: 300
+},

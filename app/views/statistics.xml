@@ -1,8 +1,48 @@
 <Alloy>
     <Window id="index">
         <NavigationGroup id="navgroup" platform="ios,mobileweb">
-            <Window title="Piwik Forums" id="win1">
-                <Label>Lade Daten</Label>
+            <Window title=" " id="win1">
+                <TableView class="container">
+                    <TableViewRow>
+                        <View class="menu">
+                            <Require src="reportmenu" 
+                                     onChangeReport="onChangeReport" 
+                                     onChangeMetric="onChangeMetric" 
+                                     onChangeDate="onChangeDate" 
+                                     onFlatten="onFlatten" 
+                                     id="reportMenuCtrl"/>
+                            <View class="menuSeparatorShadow"/>
+                            <Require src="reportinfo" id="reportInfoCtrl"/>
+                        </View>
+                    </TableViewRow>
+                    <TableViewRow>
+                        <Require src="reportgraph" id="reportGraphCtrl"/>
+                    </TableViewRow>
+                    <TableViewRow>
+                        <View class="reportDataContainer">
+                            <!--
+                            <View class="reportInfoSeparator"/>
+                            <View class="menuSeparatorShadow2"/>
+                            <View class="reportRowContainer">
+                                <Label class="reportRowTitle">Germany</Label>
+                                <Label class="reportRowValue">50</Label>
+                            </View>
+                            <View class="reportInfoSeparator"/>
+                            <View class="menuSeparator"/>
+                            <View class="reportRowContainer">
+                                <Label class="reportRowTitle">Germany</Label>
+                                <Label class="reportRowValue">50</Label>
+                            </View>
+                            <View class="reportInfoSeparator"/>
+                            <View class="menuSeparator"/>
+                            <View class="reportRowContainer">
+                                <Label class="reportRowTitle">Germany</Label>
+                                <Label class="reportRowValue">50</Label>
+                            </View>
+                            <View class="reportInfoSeparator"/>-->
+                        </View>
+                    </TableViewRow>
+                </TableView>
             </Window>
         </NavigationGroup>
 	</Window>

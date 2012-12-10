@@ -2,28 +2,9 @@
     <TableView class="container">
         <TableViewRow>
             <View class="menu">
-                <ScrollView class="reportMenuContainer">
-                    <View class="reportMenuView">
-                        <ImageView class="reportMenuIcon"/><Label class="reportMenuTitle">Reports</Label>
-                        </View>
-                    <View class="reportMenuSeparator"/>
-                    <View class="reportMenuView">
-                        <ImageView class="reportMenuIcon"/><Label class="reportMenuTitle">Metric</Label>
-                    </View>
-                    <View class="reportMenuSeparator"/>
-                    <View class="reportMenuView"><ImageView class="reportMenuIcon"/><Label class="reportMenuTitle">Date</Label></View>
-                    <View class="reportMenuSeparator"/>
-                    <View class="reportMenuView"><ImageView class="reportMenuIcon"/><Label class="reportMenuTitle">Flatten</Label></View>
-                    <View class="reportMenuSeparator"/>
-                    <View class="reportMenuView"><ImageView class="reportMenuIcon"/><Label class="reportMenuTitle">Segmentation</Label></View>
-                </ScrollView>
+
                 <View class="menuSeparatorShadow"/>
-                <View class="reportInfo">
-                    <Label id="reportInfoName"></Label>
-                    <Label id="reportInfoDate"></Label>
-                    <View class="reportInfoSeparator"/>
-                    <View class="menuSeparatorShadow2"/>
-                </View>
+
             </View>
         </TableViewRow>
         <TableViewRow>

@@ -1,0 +1,34 @@
+".container": {
+    top: 0,
+    height: 60,
+    height: Ti.UI.SIZE,
+    layout: "vertical",
+    backgroundColor: '#EBEBEB'
+},
+
+"#name": {
+    top: 10,
+    left: 15,
+    textAlign: "left",
+    font: {
+        fontSize: 13
+    }
+},
+
+"#date": {
+    top: 10,
+    left: 15,
+    textAlign: "left",
+    font: {
+        fontSize: 13
+    }
+},
+
+".menuSeparatorShadow2": {
+    height: 4,
+    backgroundImage: 'separator2.png'
+},
+
+".reportInfoSeparator": {
+    height: 10
+}

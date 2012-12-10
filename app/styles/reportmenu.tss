@@ -1,0 +1,37 @@
+".menuBar": {
+    top: 0,
+    layout: "horizontal",
+    height: 60,
+    backgroundColor: '#F5F5F5'
+},
+
+".menuItem": {
+    top: 0,
+    height: 60,
+    left: 0,
+    width: Ti.UI.SIZE
+},
+
+".menuSeparator": {
+    width: 1,
+    height: 60,
+    backgroundColor: '#cccccc'
+},
+
+".menuIcon": {
+    image: "ic_action_date.png",
+    width: 24,
+    height: 24,
+    top: 10
+},
+
+".menuTitle": {
+    left: 20, right: 20,
+    width: Ti.UI.SIZE,
+    color: '#333333',
+    bottom: 5,
+    font: {
+        fontSize: 12,
+        fontWeight: 'bold'
+    }
+}

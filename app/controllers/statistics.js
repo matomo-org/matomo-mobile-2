@@ -13,8 +13,6 @@ var reportsCollection  = Alloy.createCollection('piwikReportsList');
 var reportModel        = null;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.createModel('piwikProcessedReport');
-// an instance of the controller that displays the processed report 
-var reportController   = null;
 
 if (OS_IOS) {
     var leftButtons = [
@@ -34,11 +32,30 @@ if (OS_IOS) {
     
     var websitesButton = Ti.UI.createButton({image:'ic_action_website.png', width:32});
     websitesButton.addEventListener('click', function () {
-        // TODO We should open list of available websites here, not list of available reports
-        var reportList = Alloy.createController('reportslist', {reports: reportsCollection});
-        reportList.open();
     });
     $.win1.rightNavButton = websitesButton;
+}
+
+function onChangeReport()
+{
+    alert('change report');
+    var reportList = Alloy.createController('reportslist', {reports: reportsCollection});
+    reportList.open();
+}
+
+function onChangeMetric()
+{
+    alert('change metric');
+}
+
+function onChangeDate () 
+{
+    alert('change date');
+}
+
+function onFlatten () 
+{
+    alert('flatten');
 }
 
 accountsCollection.on('select', function (account) {
@@ -52,14 +69,11 @@ reportsCollection.on('select', function (report) {
     refresh();
 });
 
-statisticsModel.on('change', function (model) {
-    if (reportController) {
-        $.win1.remove(reportController.getView());
-        reportController = null;
-    }
-    
-    reportController = Alloy.createController('processedreport', {processedReport: model, account: accountModel});
-    $.win1.add(reportController.getView());
+statisticsModel.on('change', function (reportModel) {
+
+    $.reportInfoCtrl.update(reportModel);
+    $.reportGraphCtrl.update(reportModel, accountModel);
+
 });
 
 siteModel.on('change', function (siteModel) {
@@ -94,10 +108,7 @@ function refresh() {
     
     statisticsModel.fetch({
         account: accountModel,
-        params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: module, apiAction: action},
-        error : function(model, resp) {
-            console.log('Error 3');
-        }
+        params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: module, apiAction: action}
     });
 }
 

@@ -1,0 +1,23 @@
+<Alloy>
+    <View id="index" class="menuBar">
+        <View class="menuItem" onClick="onChangeReport">
+            <ImageView class="menuIcon"/>
+            <Label class="menuTitle">Reports</Label>
+        </View>
+        <View class="menuSeparator"/>
+        <View class="menuItem" onClick="onChangeMetric">
+            <ImageView class="menuIcon"/>
+            <Label class="menuTitle">Metric</Label>
+        </View>
+        <View class="menuSeparator"/>
+        <View class="menuItem" onClick="onChangeDate">
+            <ImageView class="menuIcon"/>
+            <Label class="menuTitle">Date</Label>
+        </View>
+        <View class="menuSeparator"/>
+        <View class="menuItem" onClick="onFlatten">
+            <ImageView class="menuIcon"/>
+            <Label class="menuTitle">Flatten</Label>
+        </View>
+    </View>
+</Alloy>
