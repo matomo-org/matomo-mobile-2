@@ -38,7 +38,6 @@ if (OS_IOS) {
 
 function onChangeReport()
 {
-    alert('change report');
     var reportList = Alloy.createController('reportslist', {reports: reportsCollection});
     reportList.open();
 }

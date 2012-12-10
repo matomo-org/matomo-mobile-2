@@ -1,8 +1,8 @@
 <Alloy>
     <View class="container">
-        <Label id="name"></Label>
-        <Label id="date"></Label>
-        <View class="reportInfoSeparator"/>
-        <View class="menuSeparatorShadow2"/>
+        <Label id="name"> - </Label>
+        <Label id="date"> - </Label>
+        <View class="separator"/>
+        <View class="separatorShadow"/>
     </View>
 </Alloy>

@@ -1,6 +1,5 @@
 ".container": {
     top: 0,
-    height: 60,
     height: Ti.UI.SIZE,
     layout: "vertical",
     backgroundColor: '#EBEBEB'
@@ -24,11 +23,11 @@
     }
 },
 
-".menuSeparatorShadow2": {
+".separatorShadow": {
     height: 4,
     backgroundImage: 'separator2.png'
 },
 
-".reportInfoSeparator": {
+".separator": {
     height: 10
 }
