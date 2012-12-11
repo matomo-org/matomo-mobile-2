@@ -7,7 +7,7 @@
  */
 
 /** @private */
-var Alloy = require('Alloy');
+var Alloy = require('alloy');
 
 /** @private */
 var Piwik = require('Piwik');
