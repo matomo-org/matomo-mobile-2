@@ -2,7 +2,8 @@
     <Window id="index">
         <NavigationGroup id="navgroup" platform="ios,mobileweb">
             <Window title=" " id="win1">
-                <TableView class="container">
+                <View id="loading"><Label>Loading</Label></View>
+                <TableView id="content" class="container">
                     <TableViewRow>
                         <View class="menu">
                             <Require src="reportmenu" 

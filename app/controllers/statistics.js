@@ -15,6 +15,7 @@ var reportModel        = null;
 var statisticsModel    = Alloy.createModel('piwikProcessedReport');
 
 var currentMetric = null;
+var flatten       = 0;
 
 if (OS_IOS) {
     var leftButtons = [
@@ -67,7 +68,8 @@ function onChooseDate ()
 
 function onFlatten () 
 {
-    alert('flatten');
+    flatten = 1;
+    refresh();
 }
 
 accountsCollection.on('select', function (account) {
@@ -77,9 +79,11 @@ accountsCollection.on('select', function (account) {
 
 statisticsModel.on('change', function (reportModel) {
 
+    $.content.show();
+    $.loading.hide();
+
     $.reportInfoCtrl.update(reportModel);
     $.reportGraphCtrl.update(reportModel, accountModel);
-
 });
 
 siteModel.on('change', function (siteModel) {
@@ -109,6 +113,9 @@ siteModel.fetch({
 function refresh() {
     console.log('refresh');
 
+    $.loading.show();
+    $.content.hide();
+
     var module = reportModel.get('module');
     var action = reportModel.get('action');
     var metric = reportModel.getSortOrder(currentMetric);
@@ -120,6 +127,7 @@ function refresh() {
         params: {period: 'day', 
                  date: 'today', 
                  idSite: siteModel.id, 
+                 flat: flatten,
                  sortOrderColumn: metric,
                  filter_sort_column: metric,
                  apiModule: module, 

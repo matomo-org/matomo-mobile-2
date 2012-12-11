@@ -6,6 +6,18 @@
     separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
 },
 
+"#loading": {
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL,
+    visible: true
+},
+
+"#content": {
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL,
+    visible: false
+},
+
 ".menu": {
     layout: "vertical",
     height: Ti.UI.SIZE
