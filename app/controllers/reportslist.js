@@ -34,7 +34,7 @@ function doSelectReport (event)
     var cid    = event.rowData.cid;
     var report = reportsCollection.getByCid(cid);
 
-    $.trigger('chosenReport', report);
+    $.trigger('reportChosen', report);
 
     $.index.close();
 }

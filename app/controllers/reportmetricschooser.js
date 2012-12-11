@@ -19,7 +19,7 @@ for (var metricInternalName in metrics) {
 options.push('SitesManager_Cancel_js');
 
 $.index.options = options;
-$.index.cancel = options.length - 1;
+$.index.cancel  = options.length - 1;
 
 function doChangeMetric (event) {
     if (!event || event.cancel === event.index || true === event.cancel) {
