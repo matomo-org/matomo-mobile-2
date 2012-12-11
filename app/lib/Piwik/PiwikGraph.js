@@ -7,7 +7,10 @@
  */
 
 /** @private */
-var Piwik   = require('Piwik');
+var Alloy = require('Alloy');
+
+/** @private */
+var Piwik = require('Piwik');
  
 /**
  * @class    This graph object provides some useful methods to assemble Piwik graph urls which can be displayed using a
@@ -56,20 +59,17 @@ function PiwikGraph () {
      * @param    {string}  graphUrl  A Piwik graph url.
      * @param    {Object}  account   The piwik account that will be used to request the graph. 
      *                               The account contains the piwik accessUrl as well as the authToken.
-     * @param    {Object}  site      The current selected website. 
      *
      * @returns  {string}  Url to the graph including the needed size information.
      */
-    this.generateUrl = function (graphUrl, account, site) {
+    this.generateUrl = function (graphUrl, account) {
         
         if (!graphUrl) {
             
             return '';
         }
         
-        var parameter   = {token_auth: account.tokenAuth,
-                           idSite:     site.idsite,
-                           language:   locale};
+        var parameter   = {language: locale};
 
         var requestUrl  = '';
         for (var paramName in parameter) {
@@ -77,10 +77,9 @@ function PiwikGraph () {
         }
         
         graphUrl = graphUrl + '&' + Piwik.getNetwork().encodeUrlParams(requestUrl);
-        graphUrl = Piwik.getNetwork().getBasePath('' + account.accessUrl) + graphUrl;
+        graphUrl = account.getBasePath() + graphUrl;
         
         account  = null;
-        site     = null;
         
         return graphUrl;
     };
@@ -160,10 +159,9 @@ function PiwikGraph () {
     this.appendSize = function (graphUrl, width, height, hires) {
 
         var parameter = {width: width, height: height};
-        var config    = require('config');
         
-        for (var index in config.piwik.graph) {
-            parameter[index] = config.piwik.graph[index];
+        for (var index in Alloy.CFG.piwik.graph) {
+            parameter[index] = Alloy.CFG.piwik.graphh[index];
         }
         
         if (hires && Piwik.getPlatform().isIos) {

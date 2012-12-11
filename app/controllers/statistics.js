@@ -14,6 +14,8 @@ var reportModel        = null;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.createModel('piwikProcessedReport');
 
+var currentMetric = null;
+
 if (OS_IOS) {
     var leftButtons = [
         {image:'ic_action_settings.png', width:32},
@@ -36,18 +38,29 @@ if (OS_IOS) {
     $.win1.rightNavButton = websitesButton;
 }
 
-function onChangeReport()
+function onChooseReport()
 {
-    var reportList = Alloy.createController('reportslist', {reports: reportsCollection});
+    var params     = {reports: reportsCollection};
+    var reportList = Alloy.createController('reportslist', params);
+    reportList.on('reportChosen', function (chosenReportModel) {
+        reportModel = chosenReportModel;
+        refresh();
+    })
     reportList.open();
 }
 
-function onChangeMetric()
+function onChooseMetric()
 {
-    alert('change metric');
+    var params         = {metrics: statisticsModel.getMetrics()};
+    var metricsChooser = Alloy.createController('reportmetricschooser', params);
+    metricsChooser.on('metricChosen', function (chosenMetric) {
+        currentMetric = chosenMetric;
+        refresh();
+    })
+    metricsChooser.open();
 }
 
-function onChangeDate () 
+function onChooseDate () 
 {
     alert('change date');
 }
@@ -59,12 +72,6 @@ function onFlatten ()
 
 accountsCollection.on('select', function (account) {
     accountModel = account;
-    refresh();
-});
-
-reportsCollection.on('select', function (report) {
-    console.log('se223');
-    reportModel = report
     refresh();
 });
 
@@ -104,10 +111,19 @@ function refresh() {
 
     var module = reportModel.get('module');
     var action = reportModel.get('action');
+    var metric = reportModel.getSortOrder(currentMetric);
+
+    statisticsModel.setSortOrder(metric);
     
     statisticsModel.fetch({
         account: accountModel,
-        params: {period: 'day', date: 'today', idSite: siteModel.id, apiModule: module, apiAction: action}
+        params: {period: 'day', 
+                 date: 'today', 
+                 idSite: siteModel.id, 
+                 sortOrderColumn: metric,
+                 filter_sort_column: metric,
+                 apiModule: module, 
+                 apiAction: action}
     });
 }
 

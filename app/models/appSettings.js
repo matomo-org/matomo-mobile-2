@@ -13,6 +13,15 @@ exports.definition = {
         "adapter": {
             "type": "properties",
             "collection_name": "settings"
+        },
+        defaults: {
+            piwikMultiChart: false,
+            piwikDefaultReportDate: 'day##yesterday',
+            piwikLanguage: 'en',
+            trackingEnabled: false,
+            preferEvolutionGraphs: false,
+            graphsEnabled: true,
+            httpTimeout: 60000
         }
     },      
 

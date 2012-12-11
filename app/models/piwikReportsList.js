@@ -1,3 +1,5 @@
+var Alloy = require('Alloy');
+
 exports.definition = {
 	
 	config: {
@@ -27,8 +29,33 @@ exports.definition = {
 
 	extendModel: function(Model) {		
 		_.extend(Model.prototype, {
-		    
-	
+
+			getSortOrder: function (metric) {
+
+				if (metric) {
+					return metric;
+				}
+
+				var _ = require("alloy/underscore");
+			    var preferredRows = Alloy.CFG.piwik.preferredMetrics;
+			    var sortOrder     = _.first(preferredRows);
+			    
+			    var metrics = this.get('metrics');
+			    if (metrics) {
+
+			        sortOrder = _.find(preferredRows, function (preferredRow) {
+			            return !!(metrics[preferredRow]);
+			        });
+
+			        if (!sortOrder) {
+				        for (var metricName in metrics) {
+				            sortOrder = metricName;
+				        }
+			        }
+			    }
+			    
+			    return sortOrder;
+			},
 			// extended functions go here
 
 		}); // end extend
@@ -43,7 +70,8 @@ exports.definition = {
 		        // Has All Websites Dashboard report etc?
 		        // Iterate over list to make sure all websites dashboard will be preferred
 		        return this.at(0);
-		    }
+		    },
+
 			// extended functions go here			
 			
 		}); // end extend

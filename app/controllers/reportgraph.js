@@ -1,4 +1,13 @@
+exports.update = function (processedReportModel, accountModel) {
+    var imageGraphUrl = processedReportModel.getImageGraphUrl();
 
-exports.update = function (report, account) {
-    $.image.image = account.getBasePath() + report.get('metadata').imageGraphUrl;
+    if (!imageGraphUrl) {
+        return;
+    }
+    
+    var graph     = require('Piwik/PiwikGraph');
+    imageGraphUrl = graph.addSortOrder(imageGraphUrl, processedReportModel.getSortOrder());
+    imageGraphUrl = graph.generateUrl(imageGraphUrl, accountModel);
+
+    $.image.image = imageGraphUrl;
 }

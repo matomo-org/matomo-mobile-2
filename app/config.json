@@ -1,5 +1,18 @@
 {
-	"global": {}, 
+	"global": {
+        "piwik": {
+            "preferredMetrics": ["nb_hits", "nb_visits", "nb_pageviews", "nb_uniq_pageviews", "nb_actions", "nb_conversions", "revenue"],
+            "filterLimit": 30,
+            "latestServerVersion": "1.9.2",
+            "numDisplayedWebsites": 50,
+            "graph": {
+                  "fontSize": 9,
+                  "showMetricTitle": 0,
+                  "aliasedGraph": 1,
+                  "legendAppendMetric": 0
+            }
+        }
+    },
 	"env:development": {}, 
 	"env:test": {}, 
 	"env:production": {}, 

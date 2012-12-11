@@ -1,5 +1,8 @@
 
-exports.update = function (report) {
-    $.name.text = report.get('metadata').dimension + ' - ' + report.get('metadata').name;
-    $.date.text = report.get('prettyDate');
+exports.update = function (processedReportModel) {
+    var selectedMetricName = processedReportModel.getMetricName();
+    var reportName         = processedReportModel.getReportName();
+    
+    $.name.text = selectedMetricName + ' - ' + reportName;
+    $.date.text = processedReportModel.get('prettyDate');
 }

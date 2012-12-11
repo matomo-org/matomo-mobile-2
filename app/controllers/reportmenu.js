@@ -1,16 +1,16 @@
 function onChangeReport ()
 {
-    $.trigger('changeReport', {});
+    $.trigger('chooseReport', {});
 }
 
 function onChangeMetric () 
 {
-    $.trigger('changeMetric', {});
+    $.trigger('chooseMetric', {});
 }
 
 function onChangeDate () 
 {
-    $.trigger('changeDate', {});
+    $.trigger('chooseDate', {});
 }
 
 function onFlatten () 

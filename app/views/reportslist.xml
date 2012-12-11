@@ -2,7 +2,7 @@
     <Window id="index">
         <NavigationGroup id="navgroup" platform="ios,mobileweb">
             <Window id="reportsWindow">
-                <TableView id="reportsTable" onClick="selectReport">
+                <TableView id="reportsTable" onClick="doSelectReport">
                 </TableView>
             </Window>
         </NavigationGroup>

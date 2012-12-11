@@ -6,9 +6,9 @@
                     <TableViewRow>
                         <View class="menu">
                             <Require src="reportmenu" 
-                                     onChangeReport="onChangeReport" 
-                                     onChangeMetric="onChangeMetric" 
-                                     onChangeDate="onChangeDate" 
+                                     onChooseReport="onChooseReport" 
+                                     onChooseMetric="onChooseMetric" 
+                                     onChooseDate="onChooseDate" 
                                      onFlatten="onFlatten" 
                                      id="reportMenuCtrl"/>
                             <View class="menuSeparatorShadow"/>

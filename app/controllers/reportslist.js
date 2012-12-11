@@ -23,19 +23,18 @@ reportsCollection.map(function (report)
     latestSection  = currentSection;
 
     var reportName = report.get('name');
-    rows.push(Ti.UI.createTableViewRow({title: reportName, 
-                                        cid: report.cid}));
+    rows.push(Ti.UI.createTableViewRow({title: reportName, cid: report.cid}));
 });
 
 $.reportsTable.setData(rows);
 rows = null;
 
-function selectReport (event) 
+function doSelectReport (event) 
 {
     var cid    = event.rowData.cid;
     var report = reportsCollection.getByCid(cid);
 
-    reportsCollection.trigger('select', report);
+    $.trigger('chosenReport', report);
 
     $.index.close();
 }
