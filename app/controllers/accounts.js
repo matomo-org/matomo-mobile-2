@@ -8,7 +8,7 @@ updateContent();
 function updateContent()
 {
     var rows = [];
-    accounts.map(function(account) {
+    accounts.forEach(function(account) {
         rows.push(Ti.UI.createTableViewRow({
             title : account.get("name"),
             id : account.id

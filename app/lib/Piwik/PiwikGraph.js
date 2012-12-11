@@ -161,7 +161,7 @@ function PiwikGraph () {
         var parameter = {width: width, height: height};
         
         for (var index in Alloy.CFG.piwik.graph) {
-            parameter[index] = Alloy.CFG.piwik.graphh[index];
+            parameter[index] = Alloy.CFG.piwik.graph[index];
         }
         
         if (hires && Piwik.getPlatform().isIos) {
