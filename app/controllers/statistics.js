@@ -45,7 +45,8 @@ function onChooseReport()
     var params     = {reports: reportsCollection};
     var reportList = Alloy.createController('reportslist', params);
     reportList.on('reportChosen', function (chosenReportModel) {
-        reportModel = chosenReportModel;
+        reportModel   = chosenReportModel;
+        currentMetric = null;
         refresh();
     })
     reportList.open();
@@ -80,19 +81,19 @@ accountsCollection.on('select', function (account) {
 });
 
 var reportRowsCtrl = null;
-statisticsModel.on('change', function (processedReportModel) {
+statisticsModel.on('refreshed', function (processedReportModel) {
 
     $.content.show();
     $.loading.hide();
 
-    $.reportInfoCtrl.update(processedReportModel);
-    $.reportGraphCtrl.update(processedReportModel, accountModel);
+    $.reportInfoCtrl.update(this);
+    $.reportGraphCtrl.update(this, accountModel);
 
     if (reportRowsCtrl) {
         $.reportRowsContainer.remove(reportRowsCtrl.getView());
     }
 
-    reportRowsCtrl = Alloy.createController('reportrows', {report: processedReportModel});
+    reportRowsCtrl = Alloy.createController('reportrows', {report: this});
     $.reportRowsContainer.add(reportRowsCtrl.getView());
 });
 
@@ -114,7 +115,6 @@ siteModel.on('change', function (siteModel) {
             reportModel = reportsCollection.getEntryReport();
            
             refresh();
-            
         },
         error : function(model, resp) {
             statisticsModel.trigger('error', {type: 'loadingReportList'});
@@ -149,6 +149,9 @@ function refresh() {
                  apiAction: action},
         error: function () {
             statisticsModel.trigger('error', {type: 'loadingProcessedReport'});
+        },
+        success: function () {
+            statisticsModel.trigger('refreshed');
         }
     });
 }
