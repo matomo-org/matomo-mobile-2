@@ -28,7 +28,8 @@ if (OS_IOS) {
     });
     
     bar.addEventListener('click', function () {
-        Alloy.createController('accounts', {accounts: accountsCollection});
+        var accounts = Alloy.createController('accounts', {accounts: accountsCollection});
+        accounts.open();
     });
     
     $.win1.leftNavButton = bar;
@@ -70,6 +71,7 @@ function onFlatten ()
 {
     flatten = 1;
     refresh();
+    flatten = 0;
 }
 
 accountsCollection.on('select', function (account) {
@@ -77,13 +79,27 @@ accountsCollection.on('select', function (account) {
     refresh();
 });
 
-statisticsModel.on('change', function (reportModel) {
+var reportRowsCtrl = null;
+statisticsModel.on('change', function (processedReportModel) {
 
     $.content.show();
     $.loading.hide();
 
-    $.reportInfoCtrl.update(reportModel);
-    $.reportGraphCtrl.update(reportModel, accountModel);
+    $.reportInfoCtrl.update(processedReportModel);
+    $.reportGraphCtrl.update(processedReportModel, accountModel);
+
+    if (reportRowsCtrl) {
+        $.reportRowsContainer.remove(reportRowsCtrl.getView());
+    }
+
+    reportRowsCtrl = Alloy.createController('reportrows', {report: processedReportModel});
+    $.reportRowsContainer.add(reportRowsCtrl.getView());
+});
+
+statisticsModel.on('error', function () {
+    // TODO what should we do in this case?
+    $.content.show();
+    $.loading.hide();
 });
 
 siteModel.on('change', function (siteModel) {
@@ -101,7 +117,7 @@ siteModel.on('change', function (siteModel) {
             
         },
         error : function(model, resp) {
-            console.log('Error 2');
+            statisticsModel.trigger('error', {type: 'loadingReportList'});
         }
     });
 });
@@ -111,7 +127,6 @@ siteModel.fetch({
 });
 
 function refresh() {
-    console.log('refresh');
 
     $.loading.show();
     $.content.hide();
@@ -131,7 +146,10 @@ function refresh() {
                  sortOrderColumn: metric,
                  filter_sort_column: metric,
                  apiModule: module, 
-                 apiAction: action}
+                 apiAction: action},
+        error: function () {
+            statisticsModel.trigger('error', {type: 'loadingProcessedReport'});
+        }
     });
 }
 

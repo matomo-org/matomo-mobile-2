@@ -59,6 +59,20 @@ exports.definition = {
 					return this.get('metadata').name;
 				}
 				return '';
+			},
+			getRows: function () {
+				var reportData = this.get('reportData');
+				var metaData   = this.get('reportMetadata');
+
+				var rows = [];
+
+				for (var index in reportData) {
+					rows.push({data: reportData[index], 
+							   metadata: metaData ? metaData[index] : null,
+							   sortOrderColumn: this.getSortOrder()});
+				}
+
+				return rows;
 			}
 
 			// extended functions go here

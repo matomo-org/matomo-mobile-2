@@ -1,0 +1,38 @@
+".container": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    layout: "vertical"
+},
+
+".data": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL
+},
+
+"#title": {
+    top: 10,
+    left: 10,
+    right: 80
+},
+
+"#value": {
+    top: 10,
+    right: 10,
+    width: 70,
+    color: "blue",
+    textAlign: "right"
+},
+
+".separator": {
+    height: 1,
+    backgroundColor: '#cccccc'
+},
+
+".menuSeparatorShadow2": {
+    height: 4,
+    backgroundImage: 'separator2.png'
+},
+
+".space": {
+    height: 10
+}

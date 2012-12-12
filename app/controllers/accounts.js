@@ -64,4 +64,6 @@ function onCreatedAccount() {
     newAccountController.getView().close();
 }
 
-$.index.open();
+exports.open = function () {
+    $.index.open();
+};

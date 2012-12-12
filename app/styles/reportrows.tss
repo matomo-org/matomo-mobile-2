@@ -1,0 +1,5 @@
+".reportDataContainer": {
+    layout: "vertical",
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL
+}

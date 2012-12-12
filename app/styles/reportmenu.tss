@@ -9,7 +9,9 @@
     top: 0,
     height: 60,
     left: 0,
-    width: Ti.UI.SIZE
+    width: Ti.UI.SIZE,
+    backgroundSelectedColor: 'white',
+    backgroundFocusedColor: 'white'
 },
 
 ".menuSeparator": {

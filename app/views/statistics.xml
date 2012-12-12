@@ -19,29 +19,11 @@
                     <TableViewRow>
                         <Require src="reportgraph" id="reportGraphCtrl"/>
                     </TableViewRow>
-                    <TableViewRow>
-                        <View class="reportDataContainer">
-                            <!--
-                            <View class="reportInfoSeparator"/>
-                            <View class="menuSeparatorShadow2"/>
-                            <View class="reportRowContainer">
-                                <Label class="reportRowTitle">Germany</Label>
-                                <Label class="reportRowValue">50</Label>
-                            </View>
-                            <View class="reportInfoSeparator"/>
-                            <View class="menuSeparator"/>
-                            <View class="reportRowContainer">
-                                <Label class="reportRowTitle">Germany</Label>
-                                <Label class="reportRowValue">50</Label>
-                            </View>
-                            <View class="reportInfoSeparator"/>
-                            <View class="menuSeparator"/>
-                            <View class="reportRowContainer">
-                                <Label class="reportRowTitle">Germany</Label>
-                                <Label class="reportRowValue">50</Label>
-                            </View>
-                            <View class="reportInfoSeparator"/>-->
-                        </View>
+                    <TableViewRow class="reportRowSeparator">
+                        <View class="space"></View>
+                        <View class="shadow"></View>
+                    </TableViewRow>
+                    <TableViewRow id="reportRowsContainer">
                     </TableViewRow>
                 </TableView>
             </Window>

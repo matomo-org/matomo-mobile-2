@@ -13,5 +13,5 @@ exports.update = function (processedReportModel, accountModel) {
 
     console.log(imageWithSize);
 
-    $.image.image = urlWithSize;
+    $.image.image = imageWithSize;
 }
