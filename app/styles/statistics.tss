@@ -29,7 +29,10 @@
 },
 
 "TableViewRow": {
-    height: Ti.UI.SIZE,
+    height: Ti.UI.SIZE
+},
+
+"TableViewRow[platform=ios]": {
     selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
 },
 

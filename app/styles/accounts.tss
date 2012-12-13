@@ -5,7 +5,8 @@
 "#accounts": {
     headerTitle: 'Your accounts',
     top: 10,
-    height: Ti.UI.FILL
+    height: Ti.UI.FILL,
+    editable: true
 },
 
 "#actions": {

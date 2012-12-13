@@ -41,6 +41,10 @@ exports.definition = {
                 
                 return null;
             },
+
+            getName: function () {
+                return this.get('name');
+            },
             
             validResponse: function (response) {
                 if (!response || !response[0]) {

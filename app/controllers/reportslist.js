@@ -1,9 +1,12 @@
-var args = arguments[0] || {};
+var args      = arguments[0] || {};
+var siteModel = args.site || false;
 var reportsCollection = args.reports || false;
 
 var rows = [];
 var currentSection = null;
 var latestSection  = null;
+
+$.reportsWindow.title = siteModel.getName();
 
 reportsCollection.map(function (report) 
 {

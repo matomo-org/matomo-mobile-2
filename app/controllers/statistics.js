@@ -42,7 +42,7 @@ if (OS_IOS) {
 
 function onChooseReport()
 {
-    var params     = {reports: reportsCollection};
+    var params     = {reports: reportsCollection, site: siteModel};
     var reportList = Alloy.createController('reportslist', params);
     reportList.on('reportChosen', function (chosenReportModel) {
         reportModel   = chosenReportModel;
@@ -104,7 +104,7 @@ statisticsModel.on('error', function () {
 });
 
 siteModel.on('change', function (siteModel) {
-    $.win1.title = siteModel.get('name');
+    $.win1.title = siteModel.getName();
 
     reportsCollection = Alloy.createCollection('piwikReportsList');
     reportsCollection.fetch({
@@ -123,6 +123,7 @@ siteModel.on('change', function (siteModel) {
 });
 
 siteModel.fetch({
+    params: {limit: 1},
     account: accountModel
 });
 

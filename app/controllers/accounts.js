@@ -18,15 +18,18 @@ function updateContent()
     $.accounts.setData(rows);
 }
 
-$.accounts.on('click', function(e) {
-    var account = accounts.get(e.rowData.id);
-    selectAccount(account);
-});
-
-function selectAccount(account)
+function onSelect(event)
 {
-    $.index.close();
+    var account = accounts.get(event.rowData.id);
     accounts.trigger('select', account);
+    $.index.close();
+}
+
+function onDelete(event)
+{
+    var account = accounts.get(event.rowData.id);
+    accounts.remove(account);
+    account.destroy();
 }
 
 if (OS_IOS && !hideCloseButton) {
