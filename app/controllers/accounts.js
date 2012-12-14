@@ -16,16 +16,17 @@ function updateContent()
     });
 
     $.accounts.setData(rows);
+    rows = null;
 }
 
-function onSelect(event)
+function doSelectAccount(event)
 {
     var account = accounts.get(event.rowData.id);
     $.trigger('accountChosen', account);
-    $.index.close();
+    close();
 }
 
-function onDelete(event)
+function doDeleteAccount(event)
 {
     var account = accounts.get(event.rowData.id);
 
@@ -35,6 +36,10 @@ function onDelete(event)
     }
 }
 
+function close () {
+    $.index.close();
+}
+
 if (OS_IOS && !hideCloseButton) {
 
     var closeButton = Ti.UI.createButton({
@@ -42,9 +47,7 @@ if (OS_IOS && !hideCloseButton) {
         style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
     });
 
-    closeButton.addEventListener('click', function(){
-        $.index.close();
-    });
+    closeButton.addEventListener('click', close);
 
     $.accountView.leftNavButton = closeButton;
 

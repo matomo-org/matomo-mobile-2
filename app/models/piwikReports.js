@@ -75,13 +75,9 @@ exports.definition = {
 		    containsAction: function (searchReport) {
 		    	var searchAction = searchReport.get('action');
 		    	var searchModule = searchReport.get('module');
-		    			// TODO forEach is not correct method
-		    	return this.forEach(function (reportModel) {
-		    		if (reportModel.get('action') == searchAction &&
-		    			reportModel.get('module') == searchModule) {
-		    			return true;
-		    		}
-		    	});
+
+		    	var reports = this.where({action: searchAction, module: searchModule});
+		    	return !!reports.length;
 		    }
 
 			// extended functions go here			

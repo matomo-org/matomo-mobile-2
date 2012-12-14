@@ -2,7 +2,7 @@
     <Window id="index">
         <NavigationGroup id="navgroup" platform="ios,mobileweb">
             <Window class="container" id="accountView" title="Accounts">
-                <TableView id="accounts" onDelete="onDelete" onClick="onSelect" class="accountsContainer" />
+                <TableView id="accounts" onDelete="doDeleteAccount" onClick="doSelectAccount" class="accountsContainer" />
                 <TableView id="actions" class="accountsContainer">
                     <TableViewRow class="masterPasswordRow">
                         <Label>Master Password</Label>
