@@ -15,7 +15,7 @@ exports.definition = {
 		},
 		"adapter": {
 			"type": "piwikapi",
-			"collection_name": "piwikreportslist"
+			"collection_name": "piwikreports"
 		},
 		"settings": {
 		    "method": "API.getReportMetadata",
@@ -71,6 +71,18 @@ exports.definition = {
 		        // Iterate over list to make sure all websites dashboard will be preferred
 		        return this.at(0);
 		    },
+
+		    containsAction: function (searchReport) {
+		    	var searchAction = searchReport.get('action');
+		    	var searchModule = searchReport.get('module');
+		    			// TODO forEach is not correct method
+		    	return this.forEach(function (reportModel) {
+		    		if (reportModel.get('action') == searchAction &&
+		    			reportModel.get('module') == searchModule) {
+		    			return true;
+		    		}
+		    	});
+		    }
 
 			// extended functions go here			
 			

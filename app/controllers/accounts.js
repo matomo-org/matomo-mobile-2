@@ -21,15 +21,18 @@ function updateContent()
 function onSelect(event)
 {
     var account = accounts.get(event.rowData.id);
-    accounts.trigger('select', account);
+    $.trigger('accountChosen', account);
     $.index.close();
 }
 
 function onDelete(event)
 {
     var account = accounts.get(event.rowData.id);
-    accounts.remove(account);
-    account.destroy();
+
+    if (account) {
+        accounts.remove(account);
+        account.destroy();
+    }
 }
 
 if (OS_IOS && !hideCloseButton) {

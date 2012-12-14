@@ -2,6 +2,10 @@
     layout: "vertical"
 },
 
+".splitWindow": {
+    showMasterInPortrait: true
+},
+
 ".container[platform=ios]": {
     separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
 },

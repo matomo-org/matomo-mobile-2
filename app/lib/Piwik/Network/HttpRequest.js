@@ -194,9 +194,9 @@ HttpRequest.prototype.handle = function () {
 
     if (!Ti.Network || !Ti.Network.online) {
         
-        this.error({error: 'No connection'});
+       // this.error({error: 'No connection'});
 
-        return;
+      //  return;
     }
 
     var requestUrl  = '';

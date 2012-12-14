@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index">
+    <Window id="index" formFactor="handheld">
         <NavigationGroup id="navgroup" platform="ios,mobileweb">
             <Window title=" " id="win1">
                 <View id="loading"><Label>Loading</Label></View>
@@ -7,10 +7,10 @@
                     <TableViewRow>
                         <View class="menu">
                             <Require src="reportmenu" 
-                                     onChooseReport="onChooseReport" 
-                                     onChooseMetric="onChooseMetric" 
-                                     onChooseDate="onChooseDate" 
-                                     onFlatten="onFlatten" 
+                                     onChooseReport="doChooseReport" 
+                                     onChooseMetric="doChooseMetric" 
+                                     onChooseDate="doChooseDate" 
+                                     onFlatten="doFlatten" 
                                      id="reportMenuCtrl"/>
                             <View class="menuSeparatorShadow"/>
                             <Require src="reportinfo" id="reportInfoCtrl"/>
@@ -29,4 +29,41 @@
             </Window>
         </NavigationGroup>
 	</Window>
+    <SplitWindow id="index" formFactor="tablet" platform="ios" class="splitWindow">
+
+        <Window title=" " id="win0">
+        </Window>
+
+        <Window>
+            <NavigationGroup>
+                <Window title=" " id="win1">
+                    <View id="loading"><Label>Loading</Label></View>
+                    <TableView id="content" class="container">
+                        <TableViewRow>
+                            <View class="menu">
+                                <Require src="reportmenu" 
+                                         onChooseReport="onChooseReport" 
+                                         onChooseMetric="onChooseMetric" 
+                                         onChooseDate="onChooseDate" 
+                                         onFlatten="onFlatten" 
+                                         id="reportMenuCtrl"/>
+                                <View class="menuSeparatorShadow"/>
+                                <Require src="reportinfo" id="reportInfoCtrl"/>
+                            </View>
+                        </TableViewRow>
+                        <TableViewRow>
+                            <Require src="reportgraph" id="reportGraphCtrl"/>
+                        </TableViewRow>
+                        <TableViewRow class="reportRowSeparator">
+                            <View class="space"></View>
+                            <View class="shadow"></View>
+                        </TableViewRow>
+                        <TableViewRow id="reportRowsContainer">
+                        </TableViewRow>
+                    </TableView>
+                </Window>
+
+            </NavigationGroup>
+        </Window>
+</SplitWindow>
 </Alloy>

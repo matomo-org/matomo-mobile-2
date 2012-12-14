@@ -32,6 +32,10 @@ exports.definition = {
             initialize: function () {
                 this.on('change:accessUrl', this.completeAccessUrl)
             },
+
+            getName: function () {
+                return this.get('name');
+            },
             
             completeAccessUrl: function (accountModel, accessUrl) {
                 
