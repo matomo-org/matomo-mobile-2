@@ -132,14 +132,14 @@ function onStatisticsFetched(processedReportModel)
 {
     showReportContent();
 
-    $.reportInfoCtrl.update(this);
-    $.reportGraphCtrl.update(this, accountModel);
+    $.reportInfoCtrl.update(processedReportModel);
+    $.reportGraphCtrl.update(processedReportModel, accountModel);
 
     if (reportRowsCtrl) {
         $.reportRowsContainer.remove(reportRowsCtrl.getView());
     }
 
-    reportRowsCtrl = Alloy.createController('reportrows', {report: this});
+    reportRowsCtrl = Alloy.createController('reportrows', {report: processedReportModel});
     $.reportRowsContainer.add(reportRowsCtrl.getView());
 }
 
