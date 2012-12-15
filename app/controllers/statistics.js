@@ -190,5 +190,9 @@ statisticsModel.on('error', function () {
 exports.open = function () {
     onAccountChosen(accountModel);
 
-    $.index.open(); 
+    if (OS_ANDROID) {
+        $.win1.open(); 
+    } else {
+        $.index.open(); 
+    }
 };

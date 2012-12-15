@@ -1,6 +1,6 @@
 <Alloy>
-    <Window id="index" formFactor="handheld">
-        <NavigationGroup id="navgroup" platform="ios,mobileweb">
+    <Window id="index" formFactor="handheld" platform="ios,mobileweb">
+        <NavigationGroup id="navgroup" >
             <Window title=" " id="win1">
                 <View id="loading"><Label>Loading</Label></View>
                 <TableView id="content" class="container">
@@ -29,6 +29,32 @@
             </Window>
         </NavigationGroup>
 	</Window>
+    <Window title=" " id="win1" formFactor="handheld" platform="android">
+        <View id="loading"><Label>Loading</Label></View>
+        <TableView id="content" class="container">
+            <TableViewRow>
+                <View class="menu">
+                    <Require src="reportmenu" 
+                             onChooseReport="doChooseReport" 
+                             onChooseMetric="doChooseMetric" 
+                             onChooseDate="doChooseDate" 
+                             onFlatten="doFlatten" 
+                             id="reportMenuCtrl"/>
+                    <View class="menuSeparatorShadow"/>
+                    <Require src="reportinfo" id="reportInfoCtrl"/>
+                </View>
+            </TableViewRow>
+            <TableViewRow>
+                <Require src="reportgraph" id="reportGraphCtrl"/>
+            </TableViewRow>
+            <TableViewRow class="reportRowSeparator">
+                <View class="space"></View>
+                <View class="shadow"></View>
+            </TableViewRow>
+            <TableViewRow id="reportRowsContainer">
+            </TableViewRow>
+        </TableView>
+    </Window>
     <SplitWindow id="index" formFactor="tablet" platform="ios" class="splitWindow">
 
         <Window title=" " id="win0">
