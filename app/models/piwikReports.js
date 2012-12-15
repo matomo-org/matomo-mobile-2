@@ -1,4 +1,4 @@
-var Alloy = require('Alloy');
+var Alloy = require('alloy');
 
 exports.definition = {
 	
