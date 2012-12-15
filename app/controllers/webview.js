@@ -9,11 +9,14 @@ if (OS_IOS) {
         style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
     });
 
-    closeButton.addEventListener('click', function(){
-        $.index.close();
-    });
+    closeButton.addEventListener('click', close);
 
     $.web.leftNavButton = closeButton;
+}
+
+function close()
+{
+    $.index.close();
 }
 
 exports.open = function () {

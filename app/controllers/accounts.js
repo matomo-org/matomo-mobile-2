@@ -3,9 +3,9 @@ var args = arguments[0] || {};
 var hideCloseButton = args.hideCloseButton || false;
 var accounts  = args.accounts || false;
 
-updateContent();
+renderListOfAccounts();
 
-function updateContent()
+function renderListOfAccounts()
 {
     var rows = [];
     accounts.forEach(function(account) {
@@ -50,12 +50,9 @@ if (OS_IOS && !hideCloseButton) {
     closeButton.addEventListener('click', close);
 
     $.accountView.leftNavButton = closeButton;
-
 }
 
-var addButton = Ti.UI.createButton({
-    title: '+'
-});
+var addButton = Ti.UI.createButton({title: '+'});
 
 $.accountView.rightNavButton = addButton;
 
@@ -69,7 +66,7 @@ addButton.addEventListener('click', function() {
 
 function onCreatedAccount() {
     accounts.off("add", onCreatedAccount);
-    updateContent();
+    renderListOfAccounts();
     newAccountController.getView().close();
 }
 

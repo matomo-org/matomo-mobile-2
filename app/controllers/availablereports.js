@@ -32,17 +32,21 @@ reportsCollection.map(function (report)
 $.reportsTable.setData(rows);
 rows = null;
 
-function doSelectReport (event) 
+function doSelectReport(event) 
 {
     var cid    = event.rowData.cid;
     var report = reportsCollection.getByCid(cid);
 
     $.trigger('reportChosen', report);
+    close();
+}
 
+function close()
+{
     $.index.close();
 }
 
-exports.open = function () 
+exports.open = function() 
 {
     $.index.open();
 };

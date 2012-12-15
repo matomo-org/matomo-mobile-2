@@ -1,4 +1,3 @@
-
 exports.update = function (processedReportModel) {
     var selectedMetricName = processedReportModel.getMetricName();
     var reportName         = processedReportModel.getReportName();

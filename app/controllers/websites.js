@@ -7,10 +7,10 @@ var siteCollection = Alloy.createCollection('piwikWebsites');
 
 siteCollection.fetch({
     account: accountModel,
-    success: renderWebsites
+    success: renderListOfWebsites
 });
 
-function renderWebsites(siteCollection)
+function renderListOfWebsites(siteCollection)
 {
     var rows = [];
     siteCollection.forEach(function (siteModel) {
@@ -27,7 +27,11 @@ function doSelectWebsite (event)
     var website = siteCollection.getByCid(cid);
 
     $.trigger('websiteChosen', website);
+    close();
+}
 
+function close()
+{
     $.index.close();
 }
 
