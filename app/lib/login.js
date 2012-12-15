@@ -46,9 +46,10 @@ exports.login = function(accounts, url, username, password)
 
     account.on('change:tokenAuth', function (accountModel, tokenAuth) {
         console.log('change:tokenAuth');
-        var site = Alloy.createModel('piwikEntrySite');
+        var site = Alloy.createModel('piwikWebsites');
 
         site.fetch({
+            params: {limit: 1},
             account: accountModel,
             success: function (siteModel) {
 
