@@ -13,7 +13,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.0.0</sdk-version>
+    <sdk-version>3.0.0.GA</sdk-version>
     <id>com.alloy.test</id>
     <name>AlloyTest</name>
     <version>1.0</version>
@@ -43,7 +43,7 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:installLocation="preferExternal"></manifest>
+        <manifest android:installLocation="preferExternal"/>
     </android>
     <mobileweb>
         <precache/>
