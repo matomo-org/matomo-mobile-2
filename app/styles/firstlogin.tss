@@ -2,59 +2,95 @@
     backgroundColor: "#F5F5F5"
 },
 
-"#imageview": {
-    image:"logo-png-page.png",
-    width: 280,
-    height:165,
-    top:10,
-    zIndex: 1
-},
-
 "#mainView": {
     layout: 'vertical',
-    top: 0,
-    bottom: 0
+    height: Ti.UI.FILL
 },
 
 "#headerView": {
     width: Ti.UI.FILL,
     top: 0,
-    height: 200,
-    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL
+    height: 200
 },
 
-"#footerView": {
-    bottom: 5,
-    height: 50,
-    width: Ti.UI.FILL,
-    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL
+"#headerView[platform=android]": {
+    top: '0dp',
+    height: '200dp'
 },
 
 "#logoImage": {
     image:"/logo-png-page.png",
-    top: 10,
     width: 280,
-    height:165
+    height: 165,
+    top: 10,
+    zIndex: 1
+},
+
+"#logoImage[platform=android]": {
+    width: '280dp',
+    height: '165dp',
+    top:'10dp',
+},
+
+"#loginform": {
+    left: 20,
+    right: 20,
+    height: Ti.UI.SIZE
+},
+
+"#loginform[platform=android]": {
+    left: '16dp',
+    right: '16dp'
+},
+
+".footerSpacer": {
+    height: 40,
+},
+
+"#footerView": {
+    bottom: 16,
+    height: 40,
+    width: Ti.UI.FILL
+},
+
+"#footerView[platform=android]": {
+    bottom: '16dp',
+    height: '40dp'
+},
+
+".footerSpacer[platform=android]": {
+    height: '40dp',
+},
+
+".footerLink": {
+    bottom: 0,
+    font: { 
+        fontSize: 16,
+        fontWeight: 'bold'
+    }
+},
+
+".footerLink[platform=android]": {
+    font: { 
+        fontSize: '16sp',
+        fontWeight: 'bold'
+    }
 },
 
 "#tryit": {
     left: 10,
-	height: 40,
-	width: 60,
-	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    font: { 
-        fontSize: 20,
-        fontWeight: 'bold'
-    }
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+},
+
+"#tryit[platform=android]": {
+    left: '16dp'
 },
 
 "#faq": {
     right: 10,
-    height: 40,
-	width: 60,
-	textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
-    font: { 
-        fontSize: 20,
-        fontWeight: 'bold'
-    }
+    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT
+},
+
+"#faq[platform=android]": {
+    right: '16dp'
 }

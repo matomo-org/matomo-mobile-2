@@ -1,13 +1,16 @@
 <Alloy>
     <Window class="container">
-        <ScrollView id="mainView">
-            <View id="headerView">
-                <ImageView id="logoImage"/>
+        <ScrollView>
+            <View id="mainView">
+                <View id="headerView">
+                    <ImageView id="logoImage"/>
+                </View>
+                <View id="loginform" />
+                <View class="footerSpacer" />
             </View>
-            <View id="loginform" />
             <View id="footerView">
-                <Label id="tryit" onClick="onTryIt">Try it!</Label>
-                <Label id="faq" onClick="onFaq">FAQ</Label>
+                <Label id="tryit" class="footerLink" onClick="onTryIt">Try it!</Label>
+                <Label id="faq" class="footerLink" onClick="onFaq">FAQ</Label>
             </View>
         </ScrollView>
     </Window>
