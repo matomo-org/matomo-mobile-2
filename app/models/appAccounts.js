@@ -19,13 +19,7 @@ function endsWithSlash(accessUrl)
 
 function appendSlashIfNecessary(accessUrl)
 {
-    var lastCharPos   = accessUrl.length - 1;
-    var lastUrlChar   = accessUrl.substr(lastCharPos, 1);
-    var last4UrlChars = accessUrl.substr(accessUrl.length - 4, 4).toLowerCase();
-
-    if ('/' !== lastUrlChar && '.php' !== last4UrlChars) {
-        // append a slash if user entered an url like 'http://demo.piwik.org' . Do not append if user entered an url
-        // like 'http://demo.piwik.org/index.php'
+    if (!endsWithSlash(accessUrl) && !endsWithPhp(accessUrl)) {
         accessUrl = accessUrl + '/';
     } 
 
