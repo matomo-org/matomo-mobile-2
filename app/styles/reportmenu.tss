@@ -2,7 +2,15 @@
     top: 0,
     layout: "horizontal",
     height: 60,
-    backgroundColor: '#F5F5F5'
+    backgroundColor: '#F5F5F5',
+    contentWidth: 'auto',
+    contentHeight: 60
+},
+
+".menuBar[platform=android]": {
+    height: '60dp',
+    contentHeight: '60dp',
+    scrollType: 'horizontal'
 },
 
 ".menuItem": {
@@ -14,10 +22,19 @@
     backgroundFocusedColor: 'white'
 },
 
+".menuItem[platform=android]": {
+    height: '60dp'
+},
+
 ".menuSeparator": {
     width: 1,
     height: 60,
     backgroundColor: '#cccccc'
+},
+
+".menuSeparator[platform=android]": {
+    width: '1dp',
+    height: '60dp'
 },
 
 ".menuIcon": {
@@ -27,13 +44,31 @@
     top: 10
 },
 
+".menuIcon[platform=android]": {
+    image: "/ic_action_date.png",
+    top: '10dp',
+    width: '24dp',
+    height: '24dp'
+},
+
 ".menuTitle": {
-    left: 20, right: 20,
+    left: 20, 
+    right: 20,
     width: Ti.UI.SIZE,
     color: '#333333',
     bottom: 5,
     font: {
         fontSize: 12,
+        fontWeight: 'bold'
+    }
+},
+
+".menuTitle[platform=android]": {
+    bottom: '5dp',
+    left: '24dp',
+    right: '24dp',
+    font: {
+        fontSize: '12sp',
         fontWeight: 'bold'
     }
 }

@@ -14,6 +14,14 @@
     }
 },
 
+"#name[platform=android]": {
+    top: '10dp',
+    left: '16dp',
+    font: {
+        fontSize: '13sp'
+    }
+},
+
 "#date": {
     top: 10,
     left: 15,
@@ -23,11 +31,28 @@
     }
 },
 
+"#date[platform=android]": {
+    top: '10dp',
+    left: '16dp',
+    font: {
+        fontSize: '13sp'
+    }
+},
+
 ".separatorShadow": {
     height: 4,
     backgroundImage: 'separator2.png'
 },
 
+".separatorShadow[platform=android]": {
+    height: '4dp',
+    backgroundImage: '/separator2.png'
+},
+
 ".separator": {
     height: 10
+},
+
+".separator[platform=android]": {
+    height: '10dp'
 }

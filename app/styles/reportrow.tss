@@ -15,6 +15,12 @@
     right: 80
 },
 
+"#title[platform=android]": {
+    top: '10dp',
+    left: '10dp',
+    right: '80dp'
+},
+
 "#value": {
     top: 10,
     right: 10,
@@ -23,9 +29,19 @@
     textAlign: "right"
 },
 
+"#value[platform=android]": {
+    top: '10dp',
+    right: '10dp',
+    width: '70dp'
+},
+
 ".separator": {
     height: 1,
     backgroundColor: '#cccccc'
+},
+
+".separator[platform=android]": {
+    height: '1dp'
 },
 
 ".menuSeparatorShadow2": {
@@ -33,6 +49,15 @@
     backgroundImage: 'separator2.png'
 },
 
+".menuSeparatorShadow2[platform=android]": {
+    height: '4dp',
+    backgroundImage: '/separator2.png'
+},
+
 ".space": {
     height: 10
+},
+
+".space[platform=android]": {
+    height: '10dp'
 }

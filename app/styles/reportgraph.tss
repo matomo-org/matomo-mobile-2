@@ -4,8 +4,19 @@
     width: Ti.UI.FILL
 },
 
+".container[platform=android]": {
+    top: '15dp'
+},
+
 "#image": {
     image: 'graph.png',
     height: 150,
-    width: 300
+    left: 10,
+    right: 10
 },
+
+"#image[platform=android]": {
+    left: '16dp',
+    right: '16dp',
+    height: '150dp',
+}

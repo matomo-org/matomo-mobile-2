@@ -9,9 +9,19 @@
     editable: true
 },
 
+"#accounts[platform=android]": {
+    headerTitle: 'Your accounts',
+    top: 10
+},
+
 "#actions": {
     height: 40,
     bottom: 40
+},
+
+"#actions[platform=android]": {
+    height: '40dp',
+    bottom: '40dp'
 },
 
 ".accountsContainer": {
@@ -20,6 +30,11 @@
     right: 10,
     backgroundColor:'transparent',
     rowBackgroundColor:'#eee'
+},
+
+".accountsContainer[platform=android]": {
+    left: '10dp',
+    right: '10dp'
 },
 
 ".accountsContainer[platform=ios]": {
@@ -38,6 +53,10 @@
     hasChild: true,
     height: 30,
     textAlign: "left"
+},
+
+".accountRow[platform=android]": {
+    height: '30dp'
 },
 
 ".addAccountRow": {

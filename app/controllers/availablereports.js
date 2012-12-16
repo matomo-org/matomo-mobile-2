@@ -43,10 +43,18 @@ function doSelectReport(event)
 
 function close()
 {
-    $.index.close();
+    if (OS_ANDROID) {
+        $.reportsWindow.close();
+    } else {
+        $.index.open();
+    }
 }
 
 exports.open = function() 
 {
-    $.index.open();
+    if (OS_ANDROID) {
+        $.reportsWindow.open();
+    } else {
+        $.index.open();
+    }
 };
