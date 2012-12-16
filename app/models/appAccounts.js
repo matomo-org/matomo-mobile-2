@@ -1,5 +1,71 @@
+function appendIndexPhpIfNecessary(accessUrl)
+{
+    accessUrl = appendSlashIfNecessary(accessUrl);
+    
+    if (!endsWithPhp(accessUrl)) {
+        accessUrl = accessUrl + 'index.php';
+    }
 
-/** @private */
+    return accessUrl;
+}
+
+function endsWithSlash(accessUrl)
+{
+    var lastCharPos = accessUrl.length - 1;
+    var lastUrlChar = accessUrl.substr(lastCharPos, 1)
+
+    return ('/' === lastUrlChar);
+}
+
+function appendSlashIfNecessary(accessUrl)
+{
+    var lastCharPos   = accessUrl.length - 1;
+    var lastUrlChar   = accessUrl.substr(lastCharPos, 1);
+    var last4UrlChars = accessUrl.substr(accessUrl.length - 4, 4).toLowerCase();
+
+    if ('/' !== lastUrlChar && '.php' !== last4UrlChars) {
+        // append a slash if user entered an url like 'http://demo.piwik.org' . Do not append if user entered an url
+        // like 'http://demo.piwik.org/index.php'
+        accessUrl = accessUrl + '/';
+    } 
+
+    return accessUrl;
+}
+
+function startsWithHttp(accessUrl)
+{
+    var last4Chars = accessUrl.substr(0, 4);
+
+    return ('http' === last4Chars.toLowerCase());
+}
+
+function endsWithPhp(accessUrl)
+{
+    var posLast4Char = accessUrl.length - 4;
+    var last4Chars   = accessUrl.substr(posLast4Char, 4);
+
+    return ('.php' === last4Chars.toLowerCase());
+}
+
+function absolutePath(accessUrl)
+{
+    var posLastSlash = accessUrl.lastIndexOf('/');
+    var absolutePath = accessUrl.substr(0, posLastSlash + 1);
+
+    return absolutePath;
+}
+
+function onlyFirstNumbers(piwikVersion)
+{
+    // compare only first six chars and ignore all dots -> from 0.6.4-rc1 to 064
+    // if version was '1.4-rc1', it is '14-rc' now
+    piwikVersion = piwikVersion.substr(0, 5).replace(/\./g, '');
+    
+    // make sure they contain only numbers.
+    piwikVersion = piwikVersion.replace(/[^\d]/g, '');
+
+    return piwikVersion;
+}
 
 exports.definition = {
 
@@ -42,23 +108,8 @@ exports.definition = {
                 if (!accessUrl) {
                     return;
                 }
-                
-                var lastUrlChar   = accessUrl.substr(accessUrl.length - 1, 1);
-                var last4UrlChars = accessUrl.substr(accessUrl.length -4, 4).toLowerCase();
 
-                if ('/' !== lastUrlChar && '.php' !== last4UrlChars) {
-                    // append a slash if user entered an url like 'http://demo.piwik.org' . Do not append if user entered an url
-                    // like 'http://demo.piwik.org/index.php'
-                    accessUrl = accessUrl + '/';
-                } 
-                
-                lastUrlChar = accessUrl.substr(accessUrl.length - 1, 1);
-                
-                if ('/' === lastUrlChar) {
-                    // if url doesn't end with *.php, append index.php automatically. we do not verify whether it ends with
-                    // index.php so the user is able to use for example xyz.php
-                    accessUrl = accessUrl + 'index.php';
-                }
+                accessUrl = appendIndexPhpIfNecessary(accessUrl)
                 
                 accountModel.set({accessUrl: accessUrl}, {silent: true});
             },
@@ -66,13 +117,14 @@ exports.definition = {
             validate: function () {
                 if (this.get('username') && !this.get('password')) {
                     return 'MissingPassword';
-                    
+
                 } else if (!this.get('username') && this.get('password')) {
                     return 'MissingUsername';
                 }
                 
                 var accessUrl = this.get('accessUrl');
-                if (!accessUrl || 'http' !== accessUrl.substr(0, 4).toLowerCase()) {
+
+                if (!accessUrl || !startsWithHttp(accessUrl)) {
             
                     return 'InvalidUrl';
                 }
@@ -133,14 +185,7 @@ exports.definition = {
                     return 0;
                 }
                 
-                piwikVersion = piwikVersion + '';
-            
-                // compare only first six chars and ignore all dots -> from 0.6.4-rc1 to 064
-                // if version was '1.4-rc1', it is '14-rc' now
-                piwikVersion = piwikVersion.substr(0, 5).replace(/\./g, '');
-                
-                // make sure they contain only numbers.
-                piwikVersion = piwikVersion.replace(/[^\d]/g, '');
+                piwikVersion = onlyFirstNumbers(piwikVersion + '')
                 
                 if ((piwikVersion + '').length == 2) {
                     // if version is e.g. '0.7' it would be interpreted as 07 (7), but it should be 0.7.0 = 70.
@@ -169,20 +214,12 @@ exports.definition = {
                 }
                 
                 accessUrl = accessUrl + '';
-            
-                if ('/' == accessUrl.substr(accessUrl.length - 1, 1)) {
-            
-                    return accessUrl;
+
+                if (endsWithPhp(accessUrl)) {
+                    return absolutePath(accessUrl);
                 }
             
-                if ('.php' == accessUrl.substr(accessUrl.length -4, 4).toLowerCase()) {
-                    var lastSlash = accessUrl.lastIndexOf('/');
-                    accessUrl     = accessUrl.substr(0, lastSlash + 1);
-            
-                    return accessUrl;
-                }
-            
-                accessUrl = accessUrl + '/';
+                accessUrl = appendSlashIfNecessary(accessUrl);
             
                 return accessUrl;
             },
