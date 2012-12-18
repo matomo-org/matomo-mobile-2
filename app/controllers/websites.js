@@ -1,7 +1,7 @@
 var args         = arguments[0] || {};
 var accountModel = args.account || false;
 
-$.websitesWindow.title = accountModel.getName();
+$.index.title = accountModel.getName();
 
 var siteCollection = Alloy.createCollection('piwikWebsites');
 
@@ -32,10 +32,10 @@ function doSelectWebsite (event)
 
 function close()
 {
-    $.index.close();
+    require('alloy').Globals.layout.close($.index);
 }
 
 exports.open = function () 
 {
-    $.index.open();
+    require('alloy').Globals.layout.open($.index);
 };

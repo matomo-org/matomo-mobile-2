@@ -1,10 +1,6 @@
 <Alloy>
     <Window id="index">
-        <NavigationGroup id="navgroup" platform="ios,mobileweb">
-            <Window id="websitesWindow">
-                <TableView id="websitesTable" onClick="doSelectWebsite">
-                </TableView>
-            </Window>
-        </NavigationGroup>
+        <TableView id="websitesTable" onClick="doSelectWebsite">
+        </TableView>
     </Window>
 </Alloy>

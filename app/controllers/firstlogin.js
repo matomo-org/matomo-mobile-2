@@ -24,6 +24,11 @@ function onFaq ()
     faq.open();
 }
 
+exports.close = function ()
+{
+    $.firstlogin.close(); 
+};
+
 exports.open = function ()
 {
     $.firstlogin.open(); 

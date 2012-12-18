@@ -36,32 +36,16 @@ function doDeleteAccount(event)
     }
 }
 
-function close () {
-    $.index.close();
-}
-
-if (OS_IOS && !hideCloseButton) {
-
-    var closeButton = Ti.UI.createButton({
-        title: 'Close',
-        style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
-    });
-
-    closeButton.addEventListener('click', close);
-
-    $.accountView.leftNavButton = closeButton;
-}
-
 var addButton = Ti.UI.createButton({title: '+'});
 
-$.accountView.rightNavButton = addButton;
+$.index.rightNavButton = addButton;
 
 var newAccountController = null;
 
 addButton.addEventListener('click', function() {
     newAccountController = Alloy.createController('newaccount', {accounts: accounts});
     accounts.on('add', onCreatedAccount);
-    newAccountController.getView().open();
+    newAccountController.open();
 });
 
 function onCreatedAccount() {
@@ -70,6 +54,12 @@ function onCreatedAccount() {
     newAccountController.getView().close();
 }
 
-exports.open = function () {
-    $.index.open();
+function close () 
+{
+    require('alloy').Globals.layout.close($.index);
+}
+
+exports.open = function ()
+{
+    require('alloy').Globals.layout.open($.index);
 };

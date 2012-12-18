@@ -28,12 +28,21 @@ if (OS_IOS) {
     
     bar.addEventListener('click', doChooseAccount);
     
-    $.win1.leftNavButton = bar;
-    
+    $.index.leftNavButton = bar;
+} else if (OS_MOBILEWEB) {
+
+    var accountsButton = Ti.UI.createButton({image:'ic_action_accounts.png', width:32});
+    accountsButton.addEventListener('click', doChooseAccount);
+
+    $.index.leftNavButton = accountsButton;
+}
+
+if (OS_IOS || OS_MOBILEWEB) {
+
     var websitesButton = Ti.UI.createButton({image:'ic_action_website.png', width:32});
     websitesButton.addEventListener('click', doChooseWebsite);
 
-    $.win1.rightNavButton = websitesButton;
+    $.index.rightNavButton = websitesButton;
 }
 
 function doChooseAccount()
@@ -92,8 +101,8 @@ function onMetricChosen(chosenMetric)
 
 function onWebsiteChosen(site)
 {
-    siteModel    = site;
-    $.win1.title = siteModel.getName();
+    siteModel = site;
+    $.index.setTitle(siteModel.getName());
 
     reportsCollection.fetch({
         account: accountModel,
@@ -191,8 +200,9 @@ exports.open = function () {
     onAccountChosen(accountModel);
 
     if (OS_ANDROID) {
-        $.win1.open(); 
-    } else {
         $.index.open(); 
+    } else {
+       // var alloy = require('alloy');
+       // alloy.Globals.navGroup.open($.index);
     }
 };

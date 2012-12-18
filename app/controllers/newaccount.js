@@ -5,6 +5,7 @@ var accounts = args.accounts;
 var loginform = Alloy.createController('loginform', {
     accounts: accounts
 });
+
 $.loginform.add(loginform.getView());
 
 function onUrlReturn () {
@@ -20,17 +21,7 @@ function onUsernameReturn () {
     $.password.focus();
 }
 
-if (OS_IOS) {
-
-    var closeButton = Ti.UI.createButton({
-        title: 'Close',
-        style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
-    });
-
-    closeButton.addEventListener('click', function(){
-        $.index.close();
-    });
-
-    $.accountFormView.leftNavButton = closeButton;
-
+exports.open = function () 
+{
+    require('alloy').Globals.layout.open($.index);
 }

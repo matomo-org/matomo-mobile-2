@@ -4,7 +4,8 @@
     height: 60,
     backgroundColor: '#F5F5F5',
     contentWidth: 'auto',
-    contentHeight: 60
+    contentHeight: 60,
+    canCancelEvents: false
 },
 
 ".menuBar[platform=android]": {

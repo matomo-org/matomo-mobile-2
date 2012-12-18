@@ -1,14 +1,5 @@
 <Alloy>
-    <Window id="index" platform="ios,mobileweb">
-        <NavigationGroup id="navgroup">
-            <Window id="reportsWindow">
-                <TableView id="reportsTable" onClick="doSelectReport">
-                </TableView>
-            </Window>
-        </NavigationGroup>
-    </Window>
-    
-    <Window id="reportsWindow" platform="android">
+    <Window id="index">
         <TableView id="reportsTable" onClick="doSelectReport">
         </TableView>
     </Window>

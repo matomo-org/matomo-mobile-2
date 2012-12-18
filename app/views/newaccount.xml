@@ -1,11 +1,7 @@
 <Alloy>
-    <Window id="index">
-        <NavigationGroup id="navgroup" platform="ios,mobileweb">
-            <Window class="container" id="accountFormView" title="Add account">
-                <ScrollView>
-                    <View id="loginform" />
-                </ScrollView>
-            </Window>
-        </NavigationGroup>
+    <Window class="container" id="index" title="Add account">
+        <ScrollView>
+            <View id="loginform" />
+        </ScrollView>
     </Window>
 </Alloy>

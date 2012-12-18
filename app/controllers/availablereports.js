@@ -6,7 +6,7 @@ var rows = [];
 var currentSection = null;
 var latestSection  = null;
 
-$.reportsWindow.title = siteModel.getName();
+$.index.title = siteModel.getName();
 
 reportsCollection.map(function (report) 
 {
@@ -43,18 +43,10 @@ function doSelectReport(event)
 
 function close()
 {
-    if (OS_ANDROID) {
-        $.reportsWindow.close();
-    } else {
-        $.index.open();
-    }
+    require('alloy').Globals.layout.close($.index);
 }
 
 exports.open = function() 
 {
-    if (OS_ANDROID) {
-        $.reportsWindow.open();
-    } else {
-        $.index.open();
-    }
+    require('alloy').Globals.layout.open($.index);
 };

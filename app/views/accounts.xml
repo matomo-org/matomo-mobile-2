@@ -1,15 +1,11 @@
 <Alloy>
-    <Window id="index">
-        <NavigationGroup id="navgroup" platform="ios,mobileweb">
-            <Window class="container" id="accountView" title="Accounts">
-                <TableView id="accounts" onDelete="doDeleteAccount" onClick="doSelectAccount" class="accountsContainer" />
-                <TableView id="actions" class="accountsContainer">
-                    <TableViewRow class="masterPasswordRow">
-                        <Label>Master Password</Label>
-                        <Button class="masterPasswordInfoButton"></Button>
-                    </TableViewRow>
-                </TableView>
-            </Window>
-        </NavigationGroup>
+    <Window class="container" id="index" title="Accounts">
+        <TableView id="accounts" onDelete="doDeleteAccount" onClick="doSelectAccount" class="accountsContainer" />
+        <TableView id="actions" class="accountsContainer">
+            <TableViewRow class="masterPasswordRow">
+                <Label>Master Password</Label>
+                <Button class="masterPasswordInfoButton"></Button>
+            </TableViewRow>
+        </TableView>
     </Window>
 </Alloy>

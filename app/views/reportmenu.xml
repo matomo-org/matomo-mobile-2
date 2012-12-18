@@ -1,5 +1,5 @@
 <Alloy>
-    <ScrollView id="index" class="menuBar">
+    <View id="index" class="menuBar">
         <View class="menuItem" onClick="onChangeReport">
             <ImageView class="menuIcon"/>
             <Label class="menuTitle">Reports</Label>
@@ -19,5 +19,10 @@
             <ImageView class="menuIcon"/>
             <Label class="menuTitle">Flatten</Label>
         </View>
-    </ScrollView>
+        <View class="menuSeparator"/>
+        <View class="menuItem" onClick="onFlatten">
+            <ImageView class="menuIcon"/>
+            <Label class="menuTitle">Segmentation</Label>
+        </View>
+    </View>
 </Alloy>
