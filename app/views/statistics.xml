@@ -1,5 +1,10 @@
 <Alloy>
     <Window title="" id="index">
+        <Menu id="menu" platform="android">
+            <MenuItem id="menuItemWebsite" onClick="doChooseWebsite" />
+            <MenuItem id="menuItemAccount" onClick="doChooseAccount" />
+            <MenuItem id="menuItemSetting" onClick="doChooseWebsite" />
+        </Menu>
         <View id="loading"><Label>Loading</Label></View>
         <TableView id="content" class="container">
             <TableViewRow>

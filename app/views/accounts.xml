@@ -1,5 +1,8 @@
 <Alloy>
     <Window class="container" id="index" title="Accounts">
+        <Menu id="menu" platform="android">
+            <MenuItem id="menuItemAddAccount" onClick="doAddAccount" />
+        </Menu>
         <TableView id="accounts" onDelete="doDeleteAccount" onClick="doSelectAccount" class="accountsContainer" />
         <TableView id="actions" class="accountsContainer">
             <TableViewRow class="masterPasswordRow">

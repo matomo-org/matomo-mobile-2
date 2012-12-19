@@ -9,6 +9,12 @@
     editable: true
 },
 
+"#menuItemAddAccount[platform=android]": {
+    icon: '/ic_action_add_account.png',
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+    title: 'Add Account'
+},
+
 "#accounts[platform=android]": {
     headerTitle: 'Your accounts',
     top: 10

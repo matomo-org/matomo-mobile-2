@@ -36,17 +36,20 @@ function doDeleteAccount(event)
     }
 }
 
+function doAddAccount()
+{
+    newAccountController = Alloy.createController('newaccount', {accounts: accounts});
+    accounts.on('add', onCreatedAccount);
+    newAccountController.open();
+}
+
 var addButton = Ti.UI.createButton({title: '+'});
 
 $.index.rightNavButton = addButton;
 
 var newAccountController = null;
 
-addButton.addEventListener('click', function() {
-    newAccountController = Alloy.createController('newaccount', {accounts: accounts});
-    accounts.on('add', onCreatedAccount);
-    newAccountController.open();
-});
+addButton.addEventListener('click', doAddAccount);
 
 function onCreatedAccount() {
     accounts.off("add", onCreatedAccount);

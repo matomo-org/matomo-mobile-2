@@ -13,7 +13,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.0.0.GA</sdk-version>
+    <sdk-version>3.0.1.v20121218130634</sdk-version>
     <id>com.alloy.test</id>
     <name>AlloyTest</name>
     <version>1.0</version>
@@ -43,7 +43,16 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:installLocation="preferExternal"/>
+        <tool-api-level>14</tool-api-level>
+        <manifest android:installLocation="preferExternal"
+            android:versionCode="20" android:versionName="2.0.0">
+            <application android:theme="@android:style/Theme.Holo.Light.DarkActionBar"/>
+            <supports-screens android:anyDensity="true"
+                android:largeScreens="true" android:normalScreens="true"
+                android:smallScreens="true" xlargeScreens="true"/>
+            <uses-sdk android:installLocation="preferExternal"
+                android:minSdkVersion="14" android:targetSdkVersion="14"/>
+        </manifest>
     </android>
     <mobileweb>
         <precache/>

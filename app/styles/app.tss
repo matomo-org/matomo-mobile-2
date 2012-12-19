@@ -3,6 +3,11 @@
     backgroundColor: "#FFFFFF"
 },
 
+"Window[platform=android]": {
+    fullscreen: false,
+    displayHomeAsUp: true
+},
+
 "NavigationGroup": {
     barColor: "#B2AEA5"
 },

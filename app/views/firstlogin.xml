@@ -1,6 +1,6 @@
 <Alloy>
-    <Window class="container">
-        <ScrollView>
+    <Window>
+        <ScrollView class="container">
             <View id="mainView">
                 <View id="headerView">
                     <ImageView id="logoImage"/>
