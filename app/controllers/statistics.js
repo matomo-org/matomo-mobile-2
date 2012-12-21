@@ -13,14 +13,11 @@ var reportModel        = null;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.createModel('piwikProcessedReport');
 
+var reportList = Alloy.createController('availablereports');
+reportList.on('reportChosen', onReportChosen);
+
 var currentMetric = null;
 var flatten       = 0;
-
-if (OS_IOS && require('alloy').isTablet) {
-    var reportList = Alloy.createController('availablereports');
-    reportList.on('reportChosen', onReportChosen);
-    require('alloy').Globals.layout.setMasterView(reportList.getView());
-}
 
 if (OS_IOS) {
     var leftButtons = [
@@ -209,6 +206,11 @@ statisticsModel.on('error', function () {
 });
 
 exports.open = function () {
+
+    if (OS_IOS && require('alloy').isTablet) {
+        require('alloy').Globals.layout.setMasterView(reportList.getView());
+    }
+
     onAccountChosen(accountModel);
 
     if (OS_ANDROID) {

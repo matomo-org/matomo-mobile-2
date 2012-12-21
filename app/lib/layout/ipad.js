@@ -19,22 +19,22 @@ exports.bootstrap = function (controller)
 
     splitwin.open();
     controller.open();
-}
+};
 
 exports.setMasterView = function(win) 
 {
     masterNavGroup.open(win);
     win = null;
-}
+};
 
 exports.close = function(win) 
 {
     detailNavGroup.close(win, {animated: true});
     win = null;
-}
+};
 
 exports.open = function(win) 
 {
     detailNavGroup.open(win, {animated: true});
     win = null;
-}
+};
