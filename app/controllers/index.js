@@ -28,7 +28,6 @@ function openStatistics()
     var statistics = Alloy.createController('statistics', {accounts: accounts});
 
     if (OS_IOS && alloy.isHandheld) {
-
         alloy.Globals.layout = require('layout/iphone');
         alloy.Globals.layout.bootstrap(statistics);
 

@@ -16,6 +16,12 @@ var statisticsModel    = Alloy.createModel('piwikProcessedReport');
 var currentMetric = null;
 var flatten       = 0;
 
+if (OS_IOS && require('alloy').isTablet) {
+    var reportList = Alloy.createController('availablereports');
+    reportList.on('reportChosen', onReportChosen);
+    require('alloy').Globals.layout.setMasterView(reportList.getView());
+}
+
 if (OS_IOS) {
     var leftButtons = [
         {image:'ic_action_settings.png', width:32},
@@ -99,6 +105,20 @@ function onMetricChosen(chosenMetric)
     refresh();
 }
 
+function onReportListFetched(reportsCollection)
+{
+    if (!reportModel || !reportsCollection.containsAction(reportModel)) {
+        // request statistics using same report if website supports this report
+        reportModel = reportsCollection.getEntryReport();
+    }
+
+    refresh();
+
+    if (OS_IOS && require('alloy').isTablet) {
+        reportList.updateReports(reportsCollection, siteModel);
+    }
+}
+
 function onWebsiteChosen(site)
 {
     siteModel = site;
@@ -107,15 +127,7 @@ function onWebsiteChosen(site)
     reportsCollection.fetch({
         account: accountModel,
         params: {idSites: siteModel.id},
-        success : function(reportsCollection) {
-
-            if (!reportModel || !reportsCollection.containsAction(reportModel)) {
-                // request statistics using same report if website supports this report
-                reportModel = reportsCollection.getEntryReport();
-            }
-
-            refresh();
-        },
+        success : onReportListFetched,
         error : function(model, resp) {
             // TODO what should we do in this case?
             statisticsModel.trigger('error', {type: 'loadingReportList'});

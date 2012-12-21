@@ -26,7 +26,7 @@ function onFaq ()
 
 exports.close = function ()
 {
-    $.firstlogin.close(); 
+    $.firstlogin.close();
 };
 
 exports.open = function ()

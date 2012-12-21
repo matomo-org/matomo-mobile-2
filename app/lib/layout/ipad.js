@@ -1,18 +1,19 @@
-var navGroup = null;
+var detailNavGroup = null;
+var masterNavGroup = null;
 
 exports.bootstrap = function (controller) 
 {
     var statisticsWin = Ti.UI.createWindow();
-    navGroup = Ti.UI.iPhone.createNavigationGroup({window: controller.getView()});
-    statisticsWin.add(navGroup);
+    detailNavGroup = Ti.UI.iPhone.createNavigationGroup({window: controller.getView()});
+    statisticsWin.add(detailNavGroup);
 
-    var nav = Ti.UI.iPhone.createNavigationGroup({
+    masterNavGroup = Ti.UI.iPhone.createNavigationGroup({
        window: Ti.UI.createWindow()
     });
 
     var splitwin = Ti.UI.iPad.createSplitWindow({
         detailView: statisticsWin,
-        masterView: nav,
+        masterView: masterNavGroup,
         showMasterInPortrait: true
     });
 
@@ -20,14 +21,20 @@ exports.bootstrap = function (controller)
     controller.open();
 }
 
-exports.close = function (win) 
+exports.setMasterView = function(win) 
 {
-    navGroup.close(win, {animated: true});
+    masterNavGroup.open(win);
     win = null;
 }
 
-exports.open = function (win) 
+exports.close = function(win) 
 {
-    navGroup.open(win, {animated: true});
+    detailNavGroup.close(win, {animated: true});
+    win = null;
+}
+
+exports.open = function(win) 
+{
+    detailNavGroup.open(win, {animated: true});
     win = null;
 }
