@@ -60,6 +60,7 @@ function onCreatedAccount() {
 function close () 
 {
     require('alloy').Globals.layout.close($.index);
+    $.destroy();
 }
 
 exports.open = function ()
