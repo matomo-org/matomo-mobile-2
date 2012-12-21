@@ -11,7 +11,7 @@ if (!accounts.length) {
 
 } else {
 
-    openStatistics();
+    openDashboard();
 }
 
 function onCreatedAccount() {
@@ -19,7 +19,13 @@ function onCreatedAccount() {
     if (firstLogin) {
         firstLogin.close();
     }
-    openStatistics();
+    openDashboard();
+}
+
+function openDashboard()
+{
+    var dashboard = Alloy.createController('dashboard', {accounts: accounts});
+    dashboard.open();
 }
 
 function openStatistics()
