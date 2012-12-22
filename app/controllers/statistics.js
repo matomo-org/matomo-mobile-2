@@ -164,13 +164,11 @@ function onStatisticsFetched(processedReportModel)
 function showReportContent()
 {
     $.loading.hide();
-    $.content.show();
 }
 
 function showLoadingMessage()
 {
     $.loading.show();
-    $.content.hide();
 }
 
 function refresh() {

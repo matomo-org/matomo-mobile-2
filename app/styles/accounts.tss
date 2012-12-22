@@ -68,17 +68,4 @@
 ".addAccountRow": {
     textAlign: "center",
     height: 40
-},
-
-".masterPasswordInfoButton": {
-    right: 10
-},
-
-".masterPasswordInfoButton[platform=ios]": {
-    style:Ti.UI.iPhone.SystemButton.INFO_DARK
-},
-
-".masterPasswordRow": {
-    textAlign: "center",
-    height: 40
 }

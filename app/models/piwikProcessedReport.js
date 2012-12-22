@@ -85,6 +85,18 @@ exports.definition = {
 	
 	extendCollection: function(Collection) {		
 		_.extend(Collection.prototype, {
+			parse: function (response) {
+
+				var reportData = response.reportData;
+				var metaData   = response.reportMetadata;
+
+				for (var index in reportData) {
+					reportData[index].columns  = response.columns;
+					reportData[index].metadata = metaData ? metaData[index] : null;
+				}
+
+				return reportData;
+			}
 
 			// extended functions go here			
 			

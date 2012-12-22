@@ -16,39 +16,21 @@ if (!accounts.length) {
 
 function onCreatedAccount() {
     accounts.off("add", onCreatedAccount);
+    
     if (firstLogin) {
         firstLogin.close();
     }
+
     openDashboard();
 }
 
 function openDashboard()
 {
-    var dashboard = Alloy.createController('dashboard', {accounts: accounts});
-    dashboard.open();
-}
+    var dashboard = Alloy.createController('allwebsitesdashboard', {accounts: accounts});
 
-function openStatistics()
-{
-    var alloy      = require('alloy');
-    var statistics = Alloy.createController('statistics', {accounts: accounts});
-
-    if (OS_IOS && alloy.isHandheld) {
-        alloy.Globals.layout = require('layout/iphone');
-        alloy.Globals.layout.bootstrap(statistics);
-
-    } else if (OS_IOS && alloy.isTablet) {
-
-        alloy.Globals.layout = require('layout/ipad');
-        alloy.Globals.layout.bootstrap(statistics);
-
-    } else if (OS_MOBILEWEB) {
-
-        alloy.Globals.layout = require('layout/mobileweb');
-        alloy.Globals.layout.bootstrap(statistics);
-
-    } else if (OS_ANDROID) {
-        alloy.Globals.layout = require('layout/android');
-        alloy.Globals.layout.bootstrap(statistics);
+    if (require('alloy').isHandheld) {
+        require('layout').bootstrap(dashboard)
+    } else {
+        dashboard.open();
     }
 }

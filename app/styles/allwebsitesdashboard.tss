@@ -1,3 +1,13 @@
+"#windowButtonBar": {
+    backgroundColor: "#B2AEA5"
+},
+
+"#searchBar": {
+    top: 0,
+    barColor: "#B2AEA5",
+    showCancel: true
+},
+
 ".container": {
     layout: "vertical"
 },
@@ -24,7 +34,7 @@
     title: 'Settings'
 },
 
-".container[platform=ios]": {
+".websitesTableView[platform=ios]": {
     separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
 },
 

@@ -4,11 +4,5 @@
             <MenuItem id="menuItemAddAccount" onClick="doAddAccount" />
         </Menu>
         <TableView id="accounts" onDelete="doDeleteAccount" onClick="doSelectAccount" class="accountsContainer" />
-        <TableView id="actions" class="accountsContainer">
-            <TableViewRow class="masterPasswordRow">
-                <Label>Master Password</Label>
-                <Button class="masterPasswordInfoButton"></Button>
-            </TableViewRow>
-        </TableView>
     </Window>
 </Alloy>
