@@ -34,6 +34,13 @@ exports.definition = {
 			getSortOrder: function () {
 				return sortOrder;
 			},
+			getEvolutionImageGraphUrl: function () {
+				if (!this.get('metadata') || !this.get('metadata').imageGraphEvolutionUrl) {
+			        return '';
+			    }
+
+			    return this.get('metadata').imageGraphEvolutionUrl;
+			},
 			getImageGraphUrl: function () {
 				if (!this.get('metadata') || !this.get('metadata').imageGraphUrl) {
 			        return '';

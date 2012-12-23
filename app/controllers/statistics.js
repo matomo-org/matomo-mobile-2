@@ -13,40 +13,16 @@ var reportModel        = null;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.createModel('piwikProcessedReport');
 
+
+var reportListController = Alloy.createController('availablereports', {reports: reportsCollection,
+                                                                       site: siteModel,
+                                                                       closeOnSelect: require('alloy').isHandheld});
+
 var currentMetric = null;
 var flatten       = 0;
 
 $.index.setTitle(siteModel.getName());
-/*
-if (OS_IOS) {
-    var leftButtons = [
-        {image:'ic_action_settings.png', width:32},
-        {image:'ic_action_accounts.png', width:32}
-    ];
-    var bar = Ti.UI.createButtonBar({
-        labels: leftButtons,
-        backgroundColor: "#B2AEA5"
-    });
-    
-    bar.addEventListener('click', doChooseAccount);
-    
-    $.index.leftNavButton = bar;
-} else if (OS_MOBILEWEB) {
 
-    var accountsButton = Ti.UI.createButton({image:'ic_action_accounts.png', width:32});
-    accountsButton.addEventListener('click', doChooseAccount);
-
-    $.index.leftNavButton = accountsButton;
-}
-
-if (OS_IOS || OS_MOBILEWEB) {
-
-    var websitesButton = Ti.UI.createButton({image:'ic_action_website.png', width:32});
-    websitesButton.addEventListener('click', doChooseWebsite);
-
-    $.index.rightNavButton = websitesButton;
-}
-*/
 function doChooseAccount()
 {
     var accounts = Alloy.createController('accounts', {accounts: accountsCollection});
@@ -63,10 +39,7 @@ function doChooseWebsite()
 
 function doChooseReport()
 {
-    var params     = {reports: reportsCollection, site: siteModel};
-    var reportList = Alloy.createController('availablereports', params);
-    reportList.on('reportChosen', exports.onReportChosen)
-    reportList.open();
+    reportListController.open();
 }
 
 function doChooseMetric()
@@ -198,9 +171,20 @@ statisticsModel.on('error', function () {
     showReportContent();
 });
 
+reportListController.on('reportChosen', exports.onReportChosen);
+
+var statistics = this;
 exports.open = function () {
 
     onWebsiteChosen(siteModel);
 
-    require('alloy').Globals.layout.open($.index);
+    var alloy  = require('alloy');
+    var layout = require('layout');
+
+    if (alloy.isTablet) {
+        layout.bootstrap(statistics, reportListController);
+        reportListController.open();
+    } else {
+        layout.bootstrap(statistics);
+    }
 };

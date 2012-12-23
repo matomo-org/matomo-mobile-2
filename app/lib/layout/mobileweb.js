@@ -8,7 +8,6 @@ exports.bootstrap = function (controller)
     statisticsWin.add(navGroup);
     statisticsWin.open();
 
-    controller.open();
 }
 
 exports.close = function (win) 

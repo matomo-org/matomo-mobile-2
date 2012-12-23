@@ -6,7 +6,6 @@ exports.bootstrap = function (controller)
     navGroup = Ti.UI.iPhone.createNavigationGroup({window: controller.getView()});
     statisticsWin.add(navGroup);
     statisticsWin.open();
-    controller.open();
 }
 
 exports.close = function (win) 

@@ -18,15 +18,9 @@ function openStatistics(siteModel)
                                                            reports: reportsCollection,
                                                            site: siteModel});
 
-    if (require('alloy').isTablet) {
-
-        var reports = Alloy.createController('availablereports', {reports: reportsCollection});
-        reports.on('reportChosen', statistics.onReportChosen);
-        require('layout').bootstrap(statistics, reports);
-    } else {
-        require('layout').bootstrap(statistics);
-    }
-
+    statistics.open();
+    $.index.close();
+    $.destroy();
 }
 
 function doChooseAccount()
@@ -70,11 +64,11 @@ function doSelectWebsite(event)
 }
 
 var reportRowsCtrl = null;
-function onStatisticsFetched(statisticsModel)
+function onStatisticsFetched(statisticsCollection)
 {
     showReportContent();
 
-    $.reportGraphCtrl.update(statisticsModel, accountModel);
+    $.reportGraphCtrl.update(statisticsCollection.first(), accountModel);
 }
 
 function showReportContent()
@@ -119,9 +113,8 @@ exports.open = function () {
 
     onAccountChosen(accountModel);
 
-    if (require('alloy').isHandheld) {
-        require('alloy').Globals.layout.open($.index);
-    } else {
-        $.index.open();
-    }
+    var alloy = require('alloy');
+
+    $.index.open();
+
 };

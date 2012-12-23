@@ -1,7 +1,7 @@
 var openedWindows = [];
 
 exports.bootstrap = function(controller) {
-    controller.open();
+
 };
 
 function hasOpenedWindow()

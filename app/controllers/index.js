@@ -16,9 +16,10 @@ if (!accounts.length) {
 
 function onCreatedAccount() {
     accounts.off("add", onCreatedAccount);
-    
+
     if (firstLogin) {
         firstLogin.close();
+        // firstLogin.destroy();
     }
 
     openDashboard();
@@ -27,10 +28,5 @@ function onCreatedAccount() {
 function openDashboard()
 {
     var dashboard = Alloy.createController('allwebsitesdashboard', {accounts: accounts});
-
-    if (require('alloy').isHandheld) {
-        require('layout').bootstrap(dashboard)
-    } else {
-        dashboard.open();
-    }
+    dashboard.open();
 }

@@ -1,12 +1,15 @@
 var args = arguments[0] || {};
 var siteModel = args.site || false;
 var reportsCollection = args.reports || false;
+var closeOnSelect     = args.closeOnSelect || false;
 
 reportsCollection.on('fetch', updateAvailableReportsList);
 
 function updatePageTitle(siteModel)
 {
-    $.index.title = siteModel.getName();
+    if ($.index) {
+        $.index.title = siteModel.getName();
+    }
 }
 
 function updateAvailableReportsList()
@@ -51,7 +54,7 @@ function doSelectReport(event)
 
     $.trigger('reportChosen', report);
 
-    if (require('alloy').isHandheld) {
+    if (closeOnSelect) {
         close();
     }
 }
@@ -65,11 +68,13 @@ exports.siteChosen = updatePageTitle;
 
 exports.open = function() 
 {
-    if (siteModel) {
-        updatePageTitle(siteModel);
-    }
+    updatePageTitle(siteModel);
 
     updateAvailableReportsList();
 
-    require('alloy').Globals.layout.open($.index);
+    var alloy = require('alloy');
+    if (alloy.isHandheld) {
+        require('layout').layout.open($.index);
+    }
+    
 };
