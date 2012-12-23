@@ -72,10 +72,6 @@
     height: Ti.UI.SIZE
 },
 
-"TableViewRow[platform=ios]": {
-    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
-},
-
 ".reportRowSeparator": {
      layout: "vertical"
 },

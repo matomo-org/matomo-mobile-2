@@ -4,22 +4,29 @@ var args = arguments[0] || {};
 var accountsCollection = args.accounts || false;
 // the currently selected account
 var accountModel       = accountsCollection.first();
-// the currently selected website
-var siteModel          = null;
-// A list of all available reports
-var reportsCollection  = Alloy.createCollection('piwikReports');
-// the currently selected report
-var reportModel        = null;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.Collections.piwikProcessedReport;
 
 $.index.title = 'All Websites Dashboard';
 
-function openStatistics() 
+function openStatistics(siteModel) 
 {
-    Alloy.createController('statistics', {accounts: accountsCollection}).open();
-    $.index.close();
-    $.destroy();
+    // A list of all available reports
+    var reportsCollection = Alloy.createCollection('piwikReports');
+
+    var statistics = Alloy.createController('statistics', {accounts: accountsCollection,
+                                                           reports: reportsCollection,
+                                                           site: siteModel});
+
+    if (require('alloy').isTablet) {
+
+        var reports = Alloy.createController('availablereports', {reports: reportsCollection});
+        reports.on('reportChosen', statistics.onReportChosen);
+        require('layout').bootstrap(statistics, reports);
+    } else {
+        require('layout').bootstrap(statistics);
+    }
+
 }
 
 function doChooseAccount()
@@ -31,6 +38,8 @@ function doChooseAccount()
 
 function onAccountChosen(account)
 {
+    showLoadingMessage();
+
     accountModel            = account;
     var entrySiteCollection = Alloy.createCollection('piwikWebsites');
     entrySiteCollection.fetch({
@@ -39,39 +48,25 @@ function onAccountChosen(account)
         success: function (entrySiteCollection) {
 
             if (1 == entrySiteCollection.length) {
-                //TODO directly open this site, all websites dashboard makes no sense.
-                // openStatistics();
+                openStatistics(entrySiteCollection.getEntrySite());
             } else if (!entrySiteCollection.length) {
                 // TODO no access to any account
+                alert('no access to any website');
             } else {
-                // fetchListOfAvailalbeReports(entrySiteCollection.getEntrySite());
+                fetchListOfAvailableWebsites(entrySiteCollection.getEntrySite());
             }
-
-            fetchListOfAvailalbeReports(entrySiteCollection.getEntrySite());
-        }
-    });
-}
-
-function fetchListOfAvailalbeReports(site)
-{
-    siteModel = site;
-    reportsCollection.fetch({
-        account: accountModel,
-        params: {idSites: site.id},
-        success : fetchListOfAvailableWebsites,
-        error : function(model, resp) {
-            // TODO what should we do in this case?
-            statisticsModel.trigger('error', {type: 'loadingReportList'});
         }
     });
 }
 
 function doSelectWebsite(event)
 {
-    var cid     = event.rowData.cid;
-    var website = statisticsModel.getByCid(cid);
+    var id      = event.rowData.modelid;
+    var website = statisticsModel.get(id);
 
-    openStatistics();
+    var siteModel = Alloy.createModel('PiwikWebsites', {idsite: website.get('reportMetadata').idsite,
+                                                        name: website.get('label')});
+    openStatistics(siteModel);
 }
 
 var reportRowsCtrl = null;
@@ -79,7 +74,6 @@ function onStatisticsFetched(statisticsModel)
 {
     showReportContent();
 
-    return;
     $.reportGraphCtrl.update(statisticsModel, accountModel);
 }
 
@@ -93,8 +87,8 @@ function showLoadingMessage()
     $.loading.show();
 }
 
-function fetchListOfAvailableWebsites() {
-
+function fetchListOfAvailableWebsites(site) 
+{
     showLoadingMessage();
 
     statisticsModel.fetch({
@@ -102,7 +96,7 @@ function fetchListOfAvailableWebsites() {
         params: {
             period: 'day',
             date: 'today',
-            idSite: siteModel.id,
+            idSite: site.id,
             sortOrderColumn: "nb_visits",
             filter_sort_column: "nb_visits",
             apiModule: "MultiSites",
@@ -124,5 +118,10 @@ exports.open = function () {
     showLoadingMessage();
 
     onAccountChosen(accountModel);
-    require('alloy').Globals.layout.open($.index);
+
+    if (require('alloy').isHandheld) {
+        require('alloy').Globals.layout.open($.index);
+    } else {
+        $.index.open();
+    }
 };

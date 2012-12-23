@@ -5,20 +5,19 @@ var accountsCollection = args.accounts || false;
 // the currently selected account
 var accountModel       = accountsCollection.first();
 // the currently selected website
-var siteModel          = null;
+var siteModel          = args.site || false;
 // A list of all available reports
-var reportsCollection  = Alloy.createCollection('piwikReports');
+var reportsCollection  = args.reports || false;
 // the currently selected report
 var reportModel        = null;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.createModel('piwikProcessedReport');
 
-var reportList = Alloy.createController('availablereports');
-reportList.on('reportChosen', onReportChosen);
-
 var currentMetric = null;
 var flatten       = 0;
 
+$.index.setTitle(siteModel.getName());
+/*
 if (OS_IOS) {
     var leftButtons = [
         {image:'ic_action_settings.png', width:32},
@@ -47,7 +46,7 @@ if (OS_IOS || OS_MOBILEWEB) {
 
     $.index.rightNavButton = websitesButton;
 }
-
+*/
 function doChooseAccount()
 {
     var accounts = Alloy.createController('accounts', {accounts: accountsCollection});
@@ -66,7 +65,7 @@ function doChooseReport()
 {
     var params     = {reports: reportsCollection, site: siteModel};
     var reportList = Alloy.createController('availablereports', params);
-    reportList.on('reportChosen', onReportChosen)
+    reportList.on('reportChosen', exports.onReportChosen)
     reportList.open();
 }
 
@@ -90,7 +89,7 @@ function doFlatten ()
     flatten = 0;
 }
 
-function onReportChosen (chosenReportModel) {
+exports.onReportChosen = function (chosenReportModel) {
     reportModel   = chosenReportModel;
     currentMetric = null;
     refresh();
@@ -110,10 +109,6 @@ function onReportListFetched(reportsCollection)
     }
 
     refresh();
-
-    if (OS_IOS && require('alloy').isTablet) {
-        reportList.updateReports(reportsCollection, siteModel);
-    }
 }
 
 function onWebsiteChosen(site)
@@ -205,16 +200,7 @@ statisticsModel.on('error', function () {
 
 exports.open = function () {
 
-    if (OS_IOS && require('alloy').isTablet) {
-        require('alloy').Globals.layout.setMasterView(reportList.getView());
-    }
+    onWebsiteChosen(siteModel);
 
-    onAccountChosen(accountModel);
-
-    if (OS_ANDROID) {
-        $.index.open(); 
-    } else {
-       // var alloy = require('alloy');
-       // alloy.Globals.navGroup.open($.index);
-    }
+    require('alloy').Globals.layout.open($.index);
 };

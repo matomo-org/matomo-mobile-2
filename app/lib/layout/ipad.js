@@ -1,30 +1,20 @@
 var detailNavGroup = null;
-var masterNavGroup = null;
+var splitWindow    = null;
 
-exports.bootstrap = function (controller) 
+exports.bootstrap = function (detailViewController, masterViewController) 
 {
     var statisticsWin = Ti.UI.createWindow();
-    detailNavGroup = Ti.UI.iPhone.createNavigationGroup({window: controller.getView()});
+    detailNavGroup = Ti.UI.iPhone.createNavigationGroup({window: detailViewController.getView()});
     statisticsWin.add(detailNavGroup);
 
-    masterNavGroup = Ti.UI.iPhone.createNavigationGroup({
-       window: Ti.UI.createWindow()
-    });
-
-    var splitwin = Ti.UI.iPad.createSplitWindow({
+    splitWindow = Ti.UI.iPad.createSplitWindow({
         detailView: statisticsWin,
-        masterView: masterNavGroup,
-        showMasterInPortrait: true
+        masterView: masterViewController.getView()
     });
 
-    splitwin.open();
-    controller.open();
-};
-
-exports.setMasterView = function(win) 
-{
-    masterNavGroup.open(win);
-    win = null;
+    splitWindow.open();
+    detailViewController.open();
+    masterViewController.open();
 };
 
 exports.close = function(win) 

@@ -1,13 +1,8 @@
 <Alloy>
     <Collection src="piwikProcessedReport"/>
     <Window title="Dashboard" id="index">
-        <RightNavButton platform="ios">
-        	<ButtonBar onClick="doChooseAccount" id="windowButtonBar">
-        		<Labels id="windowButtonBar">
-        			<Label id="settingsButton" image="ic_action_settings.png" width="32"/>
-        			<Label id="accountsButton" image="ic_action_accounts.png" width="32"/>
-        		</Labels>
-        	</ButtonBar>
+        <RightNavButton platform="ios,mobileweb">
+            <Button id="accountsButton" onClick="doChooseAccount" image="ic_action_accounts.png" width="32"/>
         </RightNavButton>
 
         <View id="loading"><Label>Loading</Label></View>
@@ -17,8 +12,7 @@
             <View class="space"></View>
             <View class="shadow"></View>
             <TableView class="websitesTableView" dataCollection="piwikProcessedReport" onClick="doSelectWebsite">
-                <TableViewRow id="reportRowsContainer">
-                    <Label text="{label}" cid="{cid}"></Label>
+                <TableViewRow title="{label}" modelid="{id}">
                 </TableViewRow>
             </TableView>
         </View>

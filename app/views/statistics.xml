@@ -1,5 +1,14 @@
 <Alloy>
     <Window title="" id="index">
+        <RightNavButton platform="ios,mobileweb">
+            <ButtonBar formFactor="tablet" onClick="doChooseAccount">
+                <Labels>
+                    <Label>Websites</Label>
+                    <Label>Accounts</Label>
+                    <Label>Settings</Label>
+                </Labels>
+            </ButtonBar>
+        </RightNavButton>
         <Menu id="menu" platform="android">
             <MenuItem id="menuItemWebsite" onClick="doChooseWebsite" />
             <MenuItem id="menuItemAccount" onClick="doChooseAccount" />

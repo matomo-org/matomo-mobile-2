@@ -1,13 +1,15 @@
 var args = arguments[0] || {};
+var siteModel = args.site || false;
+var reportsCollection = args.reports || false;
+
+reportsCollection.on('fetch', updateAvailableReportsList);
 
 function updatePageTitle(siteModel)
 {
-    if (siteModel) {
-        $.index.title = siteModel.getName();
-    }
+    $.index.title = siteModel.getName();
 }
 
-function updateAvailableReportsList(reportsCollection)
+function updateAvailableReportsList()
 {
     if (!reportsCollection) {
         return;
@@ -48,7 +50,10 @@ function doSelectReport(event)
     var report = reportsCollection.getByCid(cid);
 
     $.trigger('reportChosen', report);
-    close();
+
+    if (require('alloy').isHandheld) {
+        close();
+    }
 }
 
 function close()
@@ -56,17 +61,15 @@ function close()
     require('alloy').Globals.layout.close($.index);
 }
 
-exports.updateReports = function(reportsCollection, siteModel) 
-{
-    updatePageTitle(siteModel);
-    updateAvailableReportsList(reportsCollection);
-}
+exports.siteChosen = updatePageTitle;
 
 exports.open = function() 
 {
-    var siteModel = args.site || false;
-    var reportCollection = args.reports || false;
-    exports.updateReports(reportCollection, siteModel);
+    if (siteModel) {
+        updatePageTitle(siteModel);
+    }
+
+    updateAvailableReportsList();
 
     require('alloy').Globals.layout.open($.index);
 };

@@ -91,8 +91,10 @@ exports.definition = {
 				var metaData   = response.reportMetadata;
 
 				for (var index in reportData) {
+					reportData[index].id       = index;
 					reportData[index].columns  = response.columns;
-					reportData[index].metadata = metaData ? metaData[index] : null;
+					reportData[index].metadata = response.metadata;
+					reportData[index].reportMetadata = metaData ? metaData[index] : null;
 				}
 
 				return reportData;
