@@ -1,14 +1,3 @@
-exports.bootstrap = function(detailViewController, masterViewController)
-{
-    var alloy = require('alloy');
-
-    if (alloy.isHandheld) {
-        exports.layout.bootstrap(detailViewController);
-    } else if (alloy.isTablet) {
-        exports.layout.splitWindow(detailViewController, masterViewController);
-    }
-}
-
 var layoutName = '';
 var alloy      = require('alloy');
 
@@ -22,4 +11,4 @@ if (OS_IOS && alloy.isHandheld) {
     layoutName = 'layout/android';
 }
 
-exports.layout = require(layoutName);
+exports = require(layoutName);

@@ -11,5 +11,5 @@ exports.open = function () {
     $.index.title = webTitle;
     $.webview.url = webUrl;
 
-    require('alloy').Globals.layout.open($.index);
+    require('layout').open($.index);
 }

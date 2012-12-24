@@ -25,8 +25,30 @@ function onCreatedAccount() {
     openDashboard();
 }
 
+function openStatistics(event)
+{
+    var siteModel = event.site;
+    var account   = event.account;
+    // A list of all available reports
+    var reportsCollection = Alloy.createCollection('piwikReports');
+
+    var statistics = Alloy.createController('statistics', {accounts: accounts,
+                                                           account: account,
+                                                           reports: reportsCollection,
+                                                           site: siteModel});
+
+    statistics.open();
+}
+
 function openDashboard()
 {
-    var dashboard = Alloy.createController('allwebsitesdashboard', {accounts: accounts});
-    dashboard.open();
+    var dashboard = Alloy.createController('allwebsitesdashboard', {accounts: accounts,
+                                                                    account: accounts.first()});
+    require('layout').bootstrap(dashboard);
+
+    dashboard.on('websiteChosen', openStatistics);
+    dashboard.on('websiteChosen', function () {
+        this.close();
+    });
+    dashboard.open(true);
 }

@@ -3,7 +3,7 @@ var args = arguments[0] || {};
 // a list of all available accounts
 var accountsCollection = args.accounts || false;
 // the currently selected account
-var accountModel       = accountsCollection.first();
+var accountModel       = args.account || false;
 // the currently selected website
 var siteModel          = args.site || false;
 // A list of all available reports
@@ -32,9 +32,12 @@ function doChooseAccount()
 
 function doChooseWebsite()
 {
-    var websites = Alloy.createController('websites', {account: accountModel});
+    var websites = Alloy.createController('allwebsitesdashboard', {account: accountModel, accounts: accountsCollection});
+    websites.on('websiteChosen', function () {
+        this.close();
+    });
     websites.on('websiteChosen', onWebsiteChosen)
-    websites.open();
+    websites.open(false);
 }
 
 function doChooseReport()
@@ -84,11 +87,18 @@ function onReportListFetched(reportsCollection)
     refresh();
 }
 
-function onWebsiteChosen(site)
+function onWebsiteChosen(event)
 {
-    siteModel = site;
+    siteModel    = event.site;
+    accountModel = event.account;
+
     $.index.setTitle(siteModel.getName());
 
+    fetchListOfAvailableReports();
+}
+
+function fetchListOfAvailableReports()
+{
     reportsCollection.fetch({
         account: accountModel,
         params: {idSites: siteModel.id},
@@ -173,18 +183,17 @@ statisticsModel.on('error', function () {
 
 reportListController.on('reportChosen', exports.onReportChosen);
 
-var statistics = this;
 exports.open = function () {
 
-    onWebsiteChosen(siteModel);
+    onWebsiteChosen({site: siteModel, account: accountModel});
 
     var alloy  = require('alloy');
     var layout = require('layout');
 
     if (alloy.isTablet) {
-        layout.bootstrap(statistics, reportListController);
+        layout.openSplitWindow($.index, $.content, reportListController.getView());
         reportListController.open();
     } else {
-        layout.bootstrap(statistics);
+        layout.open($.index);
     }
 };

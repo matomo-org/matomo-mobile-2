@@ -67,8 +67,16 @@ exports.definition = {
 	extendCollection: function(Collection) {		
 		_.extend(Collection.prototype, {
 			getEntryReport: function (response) {
-		        // Has All Websites Dashboard report etc?
-		        // Iterate over list to make sure all websites dashboard will be preferred
+
+				var visitsSummaryReport = this.find(function (model) {
+					return model.get('module') == 'VisitsSummary' && model.get('action') == 'get';
+				});
+
+				if (visitsSummaryReport) {
+					return visitsSummaryReport;
+				}
+
+				// TODO search for other reports
 		        return this.at(0);
 		    },
 

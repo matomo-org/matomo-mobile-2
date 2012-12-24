@@ -1,53 +1,33 @@
-var detailNavGroup = null;
-var splitWindow    = null;
-var navGroup       = null;
+var navGroup = null;
 
-exports.bootstrap = function () {};
-
-exports.singleWin = function () 
+exports.bootstrap = function (controller) 
 {
-    var rootWindow = Ti.UI.createWindow();
+    var statisticsWin = Ti.UI.createWindow();
     navGroup = Ti.UI.iPhone.createNavigationGroup({window: controller.getView()});
-    rootWindow.add(navGroup);
-    rootWindow.open();
-};
+    statisticsWin.add(navGroup);
+    statisticsWin.open();
+}
 
-exports.splitWindow = function (detailViewController, masterViewController) 
+exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
 {
-    detailNavGroup = Ti.UI.iPhone.createNavigationGroup({window: detailViewController.getView()});
+    var masterContainer = Ti.UI.createView({left: 0, width: 200});
+    masterContainer.add(masterView);
+    detailWindow.add(masterContainer);
 
-    splitWindow = Ti.UI.iPad.createSplitWindow({
-        detailView: detailNavGroup,
-        masterView: masterViewController.getView()
-    });
+    detailContent.left  = 200;
+    detailContent.right = 0;
 
-    splitWindow.addEventListener('visible', function(e)
-    {
-        if (e.view == 'detail') {
-            e.button.title = "Reports";
-            this.detailView.leftNavButton = e.button;
-        } else if (e.view == 'master') {
-            this.detailView.leftNavButton = null;
-        }
-    });
+    exports.open(detailWindow);
+}
 
-    splitWindow.open();
-};
-
-exports.openInDetailView = function(win) 
+exports.close = function (win) 
 {
-    detailNavGroup.open(win, {animated: true});
+    navGroup.close(win, {animated : true});
     win = null;
-};
+}
 
-exports.close = function(win) 
+exports.open = function (win) 
 {
-    navGroup.close(win, {animated: true});
+    navGroup.open(win, {animated : true});
     win = null;
-};
-
-exports.open = function(win) 
-{
-    navGroup.open(win, {animated: true});
-    win = null;
-};
+}

@@ -59,11 +59,11 @@ function onCreatedAccount() {
 
 function close () 
 {
-    require('alloy').Globals.layout.close($.index);
+    require('layout').close($.index);
     $.destroy();
 }
 
 exports.open = function ()
 {
-    require('alloy').Globals.layout.open($.index);
+    require('layout').open($.index);
 };

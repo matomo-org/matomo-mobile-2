@@ -3,24 +3,15 @@ var args = arguments[0] || {};
 // a list of all available accounts
 var accountsCollection = args.accounts || false;
 // the currently selected account
-var accountModel       = accountsCollection.first();
+var accountModel = args.account || false;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.Collections.piwikProcessedReport;
 
 $.index.title = 'All Websites Dashboard';
 
-function openStatistics(siteModel) 
+function websiteChosen(siteModel) 
 {
-    // A list of all available reports
-    var reportsCollection = Alloy.createCollection('piwikReports');
-
-    var statistics = Alloy.createController('statistics', {accounts: accountsCollection,
-                                                           reports: reportsCollection,
-                                                           site: siteModel});
-
-    statistics.open();
-    $.index.close();
-    $.destroy();
+    $.trigger('websiteChosen', {site: siteModel, account: accountModel});
 }
 
 function doChooseAccount()
@@ -42,7 +33,7 @@ function onAccountChosen(account)
         success: function (entrySiteCollection) {
 
             if (1 == entrySiteCollection.length) {
-                openStatistics(entrySiteCollection.getEntrySite());
+                websiteChosen(entrySiteCollection.getEntrySite());
             } else if (!entrySiteCollection.length) {
                 // TODO no access to any account
                 alert('no access to any website');
@@ -60,7 +51,7 @@ function doSelectWebsite(event)
 
     var siteModel = Alloy.createModel('PiwikWebsites', {idsite: website.get('reportMetadata').idsite,
                                                         name: website.get('label')});
-    openStatistics(siteModel);
+    websiteChosen(siteModel);
 }
 
 var reportRowsCtrl = null;
@@ -108,13 +99,17 @@ statisticsModel.on('error', function () {
     showReportContent();
 });
 
-exports.open = function () {
+exports.close = function () {
+    require('layout').close($.index);
+    $.destroy();
+};
+
+exports.open = function (alreadyOpened) {
     showLoadingMessage();
 
     onAccountChosen(accountModel);
 
-    var alloy = require('alloy');
-
-    $.index.open();
-
+    if (!alreadyOpened) {
+        require('layout').open($.index);
+    }
 };

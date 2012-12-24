@@ -61,10 +61,8 @@ function doSelectReport(event)
 
 function close()
 {
-    require('alloy').Globals.layout.close($.index);
+    require('layout').close($.index);
 }
-
-exports.siteChosen = updatePageTitle;
 
 exports.open = function() 
 {
@@ -74,7 +72,6 @@ exports.open = function()
 
     var alloy = require('alloy');
     if (alloy.isHandheld) {
-        require('layout').layout.open($.index);
+        require('layout').open($.index);
     }
-    
 };
