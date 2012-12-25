@@ -4,7 +4,8 @@ var webTitle = args.title || false;
 
 function close()
 {
-    require('alloy').Globals.layout.close($.index);
+    require('layout').close($.index);
+    $.destroy();
 }
 
 exports.open = function () {

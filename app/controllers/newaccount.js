@@ -23,5 +23,5 @@ function onUsernameReturn () {
 
 exports.open = function () 
 {
-    require('alloy').Globals.layout.open($.index);
+    require('layout').open($.index);
 }

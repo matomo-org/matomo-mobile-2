@@ -7,6 +7,18 @@ exports.bootstrap = function (controller)
     navGroup = Ti.UI.MobileWeb.createNavigationGroup({window: controller.getView()});
     statisticsWin.add(navGroup);
     statisticsWin.open();
+}
+
+exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
+{
+    var masterContainer = Ti.UI.createView({left: 0, width: 200});
+    masterContainer.add(masterView);
+    detailWindow.add(masterContainer);
+
+    detailContent.left  = 200;
+    detailContent.right = 0;
+
+    exports.open(detailWindow);
 };
 
 exports.close = function (win) 

@@ -133,6 +133,7 @@ function onStatisticsFetched(processedReportModel)
 
     if (reportRowsCtrl) {
         $.reportRowsContainer.remove(reportRowsCtrl.getView());
+        reportRowsCtrl.destroy();
     }
 
     reportRowsCtrl = Alloy.createController('reportrows', {report: processedReportModel});

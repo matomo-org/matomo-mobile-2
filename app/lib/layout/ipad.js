@@ -6,7 +6,7 @@ exports.bootstrap = function (controller)
     navGroup = Ti.UI.iPhone.createNavigationGroup({window: controller.getView()});
     statisticsWin.add(navGroup);
     statisticsWin.open();
-}
+};
 
 exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
 {
@@ -18,16 +18,16 @@ exports.openSplitWindow = function (detailWindow, detailContent, masterView)
     detailContent.right = 0;
 
     exports.open(detailWindow);
-}
+};
 
 exports.close = function (win) 
 {
     navGroup.close(win, {animated : true});
     win = null;
-}
+};
 
 exports.open = function (win) 
 {
     navGroup.open(win, {animated : true});
     win = null;
-}
+};

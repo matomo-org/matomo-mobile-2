@@ -62,6 +62,7 @@ function doSelectReport(event)
 function close()
 {
     require('layout').close($.index);
+    $.destroy();
 }
 
 exports.open = function() 
