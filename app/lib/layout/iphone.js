@@ -1,11 +1,16 @@
 var navGroup = null;
+var isBootstrapped = false;
 
-exports.bootstrap = function (controller) 
+function bootstrap (win) 
 {
     var statisticsWin = Ti.UI.createWindow();
-    navGroup = Ti.UI.iPhone.createNavigationGroup({window: controller.getView()});
+    navGroup = Ti.UI.iPhone.createNavigationGroup({window: win});
     statisticsWin.add(navGroup);
     statisticsWin.open();
+
+    isBootstrapped = true;
+
+    win = null;
 };
 
 exports.close = function (win) 
@@ -16,6 +21,11 @@ exports.close = function (win)
 
 exports.open = function (win) 
 {
-    navGroup.open(win, {animated : true});
+    if (isBootstrapped) {
+        navGroup.open(win, {animated : true});
+    } else {
+        bootstrap(win);
+    }
+
     win = null;
 };

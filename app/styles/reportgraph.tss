@@ -1,21 +1,22 @@
-".container": {
-    top: 15,
-    height: Ti.UI.SIZE,
-    width: Ti.UI.FILL
-},
-
-".container[platform=android]": {
-    top: '15dp'
-},
-
 "#image": {
-    image: 'graph.png',
+    top: 15,
+    image: 'graphDefault.png',
     height: 150,
     left: 10,
     right: 10
 },
 
+"#image[platform=ios]": {
+    hires: true
+},
+
+"#image[platform=mobileweb]": {
+    image: 'graphDefault.png'
+},
+
 "#image[platform=android]": {
+    top: '15dp',
+    image: '/graphDefault.png',
     left: '16dp',
     right: '16dp',
     height: '150dp',

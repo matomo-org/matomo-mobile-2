@@ -1,6 +1,0 @@
-<Alloy>
-    <Window id="index">
-        <TableView id="websitesTable" onClick="doSelectWebsite">
-        </TableView>
-    </Window>
-</Alloy>

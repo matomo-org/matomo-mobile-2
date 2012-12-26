@@ -21,44 +21,41 @@
             </ButtonBar>
         </RightNavButton>
         <RightNavButton formFactor="handheld" platform="ios">
-            <ButtonBar platform="ios" onClick="doChooseWebsite">
-                <Labels>
-                    <Label image="ic_action_websites.png" width="32" />
-                </Labels>
-            </ButtonBar>
+            <Button id="websitesButton" onClick="doChooseWebsite"/>
         </RightNavButton>
         <RightNavButton platform="mobileweb">
-            <Button platform="mobileweb" image="ic_action_websites.png" onClick="doChooseWebsite" width="32"/>
+            <Button id="websitesButton" onClick="doChooseWebsite"/>
         </RightNavButton>
         <Menu id="menu" platform="android">
             <MenuItem id="menuItemWebsite" onClick="doChooseWebsite" />
             <MenuItem id="menuItemAccount" onClick="doChooseAccount" />
             <MenuItem id="menuItemSetting" onClick="doChooseWebsite" />
         </Menu>
+        
         <View id="loading"><Label>Loading</Label></View>
 
-        <TableView id="content" class="container">
-            <TableViewRow>
-                <View class="menu">
-                    <Require src="reportmenu" 
-                             onChooseReport="doChooseReport" 
-                             onChooseMetric="doChooseMetric" 
-                             onChooseDate="doChooseDate" 
-                             onFlatten="doFlatten" 
-                             id="reportMenuCtrl"/>
-                    <View class="menuSeparatorShadow"/>
+        <View id="content">
+            <Require src="reportmenu" 
+                     onChooseReport="doChooseReport" 
+                     onChooseMetric="doChooseMetric" 
+                     onChooseDate="doChooseDate" 
+                     onFlatten="doFlatten" 
+                     id="reportMenuCtrl"/>
+            <View class="menuSeparatorShadow"/>
+            <TableView id="reportTable" class="container">
+                <TableViewRow>
                     <Require src="reportinfo" id="reportInfoCtrl"/>
-                </View>
-            </TableViewRow>
-            <TableViewRow>
-                <Require src="reportgraph" id="reportGraphCtrl"/>
-            </TableViewRow>
-            <TableViewRow class="reportRowSeparator">
-                <View class="space"></View>
-                <View class="shadow"></View>
-            </TableViewRow>
-            <TableViewRow id="reportRowsContainer">
-            </TableViewRow>
-        </TableView>
+                </TableViewRow>
+                <TableViewRow>
+                    <Require src="reportgraph" id="reportGraphCtrl"/>
+                </TableViewRow>
+                <TableViewRow>
+                    <View id="reportRowSeparator" class="reportRowSeparator">
+                        <View class="space"></View>
+                        <View class="shadow"></View>
+                    </View>
+                </TableViewRow>
+            </TableView>
+        </View>
     </Window>
 </Alloy>

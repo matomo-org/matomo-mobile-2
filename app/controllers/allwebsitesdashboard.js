@@ -109,7 +109,5 @@ exports.open = function (alreadyOpened) {
 
     onAccountChosen(accountModel);
 
-    if (!alreadyOpened) {
-        require('layout').open($.index);
-    }
+    require('layout').open($.index);
 };

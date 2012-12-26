@@ -1,9 +1,5 @@
 var openedWindows = [];
 
-exports.bootstrap = function(controller) {
-
-};
-
 function hasOpenedWindow()
 {
     return !!openedWindows.length;

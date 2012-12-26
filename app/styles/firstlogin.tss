@@ -1,3 +1,7 @@
+"#index[platform=ios]": {
+    navBarHidden: true
+},
+
 ".container": {
     backgroundColor: "#F5F5F5"
 },

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window>
+    <Window id="index">
         <ScrollView class="container">
             <View id="mainView">
                 <View id="headerView">

@@ -44,11 +44,9 @@ function openDashboard()
 {
     var dashboard = Alloy.createController('allwebsitesdashboard', {accounts: accounts,
                                                                     account: accounts.first()});
-    require('layout').bootstrap(dashboard);
-
     dashboard.on('websiteChosen', openStatistics);
     dashboard.on('websiteChosen', function () {
         this.close();
     });
-    dashboard.open(true);
+    dashboard.open();
 }

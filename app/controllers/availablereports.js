@@ -65,10 +65,13 @@ function close()
     $.destroy();
 }
 
+exports.updateWebsite = function (siteModel) {
+    updatePageTitle(siteModel);
+}
+
 exports.open = function() 
 {
-    updatePageTitle(siteModel);
-
+    $.index.backButtonTitle = 'Back';
     updateAvailableReportsList();
 
     var alloy = require('alloy');

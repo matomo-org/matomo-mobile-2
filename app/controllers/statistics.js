@@ -37,7 +37,7 @@ function doChooseWebsite()
         this.close();
     });
     websites.on('websiteChosen', onWebsiteChosen)
-    websites.open(false);
+    websites.open();
 }
 
 function doChooseReport()
@@ -93,6 +93,7 @@ function onWebsiteChosen(event)
     accountModel = event.account;
 
     $.index.setTitle(siteModel.getName());
+    reportListController.updateWebsite(siteModel);
 
     fetchListOfAvailableReports();
 }
@@ -112,13 +113,15 @@ function fetchListOfAvailableReports()
 
 function onAccountChosen(account)
 {
+    showLoadingMessage();
+
     accountModel            = account;
     var entrySiteCollection = Alloy.createCollection('piwikWebsites');
     entrySiteCollection.fetch({
         params: {limit: 1},
         account: accountModel, 
         success: function (entrySiteCollection) {
-            onWebsiteChosen(entrySiteCollection.getEntrySite());
+            onWebsiteChosen({site: entrySiteCollection.getEntrySite(), account: accountModel});
         }
     });
 }
@@ -128,16 +131,40 @@ function onStatisticsFetched(processedReportModel)
 {
     showReportContent();
 
+    $.reportTable.setData([]);
+
     $.reportInfoCtrl.update(processedReportModel);
     $.reportGraphCtrl.update(processedReportModel, accountModel);
 
+    var rows = [];
+
+    var row = Ti.UI.createTableViewRow();
+    row.add($.reportInfoCtrl.getView());
+    rows.push(row);
+
+    var row = Ti.UI.createTableViewRow();
+    row.add($.reportGraphCtrl.getView());
+    rows.push(row);
+
+    var row = Ti.UI.createTableViewRow();
+    row.add($.reportRowSeparator);
+    rows.push(row);
+
     if (reportRowsCtrl) {
-        $.reportRowsContainer.remove(reportRowsCtrl.getView());
         reportRowsCtrl.destroy();
     }
+    
+    _.each(processedReportModel.getRows(), function (report) {
+        var reportRow = Alloy.createController('reportrow', report);
+        var row = Ti.UI.createTableViewRow();
+        row.add(reportRow.getView());
+        rows.push(row);
+        row = null;
+    });
 
-    reportRowsCtrl = Alloy.createController('reportrows', {report: processedReportModel});
-    $.reportRowsContainer.add(reportRowsCtrl.getView());
+    $.reportTable.setData(rows);
+    row  = null;
+    rows = null;
 }
 
 function showReportContent()

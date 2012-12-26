@@ -70,13 +70,25 @@ exports.definition = {
 			getRows: function () {
 				var reportData = this.get('reportData');
 				var metaData   = this.get('reportMetadata');
+				var columns    = this.get('columns');
 
 				var rows = [];
 
-				for (var index in reportData) {
-					rows.push({data: reportData[index], 
-							   metadata: metaData ? metaData[index] : null,
-							   sortOrderColumn: this.getSortOrder()});
+				if (_.isArray(reportData)) {
+					for (var index in reportData) {
+						rows.push({data: reportData[index], 
+								   metadata: metaData ? metaData[index] : null,
+								   sortOrderColumn: this.getSortOrder()});
+					}
+				} else {
+        			// since Piwik Server 1.5.0: for reports with no dimensions, like VisitsSummary.get
+					for (var index in reportData) {
+						var row = {data: {label: columns[index]}, 
+								   metadata: metaData ? metaData[index] : null,
+								   sortOrderColumn: index};
+						row.data[index] = reportData[index];
+						rows.push(row);
+					}
 				}
 
 				return rows;
@@ -103,6 +115,7 @@ exports.definition = {
 					reportData[index].metadata = response.metadata;
 					reportData[index].reportMetadata = metaData ? metaData[index] : null;
 				}
+
 
 				return reportData;
 			}

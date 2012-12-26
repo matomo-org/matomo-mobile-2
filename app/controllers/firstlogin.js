@@ -26,11 +26,11 @@ function onFaq ()
 
 exports.close = function ()
 {
-    $.firstlogin.close();
+    require('layout').close($.index);
     $.destroy();
 };
 
 exports.open = function ()
 {
-    $.firstlogin.open(); 
+    require('layout').open($.index);
 };

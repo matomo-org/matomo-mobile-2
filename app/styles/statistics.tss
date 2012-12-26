@@ -24,6 +24,11 @@
     title: 'Settings'
 },
 
+"#websitesButton": {
+    image: "ic_action_website.png",
+    width: 32
+},
+
 ".container[platform=ios]": {
     separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
 },
@@ -43,12 +48,12 @@
     zIndex: 3
 },
 
-".menu": {
-    layout: "vertical",
-    height: Ti.UI.SIZE
+"#reportTable": {
+    top: 68
 },
 
 ".menuSeparatorShadow": {
+    top: 60,
     height: 8,
     backgroundImage: 'separator.png'
 },
@@ -67,7 +72,8 @@
 },
 
 ".reportRowSeparator": {
-     layout: "vertical"
+     layout: "vertical",
+     height: Ti.UI.SIZE
 },
 
 ".space": {

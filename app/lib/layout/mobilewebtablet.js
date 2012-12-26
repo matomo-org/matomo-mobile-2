@@ -1,17 +1,22 @@
-
+var isBootstrapped = false;
 var navGroup = null;
+var zIndex = 0;
 
-exports.bootstrap = function (controller) 
+function bootstrap (win) 
 {
-    var statisticsWin = Ti.UI.createWindow();
-    navGroup = Ti.UI.MobileWeb.createNavigationGroup({window: controller.getView()});
-    statisticsWin.add(navGroup);
-    statisticsWin.open();
+    var rootWindow = Ti.UI.createWindow();
+    navGroup = Ti.UI.MobileWeb.createNavigationGroup({window: win});
+    rootWindow.add(navGroup);
+    rootWindow.open();
+    rootWindow = null;
+
+    isBootstrapped = true; 
+    win = null;
 }
 
 exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
 {
-    var masterContainer = Ti.UI.createView({left: 0, width: 200});
+    var masterContainer = Ti.UI.createView({left: 0, width: 200, zIndex: 3});
     masterContainer.add(masterView);
     detailWindow.add(masterContainer);
 
@@ -29,6 +34,14 @@ exports.close = function (win)
 
 exports.open = function (win) 
 {
-    navGroup.open(win, {animated: true});
+    win.zIndex = zIndex;
+    zIndex++;
+
+    if (isBootstrapped) {
+        navGroup.open(win, {animated : true});
+    } else {
+        bootstrap(win);
+    }
+
     win = null;
 };

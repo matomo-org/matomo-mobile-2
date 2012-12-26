@@ -8,6 +8,10 @@
     displayHomeAsUp: true
 },
 
+"Window[platform=ios]": {
+    navBarHidden: false
+},
+
 "NavigationGroup": {
     barColor: "#B2AEA5"
 },
