@@ -8,6 +8,10 @@
     showCancel: true
 },
 
+"#searchBar[platform=android]": {
+    height: '43dp'
+},
+
 ".container": {
     layout: "vertical"
 },
