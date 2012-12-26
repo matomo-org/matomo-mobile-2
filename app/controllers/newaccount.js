@@ -29,3 +29,9 @@ exports.open = function ()
 {
     require('layout').open($.index);
 }
+
+exports.close = function () 
+{
+    require('layout').close($.index);
+    $.destroy();
+}

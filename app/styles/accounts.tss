@@ -13,6 +13,15 @@
     editable: true
 },
 
+"#addAccountButton": {
+    title: '#'
+},
+
+"#addAccountButton[platform=ios]": {
+    title: '',
+    systemButton: Titanium.UI.iPhone.SystemButton.ADD
+},
+
 "#accounts[platform=ios]": {
     footerTitle: L('Mobile_HowtoDeleteAnAccountOniOS')
 },

@@ -65,6 +65,8 @@ function doSelectAction(event)
     dialog.show();
 }
 
+var newAccountController = null;
+
 function doAddAccount()
 {
     newAccountController = Alloy.createController('newaccount', {accounts: accounts});
@@ -72,18 +74,10 @@ function doAddAccount()
     newAccountController.open();
 }
 
-var addButton = Ti.UI.createButton({title: '+'});
-
-$.index.rightNavButton = addButton;
-
-var newAccountController = null;
-
-addButton.addEventListener('click', doAddAccount);
-
 function onCreatedAccount() {
     accounts.off("add", onCreatedAccount);
     renderListOfAccounts();
-    newAccountController.getView().close();
+    newAccountController.close();
 }
 
 function close () 

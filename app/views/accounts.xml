@@ -1,5 +1,8 @@
 <Alloy>
     <Window class="container" id="index">
+        <RightNavButton platform="ios,mobileweb">
+            <Button id="addAccountButton" onClick="doAddAccount"/>
+        </RightNavButton>
         <Menu id="menu" platform="android">
             <MenuItem id="menuItemAddAccount" onClick="doAddAccount" />
         </Menu>
