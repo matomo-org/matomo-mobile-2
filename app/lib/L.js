@@ -22,13 +22,13 @@ translation.load();
  * @param    {string}  key
  *
  * @example
- * _('General_Login') // outputs 'Login' if language is english.
+ * L('General_Login') // outputs 'Login' if language is english.
  *
  * @returns  {string}  The translated key.
  */
-function _ (key) {
+function L (key) {
 
     return translation.getString(key);
 }
 
-module.exports = _;
+module.exports = L;

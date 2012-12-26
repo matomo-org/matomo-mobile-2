@@ -1,5 +1,10 @@
 var args = arguments[0] || {};
 
+function L(key)
+{
+    return require('L')(key);
+}
+
 // a list of all available accounts
 var accountsCollection = args.accounts || false;
 // the currently selected account

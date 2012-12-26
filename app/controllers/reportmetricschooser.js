@@ -1,6 +1,8 @@
 var args    = arguments[0] || {};
 var metrics = args.metrics || [];
 
+var L = require('L');
+
 var options           = [];
 var internalNames     = [];
 var metricDisplayName = null;
@@ -16,7 +18,7 @@ for (var metricInternalName in metrics) {
     internalNames.push(String(metricInternalName));
 }
 
-options.push('SitesManager_Cancel_js');
+options.push(L('SitesManager_Cancel_js'));
 
 $.index.options = options;
 $.index.cancel  = options.length - 1;

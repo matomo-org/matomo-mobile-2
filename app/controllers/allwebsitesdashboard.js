@@ -7,7 +7,7 @@ var accountModel = args.account || false;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.Collections.piwikProcessedReport;
 
-$.index.title = 'All Websites Dashboard';
+$.index.title = require('L')('All Websites Dashboard');
 
 function websiteChosen(siteModel) 
 {

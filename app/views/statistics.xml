@@ -32,7 +32,7 @@
             <MenuItem id="menuItemSetting" onClick="doChooseWebsite" />
         </Menu>
         
-        <View id="loading"><Label>Loading</Label></View>
+        <View id="loading"><Label id="loadingLabel"></Label></View>
 
         <View id="content">
             <Require src="reportmenu" 
