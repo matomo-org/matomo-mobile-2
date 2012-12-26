@@ -16,18 +16,6 @@ function closeCurrentlyOpenedWindow()
     }
 }
 
-exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
-{
-    var masterContainer = Ti.UI.createView({left: 0, width: '200dp'});
-    masterContainer.add(masterView);
-    detailWindow.add(masterContainer);
-
-    detailContent.left  = '200dp';
-    detailContent.right = 0;
-
-    exports.open(detailWindow);
-};
-
 exports.close = function(win) {
     openedWindows.pop();
     win.close();
@@ -39,4 +27,16 @@ exports.open = function(win) {
     win.open();
     openedWindows.push(win);
     win = null;
+};
+
+exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
+{
+    var masterContainer = Ti.UI.createView({left: 0, width: '200dp'});
+    masterContainer.add(masterView);
+    detailWindow.add(masterContainer);
+
+    detailContent.left  = '200dp';
+    detailContent.right = 0;
+
+    exports.open(detailWindow);
 };

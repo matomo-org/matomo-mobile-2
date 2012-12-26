@@ -11,8 +11,8 @@ if (OS_IOS && alloy.isHandheld) {
     layoutName = 'layout/mobileweb';
 } else if (OS_ANDROID && alloy.isTablet) {
     layoutName = 'layout/androidtablet';
-}else if (OS_ANDROID) {
+} else if (OS_ANDROID) {
     layoutName = 'layout/android';
 }
 
-exports = require(layoutName);
+module.exports = require(layoutName);
