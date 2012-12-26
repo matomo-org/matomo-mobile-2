@@ -84,6 +84,7 @@
 "#tryit": {
     left: 10,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    text: L('Mobile_TryIt')
 },
 
 "#tryit[platform=android]": {
@@ -92,7 +93,8 @@
 
 "#faq": {
     right: 10,
-    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT
+    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+    text: L('General_Faq')
 },
 
 "#faq[platform=android]": {

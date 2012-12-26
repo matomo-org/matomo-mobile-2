@@ -9,7 +9,7 @@
 /** @private */
 var Piwik = require('Piwik');
 /** @private */
-var _     = require('underscore');
+var _     = require('L');
 
 /**
  * @class     A visitor is created by the method Piwik.UI.createVisitor. The visitor UI widget displays detailed

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window class="container" id="index" title="Accounts">
+    <Window class="container" id="index">
         <Menu id="menu" platform="android">
             <MenuItem id="menuItemAddAccount" onClick="doAddAccount" />
         </Menu>

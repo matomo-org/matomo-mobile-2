@@ -1,5 +1,5 @@
 <Alloy>
-    <Window class="container" id="index" title="Add account">
+    <Window class="container" id="index">
         <ScrollView>
             <View id="loginform" />
         </ScrollView>

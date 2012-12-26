@@ -1,11 +1,12 @@
 <Alloy>
     <Collection src="piwikProcessedReport"/>
-    <Window title="Dashboard" id="index">
+    <Window id="index">
         <RightNavButton platform="ios,mobileweb">
             <Button id="accountsButton" onClick="doChooseAccount" image="ic_action_accounts.png" width="32"/>
         </RightNavButton>
 
-        <View id="loading"><Label>Loading</Label></View>
+        <View id="loading"><Label id="loadingLabel"></Label></View>
+        
         <View id="content" class="container">
             <SearchBar id="searchBar" platform="android,ios"/>
             <Require src="reportgraph" id="reportGraphCtrl"/>

@@ -91,7 +91,7 @@ LiveOverview.prototype.refresh = function (params) {
         params = null;
     }
 
-    var _      = require('underscore');
+    var _      = require('L');
 
     var value  = String.format('%s %s, %s %s',
                                '' + this.getParam('visits', '-'),

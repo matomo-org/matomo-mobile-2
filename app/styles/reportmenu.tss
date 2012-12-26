@@ -71,4 +71,20 @@
         fontSize: '12sp',
         fontWeight: 'bold'
     }
+},
+
+"#reports": {
+    text: L('General_Reports')
+},
+
+"#metric": {
+    text: L('General_Metric')
+},
+
+"#date": {
+    text: L('General_Date')
+},
+
+"#flatten": {
+    text: L('General_Flatten')
 }

@@ -93,7 +93,7 @@ ModalWindow.prototype.init = function () {
                                    
         this.viewToAddOtherViews = win;
 
-        var _             = require('underscore');
+        var _             = require('L');
         var cancelButton  = Ti.UI.createButton({title: _('SitesManager_Cancel_js'),
                                                 style: Ti.UI.iPhone.SystemButtonStyle.CANCEL});
         _ = null;

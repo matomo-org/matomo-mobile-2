@@ -1,3 +1,7 @@
+function L(key)
+{
+    return require('L')(key);
+}
 
 var args = arguments[0] || {};
 var accounts = args.accounts || false;
@@ -19,7 +23,7 @@ function onTryIt ()
 
 function onFaq () 
 {
-    var webview = {title: 'FAQ', url: 'http://piwik.org/mobile/faq/'};
+    var webview = {title: L('General_Faq'), url: 'http://piwik.org/mobile/faq/'};
     var faq     = Alloy.createController('webview', webview)
     faq.open();
 }

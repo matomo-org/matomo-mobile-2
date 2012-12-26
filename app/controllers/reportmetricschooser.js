@@ -1,7 +1,10 @@
+function L(key)
+{
+    return require('L')(key);
+}
+
 var args    = arguments[0] || {};
 var metrics = args.metrics || [];
-
-var L = require('L');
 
 var options           = [];
 var internalNames     = [];

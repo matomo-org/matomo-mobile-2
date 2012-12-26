@@ -355,7 +355,7 @@ AccountRequest.prototype.requestVersion = function () {
             Piwik.getLog().debug('Version is out of date: ' + version,
                             'Piwik.Network.AccountRequest::requestVersion#version');
 
-            var _           = require('underscore');
+            var _           = require('L');
             var alertDialog = Ti.UI.createAlertDialog({
                 title: _('General_PleaseUpdatePiwik'),
                 message: String.format(_('General_PiwikXIsAvailablePleaseNotifyPiwikAdmin'), '' + that.latestVersion),

@@ -9,8 +9,8 @@
                 <View class="footerSpacer" />
             </View>
             <View id="footerView">
-                <Label id="tryit" class="footerLink" onClick="onTryIt">Try it!</Label>
-                <Label id="faq" class="footerLink" onClick="onFaq">FAQ</Label>
+                <Label id="tryit" class="footerLink" onClick="onTryIt"/>
+                <Label id="faq" class="footerLink" onClick="onFaq"/>
             </View>
         </ScrollView>
     </Window>

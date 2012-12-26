@@ -2,6 +2,10 @@
     backgroundColor: "#F5F5F5"
 },
 
+"#index": {
+    title: L('Mobile_AddAccount')
+},
+
 "#loginform": {
     top: 10,
     left: 20,

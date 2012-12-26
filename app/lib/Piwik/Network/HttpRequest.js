@@ -362,7 +362,7 @@ HttpRequest.prototype.error = function (e) {
 
     Piwik.getLog().warn(e, 'Piwik.Network.HttpRequest::error');
     
-    var _         = require('underscore');
+    var _         = require('L');
     // if set, the user will see a dialog containing this message
     var message   = '';
     // the title of the message

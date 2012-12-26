@@ -60,7 +60,7 @@ ChooseDateCommand.prototype.getId = function () {
  */
 ChooseDateCommand.prototype.getLabel = function () {
 
-    var _  = require('underscore');
+    var _  = require('L');
     
     return _('General_ChooseDate');
 };

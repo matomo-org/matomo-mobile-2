@@ -1,9 +1,9 @@
-var args = arguments[0] || {};
-
 function L(key)
 {
     return require('L')(key);
 }
+
+var args = arguments[0] || {};
 
 // a list of all available accounts
 var accountsCollection = args.accounts || false;

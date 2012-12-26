@@ -39,7 +39,7 @@ AddAccountCommand.prototype.getId = function () {
  */
 AddAccountCommand.prototype.getLabel = function () {
 
-    var _ = require('underscore');
+    var _ = require('L');
 
     return _('Mobile_AddAccount');
 };

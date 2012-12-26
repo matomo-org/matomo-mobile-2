@@ -2,6 +2,10 @@
     backgroundColor: "#F5F5F5"
 },
 
+"#index": {
+    title: L('Mobile_Accounts')
+},
+
 "#accounts": {
     headerTitle: 'Your accounts',
     top: 10,
@@ -9,15 +13,18 @@
     editable: true
 },
 
+"#accounts[platform=ios]": {
+    footerTitle: L('Mobile_HowtoDeleteAnAccountOniOS')
+},
+
 "#menuItemAddAccount[platform=android]": {
     icon: '/ic_action_add_account.png',
     showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
-    title: 'Add Account'
+    title: L('Mobile_AddAccount')
 },
 
 "#accounts[platform=android]": {
-    headerTitle: 'Your accounts',
-    top: 10
+    top: '10dp'
 },
 
 "#actions": {

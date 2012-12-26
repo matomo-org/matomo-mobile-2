@@ -15,9 +15,6 @@ function Sync(model, method, opts) {
         
             // TODO CACHE IF ENABLED
                     
-            // TODO we need a central storage for current selected account
-            var account = require('state').account();
-            
             var _ = require("alloy/underscore");
 
             if (opts.params) {
@@ -32,9 +29,6 @@ function Sync(model, method, opts) {
             if (opts && opts.account) {
                 request.setBaseUrl(opts.account.get('accessUrl'));
                 request.setUserAuthToken(opts.account.get('tokenAuth'));
-            } else if (account) {
-                request.setUserAuthToken(account.get('tokenAuth'));
-                request.setBaseUrl(account.get('accessUrl'));
             }
             
             request.setCallback(this, function (response) {

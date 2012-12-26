@@ -1,3 +1,8 @@
+function L(key)
+{
+    return require('L')(key);
+}
+
 var args = arguments[0] || {};
 
 // a list of all available accounts
@@ -6,8 +11,6 @@ var accountsCollection = args.accounts || false;
 var accountModel = args.account || false;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.Collections.piwikProcessedReport;
-
-$.index.title = require('L')('All Websites Dashboard');
 
 function websiteChosen(siteModel) 
 {

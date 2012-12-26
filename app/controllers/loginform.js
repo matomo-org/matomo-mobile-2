@@ -1,3 +1,7 @@
+function L(key)
+{
+    return require('L')(key);
+}
 
 var args = arguments[0] || {};
 var accounts = args.accounts || false;

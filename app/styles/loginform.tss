@@ -48,19 +48,19 @@
 },
 
 "#url": {
-    hintText: "URL eg http://demo.piwik.org",
+    hintText: L('Mobile_AccessUrlLabel'),
     keyboardType: Ti.UI.KEYBOARD_URL,
     returnKeyType: Ti.UI.RETURNKEY_NEXT
 },
 
 "#username": {
-    hintText: "Username",
+    hintText: L('Login_Login'),
     keyboardType: Ti.UI.KEYBOARD_DEFAULT,
     returnKeyType: Ti.UI.RETURNKEY_NEXT
 },
 
 "#password": {
-    hintText: "Password",
+    hintText: L('Login_Password'),
     passwordMask: true,
     returnKeyType: Ti.UI.RETURNKEY_DONE
 },
@@ -70,7 +70,8 @@
     font: { 
         fontSize: 12
     },
-    textAlign: 'center'
+    textAlign: 'center',
+    text: L('Mobile_HowtoLoginAnonymous')
 },
 
 ".anonymousLoginNotice[platform=android]": {

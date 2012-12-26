@@ -4,6 +4,6 @@
         <TextField id="username" class="textfield" onReturn="onUsernameReturn"/>
         <TextField id="password" class="textfield" onReturn="doLogin"/>
         <Button id="loginbutton" onClick="doLogin" title="Login" />
-        <Label id="anonymousLoginNotice">Leave username and password empty for anonymous login</Label>
+        <Label id="anonymousLoginNotice"/>
     </View>
 </Alloy>

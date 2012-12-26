@@ -1,3 +1,8 @@
+function L(key)
+{
+    return require('L')(key);
+}
+
 var args = arguments[0] || {};
 var siteModel = args.site || false;
 var reportsCollection = args.reports || false;
@@ -71,11 +76,10 @@ exports.updateWebsite = function (siteModel) {
 
 exports.open = function() 
 {
-    $.index.backButtonTitle = 'Back';
+    $.index.backButtonTitle = L('Mobile_NavigationBack');
     updateAvailableReportsList();
 
-    var alloy = require('alloy');
-    if (alloy.isHandheld) {
+    if (Alloy.isHandheld) {
         require('layout').open($.index);
     }
 };

@@ -1,3 +1,7 @@
+function L(key)
+{
+    return require('L')(key);
+}
 
 var args = arguments[0] || {};
 var hideCloseButton = args.hideCloseButton || false;
@@ -40,10 +44,10 @@ function doSelectAction(event)
 {
     var dialog = Ti.UI.createOptionDialog({
         cancel: 1,
-        options: ['Remove', 'Cancel'],
+        options: [L('General_Remove'), L('General_No')],
         selectedIndex: 1,
         destructive: 0,
-        title: 'Do you want to remove this account?'
+        title: L('Mobile_ConfirmRemoveAccount')
     });
 
     dialog.addEventListener('click', function (clickEvent) {

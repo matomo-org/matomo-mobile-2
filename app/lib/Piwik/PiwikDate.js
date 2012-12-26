@@ -127,7 +127,7 @@ PiwikDate.prototype.getRangeDate = function () {
  */
 PiwikDate.prototype.getAvailableDateRanges = function () {
 
-    var _      = require('underscore');
+    var _      = require('L');
     
     var ranges = [{label: _('General_Today'), period: 'day', date: 'today'},
                   {label: _('General_Yesterday'), period: 'day', date: 'yesterday'},
@@ -154,7 +154,7 @@ PiwikDate.prototype.getAvailableDateRanges = function () {
  */
 PiwikDate.prototype.getAvailablePeriods = function () {
     
-    var _       = require('underscore');
+    var _       = require('L');
     
     var periods = {day:   _('CoreHome_PeriodDay'),
                    week:  _('CoreHome_PeriodWeek'),
