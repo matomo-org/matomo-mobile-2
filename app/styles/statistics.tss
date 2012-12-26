@@ -52,6 +52,10 @@
     top: 68
 },
 
+"#reportTable[platform=android]": {
+    top: '68dp'
+},
+
 ".menuSeparatorShadow": {
     top: 60,
     height: 8,
@@ -59,6 +63,7 @@
 },
 
 ".menuSeparatorShadow[platform=android]": {
+    top: '60dp',
     height: '8dp',
     backgroundImage: '/separator.png'
 },
