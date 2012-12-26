@@ -3,6 +3,6 @@
         <Menu id="menu" platform="android">
             <MenuItem id="menuItemAddAccount" onClick="doAddAccount" />
         </Menu>
-        <TableView id="accounts" onDelete="doDeleteAccount" onClick="doSelectAccount" class="accountsContainer" />
+        <TableView id="accounts" onDelete="doDeleteAccount" onLongpress="doSelectAction" onClick="doSelectAccount" class="accountsContainer" />
     </Window>
 </Alloy>

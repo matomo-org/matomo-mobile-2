@@ -36,6 +36,31 @@ function doDeleteAccount(event)
     }
 }
 
+function doSelectAction(event)
+{
+    var dialog = Ti.UI.createOptionDialog({
+        cancel: 1,
+        options: ['Remove', 'Cancel'],
+        selectedIndex: 1,
+        destructive: 0,
+        title: 'Do you want to remove this account?'
+    });
+
+    dialog.addEventListener('click', function (clickEvent) {
+        if (!clickEvent || 
+            clickEvent.cancel === clickEvent.index || 
+            true === clickEvent.cancel) {
+
+            return;
+        }
+
+        doDeleteAccount(event);
+        renderListOfAccounts();
+    });
+
+    dialog.show();
+}
+
 function doAddAccount()
 {
     newAccountController = Alloy.createController('newaccount', {accounts: accounts});
