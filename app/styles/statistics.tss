@@ -6,8 +6,29 @@
     fullscreen: false
 },
 
+"#loading": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    visible: true,
+    backgroundColor: 'white',
+    zIndex: 5
+},
+
 "#loadingLabel": {
+    top: 16,
+    bottom: 16,
+    left: 16,
+    right: 16,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
     text: L('General_LoadingData')
+},
+
+"#loadingLabel[platform=android]": {
+    top: '16dp',
+    bottom: '16dp',
+    left: '16dp',
+    right: '16dp'
 },
 
 "MenuItem[platform=android]": {
@@ -23,6 +44,10 @@
     showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
     title: L('Mobile_Websites')
 },
+"#menuItemRefresh[platform=android]": {
+    icon: '/ic_action_refresh.png',
+    title: L('Mobile_Refresh')
+},
 "#menuItemSetting[platform=android]": {
     icon: '/ic_action_settings.png',
     title: L('General_Settings')
@@ -35,14 +60,6 @@
 
 ".container[platform=ios]": {
     separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
-},
-
-"#loading": {
-    height: Ti.UI.FILL,
-    width: Ti.UI.FILL,
-    visible: true,
-    backgroundColor: 'white',
-    zIndex: 5
 },
 
 "#content": {

@@ -28,6 +28,7 @@
         </RightNavButton>
         <Menu id="menu" platform="android">
             <MenuItem id="menuItemWebsite" onClick="doChooseWebsite" />
+            <MenuItem id="menuItemRefresh" onClick="doRefresh" />
             <MenuItem id="menuItemAccount" onClick="doChooseAccount" />
             <MenuItem id="menuItemSetting" onClick="doChooseWebsite" />
         </Menu>
@@ -43,6 +44,9 @@
                      id="reportMenuCtrl"/>
             <View class="menuSeparatorShadow"/>
             <TableView id="reportTable" class="container">
+                <HeaderPullView platform="ios">
+                    <Require src="pulltorefresh" id="pullToRefresh" onRefresh="refresh"/>
+                </HeaderPullView>
                 <TableViewRow>
                     <Require src="reportinfo" id="reportInfoCtrl"/>
                 </TableViewRow>

@@ -1,0 +1,8 @@
+<Alloy>
+    <View class="container">
+        <View id="arrow"/>
+        <Label id="statusLabel"/>
+        <Label id="lastUpdatedLabel"/>
+        <ActivityIndicator id="activityIndicator"/>
+    </View>
+</Alloy>

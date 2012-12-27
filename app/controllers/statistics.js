@@ -28,6 +28,10 @@ var flatten       = 0;
 
 $.index.setTitle(siteModel.getName());
 
+if (OS_IOS) {
+    $.pullToRefresh.init($.reportTable);
+}
+
 function doChooseAccount()
 {
     var accounts = Alloy.createController('accounts', {accounts: accountsCollection});
@@ -66,20 +70,20 @@ function doChooseDate ()
 function doFlatten () 
 {
     flatten = 1;
-    refresh();
+    doRefresh();
     flatten = 0;
 }
 
 exports.onReportChosen = function (chosenReportModel) {
     reportModel   = chosenReportModel;
     currentMetric = null;
-    refresh();
+    doRefresh();
 }
 
 function onMetricChosen(chosenMetric)
 {
     currentMetric = chosenMetric;
-    refresh();
+    doRefresh();
 }
 
 function onReportListFetched(reportsCollection)
@@ -89,7 +93,7 @@ function onReportListFetched(reportsCollection)
         reportModel = reportsCollection.getEntryReport();
     }
 
-    refresh();
+    doRefresh();
 }
 
 function onWebsiteChosen(event)
@@ -174,15 +178,23 @@ function onStatisticsFetched(processedReportModel)
 
 function showReportContent()
 {
+    if (OS_IOS) {
+        $.pullToRefresh.refreshDone();
+    } 
+
     $.loading.hide();
 }
 
 function showLoadingMessage()
 {
+    if (OS_IOS) {
+        $.pullToRefresh.refresh();
+    } 
+    
     $.loading.show();
 }
 
-function refresh() {
+function doRefresh() {
 
     showLoadingMessage();
 
