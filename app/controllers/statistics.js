@@ -126,11 +126,13 @@ function onAccountChosen(account)
 
     accountModel            = account;
     var entrySiteCollection = Alloy.createCollection('piwikWebsites');
+    //TODO either display ALL WEBSITES DASHBOARD OR CHOOSE CORRECT WEBSITE
+    var entrySite = entrySiteCollection.first();
     entrySiteCollection.fetch({
         params: {limit: 1},
         account: accountModel, 
         success: function (entrySiteCollection) {
-            onWebsiteChosen({site: entrySiteCollection.getEntrySite(), account: accountModel});
+            onWebsiteChosen({site: entrySite, account: accountModel});
         }
     });
 }
@@ -180,22 +182,23 @@ function showReportContent()
 {
     if (OS_IOS) {
         $.pullToRefresh.refreshDone();
-    } 
+    } else {
+        $.loading.hide();
+    }
 
-    $.loading.hide();
 }
 
 function showLoadingMessage()
 {
     if (OS_IOS) {
         $.pullToRefresh.refresh();
-    } 
-    
-    $.loading.show();
+    } else {
+        $.loading.show();
+    }
 }
 
-function doRefresh() {
-
+function doRefresh() 
+{
     showLoadingMessage();
 
     var module = reportModel.get('module');

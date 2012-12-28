@@ -3,21 +3,19 @@ accounts.fetch();
 
 var firstLogin = null;
 
-if (!accounts.length) {
+if (accounts.hasAccount()) {
+
+    showEntryScreen(accounts.lastUsedAccount());
+
+} else {
 
     firstLogin = Alloy.createController('firstlogin', {accounts: accounts});
     accounts.on('add', onCreatedAccount);
     firstLogin.open();
-
-} else {
-
-    showEntryScreen();
 }
 
-function showEntryScreen()
+function showEntryScreen(account)
 {
-    var account = accounts.first();
-
     account.select(function (account) {
         if (account.startWithAllWebsitesDashboard()) {
             openDashboard(account);
@@ -27,14 +25,15 @@ function showEntryScreen()
     });
 }
 
-function openEntrySite(accountModel) 
+function openEntrySite(account) 
 {
-    var site = Alloy.createCollection('PiwikWebsitesById');
+    var entrySiteId = account.entrySiteId();
+    var site        = Alloy.createCollection('PiwikWebsitesById');
     site.fetch({
-        params: {idSite: accountModel.entrySiteId()},
-        account: accountModel,
+        params: {idSite: entrySiteId},
+        account: account,
         success: function (sites) {
-            openStatistics({site: sites.entrySite(), account: accountModel})
+            openStatistics({site: sites.entrySite(), account: account})
         },
         error: function () {
             // TODO what now?
@@ -42,14 +41,14 @@ function openEntrySite(accountModel)
     });
 }
 
-function onCreatedAccount() {
+function onCreatedAccount(account) {
     accounts.off("add", onCreatedAccount);
 
     if (firstLogin) {
         firstLogin.close();
     }
 
-    showEntryScreen();
+    showEntryScreen(account);
 }
 
 function openStatistics(event)

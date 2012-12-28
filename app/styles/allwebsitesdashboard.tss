@@ -43,10 +43,6 @@
     title: L('General_Settings')
 },
 
-".websitesTableView[platform=ios]": {
-    separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
-},
-
 "#loading": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,

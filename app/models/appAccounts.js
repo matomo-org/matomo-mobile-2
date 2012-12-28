@@ -83,6 +83,7 @@ exports.definition = {
             "type": "properties",
             "collection_name": "appaccounts"
         },
+        lastUsedAccountPropertyKey: "app_account_id_last_used",
         defaults: {
             active: true,
             createVersionNumber: Ti.App.version,
@@ -150,10 +151,25 @@ exports.definition = {
             },
 
             select: function (callback) {
+
+                this.markAccountAsLastUsed();
                 this.updatePreferences(callback);
             },
 
+            markAccountAsLastUsed: function () {
+                var lastUsedAccountKey = this.config.lastUsedAccountPropertyKey;
+                Ti.App.Properties.setInt(lastUsedAccountKey, this.id);
+            },
+
             updatePreferences: function (callback) {
+
+                if ('anonymous' == this.get('tokenAuth')) {
+                    callback(this);
+                    callback = null;
+
+                    return;
+                }
+
                 var preferences = Alloy.createCollection('piwikAccountPreferences');
 
                 var onSuccess = function (account, defaultReport, defaultReportDate) {
@@ -294,12 +310,29 @@ exports.definition = {
     extendCollection: function(Collection) {
         _.extend(Collection.prototype, {
 
-            getNumAccounts: function () {
-                return this.length;
+            hasAccount: function () {
+                return !!this.length;
             },
-            
-            hasActivatedAccount: function () {
-                return !!this.where({active: 1});
+
+            lastUsedAccount: function () {
+                var lastUsedAccountKey = this.config.lastUsedAccountPropertyKey;
+                var hasAccountProperty = Ti.App.Properties.hasProperty(lastUsedAccountKey);
+
+                if (!hasAccountProperty) {
+
+                    return this.first();
+                }
+
+                var lastUsedAccountId = Ti.App.Properties.getInt(lastUsedAccountKey);
+                var lastUsedAccount   = this.get(lastUsedAccountId);
+
+                if (!lastUsedAccount) {
+
+                    return this.first();
+                }
+
+                return lastUsedAccount;
+
             }
 
             
