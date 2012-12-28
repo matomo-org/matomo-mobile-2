@@ -26,8 +26,10 @@ function renderListOfAccounts()
 function doSelectAccount(event)
 {
     var account = accounts.get(event.rowData.id);
-    $.trigger('accountChosen', account);
-    close();
+    account.select(function () {
+        $.trigger('accountChosen', account);
+        close();
+    });
 }
 
 function doDeleteAccount(event)

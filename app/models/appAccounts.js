@@ -149,6 +149,30 @@ exports.definition = {
                 return this;
             },
 
+            select: function (callback) {
+                this.updatePreferences(callback);
+            },
+
+            updatePreferences: function (callback) {
+                var preferences = Alloy.createCollection('piwikAccountPreferences');
+
+                var onSuccess = function (account, defaultReport, defaultReportDate) {
+
+                    account.set('defaultReport', defaultReport);
+                    account.set('defaultReportDate', defaultReportDate);
+
+                    callback(account);
+                    callback = null;
+                };
+
+                var onError = function (account) {
+                    callback(account);
+                    callback = null;
+                };
+
+                preferences.fetchPreferences(this, onSuccess, onError);
+            },
+
             updatePiwikVersion: function() {
                 var dateVersionUpdated = this.get('dateVersionUpdated');
                 if (!dateVersionUpdated) {

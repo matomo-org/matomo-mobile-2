@@ -10,7 +10,7 @@ exports.definition = {
 		},
 		"settings": {
 		    "method": "UsersManager.getTokenAuth",
-		    "cache": true
+		    "cache": false
 		},
 		"defaultParams": {}
 	},		

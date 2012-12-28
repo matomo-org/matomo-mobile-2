@@ -18,9 +18,7 @@ function showEntryScreen()
 {
     var account = accounts.first();
 
-    var preferences = Alloy.createCollection('piwikAccountPreferences');
-
-    preferences.fetchPreferences(account, function (account) {
+    account.select(function (account) {
         if (account.startWithAllWebsitesDashboard()) {
             openDashboard(account);
         } else {

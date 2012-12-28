@@ -22,7 +22,7 @@ exports.definition = {
         },
         "settings": {
             "method": "SitesManager.getSitesWithAtLeastViewAccess",
-            "cache": true
+            "cache": false
         },
         "defaultParams": {}
     },      

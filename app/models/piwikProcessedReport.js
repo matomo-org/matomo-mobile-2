@@ -17,7 +17,7 @@ exports.definition = {
 		},
 		"settings": {
 		    "method": "API.getProcessedReport",
-		    "cache": true
+		    "cache": false
 		},
 		"defaultParams": {
 		    hideMetricsDoc: 1, 

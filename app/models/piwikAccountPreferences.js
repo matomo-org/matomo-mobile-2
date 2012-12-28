@@ -36,7 +36,7 @@ exports.definition = {
     
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
-            fetchPreferences: function (account, callback) {
+            fetchPreferences: function (account, success, error) {
                 for (var index in this.config.defaultParams.urls) {
                     var defaultParam = this.config.defaultParams.urls[index];
                     defaultParam.userLogin = account.get('username');
@@ -49,17 +49,23 @@ exports.definition = {
                         var defaultReport     = JSON.parse(response[0]);
                         var defaultReportDate = JSON.parse(response[1]);
 
-                        account.set('defaultReport', defaultReport.value);
-                        account.set('defaultReportDate', defaultReportDate.value);
-
-                        if (callback) {
-                            callback(account);
+                        if (success) {
+                            success(account, defaultReport.value, defaultReportDate.value);
+                            success = null;
+                            account = null;
+                        }
+                    },
+                    error: function () {
+                        if (error) {
+                            error(account);
+                            error   = null;
+                            account = null;
                         }
                     }
                 });
 
             }
-            
+
             // extended functions go here           
             
         }); // end extend

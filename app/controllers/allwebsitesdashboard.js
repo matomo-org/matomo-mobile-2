@@ -36,12 +36,12 @@ function onAccountChosen(account)
         success: function (entrySiteCollection) {
 
             if (1 == entrySiteCollection.length) {
-                websiteChosen(entrySiteCollection.getEntrySite());
+                websiteChosen(entrySiteCollection.first());
             } else if (!entrySiteCollection.length) {
                 // TODO no access to any account
                 alert('no access to any website');
             } else {
-                fetchListOfAvailableWebsites(entrySiteCollection.getEntrySite());
+                fetchListOfAvailableWebsites(entrySiteCollection.first());
             }
         }
     });
