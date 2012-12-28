@@ -11,6 +11,17 @@
                   "aliasedGraph": 1,
                   "legendAppendMetric": 0
             }
+        },
+        "account": {
+            "defaultReport": "MultiSites",
+            "defaultReportDate": "yesterday"
+        },
+        "settings": {
+            "language": "en",
+            "trackingEnabled": false,
+            "preferEvolutionGraphs": false,
+            "graphsEnabled": true,
+            "httpTimeout": 60000
         }
     },
 	"env:development": {}, 

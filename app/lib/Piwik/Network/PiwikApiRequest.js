@@ -251,7 +251,7 @@ PiwikApiRequest.prototype.send = function () {
         this.setBaseUrl(this.account.accessUrl);
     }
 
-    this.parameter     = this._mixinParameter(this.parameter);
+    this.parameter = this._mixinParameter(this.parameter);
     
     this.handle();
 };

@@ -200,16 +200,35 @@ HttpRequest.prototype.handle = function () {
     }
 
     var requestUrl  = '';
+
+    var encode = Ti.Network.encodeURIComponent;
     
     if (parameter) {
         
         requestUrl += '?';
+
         for (var paramName in parameter) {
-            requestUrl += paramName + '=' + parameter[paramName] + '&';
+            // hack for PiwikBulkApiRequests
+            if ('urls' == paramName) {
+                for (var index in parameter.urls) {
+                    var url = parameter.urls[index];
+                    requestUrl += encode('urls[' + index + ']') + '=';
+                    for (var key in url) {
+                        requestUrl += encode(key) + '%3d' + encode(url[key]) + '%26';
+                    }
+
+                    requestUrl += '&';
+                }
+
+                continue;
+            }
+
+            requestUrl += encode(paramName) + '=' + encode(parameter[paramName]) + '&';
         }
+
     }
    
-    requestUrl       = this.baseUrl + Piwik.getNetwork().encodeUrlParams(requestUrl);
+    requestUrl = this.baseUrl + requestUrl;
     
     Piwik.getLog().debug('RequestUrl is ' + requestUrl, 'Piwik.Network.HttpRequest::handle');
     

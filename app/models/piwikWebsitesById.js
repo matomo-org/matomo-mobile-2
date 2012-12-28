@@ -18,34 +18,19 @@ exports.definition = {
         },
         "adapter": {
             "type": "piwikapi",
-            "collection_name": "piwikwebsites"
+            "collection_name": "piwikwebsitesbyid"
         },
         "settings": {
-            "method": "SitesManager.getSitesWithAtLeastViewAccess",
+            "method": "SitesManager.getSiteFromId",
             "cache": true
         },
         "defaultParams": {}
-    },      
+    },
 
-    extendModel: function(Model) {      
+    extendModel: function(Model) {
         _.extend(Model.prototype, {
             
             idAttribute: "idsite",
-/*
-            parse: function (response) {
-                if (response && response[0]) {
-                    return response[0];
-                }
-                
-                return null;
-            },
-*/
-            getName: function () {
-                return this.get('name');
-            }
-
-    
-            // extended functions go here
 
         }); // end extend
         
@@ -56,23 +41,17 @@ exports.definition = {
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
 
-            validResponse: function (response) {
-                if (!response || !response[0]) {
-                    return false;
-                }
-                
-                if (!response[0].idsite) {
-                    return false;
-                }
-                
-                return true;
+            entrySite: function () {
+                var entrysite  = this.first();
+                var attributes = entrysite.toJSON();
+
+                var siteModel  = Alloy.createModel('PiwikWebsites', attributes);
+                return siteModel;
             }
-            // extended functions go here           
-            
+
         }); // end extend
         
         return Collection;
     }
         
 }
-

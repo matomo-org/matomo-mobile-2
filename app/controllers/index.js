@@ -11,7 +11,37 @@ if (!accounts.length) {
 
 } else {
 
-    openDashboard();
+    showEntryScreen();
+}
+
+function showEntryScreen()
+{
+    var account = accounts.first();
+
+    var preferences = Alloy.createCollection('piwikAccountPreferences');
+
+    preferences.fetchPreferences(account, function (account) {
+        if (account.startWithAllWebsitesDashboard()) {
+            openDashboard(account);
+        } else {
+            openEntrySite(account);
+        }
+    });
+}
+
+function openEntrySite(accountModel) 
+{
+    var site = Alloy.createCollection('PiwikWebsitesById');
+    site.fetch({
+        params: {idSite: accountModel.entrySiteId()},
+        account: accountModel,
+        success: function (sites) {
+            openStatistics({site: sites.entrySite(), account: accountModel})
+        },
+        error: function () {
+            // TODO what now?
+        }
+    });
 }
 
 function onCreatedAccount() {
@@ -19,17 +49,16 @@ function onCreatedAccount() {
 
     if (firstLogin) {
         firstLogin.close();
-        // firstLogin.destroy();
     }
 
-    openDashboard();
+    showEntryScreen();
 }
 
 function openStatistics(event)
 {
     var siteModel = event.site;
     var account   = event.account;
-    // A list of all available reports
+
     var reportsCollection = Alloy.createCollection('piwikReports');
 
     var statistics = Alloy.createController('statistics', {accounts: accounts,
@@ -40,13 +69,14 @@ function openStatistics(event)
     statistics.open();
 }
 
-function openDashboard()
+function openDashboard(account)
 {
     var dashboard = Alloy.createController('allwebsitesdashboard', {accounts: accounts,
-                                                                    account: accounts.first()});
+                                                                    account: account});
     dashboard.on('websiteChosen', openStatistics);
     dashboard.on('websiteChosen', function () {
         this.close();
     });
+
     dashboard.open();
 }

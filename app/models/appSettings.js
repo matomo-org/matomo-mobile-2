@@ -1,27 +1,25 @@
+var Alloy = require('alloy');
+
 exports.definition = {
     
     config: {
         "columns": {
-            "piwikLanguage":"string",
-            "piwikMultiChart":"boolean",
+            "language":"string",
             "trackingEnabled":"boolean",
             "graphsEnabled":"boolean",
             "preferEvolutionGraphs":"boolean",
-            "httpTimeout":"integer",
-            "piwikDefaultReportDate":"string"
+            "httpTimeout":"integer"
         },
         "adapter": {
             "type": "properties",
             "collection_name": "settings"
         },
         defaults: {
-            piwikMultiChart: false,
-            piwikDefaultReportDate: 'day##yesterday',
-            piwikLanguage: 'en',
-            trackingEnabled: false,
-            preferEvolutionGraphs: false,
-            graphsEnabled: true,
-            httpTimeout: 60000
+            language: Alloy.CFG.settings.language,
+            trackingEnabled: Alloy.CFG.settings.trackingEnabled,
+            preferEvolutionGraphs: Alloy.CFG.settings.preferEvolutionGraphs,
+            graphsEnabled: Alloy.CFG.settings.graphsEnabled,
+            httpTimeout: Alloy.CFG.settings.httpTimeout
         }
     },      
 

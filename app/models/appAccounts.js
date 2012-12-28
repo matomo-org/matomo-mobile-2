@@ -61,6 +61,8 @@ function onlyFirstNumbers(piwikVersion)
     return piwikVersion;
 }
 
+var Alloy = require('alloy');
+
 exports.definition = {
 
     config: {
@@ -73,7 +75,9 @@ exports.definition = {
             "createVersionNumber":"string",
             "changeVersionNumber":"string",
             "version":"string",
-            "dateVersionUpdated":"string"
+            "dateVersionUpdated":"string",
+            "defaultReport": "string",
+            "defaultReportDate": "string"
         },
         "adapter": {
             "type": "properties",
@@ -82,7 +86,9 @@ exports.definition = {
         defaults: {
             active: true,
             createVersionNumber: Ti.App.version,
-            changeVersionNumber: Ti.App.version
+            changeVersionNumber: Ti.App.version,
+            defaultReport: Alloy.CFG.account.defaultReport,
+            defaultReportDate: Alloy.CFG.account.defaultReportDate
         }
     },      
 
@@ -91,6 +97,18 @@ exports.definition = {
             
             initialize: function () {
                 this.on('change:accessUrl', this.completeAccessUrl)
+            },
+
+            startWithAllWebsitesDashboard: function () {
+                return 'MultiSites' === this.get('defaultReport');
+            },
+
+            entrySiteId: function () {
+                return this.get('defaultReport');
+            },
+
+            syncPreferences: function () {
+
             },
 
             getName: function () {

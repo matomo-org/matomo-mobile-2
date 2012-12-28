@@ -1,15 +1,7 @@
 <Alloy>
     <Window title="" id="index">
-        <LeftNavButton formFactor="handheld" platform="ios">
-            <ButtonBar onClick="doChooseAccount">
-                <Labels>
-                    <Label image="ic_action_settings.png" width="32" />
-                    <Label image="ic_action_accounts.png" width="32" />
-                </Labels>
-            </ButtonBar>
-        </LeftNavButton>
-        <LeftNavButton formFactor="handheld" platform="mobileweb">
-            <Button image="ic_action_settings.png" width="32"/>
+        <LeftNavButton formFactor="handheld" platform="ios,mobileweb">
+            <Button onClick="doChooseAccount" image="ic_action_settings.png" width="32"/>
         </LeftNavButton>
         <RightNavButton formFactor="tablet" platform="ios">
             <ButtonBar onClick="doChooseAccount">
@@ -45,7 +37,7 @@
             <View class="menuSeparatorShadow"/>
             <TableView id="reportTable" class="container">
                 <HeaderPullView platform="ios">
-                    <Require src="pulltorefresh" id="pullToRefresh" onRefresh="refresh"/>
+                    <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>
                 <TableViewRow>
                     <Require src="reportinfo" id="reportInfoCtrl"/>
