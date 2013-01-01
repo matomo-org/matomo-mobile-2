@@ -1,0 +1,7 @@
+"#index": {
+    title: L('General_GiveUsYourFeedback')
+},
+
+"#feedbackTable[platform=ios]": {
+    style: Ti.UI.iPhone.TableViewStyle.GROUPED
+}

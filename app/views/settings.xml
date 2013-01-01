@@ -1,0 +1,15 @@
+<Alloy>
+    <Window id="index" onClose="onClose">
+        <TableView id="settingsTable">
+            <TableViewRow id="language" onClick="doChangeLanguage"/>
+            <TableViewRow id="tracking" onClick="toggleTrackingEnabled"/>
+            <TableViewRow id="graphs" onClick="toggleGraphsEnabled"/>
+            <TableViewSection id="advanced"/>
+            <TableViewRow id="timeout" onClick="doChangeHttpTimeout"/>
+            <TableViewSection id="help"/>
+            <TableViewRow id="about" onClick="doOpenAboutPiwikMobile"/>
+            <TableViewRow id="feedback" onClick="doOpenGiveFeedback"/>
+            <TableViewRow id="faq" onClick="doOpenFaq"/>
+        </TableView>
+    </Window>
+</Alloy>

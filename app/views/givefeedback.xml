@@ -1,0 +1,6 @@
+<Alloy>
+	<Window id="index" onClose="onClose">
+        <TableView id="feedbackTable">
+        </TableView>
+	</Window>
+</Alloy>

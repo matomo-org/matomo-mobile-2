@@ -1,3 +1,7 @@
 ".container": {
 	backgroundColor: "white"
+},
+
+"#index": {
+    backButtonTitle: L('Mobile_NavigationBack')
 }

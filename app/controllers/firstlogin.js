@@ -23,9 +23,7 @@ function onTryIt ()
 
 function onFaq () 
 {
-    var webview = {title: L('General_Faq'), url: 'http://piwik.org/mobile/faq/'};
-    var faq     = Alloy.createController('webview', webview)
-    faq.open();
+    require('commands/openFaq').execute();
 }
 
 exports.close = function ()

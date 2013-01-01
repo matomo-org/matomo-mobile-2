@@ -1,0 +1,50 @@
+"#index": {
+    title: L('General_Settings')
+},
+
+"#settingsTable[platform=ios]": {
+    style: Ti.UI.iPhone.TableViewStyle.GROUPED
+},
+
+"#language": {
+    hasChild: true,
+    title: L('General_Language')
+},
+
+"#tracking": {
+    hasCheck: true,
+    title: L('Mobile_AnonymousTracking')
+},
+
+"#graphs": {
+    hasCheck: true,
+    title: L('Mobile_EnableGraphsLabel')
+},
+
+"#timeout": {
+    hasChild: true,
+    title: L('Mobile_HttpTimeout')
+},
+
+"#about": {
+    hasDetail: true,
+    title: L('Mobile_AboutPiwikMobile')
+},
+
+"#feedback": {
+    hasDetail: true,
+    title: L('General_GiveUsYourFeedback')
+},
+
+"#faq": {
+    hasDetail: true,
+    title: L('General_Faq')
+},
+
+"#advanced": {
+     headerTitle: L('Mobile_Advanced')
+},
+
+"#help": {
+     headerTitle: L('General_Help')
+}

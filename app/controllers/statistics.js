@@ -49,6 +49,12 @@ function doChooseWebsite()
     websites.open();
 }
 
+function doOpenSettings()
+{
+    var settings = Alloy.createController('settings');
+    settings.open();
+}
+
 function doChooseReport()
 {
     reportListController.open();
@@ -72,6 +78,11 @@ function doFlatten ()
     flatten = 1;
     doRefresh();
     flatten = 0;
+}
+
+function onClose()
+{
+    $.destroy();
 }
 
 exports.onReportChosen = function (chosenReportModel) {

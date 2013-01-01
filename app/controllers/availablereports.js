@@ -76,7 +76,6 @@ exports.updateWebsite = function (siteModel) {
 
 exports.open = function() 
 {
-    $.index.backButtonTitle = L('Mobile_NavigationBack');
     updateAvailableReportsList();
 
     if (Alloy.isHandheld) {

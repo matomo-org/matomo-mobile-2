@@ -1,7 +1,10 @@
 <Alloy>
-    <Window title="" id="index">
-        <LeftNavButton formFactor="handheld" platform="ios,mobileweb">
-            <Button onClick="doChooseAccount" image="ic_action_settings.png" width="32"/>
+    <Window title="" id="index" onClose="onClose">
+        <LeftNavButton platform="mobileweb">
+            <Button onClick="doOpenSettings" image="ic_action_settings.png" width="32"/>
+        </LeftNavButton>
+        <LeftNavButton formFactor="handheld" platform="ios">
+            <Button onClick="doOpenSettings" image="ic_action_settings.png" width="32"/>
         </LeftNavButton>
         <RightNavButton formFactor="tablet" platform="ios">
             <ButtonBar onClick="doChooseAccount">
@@ -22,7 +25,7 @@
             <MenuItem id="menuItemWebsite" onClick="doChooseWebsite" />
             <MenuItem id="menuItemRefresh" onClick="doRefresh" />
             <MenuItem id="menuItemAccount" onClick="doChooseAccount" />
-            <MenuItem id="menuItemSetting" onClick="doChooseWebsite" />
+            <MenuItem id="menuItemSetting" onClick="doOpenSettings" />
         </Menu>
         
         <View id="loading"><Label id="loadingLabel"></Label></View>
