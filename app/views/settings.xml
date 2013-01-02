@@ -12,10 +12,4 @@
             <TableViewRow id="faq" onClick="doOpenFaq"/>
         </TableView>
     </Window>
-<TableView>
-    <TableViewRow title="1"/>
-    <TableViewRow title="2"/>
-    <Require type="widget" src="org.piwik.tableviewrow" title="test" description="test2" id="sfb"/>
-    <TableViewRow title="3"/>
-</TableView>
 </Alloy>

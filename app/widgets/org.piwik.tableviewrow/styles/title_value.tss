@@ -1,0 +1,42 @@
+"TableViewRow": {
+    height: Ti.UI.SIZE,
+},
+
+"#title": {
+    textAlign: 'left',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+    left: 10,
+    color: '#333333',
+    ellipsize: true,
+    wordWrap: false,
+    font: {fontSize: 18, fontWeight: 'bold'},
+    top: 11,
+    touchEnabled: false
+},
+
+"#title[platform=android]": {
+    left: '16dp',
+    right: '16dp',
+    top: '10dp',
+    font: {fontSize: '16sp', fontWeight: 'normal'},
+    zIndex: 2
+},
+
+"#value": {
+    right: 10,
+    font: {fontSize: 18},
+    textAlign: 'right',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+    color: '#385487',
+    touchEnabled: false
+},
+
+"#value[platform=android]": {
+    right: '16dp',
+    font: {fontSize: '16sp', fontWeight: 'normal'},
+    color: '#0099CC',
+    backgroundColor: 'white',
+    zIndex: 5
+}

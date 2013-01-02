@@ -1,3 +1,7 @@
+"TableViewRow": {
+    height: Ti.UI.SIZE;
+},
+
 "#row": {
     layout: 'vertical'
 },
