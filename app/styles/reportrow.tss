@@ -10,29 +10,41 @@
 },
 
 "#title": {
-    top: 10,
+    height: Ti.UI.SIZE,
     left: 10,
-    right: 80
+    right: 95,
+    color: '#333333',
+    top: 13,
+    bottom: 10,
+    font: {fontSize: 16}
 },
 
 "#title[platform=android]": {
+    left: '16dp',
+    right: '100dp',
+    color: '#333333',
     top: '10dp',
-    left: '10dp',
-    right: '80dp'
+    bottom: '10dp',
+    font: {fontSize: '16sp'}
 },
 
 "#value": {
-    top: 10,
-    right: 10,
-    width: 70,
-    color: "blue",
-    textAlign: "right"
+    height: Ti.UI.SIZE,
+    right: 3,
+    width: 87,
+    top: 13,
+    bottom: 10,
+    font: {fontSize: 16, fontWeight: 'bold'},
+    color: '#385487'
 },
 
 "#value[platform=android]": {
+    right: '16dp',
+    width: '75dp',
+    color: '#0099CC',
     top: '10dp',
-    right: '10dp',
-    width: '70dp'
+    bottom: '10dp',
+    font: {fontSize: '16sp', fontWeight: 'bold'}
 },
 
 ".separator": {
