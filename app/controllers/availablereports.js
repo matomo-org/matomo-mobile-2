@@ -37,8 +37,9 @@ function updateAvailableReportsList()
         currentSection = report.get('category');
 
         if (currentSection && currentSection !== latestSection) {
-            section = Ti.UI.createTableViewSection({headerTitle: String(currentSection)});
-            rows.push(section);
+
+            section = Alloy.createWidget('org.piwik.tableviewsection', null, {title: String(currentSection)});
+            rows.push(section.getSection());
             section = null;
         }
 

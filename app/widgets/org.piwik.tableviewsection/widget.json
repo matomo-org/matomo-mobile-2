@@ -1,0 +1,13 @@
+{
+	"id": "org.piwik.tableviewsection",
+	"name": "org.piwik.tableviewsection",
+	"description" : "",
+	"author": "",
+	"version": "1.0",
+	"copyright":"Piwik Web Analytics (c) 2013",
+	"license":"http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"3.0",
+	"tags":"",
+	"platforms":"android,ios,mobileweb"
+}

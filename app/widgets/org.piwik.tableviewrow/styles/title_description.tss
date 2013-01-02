@@ -1,0 +1,49 @@
+"#row": {
+    layout: 'vertical'
+},
+
+"#title": {
+    textAlign: 'left',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+    left: 10,
+    color: '#333333',
+    ellipsize: true,
+    wordWrap: false,
+    font: {fontSize: 18, fontWeight: 'bold'},
+    top: 11,
+    touchEnabled: false,
+},
+
+"#title[platform=android]": {
+    left: '16dp',
+    right: '16dp',
+    top: '10dp',
+    font: {fontSize: '16sp', fontWeight: 'normal'},
+    zIndex: 2,
+},
+
+"#description": {
+    font: {fontSize: 13},
+    textAlign: 'left',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+    left: 10,
+    top: 4,
+    bottom: 11,
+    color: '#808080',
+    ellipsize: true,
+    wordWrap: false,
+    touchEnabled: false,
+},
+
+"#description[platform=android]": {
+    font: {fontSize: '12sp'},
+    left: '16dp',
+    right: '16dp',
+    top: '4dp',
+    bottom: '10dp',
+    ellipsize: false,
+    wordWrap: true,
+    zIndex: 3,
+}

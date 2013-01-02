@@ -1,0 +1,19 @@
+"#index": {
+    className: "tableViewSection",
+    backgroundColor: '#B5B0A7',
+    selectedBackgroundColor: '#B5B0A7',
+    height: '24dp',
+    focusable: false,
+    left: 0,
+    width: '100%'
+},
+
+"#title": {
+    textAlign: 'left',
+    color: '#ffffff',
+    left: '16dp',
+    right: '16dp',
+    font: {fontSize: '14sp', fontWeight: 'bold'},
+    ellipsize: true,
+    wordWrap: false
+}

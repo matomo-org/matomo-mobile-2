@@ -25,31 +25,66 @@ function versionInfo()
                          '' + Ti.buildHash);
 }
 
+function doSendEmailFeedback()
+{
+    require('commands/sendEmailFeedback').execute();
+}
+
+function doRateApp()
+{
+    require('commands/rateApp').execute();
+}
+
+function doParticipate()
+{
+    require('commands/openLink').execute('http://piwik.org/contribute/');
+}
+
+function createRow(params)
+{
+    return Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
+}
+
+function createSection(params)
+{
+    return Alloy.createWidget('org.piwik.tableviewsection', null, params).getSection();
+}
+
 function render()
 {
     var rows = [];
-    /*
-    rows.push(this.create('TableViewRow', {title: 'Email us', 
-                                           description: 'Send us fedback, report a bug or a feature wish.', 
-                                           command: this.createCommand('SendFeedbackCommand')}));
+
+    var row = createRow({
+        title: 'Email Us', 
+        description: 'Send us fedback, report a bug or a feature wish.'
+    });
+    row.on('click', doSendEmailFeedback);
+    rows.push(row);
 
     var appRating = new (require('Piwik/App/Rating'));
     if (appRating.canRate()) {
-        rows.push(this.create('TableViewRow', {title: 'Rate us on the App Store', 
-                                               description: 'Piwik Mobile App is a Free Software, we would really appreciate if you took 1 minute to rate us.', 
-                                               command: this.createCommand('RateAppCommand')}));
+        row = createRow({
+            title: 'Rate us on the App Store', 
+            description: 'Piwik Mobile App is a Free Software, we would really appreciate if you took 1 minute to rate us.'
+        });
+        row.on('click', doRateApp);
+        rows.push(row);
     }
 
-    rows.push(this.create('TableViewRow', {title: 'Learn how you can participate', 
-                                           description: 'Piwik is a project made by the community, you can participate in the Piwik Mobile App or Piwik.',
-                                           command: this.createCommand('OpenLinkCommand', {link: 'http://piwik.org/contribute/'})}));
-                                                     
-    rows.push(this.create('TableViewSection', {title: 'About', style: 'native'}));
-    rows.push(this.create('TableViewRow', {title: 'Version', description: versionInfo()}));
-    rows.push(this.create('TableViewRow', {title: 'Platform', description: platformInfo()}));
-*/
+    row = createRow({
+        title: 'Learn how you can participate', 
+        description: 'Piwik is a project made by the community, you can participate in the Piwik Mobile App or Piwik.'
+    });
+    row.on('click', doParticipate)
+    rows.push(row);
+
+    rows.push(createSection({title: 'About', style: 'native'}));
+    rows.push(createRow({title: 'Version', description: versionInfo()}));
+    rows.push(createRow({title: 'Platform', description: platformInfo()}));
+
     $.feedbackTable.setData(rows);
     rows = null;
+    row  = null;
 }
 
 exports.open = function () {

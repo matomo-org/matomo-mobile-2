@@ -1,0 +1,15 @@
+<Alloy>
+    <!-- Should Be: 
+        <TableViewSection id="index">
+        <HeaderView class="headerView">
+            <Label id="title" />
+        </HeaderView>
+    </TableViewSection>
+    Use this markup as soon it is supported by Alloy
+     -->
+    <TableViewRow id="index">
+        <View class="headerView">
+            <Label id="title" />
+        </View>
+    </TableViewRow>
+</Alloy>

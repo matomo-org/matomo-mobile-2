@@ -1,15 +1,15 @@
 {
-	"global": {
+    "global": {
         "piwik": {
-            "preferredMetrics": ["nb_hits", "nb_visits", "nb_pageviews", "nb_uniq_pageviews", "nb_actions", "nb_conversions", "revenue"],
+            "preferredMetrics": [ "nb_hits", "nb_visits", "nb_pageviews", "nb_uniq_pageviews", "nb_actions", "nb_conversions", "revenue" ],
             "filterLimit": 30,
             "latestServerVersion": "1.9.2",
             "numDisplayedWebsites": 50,
             "graph": {
-                  "fontSize": 9,
-                  "showMetricTitle": 0,
-                  "aliasedGraph": 1,
-                  "legendAppendMetric": 0
+                "fontSize": 9,
+                "showMetricTitle": 0,
+                "aliasedGraph": 1,
+                "legendAppendMetric": 0
             }
         },
         "account": {
@@ -21,13 +21,16 @@
             "trackingEnabled": false,
             "preferEvolutionGraphs": false,
             "graphsEnabled": true,
-            "httpTimeout": 60000
+            "httpTimeout": 6e4
         }
     },
-	"env:development": {}, 
-	"env:test": {}, 
-	"env:production": {}, 
-	"os:ios": {}, 
-	"os:android": {}, 
-	"dependencies": {}
+    "env:development": {},
+    "env:test": {},
+    "env:production": {},
+    "os:ios": {},
+    "os:android": {},
+    "dependencies": {
+        "org.piwik.tableviewrow": "1.0",
+        "org.piwik.tableviewsection": "1.0"
+    }
 }
