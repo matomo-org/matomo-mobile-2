@@ -15,6 +15,8 @@ if (OS_IOS) {
 
 function render(account, counter30Min, counter24Hours, visitorDetails)
 {
+    showReportContent();
+
     var rows = [];
 
     counter30Min.title = String.format(L('Live_LastMinutes'), '30');
@@ -35,6 +37,24 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
     rows = null;
 }
 
+function showReportContent()
+{
+    if (OS_IOS) {
+        $.pullToRefresh.refreshDone();
+    } else {
+        $.loadingindicator.hide();
+    }
+}
+
+function showLoadingMessage()
+{
+    if (OS_IOS) {
+        $.pullToRefresh.refresh();
+    } else {
+        $.loadingindicator.show();
+    }
+}
+
 function onFetchError()
 {
     console.log('error fetching data');
@@ -42,6 +62,7 @@ function onFetchError()
 
 function doRefresh()
 {
+    showLoadingMessage();
     piwikLiveVisitors.fetchVisitors(accountModel, siteModel.id, render, onFetchError);
 }
 

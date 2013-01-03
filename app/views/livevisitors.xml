@@ -1,9 +1,13 @@
 <Alloy>
-	<View id="index">
-        <TableView id="liveTable">
-            <HeaderPullView platform="ios">
-                <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
-            </HeaderPullView>
-        </TableView>
-	</View>
+    <View id="index">
+        <Require src="loadingindicator" id="loadingindicator"/>
+
+        <View id="content">
+            <TableView id="liveTable">
+                <HeaderPullView platform="ios">
+                    <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
+                </HeaderPullView>
+            </TableView>
+        </View>
+    </View>
 </Alloy>

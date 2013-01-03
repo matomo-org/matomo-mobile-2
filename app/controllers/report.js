@@ -21,7 +21,7 @@ function showReportContent()
     if (OS_IOS) {
         $.pullToRefresh.refreshDone();
     } else {
-        $.loading.hide();
+        $.loadingindicator.hide();
     }
 
 }
@@ -31,7 +31,7 @@ function showLoadingMessage()
     if (OS_IOS) {
         $.pullToRefresh.refresh();
     } else {
-        $.loading.show();
+        $.loadingindicator.show();
     }
 }
 

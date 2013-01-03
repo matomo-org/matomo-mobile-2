@@ -1,0 +1,3 @@
+<Alloy>
+    <View id="loading"><Label id="loadingLabel"></Label></View>
+</Alloy>

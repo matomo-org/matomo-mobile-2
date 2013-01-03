@@ -1,6 +1,6 @@
 <Alloy>
     <View id="index">
-        <View id="loading"><Label id="loadingLabel"></Label></View>
+        <Require src="loadingindicator" id="loadingindicator"/>
 
         <View id="content">
             <TableView id="reportTable" class="container">
