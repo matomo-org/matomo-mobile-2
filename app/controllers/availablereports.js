@@ -27,7 +27,10 @@ function updateAvailableReportsList()
     var currentSection = null;
     var latestSection  = null;
 
-    reportsCollection.map(function (report) 
+    rows.push(Ti.UI.createTableViewRow({title: L('Live_VisitorsInRealTime'), cid: 'live', hasChild: true, ellipsize: false, wordWrap: true}));
+    rows.push(Ti.UI.createTableViewRow({title: L('Live_VisitorLog'), cid: 'visitorlog', hasChild: true, ellipsize: false, wordWrap: true}));
+
+    reportsCollection.forEach(function (report) 
     {
         if ('MultiSites_getOne' == report.get('uniqueId')) {
             // we do not display this report
@@ -46,7 +49,7 @@ function updateAvailableReportsList()
         latestSection  = currentSection;
 
         var reportName = report.get('name');
-        rows.push(Ti.UI.createTableViewRow({title: reportName, cid: report.cid}));
+        rows.push(Ti.UI.createTableViewRow({title: reportName, cid: report.cid, hasChild: true, ellipsize: false, wordWrap: true}));
     });
 
     $.reportsTable.setData(rows);
@@ -55,10 +58,16 @@ function updateAvailableReportsList()
 
 function doSelectReport(event) 
 {
-    var cid    = event.rowData.cid;
-    var report = reportsCollection.getByCid(cid);
+    var cid = event.rowData.cid;
 
-    $.trigger('reportChosen', report);
+    if ('live' == cid) {
+        $.trigger('liveVisitorsChosen');
+    } else if ('visitorlog' == cid) {
+        $.trigger('visitorLogChosen');
+    }  else {
+        var report = reportsCollection.getByCid(cid);
+        $.trigger('reportChosen', report);
+    }
 
     if (closeOnSelect) {
         close();

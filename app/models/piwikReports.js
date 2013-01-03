@@ -55,7 +55,7 @@ exports.definition = {
 			    }
 			    
 			    return sortOrder;
-			},
+			}
 			// extended functions go here
 
 		}); // end extend

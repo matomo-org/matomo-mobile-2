@@ -1,0 +1,9 @@
+<Alloy>
+	<View id="index">
+        <TableView id="liveTable">
+            <HeaderPullView platform="ios">
+                <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
+            </HeaderPullView>
+        </TableView>
+	</View>
+</Alloy>

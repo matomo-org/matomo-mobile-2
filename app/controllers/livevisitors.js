@@ -1,0 +1,48 @@
+function L(key)
+{
+    return require('L')(key);
+}
+
+var args = arguments[0] || {};
+var accountModel = args.account;
+var siteModel = args.site;
+
+var piwikLiveVisitors = Alloy.createCollection('piwikLiveVisitors');
+
+if (OS_IOS) {
+    $.pullToRefresh.init($.liveTable);
+}
+
+function render(account, counter30Min, counter24Hours, visitorDetails)
+{
+    var rows = [];
+
+    counter30Min.title = String.format(L('Live_LastMinutes'), '30');
+    var last30minutes = Alloy.createController('livecounter', counter30Min);
+    rows.push(last30minutes.getView());
+
+    counter24Hours.title = String.format(L('Live_LastHours'), '24');
+    var last24hours = Alloy.createController('livecounter', counter24Hours);
+    rows.push(last24hours.getView());
+
+    _.forEach(visitorDetails, function (visitorDetail) {
+        var params = {account: account, visitor: visitorDetail};
+        var visitorOverview = Alloy.createController('visitoroverview', params);
+        rows.push(visitorOverview.getView());
+    });
+
+    $.liveTable.setData(rows);
+    rows = null;
+}
+
+function onFetchError()
+{
+    console.log('error fetching data');
+}
+
+function doRefresh()
+{
+    piwikLiveVisitors.fetchVisitors(accountModel, siteModel.id, render, onFetchError);
+}
+
+exports.refresh = doRefresh;

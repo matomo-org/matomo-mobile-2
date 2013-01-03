@@ -1,11 +1,13 @@
 <Alloy>
     <Window title="" id="index" onClose="onClose">
+        
         <LeftNavButton platform="mobileweb">
             <Button onClick="doOpenSettings" image="ic_action_settings.png" width="32"/>
         </LeftNavButton>
         <LeftNavButton formFactor="handheld" platform="ios">
             <Button onClick="doOpenSettings" image="ic_action_settings.png" width="32"/>
         </LeftNavButton>
+
         <RightNavButton formFactor="tablet" platform="ios">
             <ButtonBar onClick="doChooseAccount">
                 <Labels>
@@ -21,6 +23,7 @@
         <RightNavButton platform="mobileweb">
             <Button id="websitesButton" onClick="doChooseWebsite"/>
         </RightNavButton>
+
         <Menu id="menu" platform="android">
             <MenuItem id="menuItemWebsite" onClick="doChooseWebsite" />
             <MenuItem id="menuItemRefresh" onClick="doRefresh" />
@@ -28,8 +31,6 @@
             <MenuItem id="menuItemSetting" onClick="doOpenSettings" />
         </Menu>
         
-        <View id="loading"><Label id="loadingLabel"></Label></View>
-
         <View id="content">
             <Require src="reportmenu" 
                      onChooseReport="doChooseReport" 
@@ -38,23 +39,6 @@
                      onFlatten="doFlatten" 
                      id="reportMenuCtrl"/>
             <View class="menuSeparatorShadow"/>
-            <TableView id="reportTable" class="container">
-                <HeaderPullView platform="ios">
-                    <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
-                </HeaderPullView>
-                <TableViewRow>
-                    <Require src="reportinfo" id="reportInfoCtrl"/>
-                </TableViewRow>
-                <TableViewRow>
-                    <Require src="reportgraph" id="reportGraphCtrl"/>
-                </TableViewRow>
-                <TableViewRow>
-                    <View id="reportRowSeparator" class="reportRowSeparator">
-                        <View class="space"></View>
-                        <View class="shadow"></View>
-                    </View>
-                </TableViewRow>
-            </TableView>
         </View>
     </Window>
 </Alloy>

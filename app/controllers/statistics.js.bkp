@@ -18,7 +18,6 @@ var reportModel        = null;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.createModel('piwikProcessedReport');
 
-var displayedController = null;
 
 var reportListController = Alloy.createController('availablereports', {reports: reportsCollection,
                                                                        site: siteModel,
@@ -28,6 +27,10 @@ var currentMetric = null;
 var flatten       = 0;
 
 $.index.setTitle(siteModel.getName());
+
+if (OS_IOS) {
+    $.pullToRefresh.init($.reportTable);
+}
 
 function doChooseAccount()
 {
@@ -73,7 +76,7 @@ function doChooseDate ()
 function doFlatten () 
 {
     flatten = 1;
-    refreshReport();
+    doRefresh();
     flatten = 0;
 }
 
@@ -82,65 +85,28 @@ function onClose()
     $.destroy();
 }
 
-function clearContent()
-{
-    if (displayedController) {
-        $.content.remove(displayedController.getView());
-        displayedController.destroy();
-        displayedController = null;
-    }
-}
-
-function displayContent(controller)
-{
-    clearContent();
-
-    displayedController = controller;
-    $.content.add(displayedController.getView());
-}
-
 function onReportChosen (chosenReportModel) {
     reportModel   = chosenReportModel;
     currentMetric = null;
-
-    refreshReport();
-}
-
-function refreshReport()
-{
-    var params = {
-        account: accountModel, 
-        site: siteModel, 
-        metric: currentMetric, 
-        report: reportModel,
-        statistics: statisticsModel
-    };
-
-    var live = Alloy.createController('report', params);
-    displayContent(live);
-    live.refresh();
+    doRefresh();
 }
 
 function onLiveVisitorsChosen()
 {
     var params = {account: accountModel, site: siteModel};
     var live   = Alloy.createController('livevisitors', params);
-    displayContent(live);
-    live.refresh();
+    live.open();
 }
 
 function onVisitorLogChosen()
 {
-    var params = {account: accountModel, site: siteModel};
-    var live   = Alloy.createController('livevisitors', params);
-    displayContent(live);
-    live.refresh();
+    alert('show visitor log');
 }
 
 function onMetricChosen(chosenMetric)
 {
     currentMetric = chosenMetric;
-    refreshReport();
+    doRefresh();
 }
 
 function onReportListFetched(reportsCollection)
@@ -150,7 +116,7 @@ function onReportListFetched(reportsCollection)
         reportModel = reportsCollection.getEntryReport();
     }
 
-    onReportChosen(reportModel);
+    doRefresh();
 }
 
 function onWebsiteChosen(event)
@@ -179,6 +145,8 @@ function fetchListOfAvailableReports()
 
 function onAccountChosen(account)
 {
+    showLoadingMessage();
+
     accountModel            = account;
     var entrySiteCollection = Alloy.createCollection('piwikWebsites');
     //TODO either display ALL WEBSITES DASHBOARD OR CHOOSE CORRECT WEBSITE
@@ -192,15 +160,96 @@ function onAccountChosen(account)
     });
 }
 
+var reportRowsCtrl = null;
+function onStatisticsFetched(processedReportModel)
+{
+    showReportContent();
+
+    $.reportTable.setData([]);
+
+    $.reportInfoCtrl.update(processedReportModel);
+    $.reportGraphCtrl.update(processedReportModel, accountModel);
+
+    var rows = [];
+
+    var row = Ti.UI.createTableViewRow();
+    row.add($.reportInfoCtrl.getView());
+    rows.push(row);
+
+    var row = Ti.UI.createTableViewRow();
+    row.add($.reportGraphCtrl.getView());
+    rows.push(row);
+
+    var row = Ti.UI.createTableViewRow();
+    row.add($.reportRowSeparator);
+    rows.push(row);
+
+    if (reportRowsCtrl) {
+        reportRowsCtrl.destroy();
+    }
+    
+    _.each(processedReportModel.getRows(), function (report) {
+        var reportRow = Alloy.createController('reportrow', report);
+        var row = Ti.UI.createTableViewRow();
+        row.add(reportRow.getView());
+        rows.push(row);
+        row = null;
+    });
+
+    $.reportTable.setData(rows);
+    row  = null;
+    rows = null;
+}
+
+function showReportContent()
+{
+    if (OS_IOS) {
+        $.pullToRefresh.refreshDone();
+    } else {
+        $.loading.hide();
+    }
+
+}
+
+function showLoadingMessage()
+{
+    if (OS_IOS) {
+        $.pullToRefresh.refresh();
+    } else {
+        $.loading.show();
+    }
+}
+
 function doRefresh() 
 {
-    if (displayContent && displayContent.refresh) {
-        displayContent.refresh();
-    }
+    showLoadingMessage();
+
+    var module = reportModel.get('module');
+    var action = reportModel.get('action');
+    var metric = reportModel.getSortOrder(currentMetric);
+
+    statisticsModel.setSortOrder(metric);
+    
+    statisticsModel.fetch({
+        account: accountModel,
+        params: {period: 'day', 
+                 date: 'today', 
+                 idSite: siteModel.id, 
+                 flat: flatten,
+                 sortOrderColumn: metric,
+                 filter_sort_column: metric,
+                 apiModule: module, 
+                 apiAction: action},
+        error: function () {
+            statisticsModel.trigger('error', {type: 'loadingProcessedReport'});
+        },
+        success: onStatisticsFetched
+    });
 }
 
 statisticsModel.on('error', function () {
     // TODO what should we do in this case?
+    showReportContent();
 });
 
 reportListController.on('reportChosen', onReportChosen);

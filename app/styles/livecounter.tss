@@ -1,0 +1,45 @@
+"TableViewRow": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
+},
+
+".container": {
+    layout: 'vertical',
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL
+},
+
+"#title": {
+    left: 10,
+    top: 8,
+    bottom: 0,
+    color: '#000000',
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    font: {fontSize: 14}
+},
+
+"#title[platform=android]": {
+    left: '16dp',
+    top: '8dp',
+    font: {fontSize: '14sp'}
+},
+
+"#counter": {
+    bottom: 8,
+    left: 10,
+    top: 3,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    color: '#385487',
+    font: {fontSize: 18}
+},
+
+"#counter[platform=android]": {
+    left: '16dp',
+    top: '3dp',
+    bottom: '8dp',
+    color: '#0099CC',
+    font: {fontSize: '18sp'}
+}

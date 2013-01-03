@@ -6,35 +6,6 @@
     fullscreen: false
 },
 
-"#loading": {
-    height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
-    visible: true,
-    backgroundColor: 'white',
-    zIndex: 5
-},
-
-"#loading[platform=ios]": {
-    visible: false
-},
-
-"#loadingLabel": {
-    top: 16,
-    bottom: 16,
-    left: 16,
-    right: 16,
-    height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
-    text: L('General_LoadingData')
-},
-
-"#loadingLabel[platform=android]": {
-    top: '16dp',
-    bottom: '16dp',
-    left: '16dp',
-    right: '16dp'
-},
-
 "MenuItem[platform=android]": {
     showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM,
 },
@@ -62,27 +33,16 @@
     width: 32
 },
 
-".container[platform=ios]": {
-    separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
-},
-
 "#content": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,
     backgroundColor: 'white',
+    layout: 'vertical',
     zIndex: 3
 },
 
-"#reportTable": {
-    top: 68
-},
-
-"#reportTable[platform=android]": {
-    top: '68dp'
-},
-
 ".menuSeparatorShadow": {
-    top: 60,
+    top: 0,
     height: 8,
     backgroundImage: 'separator.png'
 },
@@ -91,35 +51,4 @@
     top: '60dp',
     height: '8dp',
     backgroundImage: '/separator.png'
-},
-
-"TableViewRow": {
-    height: Ti.UI.SIZE
-},
-
-"TableViewRow[platform=ios]": {
-    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
-},
-
-".reportRowSeparator": {
-     layout: "vertical",
-     height: Ti.UI.SIZE
-},
-
-".space": {
-    height: 10
-},
-
-".space[platform=android]": {
-    height: '10dp'
-},
-
-".shadow": {
-    height: 4,
-    backgroundImage: "separator2.png"
-},
-
-".shadow[platform=android]": {
-    height: '4dp',
-    backgroundImage: "/separator2.png"
 }

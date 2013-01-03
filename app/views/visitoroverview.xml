@@ -1,0 +1,13 @@
+<Alloy>
+	<TableViewRow id="index">
+        <View class="dateContainer">
+            <Label id="visittime"/>
+            <ImageView id="countryFlag" class="firstIcon"/>
+            <ImageView id="browserIcon" class="followingIcon"/>
+            <ImageView id="operatingSystemIcon" class="followingIcon"/>
+        </View>
+        <Label id="referrer" class="visitorInfo"/>
+        <Label id="goalConversions" class="visitorInfo"/>
+        <Label id="pageViews" class="visitorInfo"/>
+	</TableViewRow>
+</Alloy>

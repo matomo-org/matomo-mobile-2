@@ -1,0 +1,25 @@
+<Alloy>
+    <View id="index">
+        <View id="loading"><Label id="loadingLabel"></Label></View>
+
+        <View id="content">
+            <TableView id="reportTable" class="container">
+                <HeaderPullView platform="ios">
+                    <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
+                </HeaderPullView>
+                <TableViewRow>
+                    <Require src="reportinfo" id="reportInfoCtrl"/>
+                </TableViewRow>
+                <TableViewRow>
+                    <Require src="reportgraph" id="reportGraphCtrl"/>
+                </TableViewRow>
+                <TableViewRow>
+                    <View id="reportRowSeparator" class="reportRowSeparator">
+                        <View class="space"></View>
+                        <View class="shadow"></View>
+                    </View>
+                </TableViewRow>
+            </TableView>
+        </View>
+    </View>
+</Alloy>
