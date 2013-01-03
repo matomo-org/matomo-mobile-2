@@ -132,7 +132,7 @@ function onLiveVisitorsChosen()
 function onVisitorLogChosen()
 {
     var params = {account: accountModel, site: siteModel};
-    var live   = Alloy.createController('livevisitors', params);
+    var live   = Alloy.createController('visitorlog', params);
     displayContent(live);
     live.refresh();
 }

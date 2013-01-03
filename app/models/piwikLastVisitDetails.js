@@ -14,8 +14,9 @@ exports.definition = {
             "cache": false
         },
         "defaultParams": {
-            showSubtableReports: 0,
-            hideMetricsDoc: 1, 
+            filter_limit: 10,
+            period: "day", 
+            date: "today"
         }
     },      
 
@@ -32,6 +33,47 @@ exports.definition = {
     
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
+
+            parseDate: function (date) {
+
+                if (date) {
+                    date = '' + date;
+                    var positionComma = date.indexOf(',');
+                    
+                    // API does not support date range format 'YYYY-MM-DD,YYYY-MM-DD'.
+                    if (-1 !== date.indexOf(',')) {
+                        date = date.substr(0, positionComma);
+                    }
+                }
+
+                return date;
+            },
+
+            initial: function (account, idSite, date) {
+                this.fetch({
+                    account: account,
+                    params: {filter_limit: 10, 
+                             date: this.parseDate(date)}
+                });
+            },
+
+            previous: function (account, idSite) {
+                this.fetch({
+                    account: account,
+                    params: {maxIdVisit: this.maxIdVisit,
+                             filter_limit: Alloy.CFG.piwik.filterLimit, 
+                             date: this.parseDate(date)}
+                });
+            },
+
+            next: function (account, idSite) {
+                this.fetch({
+                    account: account,
+                    params: {minTimestamp: this.minTimestamp,
+                             filter_limit: Alloy.CFG.piwik.filterLimit, 
+                             date: this.parseDate(date)}
+                });
+            }
             
             // extended functions go here           
             

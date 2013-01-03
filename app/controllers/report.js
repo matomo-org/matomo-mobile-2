@@ -20,19 +20,18 @@ function showReportContent()
 {
     if (OS_IOS) {
         $.pullToRefresh.refreshDone();
-    } else {
-        $.loadingindicator.hide();
-    }
+    } 
 
+    $.loadingindicator.hide();
 }
 
 function showLoadingMessage()
 {
     if (OS_IOS) {
         $.pullToRefresh.refresh();
-    } else {
-        $.loadingindicator.show();
     }
+    
+    $.loadingindicator.show();
 }
 
 function onStatisticsFetched(processedReportModel)

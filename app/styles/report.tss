@@ -6,35 +6,6 @@
     separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
 },
 
-"#loading": {
-    height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
-    visible: true,
-    backgroundColor: 'white',
-    zIndex: 5
-},
-
-"#loading[platform=ios]": {
-    visible: false
-},
-
-"#loadingLabel": {
-    top: 16,
-    bottom: 16,
-    left: 16,
-    right: 16,
-    height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
-    text: L('General_LoadingData')
-},
-
-"#loadingLabel[platform=android]": {
-    top: '16dp',
-    bottom: '16dp',
-    left: '16dp',
-    right: '16dp'
-},
-
 "#index": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,
