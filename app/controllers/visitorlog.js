@@ -8,9 +8,20 @@ var accountModel = args.account;
 var siteModel = args.site;
 
 var visitorLog = Alloy.createCollection('piwikLastVisitDetails');
+visitorLog.on('fetch', render);
 
 if (OS_IOS) {
-    $.pullToRefresh.init($.liveTable);
+    $.pullToRefresh.init($.visitorLogTable);
+}
+
+function onFetchPrevious()
+{
+    visitorLog.previous(account, siteModel.id);
+}
+
+function onFetchNext()
+{
+    visitorLog.next(account, siteModel.id);
 }
 
 function render(account, counter30Min, counter24Hours, visitorDetails)
@@ -19,25 +30,21 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
 
     var rows = [];
 
-    var row = Ti.UI.createTableViewRow({title: _('General_Next')});
-    row.addEventListener('next', function () {
-        visitorLog.previous();
-    })
+    var row = Ti.UI.createTableViewRow({title: L('General_Next')});
+    row.addEventListener('next', onFetchNext)
     rows.push(row);
 
-    _.forEach(visitorDetails, function (visitorDetail) {
+    visitorLog.forEach(function (visitorDetail) {
         var params = {account: account, visitor: visitorDetail};
         var visitorOverview = Alloy.createController('visitoroverview', params);
         rows.push(visitorOverview.getView());
     });
 
-    var row = Ti.UI.createTableViewRow({title: _('General_Previous')});
-    row.addEventListener('click', function () {
-        visitorLog.previous();
-    });
+    var row = Ti.UI.createTableViewRow({title: L('General_Previous')});
+    row.addEventListener('click', onFetchPrevious);
     rows.push(row);
 
-    $.liveTable.setData(rows);
+    $.visitorLogTable.setData(rows);
     rows = null;
 }
 
@@ -67,7 +74,7 @@ function onFetchError()
 function doRefresh()
 {
     showLoadingMessage();
-    piwikLiveVisitors.initial(accountModel, siteModel.id, 'today', render, onFetchError);
+    visitorLog.initial(accountModel, siteModel.id, 'today');
 }
 
 exports.refresh = doRefresh;

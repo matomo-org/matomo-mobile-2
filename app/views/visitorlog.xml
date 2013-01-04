@@ -3,7 +3,7 @@
         <Require src="loadingindicator" id="loadingindicator"/>
 
         <View id="content">
-            <TableView id="liveTable">
+            <TableView id="visitorLogTable">
                 <HeaderPullView platform="ios">
                     <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>

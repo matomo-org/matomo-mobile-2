@@ -53,6 +53,7 @@ exports.definition = {
                 this.fetch({
                     account: account,
                     params: {filter_limit: 10, 
+                             idSite: idSite,
                              date: this.parseDate(date)}
                 });
             },
@@ -61,6 +62,7 @@ exports.definition = {
                 this.fetch({
                     account: account,
                     params: {maxIdVisit: this.maxIdVisit,
+                             idSite: idSite,
                              filter_limit: Alloy.CFG.piwik.filterLimit, 
                              date: this.parseDate(date)}
                 });
@@ -70,6 +72,7 @@ exports.definition = {
                 this.fetch({
                     account: account,
                     params: {minTimestamp: this.minTimestamp,
+                             idSite: idSite,
                              filter_limit: Alloy.CFG.piwik.filterLimit, 
                              date: this.parseDate(date)}
                 });
