@@ -201,7 +201,9 @@ HttpRequest.prototype.handle = function () {
 
     var requestUrl  = '';
 
-    var encode = Ti.Network.encodeURIComponent;
+    var encode = function (param) {
+        return Ti.Network.encodeURIComponent(param);
+    };
     
     if (parameter) {
         
