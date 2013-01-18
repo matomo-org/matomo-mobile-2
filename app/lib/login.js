@@ -1,41 +1,52 @@
+var L     = require('L');
 var Alloy = require('alloy');
+
+function onError (accountModel, error) {
+
+    var message = '';
+    switch (error) {
+        case 'MissingUsername':
+            message = String.format(L('General_Required'), L('Login_Login'));
+            break;
+        case 'MissingPassword':
+            message = String.format(L('General_Required'), L('Login_Password'));
+            break;
+        case 'InvalidUrl':
+            var url = '' + accountModel.get('url');
+            message = String.format(L('SitesManager_ExceptionInvalidUrl'), url);
+            break;
+        case 'ReceiveAuthTokenError':
+            message = L('Mobile_SaveSuccessError');
+            break;
+        case 'NoViewAccess':
+            message = String.format(L('General_ExceptionPrivilegeAtLeastOneWebsite'), L('UsersManager_PrivView'));
+            break;
+        default:
+            message = L('An unknown error has occured:\n' + error);
+    }
+
+     var alertDialog = Ti.UI.createAlertDialog({
+        title: L('General_Error'),
+        message: message,
+        buttonNames: [L('General_Ok')]
+    });
+
+    alertDialog.show();
+}
 
 exports.login = function(accounts, url, username, password)
 {
-    var account = Alloy.createModel('AppAccounts', {
+    var account = Alloy.createModel('AppAccounts');
+    account.on('error', onError);
+    
+    account.set({
         accessUrl: url,
         username: username,
         password: password,
         name: url
     });
 
-    account.on('error', function (error) {
-        console.log(error);
-        switch (error) {
-            case 'MissingUsername':
-            	alert('Missing Username');
-                break;
-            case 'MissingPassword':
-            	allert('Missing Password');
-                break;
-            case 'InvalidUrl':
-                alert('Invalid Url');
-                break;
-            case 'ReceiveAuthTokenError':
-            	alert('Recieve Auth Token Error');
-                break;
-            case 'NoViewAccess':
-            	alert('No View Access');
-                break;
-            default:
-            	allert('An unknown error has occured:\n' + error)
-                return;
-        }
-        // output message
-    });
-
     if (!account.isValid()) {
-        alert('URL must not be empty!\nfoo\nbar');
         return;
     }
 
