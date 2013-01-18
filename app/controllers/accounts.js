@@ -44,9 +44,9 @@ function doDeleteAccount(event)
 
 function doSelectAction(event)
 {
-    var dialog = Ti.UI.createOptionDialog({
+    var dialog = Ti.UI.createAlertDialog({
         cancel: 1,
-        options: [L('General_Remove'), L('General_No')],
+        buttonNames: [L('General_Yes'), L('General_No')],
         selectedIndex: 1,
         destructive: 0,
         title: L('Mobile_ConfirmRemoveAccount')
