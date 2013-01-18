@@ -48,7 +48,7 @@
 },
 
 ".menuSeparatorShadow[platform=android]": {
-    top: '60dp',
+    top: '0dp',
     height: '8dp',
     backgroundImage: '/separator.png'
 }
