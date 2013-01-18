@@ -28,9 +28,9 @@ function appendSlashIfNecessary(accessUrl)
 
 function startsWithHttp(accessUrl)
 {
-    var last4Chars = accessUrl.substr(0, 4);
+    var first4Chars = accessUrl.substr(0, 4);
 
-    return ('http' === last4Chars.toLowerCase());
+    return ('http' === first4Chars.toLowerCase());
 }
 
 function endsWithPhp(accessUrl)
@@ -127,15 +127,20 @@ exports.definition = {
                 accountModel.set({accessUrl: accessUrl}, {silent: true});
             },
             
-            validate: function () {
-                if (this.get('username') && !this.get('password')) {
+            validate: function (attrs) {
+
+                if (!attrs) {
+                    return 'Unknown';
+                }
+                
+                if (attrs.username && !attrs.password) {
                     return 'MissingPassword';
 
-                } else if (!this.get('username') && this.get('password')) {
+                } else if (!attrs.username && attrs.password) {
                     return 'MissingUsername';
                 }
                 
-                var accessUrl = this.get('accessUrl');
+                var accessUrl = attrs.accessUrl;
 
                 if (!accessUrl || !startsWithHttp(accessUrl)) {
             

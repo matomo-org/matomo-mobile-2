@@ -1,6 +1,8 @@
 var L     = require('L');
 var Alloy = require('alloy');
 
+var accessUrl = null;
+
 function onError (accountModel, error) {
 
     var message = '';
@@ -12,8 +14,7 @@ function onError (accountModel, error) {
             message = String.format(L('General_Required'), L('Login_Password'));
             break;
         case 'InvalidUrl':
-            var url = '' + accountModel.get('accessUrl');
-            message = String.format(L('SitesManager_ExceptionInvalidUrl'), url);
+            message = String.format(L('SitesManager_ExceptionInvalidUrl'), accessUrl);
             break;
         case 'ReceiveAuthTokenError':
             message = L('Mobile_SaveSuccessError');
@@ -36,6 +37,8 @@ function onError (accountModel, error) {
 
 exports.login = function(accounts, url, username, password)
 {
+    accessUrl = url;
+    
     var account = Alloy.createModel('AppAccounts');
     account.on('error', onError);
     
