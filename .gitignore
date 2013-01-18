@@ -6,6 +6,3 @@ tmp
 .idea
 
 Resources/*
-
-!Resources/app.js
-!Resources/alloy.js
