@@ -12,7 +12,7 @@ function onError (accountModel, error) {
             message = String.format(L('General_Required'), L('Login_Password'));
             break;
         case 'InvalidUrl':
-            var url = '' + accountModel.get('url');
+            var url = '' + accountModel.get('accessUrl');
             message = String.format(L('SitesManager_ExceptionInvalidUrl'), url);
             break;
         case 'ReceiveAuthTokenError':
