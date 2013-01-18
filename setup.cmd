@@ -1,3 +1,4 @@
+mkdir Resources
 mkdir Resources\android
 mkdir Resources\iphone
 mkdir Resources\mobileweb
