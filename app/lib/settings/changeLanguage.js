@@ -1,4 +1,5 @@
 var L = require('L');
+var Alloy = require('alloy');
 
 function availableLanguages() 
 {
