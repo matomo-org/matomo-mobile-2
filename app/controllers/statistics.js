@@ -36,7 +36,8 @@ function doChooseAccount()
 
 function doChooseWebsite()
 {
-    var websites = Alloy.createController('allwebsitesdashboard', {account: accountModel, accounts: accountsCollection});
+    var params   = {account: accountModel, accounts: accountsCollection, autoOpen: false};
+    var websites = Alloy.createController('allwebsitesdashboard', params);
     websites.on('websiteChosen', function () {
         this.close();
     });

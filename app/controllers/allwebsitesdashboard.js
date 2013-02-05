@@ -10,7 +10,12 @@ var accountsCollection = args.accounts || false;
 // the currently selected account
 var accountModel = args.account || false;
 // the fetched statistics that belongs to the currently selected report
-var statisticsModel    = Alloy.Collections.piwikProcessedReport;
+var statisticsModel = Alloy.Collections.piwikProcessedReport;
+// whether to open a website automatically if only one website is available
+var autoOpen = true;
+if ('undefined' === (typeof args.autoOpen)) {
+    autoOpen = args.autoOpen;
+}
 
 function websiteChosen(siteModel) 
 {
@@ -35,7 +40,7 @@ function onAccountChosen(account)
         account: accountModel,
         success: function (entrySiteCollection) {
 
-            if (1 == entrySiteCollection.length) {
+            if (autoOpen && 1 == entrySiteCollection.length) {
                 websiteChosen(entrySiteCollection.first());
             } else if (!entrySiteCollection.length) {
                 // TODO no access to any account
