@@ -24,8 +24,6 @@ var reportListController = Alloy.createController('availablereports', {reports: 
                                                                        site: siteModel,
                                                                        closeOnSelect: require('alloy').isHandheld});
 
-var currentMetric = null;
-var flatten       = 0;
 
 $.index.setTitle(siteModel.getName());
 
@@ -52,31 +50,6 @@ function doOpenSettings()
     settings.open();
 }
 
-function doChooseReport()
-{
-    reportListController.open();
-}
-
-function doChooseMetric()
-{
-    var params         = {metrics: statisticsModel.getMetrics()};
-    var metricsChooser = Alloy.createController('reportmetricschooser', params);
-    metricsChooser.on('metricChosen', onMetricChosen)
-    metricsChooser.open();
-}
-
-function doChooseDate () 
-{
-    alert('change date');
-}
-
-function doFlatten () 
-{
-    flatten = 1;
-    refreshReport();
-    flatten = 0;
-}
-
 function onClose()
 {
     $.destroy();
@@ -101,7 +74,7 @@ function displayContent(controller)
 
 function onReportChosen (chosenReportModel) {
     reportModel   = chosenReportModel;
-    currentMetric = null;
+    // currentMetric = null;
 
     refreshReport();
 }
@@ -111,9 +84,9 @@ function refreshReport()
     var params = {
         account: accountModel, 
         site: siteModel, 
-        metric: currentMetric, 
         report: reportModel,
-        statistics: statisticsModel
+        statistics: statisticsModel,
+        reportList: reportListController,
     };
 
     var live = Alloy.createController('report', params);
@@ -135,12 +108,6 @@ function onVisitorLogChosen()
     var live   = Alloy.createController('visitorlog', params);
     displayContent(live);
     live.refresh();
-}
-
-function onMetricChosen(chosenMetric)
-{
-    currentMetric = chosenMetric;
-    refreshReport();
 }
 
 function onReportListFetched(reportsCollection)

@@ -14,7 +14,17 @@
 },
 
 "#reportTable": {
-    top: 0
+    top: 68
+},
+
+"#reportTable[platform=android]": {
+    top: '68dp'
+},
+
+".menuSeparatorShadow": {
+    top: 60,
+    height: 8,
+    backgroundImage: '/separator.png'
 },
 
 ".menuSeparatorShadow[platform=android]": {

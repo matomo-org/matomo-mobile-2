@@ -7,14 +7,61 @@ var siteModel       = args.site || false;
 var reportModel     = args.report || false;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel = args.statistics || false;
-var currentMetric   = args.metric || false;
+var currentMetric   = null;
 var flatten         = args.flatten || 0;
+var reportList      = args.reportList || {};
 
 var reportRowsCtrl = null;
 
 if (OS_IOS) {
     $.pullToRefresh.init($.reportTable);
 }
+
+/**
+ * REPORT-MENU START
+ */
+
+function doChooseMetric()
+{
+    var params         = {metrics: statisticsModel.getMetrics()};
+    var metricsChooser = Alloy.createController('reportmetricschooser', params);
+    metricsChooser.on('metricChosen', onMetricChosen)
+    metricsChooser.open();
+}
+
+function onMetricChosen(chosenMetric)
+{
+    currentMetric = chosenMetric;
+    doRefresh();
+}
+
+function doChooseDate () 
+{
+    alert('change date');
+}
+
+function doFlatten () 
+{
+    flatten = 1;
+    doRefresh();
+    flatten = 0;
+}
+
+function doChooseReport()
+{
+    reportList.open();
+}
+
+function onReportChosen (chosenReportModel) {
+    reportModel   = chosenReportModel;
+    currentMetric = null;
+
+    refreshReport();
+}
+
+/**
+ * REPORT-MENU END
+ */
 
 function showReportContent()
 {

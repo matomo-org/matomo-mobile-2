@@ -3,6 +3,15 @@
         <Require src="loadingindicator" id="loadingindicator"/>
 
         <View id="content">
+
+            <Require src="reportmenu" 
+                     onChooseReport="doChooseReport" 
+                     onChooseMetric="doChooseMetric" 
+                     onChooseDate="doChooseDate" 
+                     onFlatten="doFlatten" 
+                     id="reportMenuCtrl"/>
+            <View class="menuSeparatorShadow"/>
+            
             <TableView id="reportTable" class="container">
                 <HeaderPullView platform="ios">
                     <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>

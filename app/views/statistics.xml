@@ -32,13 +32,6 @@
         </Menu>
         
         <View id="content">
-            <Require src="reportmenu" 
-                     onChooseReport="doChooseReport" 
-                     onChooseMetric="doChooseMetric" 
-                     onChooseDate="doChooseDate" 
-                     onFlatten="doFlatten" 
-                     id="reportMenuCtrl"/>
-            <View class="menuSeparatorShadow"/>
         </View>
     </Window>
 </Alloy>
