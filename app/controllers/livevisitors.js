@@ -5,6 +5,7 @@ function L(key)
 
 var args = arguments[0] || {};
 var accountModel = args.account;
+var reportList   = args.reportList || {};
 var siteModel = args.site;
 
 var piwikLiveVisitors = Alloy.createCollection('piwikLiveVisitors');
@@ -35,6 +36,11 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
 
     $.liveTable.setData(rows);
     rows = null;
+}
+
+function doChooseReport()
+{
+    reportList.open();
 }
 
 function showReportContent()

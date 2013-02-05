@@ -5,7 +5,8 @@ function L(key)
 
 var args = arguments[0] || {};
 var accountModel = args.account;
-var siteModel = args.site;
+var siteModel    = args.site;
+var reportList   = args.reportList || {};
 
 var visitorLog = Alloy.createCollection('piwikLastVisitDetails');
 visitorLog.on('fetch', render);
@@ -24,7 +25,7 @@ function onFetchNext()
     visitorLog.next(account, siteModel.id);
 }
 
-function render(account, counter30Min, counter24Hours, visitorDetails)
+function render()
 {
     showReportContent();
 
@@ -35,7 +36,7 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
     rows.push(row);
 
     visitorLog.forEach(function (visitorDetail) {
-        var params = {account: account, visitor: visitorDetail};
+        var params = {account: accountModel, visitor: visitorDetail.attributes};
         var visitorOverview = Alloy.createController('visitoroverview', params);
         rows.push(visitorOverview.getView());
     });
@@ -46,6 +47,16 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
 
     $.visitorLogTable.setData(rows);
     rows = null;
+}
+
+function doChooseReport()
+{
+    reportList.open();
+}
+
+function doChooseDate()
+{
+    alert('Choose Date');
 }
 
 function showReportContent()

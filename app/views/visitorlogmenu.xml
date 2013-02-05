@@ -1,0 +1,13 @@
+<Alloy>
+    <ScrollView id="index" class="menuBar">
+        <View class="menuItem" onClick="onChangeReport" formFactor="handheld">
+            <ImageView class="menuIcon"/>
+            <Label class="menuTitle" id="reports"/>
+        </View>
+        <View class="menuSeparator"/>
+        <View class="menuItem" onClick="onChangeDate">
+            <ImageView class="menuIcon"/>
+            <Label class="menuTitle" id="date"/>
+        </View>
+    </ScrollView>
+</Alloy>

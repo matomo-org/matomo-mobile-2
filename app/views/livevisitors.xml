@@ -3,6 +3,12 @@
         <Require src="loadingindicator" id="loadingindicator"/>
 
         <View id="content">
+
+            <Require src="livevisitorsmenu" 
+                     onChooseReport="doChooseReport" 
+                     id="liveVisitorsMenuCtrl"/>
+            <View class="menuSeparatorShadow"/>
+            
             <TableView id="liveTable">
                 <HeaderPullView platform="ios">
                     <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>

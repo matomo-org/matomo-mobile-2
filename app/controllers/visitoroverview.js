@@ -6,7 +6,7 @@ function L(key)
 var args = arguments[0] || {};
 var accountModel      = args.account || false;
 var useFirstVisitTime = args.useFirstVisit || false;
-var visitor = args.visitor ||{};
+var visitor = args.visitor || {};
 
 function goalConversionDescription(visitor)
 {

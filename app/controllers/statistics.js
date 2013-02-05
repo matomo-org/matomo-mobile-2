@@ -96,7 +96,7 @@ function refreshReport()
 
 function onLiveVisitorsChosen()
 {
-    var params = {account: accountModel, site: siteModel};
+    var params = {account: accountModel, site: siteModel, reportList: reportListController};
     var live   = Alloy.createController('livevisitors', params);
     displayContent(live);
     live.refresh();
@@ -104,7 +104,7 @@ function onLiveVisitorsChosen()
 
 function onVisitorLogChosen()
 {
-    var params = {account: accountModel, site: siteModel};
+    var params = {account: accountModel, site: siteModel, reportList: reportListController};
     var live   = Alloy.createController('visitorlog', params);
     displayContent(live);
     live.refresh();

@@ -13,22 +13,21 @@
     zIndex: 3
 },
 
-"#reportTable": {
-    top: 68
+"#content": {
+    layout: "vertical"
 },
 
-"#reportTable[platform=android]": {
-    top: '68dp'
+"#reportTable": {
+    top: 0
 },
 
 ".menuSeparatorShadow": {
-    top: 60,
+    top: 0,
     height: 8,
-    backgroundImage: '/separator.png'
+    backgroundImage: 'separator.png'
 },
 
 ".menuSeparatorShadow[platform=android]": {
-    top: '60dp',
     height: '8dp',
     backgroundImage: '/separator.png'
 },
