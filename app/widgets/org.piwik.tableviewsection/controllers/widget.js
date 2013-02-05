@@ -4,7 +4,7 @@ if (OS_IOS && args.style && 'native' == args.style) {
 
     exports.getSection = function () 
     {
-        var params = {headerTitle: String(title)};
+        var params = {headerTitle: String(args.title)};
 
         return Ti.UI.createTableViewSection(params);
     }
