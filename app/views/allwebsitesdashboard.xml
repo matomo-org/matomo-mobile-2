@@ -8,7 +8,7 @@
         <View id="loading"><Label id="loadingLabel"></Label></View>
         
         <View id="content" class="container">
-            <SearchBar id="searchBar" platform="android,ios"/>
+            <SearchBar id="searchBar" onReturn="doSearchWebsite" onCancel="doCancelSearchWebsite" platform="android,ios"/>
             <Require src="reportgraph" id="reportGraphCtrl"/>
             <View class="space"></View>
             <View class="shadow"></View>

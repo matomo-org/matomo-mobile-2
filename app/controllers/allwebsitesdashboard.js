@@ -17,6 +17,8 @@ if ('undefined' === (typeof args.autoOpen)) {
     autoOpen = args.autoOpen;
 }
 
+var lastUsedWebsite = null;
+
 function websiteChosen(siteModel) 
 {
     $.trigger('websiteChosen', {site: siteModel, account: accountModel});
@@ -80,8 +82,42 @@ function showLoadingMessage()
     $.loading.show();
 }
 
+function doCancelSearchWebsite() 
+{
+    $.searchBar.value = '';
+    $.searchBar.blur();
+
+    fetchListOfAvailableWebsites(lastUsedWebsite);
+}
+
+function doSearchWebsite(event) 
+{
+    showLoadingMessage();
+
+    statisticsModel.fetch({
+        account: accountModel,
+        params: {
+            period: 'day',
+            date: 'today',
+            idSite: lastUsedWebsite.id,
+            sortOrderColumn: "nb_visits",
+            filter_sort_column: "nb_visits",
+            apiModule: "MultiSites",
+            apiAction: "getAll",
+            pattern: $.searchBar.value
+        },
+        error: function () {
+            statisticsModel.trigger('error', {type: 'loadingProcessedReport'});
+        },
+        success: onStatisticsFetched
+    });
+
+    $.searchBar.blur();
+}
+
 function fetchListOfAvailableWebsites(site) 
 {
+    lastUsedWebsite = site;
     showLoadingMessage();
 
     statisticsModel.fetch({
