@@ -21,7 +21,8 @@ exports.definition = {
 		},
 		"defaultParams": {
 		    hideMetricsDoc: 1, 
-		    showTimer: 0, 
+		    showTimer: 0,
+            filter_limit: 40
 		}
 	},		
 
