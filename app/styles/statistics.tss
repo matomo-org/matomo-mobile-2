@@ -3,7 +3,8 @@
 },
 
 "#index": {
-    fullscreen: false
+    fullscreen: false,
+    exitOnClose: true
 },
 
 "MenuItem[platform=android]": {

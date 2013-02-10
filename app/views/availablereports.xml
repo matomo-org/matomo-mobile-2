@@ -1,6 +1,8 @@
 <Alloy>
-    <Window id="index">
+    <Window id="index" formFactor="handheld">
         <TableView id="reportsTable" onClick="doSelectReport">
         </TableView>
     </Window>
+    <TableView id="reportsTable" formFactor="tablet" onClick="doSelectReport">
+    </TableView>
 </Alloy>
