@@ -10,6 +10,8 @@ var statisticsModel = args.statistics || false;
 var currentMetric   = null;
 var flatten         = args.flatten || 0;
 var reportList      = args.reportList || {};
+var reportPeriod    = args.period || 'day';
+var reportDate      = args.date || 'today';
 
 var reportRowsCtrl = null;
 
@@ -37,7 +39,8 @@ function onMetricChosen(chosenMetric)
 
 function doChooseDate () 
 {
-    alert('change date');
+    var params = {date: reportDate, period: reportPeriod};
+    require('commands/openDateChooser').execute(params, onDateChosen);
 }
 
 function doFlatten () 
@@ -56,7 +59,14 @@ function onReportChosen (chosenReportModel) {
     reportModel   = chosenReportModel;
     currentMetric = null;
 
-    refreshReport();
+    doRefresh();
+}
+
+function onDateChosen (period, dateQuery)
+{
+    reportPeriod = period;
+    reportDate   = dateQuery;
+    doRefresh();
 }
 
 /**
@@ -133,8 +143,8 @@ function doRefresh()
     
     statisticsModel.fetch({
         account: accountModel,
-        params: {period: 'day', 
-                 date: 'today', 
+        params: {period: reportPeriod, 
+                 date: reportDate, 
                  idSite: siteModel.id, 
                  flat: flatten,
                  sortOrderColumn: metric,

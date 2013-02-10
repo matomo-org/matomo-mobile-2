@@ -1,0 +1,9 @@
+<Alloy>
+    <Window class="container" id="index">
+        <RightNavButton>
+            <Button id="doneButton" onClick="doChooseDate"/>
+        </RightNavButton>
+        <TableView id="datePickerTable" onClick="doSelectPicker">
+        </TableView>
+    </Window>
+</Alloy>
