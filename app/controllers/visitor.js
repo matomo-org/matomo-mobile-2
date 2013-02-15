@@ -1,0 +1,475 @@
+function L(key)
+{
+    return require('L')(key);
+}
+
+var args = arguments[0] || {};
+var visitor = args.visitor;
+var accessUrl = args.accessUrl;
+var rows    = [];
+
+createOverview(visitor, accessUrl);
+createCustomVariables(visitor, accessUrl);
+createSystem(visitor, accessUrl);
+createActionDetails(visitor, accessUrl);
+
+
+$.visitorTable.setData(rows);
+rows = null;
+
+exports.open = function ()
+{
+    require('layout').open($.index);
+}
+
+function createRow(params)
+{
+    return Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
+}
+
+function createSection(params)
+{
+    return Alloy.createWidget('org.piwik.tableviewsection', null, params).getSection();
+}
+
+function createOverview (visitor, accessUrl) 
+{
+    var visitDateLabel = String.format('%s - %s (%s)', '' + visitor.serverDatePretty,
+                                                       '' + visitor.serverTimePretty,
+                                                       '' + visitor.visitDurationPretty);
+
+    rows.push(createRow({title: visitDateLabel, className: 'visitorTableViewRow'}));
+
+    if (visitor.visitIp) {
+        rows.push(createRow({title: L('General_VisitorIP'),
+                                                     className: 'visitorTableViewRow',
+                                                     value: visitor.visitIp}));
+    }
+    
+    if (visitor.visitorType) {
+        var visitorTypeText = visitor.visitorType;
+        
+        switch (visitorTypeText) {
+            case 'new':
+                visitorTypeText = L('General_NewVisitor');
+                break;
+
+            case 'returning':
+
+                visitorTypeText = '' + visitor.visitorType;
+
+                if (visitor.visitCount) {
+                    var visits = '' + (parseInt(visitor.visitCount, 10));
+                    visits     = String.format(L('VisitsSummary_NbVisits'), visits);
+
+                    visitorTypeText += String.format(' (%s)', visits);
+                }
+                break;
+        }
+
+        rows.push(createRow({title: L('General_VisitType'),
+                                                     className: 'visitorTableViewRow',
+                                                     value: visitorTypeText}));
+    }
+
+    if (visitor.goalConversions) {
+        var goalConversionsText = String.format(L('General_VisitConvertedNGoals'),
+                                                '' + parseInt(visitor.goalConversions, 10));
+        rows.push(createRow({title: goalConversionsText,
+                                                     className: 'visitorTableViewRow'}));
+    }
+
+    // @todo display more information about the referrer
+    var referrerValue = visitor.referrerName ? visitor.referrerName : visitor.referrerTypeName;
+
+    if (referrerValue) {
+        var referrerParams = {title: L('General_FromReferrer'),
+                              className: 'visitorTableViewRow'};
+
+        if (visitor.referrerUrl) {
+
+            if (100 < visitor.referrerUrl.length) {
+                referrerParams.description = visitor.referrerUrl.substr(0, 100) + '...';
+            } else {
+                referrerParams.description = visitor.referrerUrl;
+            }
+
+            // use vertical layout. Otherwise a long title will overlap the description (url).
+            referrerParams.layout    = 'vertical';
+
+            referrerParams.title    += ' ' + referrerValue;
+            referrerParams.focusable = true;
+
+        } else {
+             // use value to display referrerValue if no url is given
+             referrerParams.value = referrerValue;
+        }
+
+        if (visitor.referrerKeyword) {
+            referrerParams.title += String.format(": '%s'", '' + visitor.referrerKeyword);
+        }
+
+        var referrerRow = createRow(referrerParams);
+
+        referrerRow.addEventListener('click', function () {
+            if (visitor.referrerUrl) {
+
+                Piwik.getTracker().trackLink('/visitor/referrer-url', 'link');
+                Titanium.Platform.openURL(visitor.referrerUrl);
+            }
+        });
+
+        rows.push(referrerRow);
+        referrerRow = null;
+    }
+
+    if (visitor.country) {
+        rows.push(createRow({title: L('UserCountry_Country'),
+                             value: visitor.country,
+                             className: 'visitorTableViewRow'}));
+        // leftImage: {url: accessUrl + visitor.countryFlag}
+    }
+};
+
+/**
+ * Displays all custom variables of the user.
+ * Output looks like:
+ * <br />
+ * Custom Variables<br />
+ * $VARNAME     $VARVALUE<br />
+ * $VARNAME     $VARVALUE<br />
+ * $VARNAME     $VARVALUE<br />
+ */
+function createCustomVariables(visitor, accessUrl) {
+
+    if (!visitor.customVariables) {
+
+        return;
+    }
+
+    rows.push(createSection({title: L('CustomVariables_CustomVariables')}));
+
+    for (var customVariableIndex in visitor.customVariables) {
+
+        var customVariable      = visitor.customVariables[customVariableIndex];
+        var customVariableName  = customVariable['customVariableName' + customVariableIndex];
+        var customVariableValue = customVariable['customVariableValue' + customVariableIndex];
+
+        rows.push(createRow({title: customVariableName,
+                                                     className: 'visitorTableViewRow',
+                                                     value: customVariableValue}));
+    }
+    
+    visitor = null;
+};
+
+/**
+ * Creates system information.
+ * Output looks like:
+ * <br />
+ * System<br />
+ * OS           $OPERATINGSYSTEM $OPERATINGSYSTEMICON<br />
+ * Browser      $BROWSERNAME ($SCREENTYPE) $BROWSERICON<br />
+ * Resolution   $RESOLUTION<br />
+ * Plugins      $PLUGINICONS<br />
+ */
+function createSystem(visitor, accessUrl) {
+
+    rows.push(createSection({title: L('UserSettings_VisitorSettings')}));
+
+    if (visitor.operatingSystem) {
+        rows.push(createRow({title: 'OS',
+                             className: 'visitorTableViewRow',
+                             value: visitor.operatingSystem}));
+        // leftImage: {url: accessUrl + visitor.operatingSystemIcon}
+    }
+
+    if (visitor.browserName) {
+        rows.push(createRow({title: L('UserSettings_ColumnBrowser'),
+                             className: 'visitorTableViewRow',
+                             value: visitor.browserName}));
+        // leftImage: {url: accessUrl + visitor.browserIcon}
+    }
+    
+    var resolution = visitor.resolution;
+    if (resolution &&
+        visitor.screenType &&
+        'normal' != ('' + visitor.screenType).toLowerCase()) {
+        resolution += String.format(' (%s)', ''+ visitor.screenType);
+        // accessUrl + visitor.screenTypeIcon
+    }
+
+    if (resolution) {
+        rows.push(createRow({title: L('UserSettings_ColumnResolution'),
+                             className: 'visitorTableViewRow',
+                             value: resolution}));
+    }
+
+    if (visitor.pluginsIcons && visitor.pluginsIcons.length && accessUrl) {
+
+        var row = createRow({className: 'visitorTableViewRow'});
+        row.add(Ti.UI.createLabel({text: L('UserSettings_Plugins'),
+                                   id: 'tableViewRowTitleLabel'}));
+        
+        var right = 10;
+        for (var index = 0; index < visitor.pluginsIcons.length; index++) {
+            var pluginIcon = visitor.pluginsIcons[index];
+
+            // @todo not all icons are 18x18
+            if (pluginIcon.pluginIcon) {
+                row.add(Ti.UI.createImageView({image: accessUrl + pluginIcon.pluginIcon,
+                                               right: right,
+                                               width: 14,
+                                               height: 14,
+                                               className: 'pluginIcon'}));
+            }
+
+            right +=28;
+        }
+
+        rows.push(row);
+        row = null;
+    }
+    
+    visitor = null;
+};
+
+/**
+ * Triggers the rendering of several actions.
+ */
+function createActionDetails(visitor, accessUrl) {
+
+    if (!visitor.actionDetails || !visitor.actionDetails.length) {
+        visitor = null;
+
+        return;
+    }
+
+    var numActions = parseInt(visitor.actions, 10);
+    
+    rows.push(createSection({title: String.format(L('VisitsSummary_NbActions'),
+                             '' + numActions)}));
+
+    for (var index = 0; index < visitor.actionDetails.length; index++) {
+        var actionDetail = visitor.actionDetails[index];
+
+        if (!actionDetail) {
+            continue;
+        }
+
+        switch (actionDetail.type) {
+            case 'action':
+                createActionAction(actionDetail, visitor, accessUrl);
+                break;
+
+            case 'ecommerceOrder':
+            case 'ecommerceAbandonedCart':
+                createEcommerceAction(actionDetail, visitor, accessUrl);
+                break;
+
+            default:
+                createDefaultAction(actionDetail, visitor, accessUrl);
+                break;
+        }
+    }
+    
+    visitor = null;
+};
+
+/**
+ * Renders the 'action' action.
+ * Output looks like:
+ * <br />
+ * $PAGETITLE<br />
+ * $URL<br />
+ * $SERVERTIMEPRETTY<br />
+ *
+ * @param  {Object}  actionDetail
+ */
+function createActionAction(actionDetail) {
+
+    var row = Ti.UI.createTableViewRow({className: 'visitorActionActionTableViewRow'});
+
+    if (actionDetail.pageTitle) {
+        row.add(Ti.UI.createLabel({text: '' + actionDetail.pageTitle, id: 'visitorActionActionPageTitleLabel'}));
+    }
+    if (actionDetail.url) {
+        row.add(Ti.UI.createLabel({text: actionDetail.url, id: 'visitorActionActionUrlLabel'}));
+    }
+    if (actionDetail.serverTimePretty) {
+        row.add(Ti.UI.createLabel({text: actionDetail.serverTimePretty, id: 'visitorActionActionServerTimeLabel'}));
+    }
+
+    rows.push(row);
+    row = null;
+    actionDetail = null;
+};
+
+/**
+ * Renders the 'default' action. For example 'outlink', 'goal' or 'download'.
+ * Output looks like:
+ * <br />
+ * $ICON $TYPE<br />
+ * $URL<br />
+ *
+ * @param  {Object}  actionDetail
+ */
+function createDefaultAction(actionDetail, visitor, accessUrl) {
+
+    var row       = Ti.UI.createTableViewRow({className: 'visitorActionDefaultTableViewRow'});
+
+    var view      = Ti.UI.createView({id: 'visitorActionDefaultHeadlineView'});
+
+    if (accessUrl && actionDetail.icon) {
+        view.add(Ti.UI.createImageView({image: accessUrl + actionDetail.icon,
+                                        id: 'visitorActionDefaultIconImageView'}));
+    }
+
+    if (actionDetail.type) {
+
+        var title = '' + actionDetail.type;
+
+        switch (actionDetail.type) {
+            case 'goal':
+                title = L('General_Goal');
+                break;
+            
+            case 'download':
+                title = L('General_Download');
+                break;
+
+            case 'outlink':
+                title = L('General_Outlink');
+                break;
+        }
+
+        view.add(Ti.UI.createLabel({text: title, id: 'visitorActionDefaultTypeLabel'}));
+    }
+
+    row.add(view);
+    view = null;
+
+    if (actionDetail.url) {
+        row.add(Ti.UI.createLabel({text: '' + actionDetail.url, id: 'visitorActionDefaultUrlLabel'}));
+    }
+
+    rows.push(row);
+    row          = null;
+    actionDetail = null;
+};
+
+/**
+ * Renders the 'default' action. For example 'outlink' or 'download'.
+ * Output looks like:
+ * <br />
+ * $ICON Ecommerce Order/Abandoned art ($ORDERID)<br />
+ * Revenue: $X $CURRENCY, Subtotal: $Y $CURRENCY, $ETC.<br />
+ * List of Products (Quantity: $QUANTITY):<br />
+ * * $PRODUCT NAME ($PRODUCT SKU), $PRODUCT_CATEGORY<br />
+ * $PRICE $CURRENCY - Quantity: $QTY<br />
+ * Product 2<br />
+ * Product 3 etc.<br />
+ *
+ * @param  {Object}  actionDetail
+ */
+function createEcommerceAction(actionDetail, visitor, accessUrl) {
+
+    var row           = Ti.UI.createTableViewRow({className: 'visitorActionEcommerceTableViewRow'});
+    var ecommerceView = Ti.UI.createView({id: 'visitorActionEcommerceHeadlineView'});
+    var ecommerceText = '';
+
+    switch (actionDetail.type) {
+        case 'ecommerceOrder':
+            ecommerceText = L('Goals_EcommerceOrder');
+
+            break;
+
+        case 'ecommerceAbandonedCart':
+            ecommerceText = L('Goals_AbandonedCart');
+
+            break;
+
+        default:
+            ecommerceText = L('Goals_Ecommerce');
+    }
+
+    if (actionDetail.orderId) {
+        ecommerceText = String.format('%s (%s)', '' + ecommerceText, '' + actionDetail.orderId);
+    }
+
+    if (accessUrl && actionDetail.icon) {
+        ecommerceView.add(Ti.UI.createImageView({image: accessUrl + actionDetail.icon,
+                                                 id: 'visitorActionEcommerceIconImageView'}));
+    }
+
+    if (ecommerceText) {
+        ecommerceView.add(Ti.UI.createLabel({text: ecommerceText, id: 'visitorActionEcommerceTypeLabel'}));
+    }
+
+    var itemDetailsView = Ti.UI.createView({id: 'visitorActionEcommerceDetailsView'});
+
+    if (actionDetail.itemDetails) {
+        for (var index = 0; index < actionDetail.itemDetails.length; index++) {
+            var item     = actionDetail.itemDetails[index];
+            var itemText = '';
+
+            if (item.itemName) {
+                itemText += item.itemName + ' ';
+            }
+
+            itemText += String.format('(%s)', '' + item.itemSKU);
+
+            if (item.itemCategory) {
+                itemText += ', ' + item.itemCategory;
+            }
+
+            var itemView = Ti.UI.createView({id: 'visitorActionEcommerceDetailsItemView'});
+
+            itemView.add(Ti.UI.createLabel({text: ' * ', id: 'visitorActionEcommerceDetailsItemStarLabel'}));
+            itemView.add(Ti.UI.createLabel({text: itemText, id: 'visitorActionEcommerceDetailsItemNameLabel'}));
+            itemDetailsView.add(itemView);
+            itemView = null;
+
+            var priceText = '';
+
+            if (item.price) {
+                priceText += item.price + ' ' + visitor.siteCurrency;
+            }
+
+            if (item.price && item.quantity) {
+                priceText += ' - ';
+            }
+
+            if (item.quantity) {
+                priceText += 'Quantity: ' + item.quantity;
+            }
+
+            itemDetailsView.add(Ti.UI.createLabel({text: priceText, id: 'visitorActionEcommerceDetailsPriceLabel'}));
+        }
+    }
+
+    var revenueText = String.format('%s: %s %s', L('Live_GoalRevenue'),
+                                                 '' +  actionDetail.revenue,
+                                                 '' + visitor.siteCurrency);
+    
+    if (actionDetail.revenueSubTotal) {
+        revenueText += String.format(', %s: %s %s', L('General_Subtotal'),
+                                                    '' + actionDetail.revenueSubTotal,
+                                                    '' + visitor.siteCurrency);
+    }
+
+    var listOfProductsText = String.format('List of Products (Quantity: %s)', '' + parseInt(actionDetail.items, 10));
+
+    row.add(ecommerceView);
+    ecommerceView = null;
+    
+    row.add(Ti.UI.createLabel({text: revenueText, id: 'visitorActionEcommerceRevenueLabel'}));
+    row.add(Ti.UI.createLabel({text: listOfProductsText, id: 'visitorActionEcommerceDetailsListLabel'}));
+    row.add(itemDetailsView);
+    itemDetailsView = null;
+
+    rows.push(row);
+    row          = null;
+    actionDetail = null;
+    visitor      = null;
+};

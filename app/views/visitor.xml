@@ -1,0 +1,6 @@
+<Alloy>
+    <Window id="index" class="container">
+        <TableView id="visitorTable">
+        </TableView>
+    </Window>
+</Alloy>

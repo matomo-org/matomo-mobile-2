@@ -17,6 +17,17 @@ if (OS_IOS) {
     $.pullToRefresh.init($.liveTable);
 }
 
+function doOpenVisitor(event)
+{
+    if (!event || !event.rowData || !event.rowData.visitor) {
+        return;
+    }
+
+    var params  = {visitor: event.rowData.visitor};
+    var visitor = Alloy.createController('visitor', params);
+    visitor.open();
+}
+
 function render(account, counter30Min, counter24Hours, visitorDetails)
 {
     $.countdown.start();
@@ -35,7 +46,10 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
     _.forEach(visitorDetails, function (visitorDetail) {
         var params = {account: account, visitor: visitorDetail};
         var visitorOverview = Alloy.createController('visitoroverview', params);
-        rows.push(visitorOverview.getView());
+        var visitorRow = visitorOverview.getView()
+        visitorRow.visitor = visitorDetail;
+        rows.push(visitorRow);
+        visitorRow = null;
     });
 
     $.liveTable.setData(rows);

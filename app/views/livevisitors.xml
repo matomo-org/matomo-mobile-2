@@ -9,7 +9,7 @@
                      id="liveVisitorsMenuCtrl"/>
             <View class="menuSeparatorShadow"/>
             
-            <TableView id="liveTable">
+            <TableView id="liveTable" onClick="doOpenVisitor">
                 <HeaderPullView platform="ios">
                     <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>

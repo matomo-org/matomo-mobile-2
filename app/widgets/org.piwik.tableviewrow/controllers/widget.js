@@ -24,4 +24,16 @@ if (args.title && args.description) {
         return exports.create().getView();
     }
 
+} else if (args.title) {
+
+    exports.create = function ()
+    {
+        return Alloy.createWidget('org.piwik.tableviewrow', 'title', args);
+    }
+
+    exports.getRow = function ()
+    {
+        return exports.create().getView();
+    }
+
 }

@@ -1,0 +1,24 @@
+"TableViewRow": {
+    height: Ti.UI.SIZE
+},
+
+"#title": {
+    textAlign: 'left',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+    left: 10,
+    color: '#333333',
+    ellipsize: true,
+    wordWrap: false,
+    font: {fontSize: 18, fontWeight: 'bold'},
+    top: 11,
+    touchEnabled: false
+},
+
+"#title[platform=android]": {
+    left: '16dp',
+    right: '16dp',
+    top: '10dp',
+    font: {fontSize: '16sp', fontWeight: 'normal'},
+    zIndex: 2
+}
