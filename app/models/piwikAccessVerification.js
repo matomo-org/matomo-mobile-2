@@ -18,28 +18,20 @@ exports.definition = {
         },
         "adapter": {
             "type": "piwikapi",
-            "collection_name": "piwikwebsites"
+            "collection_name": "piwikaccessverification"
         },
         "settings": {
             "method": "SitesManager.getSitesWithAtLeastViewAccess",
             "cache": false
         },
-        "defaultParams": {}
+        "defaultParams": {"limit": 1}
     },      
 
     extendModel: function(Model) {      
         _.extend(Model.prototype, {
             
             idAttribute: "idsite",
-/*
-            parse: function (response) {
-                if (response && response[0]) {
-                    return response[0];
-                }
-                
-                return null;
-            },
-*/
+
             getName: function () {
                 return this.get('name');
             }
@@ -58,7 +50,6 @@ exports.definition = {
 
             validResponse: function (response) {
 
-                console.log('the response', response);
                 if (!response || !response[0]) {
                     return false;
                 }

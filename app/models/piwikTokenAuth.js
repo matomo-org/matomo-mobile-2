@@ -17,7 +17,36 @@ exports.definition = {
 
 	extendModel: function(Model) {		
 		_.extend(Model.prototype, {
-            
+
+
+            getPasswordHash: function (password) {
+                return Ti.Utils.md5HexDigest(password);
+            },
+
+            getAnonymousLoginToken: function () {
+                return 'anonymous';
+            },
+
+            fetchToken: function (accountModel, username, password, onSuccess, onError) {
+
+                if (!username && !password) {
+
+                    onSuccess(this, {value: this.getAnonymousLoginToken()});
+
+                } else {
+
+                    // fetch token via API
+                    var passwordHash = this.getPasswordHash(password);
+                    
+                    this.fetch({
+                        account: accountModel,
+                        params: {userLogin: username, md5Password: passwordHash},
+                        success: onSuccess, 
+                        error: onError
+                    });
+                }
+            },
+
             validResponse: function (response) {
                 var _ = require("alloy/underscore");
                  

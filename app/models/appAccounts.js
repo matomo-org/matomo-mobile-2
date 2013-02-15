@@ -281,29 +281,21 @@ exports.definition = {
                 return accessUrl;
             },
             
-            requestAuthToken: function () {
+            updateAuthToken: function () {
                 var username = this.get('username');
                 var password = this.get('password');
                 var account  = this;
 
-                if (!username && !password) {
-                    this.set({tokenAuth: 'anonymous'});
-                } else {
-                    // fetch token via API
-                    var tokenAuth = Alloy.createModel('piwikTokenAuth');
-                    tokenAuth.fetch({
-                        account: this,
-                        params: {userLogin: username, md5Password: Ti.Utils.md5HexDigest(password)},
-                        success: function (model, response) {
+                var onSuccess = function (model, response) {
+                    account.set({tokenAuth: response.value});
+                };
 
-                            account.set({tokenAuth: response.value});
+                var onError = function (model) {
+                    return account.trigger('error', account, 'ReceiveAuthTokenError');
+                };
 
-                        }, error: function (model) {
-
-                            return account.trigger('error', 'ReceiveAuthTokenError');
-                        }
-                    });
-                }
+                var tokenAuth = Alloy.createModel('piwikTokenAuth');
+                tokenAuth.fetchToken(this, username, password, onSuccess, onError);
             }
 
         }); // end extend

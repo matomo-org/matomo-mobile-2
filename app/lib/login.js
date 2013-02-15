@@ -35,18 +35,16 @@ function onError (accountModel, error) {
     alertDialog.show();
 }
 
-exports.login = function(accounts, url, username, password)
+exports.login = function(accounts, accessUrl, username, password)
 {
-    accessUrl = url;
-    
     var account = Alloy.createModel('AppAccounts');
     account.on('error', onError);
     
     account.set({
-        accessUrl: url,
+        accessUrl: accessUrl,
         username: username,
         password: password,
-        name: url
+        name: accessUrl
     });
 
     if (!account.isValid()) {
@@ -58,27 +56,32 @@ exports.login = function(accounts, url, username, password)
         accountModel.updatePiwikVersion();
     });
 
-    account.on('change:tokenAuth', function (accountModel, tokenAuth) {
+    account.on('change:tokenAuth', function (accountModel) {
         console.log('change:tokenAuth');
-        var site = Alloy.createModel('piwikWebsites');
+        var site = Alloy.createCollection('piwikAccessVerification');
+        // verify if user has access to at least one website using the given authToken
 
         site.fetch({
-            params: {limit: 1},
             account: accountModel,
-            success: function (siteModel) {
+            success: function () {
+                // it has access to at least one webistes
+
+                console.log('Account has access to websites');
 
                 accountModel.save();
                 accountModel.trigger('sync', accountModel);
                 accounts.add(accountModel);
 
-            }, error: function (accountModel) {
+            }, error: function () {
 
-                accountModel.clear();
-                return accountModel.trigger('error', 'NoViewAccess');
+                console.log('Acconut has no access to websites');
+
+                accountModel.clear({silent: true});
+                return accountModel.trigger('error', accountModel, 'NoViewAccess');
             }
         });
 
     });
 
-    account.requestAuthToken();
+    account.updateAuthToken();
 }
