@@ -1,7 +1,7 @@
 var L     = require('L');
 var Alloy = require('alloy');
 
-var accessUrl = null;
+var accessUrl = '';
 
 function onError (accountModel, error) {
 
@@ -14,7 +14,7 @@ function onError (accountModel, error) {
             message = String.format(L('General_Required'), L('Login_Password'));
             break;
         case 'InvalidUrl':
-            message = String.format(L('SitesManager_ExceptionInvalidUrl'), accessUrl);
+            message = String.format(L('SitesManager_ExceptionInvalidUrl'), accessUrl + '');
             break;
         case 'ReceiveAuthTokenError':
             message = L('Mobile_SaveSuccessError');
