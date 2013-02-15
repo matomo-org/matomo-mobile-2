@@ -24,6 +24,11 @@ function height (image)
     return 0;
 }
 
+function showDetail ()
+{
+    alert('open detail');
+}
+
 exports.update = function (processedReportModel, accountModel) {
     var imageGraphUrl = processedReportModel.getImageGraphUrl();
 

@@ -1,3 +1,4 @@
 <Alloy>
     <ImageView id="image"/>
+    <ImageView id="showDetailIcon" onClick="showDetail"/>
 </Alloy>

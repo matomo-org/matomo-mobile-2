@@ -21,3 +21,24 @@
     right: '16dp',
     height: '150dp',
 }
+
+"#showDetailIcon": {
+    image: 'ic_action_fullscreen.png',
+    backgroundSelectedColor: '#FFC700',
+    backgroundFocusedColor: '#FFC700',
+    backgroundColor: '#ffffff',
+    bottom: 8,
+    right: 8,
+    width: 32,
+    height: 32,
+    zIndex: 2,
+}
+
+"#showDetailIcon[platform=android]": {
+    image: '/ic_action_fullscreen.png',
+    bottom: '8dp',
+    right: '8dp',
+    width: '32dp',
+    height: '32dp',
+    zIndex: '2dp'
+}
