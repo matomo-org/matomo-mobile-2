@@ -1,3 +1,5 @@
+var imageGraphUrl;
+
 function width (image) 
 {
     if (image.size && image.size.width) {
@@ -26,11 +28,12 @@ function height (image)
 
 function showDetail ()
 {
-    alert('open detail');
+    var detailGraph = Alloy.createController('graphdetail', {graphUrl: imageGraphUrl});
+    detailGraph.open();
 }
 
 exports.update = function (processedReportModel, accountModel) {
-    var imageGraphUrl = processedReportModel.getImageGraphUrl();
+    imageGraphUrl = processedReportModel.getImageGraphUrl();
 
     if (!imageGraphUrl) {
         return;
