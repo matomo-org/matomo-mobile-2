@@ -7,9 +7,9 @@ var args = arguments[0] || {};
 var accounts = args.accounts || false;
 
 function onUrlReturn () {
-	onUrlBlur();
-	
-	$.username.focus();
+    onUrlBlur();
+
+    $.username.focus();
 }
 
 function onUrlBlur () {
@@ -25,6 +25,8 @@ function onUsernameReturn () {
 
 function doLogin()
 {
+    onUrlBlur();
+    
     require('login').login(
         accounts,
         $.url.value,
