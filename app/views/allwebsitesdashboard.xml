@@ -12,8 +12,9 @@
             <Require src="reportgraph" id="reportGraphCtrl"/>
             <View class="space"></View>
             <View class="shadow"></View>
-            <TableView class="websitesTableView" dataCollection="piwikProcessedReport" onClick="doSelectWebsite">
-                
+            <TableView class="websitesTableView" dataCollection="piwikProcessedReport" 
+                       onClick="doSelectWebsite">
+
                 <TableViewRow modelid="{id}">
                     <Label left="10" right="120" textAlign="left" text="{label}" />
 

@@ -56,8 +56,18 @@ function onAccountChosen(account)
 
 function doSelectWebsite(event)
 {
+    if (!event || !event.rowData || !event.rowData.modelid) {
+        console.log('ModelID not defined, cannot select website');
+        return;
+    }
+
     var id      = event.rowData.modelid;
     var website = statisticsModel.get(id);
+
+    if (!website) {
+        console.log('websiteModel not found in collection, cannot select website');
+        return;
+    }
 
     var siteModel = Alloy.createModel('PiwikWebsites', {idsite: website.get('reportMetadata').idsite,
                                                         name: website.get('label')});
@@ -84,6 +94,11 @@ function showLoadingMessage()
 
 function doCancelSearchWebsite() 
 {
+    if (!$.searchBar) {
+
+        return;
+    }
+    
     $.searchBar.value = '';
     $.searchBar.blur();
 
