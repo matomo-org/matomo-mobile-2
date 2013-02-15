@@ -16,6 +16,20 @@
     layout: "vertical"
 },
 
+".quickInfoName": {
+    font: {fontSize: 13},
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    color: "#000000",
+    left: 0
+}
+
+".quickInfoValue": {
+    font: {fontSize: 13},
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    color: "#008000",
+    left: 0
+}
+
 "#index": {
     fullscreen: false,
     title: L('General_AllWebsitesDashboard')

@@ -13,8 +13,21 @@
             <View class="space"></View>
             <View class="shadow"></View>
             <TableView class="websitesTableView" dataCollection="piwikProcessedReport" onClick="doSelectWebsite">
-                <TableViewRow title="{label}" modelid="{id}">
+                
+                <TableViewRow modelid="{id}">
+                    <Label left="10" right="120" textAlign="left" text="{label}" />
+
+                    <View right="10" width="100" layout="vertical" height="SIZE">
+                        <Label text="Visits" class="quickInfoName" />
+                        <View right="0" layout="horizontal" height="SIZE">
+                            <Label text="{nb_visits}" class="quickInfoValue"/>
+                            <Label text=" (" class="quickInfoName"/>
+                            <Label text="{visits_evolution}" class="quickInfoValue"/>
+                            <Label text=")" class="quickInfoName"/>
+                        </View>
+                    </View>
                 </TableViewRow>
+
             </TableView>
         </View>
     </Window>
