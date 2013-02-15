@@ -23,9 +23,6 @@ function doRefresh()
         
         return;
     }
-    
-    $.reloading = true;
-    $.pulling   = false;
 
     displayRefreshMessage();
 
@@ -39,6 +36,9 @@ function currentTime()
 
 function setStatusReloading()
 {
+    $.reloading = true;
+    $.pulling   = false;
+    
     var now = currentTime();
     
     $.lastUpdatedLabel.text = String.format(L('Mobile_LastUpdated'), now);
@@ -95,7 +95,7 @@ function onDragEnd()
     }
 }
 
-exports.refresh = doRefresh;
+exports.refresh = displayRefreshMessage;
 
 exports.init = function (tableView)
 {

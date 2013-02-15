@@ -90,9 +90,9 @@ function refreshReport()
         reportList: reportListController,
     };
 
-    var live = Alloy.createController('report', params);
-    displayContent(live);
-    live.refresh();
+    var report = Alloy.createController('report', params);
+    displayContent(report);
+    report.refresh();
 }
 
 function onLiveVisitorsChosen()
