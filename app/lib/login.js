@@ -26,7 +26,7 @@ function onError (accountModel, error) {
             message = L('An unknown error has occured:\n' + error);
     }
 
-     var alertDialog = Ti.UI.createAlertDialog({
+    var alertDialog = Ti.UI.createAlertDialog({
         title: L('General_Error'),
         message: message,
         buttonNames: [L('General_Ok')]

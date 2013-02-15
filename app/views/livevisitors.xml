@@ -15,5 +15,7 @@
                 </HeaderPullView>
             </TableView>
         </View>
+
+        <Require src="countdowntimer" id="countdown"/>
     </View>
 </Alloy>

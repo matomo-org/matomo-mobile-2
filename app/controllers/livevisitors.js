@@ -7,6 +7,9 @@ var args = arguments[0] || {};
 var accountModel = args.account;
 var reportList   = args.reportList || {};
 var siteModel = args.site;
+var refreshIntervalInMs = 45000;
+
+$.countdown.init(parseInt(refreshIntervalInMs / 1000));
 
 var piwikLiveVisitors = Alloy.createCollection('piwikLiveVisitors');
 
@@ -16,6 +19,7 @@ if (OS_IOS) {
 
 function render(account, counter30Min, counter24Hours, visitorDetails)
 {
+    $.countdown.start();
     showReportContent();
 
     var rows = [];
@@ -59,6 +63,7 @@ function showLoadingMessage()
     } 
 
     $.loadingindicator.show();
+    $.countdown.stop();
 }
 
 function onFetchError()

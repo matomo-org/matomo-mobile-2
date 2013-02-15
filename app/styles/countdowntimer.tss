@@ -1,0 +1,20 @@
+".container": {
+    height: 20,
+    bottom: 0,
+    opacity: 0.8,
+    backgroundColor: '#333333'
+}
+
+".container[platform=android]": {
+    height: "20dp",
+    bottom: "0dp"
+}
+
+"#title": {
+    fontSize: 14,
+    color: 'white',
+}
+
+"#title[platform=android]": {
+    fontSize: 14
+}

@@ -143,7 +143,7 @@ exports.definition = {
                 var accessUrl = attrs.accessUrl;
 
                 if (!accessUrl || !startsWithHttp(accessUrl)) {
-            
+
                     return 'InvalidUrl';
                 }
             },

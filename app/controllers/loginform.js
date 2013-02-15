@@ -26,7 +26,7 @@ function onUsernameReturn () {
 function doLogin()
 {
     onUrlBlur();
-    
+
     require('login').login(
         accounts,
         $.url.value,
