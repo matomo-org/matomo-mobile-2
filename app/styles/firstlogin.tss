@@ -36,6 +36,10 @@
     zIndex: 1
 },
 
+"#logoImage[platform=mobileweb]": {
+    image:"logo-png-page.png"
+},
+
 "#logoImage[platform=android]": {
     width: '280dp',
     height: '165dp',
