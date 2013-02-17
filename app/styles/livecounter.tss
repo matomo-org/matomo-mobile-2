@@ -1,6 +1,9 @@
 "TableViewRow": {
     height: Ti.UI.SIZE,
-    width: Ti.UI.FILL,
+    width: Ti.UI.FILL
+},
+
+"TableViewRow[platform=ios]": {
     selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
 },
 
