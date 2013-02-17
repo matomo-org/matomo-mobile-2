@@ -2,6 +2,15 @@
     backgroundColor: "#B2AEA5"
 },
 
+"#accountsButton": {
+    image: "ic_action_accounts.png",
+    width: "32"
+}
+
+"#accountsButton[platform=mobileweb]": {
+    width: "42"
+}
+
 "#searchBar": {
     top: 0,
     barColor: "#B2AEA5",

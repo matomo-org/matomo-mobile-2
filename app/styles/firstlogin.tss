@@ -2,13 +2,19 @@
     navBarHidden: true
 },
 
+"#index[platform=mobileweb]": {
+    navBarHidden: true
+},
+
 ".container": {
-    backgroundColor: "#F5F5F5"
+    backgroundColor: "#F5F5F5",
+    top: 0
 },
 
 "#mainView": {
     layout: 'vertical',
-    height: Ti.UI.FILL
+    height: Ti.UI.FILL,
+    top: 0
 },
 
 "#headerView": {

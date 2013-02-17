@@ -3,7 +3,8 @@
     image: 'graphDefault.png',
     height: 150,
     left: 10,
-    right: 10
+    right: 10,
+    zIndex: 5
 },
 
 "#image[platform=ios]": {
@@ -31,7 +32,7 @@
     right: 8,
     width: 32,
     height: 32,
-    zIndex: 2,
+    zIndex: 10,
 }
 
 "#showDetailIcon[platform=android]": {

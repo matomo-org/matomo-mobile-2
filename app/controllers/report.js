@@ -102,15 +102,15 @@ function onStatisticsFetched(processedReportModel)
 
     var rows = [];
 
-    var row = Ti.UI.createTableViewRow();
+    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
     row.add($.reportInfoCtrl.getView());
     rows.push(row);
 
-    var row = Ti.UI.createTableViewRow();
+    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
     row.add($.reportGraphCtrl.getView());
     rows.push(row);
 
-    var row = Ti.UI.createTableViewRow();
+    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
     row.add($.reportRowSeparator);
     rows.push(row);
 
@@ -120,7 +120,7 @@ function onStatisticsFetched(processedReportModel)
     
     _.each(processedReportModel.getRows(), function (report) {
         var reportRow = Alloy.createController('reportrow', report);
-        var row = Ti.UI.createTableViewRow();
+        var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
         row.add(reportRow.getView());
         rows.push(row);
         row = null;
@@ -129,6 +129,8 @@ function onStatisticsFetched(processedReportModel)
     $.reportTable.setData(rows);
     row  = null;
     rows = null;
+
+    $.reportTable._refreshSections();
 }
 
 function doRefresh()

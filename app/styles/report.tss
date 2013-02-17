@@ -6,6 +6,10 @@
     separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
 },
 
+".container[platform=mobileweb]": {
+    separatorStyle: Ti.UI.MobileWeb.TableViewSeparatorStyle.NONE
+},
+
 "#index": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,
@@ -32,7 +36,10 @@
     backgroundImage: '/separator.png'
 },
 
-"TableViewRow": {
+"TableViewRow[platform=ios]": {
+    height: Ti.UI.SIZE
+},
+"TableViewRow[platform=android]": {
     height: Ti.UI.SIZE
 },
 
@@ -41,12 +48,16 @@
 },
 
 ".reportRowSeparator": {
-     layout: "vertical",
-     height: Ti.UI.SIZE
+    layout: "vertical",
+    height: Ti.UI.SIZE
 },
 
 ".space": {
     height: 10
+},
+
+".space[platform=mobileweb]": {
+    top: 0, bottom: 0
 },
 
 ".space[platform=android]": {
@@ -56,6 +67,10 @@
 ".shadow": {
     height: 4,
     backgroundImage: "separator2.png"
+},
+
+".shadow[platform=mobileweb]": {
+    top: 0, bottom: 0
 },
 
 ".shadow[platform=android]": {

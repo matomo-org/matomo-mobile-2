@@ -2,10 +2,10 @@
     <Window title="" id="index" onClose="onClose">
         
         <LeftNavButton platform="mobileweb">
-            <Button onClick="doOpenSettings" image="ic_action_settings.png" width="32"/>
+            <Button class="settingsButton" onClick="doOpenSettings"/>
         </LeftNavButton>
         <LeftNavButton formFactor="handheld" platform="ios">
-            <Button onClick="doOpenSettings" image="ic_action_settings.png" width="32"/>
+            <Button class="settingsButton" onClick="doOpenSettings"/>
         </LeftNavButton>
 
         <RightNavButton formFactor="tablet" platform="ios">

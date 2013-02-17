@@ -13,8 +13,9 @@
     editable: true
 },
 
-"#addAccountButton": {
-    title: '#'
+"#addAccountButton[platform=mobileweb]": {
+    image: 'ic_action_add_account.png',
+    width: 42
 },
 
 "#addAccountButton[platform=ios]": {

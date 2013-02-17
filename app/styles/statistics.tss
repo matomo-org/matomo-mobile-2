@@ -29,9 +29,22 @@
     title: L('General_Settings')
 },
 
+".settingsButton": {
+    image: "ic_action_settings.png",
+    width: 32
+},
+
+".settingsButton[platform=mobileweb]": {
+    width: 42
+},
+
 "#websitesButton": {
     image: "ic_action_website.png",
     width: 32
+},
+
+"#websitesButton[platform=mobileweb]": {
+    width: 42
 },
 
 "#content": {
