@@ -39,4 +39,4 @@ function doChangeMetric(event)
 exports.open = function()
 {
     $.index.show();
-}
+};

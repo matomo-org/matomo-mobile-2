@@ -17,7 +17,7 @@
 "Button[platform=android]": {
     top: '8dp',
     left: '16dp',
-    right: '16dp'
+    right: '16dp',
 },
 
 "#piwikLogo": {    

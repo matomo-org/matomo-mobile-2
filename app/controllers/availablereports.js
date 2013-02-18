@@ -29,6 +29,7 @@ function updateAvailableReportsList()
 
     rows.push(Ti.UI.createTableViewRow({title: L('Live_VisitorsInRealTime'), cid: 'live', hasChild: true, ellipsize: false, wordWrap: true}));
     rows.push(Ti.UI.createTableViewRow({title: L('Live_VisitorLog'), cid: 'visitorlog', hasChild: true, ellipsize: false, wordWrap: true}));
+    rows.push(Ti.UI.createTableViewRow({title: L('Visitor Map'), cid: 'visitormap', hasChild: true, ellipsize: false, wordWrap: true}));
 
     reportsCollection.forEach(function (report) 
     {
@@ -64,7 +65,9 @@ function doSelectReport(event)
         $.trigger('liveVisitorsChosen');
     } else if ('visitorlog' == cid) {
         $.trigger('visitorLogChosen');
-    }  else {
+    } else if ('visitormap' == cid) {
+        $.trigger('visitorMapChosen');
+    } else {
         var report = reportsCollection.getByCid(cid);
         $.trigger('reportChosen', report);
     }

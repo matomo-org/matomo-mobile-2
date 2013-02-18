@@ -111,6 +111,13 @@ function onVisitorLogChosen()
     live.refresh();
 }
 
+function onVisitorMapChosen()
+{
+    var webview = {title: L('Visitor Map'), url: 'http://piwik.vis4.net/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&idSite=14&period=month&date=2013-01-18&disableLink=1&widget=1'};
+    var map     = Alloy.createController('webview', webview)
+    map.open();
+}
+
 function onReportListFetched(reportsCollection)
 {
     if (!reportModel || !reportsCollection.containsAction(reportModel)) {
@@ -174,6 +181,8 @@ statisticsModel.on('error', function () {
 reportListController.on('reportChosen', onReportChosen);
 reportListController.on('liveVisitorsChosen', onLiveVisitorsChosen);
 reportListController.on('visitorLogChosen', onVisitorLogChosen);
+reportListController.on('visitorMapChosen', onVisitorMapChosen);
+
 
 exports.open = function () {
 
