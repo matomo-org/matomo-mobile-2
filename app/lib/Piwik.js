@@ -113,6 +113,46 @@ Piwik.isObject = function (obj) {
 };
 
 /**
+ * Make sure actual >= expected.
+ * 
+ * @param  string expected Any Piwik version number. For example '0.6.4-rc1' or '1.4-beta1' or '1.10.1' or '2.0'
+ * @param  string actual   Any Piwik version number. For example '0.6.4-rc1' or '1.4-beta1' or '1.10.1' or '2.0'
+ * 
+ * @return true if the actual version number is greater than or equal to the expected version number, false otherwise.
+ */
+Piwik.isVersionGreaterThanOrEqual = function (expected, actual) {
+
+    expected = '' + expected;
+    actual   = '' + actual;
+
+    var expectedParts = expected.split('.');
+    var actualParts   = actual.split('.');
+    
+    for (var i = 0; i < expectedParts.length; ++i) {
+        if (actualParts.length == i) {
+            return false;
+        }
+
+        var expectedPart = parseInt(expectedParts[i], 10);
+        var actualPart   = parseInt(actualParts[i], 10);
+        
+        if (expectedPart == actualPart) {
+            continue;
+
+        } else if (expectedPart > actualPart) {
+
+            return false;
+
+        } else {
+
+            return true;
+        }
+    }
+    
+    return true;
+}
+
+/**
  * A simple way to check whether a variable is an Error (exception).
  * 
  * @param  {null|function|string|number|boolean|Object|Array}  err

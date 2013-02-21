@@ -150,7 +150,7 @@ exports.definition = {
 
             resetPiwikVersion: function () {
                 
-                this.set({version: 0, dateVersionUpdated: ''});
+                this.set({version: '', dateVersionUpdated: ''});
                 
                 return this;
             },
@@ -218,10 +218,10 @@ exports.definition = {
 
                         that.set({dateVersionUpdated: (new Date()) + ''});
                         
-                        if (response) {
-                            that.set({version: that.toPiwikVersion(response.value)});
+                        if (response && response.value) {
+                            that.set({version: '' + response.value});
                         } else if (!account.version) {
-                            that.set({version: 0});
+                            that.set({version: ''});
                         } else {
                             // there went something wrong with the request. For example the network connection broke up.
                             // do not set account version to 0 in such a case. We would overwrite an existing version, eg 183
@@ -233,33 +233,6 @@ exports.definition = {
                         // just ignore, piwik installation is too old
                     }
                 });
-            },
-            
-            toPiwikVersion: function (piwikVersion) {
-                
-                if (!piwikVersion) {
-                    
-                    return 0;
-                }
-                
-                piwikVersion = onlyFirstNumbers(piwikVersion + '')
-                
-                if ((piwikVersion + '').length == 2) {
-                    // if version is e.g. '0.7' it would be interpreted as 07 (7), but it should be 0.7.0 = 70.
-                    // Otherwise we run into a bug where 0.6.4 (64) is greater than 0.7 (7).
-                    piwikVersion = piwikVersion * 10;
-                }
-                
-                if ((piwikVersion + '').length == 1) {
-                    // if version is e.g. '2' it would be interpreted as 2, but it should be 2.0.0 = 200.
-                    // Otherwise we run into a bug where 0.6.4 (64) is greater than 2 (2).
-                    piwikVersion = piwikVersion * 100;
-                }
-                
-                // radix is very important in this case, otherwise eg. 064 octal is 52 decimal
-                piwikVersion = parseInt(piwikVersion, 10);
-                
-                return piwikVersion;
             },
             
             getBasePath: function () {
