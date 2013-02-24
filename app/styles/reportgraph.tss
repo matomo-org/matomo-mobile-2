@@ -1,3 +1,8 @@
+".container": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+}
+
 "#image": {
     top: 15,
     image: 'graphDefault.png',

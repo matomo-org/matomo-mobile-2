@@ -1,4 +1,6 @@
 <Alloy>
-    <ImageView id="image"/>
-    <ImageView id="showDetailIcon" onClick="showDetail"/>
+    <View class="container">
+        <ImageView id="image"/>
+        <ImageView id="showDetailIcon" onClick="showDetail"/>
+    </View>
 </Alloy>
