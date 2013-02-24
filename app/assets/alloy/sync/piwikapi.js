@@ -3,8 +3,8 @@ function InitAdapter(config) {
     
 }
 
-function Sync(model, method, opts) {
-    var name = model.config.adapter.name;
+function Sync(method, model, opts) {
+   // var name = model.config.adapter.collection_name;
     var settings = model.config.settings;
     var params = model.config.defaultParams;
 
@@ -58,8 +58,22 @@ function Sync(model, method, opts) {
     }
 }
 
-module.exports.sync = Sync, module.exports.beforeModelCreate = function(config) {
-    return config = config || {}, config.data = {}, InitAdapter(config), config;
-}, module.exports.afterModelCreate = function(Model) {
-    return Model = Model || {}, Model.prototype.config.Model = Model, Model;
+module.exports.sync = Sync;
+
+module.exports.beforeModelCreate = function(config) {
+    config = config || {};
+
+    config.data = {}; // for localStorage or case where entire collection is needed to maintain store
+
+    InitAdapter(config);
+
+    return config;
+};
+
+module.exports.afterModelCreate = function(Model) {
+    Model = Model || {};
+
+    Model.prototype.config.Model = Model; // needed for fetch operations to initialize the collection from persistent store
+
+    return Model;
 };
