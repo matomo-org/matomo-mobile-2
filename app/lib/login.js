@@ -24,7 +24,7 @@ function showWaitingIndicator()
       style: style
     });
 
-    win = Ti.UI.createWindow({backgroundColor: 'white', zIndex: 99999});
+    win = Ti.UI.createWindow({backgroundColor: '#ddd', opacity: 0.8, zIndex: 99999});
     win.add(activityIndicator);
     win.open();
 
@@ -35,7 +35,7 @@ function showWaitingIndicator()
 function hideWaitingIndicator()
 {
     if (win) {
-        win.close();
+       // win.close();
         win = null;
     }
 }
