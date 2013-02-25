@@ -3,12 +3,11 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
+var args     = arguments[0] || {};
 var accounts = args.accounts || false;
 
-var loginform = Alloy.createController('loginform', {
-    accounts: accounts
-});
+var loginform = Alloy.createController('loginform', {accounts: accounts});
+
 $.loginform.add(loginform.getView());
 
 function onTryIt ()

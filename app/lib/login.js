@@ -3,7 +3,45 @@ var Alloy = require('alloy');
 
 var accessUrl = '';
 
+var win = null;
+
+function showWaitingIndicator()
+{
+    if (win) {
+        return win;
+    }
+
+    var style = '';
+    if (OS_IOS){
+      style = Ti.UI.iPhone.ActivityIndicatorStyle.DARK;
+    } else {
+      style = Ti.UI.ActivityIndicatorStyle.DARK;
+    }
+
+    var activityIndicator = Ti.UI.createActivityIndicator({
+      font: {fontSize:26, fontWeight:'bold'},
+      message: L('Mobile_VerifyAccount'),
+      style: style
+    });
+
+    win = Ti.UI.createWindow({backgroundColor: 'white', zIndex: 99999});
+    win.add(activityIndicator);
+    win.open();
+
+    activityIndicator.show();
+    activityIndicator = null;
+}
+
+function hideWaitingIndicator()
+{
+    if (win) {
+        win.close();
+        win = null;
+    }
+}
+
 function onError (accountModel, error) {
+    hideWaitingIndicator();
 
     var message = '';
     switch (error) {
@@ -35,6 +73,7 @@ function onError (accountModel, error) {
     alertDialog.show();
 }
 
+
 exports.login = function(accounts, accessUrl, username, password)
 {
     var account = Alloy.createModel('AppAccounts');
@@ -51,13 +90,16 @@ exports.login = function(accounts, accessUrl, username, password)
         return;
     }
 
+    showWaitingIndicator();
+
     account.on('sync', function (accountModel) {
         console.log('account synced');
         accountModel.updatePiwikVersion();
     });
 
-    account.on('change:tokenAuth', function (accountModel) {
-        console.log('change:tokenAuth');
+    var verifyAuthToken = function (accountModel)
+    {
+        console.log('verifyAuthToken');
         var site = Alloy.createCollection('piwikAccessVerification');
         // verify if user has access to at least one website using the given authToken
 
@@ -67,6 +109,8 @@ exports.login = function(accounts, accessUrl, username, password)
                 // it has access to at least one webistes
 
                 console.log('Account has access to websites');
+
+                hideWaitingIndicator();
 
                 accountModel.save();
                 accountModel.trigger('sync', accountModel);
@@ -80,8 +124,9 @@ exports.login = function(accounts, accessUrl, username, password)
                 return accountModel.trigger('error', accountModel, 'NoViewAccess');
             }
         });
+    };
 
-    });
+    account.on('change:tokenAuth', verifyAuthToken);
 
     account.updateAuthToken();
 }
