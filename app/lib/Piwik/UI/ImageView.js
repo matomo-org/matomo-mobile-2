@@ -22,7 +22,6 @@
  * @exports  ImageView as Piwik.UI.ImageView
  */
 function ImageView () {
-
 }
 
 /**

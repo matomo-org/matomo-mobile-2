@@ -2,3 +2,78 @@
     backgroundColor: "white",
     navBarHidden: true 
 }
+
+"#graph": {
+   touchEnabled: false,
+   canScale: false,
+   hires: false,
+   defaultImage: 'graphDefault.png',
+   enableZoomControls: false,
+   left: 10,
+   right: 10
+}
+
+"#graph[platform=ios]": {
+   canScale: true,
+   hires: true,
+}
+
+"#graph[platform=android]": {
+    defaultImage: '/graphDefault.png'
+}
+
+".separator": {
+    bottom: 0,
+    height: 2,
+    backgroundColor: '#bbbbbb',
+    left: 0,
+    right: 0,
+}
+
+"#bottomContainer": {
+    bottom: 0,
+    left: 0,
+    right: 0,
+}
+
+"#topContainer": {
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#cccccc',
+}
+
+".labelContainer": {
+    layout: 'vertical',
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    left: 0,
+    right: 0,
+}
+
+"#reportName": {
+    text: ' ',
+    ellipsize: true,
+    wordWrap: false,
+    color: '#333333',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    left: 20,
+    right: 20,
+    font: { 
+        fontSize: 48
+    }
+}
+
+"#reportDate": {
+    text: ' ',
+    ellipsize: true,
+    wordWrap: false,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    top: 25,
+    left: 20,
+    right: 20,
+    color: '#666666',
+    font: { 
+        fontSize: 36
+    }
+}

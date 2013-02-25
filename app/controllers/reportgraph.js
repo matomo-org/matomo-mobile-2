@@ -1,4 +1,7 @@
 var imageGraphUrl;
+var imageGraphEvolutionUrl;
+var reportName = '';
+var reportDate = '';
 
 function width (image) 
 {
@@ -28,22 +31,36 @@ function height (image)
 
 function showDetail ()
 {
-    var detailGraph = Alloy.createController('graphdetail', {graphUrl: imageGraphUrl});
+    var options ={imageGraphUrl: imageGraphUrl,
+                  imageGraphEvolutionUrl: imageGraphEvolutionUrl,
+                  reportName: reportName, 
+                  reportDate: reportDate};
+
+    var detailGraph = Alloy.createController('graphdetail', options);
     detailGraph.open();
 }
 
 exports.update = function (processedReportModel, accountModel) {
     imageGraphUrl = processedReportModel.getImageGraphUrl();
+    reportName    = processedReportModel.getReportName();
+    reportDate    = processedReportModel.getReportDate();
+    imageGraphEvolutionUrl = processedReportModel.imageGraphEvolutionUrl();
 
-    if (!imageGraphUrl) {
-        return;
+    if (imageGraphUrl) {
+        var graph     = require('Piwik/PiwikGraph');
+        imageGraphUrl = graph.addSortOrder(imageGraphUrl, processedReportModel.getSortOrder());
+        imageGraphUrl = graph.generateUrl(imageGraphUrl, accountModel);
+    }
+
+    if (imageGraphEvolutionUrl) {
+        var graph     = require('Piwik/PiwikGraph');
+        imageGraphEvolutionUrl = graph.addSortOrder(imageGraphEvolutionUrl, processedReportModel.getSortOrder());
+        imageGraphEvolutionUrl = graph.generateUrl(imageGraphEvolutionUrl, accountModel);
     }
     
-    var graph     = require('Piwik/PiwikGraph');
-    imageGraphUrl = graph.addSortOrder(imageGraphUrl, processedReportModel.getSortOrder());
-    imageGraphUrl = graph.generateUrl(imageGraphUrl, accountModel);
+    // TODO SWITCHGRAPH
 
-    var imageWithSize = graph.appendSize(imageGraphUrl, width(this.image), height(this.image), OS_IOS);
+    var imageWithSize = graph.appendSize(imageGraphUrl, width($.image), height($.image), OS_IOS);
 
     console.log(imageWithSize);
 

@@ -45,6 +45,5 @@
     bottom: '8dp',
     right: '8dp',
     width: '32dp',
-    height: '32dp',
-    zIndex: '2dp'
+    height: '32dp'
 }

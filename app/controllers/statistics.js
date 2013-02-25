@@ -113,7 +113,12 @@ function onVisitorLogChosen()
 
 function onVisitorMapChosen()
 {
-    var webview = {title: L('Visitor Map'), url: 'http://piwik.vis4.net/index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&idSite=14&period=month&date=2013-01-18&disableLink=1&widget=1'};
+    var url = accountModel.getBasePath();
+    url    += "index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&idSite=";
+    url    += siteModel.id;
+    url    += "period=month&date=today&disableLink=1&widget=1";
+
+    var webview = {title: L('Visitor Map'), url: url};
     var map     = Alloy.createController('webview', webview)
     map.open();
 }

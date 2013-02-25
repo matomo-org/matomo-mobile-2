@@ -1,0 +1,56 @@
+".container": {
+    opacity: 0.9, 
+    visible: true,
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#bbbbbb',
+    height: 40,
+    zIndex: 999,
+}
+
+".container[platform=android]": {
+    height: '40dp'
+}
+
+"#index[platform=ios]": {
+    top: 0,
+    borderTop: false,
+    borderBottom: false,
+    barColor: '#bbb',
+    translucent: true,
+    zIndex: 999,
+    height: 20,
+    opacity: 0.7,
+    visible: true
+}
+
+"#closeButton[platform=ios]": {
+    title: L('General_Close'),
+    style: Ti.UI.iPhone.SystemButtonStyle.BORDERED,
+    color: '#333333'
+}
+
+"#switchButton[platform=ios]": {
+    title: ' - ',
+    style: Ti.UI.iPhone.SystemButtonStyle.BAR,
+    color: '#333333'
+}
+
+"#switchButton[platform=android]": {
+    color: '#333333',
+    right: '16dp',
+    top: '1dp',
+    height: '38dp',
+    backgroundImage: '/btn_default_normal_holo_light.9.png',
+    backgroundFocusedImage: '/btn_default_focused_holo_light.9.png',
+    backgroundSelectedImage: '/btn_default_focused_holo_light.9.png',
+    backgroundDisabledImage: '/btn_default_disabled_holo_light.9.png',
+}
+
+"#switchButton[platform=mobileweb]": {
+    color: '#333333',
+    right: 16,
+    top: 1,
+    height: 38,
+}

@@ -1,0 +1,12 @@
+<Alloy>
+    <View id="index" class="container" platform="android,mobileweb">
+        <Button id="switchButton" onClick="doSwitchGraph" />
+    </View>
+    <Toolbar id="index" platform="ios">
+        <Items>
+            <Button id="closeButton" onClick="doClose"/>
+            <FlexSpace/>
+            <Button id="switchButton" onClick="doSwitchGraph"/>
+        </Items>
+    </Toolbar>
+</Alloy>

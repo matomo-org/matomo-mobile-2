@@ -9,7 +9,7 @@
         
         <View id="content" class="container">
             <SearchBar id="searchBar" onReturn="doSearchWebsite" onCancel="doCancelSearchWebsite" platform="android,ios"/>
-            <Require src="reportgraph" id="reportGraphCtrl"/>
+            <Require src="graph" id="reportGraphCtrl"/>
             <View class="space"></View>
             <View class="shadow"></View>
             <TableView class="websitesTableView" dataCollection="piwikProcessedReport" 

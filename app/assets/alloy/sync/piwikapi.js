@@ -60,7 +60,8 @@ function Sync(method, model, opts) {
 
 module.exports.sync = Sync;
 
-module.exports.beforeModelCreate = function(config) {
+module.exports.beforeModelCreate = function (config, name)
+{
     config = config || {};
 
     config.data = {}; // for localStorage or case where entire collection is needed to maintain store
@@ -70,7 +71,8 @@ module.exports.beforeModelCreate = function(config) {
     return config;
 };
 
-module.exports.afterModelCreate = function(Model) {
+module.exports.afterModelCreate = function (Model, name)
+{
     Model = Model || {};
 
     Model.prototype.config.Model = Model; // needed for fetch operations to initialize the collection from persistent store

@@ -129,8 +129,6 @@ function onStatisticsFetched(processedReportModel)
     $.reportTable.setData(rows);
     row  = null;
     rows = null;
-
-    $.reportTable._refreshSections();
 }
 
 function doRefresh()

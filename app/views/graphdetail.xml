@@ -1,5 +1,17 @@
 <Alloy>
-    <Window id="index" class="container">
+    <Window formFactor="handheld" id="index" class="container">
         <ImageView id="graph"/>
+    </Window>
+    <Window formFactor="tablet" id="index">
+        <View id="topContainer">
+            <View class="labelContainer">
+                <Label id="reportName"/>
+                <Label id="reportDate"/>
+            </View>
+        </View>
+        <View class="separator"/>
+        <View id="bottomContainer">
+            <ImageView id="graph"/>
+        </View>
     </Window>
 </Alloy>

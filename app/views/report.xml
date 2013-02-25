@@ -20,7 +20,7 @@
                     <Require src="reportinfo" id="reportInfoCtrl"/>
                 </TableViewRow>
                 <TableViewRow>
-                    <Require src="reportgraph" id="reportGraphCtrl"/>
+                    <Require src="graph" id="reportGraphCtrl"/>
                 </TableViewRow>
                 <TableViewRow>
                     <View id="reportRowSeparator" class="reportRowSeparator">

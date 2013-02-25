@@ -1,5 +1,5 @@
 <Alloy>
-    <View class="container">
+    <View id="index" class="container">
         <ImageView id="image"/>
         <ImageView id="showDetailIcon" onClick="showDetail"/>
     </View>
