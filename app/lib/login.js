@@ -35,7 +35,7 @@ function showWaitingIndicator()
 function hideWaitingIndicator()
 {
     if (win) {
-       // win.close();
+        win.close();
         win = null;
     }
 }
