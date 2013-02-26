@@ -3,6 +3,8 @@ var args = arguments[0] || {};
 var reportName = args.reportName || ' ';
 var reportDate = args.reportDate || ' ';
 
+$.graph = $.graphWidget.getView();
+
 var graphSwitcher = Alloy.createController('graphswitcher', args);
 graphSwitcher.addSwitchGraph(true);
 $.index.add(graphSwitcher.getView());
@@ -121,7 +123,7 @@ function getGraphUrlWithSize(width, height) {
  */
 function getImageView(url, width, height) {
 
-    Piwik.getLog().debug('piwik graphUrl is ' + url, 'graph/fulldetail::getImageView');
+    console.log('piwik graphUrl is ' + url, 'graphdetail::getImageView');
 
     var options = {width: width,
                    height: height,
@@ -132,10 +134,7 @@ function getImageView(url, width, height) {
                    enableZoomControls: false,
                    image: url};
 
-    var ImageView = require('/Piwik/UI/ImageView');
-    var image     = new ImageView();
-
-    return image.init(options);
+    return Alloy.createWidget('org.piwik.imageview', 'widget', options);
 }
 
 var pictureWidth     = getPictureWidth();
@@ -143,7 +142,6 @@ var pictureHeight    = getPictureHeight();
 var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
 
 $.graph.image = graphUrlWithSize;
-
 
 if (require('alloy').isTablet) {
 
@@ -170,14 +168,25 @@ if (require('alloy').isTablet) {
             $.index.remove($.graph);
             $.graph = null;
 
+            if ($.graphWidget) {
+                $.graphWidget.destroy();
+                $.graphWidget = null;
+            }
+
             var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
-            $.graph              = getImageView(graphUrlWithSize, pictureWidth, pictureHeight);
+            $.graphWidget        = getImageView(graphUrlWithSize, pictureWidth, pictureHeight);
+            $.graph              = $.graphWidget.getView();
+
+            $.graphWidget.setParent($.index);
             
-            $.index.add($.graph);
+       //    $.index.add($.graph);
             
         } catch (e) {
             console.warn('Failed to update (remove and add) graph', 'graphdetail');
             console.warn(e, 'graphdetail');
+            for (var ind in e) {
+                console.log(ind, e[ind]);
+            }
         }
     }
     
@@ -193,6 +202,13 @@ if (require('alloy').isTablet) {
     }
 
     Ti.Gesture.addEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);
+}
+
+function destroy()
+{
+    if (!require('alloy').isTablet) {
+        Ti.Gesture.removeEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);
+    }
 }
 
 exports.open = function () 

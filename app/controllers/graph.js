@@ -46,12 +46,12 @@ function showDetail ()
 function updateImage(graphUrl)
 {
     var graph = require('Piwik/PiwikGraph');
-    var imageWithSize = graph.appendSize(graphUrl, width($.image), height($.image), OS_IOS);
+    var imageWithSize = graph.appendSize(graphUrl, width($.image.getView()), height($.image.getView()), OS_IOS);
 
     console.log(imageWithSize);
 
-    if ($.image) {
-        $.image.image = imageWithSize;
+    if ($.image.getView()) {
+        $.image.getView().image = imageWithSize;
     }
 }
 
@@ -72,7 +72,7 @@ function addGraphSwitcher(graphSwitcher)
         $.showDetailIcon.hide();
     });
 
-    $.image.addEventListener('click', function () {
+    $.image.getView().addEventListener('click', function () {
         if (!graphSwitcher) {
             return;
         }
@@ -81,7 +81,7 @@ function addGraphSwitcher(graphSwitcher)
     });
     
     if (OS_IOS) {
-        $.image.addEventListener('load', function () {
+        $.image.getView().addEventListener('load', function () {
             // we need to wait till view is visible otherwise animation will never be executed.
             if (!graphSwitcher) {
                 return;
@@ -164,10 +164,10 @@ exports.update = function (processedReportModel, accountModel) {
 
     if (OS_IOS) {
         // we need to wait till view is visible otherwise animation will never be executed.
-        $.image.addEventListener('load', animateFadeOutDetailIcon);
+        $.image.getView().addEventListener('load', animateFadeOutDetailIcon);
     } else {
         animateFadeOutDetailIcon();
     }
     
-    $.image.addEventListener('click', toggleDetailIcon)
+    $.image.getView().addEventListener('click', toggleDetailIcon)
 }

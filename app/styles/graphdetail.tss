@@ -3,7 +3,7 @@
     navBarHidden: true 
 }
 
-"#graph": {
+"#graphWidget": {
    touchEnabled: false,
    canScale: false,
    hires: false,
@@ -13,12 +13,12 @@
    right: 10
 }
 
-"#graph[platform=ios]": {
+"#graphWidget[platform=ios]": {
    canScale: true,
    hires: true,
 }
 
-"#graph[platform=android]": {
+"#graphWidget[platform=android]": {
     defaultImage: '/graphDefault.png'
 }
 

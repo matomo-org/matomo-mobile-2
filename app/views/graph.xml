@@ -1,6 +1,6 @@
 <Alloy>
     <View id="index" class="container">
-        <ImageView id="image"/>
+        <Require id="image" type="widget" src="org.piwik.imageview"/>
         <ImageView id="showDetailIcon" onClick="showDetail"/>
     </View>
 </Alloy>

@@ -4,6 +4,10 @@
         <RightNavButton platform="ios,mobileweb">
             <Button id="accountsButton" onClick="doChooseAccount"/>
         </RightNavButton>
+        
+        <Menu id="menu" platform="android">
+            <MenuItem id="menuItemAccount" onClick="doChooseAccount" />
+        </Menu>
 
         <View id="loading"><Label id="loadingLabel"></Label></View>
         

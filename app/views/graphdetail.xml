@@ -1,8 +1,8 @@
 <Alloy>
-    <Window formFactor="handheld" id="index" class="container">
-        <ImageView id="graph"/>
+    <Window formFactor="handheld" id="index" class="container" onClose="destroy">
+        <Require id="graphWidget" type="widget" src="org.piwik.imageview"/>
     </Window>
-    <Window formFactor="tablet" id="index">
+    <Window formFactor="tablet" id="index" onClose="destroy">
         <View id="topContainer">
             <View class="labelContainer">
                 <Label id="reportName"/>
@@ -11,7 +11,7 @@
         </View>
         <View class="separator"/>
         <View id="bottomContainer">
-            <ImageView id="graph"/>
+            <Require id="graphWidget" type="widget" src="org.piwik.imageview"/>
         </View>
     </Window>
 </Alloy>

@@ -2,6 +2,12 @@
     backgroundColor: "#B2AEA5"
 },
 
+"#menuItemAccount[platform=android]": {
+    icon: '/ic_action_accounts.png',
+    title: L('Mobile_Accounts'),
+    showAsAction: Ti.Android.SHOW_AS_ACTION_NEVER
+}
+
 "#accountsButton": {
     image: "ic_action_accounts.png",
     width: "32"

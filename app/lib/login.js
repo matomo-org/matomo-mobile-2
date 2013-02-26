@@ -19,7 +19,7 @@ function showWaitingIndicator()
     }
 
     var activityIndicator = Ti.UI.createActivityIndicator({
-      font: {fontSize:26, fontWeight:'bold'},
+      font: {fontSize: OS_ANDROID ? '18dp' : 26, fontWeight:'bold'},
       message: L('Mobile_VerifyAccount'),
       style: style
     });
