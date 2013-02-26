@@ -44,11 +44,12 @@ function openEntrySite(account)
 function onCreatedAccount(account) {
     accounts.off("add", onCreatedAccount);
 
+    showEntryScreen(account);
+    
     if (firstLogin) {
         firstLogin.close();
     }
 
-    showEntryScreen(account);
 }
 
 function openStatistics(event)

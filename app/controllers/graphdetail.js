@@ -31,7 +31,7 @@ $.index.addEventListener('click', function () {
  * @returns {int} The width in px 
  */
 function getViewWidth() {
-    return ($.index.size && $.index.size.width) ? $.index.size.width : Ti.Platform.displayCaps.platformWidth;
+    return ($.index && $.index.size && $.index.size.width) ? $.index.size.width : Ti.Platform.displayCaps.platformWidth;
 }
 
 /**
@@ -40,7 +40,7 @@ function getViewWidth() {
  * @returns {int} The height in px 
  */
 function getViewHeight() {
-    return ($.index.size && $.index.size.height) ? $.index.size.height : Ti.Platform.displayCaps.platformHeight;
+    return ($.index && $.index.size && $.index.size.height) ? $.index.size.height : Ti.Platform.displayCaps.platformHeight;
 }
 
 /**

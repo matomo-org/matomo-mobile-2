@@ -163,7 +163,11 @@ exports.definition = {
 
             markAccountAsLastUsed: function () {
                 var lastUsedAccountKey = this.config.lastUsedAccountPropertyKey;
-                Ti.App.Properties.setInt(lastUsedAccountKey, parseInt(this.id, 10));
+                var accountId = parseInt(this.id, 10);
+
+                if (accountId) {
+                    Ti.App.Properties.setInt(lastUsedAccountKey, accountId);
+                }
             },
 
             updatePreferences: function (callback) {

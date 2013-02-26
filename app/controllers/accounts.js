@@ -15,7 +15,7 @@ function renderListOfAccounts()
     accounts.forEach(function(account) {
         rows.push(Ti.UI.createTableViewRow({
             title : account.get("name"),
-            id : account.id
+            accountId : account.id
         }));
     });
 
@@ -25,7 +25,7 @@ function renderListOfAccounts()
 
 function doSelectAccount(event)
 {
-    var account = accounts.get(event.rowData.id);
+    var account = accounts.get(event.rowData.accountId);
     account.select(function () {
         $.trigger('accountChosen', account);
         close();
@@ -34,7 +34,7 @@ function doSelectAccount(event)
 
 function doDeleteAccount(event)
 {
-    var account = accounts.get(event.rowData.id);
+    var account = accounts.get(event.rowData.accountId);
 
     if (account) {
         accounts.remove(account);

@@ -6,6 +6,10 @@
     navBarHidden: true
 },
 
+"#index[platform=android]": {
+    exitOnClose: true
+},
+
 ".container": {
     backgroundColor: "#F5F5F5",
     top: 0
