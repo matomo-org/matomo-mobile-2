@@ -17,7 +17,10 @@ function closeCurrentlyOpenedWindow()
 }
 
 exports.close = function(win) {
-    openedWindows.pop();
+    
+    var _ = require('alloy/underscore');
+    openedWindows = _.without(openedWindows, win);
+
     win.close();
     win = null;
 };
