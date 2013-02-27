@@ -26,9 +26,9 @@
                         <Label text="Visits" class="quickInfoName" />
                         <View right="0" layout="horizontal" height="SIZE">
                             <Label text="{nb_visits}" class="quickInfoValue"/>
-                            <Label text=" (" class="quickInfoName"/>
+                            <Label text=" (" class="quickInfoValue"/>
                             <Label text="{visits_evolution}" class="quickInfoValue"/>
-                            <Label text=")" class="quickInfoName"/>
+                            <Label text=")" class="quickInfoValue"/>
                         </View>
                     </View>
                 </TableViewRow>
