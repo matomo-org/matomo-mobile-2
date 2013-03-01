@@ -29,7 +29,7 @@ function updateAvailableReportsList()
 
     rows.push(Ti.UI.createTableViewRow({title: L('Live_VisitorsInRealTime'), cid: 'live', hasChild: true, ellipsize: false, wordWrap: true}));
     rows.push(Ti.UI.createTableViewRow({title: L('Live_VisitorLog'), cid: 'visitorlog', hasChild: true, ellipsize: false, wordWrap: true}));
-    rows.push(Ti.UI.createTableViewRow({title: L('Visitor Map'), cid: 'visitormap', hasChild: true, ellipsize: false, wordWrap: true}));
+    rows.push(Ti.UI.createTableViewRow({title: L('Real-time Map'), cid: 'visitormap', hasChild: true, ellipsize: false, wordWrap: true}));
 
     reportsCollection.forEach(function (report) 
     {
