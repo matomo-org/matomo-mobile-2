@@ -5,6 +5,7 @@
         <View id="content">
 
             <Require src="livevisitorsmenu" 
+                     formFactor="handheld"
                      onChooseReport="doChooseReport" 
                      id="liveVisitorsMenuCtrl"/>
             <View class="menuSeparatorShadow"/>
