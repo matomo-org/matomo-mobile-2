@@ -1,8 +1,12 @@
 <Alloy>
     <View id="formView">
-        <TextField id="url" class="textfield" onReturn="onUrlReturn" onBlur="onUrlBlur"/>
-        <TextField id="username" class="textfield" onReturn="onUsernameReturn"/>
-        <TextField id="password" class="textfield" onReturn="doLogin"/>
+        <View id="textFieldContainer">
+            <TextField id="url" class="textfield" onReturn="onUrlReturn" onBlur="onUrlBlur"/>
+            <View class="line"/>
+            <TextField id="username" class="textfield" onReturn="onUsernameReturn"/>
+            <View class="line"/>
+            <TextField id="password" class="textfield" onReturn="doLogin"/>
+        </View>
         <Button id="loginbutton" onClick="doLogin" title="Login" />
         <Label id="anonymousLoginNotice"/>
     </View>

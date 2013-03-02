@@ -5,7 +5,7 @@
     borderColor: "#CD1628",
     width: Ti.UI.FILL,
     height: 40,
-    top: 2,
+    top: 10,
     color: '#ffffff',
     font: { 
         fontSize: 18,
@@ -18,7 +18,7 @@
 },
 
 "#loginbutton[platform=android]": {
-    top: '2dp',
+    top: '10dp',
     height: '45dp',
     font: { 
         fontSize: '18sp',
@@ -30,22 +30,39 @@
     layout: "vertical",
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
-    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL
 },
+
+"#textFieldContainer": {
+    layout: "vertical",
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    borderColor: '#E6E6E6',
+    borderWidth: 2
+}
+
+".line": {
+    width: Ti.UI.FILL,
+    height: 2,
+    backgroundColor: '#E6E6E6'
+}
 
 ".textfield": {
     top: 2,
     height: 40,
-    width: Ti.UI.FILL,
-    borderStyle: Ti.UI.INPUT_BORDERSTYLE_BEZEL,
-    borderRadius: 3,
+    left: 10, right: 10,
     autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+    borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
     autocorrect: false
 },
 
 ".textfield[platform=android]": {
     top: '2dp',
-    height: '45dp'
+    height: '45dp',
+    left: '10dp',
+    right: '10dp'
 },
 
 "#url": {
@@ -67,17 +84,19 @@
 },
 
 "#anonymousLoginNotice": {
-    top: 2,
+    top: 10,
     font: { 
         fontSize: 12
     },
-    textAlign: 'center',
-    text: L('Mobile_HowtoLoginAnonymous')
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    text: L('Mobile_HowtoLoginAnonymous'),
+    wordWrap: true,
+    left: 0, right: 0
 },
 
-".anonymousLoginNotice[platform=android]": {
-    top: '2dp',
+"#anonymousLoginNotice[platform=android]": {
+    top: '10dp',
     font: { 
-        fontSize: '14sp'
+        fontSize: '12sp'
     }
 },
