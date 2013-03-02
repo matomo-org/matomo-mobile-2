@@ -30,8 +30,9 @@
 },
 
 ".settingsButton": {
-    image: "ic_action_settings.png",
-    width: 32
+    backgroundImage: "ic_action_settings.png",
+    width: 32,
+    height: 32
 },
 
 ".settingsButton[platform=mobileweb]": {
@@ -39,8 +40,9 @@
 },
 
 "#websitesButton": {
-    image: "ic_action_website.png",
-    width: 32
+    backgroundImage: "ic_action_website.png",
+    width: 32,
+    height: 32
 },
 
 "#websitesButton[platform=mobileweb]": {

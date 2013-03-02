@@ -18,17 +18,25 @@
 },
 
 "#content": {
-    layout: "vertical"
+    layout: "vertical",
+    backgroundColor: "#f0f0f0"
 },
 
 "#reportTable": {
     top: 0
+  //  top: 10,
+  //  left: 10,
+  //  right: 10,
+  //  bottom: 10,
+  //  borderRadius: 5,
+  //  borderColor: "#D2D2D2"
 },
 
 ".menuSeparatorShadow": {
     top: 0,
-    height: 8,
-    backgroundImage: 'separator.png'
+    height: 1,
+    backgroundColor: '#cccccc'
+  //  backgroundImage: 'separator.png'
 },
 
 ".menuSeparatorShadow[platform=android]": {
@@ -49,7 +57,8 @@
 
 ".reportRowSeparator": {
     layout: "vertical",
-    height: Ti.UI.SIZE
+    height: Ti.UI.SIZE,
+    backgroundColor: 'white'
 },
 
 ".space": {
@@ -65,8 +74,8 @@
 },
 
 ".shadow": {
-    height: 4,
-    backgroundImage: "separator2.png"
+    height: 1,
+    backgroundColor: "#D2D2D2"
 },
 
 ".shadow[platform=mobileweb]": {

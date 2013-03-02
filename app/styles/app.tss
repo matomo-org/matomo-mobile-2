@@ -1,6 +1,7 @@
 "Window": {
-    barColor: "#B2AEA5",
-    backgroundColor: "#FFFFFF"
+    barImage: "navbar.png",
+    backgroundColor: "#FFFFFF",
+    barColor: "#CD1628"
 },
 
 "Window[platform=android]": {
@@ -13,7 +14,7 @@
 },
 
 "NavigationGroup": {
-    barColor: "#B2AEA5"
+    barImage: "navbar.png"
 },
 
 "Label": {

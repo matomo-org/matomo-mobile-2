@@ -1,5 +1,5 @@
 "#windowButtonBar": {
-    backgroundColor: "#B2AEA5"
+    backgroundColor: "#CD1628"
 },
 
 "#menuItemAccount[platform=android]": {
@@ -9,8 +9,9 @@
 }
 
 "#accountsButton": {
-    image: "ic_action_accounts.png",
-    width: "32"
+    backgroundImage: "ic_action_accounts.png",
+    width: 32,
+    height: 32
 }
 
 "#accountsButton[platform=mobileweb]": {
@@ -19,7 +20,7 @@
 
 "#searchBar": {
     top: 0,
-    barColor: "#B2AEA5",
+    barColor: "#cccccc",
     showCancel: true
 },
 

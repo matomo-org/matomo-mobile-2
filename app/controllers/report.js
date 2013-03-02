@@ -110,9 +110,9 @@ function onStatisticsFetched(processedReportModel)
     row.add($.reportGraphCtrl.getView());
     rows.push(row);
 
-    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-    row.add($.reportRowSeparator);
-    rows.push(row);
+     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
+     row.add($.reportRowSeparator);
+     rows.push(row);
 
     if (reportRowsCtrl) {
         reportRowsCtrl.destroy();

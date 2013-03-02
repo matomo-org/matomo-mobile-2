@@ -13,9 +13,9 @@
         
         <View id="content" class="container">
             <SearchBar id="searchBar" onReturn="doSearchWebsite" onCancel="doCancelSearchWebsite" platform="android,ios"/>
-            <Require src="graph" id="reportGraphCtrl"/>
-            <View class="space"></View>
-            <View class="shadow"></View>
+            <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
+            <View class="space" formFactor="tablet"></View>
+            <View class="shadow" formFactor="tablet"></View>
             <TableView class="websitesTableView" dataCollection="piwikProcessedReport" 
                        onClick="doSelectWebsite">
 
@@ -23,6 +23,7 @@
                     <Label left="10" right="120" textAlign="left" text="{label}" />
 
                     <View right="10" width="100" layout="vertical" height="SIZE">
+                        <View class="space"></View>
                         <Label text="Visits" class="quickInfoName" />
                         <View right="0" layout="horizontal" height="SIZE">
                             <Label text="{nb_visits}" class="quickInfoValue"/>
@@ -30,6 +31,7 @@
                             <Label text="{visits_evolution}" class="quickInfoValue"/>
                             <Label text=")" class="quickInfoValue"/>
                         </View>
+                        <View class="space"></View>
                     </View>
                 </TableViewRow>
 

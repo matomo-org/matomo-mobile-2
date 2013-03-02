@@ -1,7 +1,6 @@
 "#index": {
     className: "tableViewSection",
     height: Ti.UI.SIZE,
-    backgroundColor: '#B2AEA5',
     selectedBackgroundColor: '#B2AEA5',
     opacity: 0.95,
     selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
@@ -22,7 +21,6 @@
 
 ".headerView": {
     height: Ti.UI.SIZE,
-    backgroundColor: '#B2AEA5',
-    selectedBackgroundColor: '#B2AEA5',
-    opacity: 0.95
+    opacity: 0.95,
+    backgroundImage: 'org.piwik.tableviewsection/tableviewsectionbackground.png',
 }

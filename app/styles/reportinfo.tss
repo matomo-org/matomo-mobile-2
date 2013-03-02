@@ -2,20 +2,23 @@
     top: 0,
     height: Ti.UI.SIZE,
     layout: "vertical",
-    backgroundColor: '#EBEBEB'
+    backgroundColor: 'white'
+  //  backgroundColor: '#DCDCDC'
 },
 
 "#name": {
-    top: 10,
+    top: 13,
     left: 15,
     textAlign: "left",
+    color: "#141414",
     font: {
-        fontSize: 13
+        fontWeight: 'bold',
+        fontSize: 15
     }
 },
 
 "#name[platform=android]": {
-    top: '10dp',
+    top: '13dp',
     left: '16dp',
     font: {
         fontSize: '13sp'
@@ -23,16 +26,18 @@
 },
 
 "#date": {
-    top: 10,
+    top: 13,
+    color: "#141414",
     left: 15,
     textAlign: "left",
     font: {
-        fontSize: 13
+        fontWeight: 'bold',
+        fontSize: 15
     }
 },
 
 "#date[platform=android]": {
-    top: '10dp',
+    top: '13dp',
     left: '16dp',
     font: {
         fontSize: '13sp'
@@ -50,9 +55,15 @@
 },
 
 ".separator": {
-    height: 10
+    height: 13
 },
 
+".separatorline": {
+    top: 0,
+    height: 1,
+    backgroundColor: "#D2D2D2"
+}
+
 ".separator[platform=android]": {
-    height: '10dp'
+    height: '13dp'
 }

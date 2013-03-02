@@ -1,7 +1,8 @@
 ".container": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-    layout: "vertical"
+    layout: "vertical",
+    backgroundColor: "#F1F1F1"
 },
 
 ".data": {
@@ -11,9 +12,9 @@
 
 "#title": {
     height: Ti.UI.SIZE,
-    left: 10,
+    left: 15,
     right: 95,
-    color: '#333333',
+    color: '#7B7B7B',
     top: 13,
     bottom: 10,
     font: {fontSize: 16}
@@ -22,7 +23,7 @@
 "#title[platform=android]": {
     left: '16dp',
     right: '100dp',
-    color: '#333333',
+    color: '#7B7B7B',
     top: '10dp',
     bottom: '10dp',
     font: {fontSize: '16sp'}
@@ -35,13 +36,13 @@
     top: 13,
     bottom: 10,
     font: {fontSize: 16, fontWeight: 'bold'},
-    color: '#385487'
+    color: '#D3172A'
 },
 
 "#value[platform=android]": {
     right: '16dp',
     width: '75dp',
-    color: '#0099CC',
+    color: '#D3172A',
     top: '10dp',
     bottom: '10dp',
     font: {fontSize: '16sp', fontWeight: 'bold'}
@@ -49,7 +50,7 @@
 
 ".separator": {
     height: 1,
-    backgroundColor: '#cccccc'
+    backgroundColor: '#D2D2D2'
 },
 
 ".separator[platform=android]": {

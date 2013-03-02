@@ -1,8 +1,8 @@
 <Alloy>
     <View class="container">
-        <Label id="name"> - </Label>
         <Label id="date"> - </Label>
+        <Label id="name"> - </Label>
         <View class="separator"/>
-        <View class="separatorShadow"/>
+        <View class="separatorline"/>
     </View>
 </Alloy>

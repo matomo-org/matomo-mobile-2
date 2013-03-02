@@ -46,7 +46,7 @@ function onAccountChosen(account)
                 websiteChosen(entrySiteCollection.first());
             } else if (!entrySiteCollection.length) {
                 // TODO no access to any account
-                alert('no access to any website');
+                console.error('no access to any website');
             } else {
                 fetchListOfAvailableWebsites(entrySiteCollection.first());
             }
@@ -79,7 +79,9 @@ function onStatisticsFetched(statisticsCollection)
 {
     showReportContent();
 
-    $.reportGraphCtrl.update(statisticsCollection.first(), accountModel);
+    if ($.reportGraphCtrl) {
+        $.reportGraphCtrl.update(statisticsCollection.first(), accountModel);
+    }
 }
 
 function showReportContent()

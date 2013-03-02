@@ -2,7 +2,7 @@
     top: 0,
     layout: "horizontal",
     height: 60,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#EFEFEF',
     contentWidth: 'auto',
     canCancelEvents: false
 },
