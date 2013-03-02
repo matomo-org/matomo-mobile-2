@@ -4,7 +4,7 @@
             <ImageView class="menuIcon"/>
             <Label class="menuTitle" id="reports"/>
         </View>
-        <View class="menuSeparator"/>
+        <View class="menuSeparator" formFactor="handheld"/>
         <View class="menuItem" onClick="onChangeDate">
             <ImageView class="menuIcon"/>
             <Label class="menuTitle" id="date"/>

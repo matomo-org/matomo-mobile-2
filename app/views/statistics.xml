@@ -4,7 +4,7 @@
         <LeftNavButton platform="mobileweb">
             <Button class="settingsButton" onClick="doOpenSettings"/>
         </LeftNavButton>
-        <LeftNavButton formFactor="handheld" platform="ios">
+        <LeftNavButton platform="ios">
             <Button class="settingsButton" onClick="doOpenSettings"/>
         </LeftNavButton>
 
@@ -13,7 +13,6 @@
                 <Labels>
                     <Label>Websites</Label>
                     <Label>Accounts</Label>
-                    <Label>Settings</Label>
                 </Labels>
             </ButtonBar>
         </RightNavButton>

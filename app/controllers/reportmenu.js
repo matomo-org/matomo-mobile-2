@@ -22,3 +22,13 @@ function onFlatten ()
 {
     $.trigger('flatten', {});
 }
+
+exports.setMetric = function (metricName) 
+{
+    $.metric.text = metricName + '';
+}
+
+exports.setDate = function (displayDate) 
+{
+    $.date.text = displayDate + '';
+}

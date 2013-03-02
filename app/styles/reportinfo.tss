@@ -1,9 +1,13 @@
 ".container": {
     top: 0,
-    height: Ti.UI.SIZE,
-    layout: "vertical",
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    height: 60
   //  backgroundColor: '#DCDCDC'
+},
+
+".container[formFactor=handheld]": {
+    layout: "vertical",
+    height: Ti.UI.SIZE,
 },
 
 "#name": {
@@ -63,6 +67,10 @@
     height: 1,
     backgroundColor: "#D2D2D2"
 }
+
+".separatorline[formFactor=tablet]": {
+    top: 59
+},
 
 ".separator[platform=android]": {
     height: '13dp'

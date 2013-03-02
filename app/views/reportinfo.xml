@@ -2,7 +2,7 @@
     <View class="container">
         <Label id="date"> - </Label>
         <Label id="name"> - </Label>
-        <View class="separator"/>
+        <View class="separator" formFactor="handheld"/>
         <View class="separatorline"/>
     </View>
 </Alloy>

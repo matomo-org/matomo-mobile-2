@@ -95,24 +95,37 @@ function onStatisticsFetched(processedReportModel)
 {
     showReportContent();
     
+    if (!processedReportModel) {
+        console.error('msising report model');
+        return;
+    }
+    
     $.reportTable.setData([]);
 
-    $.reportInfoCtrl.update(processedReportModel);
+    if ($.reportInfoCtrl) {
+        $.reportInfoCtrl.update(processedReportModel);
+    }
+
     $.reportGraphCtrl.update(processedReportModel, accountModel);
 
     var rows = [];
 
-    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-    row.add($.reportInfoCtrl.getView());
-    rows.push(row);
+    if (!require('alloy').isTablet) {
+        var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
+        row.add($.reportInfoCtrl.getView());
+        rows.push(row);
+    } else {
+        $.reportMenuCtrl.setMetric(processedReportModel.getMetricName());
+        $.reportMenuCtrl.setDate(processedReportModel.getReportDate());
+    }
 
     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
     row.add($.reportGraphCtrl.getView());
     rows.push(row);
 
-     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-     row.add($.reportRowSeparator);
-     rows.push(row);
+    var row = Ti.UI.createTableViewRow({height: OS_ANDROID ? '11dp' : 11});
+    row.add($.reportRowSeparator);
+    rows.push(row);
 
     if (reportRowsCtrl) {
         reportRowsCtrl.destroy();

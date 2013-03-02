@@ -17,16 +17,13 @@
                     <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>
                 <TableViewRow>
-                    <Require src="reportinfo" id="reportInfoCtrl"/>
+                    <Require src="reportinfo" id="reportInfoCtrl" formFactor="handheld"/>
                 </TableViewRow>
                 <TableViewRow>
                     <Require src="graph" id="reportGraphCtrl"/>
                 </TableViewRow>
-                <TableViewRow>
-                    <View id="reportRowSeparator" class="reportRowSeparator">
-                        <View class="space"></View>
-                        <View class="shadow"></View>
-                    </View>
+                <TableViewRow class="reportRowSeparator">
+                    <View id="reportRowSeparator" class="shadow"/>
                 </TableViewRow>
             </TableView>
         </View>

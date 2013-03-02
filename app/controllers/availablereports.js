@@ -10,12 +10,6 @@ var closeOnSelect     = args.closeOnSelect || false;
 
 reportsCollection.on('fetch', updateAvailableReportsList);
 
-function updatePageTitle(siteModel)
-{
-    if ($.index) {
-        $.index.title = siteModel.getName();
-    }
-}
 
 function updateAvailableReportsList()
 {
@@ -84,8 +78,8 @@ function close()
     $.destroy();
 }
 
-exports.updateWebsite = function (siteModel) {
-    updatePageTitle(siteModel);
+exports.updateWebsite = function (newSiteModel) {
+    siteModel = newSiteModel
 }
 
 exports.open = function() 

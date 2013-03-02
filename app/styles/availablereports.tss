@@ -2,6 +2,16 @@
 	backgroundColor: "white"
 },
 
+"Window[platform=ios]": {
+    barImage: "navbardark.png",
+    barColor: "#2D2D2D"
+}
+
+"#index[platform=ios]": {
+    barImage: "navbardark.png",
+    barColor: "#2D2D2D"
+}
+
 "#reportsTable[platform=ios]": {
     separatorColor: '#2D2D2D'
 }
@@ -12,5 +22,6 @@
 }
 
 "#index": {
-    backButtonTitle: L('Mobile_NavigationBack')
+    // backButtonTitle: L('Mobile_NavigationBack')
+    title: L('General_Reports')
 }

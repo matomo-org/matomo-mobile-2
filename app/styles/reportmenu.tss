@@ -22,6 +22,10 @@
     backgroundFocusedColor: 'white'
 },
 
+".menuItem[formFactor=tablet]": {
+    width: '32%'
+},
+
 ".menuItem[platform=android]": {
     height: '60dp'
 },
@@ -52,8 +56,6 @@
 },
 
 ".menuTitle": {
-    left: 20, 
-    right: 20,
     width: Ti.UI.SIZE,
     color: '#333333',
     bottom: 5,
@@ -61,6 +63,11 @@
         fontSize: 12,
         fontWeight: 'bold'
     }
+},
+
+".menuItem[formFactor=handheld]": {
+    left: 20, 
+    right: 20,
 },
 
 ".menuTitle[platform=android]": {

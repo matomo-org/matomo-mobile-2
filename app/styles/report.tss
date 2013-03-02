@@ -1,5 +1,5 @@
 ".container": {
-    layout: "vertical"
+    layout: "vertical",
 },
 
 ".container[platform=ios]": {
@@ -56,33 +56,17 @@
 },
 
 ".reportRowSeparator": {
-    layout: "vertical",
-    height: Ti.UI.SIZE,
+    height: 11,
     backgroundColor: 'white'
 },
 
-".space": {
-    height: 10
-},
-
-".space[platform=mobileweb]": {
-    top: 0, bottom: 0
-},
-
-".space[platform=android]": {
-    height: '10dp'
-},
-
 ".shadow": {
+    top: 10,
     height: 1,
     backgroundColor: "#D2D2D2"
 },
 
-".shadow[platform=mobileweb]": {
-    top: 0, bottom: 0
-},
-
 ".shadow[platform=android]": {
-    height: '4dp',
-    backgroundImage: "/separator2.png"
+    top: '10dp',
+    height: '1dp'
 }
