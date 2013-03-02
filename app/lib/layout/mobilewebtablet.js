@@ -14,11 +14,17 @@ function bootstrap (win)
     win = null;
 }
 
+function getVerticalSplitViewSeparatorLine()
+{
+    return Ti.UI.createView({left: 198, width: 2, zIndex: 5, backgroundColor: '#2D2D2D'});
+}
+
 exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
 {
-    var masterContainer = Ti.UI.createView({left: 0, width: 200, zIndex: 3});
+    var masterContainer = Ti.UI.createView({left: 0, width: 198, zIndex: 3});
     masterContainer.add(masterView);
     detailWindow.add(masterContainer);
+    detailWindow.add(getVerticalSplitViewSeparatorLine());
 
     detailContent.left  = 200;
     detailContent.right = 0;

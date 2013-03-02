@@ -27,9 +27,9 @@ function updateAvailableReportsList()
     var currentSection = null;
     var latestSection  = null;
 
-    rows.push(Ti.UI.createTableViewRow({title: L('Live_VisitorsInRealTime'), cid: 'live', hasChild: true, ellipsize: false, wordWrap: true}));
-    rows.push(Ti.UI.createTableViewRow({title: L('Live_VisitorLog'), cid: 'visitorlog', hasChild: true, ellipsize: false, wordWrap: true}));
-    rows.push(Ti.UI.createTableViewRow({title: L('Real-time Map'), cid: 'visitormap', hasChild: true, ellipsize: false, wordWrap: true}));
+    rows.push(Alloy.createController('availablereportrow', {title: L('Live_VisitorsInRealTime'), cid: 'live'}).getView());
+    rows.push(Alloy.createController('availablereportrow', {title: L('Live_VisitorLog'), cid: 'visitorlog'}).getView());
+    rows.push(Alloy.createController('availablereportrow', {title: L('Real-time Map'), cid: 'visitormap'}).getView());
 
     reportsCollection.forEach(function (report) 
     {
@@ -41,16 +41,13 @@ function updateAvailableReportsList()
         currentSection = report.get('category');
 
         if (currentSection && currentSection !== latestSection) {
-
-            section = Alloy.createWidget('org.piwik.tableviewsection', null, {title: String(currentSection)});
-            rows.push(section.getSection());
-            section = null;
+            rows.push(Alloy.createController('availablereportsection', {title: String(currentSection)}).getView());
         }
 
         latestSection  = currentSection;
 
         var reportName = report.get('name');
-        rows.push(Ti.UI.createTableViewRow({title: reportName, cid: report.cid, hasChild: true, ellipsize: false, wordWrap: true}));
+        rows.push(Alloy.createController('availablereportrow', {title: reportName, cid: report.cid}).getView());
     });
 
     $.reportsTable.setData(rows);
@@ -59,6 +56,10 @@ function updateAvailableReportsList()
 
 function doSelectReport(event) 
 {
+    if (!event.rowData.cid) {
+        return;
+    }
+    
     var cid = event.rowData.cid;
 
     if ('live' == cid) {

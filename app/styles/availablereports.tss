@@ -2,6 +2,15 @@
 	backgroundColor: "white"
 },
 
+"#reportsTable[platform=ios]": {
+    separatorColor: '#2D2D2D'
+}
+
+"#reportsTable[platform=mobileweb]": {
+  //  separatorStyle: Titanium.UI.MobileWeb.TableViewSeparatorStyle.NONE,
+    separatorColor: '#2D2D2D'
+}
+
 "#index": {
     backButtonTitle: L('Mobile_NavigationBack')
 }
