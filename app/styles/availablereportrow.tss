@@ -1,5 +1,7 @@
 "#index": {
     backgroundImage: 'org.piwik.tableviewrow/background.png',
+    selectedBackgroundColor: '#333333',
+    backgroundFocusedColor: 'black',
    // hasChild: true,
     height: Ti.UI.SIZE,
 }

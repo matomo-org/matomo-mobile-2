@@ -13,7 +13,8 @@
 }
 
 "#reportsTable[platform=ios]": {
-    separatorColor: '#2D2D2D'
+    separatorColor: '#2D2D2D',
+    allowsSelection: true
 }
 
 "#reportsTable[platform=mobileweb]": {

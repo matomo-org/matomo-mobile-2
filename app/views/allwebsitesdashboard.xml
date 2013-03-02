@@ -20,7 +20,7 @@
                        onClick="doSelectWebsite">
 
                 <TableViewRow modelid="{id}">
-                    <Label left="10" right="120" textAlign="left" text="{label}" />
+                    <Label class="websiteNameLabel" text="{label}" />
 
                     <View right="10" width="100" layout="vertical" height="SIZE">
                         <View class="space"></View>

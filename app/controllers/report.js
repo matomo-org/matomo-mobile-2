@@ -94,7 +94,7 @@ function showLoadingMessage()
 function onStatisticsFetched(processedReportModel)
 {
     showReportContent();
-    
+
     if (!processedReportModel) {
         console.error('msising report model');
         return;
@@ -123,7 +123,7 @@ function onStatisticsFetched(processedReportModel)
     row.add($.reportGraphCtrl.getView());
     rows.push(row);
 
-    var row = Ti.UI.createTableViewRow({height: OS_ANDROID ? '11dp' : 11});
+    var row = Ti.UI.createTableViewRow({backgroundColor: 'white', height: OS_ANDROID ? '11dp' : 11});
     row.add($.reportRowSeparator);
     rows.push(row);
 

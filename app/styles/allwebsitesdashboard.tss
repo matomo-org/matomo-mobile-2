@@ -59,6 +59,15 @@
     text: L('General_LoadingData')
 },
 
+".websiteNameLabel": {
+    verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    left: 10, 
+    right: 120,
+    ellipsize: true,
+    wordWrap: false
+}
+
 "#loading": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,
@@ -89,7 +98,10 @@
     backgroundImage: '/separator.png'
 },
 
-"TableViewRow": {
+"TableViewRow[platform=ios]": {
+    height: Ti.UI.SIZE
+},
+"TableViewRow[platform=android]": {
     height: Ti.UI.SIZE
 },
 
@@ -106,11 +118,10 @@
 },
 
 ".shadow": {
-    height: 4,
-    backgroundImage: "separator2.png"
+    height: 1,
+    backgroundColor: "#cccccc"
 },
 
 ".shadow[platform=android]": {
-    height: '4dp',
-    backgroundImage: "/separator2.png"
+    height: '1dp'
 }
