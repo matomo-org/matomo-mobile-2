@@ -1,10 +1,13 @@
 ".menuBar": {
     top: 0,
-    layout: "horizontal",
     height: 60,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F5F5F5'
+},
+
+".menuBar[formFactor=handheld]": {
     contentWidth: 'auto',
-    canCancelEvents: false
+    canCancelEvents: false,
+    layout: "horizontal",
 },
 
 ".menuBar[platform=android]": {
@@ -22,7 +25,12 @@
 
 ".menuItem[formFactor=handheld]": {
     left: 0,
-    width: Ti.UI.SIZE
+    width: '49%'
+},
+
+".menuItem[formFactor=tablet]": {
+    left: 0,
+    width: Ti.UI.FILL,
 },
 
 ".menuItem[platform=android]": {
@@ -63,11 +71,6 @@
         fontWeight: 'bold'
     }
 },
-
-".menuTitle[formFactor=handheld]": {
-    left: 20, 
-    right: 20,
-}
 
 ".menuTitle[platform=android]": {
     bottom: '5dp',

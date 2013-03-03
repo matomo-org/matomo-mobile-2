@@ -4,8 +4,12 @@
     height: 60,
     backgroundColor: '#EFEFEF',
     contentWidth: 'auto',
-    canCancelEvents: false
+    canCancelEvents: false,
 },
+
+".menuBar[platform=mobileweb]": {
+    horizontalWrap: false
+}
 
 ".menuBar[platform=android]": {
     height: '60dp',
@@ -65,7 +69,7 @@
     }
 },
 
-".menuItem[formFactor=handheld]": {
+".menuTitle[formFactor=handheld]": {
     left: 20, 
     right: 20,
 },

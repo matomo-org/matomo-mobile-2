@@ -31,6 +31,14 @@
     color: '#333333'
 }
 
+"#closeButton[platform=mobileweb]": {
+    color: '#333333',
+    left: 16,
+    top: 1,
+    height: 38,
+    title: L('General_Close')
+}
+
 "#switchButton[platform=ios]": {
     title: ' - ',
     style: Ti.UI.iPhone.SystemButtonStyle.BAR,

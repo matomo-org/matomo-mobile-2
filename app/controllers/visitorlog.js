@@ -17,12 +17,12 @@ if (OS_IOS) {
 
 function onFetchPrevious()
 {
-    visitorLog.previous(account, siteModel.id);
+    visitorLog.previous(accountModel, siteModel.id);
 }
 
 function onFetchNext()
 {
-    visitorLog.next(account, siteModel.id);
+    visitorLog.next(accountModel, siteModel.id);
 }
 
 function render()

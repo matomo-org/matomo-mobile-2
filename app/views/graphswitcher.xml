@@ -1,5 +1,6 @@
 <Alloy>
     <View id="index" class="container" platform="android,mobileweb">
+        <Button id="closeButton" platform="mobileweb" onClick="doClose"/>
         <Button id="switchButton" onClick="doSwitchGraph" />
     </View>
     <Toolbar id="index" platform="ios">

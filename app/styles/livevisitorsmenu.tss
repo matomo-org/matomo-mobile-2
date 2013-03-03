@@ -1,39 +1,22 @@
 ".menuBar": {
     top: 0,
-    layout: "horizontal",
     height: 60,
-    backgroundColor: '#F5F5F5',
-    contentWidth: 'auto',
-    canCancelEvents: false
+    backgroundColor: '#F5F5F5'
 },
 
 ".menuBar[platform=android]": {
-    height: '60dp',
-    contentHeight: '60dp',
-    scrollType: 'horizontal'
+    height: '60dp'
 },
 
 ".menuItem": {
     top: 0,
     height: 60,
-    left: 0,
-    width: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
     backgroundSelectedColor: 'white',
     backgroundFocusedColor: 'white'
 },
 
 ".menuItem[platform=android]": {
-    height: '60dp'
-},
-
-".menuSeparator": {
-    width: 1,
-    height: 60,
-    backgroundColor: '#cccccc'
-},
-
-".menuSeparator[platform=android]": {
-    width: '1dp',
     height: '60dp'
 },
 
@@ -52,8 +35,6 @@
 },
 
 ".menuTitle": {
-    left: 20, 
-    right: 20,
     width: Ti.UI.SIZE,
     color: '#333333',
     bottom: 5,

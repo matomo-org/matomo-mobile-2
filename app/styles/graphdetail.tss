@@ -1,5 +1,9 @@
-".container": {
-    backgroundColor: "white",
+"#index": {
+    backgroundColor: "white"
+}
+
+"#index[platform=mobileweb]": {
+    modal: true,
     navBarHidden: true 
 }
 
@@ -10,7 +14,9 @@
    defaultImage: 'graphDefault.png',
    enableZoomControls: false,
    left: 10,
-   right: 10
+   right: 10,
+   top: 10,
+   bottom: 10
 }
 
 "#graphWidget[platform=ios]": {
