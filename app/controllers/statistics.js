@@ -116,9 +116,9 @@ function onVisitorMapChosen()
     var url = accountModel.getBasePath();
     url    += "index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&idSite=";
     url    += siteModel.id;
-    url    += "period=month&date=today&disableLink=1&widget=1";
+    url    += "&period=month&date=today&disableLink=1&widget=1";
 
-    var webview = {title: L('Visitor Map'), url: url};
+    var webview = {title: L('Real-time Map'), url: url};
     var map     = Alloy.createController('webview', webview)
     map.open();
 }
