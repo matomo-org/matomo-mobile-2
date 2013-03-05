@@ -107,7 +107,6 @@ function initFromDatePicker()
 {
     var params   = JSON.parse(JSON.stringify(args));
     params.value = fromDate;
-    console.log(params, 'params');
     $.fromDatePicker.applyProperties(params);
 }
 
@@ -115,7 +114,6 @@ function initToDatePicker()
 {
     var params   = JSON.parse(JSON.stringify(args));
     params.value = toDate;
-    console.log(params, 'params');
     $.toDatePicker.applyProperties(params);
 }
 
