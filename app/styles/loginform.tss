@@ -18,6 +18,8 @@
 },
 
 "#loginbutton[platform=android]": {
+    borderWidth: '1dp',
+    borderRadius: '3dp',
     top: '10dp',
     height: '45dp',
     font: { 
@@ -49,6 +51,10 @@
     backgroundColor: '#E6E6E6'
 }
 
+".line[platform=android]": {
+    height: '2dp'
+}
+
 ".textfield": {
     top: 2,
     height: 40,
@@ -62,7 +68,8 @@
     top: '2dp',
     height: '45dp',
     left: '10dp',
-    right: '10dp'
+    right: '10dp',
+    backgroundImage: 'white.png',
 },
 
 "#url": {

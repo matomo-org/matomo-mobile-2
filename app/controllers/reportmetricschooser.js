@@ -23,8 +23,6 @@ for (var metricInternalName in metrics) {
 
 options.push(L('SitesManager_Cancel_js'));
 
-$.index.options = options;
-$.index.cancel  = options.length - 1;
 
 function doChangeMetric(event)
 {
@@ -38,5 +36,12 @@ function doChangeMetric(event)
 
 exports.open = function()
 {
-    $.index.show();
+    var dialog = Ti.UI.createOptionDialog({
+        options: options, 
+        title: L('Mobile_ChooseMetric'), 
+        cancel: options.length - 1
+    });
+    
+    dialog.addEventListener('click', doChangeMetric);
+    dialog.show();
 };

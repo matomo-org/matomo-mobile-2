@@ -47,7 +47,6 @@
 "#logoImage[platform=android]": {
     width: '140dp',
     height: '51dp',
-    top:'10dp',
 },
 
 "#loginform": {
@@ -65,6 +64,10 @@
     height: 40,
 },
 
+".footerSpacer[platform=android]": {
+    height: '40dp',
+},
+
 "#footerView": {
     bottom: 16,
     height: 40,
@@ -74,10 +77,6 @@
 "#footerView[platform=android]": {
     bottom: '16dp',
     height: '40dp'
-},
-
-".footerSpacer[platform=android]": {
-    height: '40dp',
 },
 
 ".footerLink": {

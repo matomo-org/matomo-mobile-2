@@ -1,4 +1,0 @@
-<Alloy>
-	<OptionDialog id="index" onClick="doChangeMetric">
-	</OptionDialog>
-</Alloy>
