@@ -1,0 +1,20 @@
+".container": {
+    backgroundColor: "white"
+}
+
+"#index": {
+    title: L('General_ChooseDate')
+}
+
+"#datePickerTable": {
+    top: 0,
+    style: 1,
+}
+
+"#doneButton": {
+    title: L('General_Done')
+}
+
+"#doneButton[platform=ios]": {
+    style: Ti.UI.iPhone.SystemButtonStyle.DONE
+}

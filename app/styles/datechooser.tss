@@ -1,17 +1,132 @@
 ".container": {
-    backgroundColor: "white"
+    backgroundColor: 'white',
+    contentWidth: 'auto',
+    contentHeight: 'auto',
+    layout: 'vertical',
+    showVerticalScrollIndicator: true,
+    showHorizontalScrollIndicator: true,
 }
 
 "#index": {
     title: L('General_ChooseDate')
 }
 
-"#datePickerTable": {
-    top: 0,
-    style: 1,
+".headline": {
+    left: 16,
+    font: {fontSize: 18},
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    ellipsize: false,
+    wordWrap: true,
+    color: '#333333',
 }
 
-"#doneButton": {
-    title: L('General_Done'),
-    style: Ti.UI.iPhone.SystemButtonStyle.DONE
+".headline[platform=android]": {
+    left: '16dp',
+    font: {fontSize: '18sp'},
+}
+
+".section": {
+    left: 0,
+    width: Ti.UI.FILL,
+    top: 16,
+    layout: 'vertical',
+    height: Ti.UI.SIZE,
+}
+
+".section[platform=android]": {
+    top: '16dp'
+}
+
+"#periodLabel": {
+    title: L('General_Period')
+}
+
+"#periodPicker": {
+    top: 8,
+    left: 16,
+    right: 16,
+}
+
+"#periodPicker[platform=android]": {
+    top: '8dp',
+    left: '16dp',
+    right: '16dp',
+}
+
+"#periodPicker[platform=mobileweb]": {
+    height: 150
+}
+
+"#period_day": {
+    title: L('CoreHome_PeriodDay'),
+    period: 'day'
+}
+
+"#period_week": {
+    title: L('CoreHome_PeriodWeek'),
+    period: 'week'
+}
+
+"#period_month": {
+    title: L('CoreHome_PeriodMonth'),
+    period: 'month'
+}
+
+"#period_year": {
+    title: L('CoreHome_PeriodYear'),
+    period: 'year'
+}
+
+"#period_range": {
+    title: L('CoreHome_PeriodRange'),
+    period: 'range'
+}
+
+"#fromDateLabel": {
+    title: L('General_Date')
+}
+
+"#fromDatePicker": {
+    type: Ti.UI.PICKER_TYPE_DATE,
+    top: 8,
+    left: 16,
+}
+
+"#fromDatePicker[platform=android]": {
+    top: '8dp',
+    left: '16dp',
+}
+
+"#fromDatePicker[platform=mobileweb]": {
+    right: 16,
+    height: 50
+}
+
+"#toDateLabel": {
+    title: L('General_DateRangeTo_js')
+}
+
+"#toDatePicker": {
+    type: Ti.UI.PICKER_TYPE_DATE,
+    top: 8,
+    left: 16,
+    right: 16,
+}
+
+"#toDatePicker[platform=mobileweb]": {
+    height: 50
+}
+
+"#toDatePicker[platform=android]": {
+    top: '8dp',
+    left: '16dp',
+    right: '16dp',
+}
+
+"#cancelButton": {
+    title: L('SitesManager_Cancel_js')
+}
+
+"#updateButton": {
+    title: L('CoreUpdater_UpdateTitle')
 }

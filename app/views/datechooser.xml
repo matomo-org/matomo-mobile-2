@@ -1,9 +1,38 @@
 <Alloy>
-    <Window class="container" id="index">
-        <RightNavButton>
-            <Button id="doneButton" onClick="doChooseDate"/>
+    <Window id="index">
+        <RightNavButton platform="mobileweb">
+            <Button id="updateButton" onClick="doChooseDate"/>
         </RightNavButton>
-        <TableView id="datePickerTable" onClick="doSelectPicker">
-        </TableView>
+
+        <ScrollView class="container">
+            <View id="periodContainer" class="section">
+                <Label id="periodLabel" class="headline"/>
+                <Picker id="periodPicker" onChange="onPeriodChange">
+                    <PickerRow id="period_day"/>
+                    <PickerRow id="period_week"/>
+                    <PickerRow id="period_month"/>
+                    <PickerRow id="period_year"/>
+                    <PickerRow id="period_range"/>
+                </Picker>
+            </View>
+
+            <View id="fromDateContainer" class="section">
+                <Label id="fromDateLabel" class="headline"/>
+
+                <Picker id="fromDatePicker" onClick="doChangeFromDate">
+                </Picker>
+            </View>
+
+            <View id="toDateContainer" class="section">
+                <Label id="toDateLabel" class="headline"/>
+
+                <Picker id="toDatePicker" onClick="doChangeToDate">
+                </Picker>
+            </View>
+
+            <View id="buttonContainer" platform="android">
+                <Button id="updateButton" onClick="doChooseDate"/>
+            </View>
+        </ScrollView>
     </Window>
 </Alloy>
