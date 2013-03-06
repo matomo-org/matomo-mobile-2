@@ -22,8 +22,7 @@ exports.close = function (win)
 
 exports.open = function (win) 
 {
-    win.zIndex = zIndex;
-    zIndex++;
+    win.zIndex = 0;
     
     if (isBootstrapped) {
         navGroup.open(win, {animated : true});
