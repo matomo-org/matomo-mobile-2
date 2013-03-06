@@ -19,14 +19,14 @@
             <View id="fromDateContainer" class="section">
                 <Label id="fromDateLabel" class="headline"/>
 
-                <Picker id="fromDatePicker" onClick="doChangeFromDate">
+                <Picker id="fromDatePicker">
                 </Picker>
             </View>
 
             <View id="toDateContainer" class="section">
                 <Label id="toDateLabel" class="headline"/>
 
-                <Picker id="toDatePicker" onClick="doChangeToDate">
+                <Picker id="toDatePicker">
                 </Picker>
             </View>
 

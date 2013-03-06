@@ -3,13 +3,8 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
-
-// a list of all available accounts
-var fromDate = args.from || new Date();
-var toDate = args.to || new Date();
+var args   = arguments[0] || {};
 var period = args.period || 'day';
-
 
 function setPeriod(selectedPeriod) {
     
@@ -53,6 +48,9 @@ function closeWindow ()
 function doChooseDate () 
 {
     try {
+        var fromDate = $.fromDatePicker.value;
+        var toDate   = $.toDatePicker.value;
+        console.log(fromDate, toDate, period);
         
         var myEvent = {from: fromDate, to: toDate, period: period, type: 'onSet'};
         $.trigger('onSet', myEvent);
@@ -62,26 +60,6 @@ function doChooseDate ()
     } catch (e) {
         console.warn('Failed to close site chooser window', 'datechooser::dochoosedate', e);
     }
-}
-
-function doChangeFromDate() 
-{
-    if (!event || !event.value) {
-        
-        return;
-    }
-    
-    fromDate = event.value;
-}
-
-function doChangeToDate() 
-{
-    if (!event || !event.value) {
-        
-        return;
-    }
-    
-    toDate = event.value;
 }
 
 function preSelectPeriod(initialPeriod)
@@ -106,14 +84,14 @@ function preSelectPeriod(initialPeriod)
 function initFromDatePicker()
 {
     var params   = JSON.parse(JSON.stringify(args));
-    params.value = fromDate;
+    params.value = args.from || new Date();
     $.fromDatePicker.applyProperties(params);
 }
 
 function initToDatePicker()
 {
     var params   = JSON.parse(JSON.stringify(args));
-    params.value = toDate;
+    params.value = args.to || new Date();
     $.toDatePicker.applyProperties(params);
 }
 
