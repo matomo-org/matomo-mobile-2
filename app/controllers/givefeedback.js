@@ -58,7 +58,7 @@ function render()
         title: 'Email Us', 
         description: 'Send us fedback, report a bug or a feature wish.'
     });
-    row.on('click', doSendEmailFeedback);
+    row.addEventListener('click', doSendEmailFeedback);
     rows.push(row);
 
     var appRating = new (require('Piwik/App/Rating'));
@@ -67,7 +67,7 @@ function render()
             title: 'Rate us on the App Store', 
             description: 'Piwik Mobile App is a Free Software, we would really appreciate if you took 1 minute to rate us.'
         });
-        row.on('click', doRateApp);
+        row.addEventListener('click', doRateApp);
         rows.push(row);
     }
 
@@ -75,7 +75,7 @@ function render()
         title: 'Learn how you can participate', 
         description: 'Piwik is a project made by the community, you can participate in the Piwik Mobile App or Piwik.'
     });
-    row.on('click', doParticipate)
+    row.addEventListener('click', doParticipate)
     rows.push(row);
 
     rows.push(createSection({title: 'About', style: 'native'}));
