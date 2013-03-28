@@ -1,4 +1,9 @@
-var args = arguments[0] || {};
+function L(key)
+{
+    return require('L')(key);
+}
+
+var args  = arguments[0] || {};
 
 var accountModel    = args.account || false;
 // the currently selected website
@@ -12,6 +17,9 @@ var flatten         = args.flatten || 0;
 var reportList      = args.reportList || {};
 var reportPeriod    = args.period || 'day';
 var reportDate      = args.date || 'today';
+var showAllEntries  = false;
+
+var rowsFilterLimit = Alloy.CFG.piwik.filterLimit;
 
 var reportRowsCtrl = null;
 
@@ -66,6 +74,12 @@ function onDateChosen (period, dateQuery)
 {
     reportPeriod = period;
     reportDate   = dateQuery;
+    doRefresh();
+}
+
+function onTogglePaginator()
+{
+    showAllEntries = !showAllEntries; 
     doRefresh();
 }
 
@@ -139,6 +153,14 @@ function onStatisticsFetched(processedReportModel)
         row = null;
     });
 
+     if (rowsFilterLimit <= processedReportModel.getRows().length) {
+        // a show all or show less button only makes sense if there are more or equal results than the used
+        // filter limit value...
+        var row = Ti.UI.createTableViewRow({title: showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')});
+        row.addEventListener('click', onTogglePaginator);
+        rows.push(row);
+    }
+    
     $.reportTable.setData(rows);
     row  = null;
     rows = null;
@@ -162,6 +184,7 @@ function doRefresh()
                  flat: flatten,
                  sortOrderColumn: metric,
                  filter_sort_column: metric,
+                 filter_limit: showAllEntries ? -1 : rowsFilterLimit,
                  apiModule: module, 
                  apiAction: action},
         error: function () {
