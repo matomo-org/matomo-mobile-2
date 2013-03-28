@@ -32,7 +32,7 @@ function render()
     var rows = [];
 
     var row = Ti.UI.createTableViewRow({title: L('General_Next')});
-    row.addEventListener('next', onFetchNext)
+    row.addEventListener('click', onFetchNext)
     rows.push(row);
 
     visitorLog.forEach(function (visitorDetail) {
