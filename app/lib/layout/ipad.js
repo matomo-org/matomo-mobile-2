@@ -1,7 +1,6 @@
 var navGroup = null;
 var isBootstrapped = false;
 
-var detailNavGroup   = null;
 var detailRootWindow = null;
 
 function bootstrap (win)
@@ -15,12 +14,6 @@ function bootstrap (win)
 
     win = null;
 };
-
-exports.openInDetailView = function (win)
-{
-    detailNavGroup.open(win, {animated : true});
-    win = null;
-}
 
 exports.close = function (win) 
 {

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" title=" ">
+    <Window id="index">
 
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="toggleMenuButton" onClick="toggleReportMenu"/>

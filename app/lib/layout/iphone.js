@@ -3,9 +3,6 @@ var isBootstrapped = false;
 
 var rootWindow = null;
 
-var menuWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
-menuWindow.open();
-
 function bootstrap (win) 
 {
     rootWindow = Ti.UI.createWindow();
@@ -17,6 +14,29 @@ function bootstrap (win)
 
     win = null;
 };
+
+exports.close = function (win) 
+{
+    navGroup.close(win, {animated : true});
+    win = null;
+};
+
+exports.open = function (win) 
+{
+    if (isBootstrapped) {
+        navGroup.open(win, {animated : true});
+    } else {
+        bootstrap(win);
+    }
+
+    win = null;
+};
+
+
+
+
+var menuWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
+menuWindow.open();
 
 var isMenuVisible = false;
 
@@ -52,21 +72,4 @@ exports.hideMenu = hideMenu;
 exports.toggleMenu = function ()
 {
     isMenuVisible ? hideMenu() : showMenu();
-};
-
-exports.close = function (win) 
-{
-    navGroup.close(win, {animated : true});
-    win = null;
-};
-
-exports.open = function (win) 
-{
-    if (isBootstrapped) {
-        navGroup.open(win, {animated : true});
-    } else {
-        bootstrap(win);
-    }
-
-    win = null;
 };

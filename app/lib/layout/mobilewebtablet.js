@@ -1,14 +1,14 @@
 var isBootstrapped = false;
 var navGroup = null;
 var zIndex = 0;
+var rootWindow = null;
 
 function bootstrap (win) 
 {
-    var rootWindow = Ti.UI.createWindow();
+    rootWindow = Ti.UI.createWindow();
     navGroup = Ti.UI.MobileWeb.createNavigationGroup({window: win});
     rootWindow.add(navGroup);
     rootWindow.open();
-    rootWindow = null;
 
     isBootstrapped = true; 
     win = null;
@@ -18,19 +18,6 @@ function getVerticalSplitViewSeparatorLine()
 {
     return Ti.UI.createView({left: 198, width: 2, zIndex: 5, backgroundColor: '#2D2D2D'});
 }
-
-exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
-{
-    var masterContainer = Ti.UI.createView({left: 0, width: 198, zIndex: 3});
-    masterContainer.add(masterView);
-    detailWindow.add(masterContainer);
-    detailWindow.add(getVerticalSplitViewSeparatorLine());
-
-    detailContent.left  = 200;
-    detailContent.right = 0;
-
-    exports.open(detailWindow);
-};
 
 exports.close = function (win) 
 {
@@ -50,3 +37,15 @@ exports.open = function (win)
 
     win = null;
 };
+
+var menuWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
+menuWindow.open();
+
+exports.setMenuView = function(view)
+{
+    menuWindow.add(view);
+    rootWindow.left = 250;
+}
+
+exports.hideMenu = function () {};
+exports.toggleMenu = function () {}
