@@ -54,17 +54,13 @@ function onCreatedAccount(account) {
 
 function openStatistics(event)
 {
-    var siteModel = event.site;
-    var account   = event.account;
+    var siteModel    = event.site;
+    var accountModel = event.account;
 
-    var reportsCollection = Alloy.createCollection('piwikReports');
-
-    var statistics = Alloy.createController('statistics', {accounts: accounts,
-                                                           account: account,
-                                                           reports: reportsCollection,
-                                                           site: siteModel});
-
-    statistics.open();
+    var reportListController = Alloy.createController('availablereports', {accounts: accounts,
+                                                                           account: accountModel,
+                                                                           site: siteModel});
+    reportListController.open();
 }
 
 function openDashboard(account)

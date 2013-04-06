@@ -14,7 +14,8 @@
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,
     backgroundColor: 'white',
-    zIndex: 3
+    zIndex: 3,
+    backButtonTitle: L('Mobile_NavigationBack')
 },
 
 "#content": {

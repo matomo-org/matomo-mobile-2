@@ -1,15 +1,16 @@
 <Alloy>
-    <View id="index">
+    <Window id="index">
+        <LeftNavButton platform="mobileweb" formFactor="handheld">
+            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+        </LeftNavButton>
+        <LeftNavButton platform="ios" formFactor="handheld">
+            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+        </LeftNavButton>
+        
         <Require src="loadingindicator" id="loadingindicator"/>
 
         <View id="content">
 
-            <Require src="livevisitorsmenu" 
-                     formFactor="handheld"
-                     onChooseReport="doChooseReport" 
-                     id="liveVisitorsMenuCtrl"/>
-            <View class="menuSeparatorShadow"/>
-            
             <TableView id="liveTable" onClick="doOpenVisitor">
                 <HeaderPullView platform="ios">
                     <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
@@ -18,5 +19,5 @@
         </View>
 
         <Require src="countdowntimer" id="countdown"/>
-    </View>
+    </Window>
 </Alloy>

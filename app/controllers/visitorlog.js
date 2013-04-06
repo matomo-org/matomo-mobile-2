@@ -6,7 +6,6 @@ function L(key)
 var args = arguments[0] || {};
 var accountModel = args.account;
 var siteModel    = args.site;
-var reportList   = args.reportList || {};
 
 var visitorLog = Alloy.createCollection('piwikLastVisitDetails');
 visitorLog.on('fetch', render);
@@ -49,16 +48,6 @@ function render()
     rows = null;
 }
 
-function doChooseReport()
-{
-    reportList.open();
-}
-
-function doChooseDate()
-{
-    alert('Choose Date');
-}
-
 function showReportContent()
 {
     if (OS_IOS) {
@@ -88,4 +77,21 @@ function doRefresh()
     visitorLog.initial(accountModel, siteModel.id, 'today');
 }
 
+function toggleReportMenu(event)
+{
+    require('layout').toggleMenu();
+}
+
+exports.open = function () 
+{
+    doRefresh();
+    require('layout').open($.index);
+}
+
+function close()
+{
+    require('layout').close($.index);
+}
+
+exports.close   = close;
 exports.refresh = doRefresh;

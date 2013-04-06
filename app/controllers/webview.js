@@ -1,3 +1,8 @@
+function L(key)
+{
+    return require('L')(key);
+}
+
 var args     = arguments[0] || {};
 var webUrl   = args.url || false;
 var webTitle = args.title || false;
@@ -8,3 +13,10 @@ exports.open = function () {
 
     require('layout').open($.index);
 }
+
+function close()
+{
+    require('layout').close($.index);
+}
+
+exports.close = close;

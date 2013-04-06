@@ -1,31 +1,43 @@
 <Alloy>
-    <View id="index">
+    <Window title="" id="index" onClose="onClose">
+        
+        <RightNavButton formFactor="tablet" platform="ios">
+            <ButtonBar onClick="onClose">
+                <Labels>
+                    <Label>Websites</Label>
+                    <Label>Accounts</Label>
+                </Labels>
+            </ButtonBar>
+        </RightNavButton>
+        <RightNavButton formFactor="handheld" platform="ios">
+            <Button id="reportMenuButton"/>
+        </RightNavButton>
+        <RightNavButton platform="mobileweb">
+            <Button id="reportMenuButton"/>
+        </RightNavButton>
+
+        <Menu id="menu" platform="android">
+            <MenuItem id="menuItemWebsite" onClick="onClose" />
+        </Menu>
+
         <Require src="loadingindicator" id="loadingindicator"/>
 
         <View id="content">
-
-            <Require src="reportmenu" 
-                     onChooseReport="doChooseReport" 
-                     onChooseMetric="doChooseMetric" 
-                     onChooseDate="doChooseDate" 
-                     onFlatten="doFlatten" 
-                     id="reportMenuCtrl"/>
-            <View class="menuSeparatorShadow"/>
             
             <TableView id="reportTable" class="container">
                 <HeaderPullView platform="ios">
                     <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>
                 <TableViewRow>
-                    <Require src="reportinfo" id="reportInfoCtrl" formFactor="handheld"/>
+                    <Require src="graph" id="reportGraphCtrl"/>
                 </TableViewRow>
                 <TableViewRow>
-                    <Require src="graph" id="reportGraphCtrl"/>
+                    <Require src="reportinfo" id="reportInfoCtrl" formFactor="handheld"/>
                 </TableViewRow>
                 <TableViewRow class="reportRowSeparator">
                     <View id="reportRowSeparator" class="shadow"/>
                 </TableViewRow>
             </TableView>
         </View>
-    </View>
+    </Window>
 </Alloy>

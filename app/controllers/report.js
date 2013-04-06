@@ -11,7 +11,7 @@ var siteModel       = args.site || false;
 // the currently selected report
 var reportModel     = args.report || false;
 // the fetched statistics that belongs to the currently selected report
-var statisticsModel = args.statistics || false;
+var statisticsModel = args.statistics || Alloy.createModel('piwikProcessedReport');
 var currentMetric   = null;
 var flatten         = args.flatten || 0;
 var reportList      = args.reportList || {};
@@ -25,6 +25,11 @@ var reportRowsCtrl = null;
 
 if (OS_IOS) {
     $.pullToRefresh.init($.reportTable);
+}
+
+function onClose()
+{
+    $.destroy();
 }
 
 /**
@@ -56,11 +61,6 @@ function doFlatten ()
     flatten = 1;
     doRefresh();
     flatten = 0;
-}
-
-function doChooseReport()
-{
-    reportList.open();
 }
 
 function onReportChosen (chosenReportModel) {
@@ -107,6 +107,8 @@ function showLoadingMessage()
 
 function onStatisticsFetched(processedReportModel)
 {
+    $.index.title = processedReportModel.getReportName();
+    
     showReportContent();
 
     if (!processedReportModel) {
@@ -124,6 +126,10 @@ function onStatisticsFetched(processedReportModel)
 
     var rows = [];
 
+    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
+    row.add($.reportGraphCtrl.getView());
+    rows.push(row);
+
     if (!require('alloy').isTablet) {
         var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
         row.add($.reportInfoCtrl.getView());
@@ -132,10 +138,6 @@ function onStatisticsFetched(processedReportModel)
         $.reportMenuCtrl.setMetric(processedReportModel.getMetricName());
         $.reportMenuCtrl.setDate(processedReportModel.getReportDate());
     }
-
-    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-    row.add($.reportGraphCtrl.getView());
-    rows.push(row);
 
     var row = Ti.UI.createTableViewRow({backgroundColor: 'white', height: OS_ANDROID ? '11dp' : 11});
     row.add($.reportRowSeparator);
@@ -193,5 +195,12 @@ function doRefresh()
         success: onStatisticsFetched
     });
 }
+
+exports.open = function () {
+
+    onReportChosen(reportModel);
+
+    require('layout').open($.index);
+};
 
 exports.refresh = doRefresh;

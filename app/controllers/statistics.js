@@ -14,16 +14,11 @@ var siteModel          = args.site || false;
 // A list of all available reports
 var reportsCollection  = args.reports || false;
 // the currently selected report
-var reportModel        = null;
+var reportModel        = args.report || false;
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel    = Alloy.createModel('piwikProcessedReport');
 
 var displayedController = null;
-
-var reportListController = Alloy.createController('availablereports', {reports: reportsCollection,
-                                                                       site: siteModel,
-                                                                       closeOnSelect: require('alloy').isHandheld});
-
 
 $.index.setTitle(siteModel.getName());
 
@@ -44,13 +39,6 @@ function doChooseWebsite()
     websites.on('websiteChosen', onWebsiteChosen)
     websites.open();
 }
-
-function doOpenSettings()
-{
-    var settings = Alloy.createController('settings');
-    settings.open();
-}
-
 function onClose()
 {
     $.destroy();
@@ -74,7 +62,7 @@ function displayContent(controller)
 }
 
 function onReportChosen (chosenReportModel) {
-    reportModel   = chosenReportModel;
+    reportModel = chosenReportModel;
     // currentMetric = null;
 
     refreshReport();
@@ -86,51 +74,12 @@ function refreshReport()
         account: accountModel, 
         site: siteModel, 
         report: reportModel,
-        statistics: statisticsModel,
-        reportList: reportListController,
+        statistics: statisticsModel
     };
 
     var report = Alloy.createController('report', params);
     displayContent(report);
     report.refresh();
-}
-
-function onLiveVisitorsChosen()
-{
-    var params = {account: accountModel, site: siteModel, reportList: reportListController};
-    var live   = Alloy.createController('livevisitors', params);
-    displayContent(live);
-    live.refresh();
-}
-
-function onVisitorLogChosen()
-{
-    var params = {account: accountModel, site: siteModel, reportList: reportListController};
-    var live   = Alloy.createController('visitorlog', params);
-    displayContent(live);
-    live.refresh();
-}
-
-function onVisitorMapChosen()
-{
-    var url = accountModel.getBasePath();
-    url    += "index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&idSite=";
-    url    += siteModel.id;
-    url    += "&period=month&date=today&disableLink=1&widget=1";
-
-    var webview = {title: L('Real-time Map'), url: url};
-    var map     = Alloy.createController('webview', webview)
-    map.open();
-}
-
-function onReportListFetched(reportsCollection)
-{
-    if (!reportModel || !reportsCollection.containsAction(reportModel)) {
-        // request statistics using same report if website supports this report
-        reportModel = reportsCollection.getEntryReport();
-    }
-
-    onReportChosen(reportModel);
 }
 
 function onWebsiteChosen(event)
@@ -139,22 +88,7 @@ function onWebsiteChosen(event)
     accountModel = event.account;
 
     $.index.setTitle(siteModel.getName());
-    reportListController.updateWebsite(siteModel);
-
-    fetchListOfAvailableReports();
-}
-
-function fetchListOfAvailableReports()
-{
-    reportsCollection.fetch({
-        account: accountModel,
-        params: {idSites: siteModel.id},
-        success : onReportListFetched,
-        error : function(model, resp) {
-            // TODO what should we do in this case?
-            statisticsModel.trigger('error', {type: 'loadingReportList'});
-        }
-    });
+    refreshReport();
 }
 
 function onAccountChosen(account)
@@ -183,23 +117,9 @@ statisticsModel.on('error', function () {
     // TODO what should we do in this case?
 });
 
-reportListController.on('reportChosen', onReportChosen);
-reportListController.on('liveVisitorsChosen', onLiveVisitorsChosen);
-reportListController.on('visitorLogChosen', onVisitorLogChosen);
-reportListController.on('visitorMapChosen', onVisitorMapChosen);
-
-
 exports.open = function () {
 
-    onWebsiteChosen({site: siteModel, account: accountModel});
+    onReportChosen(reportModel);
 
-    var alloy  = require('alloy');
-    var layout = require('layout');
-
-    if (alloy.isTablet) {
-        layout.openSplitWindow($.index, $.content, reportListController.getView());
-        reportListController.open();
-    } else {
-        layout.open($.index);
-    }
+    require('layout').open($.index);
 };

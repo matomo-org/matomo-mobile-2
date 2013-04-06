@@ -1,28 +1,10 @@
-".container": {
-	backgroundColor: "white"
-},
-
-"Window[platform=ios]": {
-    barImage: "navbardark.png",
-    barColor: "#2D2D2D"
-}
-
-"#index[platform=ios]": {
-    barImage: "navbardark.png",
-    barColor: "#2D2D2D"
-}
-
 "#reportsTable[platform=ios]": {
     separatorColor: '#2D2D2D',
-    allowsSelection: true
+    allowsSelection: true,
+    backgroundImage: 'org.piwik.tableviewrow/background.png',
 }
 
 "#reportsTable[platform=mobileweb]": {
   //  separatorStyle: Titanium.UI.MobileWeb.TableViewSeparatorStyle.NONE,
     separatorColor: '#2D2D2D'
-}
-
-"#index": {
-    // backButtonTitle: L('Mobile_NavigationBack')
-    title: L('General_Reports')
 }

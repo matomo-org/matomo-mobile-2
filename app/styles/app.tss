@@ -20,3 +20,9 @@
 "Label": {
     color: "#333333"
 }
+
+".toggleMenuButton": {
+    backgroundImage: "ic_action_menu.png",
+    width: 32,
+    height: 32
+}

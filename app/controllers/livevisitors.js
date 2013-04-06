@@ -5,7 +5,6 @@ function L(key)
 
 var args = arguments[0] || {};
 var accountModel = args.account;
-var reportList   = args.reportList || {};
 var siteModel = args.site;
 var refreshIntervalInMs = 45000;
 
@@ -79,11 +78,6 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
     rows = null;
 
     startRefreshTimer(refreshIntervalInMs);
-}
-
-function doChooseReport()
-{
-    reportList.open();
 }
 
 function showReportContent()
@@ -175,4 +169,21 @@ function doRefresh()
 
 /***** HANDLE BACKGROUND EVENTS END ******/
 
+function toggleReportMenu(event)
+{
+    require('layout').toggleMenu();
+}
+
+exports.open = function () 
+{
+    doRefresh();
+    require('layout').open($.index);
+}
+
+function close()
+{
+    require('layout').close($.index);
+}
+
+exports.close   = close;
 exports.refresh = doRefresh;

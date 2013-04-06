@@ -1,8 +1,6 @@
 <Alloy>
-    <Window id="index" formFactor="handheld">
-        <TableView id="reportsTable" onClick="doSelectReport">
-        </TableView>
-    </Window>
-    <TableView id="reportsTable" formFactor="tablet" onClick="doSelectReport">
+    <Collection src="piwikReports"/>
+
+    <TableView id="reportsTable" onClick="doSelectReport">
     </TableView>
 </Alloy>

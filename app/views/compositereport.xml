@@ -1,0 +1,32 @@
+<Alloy>
+    <Collection src="piwikReports"/>
+
+    <Window title="" id="index" onClose="onClose">
+        
+        <LeftNavButton platform="mobileweb" formFactor="handheld">
+            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+        </LeftNavButton>
+        <LeftNavButton platform="ios" formFactor="handheld">
+            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+        </LeftNavButton>
+
+        <RightNavButton platform="ios">
+            <Button class="settingsButton" onClick="doOpenSettings"/>
+        </RightNavButton>
+        <RightNavButton platform="mobileweb">
+            <Button class="settingsButton" onClick="doOpenSettings"/>
+        </RightNavButton>
+
+        <Menu id="menu" platform="android">
+            <MenuItem id="menuItemWebsite" />
+            <MenuItem id="menuItemRefresh" />
+            <MenuItem id="menuItemAccount" />
+            <MenuItem id="menuItemSetting" />
+        </Menu>
+        
+        <ScrollView id="content" dataCollection="piwikReports" dataTransform="transformReport" dataFilter="filterReports">
+            <Require src="report_overview" title="{name}"/>
+            <View class="reportOverviewSeparator"/>
+        </ScrollView>
+    </Window>
+</Alloy>

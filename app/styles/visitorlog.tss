@@ -1,18 +1,12 @@
+"#index": {
+    title: L('Live_VisitorLog'),
+    backButtonTitle: L('Mobile_NavigationBack')
+}
+
 ".container": {
-	backgroundColor: "white"
-},
+    backgroundColor: "white"
+}
 
 "#content": {
     layout: "vertical"
-},
-
-".menuSeparatorShadow": {
-    top: 0,
-    height: 8,
-    backgroundImage: '/separator.png'
-},
-
-".menuSeparatorShadow[platform=android]": {
-    height: '8dp',
-    backgroundImage: '/separator.png'
-},
+}

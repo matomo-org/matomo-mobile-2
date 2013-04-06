@@ -1,29 +1,26 @@
 var navGroup = null;
 var isBootstrapped = false;
 
+var detailNavGroup   = null;
+var detailRootWindow = null;
+
 function bootstrap (win)
 {
-    var statisticsWin = Ti.UI.createWindow();
+    detailRootWindow = Ti.UI.createWindow();
     navGroup = Ti.UI.iPhone.createNavigationGroup({window: win});
-    statisticsWin.add(navGroup);
-    statisticsWin.open();
+    detailRootWindow.add(navGroup);
+    detailRootWindow.open();
 
     isBootstrapped = true;
 
     win = null;
 };
 
-exports.openSplitWindow = function (detailWindow, detailContent, masterView) 
+exports.openInDetailView = function (win)
 {
-    var masterContainer = Ti.UI.createView({left: 0, width: 200});
-    masterContainer.add(masterView);
-    detailWindow.add(masterContainer);
-
-    detailContent.left  = 200;
-    detailContent.right = 0;
-
-    exports.open(detailWindow);
-};
+    detailNavGroup.open(win, {animated : true});
+    win = null;
+}
 
 exports.close = function (win) 
 {
@@ -41,3 +38,15 @@ exports.open = function (win)
 
     win = null;
 };
+
+var menuWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
+menuWindow.open();
+
+exports.setMenuView = function(view)
+{
+    menuWindow.add(view);
+    detailRootWindow.left = 250;
+}
+
+exports.hideMenu = function () {};
+exports.toggleMenu = function () {}

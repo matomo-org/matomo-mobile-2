@@ -1,5 +1,6 @@
 "#index": {
-    title: L('General_Settings')
+    title: L('General_Settings'),
+    backButtonTitle: L('Mobile_NavigationBack')
 },
 
 "#settingsTable[platform=ios]": {

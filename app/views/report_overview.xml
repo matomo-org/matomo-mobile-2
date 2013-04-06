@@ -1,0 +1,21 @@
+<Alloy>
+    <Collection src="piwikProcessedReport"/>
+
+    <View id="index">
+        <View class="header" onClick="openReport">
+            <Label class="headline" text="{name}"/>
+        </View>
+        <View class="description">
+            <Label class="title">Keyword</Label>
+            <Label class="dimension" text="dimension"/>
+        </View>
+        <View class="content" id="content">
+            <View class="">
+                <Label>ROW</Label>
+            </View>
+        </View>
+        <View class="footer">
+            <Label>More</Label>
+        </View>
+    </View>
+</Alloy>

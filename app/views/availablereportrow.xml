@@ -1,5 +1,5 @@
 <Alloy>
-	<TableViewRow id="index">
+    <TableViewRow id="index">
         <Label id="title"/>
-	</TableViewRow>
+    </TableViewRow>
 </Alloy>

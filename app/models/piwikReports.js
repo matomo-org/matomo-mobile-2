@@ -66,6 +66,14 @@ exports.definition = {
 	
 	extendCollection: function(Collection) {		
 		_.extend(Collection.prototype, {
+
+			fetchAllReports: function (accountModel, siteModel) {
+				this.fetch({
+				    account: accountModel,
+				    params: {idSites: siteModel.id}
+				});
+			},
+
 			getEntryReport: function (response) {
 
 				var visitsSummaryReport = this.find(function (model) {

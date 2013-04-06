@@ -1,0 +1,13 @@
+<Alloy>
+    <Window id="index" title=" ">
+
+        <LeftNavButton platform="mobileweb" formFactor="handheld">
+            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+        </LeftNavButton>
+        <LeftNavButton platform="ios" formFactor="handheld">
+            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+        </LeftNavButton>
+        
+        <WebView id="webview"></WebView>
+    </Window>
+</Alloy>

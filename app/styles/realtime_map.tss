@@ -1,3 +1,4 @@
 "#index": {
+    title: L('Real-time Map'),
     backButtonTitle: L('Mobile_NavigationBack')
 }

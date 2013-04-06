@@ -1,0 +1,44 @@
+"#index": {
+    borderRadius: 5,
+    borderColor: "#d3d3d3",
+    borderWidth: 1,
+    backgroundColor: 'white',
+    top: 0,
+    layout: "horizontal"
+}
+
+"View": {
+    height: Ti.UI.SIZE,
+}
+
+".headline": {
+    font: {fontWeight: 'bold'}
+}
+
+".header": {
+    top: 10,
+    bottom: 10,
+    left: 10
+}
+
+".footer": {
+}
+
+".description": {
+    backgroundColor: '#efefef',
+}
+
+".content": {
+    backgroundColor: '#efefef',
+    layout: "vertical"
+}
+
+".title": {
+    left: 10,
+    width: Ti.UI.SIZE,
+}
+
+".value": {
+    right: 10,
+    width: Ti.UI.SIZE,
+}

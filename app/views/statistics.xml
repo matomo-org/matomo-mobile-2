@@ -1,13 +1,6 @@
 <Alloy>
     <Window title="" id="index" onClose="onClose">
         
-        <LeftNavButton platform="mobileweb">
-            <Button class="settingsButton" onClick="doOpenSettings"/>
-        </LeftNavButton>
-        <LeftNavButton platform="ios">
-            <Button class="settingsButton" onClick="doOpenSettings"/>
-        </LeftNavButton>
-
         <RightNavButton formFactor="tablet" platform="ios">
             <ButtonBar onClick="doChooseAccount">
                 <Labels>
