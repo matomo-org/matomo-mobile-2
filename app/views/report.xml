@@ -9,11 +9,12 @@
                 </Labels>
             </ButtonBar>
         </RightNavButton>
-        <RightNavButton formFactor="handheld" platform="ios">
-            <Button id="reportMenuButton"/>
+
+        <RightNavButton platform="ios">
+            <Button class="reportCustomizeButton" onClick="doOpenReportMenu"/>
         </RightNavButton>
         <RightNavButton platform="mobileweb">
-            <Button id="reportMenuButton"/>
+            <Button class="reportCustomizeButton" onClick="doOpenReportMenu"/>
         </RightNavButton>
 
         <Menu id="menu" platform="android">

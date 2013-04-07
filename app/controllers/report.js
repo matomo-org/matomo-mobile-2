@@ -36,6 +36,12 @@ function onClose()
  * REPORT-MENU START
  */
 
+function doOpenReportMenu()
+{
+    var reportMenu = Alloy.createController('report_menu');
+    reportMenu.open();
+}
+
 function doChooseMetric()
 {
     var params         = {metrics: statisticsModel.getMetrics()};
