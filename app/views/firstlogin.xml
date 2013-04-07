@@ -1,4 +1,6 @@
 <Alloy>
+    <Collection src="appAccounts"/>
+    
     <Window id="index">
         <ScrollView class="container">
             <View id="mainView">

@@ -1,4 +1,6 @@
 <Alloy>
+    <Collection src="appAccounts"/>
+    
     <Window class="container" id="index" onClose="onClose">
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="toggleMenuButton" onClick="toggleReportMenu"/>

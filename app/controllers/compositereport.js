@@ -52,7 +52,13 @@ function open()
 {
     require('layout').open($.index);
 
-    reportsCollection.trigger('change');
+    if (reportsCollection.length) {
+        // data is already fetched
+        reportsCollection.trigger('change');
+    }
+    
+    // TODO currently fetch and reset are triggered... causes list is rendered twice!
+    reportsCollection.off("reset");
 }
 
 function close()

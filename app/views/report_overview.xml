@@ -1,17 +1,21 @@
 <Alloy>
-    <Collection src="piwikProcessedReport"/>
+    <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
 
     <View id="index">
         <View class="header" onClick="openReport">
             <Label class="headline" text="{name}"/>
         </View>
+        <View class="separator"/>
         <View class="description">
             <Label class="title">Keyword</Label>
             <Label class="dimension" text="dimension"/>
         </View>
-        <View class="content" id="content">
-            <View class="">
-                <Label>ROW</Label>
+        <View class="separator"/>
+        <View class="content" id="content" dataCollection="$.piwikProcessedReport">
+            <View class="report_row">
+                <Label class="report_title" text="{title}"></Label>
+                <Label class="report_value" text="{value}"></Label>
+                <View class="separator"/>
             </View>
         </View>
         <View class="footer">

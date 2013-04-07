@@ -5,8 +5,6 @@ function L(key)
 
 var args = arguments[0] || {};
 
-// a list of all available accounts
-var accountsCollection = args.accounts || false;
 // the currently selected account
 var accountModel      = args.account || false;
 // the currently selected website
@@ -99,7 +97,7 @@ function onOpenSettings()
 
 function onOpenAccounts()
 {
-    var accounts = Alloy.createController('accounts', {accounts: accountsCollection});
+    var accounts = Alloy.createController('accounts');
     accounts.on('accountChosen', onAccountChosen);
     accounts.open();
     setCurrentlyOpenedReport(accounts);

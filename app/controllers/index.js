@@ -1,4 +1,4 @@
-var accounts =  Alloy.createCollection('AppAccounts');
+var accounts = Alloy.Collections.appAccounts;
 accounts.fetch();
 
 var firstLogin = null;
@@ -9,7 +9,7 @@ if (accounts.hasAccount()) {
 
 } else {
 
-    firstLogin = Alloy.createController('firstlogin', {accounts: accounts});
+    firstLogin = Alloy.createController('firstlogin');
     accounts.on('add', onCreatedAccount);
     firstLogin.open();
 }
@@ -32,8 +32,7 @@ function showEntryScreen(account)
 
 function openStatistics(siteModel, accountModel)
 {
-    var reportListController = Alloy.createController('availablereports', {accounts: accounts,
-                                                                           account: accountModel,
+    var reportListController = Alloy.createController('availablereports', {account: accountModel,
                                                                            site: siteModel});
     reportListController.open();
 }

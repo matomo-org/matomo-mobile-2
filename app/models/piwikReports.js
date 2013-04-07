@@ -69,6 +69,7 @@ exports.definition = {
 
 			fetchAllReports: function (accountModel, siteModel) {
 				this.fetch({
+					reset: true,
 				    account: accountModel,
 				    params: {idSites: siteModel.id}
 				});

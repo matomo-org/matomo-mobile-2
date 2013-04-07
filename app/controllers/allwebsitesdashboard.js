@@ -5,8 +5,6 @@ function L(key)
 
 var args = arguments[0] || {};
 
-// a list of all available accounts
-var accountsCollection = args.accounts || false;
 // the currently selected account
 var accountModel = args.account || false;
 // the fetched statistics that belongs to the currently selected report
@@ -26,11 +24,7 @@ function websiteChosen(siteModel)
 
 function doChooseAccount()
 {
-    var accounts =  Alloy.createCollection('AppAccounts');
-accounts.fetch();
-
-
-    var accounts = Alloy.createController('accounts', {accounts: accounts});
+    var accounts = Alloy.createController('accounts_selector');
     accounts.on('accountChosen', onAccountChosen);
     accounts.open();
 }
@@ -60,7 +54,7 @@ function onAccountChosen(account)
 
 function doSelectWebsite(event)
 {
-    if (!event || !event.rowData || !event.rowData.modelid) {
+    if (!event || !event.rowData || null === event.rowData.modelid) {
         console.log('ModelID not defined, cannot select website');
         return;
     }
@@ -115,15 +109,13 @@ function doSearchWebsite(event)
 {
     showLoadingMessage();
 
-    statisticsModel.fetch({
+    statisticsModel.fetchProcessedReports('nb_visits', {
         account: accountModel,
         params: {
             period: 'day',
             date: 'today',
             enhanced: 1,
             idSite: lastUsedWebsite.id,
-            sortOrderColumn: "nb_visits",
-            filter_sort_column: "nb_visits",
             apiModule: "MultiSites",
             apiAction: "getAll",
             pattern: $.searchBar.value

@@ -7,6 +7,12 @@
     layout: "horizontal"
 }
 
+".separator": {
+    backgroundColor: '#dcdcdc',
+    height: 1,
+    bottom: 0,
+}
+
 "View": {
     height: Ti.UI.SIZE,
 }
@@ -31,6 +37,27 @@
 ".content": {
     backgroundColor: '#efefef',
     layout: "vertical"
+}
+
+".report_row": {
+    left: 10,
+    right: 10
+}
+
+".report_title": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    top: 10,
+    bottom: 10,
+    left: 10
+}
+
+".report_value": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    top: 10,
+    bottom: 10,
+    right: 10
 }
 
 ".title": {

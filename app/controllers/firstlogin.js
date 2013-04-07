@@ -4,7 +4,7 @@ function L(key)
 }
 
 var args     = arguments[0] || {};
-var accounts = args.accounts || false;
+var accounts = Alloy.Collections.appAccounts;
 
 var loginform = Alloy.createController('loginform', {accounts: accounts});
 
