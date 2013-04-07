@@ -19,30 +19,16 @@
 },
 
 "#content": {
-    layout: "vertical",
-    backgroundColor: "#f0f0f0"
+    layout: "vertical"
 },
 
 "#reportTable": {
-    top: 0
-  //  top: 10,
+    top: 0,
   //  left: 10,
   //  right: 10,
   //  bottom: 10,
   //  borderRadius: 5,
-  //  borderColor: "#D2D2D2"
-},
-
-".menuSeparatorShadow": {
-    top: 0,
-    height: 1,
-    backgroundColor: '#cccccc'
-  //  backgroundImage: 'separator.png'
-},
-
-".menuSeparatorShadow[platform=android]": {
-    height: '8dp',
-    backgroundImage: '/separator.png'
+  //  borderColor: "#e6e6e6"
 },
 
 "TableViewRow[platform=ios]": {
@@ -55,19 +41,3 @@
 "TableViewRow[platform=ios]": {
     selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
 },
-
-".reportRowSeparator": {
-    height: 11,
-    backgroundColor: 'white'
-},
-
-".shadow": {
-    top: 10,
-    height: 1,
-    backgroundColor: "#D2D2D2"
-},
-
-".shadow[platform=android]": {
-    top: '10dp',
-    height: '1dp'
-}

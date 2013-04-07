@@ -2,7 +2,6 @@
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
     layout: "vertical",
-    backgroundColor: "#F1F1F1"
 },
 
 ".data": {
@@ -14,35 +13,35 @@
     height: Ti.UI.SIZE,
     left: 15,
     right: 95,
-    color: '#7B7B7B',
-    top: 13,
-    bottom: 10,
-    font: {fontSize: 16}
+    color: '#7e7e7e',
+    top: 16,
+    bottom: 16,
+    font: {fontSize: 16, fontWeight: 'bold'}
 },
 
 "#title[platform=android]": {
     left: '16dp',
     right: '100dp',
-    color: '#7B7B7B',
-    top: '10dp',
-    bottom: '10dp',
-    font: {fontSize: '16sp'}
+    top: '16dp',
+    bottom: '16dp',
+    font: {fontSize: '16sp', fontWeight: 'bold'}
 },
 
 "#value": {
     height: Ti.UI.SIZE,
-    right: 3,
-    width: 87,
+    right: 15,
+    width: 75,
     top: 13,
     bottom: 10,
     font: {fontSize: 16, fontWeight: 'bold'},
-    color: '#D3172A'
+    color: '#191919',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
 },
 
 "#value[platform=android]": {
     right: '16dp',
     width: '75dp',
-    color: '#D3172A',
+    color: '#191919',
     top: '10dp',
     bottom: '10dp',
     font: {fontSize: '16sp', fontWeight: 'bold'}
@@ -50,7 +49,7 @@
 
 ".separator": {
     height: 1,
-    backgroundColor: '#D2D2D2'
+    backgroundColor: '#e8e8e8'
 },
 
 ".separator[platform=android]": {
@@ -66,11 +65,3 @@
     height: '4dp',
     backgroundImage: '/separator2.png'
 },
-
-".space": {
-    height: 10
-},
-
-".space[platform=android]": {
-    height: '10dp'
-}

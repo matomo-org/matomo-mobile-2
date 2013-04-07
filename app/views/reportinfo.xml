@@ -1,5 +1,6 @@
 <Alloy>
     <View class="container">
+        <View class="top_separator"/>
         <Label id="name"> - </Label>
     </View>
 </Alloy>

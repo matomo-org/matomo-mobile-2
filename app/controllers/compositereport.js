@@ -40,6 +40,9 @@ function transformReport(model)
 
 function filterReports(collection)
 {
+    // TODO this will not work!
+    $.index.title = reportCategory;
+    
     return collection.where({category: reportCategory});
 }
 
@@ -56,7 +59,7 @@ function open()
         // data is already fetched
         reportsCollection.trigger('change');
     }
-    
+
     // TODO currently fetch and reset are triggered... causes list is rendered twice!
     reportsCollection.off("reset");
 }

@@ -34,9 +34,6 @@
                 <TableViewRow>
                     <Require src="reportinfo" id="reportInfoCtrl" formFactor="handheld"/>
                 </TableViewRow>
-                <TableViewRow class="reportRowSeparator">
-                    <View id="reportRowSeparator" class="shadow"/>
-                </TableViewRow>
             </TableView>
         </View>
     </Window>

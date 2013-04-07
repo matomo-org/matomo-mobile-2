@@ -1,10 +1,9 @@
 <Alloy>
     <View class="container">  
+        <View class="separator"/>
         <View class="data">
             <Label id="title"> - </Label>
             <Label id="value"> - </Label>
         </View>
-        <View class="space"/>
-        <View class="separator"/>
     </View>
 </Alloy>

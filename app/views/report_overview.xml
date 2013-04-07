@@ -7,8 +7,8 @@
         </View>
         <View class="separator"/>
         <View class="description">
-            <Label class="title">Keyword</Label>
-            <Label class="dimension" text="dimension"/>
+            <Label class="description_dimension" text="{dimension}"/>
+            <Label class="description_metric" id="metric"/>
         </View>
         <View class="separator"/>
         <View class="content" id="content" dataCollection="$.piwikProcessedReport">
@@ -18,8 +18,8 @@
                 <View class="separator"/>
             </View>
         </View>
-        <View class="footer">
-            <Label>More</Label>
+        <View class="footer" onClick="openReport">
+            <Label class="more">More</Label>
         </View>
     </View>
 </Alloy>

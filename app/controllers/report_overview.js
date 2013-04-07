@@ -17,6 +17,8 @@ var siteModel    = $model.siteModel;
 
 var processedReport = $.piwikProcessedReport;
 
+$.metric.text = $model.getMetricName();
+
 function openReport()
 {
     var params = {account: accountModel, site: siteModel, report: $model};

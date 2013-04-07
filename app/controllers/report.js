@@ -139,10 +139,6 @@ function onStatisticsFetched(processedReportModel)
         $.reportMenuCtrl.setDate(processedReportModel.getReportDate());
     }
 
-    var row = Ti.UI.createTableViewRow({backgroundColor: 'white', height: OS_ANDROID ? '11dp' : 11});
-    row.add($.reportRowSeparator);
-    rows.push(row);
-
     if (reportRowsCtrl) {
         reportRowsCtrl.destroy();
     }

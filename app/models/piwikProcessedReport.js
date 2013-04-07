@@ -190,6 +190,7 @@ exports.definition = {
                         row.metadata = response.metadata;
                         row.prettyDate     = response.prettyDate;
                         row.reportMetadata = reportMetadata ? reportMetadata[index] : null;
+                        row.hasDimension   = true;
                     
                         reportRow.push(row);
                     }
@@ -214,6 +215,7 @@ exports.definition = {
                         row.metadata = response.metadata;
                         row.prettyDate     = response.prettyDate;
                         row.reportMetadata = reportMetadata ? reportMetadata[key] : null;
+                        row.hasDimension   = false;
 
                         reportRow.push(row);
                     }

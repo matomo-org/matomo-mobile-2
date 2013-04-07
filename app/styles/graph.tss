@@ -12,7 +12,8 @@
     height: 150,
     left: 10,
     right: 10,
-    zIndex: 5
+    zIndex: 5,
+    bottom: 10,
 },
 
 "#image[platform=ios]": {
@@ -29,6 +30,7 @@
     left: '16dp',
     right: '16dp',
     height: '150dp',
+    bottom: '10dp',
 }
 
 "#showDetailIcon": {

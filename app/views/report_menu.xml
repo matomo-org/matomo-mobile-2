@@ -13,11 +13,7 @@
                     <ImageView image="ic_action_menu_date.png" right="10" width="22" height="22"/>
                 </View>
             </View>
-
-            <View id="metric" class="default_button" onClick="doChooseMetric">
-                <Label class="website_label" text="Visits"/>
-                <ImageView image="ic_action_menu_website.png" width="19" height="19" right="10"/>
-            </View>
+            
         </ScrollView>
     </Window>
 

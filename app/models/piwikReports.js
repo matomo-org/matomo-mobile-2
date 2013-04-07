@@ -30,6 +30,21 @@ exports.definition = {
 	extendModel: function(Model) {		
 		_.extend(Model.prototype, {
 
+            getMetricName: function () {
+                var metrics = this.getMetrics();
+                var sortOrder = this.getSortOrder();
+
+                if (metrics && metrics[sortOrder]) {
+                    return metrics[sortOrder];
+                }
+
+                return ''
+            },
+
+            getMetrics: function () {
+                return this.get('metrics');
+            },
+
 			getSortOrder: function (metric) {
 
 				if (metric) {
