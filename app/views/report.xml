@@ -33,7 +33,7 @@
                     <Require src="graph" id="reportGraphCtrl"/>
                 </TableViewRow>
                 <TableViewRow>
-                    <Require src="reportinfo" id="reportInfoCtrl" formFactor="handheld"/>
+                    <Require src="reportinfo" onMetricChosen="onMetricChosen" id="reportInfoCtrl" formFactor="handheld"/>
                 </TableViewRow>
             </TableView>
         </View>

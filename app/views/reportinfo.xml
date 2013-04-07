@@ -1,5 +1,5 @@
 <Alloy>
-    <View class="container">
+    <View class="container" onClick="doSelectMetric">
         <View class="top_separator"/>
         <Label id="name"> - </Label>
     </View>

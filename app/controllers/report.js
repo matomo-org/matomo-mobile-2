@@ -3,7 +3,7 @@ function L(key)
     return require('L')(key);
 }
 
-var args  = arguments[0] || {};
+var args = arguments[0] || {};
 
 var accountModel    = args.account || false;
 // the currently selected website
@@ -40,14 +40,6 @@ function doOpenReportMenu()
 {
     var reportMenu = Alloy.createController('report_menu');
     reportMenu.open();
-}
-
-function doChooseMetric()
-{
-    var params         = {metrics: statisticsModel.getMetrics()};
-    var metricsChooser = Alloy.createController('reportmetricschooser', params);
-    metricsChooser.on('metricChosen', onMetricChosen)
-    metricsChooser.open();
 }
 
 function onMetricChosen(chosenMetric)
@@ -136,14 +128,9 @@ function onStatisticsFetched(processedReportModel)
     row.add($.reportGraphCtrl.getView());
     rows.push(row);
 
-    if (!require('alloy').isTablet) {
-        var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-        row.add($.reportInfoCtrl.getView());
-        rows.push(row);
-    } else {
-        $.reportMenuCtrl.setMetric(processedReportModel.getMetricName());
-        $.reportMenuCtrl.setDate(processedReportModel.getReportDate());
-    }
+    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
+    row.add($.reportInfoCtrl.getView());
+    rows.push(row);
 
     if (reportRowsCtrl) {
         reportRowsCtrl.destroy();
