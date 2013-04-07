@@ -82,13 +82,24 @@ function onCreatedAccount() {
     newAccountController.close();
 }
 
+function toggleReportMenu(event)
+{
+    require('layout').toggleLeftSidebar();
+}
+
+function onClose ()
+{
+    $.destroy();
+}
+
 function close () 
 {
     require('layout').close($.index);
-    $.destroy();
 }
 
 exports.open = function ()
 {
     require('layout').open($.index);
 };
+
+exports.close = close;

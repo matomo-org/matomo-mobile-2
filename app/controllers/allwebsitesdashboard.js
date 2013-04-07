@@ -26,7 +26,11 @@ function websiteChosen(siteModel)
 
 function doChooseAccount()
 {
-    var accounts = Alloy.createController('accounts', {accounts: accountsCollection});
+    var accounts =  Alloy.createCollection('AppAccounts');
+accounts.fetch();
+
+
+    var accounts = Alloy.createController('accounts', {accounts: accounts});
     accounts.on('accountChosen', onAccountChosen);
     accounts.open();
 }
@@ -116,6 +120,7 @@ function doSearchWebsite(event)
         params: {
             period: 'day',
             date: 'today',
+            enhanced: 1,
             idSite: lastUsedWebsite.id,
             sortOrderColumn: "nb_visits",
             filter_sort_column: "nb_visits",

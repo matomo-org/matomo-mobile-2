@@ -11,10 +11,10 @@
         </LeftNavButton>
 
         <RightNavButton platform="ios">
-            <Button class="settingsButton" onClick="doOpenSettings"/>
+            <Button class="reportMenuButton" onClick="doOpenReportMenu"/>
         </RightNavButton>
         <RightNavButton platform="mobileweb">
-            <Button class="settingsButton" onClick="doOpenSettings"/>
+            <Button class="reportMenuButton" onClick="doOpenReportMenu"/>
         </RightNavButton>
 
         <Menu id="menu" platform="android">

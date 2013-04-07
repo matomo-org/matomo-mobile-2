@@ -1,6 +1,5 @@
 <Alloy>
     <Collection src="piwikReports"/>
-
     <TableView id="reportsTable" onClick="doSelectReport">
     </TableView>
 </Alloy>

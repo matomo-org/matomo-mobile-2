@@ -24,15 +24,10 @@ if (reportModel) {
     reportCategory = reportModel.get('category');
 }
 
-function refresh()
+function doOpenReportMenu()
 {
-    reportsCollection.fetchAllReports(accountModel, siteModel);
-}
-
-function doOpenSettings()
-{
-    var settings = Alloy.createController('settings');
-    settings.open();
+    var reportMenu = Alloy.createController('report_menu');
+    reportMenu.open();
 }
 
 function transformReport(model)
@@ -50,13 +45,14 @@ function filterReports(collection)
 
 function toggleReportMenu(event)
 {
-    require('layout').toggleMenu();
+    require('layout').toggleLeftSidebar();
 }
 
 function open()
 {
     require('layout').open($.index);
-    refresh();
+
+    reportsCollection.trigger('change');
 }
 
 function close()

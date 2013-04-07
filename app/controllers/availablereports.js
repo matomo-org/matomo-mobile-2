@@ -27,7 +27,7 @@ function updateAvailableReportsList()
     var currentSection = null;
     var latestSection  = null;
 
-    rows.push(Alloy.createController('availablereportsection', {title: L('Mobile_Reports')}).getView());
+    rows.push(Alloy.createController('availablereportsection', {title: L('General_Reports')}).getView());
     rows.push(Alloy.createController('availablereportrow', {title: L('Real-time Map'), cid: 'visitormap'}).getView());
     rows.push(Alloy.createController('availablereportrow', {title: L('Live_VisitorsInRealTime'), cid: 'live'}).getView());
     rows.push(Alloy.createController('availablereportrow', {title: L('Live_VisitorLog'), cid: 'visitorlog'}).getView());
@@ -36,7 +36,7 @@ function updateAvailableReportsList()
     {
         currentSection = report.get('category');
 
-        if ('MultiSites' == currentSection || 'API' == currentSection) {
+        if ('MultiSites' == report.get('module') || 'API' == report.get('module')) {
             // we do not display this report
             return;
         }
@@ -47,8 +47,19 @@ function updateAvailableReportsList()
         }
     });
 
+    rows.push(Alloy.createController('availablereportsection', {title: L('Mobile_Account')}).getView());
+    rows.push(Alloy.createController('availablereportrow', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
+    rows.push(Alloy.createController('availablereportrow', {title: L('General_Settings'), cid: 'settings'}).getView());
+
     $.reportsTable.setData(rows);
     rows = null;
+}
+
+function closeCurrentlyOpenedReport()
+{
+    if (currentlyActiveReport) {
+        currentlyActiveReport.close();
+    }
 }
 
 function doSelectReport(event) 
@@ -59,8 +70,9 @@ function doSelectReport(event)
     
     var cid = event.rowData.cid;
 
-    require('layout').hideMenu();
-    currentlyActiveReport.close();
+    require('layout').hideLeftSidebar();
+
+    closeCurrentlyOpenedReport();
 
     if ('live' == cid) {
         onLiveVisitorsChosen();
@@ -68,10 +80,46 @@ function doSelectReport(event)
         onVisitorLogChosen();
     } else if ('visitormap' == cid) {
         onVisitorMapChosen();
+    } else if ('settings' == cid) {
+        onOpenSettings();
+    } else if ('accounts' == cid) {
+        onOpenAccounts();
     } else {
         var report = reportsCollection.getByCid(cid);
         onReportChosen(report);
     }
+}
+
+function onOpenSettings()
+{
+    var settings = Alloy.createController('settings');
+    settings.open();
+    setCurrentlyOpenedReport(settings);
+}
+
+function onOpenAccounts()
+{
+    var accounts = Alloy.createController('accounts', {accounts: accountsCollection});
+    accounts.on('accountChosen', onAccountChosen);
+    accounts.open();
+    setCurrentlyOpenedReport(accounts);
+}
+
+function refresh()
+{
+    reportsCollection.fetchAllReports(accountModel, siteModel);
+}
+
+function onAccountChosen(account)
+{
+    require('account').selectWebsite(account, onWebsiteSelected);
+}
+
+function onWebsiteSelected(site, account)
+{
+    siteModel = site;
+    accountModel = account;
+    openEntryReport();
 }
 
 function onReportChosen(chosenReportModel)
@@ -112,16 +160,25 @@ function onVisitorMapChosen()
     setCurrentlyOpenedReport(realtimemap);
 }
 
+function openEntryReport()
+{
+    closeCurrentlyOpenedReport();
+
+    var statistics = Alloy.createController('compositereport', {account: accountModel,
+                                                                site: siteModel});
+    statistics.open();
+    setCurrentlyOpenedReport(statistics);
+}
+
 exports.updateWebsite = function (newSiteModel) {
     siteModel = newSiteModel
 }
 
 exports.open = function() 
 {
-    require('layout').setMenuView($.reportsTable);
+    require('layout').setLeftSidebar($.reportsTable);
 
-    var statistics = Alloy.createController('compositereport', {account: accountModel,
-                                                                site: siteModel});
-    statistics.open();
-    setCurrentlyOpenedReport(statistics);
+    openEntryReport();
+
+    refresh();
 };

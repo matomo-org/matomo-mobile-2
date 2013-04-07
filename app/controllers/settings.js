@@ -74,6 +74,11 @@ function doOpenGiveFeedback()
     feedback.open();
 }
 
+function toggleReportMenu(event)
+{
+    require('layout').toggleLeftSidebar();
+}
+
 function close() 
 {
     require('layout').close($.index);
@@ -86,6 +91,8 @@ function doRefresh () {
 
     close();
 }
+
+exports.close = close;
 
 exports.open = function() 
 {

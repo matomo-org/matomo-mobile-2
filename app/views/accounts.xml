@@ -1,5 +1,12 @@
 <Alloy>
-    <Window class="container" id="index">
+    <Window class="container" id="index" onClose="onClose">
+        <LeftNavButton platform="mobileweb" formFactor="handheld">
+            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+        </LeftNavButton>
+        <LeftNavButton platform="ios" formFactor="handheld">
+            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+        </LeftNavButton>
+        
         <RightNavButton platform="ios,mobileweb">
             <Button id="addAccountButton" onClick="doAddAccount"/>
         </RightNavButton>

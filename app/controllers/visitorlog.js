@@ -79,7 +79,7 @@ function doRefresh()
 
 function toggleReportMenu(event)
 {
-    require('layout').toggleMenu();
+    require('layout').toggleLeftSidebar();
 }
 
 exports.open = function () 

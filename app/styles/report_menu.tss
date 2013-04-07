@@ -1,0 +1,48 @@
+"#index": {
+    backgroundImage: 'org.piwik.tableviewrow/background.png',
+    right: 0,
+    width: 250
+}
+
+".container": {
+    layout: 'vertical'
+}
+
+".default_button": {
+    top: 10,
+    right: 10,
+    left: 10,
+    height: Ti.UI.SIZE,
+}
+
+".website_label": {
+    color: "#d5d5d5",
+    left: 10,
+    top: 5,
+    bottom: 5,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+}
+
+".highlight_button": {
+    top: 10,
+    right: 10,
+    left: 10,
+    height: Ti.UI.SIZE,
+}
+
+".date_button": {
+    backgroundImage: 'menu_button_background.png',
+    height: Ti.UI.SIZE,
+    borderColor: '#000',
+    borderRadius: 5,
+}
+
+".date_label": {
+    color: "#d5d5d5",
+    left: 10,
+    top: 5,
+    bottom: 5,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+}

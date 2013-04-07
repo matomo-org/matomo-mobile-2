@@ -38,14 +38,14 @@ exports.open = function (win)
     win = null;
 };
 
-var menuWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
-menuWindow.open();
+var leftSidebarWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
+leftSidebarWindow.open();
 
-exports.setMenuView = function(view)
+exports.setLeftSidebar = function(view)
 {
-    menuWindow.add(view);
+    leftSidebarWindow.add(view);
     rootWindow.left = 250;
 }
 
-exports.hideMenu = function () {};
-exports.toggleMenu = function () {}
+exports.hideLeftSidebar = function () {};
+exports.toggleLeftSidebar = function () {}

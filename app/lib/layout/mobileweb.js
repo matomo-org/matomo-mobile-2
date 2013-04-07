@@ -40,12 +40,12 @@ exports.open = function (win)
 
 
 
-var menuWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
-menuWindow.open();
+var leftSidebarWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
+leftSidebarWindow.open();
 
 var isMenuVisible = false;
 
-function hideMenu()
+function hideLeftSidebar()
 {
     rootWindow.animate({
         left: 0,
@@ -56,7 +56,7 @@ function hideMenu()
     isMenuVisible = false;
 }
 
-function showMenu()
+function showLeftSidebar()
 {
     rootWindow.animate({
         left: 250,
@@ -67,14 +67,14 @@ function showMenu()
     isMenuVisible = true;
 }
 
-exports.setMenuView = function(view)
+exports.setLeftSidebar = function(view)
 {
-    menuWindow.add(view);
+    leftSidebarWindow.add(view);
 };
 
-exports.hideMenu = hideMenu;
+exports.hideLeftSidebar = hideLeftSidebar;
 
-exports.toggleMenu = function ()
+exports.toggleLeftSidebar = function ()
 {
-    isMenuVisible ? hideMenu() : showMenu();
+    isMenuVisible ? hideLeftSidebar() : showLeftSidebar();
 };
