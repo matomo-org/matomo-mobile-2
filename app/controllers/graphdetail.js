@@ -118,7 +118,7 @@ function getGraphUrlWithSize(width, height) {
 
     var graph            = require('Piwik/PiwikGraph');
     var graphUrlWithSize = graph.appendSize(graphSwitcher.currentGraphUrl(), width, height, true);
-    graphUrlWithSize     = graph.setParams(graphUrlWithSize, {showMetricTitle: 1, legendAppendMetric: 1});
+    graphUrlWithSize     = graph.setParams(graphUrlWithSize, {showMetricTitle: 1, showLegend: 1, legendAppendMetric: 1});
     graph                = null;
     
     return graphUrlWithSize;
