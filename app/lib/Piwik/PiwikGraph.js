@@ -173,6 +173,9 @@ function PiwikGraph () {
             parameter.legendFontSize = Math.round(parameter.fontSize * 1.5);
             parameter.fontSize = Math.round(parameter.fontSize * 1.5);
         } 
+
+        parameter.backgroundColor='efefef';
+        parameter.gridColor='dcdcdc';
         
         // prevents graph from caching
         parameter.cacherand    = Math.floor(Math.random() * 9999999);
