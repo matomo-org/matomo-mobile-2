@@ -98,7 +98,7 @@ function openSettings()
     setCurrentlyOpenedReport(settings);
 }
 
-function onOpenAccounts()
+function chooseAccount()
 {
     var accounts = Alloy.createController('accounts');
     accounts.on('accountChosen', onAccountChosen);
@@ -106,7 +106,7 @@ function onOpenAccounts()
     setCurrentlyOpenedReport(accounts);
 }
 
-function chooseAccount(account)
+function onAccountChosen(account)
 {
     require('account').selectWebsite(account, onWebsiteSelected);
 }

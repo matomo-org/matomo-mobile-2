@@ -36,10 +36,18 @@ function doDeleteAccount(event)
 {
     var account = accounts.get(event.rowData.accountId);
 
+    // TODO this will result in an error cause other windows will no longer get an account
+    // var currentActiveAccount = require('session').getAccount();
+    // if (account == currentActiveAccount) {
+    //     require('session').setWebsite(null, null);
+    // }
+
     if (account) {
         accounts.remove(account);
         account.destroy();
     }
+
+    // TODO if no further account is available, we will run into problems...
 }
 
 function doSelectAction(event)
