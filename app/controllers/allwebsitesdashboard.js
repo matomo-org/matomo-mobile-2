@@ -5,14 +5,15 @@ function L(key)
 
 var args = arguments[0] || {};
 
+var accountsCollection = Alloy.Collections.appAccounts;
 // the currently selected account
-var accountModel = args.account || false;
+var accountModel    = accountsCollection.lastUsedAccount();
 // the fetched statistics that belongs to the currently selected report
 var statisticsModel = Alloy.Collections.piwikProcessedReport;
-// whether to open a website automatically if only one website is available
+
 var autoOpen = true;
-if ('undefined' === (typeof args.autoOpen)) {
-    autoOpen = args.autoOpen;
+if ('undefined' === (typeof args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable)) {
+    autoOpen = args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable;
 }
 
 var lastUsedWebsite = null;

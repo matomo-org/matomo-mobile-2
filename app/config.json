@@ -9,7 +9,10 @@
                 "fontSize": 9,
                 "showMetricTitle": 0,
                 "aliasedGraph": 1,
-                "legendAppendMetric": 0
+                "legendAppendMetric": 0,
+                "backgroundColor": "efefef",
+                "gridColor": "dcdcdc",
+                "colors": "cb2026"
             }
         },
         "account": {

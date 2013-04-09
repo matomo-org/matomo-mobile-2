@@ -1,5 +1,7 @@
 <Alloy>
     <Collection src="piwikProcessedReport"/>
+    <Collection src="appAccounts"/>
+    
     <Window id="index">
         <RightNavButton platform="ios,mobileweb">
             <Button id="accountsButton" onClick="doChooseAccount"/>

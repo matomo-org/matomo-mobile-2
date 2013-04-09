@@ -3,10 +3,10 @@
     
     <Window class="container" id="index" onClose="onClose">
         <LeftNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+            <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         <LeftNavButton platform="ios" formFactor="handheld">
-            <Button class="toggleMenuButton" onClick="toggleReportMenu"/>
+            <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         
         <RightNavButton platform="ios,mobileweb">

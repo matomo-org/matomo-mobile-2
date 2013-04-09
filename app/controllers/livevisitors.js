@@ -3,9 +3,6 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
-var accountModel = args.account;
-var siteModel = args.site;
 var refreshIntervalInMs = 45000;
 
 $.countdown.init(parseInt(refreshIntervalInMs / 1000));
@@ -106,6 +103,9 @@ function onFetchError()
 
 function doRefresh()
 {
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
+
     showLoadingMessage();
     piwikLiveVisitors.fetchVisitors(accountModel, siteModel.id, render, onFetchError);
 }
@@ -169,9 +169,15 @@ function doRefresh()
 
 /***** HANDLE BACKGROUND EVENTS END ******/
 
-function toggleReportMenu(event)
+function toggleReportConfiguratorVisibility()
 {
-    require('layout').toggleLeftSidebar();
+    require('report/configurator').refresh({});
+    require('report/configurator').toggleVisibility();
+}
+
+function toggleReportChooserVisibility(event)
+{
+    require('report/chooser').toggleVisibility();
 }
 
 exports.open = function () 

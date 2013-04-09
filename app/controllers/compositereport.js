@@ -3,39 +3,54 @@ function L(key)
     return require('L')(key);
 }
 
+var args = arguments[0] || {};
+var reportCategory    = args.reportCategory;
+var reportsCollection = Alloy.Collections.piwikReports;
+
+function registerEvents()
+{
+    var session = require('session');
+    session.on('websiteChanged', onWebsiteChosen);
+    session.on('dateChosen', onDateChosen);
+}
+
+function unregisterEvents()
+{
+    var session = require('session');
+    session.off('websiteChanged', onWebsiteChosen);
+    session.off('dateChosen', onDateChosen);
+}
+
 function onClose()
 {
+    unregisterEvents();
+
     $.destroy();
 }
 
-var args = arguments[0] || {};
+function toggleReportConfiguratorVisibility()
+{
+    var siteModel = require('session').getWebsite();
 
-// the currently selected account
-var accountModel       = args.account || false;
-// the currently selected website
-var siteModel          = args.site || false;
-// A list of all available reports
-var reportsCollection  = Alloy.Collections.piwikReports;
-
-var reportModel = args.report || false;
-
-var reportCategory = 'Visits Summary';
-if (reportModel) {
-    reportCategory = reportModel.get('category');
+    var reportConfigurator = require('report/configurator');
+    reportConfigurator.refresh({websiteName: siteModel.getName(),
+                                prettyDate: 'Today'});
+    reportConfigurator.toggleVisibility();
 }
 
-function doOpenReportMenu()
+function toggleReportChooserVisibility(event)
 {
-    var reportMenu = Alloy.createController('report_menu');
-    reportMenu.open();
+    require('report/chooser').toggleVisibility();
 }
 
-function transformReport(model)
+function onWebsiteChosen()
 {
-    model.accountModel = accountModel;
-    model.siteModel    = siteModel;
+    alert('website chosen');
+}
 
-    return model;
+function onDateChosen() 
+{
+    alert('date chosen');
 }
 
 function filterReports(collection)
@@ -46,22 +61,33 @@ function filterReports(collection)
     return collection.where({category: reportCategory});
 }
 
-function toggleReportMenu(event)
+function isDataAlreadyFetched()
 {
-    require('layout').toggleLeftSidebar();
+    return reportsCollection.length;
+}
+
+function forceRenderingListOfReports()
+{
+    reportsCollection.trigger('change');
+}
+
+function preventListOfReportsWillBeRenderedTwice()
+{
+    // TODO currently fetch and reset are triggered... causes list is rendered (and data fetched) twice!
+    reportsCollection.off("reset");
 }
 
 function open()
 {
     require('layout').open($.index);
 
-    if (reportsCollection.length) {
-        // data is already fetched
-        reportsCollection.trigger('change');
+    if (isDataAlreadyFetched()) {
+        forceRenderingListOfReports();
     }
 
-    // TODO currently fetch and reset are triggered... causes list is rendered twice!
-    reportsCollection.off("reset");
+    preventListOfReportsWillBeRenderedTwice();
+
+    registerEvents();
 }
 
 function close()
@@ -70,4 +96,4 @@ function close()
 }
 
 exports.close = close;
-exports.open = open;
+exports.open  = open;

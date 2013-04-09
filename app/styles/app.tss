@@ -21,8 +21,14 @@
     color: "#333333"
 }
 
-".toggleMenuButton": {
+".reportChooserButton": {
     backgroundImage: "ic_action_menu.png",
     width: 32,
     height: 32
 }
+
+".reportConfiguratorButton": {
+    backgroundImage: "ic_action_reportmenu.png",
+    width: 32,
+    height: 32
+},

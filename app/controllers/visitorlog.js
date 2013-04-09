@@ -3,11 +3,9 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
-var accountModel = args.account;
-var siteModel    = args.site;
-
-var visitorLog = Alloy.createCollection('piwikLastVisitDetails');
+var accountModel = require('session').getAccount();
+var siteModel    = require('session').getWebsite();
+var visitorLog   = Alloy.createCollection('piwikLastVisitDetails');
 visitorLog.on('fetch', render);
 
 if (OS_IOS) {
@@ -77,9 +75,15 @@ function doRefresh()
     visitorLog.initial(accountModel, siteModel.id, 'today');
 }
 
-function toggleReportMenu(event)
+function toggleReportConfiguratorVisibility()
 {
-    require('layout').toggleLeftSidebar();
+    require('report/configurator').refresh({});
+    require('report/configurator').toggleVisibility();
+}
+
+function toggleReportChooserVisibility(event)
+{
+    require('report/chooser').toggleVisibility();
 }
 
 exports.open = function () 

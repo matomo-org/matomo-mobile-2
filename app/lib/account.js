@@ -23,7 +23,7 @@ function onSiteSelected(event)
 
 function openDashboard(account)
 {
-    var dashboard = Alloy.createController('allwebsitesdashboard', {account: account});
+    var dashboard = Alloy.createController('allwebsitesdashboard');
     dashboard.on('websiteChosen', onSiteSelected);
     dashboard.on('websiteChosen', function () {
         this.close();

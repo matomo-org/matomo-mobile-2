@@ -3,14 +3,7 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
-
-// the currently selected account
-var accountModel      = args.account || false;
-// the currently selected website
-var siteModel         = args.site || false;
 var reportsCollection = Alloy.Collections.piwikReports;
-
 reportsCollection.on('fetch', updateAvailableReportsList);
 
 var currentlyActiveReport = null;
@@ -48,6 +41,7 @@ function updateAvailableReportsList()
     rows.push(Alloy.createController('availablereportsection', {title: L('Mobile_Account')}).getView());
     rows.push(Alloy.createController('availablereportrow', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
     rows.push(Alloy.createController('availablereportrow', {title: L('General_Settings'), cid: 'settings'}).getView());
+    rows.push(Alloy.createController('availablereportrow', {title: L('General_Help'), cid: 'help'}).getView());
 
     $.reportsTable.setData(rows);
     rows = null;
@@ -73,22 +67,31 @@ function doSelectReport(event)
     closeCurrentlyOpenedReport();
 
     if ('live' == cid) {
-        onLiveVisitorsChosen();
+        openLiveVisitors();
     } else if ('visitorlog' == cid) {
-        onVisitorLogChosen();
+        openVisitorLog();
     } else if ('visitormap' == cid) {
-        onVisitorMapChosen();
+        openVisitorMap();
     } else if ('settings' == cid) {
-        onOpenSettings();
+        openSettings();
+    } else if ('help' == cid) {
+        openHelp();
     } else if ('accounts' == cid) {
-        onOpenAccounts();
+        chooseAccount();
     } else {
         var report = reportsCollection.getByCid(cid);
-        onReportChosen(report);
+        openCompositeReport(report);
     }
 }
 
-function onOpenSettings()
+function openHelp()
+{
+    var help = Alloy.createController('help');
+    help.open();
+    setCurrentlyOpenedReport(help);
+}
+
+function openSettings()
 {
     var settings = Alloy.createController('settings');
     settings.open();
@@ -103,46 +106,53 @@ function onOpenAccounts()
     setCurrentlyOpenedReport(accounts);
 }
 
-function refresh()
-{
-    reportsCollection.fetchAllReports(accountModel, siteModel);
-}
-
-function onAccountChosen(account)
+function chooseAccount(account)
 {
     require('account').selectWebsite(account, onWebsiteSelected);
 }
 
-function onWebsiteSelected(site, account)
+function onWebsiteSelected(siteModel, accountModel)
 {
-    siteModel = site;
-    accountModel = account;
+    require('session').setWebsite(siteModel, accountModel);
+
     openEntryReport();
 }
 
-function onReportChosen(chosenReportModel)
+function openCompositeReport(chosenReportModel)
 {
-    var statistics = Alloy.createController('compositereport', {account: accountModel,
-                                                                report: chosenReportModel,
-                                                                site: siteModel});
+    var reportCategory = chosenReportModel.get('category');
+    var statistics     = Alloy.createController('compositereport', {reportCategory: reportCategory});
     statistics.open();
     setCurrentlyOpenedReport(statistics);
 }
 
-function onLiveVisitorsChosen()
+function openLiveVisitors()
 {
-    var params = {account: accountModel, site: siteModel};
-    var live   = Alloy.createController('livevisitors', params);
+    var live = Alloy.createController('livevisitors');
     live.open();
     setCurrentlyOpenedReport(live);
 }
 
-function onVisitorLogChosen()
+function openVisitorLog()
 {
-    var params = {account: accountModel, site: siteModel};
-    var log    = Alloy.createController('visitorlog', params);
+    var log = Alloy.createController('visitorlog');
     log.open();
     setCurrentlyOpenedReport(log);
+}
+
+function openVisitorMap()
+{
+    var realtimemap = Alloy.createController('realtime_map');
+    realtimemap.open();
+    setCurrentlyOpenedReport(realtimemap);
+}
+
+function refresh()
+{
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
+
+    reportsCollection.fetchAllReports(accountModel, siteModel);
 }
 
 function setCurrentlyOpenedReport(controller)
@@ -150,26 +160,14 @@ function setCurrentlyOpenedReport(controller)
     currentlyActiveReport = controller;
 }
 
-function onVisitorMapChosen()
-{
-    var params      = {account: accountModel, site: siteModel};
-    var realtimemap = Alloy.createController('realtime_map', params);
-    realtimemap.open();
-    setCurrentlyOpenedReport(realtimemap);
-}
-
 function openEntryReport()
 {
     closeCurrentlyOpenedReport();
 
-    var statistics = Alloy.createController('compositereport', {account: accountModel,
-                                                                site: siteModel});
-    statistics.open();
-    setCurrentlyOpenedReport(statistics);
-}
-
-exports.updateWebsite = function (newSiteModel) {
-    siteModel = newSiteModel
+    // TODO we cannot just use Visits Summary
+    var compositeReport = Alloy.createController('compositereport', {reportCategory: 'Visits Summary'});
+    compositeReport.open();
+    setCurrentlyOpenedReport(compositeReport);
 }
 
 exports.open = function() 

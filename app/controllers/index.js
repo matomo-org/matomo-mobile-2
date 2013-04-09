@@ -32,7 +32,8 @@ function showEntryScreen(account)
 
 function openStatistics(siteModel, accountModel)
 {
-    var reportListController = Alloy.createController('availablereports', {account: accountModel,
-                                                                           site: siteModel});
-    reportListController.open();
+    require('session').setWebsite(siteModel, accountModel);
+    
+    var reportChooser = Alloy.createController('availablereports');
+    reportChooser.open();
 }

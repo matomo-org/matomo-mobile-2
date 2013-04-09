@@ -1,0 +1,23 @@
+"#index": {
+    title: L('General_Help'),
+    backButtonTitle: L('Mobile_NavigationBack')
+},
+
+"#helpTable[platform=ios]": {
+    style: Ti.UI.iPhone.TableViewStyle.GROUPED
+},
+
+"#about": {
+    hasDetail: true,
+    title: L('Mobile_AboutPiwikMobile')
+},
+
+"#feedback": {
+    hasDetail: true,
+    title: L('General_GiveUsYourFeedback')
+},
+
+"#faq": {
+    hasDetail: true,
+    title: L('General_Faq')
+},

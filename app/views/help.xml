@@ -7,12 +7,10 @@
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         
-        <TableView id="settingsTable">
-            <TableViewRow id="language" onClick="doChangeLanguage"/>
-            <TableViewRow id="tracking" onClick="toggleTrackingEnabled"/>
-            <TableViewRow id="graphs" onClick="toggleGraphsEnabled"/>
-            <TableViewSection id="advanced"/>
-            <TableViewRow id="timeout" onClick="doChangeHttpTimeout"/>
+        <TableView id="helpTable">
+            <TableViewRow id="about" onClick="doOpenAboutPiwikMobile"/>
+            <TableViewRow id="feedback" onClick="doOpenGiveFeedback"/>
+            <TableViewRow id="faq" onClick="doOpenFaq"/>
         </TableView>
     </Window>
 </Alloy>

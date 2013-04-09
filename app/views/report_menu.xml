@@ -2,14 +2,14 @@
     <Window id="index" onClose="onClose">
         <ScrollView class="container">
 
-            <View id="website" class="default_button" onClick="doChooseWebsite">
-                <Label class="website_label" text="Clearcode.cc"/>
+            <View id="websiteContainer" class="default_button" onClick="chooseWebsite">
+                <Label id="websiteLabel" class="website_label" text="Clearcode.cc"/>
                 <ImageView image="ic_action_menu_website.png" width="19" height="19" right="10"/>
             </View>
 
-            <View id="date" class="highlight_button" onClick="doChooseDate">
+            <View id="dateContainer" class="highlight_button" onClick="chooseDate">
                 <View class="date_button">
-                    <Label class="date_label" text="18 Februar 2013"/>
+                    <Label id="dateLabel" class="date_label" text="18 Februar 2013"/>
                     <ImageView image="ic_action_menu_date.png" right="10" width="22" height="22"/>
                 </View>
             </View>

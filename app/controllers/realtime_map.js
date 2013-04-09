@@ -3,12 +3,11 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
-var accountModel = args.account || false;
-var siteModel    = args.site || false;
-
 function openRealTimeMapInWebview()
 {
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
+
     var url = accountModel.getBasePath();
     url    += "index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&idSite=";
     url    += siteModel.id;
@@ -24,9 +23,15 @@ exports.open = function () {
     require('layout').open($.index);
 }
 
-function toggleReportMenu(event)
+function toggleReportConfiguratorVisibility()
 {
-    require('layout').toggleLeftSidebar();
+    require('report/configurator').refresh({});
+    require('report/configurator').toggleVisibility();
+}
+
+function toggleReportChooserVisibility(event)
+{
+    require('report/chooser').toggleVisibility();
 }
 
 function close()

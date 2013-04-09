@@ -11,10 +11,10 @@
         </RightNavButton>
 
         <RightNavButton platform="ios">
-            <Button class="reportCustomizeButton" onClick="doOpenReportMenu"/>
+            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
         <RightNavButton platform="mobileweb">
-            <Button class="reportCustomizeButton" onClick="doOpenReportMenu"/>
+            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
 
         <Menu id="menu" platform="android">

@@ -48,7 +48,8 @@
 
 "#index": {
     fullscreen: false,
-    title: L('General_AllWebsitesDashboard')
+    title: L('General_AllWebsitesDashboard'),
+    backButtonTitle: L('Mobile_NavigationBack')
 },
 
 "#index[platform=android]": {

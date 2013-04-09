@@ -5,19 +5,20 @@ function L(key)
 
 var args = arguments[0] || {};
 
-var accountModel    = args.account || false;
-// the currently selected website
-var siteModel       = args.site || false;
+var accountModel = require('session').getAccount();
+var siteModel    = require('session').getWebsite();
+
+var currentMetric   = null;
 // the currently selected report
 var reportModel     = args.report || false;
-// the fetched statistics that belongs to the currently selected report
-var statisticsModel = args.statistics || Alloy.createModel('piwikProcessedReport');
-var currentMetric   = null;
 var flatten         = args.flatten || 0;
 var reportList      = args.reportList || {};
 var reportPeriod    = args.period || 'day';
 var reportDate      = args.date || 'today';
 var showAllEntries  = false;
+
+// the fetched statistics that belongs to the currently selected report
+var statisticsModel = Alloy.createModel('piwikProcessedReport');
 
 var rowsFilterLimit = Alloy.CFG.piwik.filterLimit;
 
@@ -36,10 +37,10 @@ function onClose()
  * REPORT-MENU START
  */
 
-function doOpenReportMenu()
+function toggleReportConfiguratorVisibility()
 {
-    var reportMenu = Alloy.createController('report_menu');
-    reportMenu.open();
+    require('report/configurator').refresh({website: siteModel.getName()});
+    require('report/configurator').toggleVisibility();
 }
 
 function onMetricChosen(chosenMetric)

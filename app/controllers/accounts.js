@@ -82,9 +82,9 @@ function onCreatedAccount() {
     newAccountController.close();
 }
 
-function toggleReportMenu(event)
+function toggleReportChooserVisibility(event)
 {
-    require('layout').toggleLeftSidebar();
+    require('report/chooser').toggleVisibility();
 }
 
 function onClose ()

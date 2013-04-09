@@ -57,26 +57,9 @@ function doChangeHttpTimeout()
     httpTimeout.open();
 }
 
-function doOpenFaq()
+function toggleReportChooserVisibility(event)
 {
-    require('commands/openFaq').execute();
-}
-
-function doOpenAboutPiwikMobile()
-{
-    var about = Alloy.createController('aboutpiwikmobile');
-    about.open();
-}
-
-function doOpenGiveFeedback()
-{
-    var feedback = Alloy.createController('givefeedback');
-    feedback.open();
-}
-
-function toggleReportMenu(event)
-{
-    require('layout').toggleLeftSidebar();
+    require('report/chooser').toggleVisibility();
 }
 
 function close() 

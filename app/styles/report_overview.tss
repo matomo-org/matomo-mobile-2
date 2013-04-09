@@ -15,6 +15,7 @@
 
 "View": {
     height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
 }
 
 ".headline": {

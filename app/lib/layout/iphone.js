@@ -34,32 +34,36 @@ exports.open = function (win)
 
 
 
-
-var leftSidebarWindow = Ti.UI.createWindow({left: 0, width: 250, barImage: "navbardark.png", barColor: "#2D2D2D"});
+// we have to create this window before any other window, 
+// otherwise the menu will be always displayed on top of the root window.
+var leftSidebarWindow = Ti.UI.createWindow({left: 0, width: 250, visible: false});
 leftSidebarWindow.open();
-
-var isMenuVisible = false;
 
 function hideLeftSidebar()
 {
-    rootWindow.animate({
+    var animation = Ti.UI.createAnimation({
         left: 0,
         duration: 400,
         right: 0,
-        curve:Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+        curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
     });
-    isMenuVisible = false;
+
+    animation.addEventListener('complete', function () {
+        leftSidebarWindow.hide();
+    });
+
+    rootWindow.animate(animation);
 }
 
 function showLeftSidebar()
 {
+    leftSidebarWindow.show();
     rootWindow.animate({
         left: 250,
         duration: 400,
         right: -250,
-        curve:Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+        curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
     });
-    isMenuVisible = true;
 }
 
 exports.setLeftSidebar = function(view)
@@ -71,5 +75,60 @@ exports.hideLeftSidebar = hideLeftSidebar;
 
 exports.toggleLeftSidebar = function ()
 {
-    isMenuVisible ? hideLeftSidebar() : showLeftSidebar();
+    leftSidebarWindow.visible ? hideLeftSidebar() : showLeftSidebar();
 };
+
+
+
+
+
+
+
+
+
+
+
+// we have to create this window before any other window, 
+// otherwise the menu will be always displayed on top of the root window.
+var rightSidebarWindow = Ti.UI.createWindow({right: 0, width: 250, visible: false});
+rightSidebarWindow.open();
+
+function hideRightSidebar()
+{
+    var animation = Ti.UI.createAnimation({
+        left: 0,
+        duration: 400,
+        right: 0,
+        curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+    });
+    
+    animation.addEventListener('complete', function () {
+        rightSidebarWindow.hide();
+    });
+
+    rootWindow.animate(animation);
+}
+
+function showRightSidebar()
+{
+    rightSidebarWindow.show();
+
+    rootWindow.animate({
+        right: 250,
+        duration: 400,
+        left: -250,
+        curve:Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+    });
+}
+
+exports.setRightSidebar = function(view)
+{
+    rightSidebarWindow.add(view);
+};
+
+exports.hideRightSidebar = hideRightSidebar;
+
+exports.toggleRightSidebar = function()
+{
+    rightSidebarWindow.visible ? hideRightSidebar() : showRightSidebar();
+}

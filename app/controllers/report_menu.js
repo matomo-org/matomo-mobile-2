@@ -1,66 +1,72 @@
-function updateWebsite(params)
-{
-    if (params.website) {
+var options = null;
 
+function refreshWebsiteButton()
+{
+    if (options.websiteName) {
+        $.websiteContainer.show();
+        $.websiteLabel.text = options.websiteName;
     } else {
-        
+        $.websiteContainer.hide();
     }
 }
 
-function updateDate(params)
+function refreshDateButton()
 {
-    if (params.date) {
-
+    if (options.prettyDate) {
+        $.dateContainer.show();
+        $.dateLabel.text = options.prettyDate;
     } else {
-        
+        $.dateContainer.hide();
     }
 }
 
-function updateMetric(params)
+function refresh(opts)
 {
-    if (params.metric) {
+    options = opts;
 
-    } else {
-        
-    }
+    refreshWebsiteButton();
+    refreshDateButton();
 }
 
-function update(params)
-{
-    updateWebsite(params);
-    updateDate(params);
-    updateMetric(params);
-}
-
-function doChooseWebsite()
-{
-
-}
-
-function doChooseDate()
-{
-
-}
-
-function doChooseMetric()
-{
-
-}
-
-function onClose ()
+function onClose()
 {
     $.destroy();
 }
 
+function chooseWebsite()
+{
+    require('layout').hideRightSidebar();
+    require('commands/openWebsiteChooser').execute(onWebsiteChosen);
+}
+
+function onWebsiteChosen(event)
+{
+    require('session').setWebsite(event.site, event.account);
+}
+
+function chooseDate()
+{
+    require('layout').hideRightSidebar();
+
+    var params = {date: options.reportDate, period: options.reportPeriod};
+    require('commands/openDateChooser').execute(params, onDateChosen);
+}
+
+function onDateChosen(event)
+{
+    $.trigger('dateChosen', event);
+}
+
 function open()
 {
-    $.index.open();
+    require('layout').setRightSidebar($.index);
 }
 
-function close()
+function toggleVisibility() 
 {
-    $.index.open();
+    require('layout').toggleRightSidebar();
 }
 
-exports.close = close;
-exports.open = open;
+exports.open    = open;
+exports.refresh = refresh
+exports.toggleVisibility = toggleVisibility;
