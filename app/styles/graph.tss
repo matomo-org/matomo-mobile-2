@@ -1,7 +1,7 @@
 ".container": {
     height: Ti.UI.SIZE,
     width: Ti.UI.SIZE,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#efefef'
     // use e5e5e5 once we can change backgroundcolor of graph
    // backgroundColor: '#E5E5E5'
 }

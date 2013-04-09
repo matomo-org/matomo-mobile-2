@@ -25,5 +25,5 @@
 ".top_separator": {
     backgroundColor: "#dcdcdc",
     height: 1,
-    top: 1
+    top: 0
 }

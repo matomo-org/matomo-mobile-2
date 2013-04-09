@@ -8,7 +8,7 @@ function openEntrySite(account)
         params: {idSite: entrySiteId},
         account: account,
         success: function (sites) {
-            openStatistics({site: sites.entrySite(), account: account})
+            onSiteSelected({site: sites.entrySite(), account: account})
         },
         error: function () {
             // TODO what now?

@@ -44,6 +44,8 @@ function startsNotWithHttp(url)
     return (-1 == url.indexOf('http'));
 }
 
+var urlErrorHandled = null;
+
 function tryAlternativeDownloadMethod(event) {
 
     var errorImage = 'images/image_load_error.png';

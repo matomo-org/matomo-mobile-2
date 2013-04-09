@@ -175,7 +175,7 @@ function PiwikGraph () {
         } 
         
         // prevents graph from caching
-        parameter.cacherand    = Math.floor(Math.random() * 9999999);
+        parameter.cacherand = Math.floor(Math.random() * 9999999);
         
         graphUrl  = this.setParams(graphUrl, parameter);
         parameter = null;
