@@ -1,49 +1,6 @@
-function L(key)
-{
-    return require('L')(key);
+// !!$model.get('constantRowsCount') || 
+if ('get' == $model.get('action')) {
+    exports = Alloy.createController('report_overview_without_dimension', arguments[0]);
+} else {
+    exports = Alloy.createController('report_overview_with_dimension', arguments[0]);
 }
-
-var args         = arguments[0] || {};
-var flatten      = args.flatten || 0;
-var reportPeriod = args.period || 'day';
-var reportDate   = args.date || 'today';
-
-$.metric.text = $model.getMetricName();
-
-function openReport()
-{
-    var report = Alloy.createController('report', {report: $model});
-    report.open();
-}
-
-function preventReportWillBeRenderedTwice()
-{
-    // TODO currently fetch and reset are triggered...
-    $.piwikProcessedReport.off("reset");
-}
-
-function fetchProcessedReport()
-{
-    var accountModel = require('session').getAccount();
-    var siteModel    = require('session').getWebsite();
-
-    var module = $model.get('module');
-    var action = $model.get('action');
-    var metric = $model.getSortOrder();
-
-    $.piwikProcessedReport.fetchProcessedReports(metric, {
-        account: accountModel,
-        params: {
-            period: reportPeriod, 
-            date: reportDate, 
-            idSite: siteModel.id, 
-            flat: flatten,
-            filter_truncate: 3,
-            apiModule: module, 
-            apiAction: action
-        }
-    });
-}
-
-preventReportWillBeRenderedTwice();
-fetchProcessedReport();

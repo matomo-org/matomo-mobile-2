@@ -1,0 +1,102 @@
+"#index": {
+    borderRadius: 5,
+    borderColor: "#d3d3d3",
+    borderWidth: 1,
+    backgroundColor: 'white',
+    top: 0,
+    layout: "horizontal"
+}
+
+".separator": {
+    backgroundColor: '#dcdcdc',
+    height: 1,
+    bottom: 0,
+}
+
+"View": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+}
+
+".headline": {
+    color: '#191919',
+    font: {fontWeight: 'bold'},
+    left: 0,
+    width: Ti.UI.SIZE,
+}
+
+".header": {
+    top: 18,
+    bottom: 18,
+    left: 10
+}
+
+".footer": {
+    height: 35,
+}
+
+".description": {
+    backgroundColor: '#efefef',
+}
+
+".content": {
+    backgroundColor: '#efefef',
+    layout: "vertical"
+}
+
+".report_row": {
+    left: 0,
+    right: 0,
+}
+
+".report_title": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    color: '#7e7e7e',
+    font: {fontWeight: 'bold'},
+    top: 16,
+    bottom: 10,
+    left: 10,
+    bottom: 16,
+    right: 95,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+}
+
+".report_value": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    color: '#191919',
+    font: {fontWeight: 'bold'},
+    top: 16,
+    bottom: 10,
+    right: 10,
+    bottom: 16,
+    width: 75,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+}
+
+".more": {
+    left: 10,
+    width: Ti.UI.SIZE,
+}
+
+".description_dimension": {
+    color: '#191919',
+    top: 14,
+    bottom: 14,
+    left: 10,
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+    font: {fontWeight: 'normal'}
+}
+
+".description_metric": {
+    color: '#191919',
+    top: 14,
+    bottom: 14,
+    right: 10,
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+    font: {fontWeight: 'normal'}
+}

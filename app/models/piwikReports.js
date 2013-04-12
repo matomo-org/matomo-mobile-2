@@ -38,9 +38,11 @@ exports.definition = {
                     return metrics[sortOrder];
                 }
 
-                return ''
+                return '';
             },
-
+            getReportName: function () {
+                return this.get('name');
+            },
             getMetrics: function () {
                 return this.get('metrics');
             },

@@ -1,0 +1,16 @@
+<Alloy>
+    <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
+
+    <View id="index">
+        <View class="header" onClick="openReport">
+            <Label class="headline" id="headline"/>
+        </View>
+        <View class="separator"/>
+        <View class="content" id="content">
+            <Require src="graph" id="graphCtrl"/>
+        </View>
+        <View class="footer" onClick="openReport">
+            <Label class="more">More</Label>
+        </View>
+    </View>
+</Alloy>
