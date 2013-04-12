@@ -169,12 +169,6 @@ function doRefresh()
 
 /***** HANDLE BACKGROUND EVENTS END ******/
 
-function toggleReportConfiguratorVisibility()
-{
-    require('report/configurator').refresh({});
-    require('report/configurator').toggleVisibility();
-}
-
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();

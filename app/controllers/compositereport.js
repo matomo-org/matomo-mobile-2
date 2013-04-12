@@ -29,16 +29,6 @@ function onClose()
     $.destroy();
 }
 
-function toggleReportConfiguratorVisibility()
-{
-    var siteModel = require('session').getWebsite();
-
-    var reportConfigurator = require('report/configurator');
-    reportConfigurator.refresh({websiteName: siteModel.getName(),
-                                prettyDate: 'Today'});
-    reportConfigurator.toggleVisibility();
-}
-
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();

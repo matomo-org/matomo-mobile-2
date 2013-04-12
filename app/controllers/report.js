@@ -36,12 +36,6 @@ function onClose()
  * REPORT-MENU START
  */
 
-function toggleReportConfiguratorVisibility()
-{
-    require('report/configurator').refresh({website: siteModel.getName()});
-    require('report/configurator').toggleVisibility();
-}
-
 function onMetricChosen(chosenMetric)
 {
     currentMetric = chosenMetric;

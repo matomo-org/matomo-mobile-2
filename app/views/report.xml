@@ -10,13 +10,6 @@
             </ButtonBar>
         </RightNavButton>
 
-        <RightNavButton platform="ios">
-            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
-        </RightNavButton>
-        <RightNavButton platform="mobileweb">
-            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
-        </RightNavButton>
-
         <Menu id="menu" platform="android">
             <MenuItem id="menuItemWebsite" onClick="onClose" />
         </Menu>

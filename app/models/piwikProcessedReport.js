@@ -77,28 +77,28 @@ exports.definition = {
             getMetadata: function () {
                 return this.get('metadata');
             },
-            getRowMetadata: function () {
-                return this.get('rowMetadata');
+            getReportMetadata: function () {
+                return this.get('reportMetadata');
             },
             hasLogo: function () {
                 return !!this.getLogo();
             },
             getLogo: function () {
-                var metadata = this.getRowMetadata();
+                var metadata = this.getReportMetadata();
 
                 if (metadata && metadata.logo) {
                     return metadata.logo;
                 }
             },
             getLogoWidth: function () {
-                var metadata = this.getRowMetadata();
+                var metadata = this.getReportMetadata();
 
                 if (metadata && metadata.logoWidth) {
                     return metadata.logoWidth;
                 }
             },
             getLogoHeight: function () {
-                var metadata = this.getRowMetadata();
+                var metadata = this.getReportMetadata();
 
                 if (metadata && metadata.logoHeight) {
                     return metadata.logoHeight;
@@ -217,11 +217,10 @@ exports.definition = {
                         row.id       = index;
                         row.columns  = response.columns;
                         row.metadata = response.metadata;
-                        row.rowMetadata = metadata;
-                        row.prettyDate     = response.prettyDate;
-                        row.reportMetadata = reportMetadata ? reportMetadata[index] : null;
+                        row.prettyDate      = response.prettyDate;
+                        row.reportMetadata  = metadata
                         row.sortOrderColumn = this.sortOrderColumn;
-                        row.hasDimension   = true;
+                        row.hasDimension    = true;
                     
                         reportRow.push(row);
                     }
@@ -244,7 +243,6 @@ exports.definition = {
                         row.id       = reportRow.length;
                         row.columns  = response.columns;
                         row.metadata = response.metadata;
-                        row.rowMetadata = {};
                         row.prettyDate      = response.prettyDate;
                         row.sortOrderColumn = this.sortOrderColumn;
                         row.reportMetadata  = reportMetadata ? reportMetadata[key] : null;

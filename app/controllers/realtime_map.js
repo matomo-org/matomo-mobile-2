@@ -23,12 +23,6 @@ exports.open = function () {
     require('layout').open($.index);
 }
 
-function toggleReportConfiguratorVisibility()
-{
-    require('report/configurator').refresh({});
-    require('report/configurator').toggleVisibility();
-}
-
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
