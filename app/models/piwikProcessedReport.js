@@ -74,6 +74,53 @@ exports.definition = {
                 }
                 return '';
             },
+            getMetadata: function () {
+                return this.get('metadata');
+            },
+            getRowMetadata: function () {
+                return this.get('rowMetadata');
+            },
+            hasLogo: function () {
+                return !!this.getLogo();
+            },
+            getLogo: function () {
+                var metadata = this.getRowMetadata();
+
+                if (metadata && metadata.logo) {
+                    return metadata.logo;
+                }
+            },
+            getLogoWidth: function () {
+                var metadata = this.getRowMetadata();
+
+                if (metadata && metadata.logoWidth) {
+                    return metadata.logoWidth;
+                }
+            },
+            getLogoHeight: function () {
+                var metadata = this.getRowMetadata();
+
+                if (metadata && metadata.logoHeight) {
+                    return metadata.logoHeight;
+                }
+            },
+            getSubtableId: function () {
+                var metadata = this.getMetadata();
+
+                if (this.hasSubtable() && metadata && metadata.idsubdatatable) {
+                    return metadata.idsubdatatable;
+                }
+            },
+            hasSubtable: function () {
+                 return !!this.getActionToLoadSubTables();
+            },
+            getActionToLoadSubTables: function () {
+                 metadata = this.getMetadata();
+
+                if (metadata && metadata.actionToLoadSubTables) {
+                    return metadata.actionToLoadSubTables;
+                }
+            },
             getRows: function () {
                 var reportData = this.get('reportData');
                 var metaData   = this.get('reportMetadata');
@@ -138,7 +185,6 @@ exports.definition = {
                 
                 var reportData     = response.reportData;
                 var reportMetadata = response.reportMetadata;
-                var hasSubtables   = response.metadata && response.metadata.actionToLoadSubTables;
 
                 if (_.isArray(reportData) && 0 < reportData.length) {
 
@@ -168,28 +214,13 @@ exports.definition = {
                         row = report;
                         row.title = label;
                         row.value = value;
-                        
-                        if (metadata && metadata.logo) {
-                            
-                            row.logo = metadata.logo;
-                            
-                            if (metadata.logoWidth) {
-                                row.logoWidth  = metadata.logoWidth;
-                            }
-                            if (metadata.logoHeight) {
-                                row.logoHeight = metadata.logoHeight;
-                            }
-                        }
-                        
-                        if (hasSubtables && metadata && metadata.idsubdatatable) {
-                            row.idSubtable = metadata.idsubdatatable;
-                        }
-
                         row.id       = index;
                         row.columns  = response.columns;
                         row.metadata = response.metadata;
+                        row.rowMetadata = metadata;
                         row.prettyDate     = response.prettyDate;
                         row.reportMetadata = reportMetadata ? reportMetadata[index] : null;
+                        row.sortOrderColumn = this.sortOrderColumn;
                         row.hasDimension   = true;
                     
                         reportRow.push(row);
@@ -213,9 +244,11 @@ exports.definition = {
                         row.id       = reportRow.length;
                         row.columns  = response.columns;
                         row.metadata = response.metadata;
-                        row.prettyDate     = response.prettyDate;
-                        row.reportMetadata = reportMetadata ? reportMetadata[key] : null;
-                        row.hasDimension   = false;
+                        row.rowMetadata = {};
+                        row.prettyDate      = response.prettyDate;
+                        row.sortOrderColumn = this.sortOrderColumn;
+                        row.reportMetadata  = reportMetadata ? reportMetadata[key] : null;
+                        row.hasDimension    = false;
 
                         reportRow.push(row);
                     }
