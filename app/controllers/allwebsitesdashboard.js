@@ -3,16 +3,14 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
 
 var accountsCollection = Alloy.Collections.appAccounts;
-// the currently selected account
-var accountModel    = accountsCollection.lastUsedAccount();
-// the fetched statistics that belongs to the currently selected report
-var statisticsModel = Alloy.Collections.piwikProcessedReport;
+var accountModel       = accountsCollection.lastUsedAccount();
 
+var args     = arguments[0] || {};
 var autoOpen = true;
-if ('undefined' === (typeof args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable)) {
+if ('undefined' !== (typeof args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable) &&
+    null !== args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable) {
     autoOpen = args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable;
 }
 
@@ -61,7 +59,7 @@ function doSelectWebsite(event)
     }
 
     var id      = event.rowData.modelid;
-    var website = statisticsModel.get(id);
+    var website = $.piwikProcessedReport.get(id);
 
     if (!website) {
         console.log('websiteModel not found in collection, cannot select website');
@@ -110,7 +108,7 @@ function doSearchWebsite(event)
 {
     showLoadingMessage();
 
-    statisticsModel.fetchProcessedReports('nb_visits', {
+    $.piwikProcessedReport.fetchProcessedReports('nb_visits', {
         account: accountModel,
         params: {
             period: 'day',
@@ -122,7 +120,7 @@ function doSearchWebsite(event)
             pattern: $.searchBar.value
         },
         error: function () {
-            statisticsModel.trigger('error', {type: 'loadingProcessedReport'});
+            $.piwikProcessedReport.trigger('error', {type: 'loadingProcessedReport'});
         },
         success: onStatisticsFetched
     });
@@ -135,11 +133,13 @@ function fetchListOfAvailableWebsites(site)
     lastUsedWebsite = site;
     showLoadingMessage();
 
-    statisticsModel.fetch({
+    var reportDate = require('session').getReportDate();
+
+    $.piwikProcessedReport.fetch({
         account: accountModel,
         params: {
-            period: 'day',
-            date: 'today',
+            period: reportDate.getPeriodQueryString(), 
+            date: reportDate.getDateQueryString(), 
             idSite: site.id,
             sortOrderColumn: "nb_visits",
             filter_sort_column: "nb_visits",
@@ -147,13 +147,13 @@ function fetchListOfAvailableWebsites(site)
             apiAction: "getAll"
         },
         error: function () {
-            statisticsModel.trigger('error', {type: 'loadingProcessedReport'});
+            $.piwikProcessedReport.trigger('error', {type: 'loadingProcessedReport'});
         },
         success: onStatisticsFetched
     });
 }
 
-statisticsModel.on('error', function () {
+$.piwikProcessedReport.on('error', function () {
     // TODO what should we do in this case?
     showReportContent();
 });

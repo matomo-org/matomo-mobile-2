@@ -6,19 +6,20 @@ function L(key)
 var args = arguments[0] || {};
 var reportCategory    = args.reportCategory;
 var reportsCollection = Alloy.Collections.piwikReports;
+var reportDate        = require('session').getReportDate();
 
 function registerEvents()
 {
     var session = require('session');
     session.on('websiteChanged', onWebsiteChosen);
-    session.on('dateChosen', onDateChosen);
+    session.on('reportDateChanged', onDateChosen);
 }
 
 function unregisterEvents()
 {
     var session = require('session');
     session.off('websiteChanged', onWebsiteChosen);
-    session.off('dateChosen', onDateChosen);
+    session.off('reportDateChanged', onDateChosen);
 }
 
 function onClose()
@@ -43,14 +44,31 @@ function toggleReportChooserVisibility(event)
     require('report/chooser').toggleVisibility();
 }
 
+var accountModel = require('session').getAccount();
+
+function accountDidNotChange()
+{
+    var currentAccount = require('session').getAccount();
+
+    return currentAccount === accountModel;
+}
+
 function onWebsiteChosen()
 {
-    alert('website chosen');
+    if (accountDidNotChange()) {
+        forceRenderingListOfReports();
+    } else {
+        // let reportChooser to the refresh
+    }
 }
 
 function onDateChosen() 
 {
-    alert('date chosen');
+    if (accountDidNotChange()) {
+        forceRenderingListOfReports();
+    } else {
+        // let reportChooser to the refresh
+    }
 }
 
 function filterReports(collection)

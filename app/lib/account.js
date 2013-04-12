@@ -32,11 +32,20 @@ function openDashboard(account)
     dashboard.open();
 }
 
+function updateDefaultReportDateInSession(accountModel)
+{
+    var reportDate = new (require('report/date'));
+    reportDate.setReportDate(accountModel.getDefaultReportDate());
+
+    require('session').setReportDate(reportDate);
+}
+
 exports.selectWebsite = function (accountModel, callback)
 {
     onSiteSelectedCallback = callback;
 
     accountModel.select(function (account) {
+        updateDefaultReportDateInSession(account);
         if (account.startWithAllWebsitesDashboard()) {
             openDashboard(account);
         } else {

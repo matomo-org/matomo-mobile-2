@@ -1,17 +1,3 @@
-function changePeriod (period) 
-{
-    if (!period) {
-    
-        return;
-    }
-
-    var session = require('Piwik/App/Session');
-    session.set('piwik_parameter_period', period);
-    session     = null;
-
-    return period;
-};
-
 function isEarlier (from, to) 
 {
     if (!from) {
@@ -35,7 +21,7 @@ function isEarlier (from, to)
     return false;
 };
 
-function changeDate (from, to, period)
+function formatDateToPiwikQuery (from, to, period)
 {
     // make sure from is always earlier than to if period is range
     if ('range' == period && !isEarlier(from, to)) {
@@ -46,11 +32,6 @@ function changeDate (from, to, period)
 
     var piwikDate = new (require('Piwik/PiwikDate'));
     var dateQuery = piwikDate.toPiwikQueryString(period, from, to);
-
-    var session   = require('Piwik/App/Session');
-    session.set('piwik_parameter_date', dateQuery);
-    session       = null;
-    piwikDate     = null;
 
     return dateQuery;
 };
@@ -83,10 +64,9 @@ exports.execute = function (params, onDateChosen)
                                                            minDate: min});
 
     picker.on('onSet', function (event) {
-        var period    = changePeriod(event.period);
-        var dateQuery = changeDate(event.from, event.to, event.period);
+        var dateQuery = formatDateToPiwikQuery(event.from, event.to, event.period);
 
-        onDateChosen(period, dateQuery);
+        onDateChosen(event.period, dateQuery);
     });
     
     picker.open();

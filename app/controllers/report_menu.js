@@ -52,9 +52,13 @@ function chooseDate()
     require('commands/openDateChooser').execute(params, onDateChosen);
 }
 
-function onDateChosen(event)
+function onDateChosen(period, date)
 {
-    $.trigger('dateChosen', event);
+    var reportDate = new (require('report/date'));
+    reportDate.setDate(date);
+    reportDate.setPeriod(period);
+
+    require('session').setReportDate(reportDate);
 }
 
 function open()

@@ -2,7 +2,7 @@ var Session = function () {
 
     var website = null;
     var account = null;
-    var date    = null;
+    var reportDate = null;
 
     var Alloy = require('alloy'); 
 
@@ -26,12 +26,12 @@ var Session = function () {
             return account;
         },
 
-        setDate: function (dateModel) {
-            date = dateModel;
-            this.trigger('dateChanged', date);
+        setReportDate: function (reportDateModel) {
+            reportDate = reportDateModel;
+            this.trigger('reportDateChanged', reportDate);
         },
-        getDate: function () {
-            return date;
+        getReportDate: function () {
+            return reportDate;
         },
     });
 };

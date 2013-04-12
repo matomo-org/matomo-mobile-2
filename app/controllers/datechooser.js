@@ -64,7 +64,7 @@ function doChooseDate ()
 
 function preSelectPeriod(initialPeriod)
 {
-    var PiwikDates = require('Piwik/PiwikDate');
+    var PiwikDates = require('report/date');
     var piwikDate  = new PiwikDates();
     var periods    = piwikDate.getAvailablePeriods();
 

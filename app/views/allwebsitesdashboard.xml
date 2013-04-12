@@ -1,5 +1,5 @@
 <Alloy>
-    <Collection src="piwikProcessedReport"/>
+    <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
     <Collection src="appAccounts"/>
     
     <Window id="index">
@@ -18,7 +18,7 @@
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
             <View class="space" formFactor="tablet"></View>
             <View class="shadow" formFactor="tablet"></View>
-            <TableView class="websitesTableView" dataCollection="piwikProcessedReport" 
+            <TableView class="websitesTableView" dataCollection="$.piwikProcessedReport" 
                        onClick="doSelectWebsite">
 
                 <TableViewRow modelid="{id}">

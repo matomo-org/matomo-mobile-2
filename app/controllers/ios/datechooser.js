@@ -100,7 +100,7 @@ function onPeriodChange(event)
 
 function createPeriodPicker () 
 {
-    var piwikDate  = new (require('Piwik/PiwikDate'));
+    var piwikDate  = new (require('report/date'));
     var periods    = piwikDate.getAvailablePeriods();
     
     var pickerRows = [];

@@ -13,8 +13,7 @@ var currentMetric   = null;
 var reportModel     = args.report || false;
 var flatten         = args.flatten || 0;
 var reportList      = args.reportList || {};
-var reportPeriod    = args.period || 'day';
-var reportDate      = args.date || 'today';
+var reportDate      = require('session').getReportDate();
 var showAllEntries  = false;
 
 // the fetched statistics that belongs to the currently selected report
@@ -170,8 +169,8 @@ function doRefresh()
     
     statisticsModel.fetch({
         account: accountModel,
-        params: {period: reportPeriod, 
-                 date: reportDate, 
+        params: {period: reportDate.getPeriodQueryString(), 
+                 date: reportDate.getDateQueryString(), 
                  idSite: siteModel.id, 
                  flat: flatten,
                  sortOrderColumn: metric,

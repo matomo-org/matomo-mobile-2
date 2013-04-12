@@ -115,6 +115,10 @@ exports.definition = {
             getName: function () {
                 return this.get('name');
             },
+
+            getDefaultReportDate: function () {
+                return this.get('defaultReportDate');
+            },
             
             completeAccessUrl: function (accountModel, accessUrl) {
                 
