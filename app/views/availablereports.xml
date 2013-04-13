@@ -1,5 +1,11 @@
 <Alloy>
     <Collection src="piwikReports"/>
     <TableView id="reportsTable" onClick="doSelectReport">
+        <HeaderView>
+            <View class="header">
+                <Require src="website_picker"/>
+                <Require src="date_picker"/>
+            </View>
+        </HeaderView>
     </TableView>
 </Alloy>

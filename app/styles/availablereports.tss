@@ -8,3 +8,9 @@
   //  separatorStyle: Titanium.UI.MobileWeb.TableViewSeparatorStyle.NONE,
     separatorColor: '#2D2D2D'
 }
+
+".header": {
+    layout: 'vertical',
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL
+}

@@ -1,8 +1,14 @@
 <Alloy>
-    <Window class="container" id="index">
+    <Window class="iOSContainer" id="index">
         <RightNavButton>
             <Button id="doneButton" onClick="doChooseDate"/>
         </RightNavButton>
+        <Picker id="fromPicker" onChange="onFromDateChange">
+        </Picker>
+        <Picker id="toPicker" onChange="onToDateChange">
+        </Picker>
+        <Picker id="iOSPeriodPicker" onChange="onPeriodChange">
+        </Picker>
         <TableView id="datePickerTable" onClick="doSelectPicker">
         </TableView>
     </Window>

@@ -17,7 +17,7 @@
             <MenuItem id="menuItemSetting" />
         </Menu>
         
-        <ScrollView id="content" dataCollection="piwikReports" dataFilter="filterReports">
+        <ScrollView id="content" dataCollection="piwikReports" dataFilter="filterReports" dataFunction="renderListOfReports">
             <Require src="report_overview" title="{name}"/>
             <View class="reportOverviewSeparator"/>
         </ScrollView>

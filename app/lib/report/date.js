@@ -44,7 +44,9 @@ reportDate.prototype.setDate = function (date) {
 reportDate.prototype.setPeriod = function (period) {
     this.period = period;
 };
-
+reportDate.prototype.getPeriod = function () {
+    return this.period;
+};
 reportDate.prototype.getPeriodQueryString = function () {
     return this.period;
 };
@@ -80,33 +82,41 @@ reportDate.prototype.getRangeDate = function () {
     
     var fromDate = null;
     var toDate   = null;
+
+    var moment = require('moment/moment');
     
     if ('last7' == this.date) {
-        
-        fromDate = new Date();
-        fromDate.setDate(fromDate.getDate() - 6);
+
+        fromDate = moment().subtract('days', 6).toDate();
         toDate   = new Date();
         
     } else if ('last30' == this.date) {
         
-        fromDate = new Date();
-        fromDate.setDate(fromDate.getDate() - 29);
+        fromDate = moment().subtract('days', 29).toDate();
         toDate   = new Date();
         
     } else if ('previous7' == this.date) {
         
-        fromDate = new Date();
-        fromDate.setDate(fromDate.getDate() - 7);
-        toDate   = new Date();
-        toDate.setDate(toDate.getDate() - 1);
+        fromDate = moment().subtract('days', 7).toDate();
+        toDate   = moment().subtract('days', 1).toDate();
         
     } else if ('previous30' == this.date) {
         
-        fromDate = new Date();
-        fromDate.setDate(fromDate.getDate() - 30);
-        toDate   = new Date();
-        toDate.setDate(toDate.getDate() - 1);
+        fromDate = moment().subtract('days', 30).toDate();
+        toDate   = moment().subtract('days', 1).toDate();
         
+    } else if ('week' == this.period) {
+
+        var fromDate = this.toDate(this.date);
+        var toDate   = this.toDate(this.date);
+        if (0 === fromDate.getDay()) {
+            fromDate = moment().subtract('days', 7).toDate();
+            toDate   = moment().subtract('days', 7).toDate();
+        }
+
+        fromDate.setDate(fromDate.getDate() - fromDate.getDay() + 1);
+        toDate.setDate(toDate.getDate() + (7 - toDate.getDay()));
+    
     } else if (-1 != this.date.indexOf(',')) {
         
         var fromAndTo = this.date.split(',');

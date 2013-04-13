@@ -90,7 +90,7 @@ function open()
     require('layout').open($.index);
 
     if (isDataAlreadyFetched()) {
-        forceRenderingListOfReports();
+        renderListOfReports();
     }
 
     preventListOfReportsWillBeRenderedTwice();

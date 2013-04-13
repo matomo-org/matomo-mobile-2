@@ -110,8 +110,8 @@ function Locale () {
      */
     this.getLocale = function () {
 
-        var settings = Piwik.require('App/Settings');
-        var locale   = settings.getLanguage();
+        var settings = Alloy.createCollection('AppSettings').settings();
+        var locale   = settings.languageCode();
 
         if (locale && this.languageExists(locale)) {
             settings = null;
@@ -129,7 +129,7 @@ function Locale () {
             config     = null;
         }
 
-        settings.setLanguage(locale);
+        settings.setLanguageCode(locale);
 
         return locale;
     };

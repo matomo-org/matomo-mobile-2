@@ -1,14 +1,44 @@
-".container": {
-    backgroundColor: "white"
-}
-
-"#index": {
+".iOSContainer": {
+    backgroundColor: "white",
     title: L('General_ChooseDate')
 }
 
 "#datePickerTable": {
     top: 0,
-    style: 1,
+    zIndex: 4
+}
+
+"#fromPicker": {
+    bottom: 0,
+    zIndex: 10,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    left: 0,
+    type: Ti.UI.PICKER_TYPE_DATE
+}
+
+"#toPicker": {
+    bottom: 0,
+    left: 0,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    zIndex: 8,
+    type: Ti.UI.PICKER_TYPE_DATE,
+    visible: false
+}
+
+"#iOSPeriodPicker": {
+    bottom: 0,
+    left: 0,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    zIndex: 6,
+    visible: false,
+    selectionIndicator: true
+}
+
+"#datePickerTable[platform=ios]": {
+    style: Titanium.UI.iPhone.TableViewStyle.GROUPED,
 }
 
 "#doneButton": {

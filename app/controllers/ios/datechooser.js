@@ -14,10 +14,6 @@ var periodRow   = null;
 var fromDateRow = null;
 var toDateRow   = null;
 
-var fromPicker   = null;
-var toPicker     = null;
-var periodPicker = null;
-
 function createRow(params)
 {
     return Alloy.createWidget('org.piwik.tableviewrow', null, params).create();
@@ -25,7 +21,7 @@ function createRow(params)
 
 function doSelectPicker (event)
 {
-    if (!toPicker || !fromPicker || !periodPicker) {
+    if (!$.toPicker || !$.fromPicker || !$.iOSPeriodPicker) {
         
         return;
     }
@@ -34,28 +30,28 @@ function doSelectPicker (event)
     
     if (0 === event.index) {
         
-        toPicker.hide();
-        fromPicker.hide();
-        periodPicker.show();
+        $.toPicker.hide();
+        $.fromPicker.hide();
+        $.iOSPeriodPicker.show();
 
         // workaround for iPhone landscape orientation. Otherwise the tableview is not fully visible/scrollable
-        $.datePickerTable.applyProperties({bottom: periodPicker.size.height});
+        $.datePickerTable.applyProperties({bottom: $.iOSPeriodPicker.size.height});
 
     } else if (1 == event.index) {
         
-        toPicker.hide();
-        periodPicker.hide();
-        fromPicker.show();
+        $.toPicker.hide();
+        $.iOSPeriodPicker.hide();
+        $.fromPicker.show();
         
-        $.datePickerTable.applyProperties({bottom: fromPicker.size.height});
+        $.datePickerTable.applyProperties({bottom: $.fromPicker.size.height});
         
     } else if (2 == event.index) {
         
-        periodPicker.hide();
-        fromPicker.hide();
-        toPicker.show();
+        $.iOSPeriodPicker.hide();
+        $.fromPicker.hide();
+        $.toPicker.show();
         
-        $.datePickerTable.applyProperties({bottom: toPicker.size.height});
+        $.datePickerTable.applyProperties({bottom: $.toPicker.size.height});
     }
 }
 
@@ -69,12 +65,14 @@ function createTableViewRows ()
                              value: getDisplayDate(toDate)});
 }
 
-function setPeriod (period) 
+function setPeriod (periodToSet) 
 {
-    if (!period) {
+    if (!periodToSet) {
         
         return;
     }
+
+    period = periodToSet;
 
     if ('range' == period) {
         fromDateRow.changeTitle(L('General_DateRangeFrom_js'));
@@ -110,20 +108,14 @@ function createPeriodPicker ()
         pickerRows.push({title: periods[findPeriod], period: findPeriod});
     }
 
-    periodPicker = Ti.UI.createPicker({
-        id: 'datePickerPeriod', 
-        selectionIndicator: true, 
-        bottom: 0,
-        zIndex: 101
-    });
-    
-    periodPicker.add(pickerRows);
-    $.index.add(periodPicker);
+    $.iOSPeriodPicker.bottom = 0;
+
+    $.iOSPeriodPicker.add(pickerRows);
     
     var index = 0;
     for (findPeriod in periods) {
         if (period == findPeriod) {
-            periodPicker.setSelectedRow(0, index, true);
+            $.iOSPeriodPicker.setSelectedRow(0, index, true);
             periodRow.changeValue(periods[findPeriod]);
             break;
         }
@@ -131,10 +123,8 @@ function createPeriodPicker ()
         index++;
     }
     
-    periodPicker.hide();
-    
-    periodPicker.addEventListener('change', onPeriodChange);
-
+    $.iOSPeriodPicker.hide();
+   
     for (var rowIndex = 0; rowIndex < pickerRows.length; rowIndex++) {
         pickerRows[rowIndex] = null;
     }
@@ -169,19 +159,15 @@ function createFromDatePicker (params)
         
         return;
     }
-    
-    params.id     = 'datePickerFrom';
-    params.value  = fromDate;
-    params.bottom = 0;
-    params.zIndex = 103;
-    params.type   = Ti.UI.PICKER_TYPE_DATE;
-    
-    fromPicker = Ti.UI.createPicker(params);
-    params     = null;
-    
-    $.index.add(fromPicker);
 
-    fromPicker.addEventListener('change', onFromDateChange);
+    $.fromPicker.applyProperties({
+        value: fromDate, 
+        bottom: 0, 
+        minDate: params.minDate, 
+        maxDate: params.maxDate
+    });
+
+    $.fromPicker.show();
 };
 
 function onToDateChange(event)
@@ -209,20 +195,13 @@ function createToDatePicker (params)
         
         return;
     }
-    
-    params.id      = 'datePickerTo';
-    params.visible = false;
-    params.value   = toDate;
-    params.bottom  = 0;
-    params.zIndex  = 102;
-    params.type    = Ti.UI.PICKER_TYPE_DATE;
-    
-    toPicker = Ti.UI.createPicker(params);
-    params   = null;
 
-    $.index.add(toPicker);
-    
-    toPicker.addEventListener('change', onToDateChange);
+    $.toPicker.applyProperties({
+        value: toDate, 
+        bottom: 0, 
+        minDate: params.minDate, 
+        maxDate: params.maxDate
+    });
 };
 
 function selectRow (index) 
@@ -284,14 +263,14 @@ function doChooseDate ()
 exports.open = function ()
 {
     createTableViewRows();
+
     setPeriod(period);
     selectRow(1);
     createFromDatePicker(args);
 
-    $.datePickerTable.applyProperties({bottom: fromPicker.size.height});
+    $.datePickerTable.applyProperties({bottom: $.fromPicker.size.height});
 
     createToDatePicker(args);
     createPeriodPicker(args);
-
     require('layout').open($.index);
 }

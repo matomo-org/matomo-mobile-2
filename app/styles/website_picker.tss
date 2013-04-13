@@ -1,0 +1,25 @@
+"#index": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    top: 10,
+    right: 10,
+    left: 10,
+    bottom: 10,
+}
+
+".icon": {
+    image: "ic_action_menu_website.png",
+    width: 19,
+    height: 19, 
+    right: 10
+}
+
+"#websiteName": {
+    color: "#d5d5d5",
+    left: 10,
+    top: 5,
+    bottom: 5,
+    right: 39,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    height: Ti.UI.SIZE,
+}

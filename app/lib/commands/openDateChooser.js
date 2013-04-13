@@ -64,6 +64,7 @@ exports.execute = function (params, onDateChosen)
                                                            minDate: min});
 
     picker.on('onSet', function (event) {
+
         var dateQuery = formatDateToPiwikQuery(event.from, event.to, event.period);
 
         onDateChosen(event.period, dateQuery);

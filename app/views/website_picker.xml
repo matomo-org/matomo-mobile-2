@@ -1,0 +1,8 @@
+<Alloy>
+
+    <View id="index" onClick="chooseWebsite">
+        <Label id="websiteName" class="website_name" text=" - "/>
+        <ImageView class="icon"/>
+    </View>
+
+</Alloy>

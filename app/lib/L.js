@@ -7,9 +7,7 @@
  */
 
 /** @private */
-var Piwik       = require('Piwik');
-/** @private */
-var translation = Piwik.require('Locale/Translation');
+var translation = require('Piwik/Locale/Translation');
 
 // activate and initialize translations
 translation.load();
