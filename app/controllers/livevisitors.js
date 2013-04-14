@@ -13,6 +13,24 @@ if (OS_IOS) {
     $.pullToRefresh.init($.liveTable);
 }
 
+function registerEvents()
+{
+    var session = require('session');
+    session.on('websiteChanged', doRefresh);
+}
+
+function unregisterEvents()
+{
+    var session = require('session');
+    session.off('websiteChanged', doRefresh);
+}
+
+function onClose()
+{
+    unregisterEvents();
+    $.destroy();
+}
+
 var refreshTimer = null;
 var stopRefreshTimer = function () {
 
@@ -176,6 +194,7 @@ function toggleReportChooserVisibility(event)
 
 exports.open = function () 
 {
+    registerEvents();
     doRefresh();
     require('layout').open($.index);
 }

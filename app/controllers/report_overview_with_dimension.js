@@ -12,7 +12,7 @@ $.metric.text    = $model.getMetricName();
 
 function openReport()
 {
-    var report = Alloy.createController('report', {report: $model});
+    var report = Alloy.createController('report_with_dimension', {report: $model});
     report.open();
 }
 

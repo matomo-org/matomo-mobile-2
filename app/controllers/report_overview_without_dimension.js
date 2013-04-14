@@ -13,7 +13,7 @@ $.headline.text = String.format('%s (%s)', '' + $model.getReportName(), '' + $mo
 
 function openReport()
 {
-    var report = Alloy.createController('report', {report: $model});
+    var report = Alloy.createController('report_without_dimension', {report: $model});
     report.open();
 }
 
