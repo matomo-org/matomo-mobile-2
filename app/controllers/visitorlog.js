@@ -5,6 +5,7 @@ function L(key)
 
 var accountModel = require('session').getAccount();
 var siteModel    = require('session').getWebsite();
+var reportDate   = require('session').getReportDate();
 var visitorLog   = Alloy.createCollection('piwikLastVisitDetails');
 visitorLog.on('fetch', render);
 
@@ -12,12 +13,45 @@ if (OS_IOS) {
     $.pullToRefresh.init($.visitorLogTable);
 }
 
-function onFetchPrevious()
+function registerEvents()
+{
+    var session = require('session');
+    session.on('websiteChanged', onWebsiteChanged);
+    session.on('reportDateChanged', onDateChanged);
+}
+
+function unregisterEvents()
+{
+    var session = require('session');
+    session.off('websiteChanged', onWebsiteChanged);
+    session.off('reportDateChanged', onDateChanged);
+}
+
+function onWebsiteChanged(website)
+{
+    siteModel    = website;
+    accountModel = require('session').getAccount();
+    doRefresh();
+}
+
+function onDateChanged(date)
+{
+    reportDate = date;
+    doRefresh();
+}
+
+function onClose()
+{
+    unregisterEvents();
+    $.destroy();
+}
+
+function fetchPrevious()
 {
     visitorLog.previous(accountModel, siteModel.id);
 }
 
-function onFetchNext()
+function fetchNext()
 {
     visitorLog.next(accountModel, siteModel.id);
 }
@@ -29,7 +63,7 @@ function render()
     var rows = [];
 
     var row = Ti.UI.createTableViewRow({title: L('General_Next')});
-    row.addEventListener('click', onFetchNext)
+    row.addEventListener('click', fetchNext)
     rows.push(row);
 
     visitorLog.forEach(function (visitorDetail) {
@@ -39,10 +73,15 @@ function render()
     });
 
     var row = Ti.UI.createTableViewRow({title: L('General_Previous')});
-    row.addEventListener('click', onFetchPrevious);
+    row.addEventListener('click', fetchPrevious);
     rows.push(row);
 
     $.visitorLogTable.setData(rows);
+
+    if ($.visitorLogTable && $.visitorLogTable.scrollToTop) {
+        $.visitorLogTable.scrollToTop();
+    }
+    
     rows = null;
 }
 
@@ -72,7 +111,11 @@ function onFetchError()
 function doRefresh()
 {
     showLoadingMessage();
-    visitorLog.initial(accountModel, siteModel.id, 'today');
+
+    var period = reportDate.getPeriodQueryString();
+    var date   = reportDate.getDateQueryString();
+
+    visitorLog.initial(accountModel, siteModel.id, period, date);
 }
 
 function toggleReportChooserVisibility(event)
@@ -82,6 +125,7 @@ function toggleReportChooserVisibility(event)
 
 exports.open = function () 
 {
+    registerEvents();
     doRefresh();
     require('layout').open($.index);
 }

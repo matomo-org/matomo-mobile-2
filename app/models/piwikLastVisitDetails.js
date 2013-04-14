@@ -34,9 +34,19 @@ exports.definition = {
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
 
-            usedMaxVisitIds: [],
+            currentOffset: 0,
+            nextOffset: 0,
 
             date: null,
+            period: null,
+
+            getPeriod: function () {
+                if ('range' == this.period) {
+                    return 'day';
+                }
+
+                return this.period;
+            },
 
             parseDate: function () {
                 var date = this.date;
@@ -54,50 +64,61 @@ exports.definition = {
                 return date;
             },
 
-            initial: function (account, idSite, date) {
-                this.date = date; 
+            initial: function (account, idSite, period, date) {
+                this.date   = date; 
+                this.period = period;
 
+                this.currentOffset = 0;
+                this.nextOffset    = 10;
+
+                this.reset();
                 this.fetch({
                     account: account,
                     params: {filter_limit: 10, 
                              idSite: idSite,
+                             period: this.getPeriod(),
                              date: this.parseDate()}
                 });
             },
 
             previous: function (account, idSite) {
 
-                var lastVisitId = this.last().get('idVisit');
+                var filterLimit    = Alloy.CFG.piwik.filterLimit;
+                this.currentOffset = this.nextOffset;
+                this.nextOffset    = this.currentOffset + filterLimit;
 
-                // store the previous used oldestVisitId. This makes sure we can display the same previous users
-                this.usedMaxVisitIds.push(lastVisitId);
-
+                this.reset();
                 this.fetch({
                     account: account,
-                    params: {maxIdVisit: lastVisitId,
+                    params: {filter_offset: this.currentOffset,
                              idSite: idSite,
-                             filter_limit: Alloy.CFG.piwik.filterLimit, 
+                             filter_limit: this.nextOffset, 
+                             period: this.getPeriod(),
                              date: this.parseDate()}
                 });
             },
 
             next: function (account, idSite) {
 
-                var params = {idSite: idSite,
-                              filter_limit: Alloy.CFG.piwik.filterLimit, 
+                var filterLimit = Alloy.CFG.piwik.filterLimit;
+                this.nextOffset = this.currentOffset;
+                this.currentOffset = this.currentOffset - filterLimit;
+
+                if (0 > this.currentOffset) {
+                    this.currentOffset = 0;
+                }
+
+                if (!this.nextOffset) {
+                    this.nextOffset = 10;
+                }
+
+                var params = {filter_offset: this.currentOffset,
+                              idSite: idSite,
+                              filter_limit: this.nextOffset,
+                              period: this.getPeriod(), 
                               date: this.parseDate()};
 
-                if (this.usedMaxVisitIds && this.usedMaxVisitIds.length) {
-                    // remove the previous displayed maxVisitId from stack
-                    params.maxIdVisit = this.usedMaxVisitIds.pop();
-                }
-
-                // if there is no previousUsedMaxIdVisit given, request by minTimestamp. We always prefer maxIdVisit here
-                // cause when maxIdVisit is used, we get the users sorted by VisitId/firstVisitTime
-                if (!params.maxIdVisit) {
-                    params.minTimestamp = this.first().get('firstActionTimestamp');
-                }
-
+                this.reset();
                 this.fetch({account: account, params: params});
             }
             
