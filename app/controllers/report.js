@@ -5,15 +5,12 @@ function L(key)
 
 var args = arguments[0] || {};
 
-var accountModel = require('session').getAccount();
-var siteModel    = require('session').getWebsite();
-
 var currentMetric   = null;
 // the currently selected report
 var reportModel     = args.report || false;
-var flatten         = args.flatten || 0;
 var reportList      = args.reportList || {};
 var reportDate      = require('session').getReportDate();
+var flatten         = 0;
 var showAllEntries  = false;
 
 // the fetched statistics that belongs to the currently selected report
@@ -27,38 +24,41 @@ if (OS_IOS) {
     $.pullToRefresh.init($.reportTable);
 }
 
+function registerEvents()
+{
+    var session = require('session');
+    session.on('websiteChanged', onWebsiteChanged);
+    session.on('reportDateChanged', onDateChanged);
+}
+
+function unregisterEvents()
+{
+    var session = require('session');
+    session.off('websiteChanged', onWebsiteChanged);
+    session.off('reportDateChanged', onDateChanged);
+}
+
 function onClose()
 {
+    unregisterEvents();
+
     $.destroy();
 }
 
-/**
- * REPORT-MENU START
- */
+function onWebsiteChanged()
+{
+    doRefresh();
+}
+
+function onDateChanged(changedReportDate) 
+{
+    reportDate = changedReportDate;
+    doRefresh();
+}
 
 function onMetricChosen(chosenMetric)
 {
     currentMetric = chosenMetric;
-    doRefresh();
-}
-
-function doChooseDate () 
-{
-    var params = {date: reportDate, period: reportPeriod};
-    require('commands/openDateChooser').execute(params, onDateChosen);
-}
-
-function doFlatten () 
-{
-    flatten = 1;
-    doRefresh();
-    flatten = 0;
-}
-
-function onReportChosen (chosenReportModel) {
-    reportModel   = chosenReportModel;
-    currentMetric = null;
-
     doRefresh();
 }
 
@@ -69,15 +69,18 @@ function onDateChosen (period, dateQuery)
     doRefresh();
 }
 
+function onReportChosen (chosenReportModel) {
+    reportModel   = chosenReportModel;
+    currentMetric = null;
+
+    doRefresh();
+}
+
 function onTogglePaginator()
 {
     showAllEntries = !showAllEntries; 
     doRefresh();
 }
-
-/**
- * REPORT-MENU END
- */
 
 function showReportContent()
 {
@@ -99,6 +102,8 @@ function showLoadingMessage()
 
 function onStatisticsFetched(processedReportModel)
 {
+    var accountModel = require('session').getAccount();
+
     $.index.title = processedReportModel.getReportName();
     
     showReportContent();
@@ -154,6 +159,9 @@ function onStatisticsFetched(processedReportModel)
 function doRefresh()
 {
     showLoadingMessage();
+
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
 
     var module = reportModel.get('module');
     var action = reportModel.get('action');

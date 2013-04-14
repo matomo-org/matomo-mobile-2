@@ -11,15 +11,15 @@ var reportDate        = require('session').getReportDate();
 function registerEvents()
 {
     var session = require('session');
-    session.on('websiteChanged', onWebsiteChosen);
-    session.on('reportDateChanged', onDateChosen);
+    session.on('websiteChanged', onWebsiteChanged);
+    session.on('reportDateChanged', onDateChanged);
 }
 
 function unregisterEvents()
 {
     var session = require('session');
-    session.off('websiteChanged', onWebsiteChosen);
-    session.off('reportDateChanged', onDateChosen);
+    session.off('websiteChanged', onWebsiteChanged);
+    session.off('reportDateChanged', onDateChanged);
 }
 
 function onClose()
@@ -43,19 +43,19 @@ function accountDidNotChange()
     return currentAccount === accountModel;
 }
 
-function onWebsiteChosen()
+function onWebsiteChanged()
 {
     if (accountDidNotChange()) {
-        forceRenderingListOfReports();
+        renderListOfReports();
     } else {
         // let reportChooser to the refresh
     }
 }
 
-function onDateChosen() 
+function onDateChanged() 
 {
     if (accountDidNotChange()) {
-        forceRenderingListOfReports();
+        renderListOfReports();
     } else {
         // let reportChooser to the refresh
     }

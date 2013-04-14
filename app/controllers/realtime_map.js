@@ -3,6 +3,24 @@ function L(key)
     return require('L')(key);
 }
 
+function registerEvents()
+{
+    var session = require('session');
+    session.on('websiteChanged', openRealTimeMapInWebview);
+}
+
+function unregisterEvents()
+{
+    var session = require('session');
+    session.off('websiteChanged', openRealTimeMapInWebview);
+}
+
+function onClose()
+{
+    unregisterEvents();
+    $.destroy();
+}
+
 function openRealTimeMapInWebview()
 {
     var accountModel = require('session').getAccount();
@@ -16,9 +34,10 @@ function openRealTimeMapInWebview()
     $.webview.url = url;
 }
 
-exports.open = function () {
-
+exports.open = function () 
+{
     openRealTimeMapInWebview();
+    registerEvents();
 
     require('layout').open($.index);
 }
