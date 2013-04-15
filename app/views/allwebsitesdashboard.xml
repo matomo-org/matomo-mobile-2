@@ -16,7 +16,6 @@
         <View id="content" class="container">
             <SearchBar id="searchBar" onReturn="doSearchWebsite" onCancel="doCancelSearchWebsite" platform="android,ios"/>
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
-            <View class="space" formFactor="tablet"></View>
             <View class="shadow" formFactor="tablet"></View>
             <TableView class="websitesTableView" dataCollection="$.piwikProcessedReport" 
                        onClick="doSelectWebsite">

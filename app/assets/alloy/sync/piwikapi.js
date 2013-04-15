@@ -38,7 +38,6 @@ function Sync(method, model, opts) {
                     opts.error && opts.error(null);
                 } else {
                     opts.success && opts.success(response);
-                    model.trigger("fetch");
                 }
             });
             

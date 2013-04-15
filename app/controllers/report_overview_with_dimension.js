@@ -3,6 +3,8 @@ function L(key)
     return require('L')(key);
 }
 
+console.log('report_overview_with_dimension');
+
 var args         = arguments[0] || {};
 var flatten      = args.flatten || 0;
 var reportPeriod = args.period || 'day';
@@ -14,12 +16,6 @@ function openReport()
 {
     var report = Alloy.createController('report_with_dimension', {report: $model});
     report.open();
-}
-
-function preventReportWillBeRenderedTwice()
-{
-    // TODO currently fetch and reset are triggered...
-    $.piwikProcessedReport.off("reset");
 }
 
 function fetchProcessedReport()
@@ -45,5 +41,4 @@ function fetchProcessedReport()
     });
 }
 
-preventReportWillBeRenderedTwice();
 fetchProcessedReport();

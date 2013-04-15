@@ -10,10 +10,6 @@
             </ButtonBar>
         </RightNavButton>
 
-        <Menu id="menu" platform="android">
-            <MenuItem id="menuItemWebsite" onClick="onClose" />
-        </Menu>
-
         <Require src="loadingindicator" id="loadingindicator"/>
 
         <View id="content">
@@ -26,7 +22,7 @@
                     <Require src="graph" id="reportGraphCtrl"/>
                 </TableViewRow>
                 <TableViewRow>
-                    <Require src="reportinfo" onMetricChosen="onMetricChosen" id="reportInfoCtrl" formFactor="handheld"/>
+                    <Require src="reportinfo" onMetricChosen="onMetricChosen" id="reportInfoCtrl"/>
                 </TableViewRow>
             </TableView>
         </View>

@@ -45,6 +45,7 @@ exports.open = function (win)
 var leftSidebarWindow = Ti.UI.createWindow({left: 0, width: 250, visible: false});
 leftSidebarWindow.open();
 
+var leftSidebarVisible = false;
 function hideLeftSidebar()
 {
     var animation = Ti.UI.createAnimation({
@@ -59,6 +60,7 @@ function hideLeftSidebar()
     });
 
     rootWindow.animate(animation);
+    leftSidebarVisible = false;
 }
 
 function showLeftSidebar()
@@ -70,6 +72,8 @@ function showLeftSidebar()
         right: -250,
         curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
     });
+
+    leftSidebarVisible = true;
 }
 
 exports.setLeftSidebar = function(view)
@@ -81,7 +85,7 @@ exports.hideLeftSidebar = hideLeftSidebar;
 
 exports.toggleLeftSidebar = function ()
 {
-    leftSidebarWindow.visible ? hideLeftSidebar() : showLeftSidebar();
+    leftSidebarVisible ? hideLeftSidebar() : showLeftSidebar();
 };
 
 
@@ -99,6 +103,8 @@ exports.toggleLeftSidebar = function ()
 var rightSidebarWindow = Ti.UI.createWindow({right: 0, width: 250, visible: false});
 rightSidebarWindow.open();
 
+var rightSidebarVisible = false;
+
 function hideRightSidebar()
 {
     var animation = Ti.UI.createAnimation({
@@ -113,6 +119,7 @@ function hideRightSidebar()
     });
 
     rootWindow.animate(animation);
+    rightSidebarVisible = false;
 }
 
 function showRightSidebar()
@@ -125,6 +132,8 @@ function showRightSidebar()
         left: -250,
         curve:Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
     });
+
+    rightSidebarVisible = true;
 }
 
 exports.setRightSidebar = function(view)
@@ -136,5 +145,5 @@ exports.hideRightSidebar = hideRightSidebar;
 
 exports.toggleRightSidebar = function()
 {
-    rightSidebarWindow.visible ? hideRightSidebar() : showRightSidebar();
+    rightSidebarVisible ? hideRightSidebar() : showRightSidebar();
 }

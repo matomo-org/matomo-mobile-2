@@ -1,7 +1,16 @@
 var moment = require('moment/moment');
 
+function isLoadedByDefault(locale)
+{
+    return ('en' == locale);
+}
+
 function tryToLoadLanguage(locale)
 {
+    if (isLoadedByDefault(locale)) {
+        return true;
+    }
+
     var path = 'moment/lang/' + locale;
 
     try {

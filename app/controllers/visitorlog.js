@@ -7,7 +7,7 @@ var accountModel = require('session').getAccount();
 var siteModel    = require('session').getWebsite();
 var reportDate   = require('session').getReportDate();
 var visitorLog   = Alloy.createCollection('piwikLastVisitDetails');
-visitorLog.on('fetch', render);
+visitorLog.on('reset', render);
 
 if (OS_IOS) {
     $.pullToRefresh.init($.visitorLogTable);

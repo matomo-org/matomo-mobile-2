@@ -4,7 +4,7 @@ function L(key)
 }
 
 var reportsCollection = Alloy.Collections.piwikReports;
-reportsCollection.on('fetch', updateAvailableReportsList);
+reportsCollection.on('reset', updateAvailableReportsList);
 
 var currentlyActiveReport = null;
 
@@ -19,7 +19,7 @@ function updateAvailableReportsList()
     var latestSection  = null;
 
     rows.push(Alloy.createController('availablereportsection', {title: L('General_Reports')}).getView());
-    rows.push(Alloy.createController('availablereportrow', {title: L('Real-time Map'), cid: 'visitormap'}).getView());
+    rows.push(Alloy.createController('availablereportrow', {title: L('UserCountryMap_RealTimeMap'), cid: 'visitormap'}).getView());
     rows.push(Alloy.createController('availablereportrow', {title: L('Live_VisitorsInRealTime'), cid: 'live'}).getView());
     rows.push(Alloy.createController('availablereportrow', {title: L('Live_VisitorLog'), cid: 'visitorlog'}).getView());
 
@@ -165,7 +165,7 @@ function openEntryReport()
     closeCurrentlyOpenedReport();
 
     // TODO we cannot just use Visits Summary
-    var compositeReport = Alloy.createController('compositereport', {reportCategory: 'Visits Summary'});
+    var compositeReport = Alloy.createController('compositereport');
     compositeReport.open();
     setCurrentlyOpenedReport(compositeReport);
 }

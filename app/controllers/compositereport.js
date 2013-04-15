@@ -4,7 +4,7 @@ function L(key)
 }
 
 var args = arguments[0] || {};
-var reportCategory    = args.reportCategory;
+var reportCategory    = args.reportCategory || null;
 var reportsCollection = Alloy.Collections.piwikReports;
 var reportDate        = require('session').getReportDate();
 
@@ -63,7 +63,11 @@ function onDateChanged()
 
 function filterReports(collection)
 {
-    // TODO this will not work!
+    if (!reportCategory && collection.at(2)) {
+        // TODO remove hardcoded value 2
+        reportCategory = collection.at(2).get('category');
+    }
+
     $.index.title = reportCategory;
     
     return collection.where({category: reportCategory});
@@ -74,28 +78,14 @@ function isDataAlreadyFetched()
     return reportsCollection.length;
 }
 
-function forceRenderingListOfReports()
-{
-    reportsCollection.trigger('change');
-}
-
-function preventListOfReportsWillBeRenderedTwice()
-{
-    // TODO currently fetch and reset are triggered... causes list is rendered (and data fetched) twice!
-    reportsCollection.off("reset");
-}
-
 function open()
 {
+    registerEvents();
     require('layout').open($.index);
 
     if (isDataAlreadyFetched()) {
         renderListOfReports();
     }
-
-    preventListOfReportsWillBeRenderedTwice();
-
-    registerEvents();
 }
 
 function close()

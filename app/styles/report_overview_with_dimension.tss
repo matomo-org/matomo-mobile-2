@@ -4,7 +4,7 @@
     borderWidth: 1,
     backgroundColor: 'white',
     top: 0,
-    layout: "horizontal"
+    layout: 'vertical'
 }
 
 ".separator": {

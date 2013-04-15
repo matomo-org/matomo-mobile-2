@@ -1,5 +1,5 @@
 <Alloy>
-    <View class="container">  
+    <View id="index" class="container">  
         <View class="separator"/>
         <View class="data">
             <Label id="title"> - </Label>

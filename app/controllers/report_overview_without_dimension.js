@@ -50,5 +50,5 @@ function fetchProcessedReport()
     });
 }
 
-$.piwikProcessedReport.on('fetch', renderGraph)
+$.piwikProcessedReport.on('reset', renderGraph)
 fetchProcessedReport();
