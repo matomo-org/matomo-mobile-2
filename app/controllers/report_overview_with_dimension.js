@@ -3,8 +3,6 @@ function L(key)
     return require('L')(key);
 }
 
-console.log('report_overview_with_dimension');
-
 var args         = arguments[0] || {};
 var flatten      = args.flatten || 0;
 var reportPeriod = args.period || 'day';

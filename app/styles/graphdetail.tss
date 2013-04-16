@@ -1,5 +1,8 @@
-"#index": {
+"#index[formFactor=tablet]": {
     backgroundColor: "white"
+}
+"#index[formFactor=handheld]": {
+    backgroundColor: "#efefef"
 }
 
 "#index[platform=mobileweb]": {

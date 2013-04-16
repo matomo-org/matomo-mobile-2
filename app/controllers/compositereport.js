@@ -68,8 +68,12 @@ function filterReports(collection)
         reportCategory = collection.at(2).get('category');
     }
 
-    $.index.title = reportCategory;
-    
+    if (OS_MOBILEWEB) {
+        $.index.setTitleControl(Ti.UI.createLabel({text: reportCategory, color: 'white'}));
+    } else {
+        $.index.title = reportCategory;
+    }
+
     return collection.where({category: reportCategory});
 }
 

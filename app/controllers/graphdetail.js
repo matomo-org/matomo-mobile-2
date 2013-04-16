@@ -118,8 +118,14 @@ function getGraphUrlWithSize(width, height) {
 
     var graph            = require('Piwik/PiwikGraph');
     var graphUrlWithSize = graph.appendSize(graphSwitcher.currentGraphUrl(), width, height, true);
-    graphUrlWithSize     = graph.setParams(graphUrlWithSize, {showMetricTitle: 1, showLegend: 1, legendAppendMetric: 1});
-    graph                = null;
+
+    var params = {showMetricTitle: 1, showLegend: 1, legendAppendMetric: 1};
+    if (require('alloy').isTablet) {
+        params.backgroundColor = 'white';
+    }
+
+    graphUrlWithSize = graph.setParams(graphUrlWithSize, params);
+    graph = null;
     
     return graphUrlWithSize;
 }
