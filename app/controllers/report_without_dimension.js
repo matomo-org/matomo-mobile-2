@@ -77,8 +77,16 @@ function showLoadingMessage()
     $.loadingindicator.show();
 }
 
+function removeAllChildrenFromContent()
+{
+    var children = $.content.children;
+    for (var d = children.length - 1; d >= 0; d--) $.content.remove(children[d]);
+}
+
 function onStatisticsFetched(processedReportModel)
 {
+    removeAllChildrenFromContent();
+
     var accountModel = require('session').getAccount();
 
     $.index.title = processedReportModel.getReportName();
@@ -111,6 +119,15 @@ function onStatisticsFetched(processedReportModel)
         var label = Ti.UI.createLabel({text: columns[metric].toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: 13, fontWeight: 'bold'}, height: Ti.UI.SIZE, top: 5, color: '#7e7e7e', left: 10, right: 10});
         metricContainer.add(value);
         metricContainer.add(label);
+
+        metricContainer.addEventListener('click', (function (metric) {
+            var changeMetric = function () {
+                currentMetric = metric;
+                doRefresh();
+            };
+
+            return changeMetric;
+        })(metric));
 
         outerContainer.add(metricContainer);
         containerRow.add(outerContainer);
