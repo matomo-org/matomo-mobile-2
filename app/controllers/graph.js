@@ -39,7 +39,7 @@ function getGraphOptions()
 
 function showDetail ()
 {
-    var detailGraph = Alloy.createController('graphdetail', getGraphOptions());
+    var detailGraph = Alloy.createController('graph_detail', getGraphOptions());
     detailGraph.open();
 }
 
@@ -145,7 +145,7 @@ exports.update = function (processedReportCollection, accountModel) {
     imageGraphUrl = completeGraphUrl(imageGraphUrl, processedReportCollection, accountModel);
     imageGraphEvolutionUrl = completeGraphUrl(imageGraphEvolutionUrl, processedReportCollection, accountModel);
 
-    var graphSwitcher = Alloy.createController('graphswitcher', getGraphOptions());
+    var graphSwitcher = Alloy.createController('graph_switcher', getGraphOptions());
 
     if (!graphSwitcher.currentGraphUrl()) {
         // no image to display

@@ -9,7 +9,7 @@ if (accounts.hasAccount()) {
 
 } else {
 
-    firstLogin = Alloy.createController('firstlogin');
+    firstLogin = Alloy.createController('first_login');
     accounts.on('add', onCreatedAccount);
     firstLogin.open();
 }
@@ -34,6 +34,6 @@ function openStatistics(siteModel, accountModel)
 {
     require('session').setWebsite(siteModel, accountModel);
     
-    var reportChooser = Alloy.createController('availablereports');
+    var reportChooser = Alloy.createController('report_chooser');
     reportChooser.open();
 }

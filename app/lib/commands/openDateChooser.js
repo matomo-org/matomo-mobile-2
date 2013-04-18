@@ -55,13 +55,13 @@ exports.execute = function (params, onDateChosen)
     
     var max       = new Date();
     var min       = new Date(2008, 0, 1);
-    var picker    = Alloy.createController('datechooser', {from: from,
-                                                           to: to,
-                                                           maxDate: max,
-                                                           period: period,
-                                                           selectionIndicator: true,
-                                                           source: params.source ? params.source : null,
-                                                           minDate: min});
+    var picker    = Alloy.createController('date_chooser', {from: from,
+                                                            to: to,
+                                                            maxDate: max,
+                                                            period: period,
+                                                            selectionIndicator: true,
+                                                            source: params.source ? params.source : null,
+                                                            minDate: min});
 
     picker.on('onSet', function (event) {
 

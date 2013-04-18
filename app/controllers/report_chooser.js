@@ -18,10 +18,10 @@ function updateAvailableReportsList()
     var currentSection = null;
     var latestSection  = null;
 
-    rows.push(Alloy.createController('availablereportsection', {title: L('General_Reports')}).getView());
-    rows.push(Alloy.createController('availablereportrow', {title: L('UserCountryMap_RealTimeMap'), cid: 'visitormap'}).getView());
-    rows.push(Alloy.createController('availablereportrow', {title: L('Live_VisitorsInRealTime'), cid: 'live'}).getView());
-    rows.push(Alloy.createController('availablereportrow', {title: L('Live_VisitorLog'), cid: 'visitorlog'}).getView());
+    rows.push(Alloy.createController('report_chooser_section', {title: L('General_Reports')}).getView());
+    rows.push(Alloy.createController('report_chooser_row', {title: L('UserCountryMap_RealTimeMap'), cid: 'visitormap'}).getView());
+    rows.push(Alloy.createController('report_chooser_row', {title: L('Live_VisitorsInRealTime'), cid: 'live'}).getView());
+    rows.push(Alloy.createController('report_chooser_row', {title: L('Live_VisitorLog'), cid: 'visitorlog'}).getView());
 
     reportsCollection.forEach(function (report) 
     {
@@ -33,15 +33,15 @@ function updateAvailableReportsList()
         }
 
         if (currentSection && currentSection !== latestSection) {
-            rows.push(Alloy.createController('availablereportrow', {title: currentSection, cid: report.cid}).getView());
+            rows.push(Alloy.createController('report_chooser_row', {title: currentSection, cid: report.cid}).getView());
             latestSection = currentSection;
         }
     });
 
-    rows.push(Alloy.createController('availablereportsection', {title: L('Mobile_Account')}).getView());
-    rows.push(Alloy.createController('availablereportrow', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
-    rows.push(Alloy.createController('availablereportrow', {title: L('General_Settings'), cid: 'settings'}).getView());
-    rows.push(Alloy.createController('availablereportrow', {title: L('General_Help'), cid: 'help'}).getView());
+    rows.push(Alloy.createController('report_chooser_section', {title: L('Mobile_Account')}).getView());
+    rows.push(Alloy.createController('report_chooser_row', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
+    rows.push(Alloy.createController('report_chooser_row', {title: L('General_Settings'), cid: 'settings'}).getView());
+    rows.push(Alloy.createController('report_chooser_row', {title: L('General_Help'), cid: 'help'}).getView());
 
     $.reportsTable.setData(rows);
     rows = null;
@@ -121,7 +121,7 @@ function onWebsiteSelected(siteModel, accountModel)
 function openCompositeReport(chosenReportModel)
 {
     var reportCategory = chosenReportModel.get('category');
-    var statistics     = Alloy.createController('compositereport', {reportCategory: reportCategory});
+    var statistics     = Alloy.createController('report_composite', {reportCategory: reportCategory});
     statistics.open();
     setCurrentlyOpenedReport(statistics);
 }
@@ -165,7 +165,7 @@ function openEntryReport()
     closeCurrentlyOpenedReport();
 
     // TODO we cannot just use Visits Summary
-    var compositeReport = Alloy.createController('compositereport');
+    var compositeReport = Alloy.createController('report_composite');
     compositeReport.open();
     setCurrentlyOpenedReport(compositeReport);
 }

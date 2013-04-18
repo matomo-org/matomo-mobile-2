@@ -79,7 +79,7 @@ var newAccountController = null;
 
 function doAddAccount()
 {
-    newAccountController = Alloy.createController('newaccount', {accounts: accounts});
+    newAccountController = Alloy.createController('account_creator', {accounts: accounts});
     accounts.on('add', onCreatedAccount);
     newAccountController.open();
 }

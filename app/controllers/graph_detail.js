@@ -5,7 +5,7 @@ var reportDate = args.reportDate || ' ';
 
 $.graph = $.graphWidget.getView();
 
-var graphSwitcher = Alloy.createController('graphswitcher', args);
+var graphSwitcher = Alloy.createController('graph_switcher', args);
 graphSwitcher.addSwitchGraph(true);
 $.index.add(graphSwitcher.getView());
 

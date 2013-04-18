@@ -6,7 +6,7 @@ function L(key)
 var args     = arguments[0] || {};
 var accounts = Alloy.Collections.appAccounts;
 
-var loginform = Alloy.createController('loginform', {accounts: accounts});
+var loginform = Alloy.createController('login_form', {accounts: accounts});
 
 $.loginform.add(loginform.getView());
 

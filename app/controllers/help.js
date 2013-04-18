@@ -15,13 +15,13 @@ function doOpenFaq()
 
 function doOpenAboutPiwikMobile()
 {
-    var about = Alloy.createController('aboutpiwikmobile');
+    var about = Alloy.createController('about_piwik_mobile');
     about.open();
 }
 
 function doOpenGiveFeedback()
 {
-    var feedback = Alloy.createController('givefeedback');
+    var feedback = Alloy.createController('give_feedback');
     feedback.open();
 }
 
