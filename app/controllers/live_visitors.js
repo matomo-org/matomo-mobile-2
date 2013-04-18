@@ -55,13 +55,13 @@ var startRefreshTimer = function (timeoutInMs) {
     }, timeoutInMs);
 }
 
-function doOpenVisitor(event)
+function openVisitor(event)
 {
-    if (!event || !event.rowData || !event.rowData.visitor) {
+    if (!event || !event.row || !event.row.visitor) {
         return;
     }
 
-    var params  = {visitor: event.rowData.visitor};
+    var params  = {visitor: event.row.visitor};
     var visitor = Alloy.createController('visitor', params);
     visitor.open();
 }
@@ -73,11 +73,11 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
     var rows = [];
 
     counter30Min.title = String.format(L('Live_LastMinutes'), '30');
-    var last30minutes = Alloy.createController('livecounter', counter30Min);
+    var last30minutes = Alloy.createController('live_counter', counter30Min);
     rows.push(last30minutes.getView());
 
     counter24Hours.title = String.format(L('Live_LastHours'), '24');
-    var last24hours = Alloy.createController('livecounter', counter24Hours);
+    var last24hours = Alloy.createController('live_counter', counter24Hours);
     rows.push(last24hours.getView());
 
     _.forEach(visitorDetails, function (visitorDetail) {

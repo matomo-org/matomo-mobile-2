@@ -128,7 +128,7 @@ function openCompositeReport(chosenReportModel)
 
 function openLiveVisitors()
 {
-    var live = Alloy.createController('livevisitors');
+    var live = Alloy.createController('live_visitors');
     live.open();
     setCurrentlyOpenedReport(live);
 }
