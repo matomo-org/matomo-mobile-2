@@ -1,22 +1,22 @@
 exports.definition = {
-	
-	config: {
-		"columns": {
-			"value":"string"
-		},
-		"adapter": {
-			"type": "piwikapi",
-			"collection_name": "piwiktokenauth"
-		},
-		"settings": {
-		    "method": "UsersManager.getTokenAuth",
-		    "cache": false
-		},
-		"defaultParams": {}
-	},		
+    
+    config: {
+        "columns": {
+            "value":"string"
+        },
+        "adapter": {
+            "type": "piwikapi",
+            "collection_name": "piwiktokenauth"
+        },
+        "settings": {
+            "method": "UsersManager.getTokenAuth",
+            "cache": false
+        },
+        "defaultParams": {}
+    },        
 
-	extendModel: function(Model) {		
-		_.extend(Model.prototype, {
+    extendModel: function(Model) {        
+        _.extend(Model.prototype, {
 
 
             getPasswordHash: function (password) {
@@ -58,19 +58,19 @@ exports.definition = {
                 return true;
             }
 
-		}); // end extend
-		
-		return Model;
-	},
-	
-	
-	extendCollection: function(Collection) {		
-		_.extend(Collection.prototype, {
-			
-		}); // end extend
-		
-		return Collection;
-	}
-		
+        }); // end extend
+        
+        return Model;
+    },
+    
+    
+    extendCollection: function(Collection) {        
+        _.extend(Collection.prototype, {
+            
+        }); // end extend
+        
+        return Collection;
+    }
+        
 }
 
