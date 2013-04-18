@@ -142,7 +142,7 @@ function onStatisticsFetched(processedReportCollection)
 
         var hasSubtable = processedReportCollection.hasSubtable() && processedReport.getSubtableId();
 
-        var reportRow = Alloy.createController('reportrow', processedReport);
+        var reportRow = Alloy.createController('report_row', processedReport);
         var row = Ti.UI.createTableViewRow({
             height: Ti.UI.SIZE, 
             subtableId: processedReport.getSubtableId(),
@@ -151,7 +151,7 @@ function onStatisticsFetched(processedReportCollection)
             currentReportName: processedReportCollection.getReportName(),
             currentMetric: processedReportCollection.getSortOrder(),
             hasChild: hasSubtable,
-            subReportTitle: processedReport.getTitle()
+            reportTitle: processedReport.getTitle()
         });
 
         if (hasSubtable) {
@@ -164,7 +164,7 @@ function onStatisticsFetched(processedReportCollection)
                     apiAction: this.subtableAction,
                     subtableId: this.subtableId,
                     metric: this.currentMetric,
-                    subReportTitle: this.subReportTitle
+                    reportTitle: this.reportTitle
                 };
             
                 var subtableReport = Alloy.createController('report_subtable', params);

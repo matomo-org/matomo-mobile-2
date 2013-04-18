@@ -3,7 +3,7 @@ var processedReport = null;
 function doSelectMetric()
 {
     var params         = {metrics: processedReport.getMetrics()};
-    var metricsChooser = Alloy.createController('reportmetricschooser', params);
+    var metricsChooser = Alloy.createController('report_metrics_chooser', params);
     metricsChooser.on('metricChosen', onMetricChosen)
     metricsChooser.open();
 }

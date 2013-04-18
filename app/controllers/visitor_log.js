@@ -68,7 +68,7 @@ function render()
 
     visitorLog.forEach(function (visitorDetail) {
         var params = {account: accountModel, visitor: visitorDetail.attributes};
-        var visitorOverview = Alloy.createController('visitoroverview', params);
+        var visitorOverview = Alloy.createController('visitor_overview', params);
         rows.push(visitorOverview.getView());
     });
 

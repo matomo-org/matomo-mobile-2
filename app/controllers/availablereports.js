@@ -135,7 +135,7 @@ function openLiveVisitors()
 
 function openVisitorLog()
 {
-    var log = Alloy.createController('visitorlog');
+    var log = Alloy.createController('visitor_log');
     log.open();
     setCurrentlyOpenedReport(log);
 }

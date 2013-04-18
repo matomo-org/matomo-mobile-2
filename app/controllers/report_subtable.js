@@ -103,7 +103,7 @@ function onStatisticsFetched(processedReportCollection)
 
         var hasSubtable = processedReportCollection.hasSubtable() && processedReport.getSubtableId();
 
-        var reportRow = Alloy.createController('reportrow', processedReport);
+        var reportRow = Alloy.createController('report_row', processedReport);
         var row = Ti.UI.createTableViewRow({
             height: Ti.UI.SIZE, 
             subtableId: processedReport.getSubtableId(),
