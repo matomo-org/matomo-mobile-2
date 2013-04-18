@@ -13,7 +13,7 @@
                     <Require src="graph" id="reportGraphCtrl"/>
                 </TableViewRow>
                 <TableViewRow>
-                    <Require src="reportinfo" onMetricChosen="onMetricChosen" id="reportInfoCtrl"/>
+                    <Require src="report_metadata" onMetricChosen="onMetricChosen" id="reportInfoCtrl"/>
                 </TableViewRow>
             </TableView>
         </View>
