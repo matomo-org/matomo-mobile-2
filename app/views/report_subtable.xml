@@ -1,0 +1,21 @@
+<Alloy>
+    <Window title="" id="index" onClose="onClose">
+
+        <Require src="loadingindicator" id="loadingindicator"/>
+
+        <View id="content">
+            
+            <TableView id="reportTable" class="container">
+                <HeaderPullView platform="ios">
+                    <Require src="pulltorefresh" id="pullToRefresh" onRefresh="doRefresh"/>
+                </HeaderPullView>
+                <TableViewRow>
+                    <Require src="graph" id="reportGraphCtrl"/>
+                </TableViewRow>
+                <TableViewRow>
+                    <Require src="reportinfo" onMetricChosen="onMetricChosen" id="reportInfoCtrl"/>
+                </TableViewRow>
+            </TableView>
+        </View>
+    </Window>
+</Alloy>

@@ -3,7 +3,6 @@ function L(key)
     return require('L')(key);
 }
 
-
 var accountsCollection = Alloy.Collections.appAccounts;
 var accountModel       = accountsCollection.lastUsedAccount();
 
@@ -77,7 +76,7 @@ function onStatisticsFetched(statisticsCollection)
     showReportContent();
 
     if ($.reportGraphCtrl) {
-        $.reportGraphCtrl.update(statisticsCollection.first(), accountModel);
+        $.reportGraphCtrl.update(statisticsCollection, accountModel);
     }
 }
 
@@ -135,14 +134,12 @@ function fetchListOfAvailableWebsites(site)
 
     var reportDate = require('session').getReportDate();
 
-    $.piwikProcessedReport.fetch({
+    $.piwikProcessedReport.fetchProcessedReports("nb_visits", {
         account: accountModel,
         params: {
             period: reportDate.getPeriodQueryString(), 
             date: reportDate.getDateQueryString(), 
             idSite: site.id,
-            sortOrderColumn: "nb_visits",
-            filter_sort_column: "nb_visits",
             apiModule: "MultiSites",
             apiAction: "getAll"
         },

@@ -21,7 +21,7 @@ function renderGraph()
 {
     var accountModel = require('session').getAccount();
     if ($.piwikProcessedReport.first()) {
-        $.graphCtrl.update($.piwikProcessedReport.first(), accountModel);
+        $.graphCtrl.update($.piwikProcessedReport, accountModel);
     } else {
         // TODO ... this.hide(); this.destroy()??
     }

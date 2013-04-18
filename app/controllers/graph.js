@@ -94,14 +94,14 @@ function addGraphSwitcher(graphSwitcher)
     }
 }
 
-function completeGraphUrl(graphUrl, processedReportModel, accountModel)
+function completeGraphUrl(graphUrl, processedReportCollection, accountModel)
 {
     if (!graphUrl) {
         return '';
     }
 
     var graph = require('Piwik/PiwikGraph');
-    graphUrl  = graph.addSortOrder(graphUrl, processedReportModel.getSortOrder());
+    graphUrl  = graph.addSortOrder(graphUrl, processedReportCollection.getSortOrder());
     graphUrl  = graph.generateUrl(graphUrl, accountModel);
 
     return graphUrl;
@@ -135,15 +135,15 @@ function animateFadeOutDetailIcon()
     $.showDetailIcon.animate({opacity: 0, delay: 600, duration: 600}, fadeOutDetailIcon);
 }
 
-exports.update = function (processedReportModel, accountModel) {
+exports.update = function (processedReportCollection, accountModel) {
 
-    imageGraphUrl = processedReportModel.getImageGraphUrl();
-    reportName    = processedReportModel.getReportName();
-    reportDate    = processedReportModel.getReportDate();
-    imageGraphEvolutionUrl = processedReportModel.getEvolutionImageGraphUrl();
+    imageGraphUrl = processedReportCollection.getImageGraphUrl();
+    reportName    = processedReportCollection.getReportName();
+    reportDate    = processedReportCollection.getReportDate();
+    imageGraphEvolutionUrl = processedReportCollection.getEvolutionImageGraphUrl();
 
-    imageGraphUrl = completeGraphUrl(imageGraphUrl, processedReportModel, accountModel);
-    imageGraphEvolutionUrl = completeGraphUrl(imageGraphEvolutionUrl, processedReportModel, accountModel);
+    imageGraphUrl = completeGraphUrl(imageGraphUrl, processedReportCollection, accountModel);
+    imageGraphEvolutionUrl = completeGraphUrl(imageGraphEvolutionUrl, processedReportCollection, accountModel);
 
     var graphSwitcher = Alloy.createController('graphswitcher', getGraphOptions());
 

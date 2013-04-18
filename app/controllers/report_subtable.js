@@ -116,10 +116,10 @@ function onStatisticsFetched(processedReportCollection)
     $.reportTable.setData([]);
 
     if ($.reportInfoCtrl) {
-        $.reportInfoCtrl.update(processedReportCollection);
+        $.reportInfoCtrl.update(processedReportCollection.first());
     }
 
-    $.reportGraphCtrl.update(processedReportCollection, accountModel);
+    $.reportGraphCtrl.update(processedReportCollection.first(), accountModel);
 
     var rows = [];
 
@@ -139,39 +139,11 @@ function onStatisticsFetched(processedReportCollection)
         if (!processedReport) {
             return;
         }
-
         var reportRow = Alloy.createController('reportrow', processedReport);
         var row = Ti.UI.createTableViewRow({
             height: Ti.UI.SIZE, 
-            subtableId: processedReport.getSubtableId(),
-            hasCheck: processedReportCollection.hasSubtable()
+            subtableId: processedReport.getSubtableId()
         });
-
-        if (processedReportCollection.hasSubtable()) {
-            row.addEventListener('click', function () {
-
-                processedReportCollection.getActionToLoadSubTables();
-                /**
-                 * 
-            var backTitle = (params.report && params.report.name) ? params.report.name : _('Mobile_NavigationBack');
-
-            // make a simple copy of params
-            var newParams               = JSON.parse(JSON.stringify(params));
-            newParams.report.action     = actionToLoadSubTables;
-            newParams.report.idSubtable = event.row.idSubtable;
-            newParams.report.name       = event.row.reportName;
-            newParams.url               = 'statistics/show';
-            newParams.backButtonTitle   = backTitle;
-            newParams.target            = 'detail';
-            
-                 * @type {Object}
-                 */
-                var params = {};
-                var subtableReport = Alloy.createController('report_subtable', params);
-                subtableReport.open();
-            });
-        }
-
         row.add(reportRow.getView());
         rows.push(row);
         row = null;

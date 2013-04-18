@@ -13,8 +13,8 @@ function onMetricChosen(chosenMetric)
     $.trigger('metricChosen', chosenMetric);
 }
 
-exports.update = function (processedReportModel) {
-    processedReport        = processedReportModel;
+exports.update = function (processedReportCollection) {
+    processedReport        = processedReportCollection;
     var selectedMetricName = processedReport.getMetricName();
     
     $.name.text = selectedMetricName

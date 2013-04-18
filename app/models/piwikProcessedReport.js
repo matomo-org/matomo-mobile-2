@@ -3,11 +3,11 @@ exports.definition = {
     
     config: {
         "columns": {
-            "website":"string",
-            "prettyDate":"string",
-            "metadata":"string",
-            "columns":"string",
-            "reportData":"string",
+            "title":"string",
+            "value":"string",
+            "id":"string",
+            "sortOrderColumn":"string",
+            "hasDimension":"string",
             "reportMetadata":"string"
         },
         "adapter": {
@@ -27,55 +27,14 @@ exports.definition = {
 
     extendModel: function(Model) {        
         _.extend(Model.prototype, {
-            sortOrder: null,
-            setSortOrder: function (sort) {
-                // TODO set config.defaultParams.filter_sort_column|sortOrderColumn
-                this.sortOrder = sort;
+            getTitle: function () {
+                return this.get('title');
+            },
+            getValue: function () {
+                return this.get('value');
             },
             getSortOrder: function () {
-                return this.sortOrder;
-            },
-            getEvolutionImageGraphUrl: function () {
-                if (!this.get('metadata') || !this.get('metadata').imageGraphEvolutionUrl) {
-                    return '';
-                }
-
-                return this.get('metadata').imageGraphEvolutionUrl;
-            },
-            getImageGraphUrl: function () {
-                if (!this.get('metadata') || !this.get('metadata').imageGraphUrl) {
-                    return '';
-                }
-
-                return this.get('metadata').imageGraphUrl;
-            },
-            getMetrics: function () {
-                return this.get('columns');
-            },
-            getMetricName: function () {
-                var metrics = this.getMetrics();
-                var sortOrder = this.getSortOrder();
-
-                if (metrics && metrics[sortOrder]) {
-                    return metrics[sortOrder];
-                }
-
-                return ''
-            },
-            getReportName: function () {
-                if (this.get('metadata') && this.get('metadata').name) {
-                    return this.get('metadata').name;
-                }
-                return '';
-            },
-            getReportDate: function () {
-                if (this.get('prettyDate')) {
-                    return this.get('prettyDate');
-                }
-                return '';
-            },
-            getMetadata: function () {
-                return this.get('metadata');
+                return this.get('sortOrderColumn');
             },
             getReportMetadata: function () {
                 return this.get('reportMetadata');
@@ -105,49 +64,12 @@ exports.definition = {
                 }
             },
             getSubtableId: function () {
-                var metadata = this.getMetadata();
+                var metadata = this.getReportMetadata();
 
-                if (this.hasSubtable() && metadata && metadata.idsubdatatable) {
+                if (metadata && metadata.idsubdatatable) {
                     return metadata.idsubdatatable;
                 }
-            },
-            hasSubtable: function () {
-                 return !!this.getActionToLoadSubTables();
-            },
-            getActionToLoadSubTables: function () {
-                 metadata = this.getMetadata();
-
-                if (metadata && metadata.actionToLoadSubTables) {
-                    return metadata.actionToLoadSubTables;
-                }
-            },
-            getRows: function () {
-                var reportData = this.get('reportData');
-                var metaData   = this.get('reportMetadata');
-                var columns    = this.get('columns');
-
-                var rows = [];
-
-                if (_.isArray(reportData)) {
-                    for (var index in reportData) {
-                        rows.push({data: reportData[index], 
-                                   metadata: metaData ? metaData[index] : null,
-                                   sortOrderColumn: this.getSortOrder()});
-                    }
-                } else {
-                    // since Piwik Server 1.5.0: for reports with no dimensions, like VisitsSummary.get
-                    for (var index in reportData) {
-                        var row = {data: {label: columns[index]}, 
-                                   metadata: metaData ? metaData[index] : null,
-                                   sortOrderColumn: index};
-                        row.data[index] = reportData[index];
-                        rows.push(row);
-                    }
-                }
-
-                return rows;
             }
-
             // extended functions go here
 
         }); // end extend
@@ -158,7 +80,71 @@ exports.definition = {
     
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
+            // TODO set config.defaultParams.filter_sort_column|sortOrderColumn
             sortOrderColumn: null,
+            metadata: null,
+            prettyDate: null,
+            website: null,
+            columns: null,
+
+            getMetadata: function () {
+                return (this.metadata || {});
+            },
+
+            hasSubtable: function () {
+                 return !!this.getActionToLoadSubTables();
+            },
+            getActionToLoadSubTables: function () {
+                var metadata = this.getMetadata();
+
+                if (metadata && metadata.actionToLoadSubTables) {
+                    return metadata.actionToLoadSubTables;
+                }
+            },
+
+            getMetrics: function () {
+                return (this.columns || {});
+            },
+            getMetricName: function () {
+                var metrics = this.getMetrics();
+                var sortOrder = this.getSortOrder();
+
+                if (metrics && metrics[sortOrder]) {
+                    return metrics[sortOrder];
+                }
+
+                return ''
+            },
+
+            getReportDate: function () {
+                return this.prettyDate;
+            },
+
+            getReportName: function () {
+                if (this.metadata && this.metadata.name) {
+                    return this.metadata.name;
+                }
+                return '';
+            },
+
+            getEvolutionImageGraphUrl: function () {
+                if (!this.metadata || !this.metadata.imageGraphEvolutionUrl) {
+                    return '';
+                }
+
+                return this.metadata.imageGraphEvolutionUrl;
+            },
+            getImageGraphUrl: function () {
+                if (!this.metadata || !this.metadata.imageGraphUrl) {
+                    return '';
+                }
+
+                return this.metadata.imageGraphUrl;
+            },
+
+            getSortOrder: function () {
+                return this.sortOrderColumn;
+            },
 
             fetchProcessedReports: function (sortOrderColumn, options) {
                 this.sortOrderColumn = sortOrderColumn;
@@ -175,8 +161,13 @@ exports.definition = {
                     
                     return [];
                 }
+
+                this.metadata = response.metadata;
+                this.website  = response.website;
+                this.prettyDate = response.prettyDate;
+                this.columns  = response.columns;
                     
-                var reportRow = [];
+                var rows = [];
                 var label;
                 var value;
                 var row;
@@ -215,14 +206,11 @@ exports.definition = {
                         row.title = label;
                         row.value = value;
                         row.id       = index;
-                        row.columns  = response.columns;
-                        row.metadata = response.metadata;
-                        row.prettyDate      = response.prettyDate;
                         row.reportMetadata  = metadata
                         row.sortOrderColumn = this.sortOrderColumn;
                         row.hasDimension    = true;
                     
-                        reportRow.push(row);
+                        rows.push(row);
                     }
                     
                 } else if (_.isObject(reportData)) {
@@ -237,21 +225,18 @@ exports.definition = {
                         
                         value = reportData[key];
 
-                        row = reportData;
+                        row = _.clone(reportData);
                         row.title = label;
                         row.value = value;
-                        row.id       = reportRow.length;
-                        row.columns  = response.columns;
-                        row.metadata = response.metadata;
-                        row.prettyDate      = response.prettyDate;
-                        row.sortOrderColumn = this.sortOrderColumn;
+                        row.id    = rows.length;
+                        row.sortOrderColumn = key;
                         row.reportMetadata  = reportMetadata ? reportMetadata[key] : null;
                         row.hasDimension    = false;
 
-                        reportRow.push(row);
+                        rows.push(row);
                     }
                 }
-                
+
                 response       = null;
                 account        = null;
                 metadata       = null;
@@ -260,7 +245,7 @@ exports.definition = {
                 reportData     = null;
                 reportMetadata = null;
 
-                return reportRow;
+                return rows;
             }
 
             // extended functions go here            

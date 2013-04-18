@@ -11,7 +11,7 @@ var reportList    = args.reportList || {};
 var reportDate    = require('session').getReportDate();
 
 // the fetched statistics that belongs to the currently selected report
-var statisticsModel = Alloy.createModel('piwikProcessedReport');
+var processedReportCollection = Alloy.createCollection('piwikProcessedReport');
 
 var reportRowsCtrl = null;
 
@@ -83,31 +83,15 @@ function removeAllChildrenFromContent()
     for (var d = children.length - 1; d >= 0; d--) $.content.remove(children[d]);
 }
 
-function onStatisticsFetched(processedReportModel)
-{
-    removeAllChildrenFromContent();
+var containerRow = null;
+function renderMetricTile (processedReportModel, index) {
 
-    var accountModel = require('session').getAccount();
+        var title = processedReportModel.getTitle();
+        var value = processedReportModel.getValue();
+        var sortColumnModel  = processedReportModel.getSortOrder();
+        var sortColumnReport = processedReportCollection.getSortOrder(); 
 
-    $.index.title = processedReportModel.getReportName();
-    
-    showReportContent();
-
-    if (!processedReportModel) {
-        console.error('msising report model');
-        return;
-    }
-    var columns = processedReportModel.get('columns');
-    var reportData = processedReportModel.get('reportData');
-    var sortColumn = processedReportModel.getSortOrder();
-
-    $.reportGraphCtrl.update(processedReportModel, accountModel);
-
-    var containerRow = null;
-    var index = 0; 
-    for (var metric in columns) {
-
-        var labelColor = (metric == sortColumn) ? '#cb2026' : 'black';
+        var labelColor = (sortColumnReport == sortColumnModel) ? '#cb2026' : 'black';
 
         if (0 == (index % 2)) {
             containerRow = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, layout: 'horizontal'});
@@ -115,8 +99,8 @@ function onStatisticsFetched(processedReportModel)
         } 
         var outerContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: '50%'});
         var metricContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, top: 22, bottom: 25, layout: 'vertical'});
-        var value = Ti.UI.createLabel({text: (reportData[metric] || '-'), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 0, font: {fontSize: 25, fontWeight: 'bold'}, color: labelColor, left: 10, right: 10, height: Ti.UI.SIZE});
-        var label = Ti.UI.createLabel({text: columns[metric].toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: 13, fontWeight: 'bold'}, height: Ti.UI.SIZE, top: 5, color: '#7e7e7e', left: 10, right: 10});
+        var value = Ti.UI.createLabel({text: value, textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 0, font: {fontSize: 25, fontWeight: 'bold'}, color: labelColor, left: 10, right: 10, height: Ti.UI.SIZE});
+        var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: 13, fontWeight: 'bold'}, height: Ti.UI.SIZE, top: 5, color: '#7e7e7e', left: 10, right: 10});
         metricContainer.add(value);
         metricContainer.add(label);
 
@@ -127,7 +111,7 @@ function onStatisticsFetched(processedReportModel)
             };
 
             return changeMetric;
-        })(metric));
+        })(sortColumnModel));
 
         outerContainer.add(metricContainer);
         containerRow.add(outerContainer);
@@ -135,21 +119,30 @@ function onStatisticsFetched(processedReportModel)
         if (1 == (index % 2)) {
             var horizontalSeparator = Ti.UI.createView({height: 1, backgroundColor: '#e6e6e6', width: Ti.UI.FILL});
             $.content.add(horizontalSeparator);
-/*
-            var verticalSeparator = Ti.UI.createView({left: 0, zIndex: 2, width: 1, backgroundColor: '#e6e6e6', height: outerContainer.size.height});
-            outerContainer.add(verticalSeparator);
-
-            */
         }
-
-        index++;
-
-
     }
+
+function onStatisticsFetched(processedReportCollection)
+{
+    removeAllChildrenFromContent();
+
+    var accountModel = require('session').getAccount();
+
+    $.index.title = processedReportCollection.getReportName();
     
+    showReportContent();
+
+    if (!processedReportCollection) {
+        console.error('msising report model');
+        return;
+    }
+
+    $.reportGraphCtrl.update(processedReportCollection, accountModel);
+
+    processedReportCollection.forEach(renderMetricTile);
+
     var verticalSeparator = Ti.UI.createView({left: '50%', zIndex: 2, width: 1, top: 17, bottom: 10, backgroundColor: '#e6e6e6', height: Ti.UI.FILL});
     $.outerContent.add(verticalSeparator);
-
 }
 
 function doRefresh()
@@ -163,19 +156,15 @@ function doRefresh()
     var action = reportModel.get('action');
     var metric = reportModel.getSortOrder(currentMetric);
 
-    statisticsModel.setSortOrder(metric);
-    
-    statisticsModel.fetch({
+    processedReportCollection.fetchProcessedReports(metric, {
         account: accountModel,
         params: {period: reportDate.getPeriodQueryString(), 
                  date: reportDate.getDateQueryString(), 
                  idSite: siteModel.id, 
-                 sortOrderColumn: metric,
-                 filter_sort_column: metric,
                  apiModule: module, 
                  apiAction: action},
         error: function () {
-            statisticsModel.trigger('error', {type: 'loadingProcessedReport'});
+            processedReportCollection.trigger('error', {type: 'loadingProcessedReport'});
         },
         success: onStatisticsFetched
     });
@@ -187,5 +176,3 @@ exports.open = function () {
 
     require('layout').open($.index);
 };
-
-exports.refresh = doRefresh;

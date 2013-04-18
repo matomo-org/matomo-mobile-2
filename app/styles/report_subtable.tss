@@ -1,0 +1,43 @@
+".container": {
+    layout: "vertical",
+},
+
+".container[platform=ios]": {
+    separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
+},
+
+".container[platform=mobileweb]": {
+    separatorStyle: Ti.UI.MobileWeb.TableViewSeparatorStyle.NONE
+},
+
+"#index": {
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL,
+    backgroundColor: 'white',
+    zIndex: 3,
+    backButtonTitle: L('Mobile_NavigationBack')
+},
+
+"#content": {
+    layout: "vertical"
+},
+
+"#reportTable": {
+    top: 0,
+  //  left: 10,
+  //  right: 10,
+  //  bottom: 10,
+  //  borderRadius: 5,
+  //  borderColor: "#e6e6e6"
+},
+
+"TableViewRow[platform=ios]": {
+    height: Ti.UI.SIZE
+},
+"TableViewRow[platform=android]": {
+    height: Ti.UI.SIZE
+},
+
+"TableViewRow[platform=ios]": {
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
+},
