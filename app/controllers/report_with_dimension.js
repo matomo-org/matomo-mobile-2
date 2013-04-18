@@ -10,7 +10,7 @@ var currentMetric   = null;
 var reportModel     = args.report || false;
 var reportList      = args.reportList || {};
 var reportDate      = require('session').getReportDate();
-var flatten         = 0;
+var flatten         = args.flatten || 0;
 var showAllEntries  = false;
 
 $.index.title = reportModel.getReportName();
@@ -140,33 +140,33 @@ function onStatisticsFetched(processedReportCollection)
             return;
         }
 
+        var hasSubtable = processedReportCollection.hasSubtable() && processedReport.getSubtableId();
+
         var reportRow = Alloy.createController('reportrow', processedReport);
         var row = Ti.UI.createTableViewRow({
             height: Ti.UI.SIZE, 
             subtableId: processedReport.getSubtableId(),
-            hasCheck: processedReportCollection.hasSubtable()
+            subtableAction: processedReportCollection.getActionToLoadSubTables(),
+            subtableModule: processedReportCollection.getModule(),
+            currentReportName: processedReportCollection.getReportName(),
+            currentMetric: processedReportCollection.getSortOrder(),
+            hasChild: hasSubtable,
+            subReportTitle: processedReport.getTitle()
         });
 
-        if (processedReportCollection.hasSubtable()) {
+        if (hasSubtable) {
             row.addEventListener('click', function () {
 
-                processedReportCollection.getActionToLoadSubTables();
-                /**
-                 * 
-            var backTitle = (params.report && params.report.name) ? params.report.name : _('Mobile_NavigationBack');
-
-            // make a simple copy of params
-            var newParams               = JSON.parse(JSON.stringify(params));
-            newParams.report.action     = actionToLoadSubTables;
-            newParams.report.idSubtable = event.row.idSubtable;
-            newParams.report.name       = event.row.reportName;
-            newParams.url               = 'statistics/show';
-            newParams.backButtonTitle   = backTitle;
-            newParams.target            = 'detail';
+                var params = {
+                    backButtonTitle: this.currentReportName || L('Mobile_NavigationBack'),
+                    flatten: flatten,
+                    apiModule: this.subtableModule, 
+                    apiAction: this.subtableAction,
+                    subtableId: this.subtableId,
+                    metric: this.currentMetric,
+                    subReportTitle: this.subReportTitle
+                };
             
-                 * @type {Object}
-                 */
-                var params = {};
                 var subtableReport = Alloy.createController('report_subtable', params);
                 subtableReport.open();
             });

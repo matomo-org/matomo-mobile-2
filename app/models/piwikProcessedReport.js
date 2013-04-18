@@ -70,7 +70,6 @@ exports.definition = {
                     return metadata.idsubdatatable;
                 }
             }
-            // extended functions go here
 
         }); // end extend
         
@@ -86,6 +85,14 @@ exports.definition = {
             prettyDate: null,
             website: null,
             columns: null,
+
+            getModule: function () {
+                var metadata = this.getMetadata();
+
+                if (metadata && metadata.module) {
+                    return metadata.module;
+                }
+            },
 
             getMetadata: function () {
                 return (this.metadata || {});
@@ -247,8 +254,6 @@ exports.definition = {
 
                 return rows;
             }
-
-            // extended functions go here            
             
         }); // end extend
         

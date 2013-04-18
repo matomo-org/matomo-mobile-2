@@ -5,15 +5,17 @@ function L(key)
 
 var args = arguments[0] || {};
 
-var currentMetric   = null;
 // the currently selected report
-var reportModel     = args.report || false;
-var reportList      = args.reportList || {};
-var reportDate      = require('session').getReportDate();
-var flatten         = 0;
-var showAllEntries  = false;
+var reportAction   = args.apiAction || '';
+var reportModule   = args.apiModule || '';
+var subtableId     = args.subtableId || '';
+var flatten        = args.flatten || 0;
+var currentMetric  = args.metric;
+var reportDate     = require('session').getReportDate();
+var showAllEntries = false;
 
-$.index.title = reportModel.getReportName();
+$.index.title = args.reportTitle || '';
+$.index.backButtonTitle = args.backButtonTitle;
 
 // the fetched statistics that belongs to the currently selected report
 var processedReports = Alloy.createCollection('piwikProcessedReport');
@@ -26,55 +28,14 @@ if (OS_IOS) {
     $.pullToRefresh.init($.reportTable);
 }
 
-function registerEvents()
-{
-    var session = require('session');
-    session.on('websiteChanged', onWebsiteChanged);
-    session.on('reportDateChanged', onDateChanged);
-}
-
-function unregisterEvents()
-{
-    var session = require('session');
-    session.off('websiteChanged', onWebsiteChanged);
-    session.off('reportDateChanged', onDateChanged);
-}
-
 function onClose()
 {
-    unregisterEvents();
-
     $.destroy();
-}
-
-function onWebsiteChanged()
-{
-    doRefresh();
-}
-
-function onDateChanged(changedReportDate) 
-{
-    reportDate = changedReportDate;
-    doRefresh();
 }
 
 function onMetricChosen(chosenMetric)
 {
     currentMetric = chosenMetric;
-    doRefresh();
-}
-
-function onDateChosen (period, dateQuery)
-{
-    reportPeriod = period;
-    reportDate   = dateQuery;
-    doRefresh();
-}
-
-function onReportChosen (chosenReportModel) {
-    reportModel   = chosenReportModel;
-    currentMetric = null;
-
     doRefresh();
 }
 
@@ -116,10 +77,10 @@ function onStatisticsFetched(processedReportCollection)
     $.reportTable.setData([]);
 
     if ($.reportInfoCtrl) {
-        $.reportInfoCtrl.update(processedReportCollection.first());
+        $.reportInfoCtrl.update(processedReportCollection);
     }
 
-    $.reportGraphCtrl.update(processedReportCollection.first(), accountModel);
+    $.reportGraphCtrl.update(processedReportCollection, accountModel);
 
     var rows = [];
 
@@ -139,11 +100,35 @@ function onStatisticsFetched(processedReportCollection)
         if (!processedReport) {
             return;
         }
+
+        var hasSubtable = processedReportCollection.hasSubtable() && processedReport.getSubtableId();
+
         var reportRow = Alloy.createController('reportrow', processedReport);
         var row = Ti.UI.createTableViewRow({
             height: Ti.UI.SIZE, 
-            subtableId: processedReport.getSubtableId()
+            subtableId: processedReport.getSubtableId(),
+            subtableAction: processedReportCollection.getActionToLoadSubTables(),
+            subtableModule: processedReportCollection.getModule(),
+            currentReportName: processedReportCollection.getReportName(),
+            hasChild: hasSubtable
         });
+
+        if (hasSubtable) {
+            row.addEventListener('click', function () {
+
+                var params = {
+                    backButtonTitle: this.currentReportName || L('Mobile_NavigationBack'),
+                    flatten: flatten,
+                    apiModule: this.subtableModule, 
+                    apiAction: this.subtableAction,
+                    subtableId: this.subtableId
+                };
+            
+                var subtableReport = Alloy.createController('report_subtable', params);
+                subtableReport.open();
+            });
+        }
+
         row.add(reportRow.getView());
         rows.push(row);
         row = null;
@@ -169,19 +154,16 @@ function doRefresh()
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
-    var module = reportModel.get('module');
-    var action = reportModel.get('action');
-    var metric = reportModel.getSortOrder(currentMetric);
-
-    processedReports.fetchProcessedReports(metric, {
+    processedReports.fetchProcessedReports(currentMetric, {
         account: accountModel,
         params: {period: reportDate.getPeriodQueryString(), 
                  date: reportDate.getDateQueryString(), 
                  idSite: siteModel.id, 
+                 idSubtable: subtableId,
                  flat: flatten,
                  filter_limit: showAllEntries ? -1 : rowsFilterLimit,
-                 apiModule: module, 
-                 apiAction: action},
+                 apiModule: reportModule, 
+                 apiAction: reportAction},
         error: function () {
             processedReports.trigger('error', {type: 'loadingProcessedReport'});
         },
@@ -191,7 +173,7 @@ function doRefresh()
 
 exports.open = function () {
 
-    onReportChosen(reportModel);
+    doRefresh();
 
     require('layout').open($.index);
 };
