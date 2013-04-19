@@ -7,7 +7,7 @@ var rootWindow = null;
 function bootstrap (win) 
 {
     rootWindow = Ti.UI.createWindow();
-    navGroup = Ti.UI.MobileWeb.createNavigationGroup({window: win});
+    navGroup   = new NavigationGroup({window: win});
     rootWindow.add(navGroup);
     rootWindow.open();
 

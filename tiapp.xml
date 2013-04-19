@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <property name="acs-oauth-secret-production" type="string">0yrwAeaCuLdFjWSuYGiNgiClqIgZ2v4U</property>
-    <property name="acs-oauth-key-production" type="string">fKHneRwI28pQwpb48rB3l4QVetX7DDxY</property>
-    <property name="acs-api-key-production" type="string">piRNdg5jK7VUBfwQqORAkKvcEfYrhW4r</property>
-    <property name="acs-oauth-secret-development" type="string">P1EEmwM3sNuNgN5kgDoeILHyqCTeKVr7</property>
-    <property name="acs-oauth-key-development" type="string">VFiSrvlUP1ZRyvt4TtoUuVr9eWY5UDCV</property>
-    <property name="acs-api-key-development" type="string">1yrv8sWkHVrdN1m89JvrMwZvW10SCb7t</property>
     <deployment-targets>
+        <target device="tizen">false</target>
         <target device="mobileweb">true</target>
         <target device="iphone">true</target>
         <target device="ipad">true</target>
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.0.2.GA</sdk-version>
+    <sdk-version>3.1.0.v20130412191547</sdk-version>
     <id>com.alloy.test</id>
     <name>AlloyTest</name>
     <version>1.0</version>
@@ -31,6 +26,7 @@
     <analytics>false</analytics>
     <guid>024a65cf-84ce-4ace-bd18-cacf73bbbd91</guid>
     <property name="ti.ui.defaultunit">system</property>
+    <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
@@ -54,7 +50,7 @@
                 android:largeScreens="true" android:normalScreens="true"
                 android:smallScreens="true" xlargeScreens="true"/>
             <uses-sdk android:installLocation="preferExternal"
-                android:minSdkVersion="14" android:targetSdkVersion="14"/>
+                android:minSdkVersion="14" android:targetSdkVersion="16"/>
         </manifest>
     </android>
     <mobileweb>
@@ -66,8 +62,8 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="commonjs" version="2.3.0">ti.cloud</module>
         <module platform="android" version="1.0">ti.physicalSizeCategory</module>
+        <module platform="mobileweb" version="1.0">org.piwik.navigationgroup</module>
     </modules>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>

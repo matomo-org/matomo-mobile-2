@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0
+apiversion: 2
+description: My module
+author: Thomas Steur
+license: GPL v3 or later
+copyright: Piwik - Web Analytics
+
+
+# these should not be edited
+name: NavigationGroup
+moduleid: org.piwik.navigationgroup
+guid: f321c303-122e-44cf-b6d1-f7e2f62c5728
+platform: mobileweb
+minsdk: 3.1.0.GA

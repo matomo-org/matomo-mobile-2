@@ -1,0 +1,9 @@
+{
+    "description": "Custom NavigationGroup", 
+    "directories": {
+        "lib": "./src"
+    }, 
+    "main": "NavigationGroup", 
+    "name": "NavigationGroup", 
+    "version": "1.0"
+}
