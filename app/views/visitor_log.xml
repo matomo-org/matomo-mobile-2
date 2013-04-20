@@ -7,11 +7,11 @@
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         
-        <Require src="loading_indicator" id="loadingindicator"/>
+        <Require src="loading_indicator" id="loadingIndicator"/>
 
         <View id="content">
 
-            <TableView id="visitorLogTable">
+            <TableView id="visitorLogTable" onClick="openVisitor">
                 <HeaderPullView platform="ios">
                     <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>

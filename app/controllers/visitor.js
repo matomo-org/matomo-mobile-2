@@ -114,8 +114,8 @@ function createOverview (visitor, accessUrl)
         referrerRow.addEventListener('click', function () {
             if (visitor.referrerUrl) {
 
-                Piwik.getTracker().trackLink('/visitor/referrer-url', 'link');
-                Titanium.Platform.openURL(visitor.referrerUrl);
+                require('Piwik/Tracker').trackLink('/visitor/referrer-url', 'link');
+                Ti.Platform.openURL(visitor.referrerUrl);
             }
         });
 

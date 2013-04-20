@@ -44,6 +44,20 @@
     layout: "vertical"
 }
 
+"#noData": {
+    visible: false,
+    height: 0,
+}
+
+".no_data": {
+    top: 18,
+    bottom: 18,
+    left: 10,
+    height: Ti.UI.SIZE,
+    text: L('CoreHome_TableNoData'),
+    color: '#7e7e7e',
+}
+
 ".report_row": {
     left: 0,
     right: 0,

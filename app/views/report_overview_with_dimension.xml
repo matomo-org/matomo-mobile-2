@@ -11,6 +11,11 @@
             <Label class="description_metric" id="metric"/>
         </View>
         <View class="separator"/>
+        <Require src="loading_indicator" id="loadingIndicator"/>
+        <View id="noData">
+            <Label class="no_data"/>
+            <View class="separator"/>
+        </View>
         <View class="content" id="content" dataCollection="$.piwikProcessedReport">
             <View class="report_row">
                 <Label class="report_title" text="{title}"></Label>

@@ -5,8 +5,7 @@ function L(key)
 
 var args         = arguments[0] || {};
 var flatten      = args.flatten || 0;
-var reportPeriod = args.period || 'day';
-var reportDate   = args.date || 'today';
+var reportDate   = require('session').getReportDate();
 var $model       = args ? args["$model"] : null;
 $.metric.text    = $model.getMetricName();
 
@@ -14,6 +13,38 @@ function openReport()
 {
     var report = Alloy.createController('report_with_dimension', {report: $model});
     report.open();
+}
+
+function hideReportHasNoData()
+{
+    $.noData.hide();
+    $.noData.height = 0;
+}
+
+function showReportHasNoData()
+{
+    $.noData.height = Ti.UI.SIZE;
+    $.noData.show();
+}
+
+function hasReportRowsToDisplay()
+{
+    return ($.piwikProcessedReport && $.piwikProcessedReport.length);
+}
+
+function showReportContent()
+{
+    if (!hasReportRowsToDisplay()) {
+        showReportHasNoData();
+    }
+
+    $.loadingIndicator.hide();
+}
+
+function showLoadingMessage()
+{
+    hideReportHasNoData();
+    $.loadingIndicator.show();
 }
 
 function fetchProcessedReport()
@@ -25,11 +56,14 @@ function fetchProcessedReport()
     var action = $model.get('action');
     var metric = $model.getSortOrder();
 
+    showLoadingMessage();
+    $.piwikProcessedReport.on('reset', showReportContent);
+
     $.piwikProcessedReport.fetchProcessedReports(metric, {
         account: accountModel,
         params: {
-            period: reportPeriod, 
-            date: reportDate, 
+            period: reportDate.getPeriodQueryString(), 
+            date: reportDate.getDateQueryString(), 
             idSite: siteModel.id, 
             flat: flatten,
             filter_truncate: 3,

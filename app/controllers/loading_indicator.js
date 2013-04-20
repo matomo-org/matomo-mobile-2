@@ -1,13 +1,16 @@
+function L(key)
+{
+    return require('L')(key);
+}
+
 exports.hide = function()
 {
-    if (!OS_IOS) {
-        $.loading.hide();
-    }
+    $.loading.hide();
+    $.loading.height = 0;
 }
 
 exports.show = function()
 {
-    if (!OS_IOS) {
-        $.loading.show();
-    }
+    $.loading.height = Ti.UI.SIZE;
+    $.loading.show();
 }

@@ -4,7 +4,7 @@
 }
 
 ".container": {
-	backgroundColor: "white"
+    backgroundColor: "white"
 },
 
 "#content": {

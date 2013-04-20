@@ -42,7 +42,7 @@ exports.definition = {
 
             getPeriod: function () {
                 if ('range' == this.period) {
-                    return 'day';
+                    return 'month';
                 }
 
                 return this.period;
@@ -71,7 +71,6 @@ exports.definition = {
                 this.currentOffset = 0;
                 this.nextOffset    = 10;
 
-                this.reset();
                 this.fetch({
                     account: account,
                     params: {filter_limit: 10, 
@@ -87,7 +86,6 @@ exports.definition = {
                 this.currentOffset = this.nextOffset;
                 this.nextOffset    = this.currentOffset + filterLimit;
 
-                this.reset();
                 this.fetch({
                     account: account,
                     params: {filter_offset: this.currentOffset,
@@ -118,7 +116,6 @@ exports.definition = {
                               period: this.getPeriod(), 
                               date: this.parseDate()};
 
-                this.reset();
                 this.fetch({account: account, params: params});
             }
             

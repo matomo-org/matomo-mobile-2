@@ -3,7 +3,7 @@
     [
         {
             "path": ".",
-            "folder_exclude_patterns": ["build", "modules", "plugins"],
+            "folder_exclude_patterns": ["build", "plugins"],
             "binary_file_patterns": ["Resources/*"],
             "file_exclude_patterns": ["*.java"]
         }

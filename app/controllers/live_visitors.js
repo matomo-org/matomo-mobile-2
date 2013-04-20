@@ -83,8 +83,8 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
     _.forEach(visitorDetails, function (visitorDetail) {
         var params = {account: account, visitor: visitorDetail};
         var visitorOverview = Alloy.createController('visitor_overview', params);
-        var visitorRow = visitorOverview.getView()
-        visitorRow.visitor = visitorDetail;
+        var visitorRow      = visitorOverview.getView()
+        visitorRow.visitor  = visitorDetail;
         rows.push(visitorRow);
         visitorRow = null;
     });

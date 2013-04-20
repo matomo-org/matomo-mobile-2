@@ -27,6 +27,17 @@ function unregisterEvents()
     session.off('reportDateChanged', onDateChanged);
 }
 
+function openVisitor(event)
+{
+    if (!event || !event.row || !event.row.visitor) {
+        return;
+    }
+
+    var params  = {visitor: event.row.visitor};
+    var visitor = Alloy.createController('visitor', params);
+    visitor.open();
+}
+
 function onWebsiteChanged(website)
 {
     siteModel    = website;
@@ -48,11 +59,13 @@ function onClose()
 
 function fetchPrevious()
 {
+    showLoadingMessage();
     visitorLog.previous(accountModel, siteModel.id);
 }
 
 function fetchNext()
 {
+    showLoadingMessage();
     visitorLog.next(accountModel, siteModel.id);
 }
 
@@ -62,26 +75,34 @@ function render()
 
     var rows = [];
 
-    var row = Ti.UI.createTableViewRow({title: L('General_Next')});
+    var row = Ti.UI.createTableViewRow({title: L('General_Next'), color: '#336699'});
     row.addEventListener('click', fetchNext)
     rows.push(row);
 
-    visitorLog.forEach(function (visitorDetail) {
-        var params = {account: accountModel, visitor: visitorDetail.attributes};
-        var visitorOverview = Alloy.createController('visitor_overview', params);
-        rows.push(visitorOverview.getView());
-    });
+    if (visitorLog.length) {
+        visitorLog.forEach(function (visitorDetail) {
+            var params = {account: accountModel, visitor: visitorDetail.attributes};
+            var visitorOverview = Alloy.createController('visitor_overview', params);
+            var visitorRow      = visitorOverview.getView();
+            visitorRow.visitor  = visitorDetail.attributes;
+            rows.push(visitorRow);
+            visitorRow = null;
+        });
+    } else {
+        var row = Ti.UI.createTableViewRow({title: L('Mobile_NoVisitorFound')});
+        rows.push(row);
+    }
 
-    var row = Ti.UI.createTableViewRow({title: L('General_Previous')});
+    var row = Ti.UI.createTableViewRow({title: L('General_Previous'), color: '#336699'});
     row.addEventListener('click', fetchPrevious);
     rows.push(row);
 
     $.visitorLogTable.setData(rows);
 
-    if ($.visitorLogTable && $.visitorLogTable.scrollToTop) {
+    if (OS_IOS && $.visitorLogTable && $.visitorLogTable.scrollToTop) {
         $.visitorLogTable.scrollToTop();
     }
-    
+
     rows = null;
 }
 
@@ -91,7 +112,7 @@ function showReportContent()
         $.pullToRefresh.refreshDone();
     } 
 
-    $.loadingindicator.hide();
+    $.loadingIndicator.hide();
 }
 
 function showLoadingMessage()
@@ -100,7 +121,7 @@ function showLoadingMessage()
         $.pullToRefresh.refresh();
     } 
 
-    $.loadingindicator.show();
+    $.loadingIndicator.show();
 }
 
 function onFetchError()

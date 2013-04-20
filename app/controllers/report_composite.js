@@ -10,6 +10,8 @@ var reportDate        = require('session').getReportDate();
 
 function registerEvents()
 {
+    Alloy.Collections.piwikReports.on('reset', hideLoadingIndicator);
+
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
     session.on('reportDateChanged', onDateChanged);
@@ -17,6 +19,8 @@ function registerEvents()
 
 function unregisterEvents()
 {
+    Alloy.Collections.piwikReports.off('reset', hideLoadingIndicator);
+    
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
     session.off('reportDateChanged', onDateChanged);
@@ -27,6 +31,16 @@ function onClose()
     unregisterEvents();
 
     $.destroy();
+}
+
+function hideLoadingIndicator()
+{
+    $.loadingIndicator.hide();
+}
+
+function showLoadingIndicator()
+{
+    $.loadingIndicator.show();
 }
 
 function toggleReportChooserVisibility(event)
@@ -75,7 +89,7 @@ function filterReports(collection)
 
 function isDataAlreadyFetched()
 {
-    return reportsCollection.length;
+    return !!reportsCollection.length;
 }
 
 function open()
@@ -84,7 +98,12 @@ function open()
     require('layout').open($.index);
 
     if (isDataAlreadyFetched()) {
+        console.log('Fetched');
+        hideLoadingIndicator();
         renderListOfReports();
+    } else {
+        console.log('there');
+        showLoadingIndicator();
     }
 }
 

@@ -1,6 +1,6 @@
 
 exports.definition = {
-    
+    // TODO get filter limit from config
     config: {
         "columns": {
             "title":"string",
@@ -199,9 +199,14 @@ exports.definition = {
 
                         label  = report.label;
                         value  = report.value;
-                        
-                        if (report[this.sortOrderColumn]) {
+
+                        if (!_.isUndefined(report[this.sortOrderColumn])
+                            && !_.isNull(report[this.sortOrderColumn])) {
                             value = report[this.sortOrderColumn];
+                        }
+
+                        if (_.isUndefined(value) || _.isNull(value)) {
+                            value = '-';
                         }
 
                         if (metadata && metadata.shortLabel) {
@@ -212,6 +217,7 @@ exports.definition = {
                         row = report;
                         row.title = label;
                         row.value = value;
+
                         row.id       = index;
                         row.reportMetadata  = metadata
                         row.sortOrderColumn = this.sortOrderColumn;
@@ -232,6 +238,10 @@ exports.definition = {
                         
                         value = reportData[key];
 
+                        if (_.isUndefined(value) || _.isNull(value)) {
+                            value = '-';
+                        }
+                        
                         row = _.clone(reportData);
                         row.title = label;
                         row.value = value;

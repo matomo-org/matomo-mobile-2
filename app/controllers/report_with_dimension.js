@@ -20,8 +20,6 @@ var processedReports = Alloy.createCollection('piwikProcessedReport');
 
 var rowsFilterLimit = Alloy.CFG.piwik.filterLimit;
 
-var reportRowsCtrl = null;
-
 if (OS_IOS) {
     $.pullToRefresh.init($.reportTable);
 }
@@ -102,18 +100,33 @@ function showLoadingMessage()
     $.loadingindicator.show();
 }
 
-function onStatisticsFetched(processedReportCollection)
+function showReportHasNoData()
+{
+    var row = Ti.UI.createTableViewRow({
+        height: Ti.UI.SIZE, 
+        color: '#7e7e7e',
+        title: 'No data for this table'
+    });
+
+    $.reportTable.setData([row]);
+}
+
+function hasReportData(processedReportCollection) {
+    return (processedReportCollection && processedReportCollection.length);
+}
+
+function renderProcessedReport(processedReportCollection)
 {
     var accountModel = require('session').getAccount();
     
     showReportContent();
 
-    if (!processedReportCollection) {
-        console.error('msising report model');
+    $.reportTable.setData([]);
+
+    if (!hasReportData(processedReportCollection)) {
+        showReportHasNoData();
         return;
     }
-    
-    $.reportTable.setData([]);
 
     if ($.reportInfoCtrl) {
         $.reportInfoCtrl.update(processedReportCollection);
@@ -131,10 +144,6 @@ function onStatisticsFetched(processedReportCollection)
     row.add($.reportInfoCtrl.getView());
     rows.push(row);
 
-    if (reportRowsCtrl) {
-        reportRowsCtrl.destroy();
-    }
-    
     processedReportCollection.forEach(function (processedReport) {
         if (!processedReport) {
             return;
@@ -213,7 +222,7 @@ function doRefresh()
         error: function () {
             processedReports.trigger('error', {type: 'loadingProcessedReport'});
         },
-        success: onStatisticsFetched
+        success: renderProcessedReport
     });
 }
 
