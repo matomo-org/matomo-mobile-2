@@ -33,11 +33,12 @@ exports.open = function (win)
 };
 
 
-
 // we have to create this window before any other window, 
 // otherwise the menu will be always displayed on top of the root window.
 var leftSidebarWindow = Ti.UI.createWindow({left: 0, width: 250, visible: false});
 leftSidebarWindow.open();
+
+var leftSidebarOuterWindow;
 
 function hideLeftSidebar()
 {
@@ -50,6 +51,9 @@ function hideLeftSidebar()
 
     animation.addEventListener('complete', function () {
         leftSidebarWindow.hide();
+        leftSidebarOuterWindow.removeEventListener('click', hideLeftSidebar);
+        leftSidebarOuterWindow.close();
+        leftSidebarOuterWindow = null;
     });
 
     rootWindow.animate(animation);
@@ -57,6 +61,10 @@ function hideLeftSidebar()
 
 function showLeftSidebar()
 {
+    leftSidebarOuterWindow = Ti.UI.createWindow({left: 250, right: 0, backgroundColor: 'transparent'});
+    leftSidebarOuterWindow.addEventListener('click', hideLeftSidebar);
+    leftSidebarOuterWindow.open();
+
     leftSidebarWindow.show();
     rootWindow.animate({
         left: 250,
