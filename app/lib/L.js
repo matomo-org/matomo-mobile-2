@@ -6,11 +6,16 @@
  * @version $Id$
  */
 
-/** @private */
 var translation = require('Piwik/Locale/Translation');
+    
+function loadCurrentLanguage()
+{
+    translation.load();
+}
 
-// activate and initialize translations
-translation.load();
+Alloy.createCollection('AppSettings').settings().on('change:language', loadCurrentLanguage);
+
+loadCurrentLanguage();
 
 /**
  * Translation wrapper. Use this method if you want to translate any text within the application.

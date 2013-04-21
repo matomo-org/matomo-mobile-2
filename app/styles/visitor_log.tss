@@ -3,6 +3,10 @@
     backButtonTitle: L('Mobile_NavigationBack')
 }
 
+"#loadingIndicator": {
+    rounded: true
+}
+
 ".container": {
     backgroundColor: "white"
 }

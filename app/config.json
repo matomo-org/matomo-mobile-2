@@ -24,7 +24,7 @@
             "trackingEnabled": false,
             "preferEvolutionGraphs": false,
             "graphsEnabled": true,
-            "httpTimeout": 6e4
+            "httpTimeout": 60000
         }
     },
     "env:development": {},

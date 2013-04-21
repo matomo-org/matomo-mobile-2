@@ -6,22 +6,7 @@ function L(key)
 var args = arguments[0] || {};
 var hideCloseButton = args.hideCloseButton || false;
 var accounts = Alloy.Collections.appAccounts;
-
-renderListOfAccounts();
-
-function renderListOfAccounts()
-{
-    var rows = [];
-    accounts.forEach(function(account) {
-        rows.push(Ti.UI.createTableViewRow({
-            title : account.get("name"),
-            accountId : account.id
-        }));
-    });
-
-    $.accounts.setData(rows);
-    rows = null;
-}
+accounts.fetch();
 
 function doSelectAccount(event)
 {
@@ -69,7 +54,6 @@ function doSelectAction(event)
         }
 
         doDeleteAccount(event);
-        renderListOfAccounts();
     });
 
     dialog.show();
@@ -86,7 +70,6 @@ function doAddAccount()
 
 function onCreatedAccount() {
     accounts.off("add", onCreatedAccount);
-    renderListOfAccounts();
     newAccountController.close();
 }
 

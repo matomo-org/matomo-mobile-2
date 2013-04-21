@@ -2,6 +2,10 @@
     backgroundColor: "#e5e5e5"
 }
 
+"#loadingIndicator": {
+    rounded: true
+}
+
 "#content": {
     backgroundColor: "#e5e5e5",
     left: 10,

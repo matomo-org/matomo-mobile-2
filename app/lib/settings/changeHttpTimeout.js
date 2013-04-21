@@ -17,10 +17,19 @@ function trackTimeoutChange(timeoutValue)
 
 }
 
-function changeTimeoutSetting(timeoutValue)
+function changeTimeoutSetting(timeoutValueInMs)
 {
     var settings = Alloy.createCollection('AppSettings').settings();
-    settings.setHttpTimeout(timeoutValue);
+    settings.setHttpTimeout(timeoutValueInMs);
+    settings.save();
+}
+
+function getCurrentHttpTimeoutName()
+{
+    var settings = Alloy.createCollection('AppSettings').settings();
+    var timeout  = parseInt(settings.httpTimeout(), 10);
+
+    return parseInt(timeout / 1000, 10) + 's';
 }
 
 function getSelectedTimeoutInMs(index)
@@ -44,6 +53,8 @@ function onTimeoutSelected(event)
     trackTimeoutChange(timeoutValue);
     changeTimeoutSetting(timeoutValue);
 }
+
+exports.getCurrentHttpTimeoutName = getCurrentHttpTimeoutName;
 
 exports.open = function () 
 {

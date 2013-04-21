@@ -88,6 +88,7 @@ function changeLanguageSetting(selectedLangCode)
 {
     var settings = Alloy.createCollection('AppSettings').settings();
     settings.setLanguageCode(selectedLangCode);
+    settings.save();
 }
 
 function pressedCancel(event)
@@ -117,6 +118,7 @@ function onLanguageSelected (event)
     }
 }
 
+exports.getCurrentLanguageName = currentLanguageName;
 exports.open = function (appSettings) {
 
     var languageNames = availableLanguageNamesSortedByAlphabet();

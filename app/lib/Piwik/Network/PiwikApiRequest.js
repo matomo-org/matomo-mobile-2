@@ -174,8 +174,8 @@ PiwikApiRequest.prototype._mixinParameter = function (parameter) {
         parameter.method     = this.method;
     }
 
-    var settings = Piwik.require('App/Settings');
-    var language = settings.getLanguage();
+    var settings = Alloy.createCollection('AppSettings').settings();
+    var language = settings.languageCode();
     settings     = null;
     
     if (language) {

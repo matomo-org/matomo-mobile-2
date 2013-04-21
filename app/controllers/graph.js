@@ -135,7 +135,22 @@ function animateFadeOutDetailIcon()
     $.showDetailIcon.animate({opacity: 0, delay: 600, duration: 600}, fadeOutDetailIcon);
 }
 
-exports.update = function (processedReportCollection, accountModel) {
+function areGraphsEnabled()
+{
+    var settings = Alloy.createCollection('AppSettings').settings();
+
+    return settings.areGraphsEnabled();
+}
+
+exports.update = function (processedReportCollection, accountModel) 
+{
+    if (!areGraphsEnabled()) {
+        $.index.height = 0;
+        $.index.hide();
+        $.destroy();
+        // TODO remove from parent?
+        return;
+    }
 
     imageGraphUrl = processedReportCollection.getImageGraphUrl();
     reportName    = processedReportCollection.getReportName();

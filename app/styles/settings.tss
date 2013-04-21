@@ -3,15 +3,21 @@
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
+"ListItem": {
+    selectionStyle: Ti.UI.iPhone.ListViewCellSelectionStyle.NONE
+}
+
 "#settingsTable": {
-    footerTitle: L('Piwik Mobile will automatically use your Piwik user settings "Report to load by default" and "Report date to load by default"')
+    footerTitle: L('Piwik Mobile uses your Piwik user settings "Report to load by default" and "Report date to load by default"')
 },
 
 "#settingsTable[platform=ios]": {
-    style: Ti.UI.iPhone.TableViewStyle.GROUPED
+    style: Ti.UI.iPhone.ListViewStyle.GROUPED
 },
 
 "#language": {
+    accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE, 
+    template: Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS,
     hasChild: true,
     title: L('General_Language')
 },
@@ -27,6 +33,8 @@
 },
 
 "#timeout": {
+    accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE, 
+    template: Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS,
     hasChild: true,
     title: L('Mobile_HttpTimeout')
 },
@@ -48,8 +56,4 @@
 
 "#advanced": {
     headerTitle: L('Mobile_Advanced')
-},
-
-"#help": {
-     headerTitle: L('General_Help')
 }

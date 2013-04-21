@@ -1,60 +1,57 @@
-var settings = Alloy.createCollection('AppSettings').settings();
-settings.on('change:language change:httpTimeout', doRefresh);
-
 function L(key)
 {
     return require('L')(key);
 }
 
+var callbacks = {changeLanguage: changeLanguage,
+                 toggleTrackingEnabled: toggleTrackingEnabled,
+                 toggleGraphsEnabled: toggleGraphsEnabled,
+                 changeHttpTimeout: changeHttpTimeout}
+
 function onClose()
 {
+    if (supportsListView()) {
+        var settings = Alloy.createCollection('AppSettings').settings();
+        settings.off('change', updateAllDisplayedSettingsValues);
+    }
+
     $.destroy();
 }
 
-function doChangeLanguage()
+function onItemClick(event)
 {
-    var language = require('settings/changeLanguage');
-    language.open();
+    var section = $.settingsTable.sections[event.sectionIndex];
+    var item    = section.getItemAt(event.itemIndex);
+
+    var callback = item.properties.callback;
+    if (callback && callbacks[callback]) {
+        callbacks[callback]();
+    }
+}
+
+function supportsListView()
+{
+    return (OS_IOS || OS_ANDROID);
+}
+
+function changeLanguage()
+{
+    require('settings/changeLanguage').open();
 }
 
 function toggleTrackingEnabled()
 {
-    var enabled  = !$.tracking.getHasCheck();
-
-    $.tracking.setHasCheck(enabled);
-    settings.setTrackingEnabled(enabled);
-
-    var action  = enabled ? 'enable' : 'disable';
-    var tracker = require('Piwik/Tracker');
-    tracker.trackEvent({title: 'Anonymous Tracking ' + action,
-                        url: '/settings/anonymous-tracking/' + action});
-
-    var alertDialog = Ti.UI.createAlertDialog({
-        message: L('Mobile_AskForAnonymousTrackingPermission'),
-        buttonNames: [L('General_Ok')]
-    });
-    
-    alertDialog.show();
-    alertDialog = null;
+    require('settings/trackingEnabled').toggle();
 }
 
 function toggleGraphsEnabled()
 {
-    var enabled  = !$.graphs.getHasCheck();
-
-    $.graphs.setHasCheck(enabled);
-    settings.setGraphsEnabled(enabled);
-
-    var action  = enabled ? 'enable' : 'disable';
-    var tracker = require('Piwik/Tracker');
-    tracker.trackEvent({title: 'Graphs ' + action,
-                        url: '/settings/graphs/' + action});
+    require('settings/graphsEnabled').toggle();
 }
 
-function doChangeHttpTimeout()
+function changeHttpTimeout()
 {
-    var httpTimeout = require('settings/changeHttpTimeout');
-    httpTimeout.open();
+    require('settings/changeHttpTimeout').open();
 }
 
 function toggleReportChooserVisibility(event)
@@ -64,20 +61,78 @@ function toggleReportChooserVisibility(event)
 
 function close() 
 {
+    callbacks = null;
+    
     require('layout').close($.index);
 }
 
-function doRefresh () {
+function updateDisplayedLanguageValue()
+{
+    var languageName = require('settings/changeLanguage').getCurrentLanguageName();
+    setSubtitle($.basic, 0, languageName);
+}
 
-    var settings = Alloy.createController('settings');
-    settings.open();
+function updateDisplayedHttpTimeoutValue()
+{
+    var httpTimeout = require('settings/changeHttpTimeout').getCurrentHttpTimeoutName();
+    setSubtitle($.advanced, 0, httpTimeout);
+}
 
-    close();
+function updateDisplayedTrackingValue()
+{
+    var settings = Alloy.createCollection('AppSettings').settings();
+
+    setHasCheck($.tracking, 1, settings.isTrackingEnabled());
+}
+
+function updateDisplayedGraphsValue()
+{
+    var settings = Alloy.createCollection('AppSettings').settings();
+
+    setHasCheck($.graphs, 2, settings.areGraphsEnabled());
+}
+
+function setSubtitle(section, itemIndex, subtitle)
+{
+    var item = section.getItemAt(itemIndex);
+    item.properties.subtitle = subtitle;
+    section.updateItemAt(itemIndex, item, {animated: true});
+}
+
+function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled) 
+{
+    if (!supportsListView()) {
+        return uiRowIfTableView.setHasCheck(enabled);
+    }
+
+    var item = $.basic.getItemAt(indexOfItemIfListView);
+
+    if (enabled) {
+        item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
+    }  else {
+        item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
+    }
+    
+    $.basic.updateItemAt(indexOfItemIfListView, item, {animated: true});
+}
+
+function updateAllDisplayedSettingsValues()
+{
+    updateDisplayedLanguageValue();
+    updateDisplayedHttpTimeoutValue();
+    updateDisplayedTrackingValue();
+    updateDisplayedGraphsValue();
 }
 
 exports.close = close;
 
 exports.open = function() 
 {
+    if (supportsListView()) {
+        var settings = Alloy.createCollection('AppSettings').settings();
+        settings.on('change', updateAllDisplayedSettingsValues);
+        updateAllDisplayedSettingsValues();
+    }
+
     require('layout').open($.index);
 };

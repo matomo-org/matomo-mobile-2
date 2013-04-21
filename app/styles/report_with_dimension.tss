@@ -10,6 +10,10 @@
     separatorStyle: Ti.UI.MobileWeb.TableViewSeparatorStyle.NONE
 },
 
+"#loadingindicator": {
+    rounded: true
+}
+
 "#index": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,

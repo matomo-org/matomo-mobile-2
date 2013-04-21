@@ -247,10 +247,10 @@ HttpRequest.prototype.handle = function () {
         that = null; 
     };
 
-    var settings     = Piwik.require('App/Settings');
+    var settings = Alloy.createCollection('AppSettings').settings();
     
     // override the iPhone default timeout
-    var timeoutValue = parseInt(settings.getHttpTimeout(), 10);
+    var timeoutValue = parseInt(settings.httpTimeout(), 10);
     this.xhr.setTimeout(timeoutValue);
 
     this.xhr.open("GET", requestUrl);

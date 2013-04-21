@@ -174,6 +174,8 @@ exports.open = function()
 {
     require('layout').setLeftSidebar($.reportsTable);
 
+    Alloy.createCollection('AppSettings').settings().on('change:language', refresh);
+
     openEntryReport();
 
     refresh();

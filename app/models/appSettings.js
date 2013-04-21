@@ -85,6 +85,8 @@ exports.definition = {
                     return modelSingleton;
                 }
 
+                this.fetch();
+
                 if (this.first()) {
                     modelSingleton = this.first();
                 } else {

@@ -1,17 +1,16 @@
-".container": {
-    backgroundColor: "#F5F5F5"
-},
-
 "#index": {
     title: L('Mobile_Accounts')
 },
 
 "#accounts": {
     headerTitle: 'Your accounts',
-    top: 10,
-    height: Ti.UI.FILL,
-    editable: true
+    editable: true,
 },
+
+"#accounts[platform=ios]": {
+    style: Ti.UI.iPhone.TableViewStyle.GROUPED,
+    footerTitle: L('Mobile_HowtoDeleteAnAccountOniOS')
+}
 
 "#addAccountButton[platform=mobileweb]": {
     image: 'ic_action_add_account.png',
@@ -23,45 +22,10 @@
     systemButton: Titanium.UI.iPhone.SystemButton.ADD
 },
 
-"#accounts[platform=ios]": {
-    footerTitle: L('Mobile_HowtoDeleteAnAccountOniOS')
-},
-
 "#menuItemAddAccount[platform=android]": {
     icon: '/ic_action_add_account.png',
     showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
     title: L('Mobile_AddAccount')
-},
-
-"#accounts[platform=android]": {
-    top: '10dp'
-},
-
-"#actions": {
-    height: 40,
-    bottom: 40
-},
-
-"#actions[platform=android]": {
-    height: '40dp',
-    bottom: '40dp'
-},
-
-".accountsContainer": {
-    width: Ti.UI.FILL,
-    left: 10,
-    right: 10,
-    backgroundColor:'transparent',
-    rowBackgroundColor:'#eee'
-},
-
-".accountsContainer[platform=android]": {
-    left: '10dp',
-    right: '10dp'
-},
-
-".accountsContainer[platform=ios]": {
-    style: Titanium.UI.iPhone.TableViewStyle.GROUPED
 },
 
 ".addAccountButton": {
@@ -70,19 +34,4 @@
 
 ".addAccountButton[platform=ios]": {
     style:Ti.UI.iPhone.SystemButton.CONTACT_ADD
-},
-
-".accountRow": {
-    hasChild: true,
-    height: 30,
-    textAlign: "left"
-},
-
-".accountRow[platform=android]": {
-    height: '30dp'
-},
-
-".addAccountRow": {
-    textAlign: "center",
-    height: 40
 }

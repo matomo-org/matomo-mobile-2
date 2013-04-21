@@ -136,9 +136,12 @@ function renderProcessedReport(processedReportCollection)
 
     var rows = [];
 
-    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-    row.add($.reportGraphCtrl.getView());
-    rows.push(row);
+    var settings = Alloy.createCollection('AppSettings').settings();
+    if (settings.areGraphsEnabled()) {
+        var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
+        row.add($.reportGraphCtrl.getView());
+        rows.push(row);
+    }
 
     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
     row.add($.reportInfoCtrl.getView());

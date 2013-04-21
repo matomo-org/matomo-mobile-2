@@ -4,6 +4,10 @@
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
+"#loadingindicator": {
+    rounded: true
+}
+
 ".container": {
     top: 0,
     height: Ti.UI.SIZE,

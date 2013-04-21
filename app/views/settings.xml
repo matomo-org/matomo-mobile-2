@@ -6,13 +6,24 @@
         <LeftNavButton platform="ios" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
+
+        <ListView id="settingsTable" platform="ios,android" onItemclick="onItemClick">
+            <ListSection id="basic">
+                <ListItem id="language" callback="changeLanguage"/>
+                <ListItem id="tracking" callback="toggleTrackingEnabled"/>
+                <ListItem id="graphs" callback="toggleGraphsEnabled"/>
+            </ListSection>
+            <ListSection id="advanced">
+                <ListItem id="timeout" callback="changeHttpTimeout"/>
+            </ListSection>
+        </ListView>
         
-        <TableView id="settingsTable">
-            <TableViewRow id="language" onClick="doChangeLanguage"/>
+        <TableView id="settingsTable" platform="mobileweb">
+            <TableViewRow id="language" onClick="changeLanguage"/>
             <TableViewRow id="tracking" onClick="toggleTrackingEnabled"/>
             <TableViewRow id="graphs" onClick="toggleGraphsEnabled"/>
             <TableViewSection id="advanced"/>
-            <TableViewRow id="timeout" onClick="doChangeHttpTimeout"/>
+            <TableViewRow id="timeout" onClick="changeHttpTimeout"/>
         </TableView>
     </Window>
 </Alloy>
