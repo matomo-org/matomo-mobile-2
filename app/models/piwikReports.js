@@ -1,34 +1,34 @@
 var Alloy = require('alloy');
 
 exports.definition = {
-	
-	config: {
-		"columns": {
-			"category":"string",
+    
+    config: {
+        "columns": {
+            "category":"string",
             "name":"string",
             "module":"string",
             "action":"string",
             "dimension":"string",
             "metrics":"string",
             "metricsDocumentation":"string",
-			"uniqueId":"string"
-		},
-		"adapter": {
-			"type": "piwikapi",
-			"collection_name": "piwikreports"
-		},
-		"settings": {
-		    "method": "API.getReportMetadata",
-		    "cache": true
-		},
-		"defaultParams": {
-		    showSubtableReports: 0,
-		    hideMetricsDoc: 1, 
-		}
-	},		
+            "uniqueId":"string"
+        },
+        "adapter": {
+            "type": "piwikapi",
+            "collection_name": "piwikreports"
+        },
+        "settings": {
+            "method": "API.getReportMetadata",
+            "cache": true
+        },
+        "defaultParams": {
+            showSubtableReports: 0,
+            hideMetricsDoc: 1, 
+        }
+    },        
 
-	extendModel: function(Model) {		
-		_.extend(Model.prototype, {
+    extendModel: function(Model) {        
+        _.extend(Model.prototype, {
 
             getMetricName: function () {
                 var metrics = this.getMetrics();
@@ -47,79 +47,79 @@ exports.definition = {
                 return this.get('metrics');
             },
 
-			getSortOrder: function (metric) {
+            getSortOrder: function (metric) {
 
-				if (metric) {
-					return metric;
-				}
+                if (metric) {
+                    return metric;
+                }
 
-				var _ = require("alloy/underscore");
-			    var preferredRows = Alloy.CFG.piwik.preferredMetrics;
-			    var sortOrder     = _.first(preferredRows);
-			    
-			    var metrics = this.get('metrics');
-			    if (metrics) {
+                var _ = require("alloy/underscore");
+                var preferredRows = Alloy.CFG.piwik.preferredMetrics;
+                var sortOrder     = _.first(preferredRows);
+                
+                var metrics = this.get('metrics');
+                if (metrics) {
 
-			        sortOrder = _.find(preferredRows, function (preferredRow) {
-			            return !!(metrics[preferredRow]);
-			        });
+                    sortOrder = _.find(preferredRows, function (preferredRow) {
+                        return !!(metrics[preferredRow]);
+                    });
 
-			        if (!sortOrder) {
-				        for (var metricName in metrics) {
-				            sortOrder = metricName;
-				        }
-			        }
-			    }
-			    
-			    return sortOrder;
-			}
-			// extended functions go here
+                    if (!sortOrder) {
+                        for (var metricName in metrics) {
+                            sortOrder = metricName;
+                        }
+                    }
+                }
+                
+                return sortOrder;
+            }
+            // extended functions go here
 
-		}); // end extend
-		
-		return Model;
-	},
-	
-	
-	extendCollection: function(Collection) {		
-		_.extend(Collection.prototype, {
+        }); // end extend
+        
+        return Model;
+    },
+    
+    
+    extendCollection: function(Collection) {        
+        _.extend(Collection.prototype, {
 
-			fetchAllReports: function (accountModel, siteModel) {
-				this.fetch({
-					reset: true,
-				    account: accountModel,
-				    params: {idSites: siteModel.id}
-				});
-			},
+            fetchAllReports: function (accountModel, siteModel) {
+                this.fetch({
+                    reset: true,
+                    account: accountModel,
+                    params: {idSites: siteModel.id}
+                });
+            },
 
-			getEntryReport: function (response) {
+            getEntryReport: function (response) {
 
-				var visitsSummaryReport = this.find(function (model) {
-					return model.get('module') == 'VisitsSummary' && model.get('action') == 'get';
-				});
+                var visitsSummaryReport = this.find(function (model) {
+                    return model.get('module') == 'VisitsSummary' && model.get('action') == 'get';
+                });
 
-				if (visitsSummaryReport) {
-					return visitsSummaryReport;
-				}
+                if (visitsSummaryReport) {
+                    return visitsSummaryReport;
+                }
 
-				// TODO search for other reports
-		        return this.at(0);
-		    },
+                // TODO search for other reports
+                return this.at(0);
+            },
 
-		    containsAction: function (searchReport) {
-		    	var searchAction = searchReport.get('action');
-		    	var searchModule = searchReport.get('module');
+            containsAction: function (searchReport) {
+                var searchAction = searchReport.get('action');
+                var searchModule = searchReport.get('module');
 
-		    	var reports = this.where({action: searchAction, module: searchModule});
-		    	return !!reports.length;
-		    }
+                var reports = this.where({action: searchAction, module: searchModule});
+                return !!reports.length;
+            }
 
-			// extended functions go here			
-			
-		}); // end extend
-		
-		return Collection;
-	}
-		
+            // extended functions go here            
+            
+        }); // end extend
+        
+        return Collection;
+    }
+        
 }
 
