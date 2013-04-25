@@ -1,5 +1,61 @@
 var Alloy = require('alloy');
 
+function getDashboards()
+{
+    return [
+      {
+        "name": "Dashboard",
+        "widgets": [
+          {
+            "module": "VisitsSummary",
+            "action": "getEvolutionGraph"
+          },
+          {
+            "module": "Live",
+            "action": "widget"
+          },
+          {
+            "module": "VisitorInterest",
+            "action": "getNumberOfVisitsPerVisitDuration"
+          },
+          {
+            "module": "CoreHome",
+            "action": "getPromoVideo"
+          },
+          {
+            "module": "Referers",
+            "action": "getKeywords"
+          },
+          {
+            "module": "Referers",
+            "action": "getWebsites"
+          },
+          {
+            "module": "UserCountryMap",
+            "action": "visitorMap"
+          },
+          {
+            "module": "UserSettings",
+            "action": "getBrowser"
+          },
+          {
+            "module": "Referers",
+            "action": "getSearchEngines"
+          },
+          {
+            "module": "VisitTime",
+            "action": "getVisitInformationPerServerTime"
+          },
+          {
+            "module": "ExampleRssWidget",
+            "action": "rssPiwik"
+          }
+        ]
+      }
+    ];
+}
+
+
 exports.definition = {
     
     config: {
@@ -23,7 +79,7 @@ exports.definition = {
         },
         "defaultParams": {
             showSubtableReports: 0,
-            hideMetricsDoc: 1, 
+            hideMetricsDoc: 1
         }
     },        
 
@@ -81,8 +137,66 @@ exports.definition = {
     },
     
     
-    extendCollection: function(Collection) {        
+    extendCollection: function(Collection) {
+
+        var findReportByWidgetInPreformattedReports = function (widget) {
+            if (!widget) {
+                return;
+            }
+
+            var module = widget.module;
+            var action = widget.action;
+
+            if (this.preformattedReports && 
+                this.preformattedReports[module] && 
+                this.preformattedReports[module][action]) {
+
+                var report = this.preformattedReports[module][action];
+
+                return _.clone(report);
+            }
+        };
+
+        var resolveDashboardToReports = function (dashboard) {
+            if (!dashboard) {
+                return [];
+            }
+            
+            var dashboardName = dashboard.name;
+            var widgets       = dashboard.widgets;
+
+            var reports = _.map(widgets, findReportByWidgetInPreformattedReports, this);
+            reports     = _.compact(reports); 
+
+            _.each(reports, function (report) {
+                report.category    = dashboardName;
+                report.isDashboard = true;
+            });
+
+            return reports;
+        };
+
+        var preformatReportsForFasterSearch = function (reports) {
+            var formatted = {};
+
+            for (var index = 0; index < reports.length; index++) {
+                var report = reports[index];
+                var module = report.module;
+                var action = report.action;
+
+                if (!formatted[module]) {
+                    formatted[module] = {};
+                }
+
+                formatted[module][action] = report;
+            }
+
+            return formatted;
+        };
+
         _.extend(Collection.prototype, {
+
+            preformattedReports: null,
 
             fetchAllReports: function (accountModel, siteModel) {
                 this.fetch({
@@ -92,17 +206,35 @@ exports.definition = {
                 });
             },
 
+            hasDashboardReport: function () {
+                return this.at(0).get('isDashboard');
+            },
+
+            getFirstReportThatIsNotMultiSites: function () {
+                var index = 0;
+                while (this.at(index)) {
+                    var module = this.at(index).get('module');
+
+                    if ('MultiSites' != module) {
+                        return this.at(index);
+                    }
+
+                    index++;
+                }
+            },
+
             getEntryReport: function (response) {
 
-                var visitsSummaryReport = this.find(function (model) {
-                    return model.get('module') == 'VisitsSummary' && model.get('action') == 'get';
-                });
-
-                if (visitsSummaryReport) {
-                    return visitsSummaryReport;
+                if (this.hasDashboardReport()) {
+                    return this.at(0);
                 }
 
-                // TODO search for other reports
+                var preferredReport = this.getFirstReportThatIsNotMultiSites();
+
+                if (preferredReport) {
+                    return preferredReport;
+                }
+
                 return this.at(0);
             },
 
@@ -112,6 +244,27 @@ exports.definition = {
 
                 var reports = this.where({action: searchAction, module: searchModule});
                 return !!reports.length;
+            },
+
+            parse: function (response) {
+                //var dashboards = response[0];
+                //var reports    = response[1];
+                var dashboards = getDashboards();
+                var reports    = response;
+
+                // TODO optimize algorithm from mapping of dashboards to reports
+                this.preformattedReports = preformatReportsForFasterSearch(reports);
+
+                var reportsToAdd = _.map(dashboards, resolveDashboardToReports, this);
+                reportsToAdd     = _.flatten(reportsToAdd);
+
+                while (reportsToAdd.length) {
+                    reports.unshift(reportsToAdd.pop());
+                }
+
+                this.preformattedReports = null;
+
+                return reports;
             }
 
             // extended functions go here            
@@ -121,5 +274,4 @@ exports.definition = {
         return Collection;
     }
         
-}
-
+};

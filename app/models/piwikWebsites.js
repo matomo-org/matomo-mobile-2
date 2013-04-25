@@ -58,7 +58,6 @@ exports.definition = {
 
             validResponse: function (response) {
 
-                console.log('the response', response);
                 if (!response || !response[0]) {
                     return false;
                 }

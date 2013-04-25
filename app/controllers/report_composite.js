@@ -77,9 +77,14 @@ function onDateChanged()
 
 function filterReports(collection)
 {
-    if (!reportCategory && collection.at(2)) {
-        // TODO remove hardcoded value 2
-        reportCategory = collection.at(2).get('category');
+    if (!reportCategory) {
+        var entryReport = collection.getEntryReport();
+
+        if (!entryReport) {
+            return collection;
+        }
+        
+        reportCategory  = entryReport.get('category');
     }
 
     $.index.title = reportCategory;
