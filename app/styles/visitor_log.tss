@@ -7,10 +7,6 @@
     rounded: true
 }
 
-".container": {
-    backgroundColor: "white"
-}
-
 "#content": {
     layout: "vertical"
 }

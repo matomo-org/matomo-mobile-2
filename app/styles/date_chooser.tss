@@ -123,10 +123,6 @@
     right: '16dp',
 }
 
-"#cancelButton": {
-    title: L('SitesManager_Cancel_js')
-}
-
 "#updateButton": {
     title: L('CoreUpdater_UpdateTitle')
 }

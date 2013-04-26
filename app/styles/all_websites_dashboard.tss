@@ -1,7 +1,3 @@
-"#windowButtonBar": {
-    backgroundColor: "#CD1628"
-},
-
 "#menuItemAccount[platform=android]": {
     icon: '/ic_action_accounts.png',
     title: L('Mobile_Accounts'),
@@ -84,30 +80,11 @@
     zIndex: 3
 },
 
-".menu": {
-    layout: "vertical",
-    height: Ti.UI.SIZE
-},
-
-".menuSeparatorShadow": {
-    height: 8,
-    backgroundImage: 'separator.png'
-},
-
-".menuSeparatorShadow[platform=android]": {
-    height: '8dp',
-    backgroundImage: '/separator.png'
-},
-
 "TableViewRow[platform=ios]": {
     height: Ti.UI.SIZE
 },
 "TableViewRow[platform=android]": {
     height: Ti.UI.SIZE
-},
-
-".reportRowSeparator": {
-     layout: "vertical"
 },
 
 ".space": {

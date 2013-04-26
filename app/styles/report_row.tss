@@ -55,13 +55,3 @@
 ".separator[platform=android]": {
     height: '1dp'
 },
-
-".menuSeparatorShadow2": {
-    height: 4,
-    backgroundImage: 'separator2.png'
-},
-
-".menuSeparatorShadow2[platform=android]": {
-    height: '4dp',
-    backgroundImage: '/separator2.png'
-},

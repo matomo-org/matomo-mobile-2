@@ -27,11 +27,3 @@
     showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
     title: L('Mobile_AddAccount')
 },
-
-".addAccountButton": {
-    right: 10
-},
-
-".addAccountButton[platform=ios]": {
-    style:Ti.UI.iPhone.SystemButton.CONTACT_ADD
-}

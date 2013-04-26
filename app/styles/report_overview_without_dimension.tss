@@ -40,37 +40,6 @@
     layout: "vertical"
 }
 
-".report_row": {
-    left: 0,
-    right: 0,
-}
-
-".report_title": {
-    height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
-    color: '#7e7e7e',
-    font: {fontWeight: 'bold'},
-    top: 16,
-    bottom: 10,
-    left: 10,
-    bottom: 16,
-    right: 95,
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-}
-
-".report_value": {
-    height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
-    color: '#191919',
-    font: {fontWeight: 'bold'},
-    top: 16,
-    bottom: 10,
-    right: 10,
-    bottom: 16,
-    width: 75,
-    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
-}
-
 ".more": {
     left: 10,
     width: Ti.UI.SIZE,

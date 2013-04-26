@@ -39,21 +39,6 @@
     title: L('Mobile_HttpTimeout')
 },
 
-"#about": {
-    hasDetail: true,
-    title: L('Mobile_AboutPiwikMobile')
-},
-
-"#feedback": {
-    hasDetail: true,
-    title: L('General_GiveUsYourFeedback')
-},
-
-"#faq": {
-    hasDetail: true,
-    title: L('General_Faq')
-},
-
 "#advanced": {
     headerTitle: L('Mobile_Advanced')
 }
