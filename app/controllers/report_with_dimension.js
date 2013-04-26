@@ -155,6 +155,7 @@ function renderProcessedReport(processedReportCollection)
         var hasSubtable = processedReportCollection.hasSubtable() && processedReport.getSubtableId();
 
         var reportRow = Alloy.createController('report_row', processedReport);
+
         var row = Ti.UI.createTableViewRow({
             height: Ti.UI.SIZE, 
             subtableId: processedReport.getSubtableId(),
@@ -163,8 +164,14 @@ function renderProcessedReport(processedReportCollection)
             currentReportName: processedReportCollection.getReportName(),
             currentMetric: processedReportCollection.getSortOrder(),
             hasChild: hasSubtable,
-            reportTitle: processedReport.getTitle()
+            reportTitle: processedReport.getTitle(),
         });
+
+        if (OS_IOS && !hasSubtable) {
+            row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+        } else if (OS_IOS) {
+            row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+        }
 
         if (hasSubtable) {
             row.addEventListener('click', function () {

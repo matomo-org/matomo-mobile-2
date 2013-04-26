@@ -71,7 +71,7 @@ exports.execute = function ()
     emailDialog.setToRecipients(['mobile@piwik.org']);
 
     if (emailDialog.setBarColor) {
-        emailDialog.setBarColor('#B2AEA5');
+        emailDialog.setBarColor('#CD1628');
     }
 
     if (!emailDialog.isSupported()) {

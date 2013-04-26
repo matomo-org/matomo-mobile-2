@@ -1,5 +1,8 @@
 var args = arguments[0] || {};
 
+var errorImage = 'image_load_error.png';
+var supportsWidthDetectionOfImage = (OS_ANDROID || OS_IOS);
+
 function loadImageViaXhr(imageView, urlToLoad)
 {
     // timeout?
@@ -7,11 +10,14 @@ function loadImageViaXhr(imageView, urlToLoad)
                                                    enableKeepAlive: false});
 
     imageLoader.open('GET', urlToLoad);
+
     imageLoader.onload = function () {
 
-        if (imageView && this.responseData) {
+        if (imageView && this.responseData && (this.responseData.width || !supportsWidthDetectionOfImage)) {
             // image view not yet cleaned up?
             imageView.image = this.responseData;
+        } else if (imageView) {
+            imageView.image = errorImage;
         }
          
         imageLoader = null;
@@ -48,8 +54,6 @@ var urlErrorHandled = null;
 
 function tryAlternativeDownloadMethod(event) {
 
-    var errorImage = 'images/image_load_error.png';
-    
     if (this.image && errorImage == this.image) {
         // there could be an error while loading the error image :)
         
