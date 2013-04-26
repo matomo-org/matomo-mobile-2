@@ -17,8 +17,11 @@
             <SearchBar id="searchBar" onReturn="doSearchWebsite" onCancel="doCancelSearchWebsite" platform="android,ios"/>
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
             <View class="shadow" formFactor="tablet"></View>
-            <TableView class="websitesTableView" dataCollection="$.piwikProcessedReport" 
+            <TableView id="websitesTable" dataCollection="$.piwikProcessedReport" 
                        onClick="doSelectWebsite">
+                <HeaderPullView platform="ios">
+                    <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
+                </HeaderPullView>
 
                 <TableViewRow modelid="{id}">
                     <Label class="websiteNameLabel" text="{label}" />

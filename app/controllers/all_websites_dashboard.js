@@ -3,6 +3,10 @@ function L(key)
     return require('L')(key);
 }
 
+if (OS_IOS) {
+    $.pullToRefresh.init($.websitesTable);
+}
+
 var accountsCollection = Alloy.Collections.appAccounts;
 var accountModel       = accountsCollection.lastUsedAccount();
 
@@ -82,11 +86,19 @@ function onStatisticsFetched(statisticsCollection)
 
 function showReportContent()
 {
+    if (OS_IOS) {
+        $.pullToRefresh.refreshDone();
+    } 
+
     $.loading.hide();
 }
 
 function showLoadingMessage()
 {
+    if (OS_IOS) {
+        $.pullToRefresh.refresh();
+    }
+    
     $.loading.show();
 }
 
@@ -100,7 +112,7 @@ function doCancelSearchWebsite()
     $.searchBar.value = '';
     $.searchBar.blur();
 
-    fetchListOfAvailableWebsites(lastUsedWebsite);
+    doRefresh();
 }
 
 function doSearchWebsite(event) 
@@ -125,6 +137,13 @@ function doSearchWebsite(event)
     });
 
     $.searchBar.blur();
+}
+
+function doRefresh()
+{
+    if (lastUsedWebsite) {
+        fetchListOfAvailableWebsites(lastUsedWebsite);
+    }
 }
 
 function fetchListOfAvailableWebsites(site) 
