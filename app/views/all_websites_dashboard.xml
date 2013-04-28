@@ -18,7 +18,7 @@
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
             <View class="shadow" formFactor="tablet"></View>
             <TableView id="websitesTable" dataCollection="$.piwikProcessedReport" 
-                       onClick="doSelectWebsite">
+                       onClick="doSelectWebsite" dataTransform="formatWebsite">
                 <HeaderPullView platform="ios">
                     <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>
@@ -30,10 +30,10 @@
                         <View class="space"></View>
                         <Label text="Visits" class="quickInfoName" />
                         <View right="0" layout="horizontal" height="SIZE">
-                            <Label text="{nb_visits}" class="quickInfoValue"/>
-                            <Label text=" (" class="quickInfoValue"/>
-                            <Label text="{visits_evolution}" class="quickInfoValue"/>
-                            <Label text=")" class="quickInfoValue"/>
+                            <Label text="{nb_visits}" color="{evolution_color}" class="quickInfoValue"/>
+                            <Label text=" (" color="{evolution_color}" class="quickInfoValue"/>
+                            <Label text="{visits_evolution}" color="{evolution_color}" class="quickInfoValue"/>
+                            <Label text=")" color="{evolution_color}" class="quickInfoValue"/>
                         </View>
                         <View class="space"></View>
                     </View>

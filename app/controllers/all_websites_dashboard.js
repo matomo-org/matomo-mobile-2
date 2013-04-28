@@ -171,6 +171,24 @@ function fetchListOfAvailableWebsites(site)
     });
 }
 
+function isNegativeEvolution(evolution)
+{
+    return (evolution && '-' == (evolution+'').substr(0, 1));
+}
+
+function formatWebsite(model)
+{
+    var evolution = model.get('visits_evolution');
+
+    if (isNegativeEvolution(evolution)) {
+        model.set('evolution_color', '#800000');
+    } else {
+        model.set('evolution_color', '#008000');
+    }
+
+    return model;
+}
+
 $.piwikProcessedReport.on('error', function () {
     // TODO what should we do in this case?
     showReportContent();
