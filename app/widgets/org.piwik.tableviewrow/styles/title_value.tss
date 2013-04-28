@@ -3,7 +3,7 @@
 },
 
 "#title": {
-    textAlign: 'left',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
     left: 10,
@@ -12,6 +12,7 @@
     wordWrap: false,
     font: {fontSize: 18, fontWeight: 'bold'},
     top: 11,
+    bottom: 11,
     touchEnabled: false
 },
 
@@ -20,13 +21,14 @@
     right: '16dp',
     top: '10dp',
     font: {fontSize: '16sp', fontWeight: 'normal'},
-    zIndex: 2
+    zIndex: 2,
+    bottom: '11dp'
 },
 
 "#value": {
     right: 10,
     font: {fontSize: 18},
-    textAlign: 'right',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
     color: '#385487',
