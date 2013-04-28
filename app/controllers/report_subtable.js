@@ -149,7 +149,7 @@ function onStatisticsFetched(processedReportCollection)
     if (rowsFilterLimit <= processedReportCollection.length) {
         // a show all or show less button only makes sense if there are more or equal results than the used
         // filter limit value...
-        var row = Ti.UI.createTableViewRow({title: showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')});
+        var row = Ti.UI.createTableViewRow({color: '#336699', title: showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')});
         row.addEventListener('click', onTogglePaginator);
         rows.push(row);
     }
