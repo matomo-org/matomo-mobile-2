@@ -3,7 +3,6 @@
         "piwik": {
             "preferredMetrics": [ "nb_hits", "nb_visits", "nb_pageviews", "nb_uniq_pageviews", "nb_actions", "nb_conversions", "revenue" ],
             "filterLimit": 30,
-            "latestServerVersion": "1.12.0",
             "graph": {
                 "fontSize": 9,
                 "showMetricTitle": 0,
