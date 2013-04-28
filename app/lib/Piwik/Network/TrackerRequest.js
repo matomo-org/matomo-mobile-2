@@ -6,11 +6,6 @@
  * @version $Id$
  */
 
-/** @private */
-var Piwik  = require('Piwik');
-/** @private */
-var config = require('config');
-
 /**
  * @class     Sends tracking requests to a piwik instance. The piwik instance can be configured within the config.
  *
@@ -19,17 +14,19 @@ var config = require('config');
  */
 function TrackerRequest () {
 
-    this.baseUrl    = config.tracking.piwikServerUrl;
+    this.baseUrl    = require('alloy').CFG.tracking.piwikServerUrl;
     
     this.sendErrors = false;
     
     this.userAgend  = Ti.userAgent;
 }
 
+var HttpRequest = require('Piwik/Network/HttpRequest');
+
 /**
  * Extend Piwik.Network.HttpRequest.
  */
-TrackerRequest.prototype = Piwik.require('Network/HttpRequest');
+TrackerRequest.prototype = new HttpRequest();
 
 /**
  * Sends the tracking request.

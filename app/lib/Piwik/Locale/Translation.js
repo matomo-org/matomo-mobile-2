@@ -5,9 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  * @version $Id$
  */
-
-/** @private */
-var Piwik = require('Piwik');
  
 /**
  * @class    Provides some translation related methods. The translations for each language are stored within the
@@ -65,7 +62,7 @@ function Translation () {
             return this.DEFAULT_TRANSLATION[key];
         }
 
-        Piwik.getLog().error('Missing default translation for key ' + key, 'Piwik.Locale.Translation::get');
+        console.error('Missing default translation for key ' + key, 'Piwik.Locale.Translation::get');
 
         return key;
     };
@@ -75,16 +72,18 @@ function Translation () {
      */
     this.load = function () {
 
-        var locale = Piwik.require('Locale');
+        var locale = require('Piwik/Locale');
         locale     = locale.getLocale();
 
         try {
             this.translations = require('i18n/' + locale);
         } catch (e) {
-            Piwik.getLog().error('Failed to load translations for locale ' + locale, 'Piwik.Locale.Translation::load');
+            console.error('Failed to load translations for locale ' + locale, 'Piwik.Locale.Translation::load');
 
-            var uiError = Piwik.getUI().createError({exception: e, errorCode: 'PiTrLo35'});
-            uiError.showErrorMessageToUser();
+            var tracker = require('Piwik/Tracker');
+            tracker.trackException({error: e, errorCode: 'PiTrLo35'});
+
+            Alloy.createController('error', {error: e}).open();
         }
     };
 }

@@ -6,15 +6,12 @@
  * @version $Id$
  */
 
-/** @private */
-var Piwik   = require('Piwik');
-
 /**
  * @class    Can be used to send a GET http request to any url. Attend that synchronous requests are not supported at 
  *           the moment.
  *
  * @example
- * var request = Piwik.require('Network/HttpRequest');
+ * var request = require('Piwik/Network/HttpRequest');
  * request.setBaseUrl('http://demo.piwik.org/');
  * request.setParameter({siteId: 5});
  * request.setCallback(anyContext, function (response, parameters) {});
@@ -232,7 +229,7 @@ HttpRequest.prototype.handle = function () {
    
     requestUrl = this.baseUrl + requestUrl;
     
-    Piwik.getLog().debug('RequestUrl is ' + requestUrl, 'Piwik.Network.HttpRequest::handle');
+    console.debug('RequestUrl is ' + requestUrl, 'Piwik.Network.HttpRequest::handle');
     
     this.xhr         = Ti.Network.createHTTPClient({validatesSecureCertificate: false, enableKeepAlive: false});
     var that         = this;
@@ -297,7 +294,7 @@ HttpRequest.prototype.abort = function () {
  */
 HttpRequest.prototype.load = function (xhr) {
 
-    Piwik.getLog().debug('Received response ' + xhr.responseText, 'Piwik.Network.HttpRequest::load');
+    console.debug('Received response ' + xhr.responseText, 'Piwik.Network.HttpRequest::load');
 
     try {
         // parse response
@@ -318,7 +315,8 @@ HttpRequest.prototype.load = function (xhr) {
 
     } catch (exception) {
 
-        Piwik.getUI().createError({exception: exception, errorCode: 'PiHrLo26'});
+        var tracker = require('Piwik/Tracker');
+        tracker.trackException({error: exception, errorCode: 'PiHrLo26'});
 
         this.error({error: 'Failed to parse response'});
 
@@ -339,7 +337,7 @@ HttpRequest.prototype.load = function (xhr) {
 
     var callback  = this.callback;
     if (!callback) {
-        callback  = new Function();
+        callback  = function () {};
     }
 
     var parameter = this.parameter;
@@ -349,11 +347,11 @@ HttpRequest.prototype.load = function (xhr) {
         callback.apply(this.context, [response, parameter]);
  
     } catch (e) {
-        Piwik.getLog().warn('Failed to call callback method: ' + e.message, 
-                            'Piwik.Network.HttpRequest::load#callback');
+        console.warn('Failed to call callback method: ' + e.message, 
+                     'Piwik.Network.HttpRequest::load#callback');
 
-        var uiError = Piwik.getUI().createError({exception: e, errorCode: 'PiHrLo29'});
-        uiError.showErrorMessageToUser();
+        var tracker = require('Piwik/Tracker');
+        tracker.trackException({error: e, errorCode: 'PiHrLo29'});
     }
 
     // onload hook
@@ -381,13 +379,13 @@ HttpRequest.prototype.error = function (e) {
         e = null;
     }
 
-    Piwik.getLog().warn(e, 'Piwik.Network.HttpRequest::error');
+    console.warn(e, 'Piwik.Network.HttpRequest::error');
     
-    var _         = require('L');
+    var L         = require('L');
     // if set, the user will see a dialog containing this message
     var message   = '';
     // the title of the message
-    var title     = _('General_Error');
+    var title     = L('General_Error');
     // null|string|Error if set, the error will be tracked
     var exception = null;
     // the type of the error, for example TypeError, SyntaxError, ...
@@ -397,7 +395,7 @@ HttpRequest.prototype.error = function (e) {
     if ((!e || !e.error) && this.xhr && 200 != this.xhr.status) {
         
         exception = this.xhr.statusText ? this.xhr.statusText : this.xhr.status;
-        message   = String.format(_('Mobile_NetworkErrorWithStatusCode'), 'Unknown', '' + exception, baseUrl);
+        message   = String.format(L('Mobile_NetworkErrorWithStatusCode'), 'Unknown', '' + exception, baseUrl);
         
     } else if (e && e.error) {
         
@@ -460,8 +458,8 @@ HttpRequest.prototype.error = function (e) {
             case 'no connection':
                 // apple requires that we inform the user if no network connection is available
                 
-                title   = _('Mobile_NetworkNotReachable');
-                message = _('Mobile_YouAreOffline');
+                title   = L('Mobile_NetworkNotReachable');
+                message = L('Mobile_YouAreOffline');
     
                 break;
     
@@ -470,14 +468,14 @@ HttpRequest.prototype.error = function (e) {
             case 'the request timed out':
             case 'chunked stream ended unexpectedly':
     
-                message = String.format(_('General_RequestTimedOut'), baseUrl);
+                message = String.format(L('General_RequestTimedOut'), baseUrl);
     
                 break;
     
             case 'host is unresolved':
             case 'not found':
     
-                message = String.format(_('General_NotValid'), baseUrl);
+                message = String.format(L('General_NotValid'), baseUrl);
     
                 break;
     
@@ -506,7 +504,7 @@ HttpRequest.prototype.error = function (e) {
                     errorType  += '-' + this.xhr.status;
                 }
                 
-                message = String.format(_('Mobile_NetworkErrorWithStatusCode'), e.error, statusText, baseUrl);
+                message = String.format(L('Mobile_NetworkErrorWithStatusCode'), e.error, statusText, baseUrl);
         }
     }
     
@@ -516,16 +514,17 @@ HttpRequest.prototype.error = function (e) {
         var alertDialog = Ti.UI.createAlertDialog({
             title: title,
             message: message,
-            buttonNames: [_('General_Ok')]
+            buttonNames: [L('General_Ok')]
         });
 
         alertDialog.show();
         alertDialog = null;
         
         if (exception) {
-            Piwik.getUI().createError({exception: exception, type: errorType,
-                                       file: 'Piwik/Network/HttpRequest.js', 
-                                       errorCode: 'PiHrLe39'});
+            var tracker = require('Piwik/Tracker');
+            tracker.trackException({error: exception, type: errorType,
+                                    file: 'Piwik/Network/HttpRequest.js', 
+                                    errorCode: 'PiHrLe39'});
         }
     }
 

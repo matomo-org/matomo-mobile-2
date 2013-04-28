@@ -49,18 +49,6 @@ function absolutePath(accessUrl)
     return absolutePath;
 }
 
-function onlyFirstNumbers(piwikVersion)
-{
-    // compare only first six chars and ignore all dots -> from 0.6.4-rc1 to 064
-    // if version was '1.4-rc1', it is '14-rc' now
-    piwikVersion = piwikVersion.substr(0, 5).replace(/\./g, '');
-    
-    // make sure they contain only numbers.
-    piwikVersion = piwikVersion.replace(/[^\d]/g, '');
-
-    return piwikVersion;
-}
-
 var Alloy = require('alloy');
 
 exports.definition = {
@@ -163,6 +151,7 @@ exports.definition = {
 
                 this.markAccountAsLastUsed();
                 this.updatePreferences(callback);
+                this.updatePiwikVersion();
             },
 
             markAccountAsLastUsed: function () {
@@ -220,14 +209,15 @@ exports.definition = {
                 }
                 
                 var that = this;
-                var version = Alloy.createCollection('piwikVersion');
+                var version = Alloy.createModel('piwikVersion');
                 version.fetch({
-                    success : function(model, response) {
+                    account: this,
+                    success : function(model) {
 
                         that.set({dateVersionUpdated: (new Date()) + ''});
-                        
-                        if (response && response.value) {
-                            that.set({version: '' + response.value});
+
+                        if (model && model.getVersion()) {
+                            that.set({version: '' + model.getVersion()});
                         } else if (!account.version) {
                             that.set({version: ''});
                         } else {

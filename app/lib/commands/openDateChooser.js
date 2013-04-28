@@ -30,7 +30,7 @@ function formatDateToPiwikQuery (from, to, period)
         to       = temp;
     } 
 
-    var piwikDate = new (require('Piwik/PiwikDate'));
+    var piwikDate = new (require('report/date'));
     var dateQuery = piwikDate.toPiwikQueryString(period, from, to);
 
     return dateQuery;
@@ -45,7 +45,7 @@ exports.execute = function (params, onDateChosen)
     var period    = params.period ? params.period : 'day';
     var date      = params.date ? params.date : ''
  
-    var piwikDate = new (require('Piwik/PiwikDate'));
+    var piwikDate = new (require('report/date'));
     piwikDate.setDate(date);
     piwikDate.setPeriod(period);
  

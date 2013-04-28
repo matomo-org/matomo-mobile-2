@@ -19,7 +19,7 @@ exports.definition = {
         },
         defaults: {
             id: 1,
-            language: settingDefaults.language,
+            language: settingDefaults.locale,
             trackingEnabled: settingDefaults.trackingEnabled,
             preferEvolutionGraphs: settingDefaults.preferEvolutionGraphs,
             graphsEnabled: settingDefaults.graphsEnabled,

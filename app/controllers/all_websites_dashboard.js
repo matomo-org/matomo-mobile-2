@@ -128,7 +128,8 @@ function doSearchWebsite(event)
             idSite: lastUsedWebsite.id,
             apiModule: "MultiSites",
             apiAction: "getAll",
-            pattern: $.searchBar.value
+            pattern: $.searchBar.value,
+            filter_limit: Alloy.CFG.numDisplayedWebsitesInDashboard
         },
         error: function () {
             $.piwikProcessedReport.trigger('error', {type: 'loadingProcessedReport'});
@@ -160,7 +161,8 @@ function fetchListOfAvailableWebsites(site)
             date: reportDate.getDateQueryString(), 
             idSite: site.id,
             apiModule: "MultiSites",
-            apiAction: "getAll"
+            apiAction: "getAll",
+            filter_limit: Alloy.CFG.numDisplayedWebsitesInDashboard
         },
         error: function () {
             $.piwikProcessedReport.trigger('error', {type: 'loadingProcessedReport'});

@@ -103,11 +103,9 @@ function open()
     require('layout').open($.index);
 
     if (isDataAlreadyFetched()) {
-        console.log('Fetched');
         hideLoadingIndicator();
         renderListOfReports();
     } else {
-        console.log('there');
         showLoadingIndicator();
     }
 }

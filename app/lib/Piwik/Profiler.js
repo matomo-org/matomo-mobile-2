@@ -5,11 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  * @version $Id$
  */
-
-/** @private */
-var Piwik  = require('Piwik');
-/** @private */
-var config = require('config');
  
 /**
  * @class    Provides a simple profiler. The profiler logs all profiling information to the standard iOS/Android SDK log
@@ -26,7 +21,7 @@ function Profiler () {
      *
      * @type  boolean
      */
-    this.ENABLED = config.profileEnabled;
+    this.ENABLED = false;
 
     /**
      * Holds the number of milliseconds since 1/1/1970. Will be updated on each step() call if profiling is enabled.

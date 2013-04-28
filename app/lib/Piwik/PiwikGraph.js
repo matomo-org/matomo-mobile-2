@@ -10,7 +10,7 @@
 var Alloy = require('alloy');
 
 /** @private */
-var Piwik = require('Piwik');
+var network = require('Piwik/Network');
  
 /**
  * @class    This graph object provides some useful methods to assemble Piwik graph urls which can be displayed using a
@@ -51,7 +51,7 @@ function PiwikGraph () {
      * 
      * @private
      */
-    var locale = Piwik.require('Locale').getLocale();
+    var locale = require('Piwik/Locale').getLocale();
     
     /**
      * Appends the size string to a given graphUrl. This defines how height the chart will be rendered. 
@@ -76,7 +76,7 @@ function PiwikGraph () {
             requestUrl += paramName + '=' + parameter[paramName] + '&';
         }
         
-        graphUrl = graphUrl + '&' + Piwik.getNetwork().encodeUrlParams(requestUrl);
+        graphUrl = graphUrl + '&' + network.encodeUrlParams(requestUrl);
         graphUrl = account.getBasePath() + graphUrl;
         
         account  = null;
@@ -138,7 +138,7 @@ function PiwikGraph () {
             separator = '';
         }
         
-        graphUrl      = graphUrl + separator + Piwik.getNetwork().encodeUrlParams(urlGetParams);
+        graphUrl      = graphUrl + separator + network.encodeUrlParams(urlGetParams);
         params        = null;
         
         return graphUrl;
@@ -164,12 +164,12 @@ function PiwikGraph () {
             parameter[index] = Alloy.CFG.piwik.graph[index];
         }
         
-        if (hires && Piwik.getPlatform().isIos) {
+        if (hires && OS_IOS) {
             parameter.legendFontSize = parameter.fontSize * 2;
             parameter.fontSize = parameter.fontSize * 2;
             parameter.width    = parameter.width * 2;
             parameter.height   = parameter.height * 2;
-        } else if (hires && Piwik.getPlatform().isAndroid) {
+        } else if (hires && OS_ANDROID) {
             parameter.legendFontSize = Math.round(parameter.fontSize * 1.5);
             parameter.fontSize = Math.round(parameter.fontSize * 1.5);
         } 
@@ -203,7 +203,7 @@ function PiwikGraph () {
         // prevents graph from caching
         url    += '&cacherand=' + Math.floor(Math.random() * 9999999);
 
-        return accessUrl + Piwik.getNetwork().encodeUrlParams(url);
+        return accessUrl + network.encodeUrlParams(url);
     };
 }
 

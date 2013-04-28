@@ -6,9 +6,6 @@
  * @version $Id$
  */
 
-/** @private */
-var Piwik = require('Piwik');
-
 /**
  * Whether the user wants to be reminded after the next 40th app start. If this is false, we should make sure
  * that the user will not be asked to rate the app.
@@ -46,6 +43,11 @@ var numLaunches = 1;
  */
 function Rating () {
 
+}
+
+function getTracker()
+{
+    return require('Piwik/Tracker');
 }
 
 /**
@@ -117,17 +119,17 @@ Rating.prototype.askUserToRate = function () {
             // user pressed the "Don't remind me" button
             remindMe = false;
             
-            Piwik.getTracker().trackEvent({title: 'Dont remind me', url: '/rating/dont-remind-me'});
+            getTracker().trackEvent({title: 'Dont remind me', url: '/rating/dont-remind-me'});
 
         } else if (0 == event.index) {
             remindMe = false;
 
             that.rate();
             
-            Piwik.getTracker().trackEvent({title: 'Rate now', url: '/rating/rate-now'});
+            getTracker().trackEvent({title: 'Rate now', url: '/rating/rate-now'});
         
         } else if (1 == event.index) {
-            Piwik.getTracker().trackEvent({title: 'Rate not now', url: '/rating/not-now'});
+            getTracker().trackEvent({title: 'Rate not now', url: '/rating/not-now'});
         }
         
         that.store();
@@ -146,11 +148,11 @@ Rating.prototype.getStoreName = function () {
     
     var storeName = '';
     
-    if (Piwik.getPlatform().isAndroid) {
+    if (OS_ANDROID) {
 
         storeName = 'Google Play Store';
 
-    } else if (Piwik.getPlatform().isIos) {
+    } else if (OS_IOS) {
 
         storeName = 'App Store';
     }
@@ -166,16 +168,14 @@ Rating.prototype.getStoreName = function () {
  */
 Rating.prototype.getStoreUrl = function () {
 
-    if (Piwik.getPlatform().isAndroid) {
+    if (OS_ANDROID) {
         // @todo what if android market isn't installed?
 
         return 'market://details?id=' + Ti.App.id;
 
-    } else if (Piwik.getPlatform().isIos) {
+    } else if (OS_IOS) {
 
-        var config   = require('config');
-        var appStore = config.appleAppStore;
-        config       = null;
+        var appStore = require('alloy').CFG.appleAppStore;
         
         if (!appStore || !appStore.appId) {
             // no app store id configured.
@@ -232,7 +232,7 @@ Rating.prototype.rate = function () {
     try {
         Ti.Platform.openURL(storeUrl);
     } catch (e) {
-        Piwik.getLog().warn('Failed to open url ' + storeUrl, 'Piwik.App.Rating::rate');
+        console.warn('Failed to open url ' + storeUrl, 'Piwik.App.Rating::rate');
     }
 };
 

@@ -7,11 +7,14 @@
  */
 
 /** @private */
-var Piwik  = require('Piwik');
+var trackingConfig = require('alloy').CFG.tracking;
 /** @private */
-var config = require('config');
-/** @private */
-var queue  = Piwik.require('Tracker/Queue');
+var queue  = require('Piwik/Tracker/Queue');
+
+function getSettings()
+{
+    return Alloy.createCollection('AppSettings').settings();
+}
  
 /**
  * @class    Piwik Tracker tracks page views, events and so on to a configured Piwik Server installation. Tracking
@@ -30,14 +33,14 @@ function Tracker () {
      *
      * @type  number
      */
-    this.siteId         = config.tracking.siteId;
+    this.siteId         = trackingConfig.siteId;
 
     /**
      * The api version of the Piwik Server installation.
      *
      * @type  number
      */
-    this.apiVersion     = config.tracking.apiVersion;
+    this.apiVersion     = trackingConfig.apiVersion;
 
     /**
      * Holds the current document title. This document title will be used in all trackings until another document
@@ -101,7 +104,7 @@ function Tracker () {
      * 
      * @private
      */
-    var baseUrl         = config.tracking.baseUrl;
+    var baseUrl         = trackingConfig.baseUrl;
 
     /**
      * These parameters holds all tracking information and will be send to the Piwik Server installation. Will be reset
@@ -139,7 +142,7 @@ function Tracker () {
         }
 
         // have a look whether there is an already created uuid
-        var storage    = Piwik.require('App/Storage');
+        var storage    = require('Piwik/App/Storage');
         var cachedUUid = storage.get('tracking_visitor_uuid');
 
         if (cachedUUid && storage.KEY_NOT_FOUND !== cachedUUid) {
@@ -171,7 +174,7 @@ function Tracker () {
         uuid      = Ti.Platform.osname + Ti.Platform.id + nowTs + Ti.Platform.model;
         uuid      = Ti.Utils.md5HexDigest(uuid).slice(0, 16);
 
-        var storage = Piwik.require('App/Storage');
+        var storage = require('Piwik/App/Storage');
         storage.set('tracking_visitor_uuid', uuid);
         storage     = null;
 
@@ -194,7 +197,7 @@ function Tracker () {
         }
 
         // have a look whether there is already a visit count number
-        var storage          = Piwik.require('App/Storage');
+        var storage          = require('Piwik/App/Storage');
         var cachedVisitCount = storage.get('tracking_visit_count');
 
         if (cachedVisitCount && storage.KEY_NOT_FOUND !== cachedVisitCount) {
@@ -287,6 +290,7 @@ function Tracker () {
      * Logs an exception.
      *
      * @param  {Object}  exception
+     * @param  {Error}   exception.error      An optional instance of Error
      * @param  {string}  exception.file       The name of the file where the exception was thrown.
      * @param  {string}  exception.line       The number of the line where the exception was thrown.
      * @param  {string}  exception.message    The exception message.
@@ -300,26 +304,48 @@ function Tracker () {
             return;
         }
 
-        exception.file    = '' + exception.file;
-        exception.message = '' + exception.message;
+        var error     = exception.error || null;
+        var line      = exception.line || 'unknown';
+        var file      = exception.file || 'unknown';
+        var type      = exception.type || 'unknown';
+        var errorCode = exception.errorCode || '0';
+        var message   = '' + error;
 
-        if (exception && exception.file && 60 < exception.file.length) {
+        var Piwik = require('Piwik');
+        if (error && Piwik.isError(error)) {
+
+            if (error.name) {
+                type  = error.name;
+            }
+
+            if (error.sourceURL) {
+                file  = error.sourceURL;
+            }
+
+            if (error.line) {
+                line  = error.line;
+            }
+        }
+
+        file = '' + file;
+
+        if (file && 60 < file.length) {
             // use max 60 chars
-            exception.file    = exception.file.substr(exception.file.length - 60);
+            file = file.substr(file.length - 60);
         }
 
-        if (exception && exception.message && 200 < exception.message.length) {
+        if (message && 200 < message.length) {
             // use max 200 chars
-            exception.message = exception.message.substr(0, 200);
+            message = message.substr(0, 200);
         }
 
-        var url   = '/exception/' + exception.type;
-        url      += '/' + exception.errorCode;
-        url      += '/' + exception.file;
-        url      += '/' + exception.line;
-        url      += '/' + exception.message;
+        var url   = '/exception/' + type;
+        url      += '/' + errorCode;
+        url      += '/' + file;
+        url      += '/' + line;
+        url      += '/' + message;
 
-        var title = 'Exception ' + exception.type;
+        var title = 'Exception ' + type;
 
         parameter.action_name = '' + title;
         parameter.url         = baseUrl + url;
@@ -402,15 +428,9 @@ function Tracker () {
      */
     this.prepareVisitCustomVariables = function () {
         
-        var session     = Piwik.require('App/Session');
-        var locale      = Piwik.require('Locale');
-        var websites    = session.get('piwik_sites_allowed', []);
-        var numWebsites = 0;
-        var numAccounts = Piwik.require('App/Accounts').getNumAccounts();
-        
-        if (Piwik.isArray(websites) && 'undefined' !== (typeof websites.length)) {
-            numWebsites = websites.length;
-        }
+        var locale      = require('Piwik/Locale');
+        var Alloy       = require("alloy");
+        var numAccounts = Alloy.Collections.instance("appAccounts").length;
             
         this.setCustomVariable(1, 'OS', Ti.Platform.osname + ' ' + Ti.Platform.version, 'visit');
 
@@ -421,13 +441,7 @@ function Tracker () {
         this.setCustomVariable(3, 'Locale', Ti.Platform.locale + '::' + locale.getLocale(), 'visit');
         this.setCustomVariable(4, 'Num Accounts', numAccounts, 'visit');
         
-        if (numWebsites) {
-            this.setCustomVariable(5, 'Num Sites', numWebsites, 'visit');
-        }
-        
-        session  = null;
         locale   = null;
-        websites = null;
     };
 
     /**
@@ -438,12 +452,12 @@ function Tracker () {
      */
     this.isEnabled = function () {
 
-        if (!config.tracking.enabled) {
+        if (!trackingConfig || !trackingConfig.enabled) {
 
             return false;
         }
 
-        var settings  = Piwik.require('App/Settings');
+        var settings  = getSettings();
         var isEnabled = settings.isTrackingEnabled();
         settings      = null;
 
@@ -525,7 +539,7 @@ function Tracker () {
      */
     this.askForPermission = function () {
 
-        if (!config.tracking.enabled) {
+        if (!trackingConfig || !trackingConfig.enabled) {
 
             return;
         }
@@ -548,7 +562,7 @@ function Tracker () {
                 return;
             }
 
-            var settings = Piwik.require('App/Settings');
+            var settings = getSettings();
 
             switch (event.index) {
                 case 0:
@@ -558,7 +572,6 @@ function Tracker () {
                     Ti.UI.createAlertDialog({message: _('Feedback_ThankYou'), ok: _('General_Ok') }).show();
                     break;
 
-                case 1:
                 default:
 
                     settings.setTrackingEnabled(false);

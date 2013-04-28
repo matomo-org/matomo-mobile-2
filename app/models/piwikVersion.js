@@ -2,28 +2,15 @@ exports.definition = {
     
     config: {
         "columns": {
-            "idsite":"integer",
-            "name":"string",
-            "main_url":"string",
-            "ts_created":"string",
-            "timezone":"string",
-            "currency":"string",
-            "excluded_ips":"integer",
-            "excluded_parameters":"string",
-            "sitesearch":"integer",
-            "sitesearch_keyword_parameters":"string",
-            "sitesearch_category_parameters":"string",
-            "group":"string",
-            "ecommerce":"integer"
+            "value":"string"
         },
         "adapter": {
             "type": "piwikapi",
-            "collection_name": "piwikentrysite"
+            "collection_name": "piwikversion"
         },
         "settings": {
             "method": "API.getPiwikVersion",
             "cache": true,
-            // older Piwik versions < 1.8 don't support API.getPiwikVersion. Makes sure those users won't get an error meesage.
             "displayErrors": false
         },
         "defaultParams": {
@@ -34,7 +21,47 @@ exports.definition = {
     extendModel: function(Model) {        
         _.extend(Model.prototype, {
 
+            getLatestVersion: function () {
+                return Alloy.CFG.piwik.latestServerVersion;
+            },
+
+            isOutdatedVersion: function () {
+
+                var latestVersion  = this.getLatestVersion();
+                var currentVersion = this.getVersion();
+
+                if (!currentVersion) {
+                    // maybe request failed
+                    return false;
+                }
+
+                var piwik = require('Piwik');
+
+                return piwik.isVersionGreaterThan(currentVersion, latestVersion);
+            },
+
             // extended functions go here
+            showMessageIfIsOutdatedVersion: function () {
+
+                if (this.isOutdatedVersion()) {
+                    var L       = require('L');
+                    var message = String.format(L('General_PiwikXIsAvailablePleaseNotifyPiwikAdmin'), 
+                                                '' + this.getLatestVersion());
+
+                    var alertDialog = Ti.UI.createAlertDialog({
+                        title: L('General_PleaseUpdatePiwik'),
+                        message: message,
+                        buttonNames: [L('General_Ok')]
+                    });
+
+                    alertDialog.show();
+                    alertDialog = null;
+                }
+            },
+
+            getVersion: function () {
+                return this.get('value');
+            }
 
         }); // end extend
         
@@ -51,6 +78,6 @@ exports.definition = {
         
         return Collection;
     }
-        
-}
+
+};
 

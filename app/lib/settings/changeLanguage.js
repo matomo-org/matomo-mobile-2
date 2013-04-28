@@ -4,7 +4,7 @@ var Alloy = require('alloy');
 function availableLanguages() 
 {
     var locale = require('Piwik/Locale');
-
+    
     return locale.getAvailableLanguages();
 }
 

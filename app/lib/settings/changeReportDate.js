@@ -3,7 +3,7 @@ var Alloy = require('alloy');
 
 function getAvailableDateRanges()
 {
-    var piwikDate = new (require('Piwik/PiwikDate'));
+    var piwikDate = new (require('report/date'));
     var availableDateRanges = piwikDate.getAvailableDateRanges();
 
     return availableDateRanges;

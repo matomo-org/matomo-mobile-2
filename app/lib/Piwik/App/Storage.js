@@ -5,9 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  * @version $Id$
  */
-
-/** @private */
-var Piwik = require('Piwik');
  
 /**
  * @class    Stores values beyond application sessions. It is possible to store any data except not 

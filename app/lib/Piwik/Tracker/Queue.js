@@ -7,9 +7,7 @@
  */
 
 /** @private */
-var Piwik  = require('Piwik');
-/** @private */
-var config = require('config');
+var maxTracksPerDay = require('alloy').CFG.tracking.maxTracksPerDay;
 
 /**
  * @class    Piwik Tracking Queue. It orders/processes the tracking requests in a FIFO manner. 
@@ -131,7 +129,7 @@ function TrackerQueue () {
             numTracksToday = 0;
         }
 
-        if (config.tracking.maxTracksPerDay && config.tracking.maxTracksPerDay <= numTracksToday) {
+        if (maxTracksPerDay && maxTracksPerDay <= numTracksToday) {
             // set maxTracksPerDay to 0 for unlimited tracks per day. Do not dispatch more than configured
 
             return;
@@ -308,7 +306,8 @@ function TrackerQueue () {
         }
         
         var parameter = this.poll();
-        var tracker   = Piwik.require('Network/TrackerRequest');
+        var TrackerRequest = require('Piwik/Network/TrackerRequest');
+        var tracker   = new TrackerRequest();
         
         tracker.setParameter(parameter);
         tracker.send();

@@ -31,7 +31,9 @@ function doRefresh()
 
 function currentTime()
 {
-    return require('Piwik/Utils/Date').toLocaleTime(new Date());
+    var moment = require('moment/moment');
+    
+    return moment().format('LT');
 }
 
 function setStatusReloading()

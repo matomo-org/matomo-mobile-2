@@ -190,7 +190,7 @@ reportDate.prototype.getAvailablePeriods = function () {
  * @param    {string}  str
  *
  * @example
- * Piwik.require('report/date').toDate('2010-05-31');
+ * require('report/date').toDate('2010-05-31');
  *
  * @returns  {Date}    The created date object.
  */
@@ -234,7 +234,7 @@ reportDate.prototype.toDate = function (str) {
  * @example
  * var from = new Date(2010, 05, 24);
  * var to   = new Date(2011, 06, 27);
- * Piwik.require('report/date').toPiwikQueryString('range', from, to); // outputs '2010-05-24,2011-06-27'
+ * require('report/date').toPiwikQueryString('range', from, to); // outputs '2010-05-24,2011-06-27'
  *
  * @returns  {string}  The in Piwik API required date format.
  */

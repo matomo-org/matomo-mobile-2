@@ -112,6 +112,12 @@ function onStatisticsFetched(processedReportCollection)
             currentReportName: processedReportCollection.getReportName(),
             hasChild: hasSubtable
         });
+        
+        if (OS_IOS && !hasSubtable) {
+            row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+        } else if (OS_IOS) {
+            row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+        }
 
         if (hasSubtable) {
             row.addEventListener('click', function () {

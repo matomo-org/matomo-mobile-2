@@ -3,8 +3,7 @@
         "piwik": {
             "preferredMetrics": [ "nb_hits", "nb_visits", "nb_pageviews", "nb_uniq_pageviews", "nb_actions", "nb_conversions", "revenue" ],
             "filterLimit": 30,
-            "latestServerVersion": "1.9.2",
-            "numDisplayedWebsites": 50,
+            "latestServerVersion": "1.12.0",
             "graph": {
                 "fontSize": 9,
                 "showMetricTitle": 0,
@@ -15,12 +14,25 @@
                 "colors": "cb2026"
             }
         },
+        "numDisplayedWebsitesInDashboard": 50,
+        "tracking": {
+            "enabled": true,
+            "siteId": 25,
+            "apiVersion": 1,
+            "baseUrl": "http://mobileapp.piwik.org",
+            "piwikServerUrl": "http://demo.piwik.org/piwik.php",
+            "maxTracksPerDay": 200
+        },
+        "faqUrl": "http://piwik.org/mobile/faq",
+        "appleAppStore": {
+            "appId": "385536442"
+        },
         "account": {
             "defaultReport": "MultiSites",
             "defaultReportDate": "yesterday"
         },
         "settings": {
-            "language": "en",
+            "locale": "en",
             "trackingEnabled": false,
             "preferEvolutionGraphs": false,
             "graphsEnabled": true,
@@ -32,6 +44,9 @@
     "env:production": {},
     "os:ios": {},
     "os:android": {},
+    "os:mobileweb": {
+        "numDisplayedWebsitesInDashboard": -1
+    },
     "dependencies": {
         "org.piwik.tableviewrow": "1.0",
         "org.piwik.tableviewsection": "1.0",

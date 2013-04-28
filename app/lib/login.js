@@ -93,13 +93,11 @@ exports.login = function(accounts, accessUrl, username, password)
     showWaitingIndicator();
 
     account.on('sync', function (accountModel) {
-        console.log('account synced');
         accountModel.updatePiwikVersion();
     });
 
     var verifyAuthToken = function (accountModel)
     {
-        console.log('verifyAuthToken');
         var site = Alloy.createCollection('piwikAccessVerification');
         // verify if user has access to at least one website using the given authToken
 
@@ -108,8 +106,6 @@ exports.login = function(accounts, accessUrl, username, password)
             success: function () {
                 // it has access to at least one webistes
 
-                console.log('Account has access to websites');
-
                 hideWaitingIndicator();
 
                 accountModel.save();
@@ -117,8 +113,6 @@ exports.login = function(accounts, accessUrl, username, password)
                 accounts.add(accountModel);
 
             }, error: function () {
-
-                console.log('Acconut has no access to websites');
 
                 accountModel.clear({silent: true});
                 return accountModel.trigger('error', accountModel, 'NoViewAccess');

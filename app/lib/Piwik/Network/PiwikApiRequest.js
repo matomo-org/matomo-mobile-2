@@ -6,15 +6,12 @@
  * @version $Id$
  */
 
-/** @private */
-var Piwik = require('Piwik');
-
 /**
  * @class     Provides the ability to make an authenticated call using the piwik rest api. The data are requested
  *            via HTTP GET method. 
  *
  * @example
- * var request = Piwik.require('Network/PiwikApiRequest');
+ * var request = require('Piwik/Network/PiwikApiRequest');
  * request.setMethod('UsersManager.getTokenAuth');
  * request.setParameter({idSite: 4});
  * request.setAccount(account);
@@ -88,10 +85,12 @@ function PiwikApiRequest () {
     this.handleAs      = 'json';
 }
 
+var HttpRequest = require('Piwik/Network/HttpRequest');
+
 /**
  * Extend Piwik.Network.HttpRequest.
  */
-PiwikApiRequest.prototype = Piwik.require('Network/HttpRequest');
+PiwikApiRequest.prototype = new HttpRequest();
 
 /**
  * Sets (overwrites) the user auth token.
@@ -197,8 +196,9 @@ PiwikApiRequest.prototype._mixinParameter = function (parameter) {
  * @override
  */
 PiwikApiRequest.prototype.isValidResponse = function (response) {
+    var _ = require('alloy/underscore')._;
     
-    if (response && Piwik.isObject(response) && response.result && 'error' == response.result) {
+    if (response && _.isObject(response) && response.result && 'error' == response.result) {
         // the piwik response contains an error
         
         if (!this.displayErrorAllowed()) {
@@ -210,17 +210,17 @@ PiwikApiRequest.prototype.isValidResponse = function (response) {
         
         this.errorMessageSent = true;
 
-        var _       = require('L');
+        var L       = require('L');
         
-        var message = _('General_InvalidResponse');
+        var message = L('General_InvalidResponse');
         if (response.message) {
             message = response.message;
         }
 
         var alertDialog = Ti.UI.createAlertDialog({
-            title: _('General_Error'),
+            title: L('General_Error'),
             message: message,
-            buttonNames: [_('General_Ok')]
+            buttonNames: [L('General_Ok')]
         });
 
         alertDialog.show();

@@ -6,9 +6,6 @@
  * @version $Id$
  */
 
-/** @private */
-var Piwik = require('Piwik');
-
 /**
  * @class    Provides methods needed in most Network Requests. Serves as a base class for network classes. A request
  *           should extend this class.

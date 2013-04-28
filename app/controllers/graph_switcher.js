@@ -9,6 +9,11 @@ var staticUrl    = args.imageGraphUrl || '';
 var evolutionUrl = args.imageGraphEvolutionUrl || '';
 var currentUrl   = getPreferredGraphUrl();
 
+function getSettings()
+{
+    return Alloy.createCollection('AppSettings').settings();
+}
+
 /**
  * Switches/Changes the pointer to the next graph url and returns the url. Example: If static graph is currently active
  * it'll switch to the evolution graph and return the url of the evolution graph. Automatically stores the chosen
@@ -21,13 +26,13 @@ function nextGraphUrl()
     if (currentUrl == staticUrl) {
         currentUrl = evolutionUrl;
         
-        require('Piwik/App/Settings').setPreferEvoltuionGraphs(true);
+        getSettings().setPreferEvolutionGraphs(true);
         require('Piwik/Tracker').trackEvent({title: 'Switch Graph Static', url: '/graph/switch/static'});
         
     } else if (currentUrl == evolutionUrl) {
         currentUrl = staticUrl;
         
-        require('Piwik/App/Settings').setPreferEvoltuionGraphs(false);
+        getSettings().setPreferEvolutionGraphs(false);
         require('Piwik/Tracker').trackEvent({title: 'Switch Graph Evolution', url: '/graph/switch/evolution'});
     }
     
@@ -68,7 +73,7 @@ function getPreferredGraphUrl()
         return '';
     } 
     
-    if (require('Piwik/App/Settings').getPreferEvoltuionGraphs()) {
+    if (getSettings().preferEvolutionGraphs()) {
         
         return evolutionUrl;
     }
