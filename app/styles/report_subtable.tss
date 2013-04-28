@@ -1,15 +1,3 @@
-".container": {
-    layout: "vertical",
-},
-
-".container[platform=ios]": {
-    separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
-},
-
-".container[platform=mobileweb]": {
-    separatorStyle: Ti.UI.MobileWeb.TableViewSeparatorStyle.NONE
-},
-
 "#index": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,
@@ -24,6 +12,7 @@
 
 "#reportTable": {
     top: 0,
+    separatorColor: '#e8e8e8'
   //  left: 10,
   //  right: 10,
   //  bottom: 10,

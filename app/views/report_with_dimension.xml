@@ -1,15 +1,6 @@
 <Alloy>
     <Window title="" id="index" onClose="onClose">
         
-        <RightNavButton formFactor="tablet" platform="ios">
-            <ButtonBar onClick="onClose">
-                <Labels>
-                    <Label>Websites</Label>
-                    <Label>Accounts</Label>
-                </Labels>
-            </ButtonBar>
-        </RightNavButton>
-
         <Require src="loading_indicator" id="loadingindicator"/>
 
         <View id="content">

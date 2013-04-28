@@ -1,7 +1,6 @@
 ".container": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-    layout: "vertical",
 },
 
 ".data": {
@@ -45,13 +44,4 @@
     top: '10dp',
     bottom: '10dp',
     font: {fontSize: '16sp', fontWeight: 'bold'}
-},
-
-".separator": {
-    height: 1,
-    backgroundColor: '#e8e8e8'
-},
-
-".separator[platform=android]": {
-    height: '1dp'
-},
+}
