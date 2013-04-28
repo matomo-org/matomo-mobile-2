@@ -1,12 +1,20 @@
 ".container": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
+    layout: "horizontal"
 },
 
 ".data": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL
 },
+
+"#icon": {
+    height: 0,
+    width: 0,
+    visible: 0,
+    left: 0
+}
 
 "#title": {
     height: Ti.UI.SIZE,

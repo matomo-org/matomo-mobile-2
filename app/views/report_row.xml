@@ -1,5 +1,6 @@
 <Alloy>
     <View id="index" class="container">
+        <ImageView id="icon"/>
         <View class="data">
             <Label id="title"> - </Label>
             <Label id="value"> - </Label>
