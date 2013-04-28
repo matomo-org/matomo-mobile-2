@@ -42,8 +42,8 @@ function createOverview (visitor, accessUrl)
 
     if (visitor.visitIp) {
         rows.push(createRow({title: L('General_VisitorIP'),
-                                                     className: 'visitorTableViewRow',
-                                                     value: visitor.visitIp}));
+                             className: 'visitorTableViewRow',
+                             value: visitor.visitIp}));
     }
     
     if (visitor.visitorType) {
@@ -68,15 +68,15 @@ function createOverview (visitor, accessUrl)
         }
 
         rows.push(createRow({title: L('General_VisitType'),
-                                                     className: 'visitorTableViewRow',
-                                                     value: visitorTypeText}));
+                             className: 'visitorTableViewRow',
+                             value: visitorTypeText}));
     }
 
     if (visitor.goalConversions) {
         var goalConversionsText = String.format(L('General_VisitConvertedNGoals'),
                                                 '' + parseInt(visitor.goalConversions, 10));
         rows.push(createRow({title: goalConversionsText,
-                                                     className: 'visitorTableViewRow'}));
+                             className: 'visitorTableViewRow'}));
     }
 
     // @todo display more information about the referrer
@@ -156,8 +156,8 @@ function createCustomVariables(visitor, accessUrl) {
         var customVariableValue = customVariable['customVariableValue' + customVariableIndex];
 
         rows.push(createRow({title: customVariableName,
-                                                     className: 'visitorTableViewRow',
-                                                     value: customVariableValue}));
+                             className: 'visitorTableViewRow',
+                             value: customVariableValue}));
     }
     
     visitor = null;
