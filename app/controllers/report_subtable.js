@@ -85,10 +85,16 @@ function onStatisticsFetched(processedReportCollection)
     var rows = [];
 
     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
+    if (OS_IOS) {
+        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+    }
     row.add($.reportGraphCtrl.getView());
     rows.push(row);
 
     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
+    if (OS_IOS) {
+        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+    }
     row.add($.reportInfoCtrl.getView());
     rows.push(row);
 
