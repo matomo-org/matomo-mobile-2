@@ -15,6 +15,9 @@ exports.definition = {
         },
         "defaultParams": {
             limit: 1
+        },
+        defaults: {
+            value: ''
         }
     },        
 
