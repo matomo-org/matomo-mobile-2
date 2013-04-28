@@ -5,6 +5,10 @@
     backgroundColor: "#efefef"
 }
 
+"#index[platform=ios]": {
+    navBarHidden: true 
+}
+
 "#index[platform=mobileweb]": {
     modal: true,
     navBarHidden: true 
