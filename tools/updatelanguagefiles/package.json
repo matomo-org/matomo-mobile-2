@@ -1,0 +1,37 @@
+{
+  "author": "(c) piwik.org",
+  "contributors": [
+    "Thomas Steur <thomas.steur@gmail.com>"
+  ],
+  "name": "updatelanguagefiles",
+  "keywords" : [
+    "piwik",
+    "mobile",
+    "i18n"
+  ],
+  "description": "Creates a file for each available language within the i18n directory.",
+  "version": "0.0.1",
+  "homepage": "http://piwik.org",
+  "bugs": "http://dev.piwik.org",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/piwik/piwik-mobile.git"
+  },
+  "directories" : {
+    "lib" : "lib"
+  },
+  "license":"GPL v3 or later",
+  "main": "./lib/updatelanguagefiles.js",
+  "bin": {
+    "alloy": "./bin/updatelanguagefiles"
+  },
+  "dependencies": {
+    "piwik-client": "0.2.x"
+  },
+  "devDependencies": {
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
