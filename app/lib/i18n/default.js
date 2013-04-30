@@ -1,4 +1,5 @@
 module.exports = {
+    Actions_SubmenuSitesearch:                                          'Site Search',
     CorePluginsAdmin_Activate:                                          'Activate',
     CorePluginsAdmin_Deactivate:                                        'Deactivate',
     CoreHome_PeriodDay:                                                 'Day',
