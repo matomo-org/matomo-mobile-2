@@ -141,7 +141,7 @@ function onStatisticsFetched(processedReportCollection)
 
     processedReportCollection.forEach(renderMetricTile);
 
-    var verticalSeparator = Ti.UI.createView({left: '50%', zIndex: 2, width: 1, top: 17, bottom: 10, backgroundColor: '#e6e6e6', height: Ti.UI.FILL});
+    var verticalSeparator = Ti.UI.createView({left: '50%', zIndex: 2, width: 1, top: 17, backgroundColor: '#e6e6e6', height: $.content.size.height});
     $.outerContent.add(verticalSeparator);
 }
 

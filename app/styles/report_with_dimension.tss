@@ -33,4 +33,17 @@
 
 "TableViewRow[platform=ios]": {
     selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
-},
+}
+
+".footerView": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+}
+
+".footerLogo": {
+    top: 12,
+    bottom: 25,
+    width: 55,
+    height: 19,
+    image: 'piwik_logo_light_footer.png'
+}

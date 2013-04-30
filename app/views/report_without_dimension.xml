@@ -8,9 +8,13 @@
         <Require src="loading_indicator" id="loadingindicator"/>
 
         <ScrollView class="container">
-            <Require src="graph" id="reportGraphCtrl"/>
-            <View id="outerContent">
-                <View id="content"/>
+            <View class="innerContainer">
+                <Require src="graph" id="reportGraphCtrl"/>
+                <View class="separator"/>
+                <View id="outerContent">
+                    <View id="content"/>
+                </View>
+                <ImageView class="footerLogo"/>
             </View>
         </ScrollView>
     </Window>

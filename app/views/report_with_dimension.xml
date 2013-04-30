@@ -9,6 +9,11 @@
                 <HeaderPullView platform="ios">
                     <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>
+                <FooterView>
+                    <View class="footerView">
+                        <ImageView class="footerLogo"/>
+                    </View>
+                </FooterView>
                 <TableViewRow>
                     <Require src="graph" id="reportGraphCtrl"/>
                 </TableViewRow>

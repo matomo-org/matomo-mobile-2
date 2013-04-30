@@ -3,16 +3,18 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
-var visitor = args.visitor;
-var accessUrl = args.accessUrl;
-var rows    = [];
+var args      = arguments[0] || {};
+var visitor   = args.visitor;
+
+var accountModel = require('session').getAccount();
+var accessUrl    = accountModel.getBasePath();
+
+var rows = [];
 
 createOverview(visitor, accessUrl);
 createCustomVariables(visitor, accessUrl);
 createSystem(visitor, accessUrl);
 createActionDetails(visitor, accessUrl);
-
 
 $.visitorTable.setData(rows);
 rows = null;
@@ -20,7 +22,7 @@ rows = null;
 exports.open = function ()
 {
     require('layout').open($.index);
-}
+};
 
 function createRow(params)
 {
@@ -129,7 +131,7 @@ function createOverview (visitor, accessUrl)
                              className: 'visitorTableViewRow'}));
         // leftImage: {url: accessUrl + visitor.countryFlag}
     }
-};
+}
 
 /**
  * Displays all custom variables of the user.
@@ -141,8 +143,8 @@ function createOverview (visitor, accessUrl)
  * $VARNAME     $VARVALUE<br />
  */
 function createCustomVariables(visitor, accessUrl) {
-
-    if (!visitor.customVariables) {
+    var _ = require('alloy/underscore')._;
+    if (_.isEmpty(visitor.customVariables)) {
 
         return;
     }
@@ -161,7 +163,7 @@ function createCustomVariables(visitor, accessUrl) {
     }
     
     visitor = null;
-};
+}
 
 /**
  * Creates system information.
@@ -207,20 +209,19 @@ function createSystem(visitor, accessUrl) {
 
     if (visitor.pluginsIcons && visitor.pluginsIcons.length && accessUrl) {
 
-        var row = createRow({className: 'visitorTableViewRow'});
-        row.add(Ti.UI.createLabel({text: L('UserSettings_Plugins'),
-                                   id: 'tableViewRowTitleLabel'}));
-        
+        var row = createRow({title: L('UserSettings_Plugins'), className: 'visitorTableViewRow'});
+
         var right = 10;
         for (var index = 0; index < visitor.pluginsIcons.length; index++) {
             var pluginIcon = visitor.pluginsIcons[index];
 
-            // @todo not all icons are 18x18
+            // @todo not all icons are 14x14
             if (pluginIcon.pluginIcon) {
                 row.add(Ti.UI.createImageView({image: accessUrl + pluginIcon.pluginIcon,
                                                right: right,
                                                width: 14,
-                                               height: 14,
+                                               height: 14, 
+                                               top: 14,
                                                className: 'pluginIcon'}));
             }
 
@@ -232,7 +233,7 @@ function createSystem(visitor, accessUrl) {
     }
     
     visitor = null;
-};
+}
 
 /**
  * Triggers the rendering of several actions.
@@ -274,7 +275,7 @@ function createActionDetails(visitor, accessUrl) {
     }
     
     visitor = null;
-};
+}
 
 /**
  * Renders the 'action' action.
@@ -288,22 +289,22 @@ function createActionDetails(visitor, accessUrl) {
  */
 function createActionAction(actionDetail) {
 
-    var row = Ti.UI.createTableViewRow({className: 'visitorActionActionTableViewRow'});
+    var row = Ti.UI.createTableViewRow(helperVisitorActionActionTableViewRow());
 
     if (actionDetail.pageTitle) {
-        row.add(Ti.UI.createLabel({text: '' + actionDetail.pageTitle, id: 'visitorActionActionPageTitleLabel'}));
+        row.add(Ti.UI.createLabel(helperVisitorActionActionPageTitleLabel(actionDetail.pageTitle)));
     }
     if (actionDetail.url) {
-        row.add(Ti.UI.createLabel({text: actionDetail.url, id: 'visitorActionActionUrlLabel'}));
+        row.add(Ti.UI.createLabel(helperVisitorActionActionUrlLabel(actionDetail.url)));
     }
     if (actionDetail.serverTimePretty) {
-        row.add(Ti.UI.createLabel({text: actionDetail.serverTimePretty, id: 'visitorActionActionServerTimeLabel'}));
+        row.add(Ti.UI.createLabel(helperVisitorActionActionServerTimeLabel(actionDetail.serverTimePretty)));
     }
 
     rows.push(row);
     row = null;
     actionDetail = null;
-};
+}
 
 /**
  * Renders the 'default' action. For example 'outlink', 'goal' or 'download'.
@@ -316,13 +317,12 @@ function createActionAction(actionDetail) {
  */
 function createDefaultAction(actionDetail, visitor, accessUrl) {
 
-    var row       = Ti.UI.createTableViewRow({className: 'visitorActionDefaultTableViewRow'});
+    var row       = Ti.UI.createTableViewRow(helperVisitorActionDefaultTableViewRow());
 
-    var view      = Ti.UI.createView({id: 'visitorActionDefaultHeadlineView'});
+    var view      = Ti.UI.createView(helperVisitorActionDefaultHeadlineView());
 
     if (accessUrl && actionDetail.icon) {
-        view.add(Ti.UI.createImageView({image: accessUrl + actionDetail.icon,
-                                        id: 'visitorActionDefaultIconImageView'}));
+        view.add(Ti.UI.createImageView(helperVisitorActionDefaultIconImageView(accessUrl + actionDetail.icon)));
     }
 
     if (actionDetail.type) {
@@ -341,22 +341,26 @@ function createDefaultAction(actionDetail, visitor, accessUrl) {
             case 'outlink':
                 title = L('General_Outlink');
                 break;
+
+            case 'search':
+                title = L('Actions_SubmenuSitesearch');
+                break;
         }
 
-        view.add(Ti.UI.createLabel({text: title, id: 'visitorActionDefaultTypeLabel'}));
+        view.add(Ti.UI.createLabel(helperVisitorActionDefaultTypeLabel(title)));
     }
 
     row.add(view);
     view = null;
 
     if (actionDetail.url) {
-        row.add(Ti.UI.createLabel({text: '' + actionDetail.url, id: 'visitorActionDefaultUrlLabel'}));
+        row.add(Ti.UI.createLabel(helperVisitorActionDefaultUrlLabel(actionDetail.url)));
     }
 
     rows.push(row);
     row          = null;
     actionDetail = null;
-};
+}
 
 /**
  * Renders the 'default' action. For example 'outlink' or 'download'.
@@ -374,8 +378,8 @@ function createDefaultAction(actionDetail, visitor, accessUrl) {
  */
 function createEcommerceAction(actionDetail, visitor, accessUrl) {
 
-    var row           = Ti.UI.createTableViewRow({className: 'visitorActionEcommerceTableViewRow'});
-    var ecommerceView = Ti.UI.createView({id: 'visitorActionEcommerceHeadlineView'});
+    var row           = Ti.UI.createTableViewRow(helperVisitorActionEcommerceTableViewRow());
+    var ecommerceView = Ti.UI.createView(helperVisitorActionEcommerceHeadlineView());
     var ecommerceText = '';
 
     switch (actionDetail.type) {
@@ -398,15 +402,14 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
     }
 
     if (accessUrl && actionDetail.icon) {
-        ecommerceView.add(Ti.UI.createImageView({image: accessUrl + actionDetail.icon,
-                                                 id: 'visitorActionEcommerceIconImageView'}));
+        ecommerceView.add(Ti.UI.createImageView(helperVisitorActionEcommerceIconImageView(accessUrl + actionDetail.icon)));
     }
 
     if (ecommerceText) {
-        ecommerceView.add(Ti.UI.createLabel({text: ecommerceText, id: 'visitorActionEcommerceTypeLabel'}));
+        ecommerceView.add(Ti.UI.createLabel(helperVisitorActionEcommerceTypeLabel(ecommerceText)));
     }
 
-    var itemDetailsView = Ti.UI.createView({id: 'visitorActionEcommerceDetailsView'});
+    var itemDetailsView = Ti.UI.createView(helperVisitorActionEcommerceDetailsView());
 
     if (actionDetail.itemDetails) {
         for (var index = 0; index < actionDetail.itemDetails.length; index++) {
@@ -423,10 +426,10 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
                 itemText += ', ' + item.itemCategory;
             }
 
-            var itemView = Ti.UI.createView({id: 'visitorActionEcommerceDetailsItemView'});
+            var itemView = Ti.UI.createView(helperVisitorActionEcommerceDetailsItemView());
 
-            itemView.add(Ti.UI.createLabel({text: ' * ', id: 'visitorActionEcommerceDetailsItemStarLabel'}));
-            itemView.add(Ti.UI.createLabel({text: itemText, id: 'visitorActionEcommerceDetailsItemNameLabel'}));
+            itemView.add(Ti.UI.createLabel(helperVisitorActionEcommerceDetailsItemStarLabel(' * ')));
+            itemView.add(Ti.UI.createLabel(helperVisitorActionEcommerceDetailsItemNameLabel(itemText)));
             itemDetailsView.add(itemView);
             itemView = null;
 
@@ -444,7 +447,7 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
                 priceText += 'Quantity: ' + item.quantity;
             }
 
-            itemDetailsView.add(Ti.UI.createLabel({text: priceText, id: 'visitorActionEcommerceDetailsPriceLabel'}));
+            itemDetailsView.add(Ti.UI.createLabel(helperVisitorActionEcommerceDetailsPriceLabel(priceText)));
         }
     }
 
@@ -463,8 +466,8 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
     row.add(ecommerceView);
     ecommerceView = null;
     
-    row.add(Ti.UI.createLabel({text: revenueText, id: 'visitorActionEcommerceRevenueLabel'}));
-    row.add(Ti.UI.createLabel({text: listOfProductsText, id: 'visitorActionEcommerceDetailsListLabel'}));
+    row.add(Ti.UI.createLabel(helperVisitorActionEcommerceRevenueLabel(revenueText)));
+    row.add(Ti.UI.createLabel(helperVisitorActionEcommerceDetailsListLabel(listOfProductsText)));
     row.add(itemDetailsView);
     itemDetailsView = null;
 
@@ -472,4 +475,206 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
     row          = null;
     actionDetail = null;
     visitor      = null;
-};
+}
+
+
+
+function helperVisitorActionActionPageTitleLabel(text) {
+    return {
+        text: (text+'') || '',
+        left: 10,
+        font: {fontSize: 13, fontWeight: 'bold'},
+        top: 5,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionActionUrlLabel(text) {
+    return {
+        text: (text+'') || '',
+        left: 10,
+        color: '#555555',
+        font: {fontSize: 13},
+        top: 3,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionActionServerTimeLabel(text) {
+    return {
+        text: (text+'') || '',
+        bottom: 5,
+        top: 3,
+        left: 10,
+        font: {fontSize: 13},
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionActionTableViewRow() {
+    return {
+        layout: 'vertical',
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
+        selectionStyle: 0
+    };
+}
+
+function helperVisitorActionDefaultTableViewRow() {
+    return {
+        layout: 'vertical',
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
+        selectionStyle: 0};
+}
+
+function helperVisitorActionDefaultHeadlineView() {
+    return {
+        layout: 'horizontal',
+        left: 10,
+        top: 5,
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL};
+}
+
+function helperVisitorActionDefaultIconImageView(image) {
+    return {
+        image: image,
+        left: 0,
+        top: 4,
+        width: 10,
+        height: 9,
+        canScale: false,
+        enableZoomControls: false};
+}
+
+function helperVisitorActionDefaultTypeLabel(text) {
+    return {
+        text: (text+'') || '',
+        top: 0,
+        left: 10,
+        font: {fontSize: 13, fontWeight: 'bold'},
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionDefaultUrlLabel(text) {
+    return {
+        text: (text+'') || '',
+        color: '#808080',
+        bottom: 5,
+        left: 10,
+        top: 4,
+        font: {fontSize: 13},
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionEcommerceTableViewRow() {
+    return {
+        layout: 'vertical',
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
+        selectionStyle: 0};
+}
+
+function helperVisitorActionEcommerceHeadlineView() {
+    return {
+        layout: 'horizontal',
+        left: 10,
+        top: 5,
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL};
+}
+
+function helperVisitorActionEcommerceIconImageView(image) {
+    return {
+        image: image,
+        top: 4,
+        left: 0,
+        width: 10,
+        height: 10,
+        canScale: false,
+        enableZoomControls: false};
+}
+
+function helperVisitorActionEcommerceTypeLabel(text) {
+    return {
+        text: (text+'') || '',
+        top: 1,
+        left: 10,
+        font: {fontSize: 13, fontWeight: 'bold'},
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionEcommerceDetailsView() {
+    return {
+        layout: 'vertical',
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        left: 0,
+        bottom: 5,
+        top: 4};
+}
+
+function helperVisitorActionEcommerceDetailsItemView() {
+    return {
+        layout: 'horizontal',
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        left: 10};
+}
+
+function helperVisitorActionEcommerceDetailsItemStarLabel(text) {
+    return {
+        text: (text+'') || '',
+        left: 0,
+        color: '#808080',
+        font: {fontSize: 13},
+        top: 3,
+        width: 15,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionEcommerceDetailsItemNameLabel(text) {
+    return {
+        text: (text+'') || '',
+        left: 5,
+        color: '#808080',
+        font: {fontSize: 13},
+        top: 3,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionEcommerceRevenueLabel(text) {
+    return {
+        text: (text+'') || '',
+        left: 10,
+        font: {fontSize: 13},
+        top: 4,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionEcommerceDetailsListLabel(text) {
+    return {
+        text: (text+'') || '',
+        left: 10,
+        font: {fontSize: 13},
+        top: 4,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}
+
+function helperVisitorActionEcommerceDetailsPriceLabel(text) {
+    return {
+        text: (text+'') || '',
+        left: 30,
+        color: '#808080',
+        font: {fontSize: 13},
+        top: 4,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE};
+}

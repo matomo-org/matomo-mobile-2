@@ -6,15 +6,29 @@
     rounded: true
 }
 
-"#content": {
-    backgroundColor: "#e5e5e5",
+".reportContainer": {
+    layout: "vertical",
+    height: Ti.UI.SIZE,
     left: 10,
     right: 10,
     top: 10,
+}
+
+".footerLogo": {
+    top: 2,
+    bottom: 25,
+    width: 55,
+    height: 19,
+    image: 'piwik_logo_dark_footer.png'
+}
+
+"#content": {
+    layout: "vertical",
+    backgroundColor: "#e5e5e5",
     contentHeight: 'auto',
-    layout: "vertical"
+    showVerticalScrollIndicator: true
 }
 
 ".reportOverviewSeparator": {
-    height: 5
+    height: 10
 }
