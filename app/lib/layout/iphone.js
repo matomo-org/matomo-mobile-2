@@ -13,7 +13,7 @@ function bootstrap (win)
     isBootstrapped = true;
 
     win = null;
-};
+}
 
 exports.close = function (win) 
 {
@@ -51,6 +51,12 @@ function hideLeftSidebar()
 
     animation.addEventListener('complete', function () {
         leftSidebarWindow.hide();
+
+        if (!leftSidebarOuterWindow) {
+            console.warn('leftSidebarOuterWindow not set in layout');
+            return;
+        }
+
         leftSidebarOuterWindow.removeEventListener('click', hideLeftSidebar);
         leftSidebarOuterWindow.close();
         leftSidebarOuterWindow = null;
@@ -101,6 +107,8 @@ exports.toggleLeftSidebar = function ()
 var rightSidebarWindow = Ti.UI.createWindow({right: 0, width: 250, visible: false});
 rightSidebarWindow.open();
 
+var rightSidebarOuterWindow;
+
 function hideRightSidebar()
 {
     var animation = Ti.UI.createAnimation({
@@ -112,6 +120,15 @@ function hideRightSidebar()
     
     animation.addEventListener('complete', function () {
         rightSidebarWindow.hide();
+
+        if (!rightSidebarOuterWindow) {
+            console.warn('rightSidebarOuterWindow not set in layout');
+            return;
+        }
+
+        rightSidebarOuterWindow.removeEventListener('click', hideRightSidebar);
+        rightSidebarOuterWindow.close();
+        rightSidebarOuterWindow = null;
     });
 
     rootWindow.animate(animation);
@@ -119,6 +136,10 @@ function hideRightSidebar()
 
 function showRightSidebar()
 {
+    rightSidebarOuterWindow = Ti.UI.createWindow({left: 0, right: 250, backgroundColor: 'transparent'});
+    rightSidebarOuterWindow.addEventListener('click', hideRightSidebar);
+    rightSidebarOuterWindow.open();
+
     rightSidebarWindow.show();
 
     rootWindow.animate({
@@ -139,4 +160,4 @@ exports.hideRightSidebar = hideRightSidebar;
 exports.toggleRightSidebar = function()
 {
     rightSidebarWindow.visible ? hideRightSidebar() : showRightSidebar();
-}
+};
