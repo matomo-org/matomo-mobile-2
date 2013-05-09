@@ -8,6 +8,15 @@
     rounded: true
 }
 
+"#verticalSeparator": {
+    left: '50%',
+    zIndex: 2, 
+    width: 1, 
+    top: 17, 
+    backgroundColor: '#e6e6e6', 
+    height: 0,
+}
+
 ".container": {
     top: 0,
     height: Ti.UI.SIZE,
@@ -36,7 +45,8 @@
 "#outerContent": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-    top: 0,bottom: 0,
+    top: 0,
+    bottom: 0,
 }
 
 "#content": {

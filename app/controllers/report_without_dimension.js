@@ -140,9 +140,30 @@ function onStatisticsFetched(processedReportCollection)
     $.reportGraphCtrl.update(processedReportCollection, accountModel);
 
     processedReportCollection.forEach(renderMetricTile);
+}
 
-    var verticalSeparator = Ti.UI.createView({left: '50%', zIndex: 2, width: 1, top: 17, backgroundColor: '#e6e6e6', height: $.content.size.height});
-    $.outerContent.add(verticalSeparator);
+function fixVerticalSeparatorHeight()
+{
+    console.log('attention: this may cause an endless loop because of postlayout event. hopefully you do not see this too often');
+
+    if (!$.content || !$.content.size || !$.content.size.height) { 
+
+        return;
+    }
+
+    var height = parseInt($.content.size.height, 10);
+
+    if (5 < height) {
+
+        if (OS_MOBILEWEB) {
+            // don't know why but on MobileWeb height will be only changed if there is a small delay. Tried lots of different implementations but didn't find a better solution
+            setTimeout(function () {
+                $.verticalSeparator.setHeight($.content.size.height);
+            }, 100);
+        } else {
+            $.verticalSeparator.setHeight($.content.size.height);
+        }
+    } 
 }
 
 function doRefresh()
@@ -171,6 +192,8 @@ function doRefresh()
 }
 
 exports.open = function () {
+
+    $.content.addEventListener('postlayout', fixVerticalSeparatorHeight);
 
     onReportChosen(reportModel);
 
