@@ -12,7 +12,8 @@
 ".header": {
     layout: 'vertical',
     height: Ti.UI.SIZE,
-    width: Ti.UI.FILL
+    width: Ti.UI.FILL,
+    backgroundImage: 'org.piwik.tableviewrow/background.png',
 }
 
 ".separator": {

@@ -9,16 +9,16 @@
 ".icon": {
     image: "ic_action_menu_date.png",
     right: 10,
-    width: 22,
-    height: 22
+    width: 19,
+    height: 19
 }
 
 "#dateLabel": {
     color: "#d5d5d5",
-    left: 10,
+    left: 0,
     top: 5,
     bottom: 5,
-    right: 42,
+    right: 39,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     height: Ti.UI.SIZE,
 }

@@ -15,7 +15,7 @@
 
 "#websiteName": {
     color: "#d5d5d5",
-    left: 10,
+    left: 0,
     top: 5,
     bottom: 5,
     right: 39,
