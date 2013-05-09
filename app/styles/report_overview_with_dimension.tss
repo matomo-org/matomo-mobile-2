@@ -7,6 +7,10 @@
     layout: 'vertical'
 }
 
+"#loadingIndicator": {
+    height: 160
+}
+
 ".separator": {
     backgroundColor: '#dcdcdc',
     height: 1,
@@ -41,7 +45,7 @@
 
 ".content": {
     backgroundColor: '#efefef',
-    layout: "vertical"
+    layout: "vertical",
 }
 
 "#noData": {

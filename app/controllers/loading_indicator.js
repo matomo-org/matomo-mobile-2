@@ -3,6 +3,12 @@ function L(key)
     return require('L')(key);
 }
 
+function centerLoadingLabel()
+{
+    $.loadingLabel.top    = null;
+    $.loadingLabel.bottom = null;
+}
+
 var args = arguments[0] || {};
 
 if (args && args.rounded) {
@@ -13,6 +19,14 @@ if (args && args.rounded) {
     });
 }
 
+if (args && args.height) {
+    $.loading.applyProperties({
+        height: args.height
+    });
+    
+    centerLoadingLabel();
+}
+
 exports.hide = function()
 {
     $.loading.hide();
@@ -21,6 +35,11 @@ exports.hide = function()
 
 exports.show = function()
 {
-    $.loading.height = Ti.UI.SIZE;
+    if (args && args.height) {
+        $.loading.height = args.height;
+    } else {
+        $.loading.height = Ti.UI.SIZE;
+    }
+
     $.loading.show();
 }
