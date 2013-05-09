@@ -1,7 +1,7 @@
 <Alloy>
 
     <View id="index" onClick="chooseWebsite">
-        <Label id="websiteName" class="website_name" text=" - "/>
+        <Label id="websiteName" text=" - "/>
         <ImageView class="icon"/>
     </View>
 

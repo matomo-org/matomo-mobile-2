@@ -1,12 +1,11 @@
 <Alloy>
     <Window id="index" onClose="onClose">
-        <ScrollView class="container">
-            <ImageView id="piwikLogo"/>
-            <Button id="website" onClick="doOpenWebsite"/>
-            <Button id="email" onClick="doEmailUs"/>
-            <Button id="follow" onClick="doFollowPiwik"/>
-            <Button id="sourceCode" onClick="doOpenSourceCode"/>
-            <Button id="license" onClick="doOpenLicense"/>
-        </ScrollView>
+        <TableView id="aboutPiwikTable">
+            <TableViewRow id="website" onClick="openWebsite"/>
+            <TableViewRow id="follow" onClick="followPiwik"/>
+            <TableViewRow id="participate" onClick="participate"/>
+            <TableViewRow id="sourceCode" onClick="openSourceCode"/>
+            <TableViewRow id="license" onClick="openLicense"/>
+        </TableView>
     </Window>
 </Alloy>

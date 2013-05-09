@@ -1,5 +1,13 @@
 <Alloy>
 	<Window id="index" onClose="onClose">
+
+        <LeftNavButton platform="mobileweb" formFactor="handheld">
+            <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
+        </LeftNavButton>
+        <LeftNavButton platform="ios" formFactor="handheld">
+            <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
+        </LeftNavButton>
+        
         <TableView id="feedbackTable">
         </TableView>
 	</Window>

@@ -3,7 +3,9 @@
         <ScrollView class="container">
 
             <Require src="website_picker" onSelected="hideRightSidebar"/>
+            <View class="separator"/>
             <Require src="date_picker" onSelected="hideRightSidebar"/>
+            <View class="separator"/>
             
         </ScrollView>
     </Window>

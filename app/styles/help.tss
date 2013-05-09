@@ -12,10 +12,20 @@
     title: L('Mobile_AboutPiwikMobile')
 },
 
-"#feedback": {
+"#email": {
     hasDetail: true,
-    title: L('General_GiveUsYourFeedback')
+    title: L('Mobile_EmailUs')
 },
+
+"#forums": {
+    hasDetail: true,
+    title: L('General_Forums')
+}
+
+"#documentation": {
+    hasDetail: true,
+    title: L('General_Documentation')
+}
 
 "#faq": {
     hasDetail: true,

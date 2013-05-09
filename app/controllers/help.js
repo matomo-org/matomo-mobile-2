@@ -8,21 +8,32 @@ function onClose()
     $.destroy();
 }
 
-function doOpenFaq()
+function openFaq()
 {
     require('commands/openFaq').execute();
 }
 
-function doOpenAboutPiwikMobile()
+function openAboutPiwikMobile()
 {
     var about = Alloy.createController('about_piwik_mobile');
     about.open();
 }
 
-function doOpenGiveFeedback()
+function emailUs()
 {
-    var feedback = Alloy.createController('give_feedback');
-    feedback.open();
+    require('commands/sendEmailFeedback').execute();
+}
+
+function openForum()
+{
+    var params = {title: L('General_Forums'), url: 'http://forum.piwik.org/'};
+    Alloy.createController('webview', params).open();
+}
+
+function openDocumentation()
+{
+    var params = {title: L('General_Documentation'), url: 'http://piwik.org/docs/'};
+    Alloy.createController('webview', params).open();
 }
 
 function toggleReportChooserVisibility(event)

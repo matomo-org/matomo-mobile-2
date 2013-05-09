@@ -8,6 +8,11 @@ function onClose()
     $.destroy();
 }
 
+function toggleReportChooserVisibility(event)
+{
+    require('report/chooser').toggleVisibility();
+}
+
 function platformInfo()
 {
     return String.format('%s %s %s (%s)', 
@@ -75,7 +80,7 @@ function render()
         title: 'Learn how you can participate', 
         description: 'Piwik is a project made by the community, you can participate in the Piwik Mobile App or Piwik.'
     });
-    row.addEventListener('click', doParticipate)
+    row.addEventListener('click', doParticipate);
     rows.push(row);
 
     rows.push(createSection({title: 'About', style: 'native'}));
@@ -90,4 +95,8 @@ function render()
 exports.open = function () {
     render();
     require('layout').open($.index);
-}
+};
+
+exports.close = function () {
+    require('layout').close($.index);
+};

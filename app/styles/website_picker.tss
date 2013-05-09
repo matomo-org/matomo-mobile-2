@@ -1,16 +1,16 @@
 "#index": {
-    height: Ti.UI.SIZE,
     top: 10,
     right: 10,
     left: 10,
     bottom: 10,
+    height: Ti.UI.SIZE,
 }
 
 ".icon": {
-    image: "ic_action_menu_website.png",
+    image: "ic_action_menu_website.png", 
+    right: 10,
     width: 19,
-    height: 19, 
-    right: 10
+    height: 19
 }
 
 "#websiteName": {

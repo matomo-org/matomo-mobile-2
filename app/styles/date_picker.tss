@@ -13,13 +13,6 @@
     height: 22
 }
 
-".button": {
-    backgroundImage: 'menu_button_background.png',
-    height: Ti.UI.SIZE,
-    borderColor: '#000',
-    borderRadius: 5,
-}
-
 "#dateLabel": {
     color: "#d5d5d5",
     left: 10,

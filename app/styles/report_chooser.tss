@@ -14,3 +14,9 @@
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL
 }
+
+".separator": {
+    height: 1,
+    width: Ti.UI.FILL,
+    backgroundColor: '#2d2d2d'
+}

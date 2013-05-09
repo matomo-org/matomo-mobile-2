@@ -2,50 +2,20 @@
     title: L('Mobile_AboutPiwikMobile')
 },
 
-".container": {
-    layout: 'vertical'
-},
-
-"Button": {
-    top: 8,
-    left: 16,
-    right: 16,
-    height: Ti.UI.SIZE,
-    color: '#336699'
-},
-
-"Button[platform=android]": {
-    top: '8dp',
-    left: '16dp',
-    right: '16dp',
-},
-
-"#piwikLogo": {    
-    image: 'logo_piwik_mobile.png',
-    width: 288,
-    height: 102,
-    top: 16,
-    bottom: 8
-},
-
-"#piwikLogo[platform=android]": {    
-    image: '/logo_piwik_mobile.png',
-    width: '288dp',
-    height: '102dp',
-    top: '16dp',
-    bottom: '8dp'
-},
+"#aboutPiwikTable[platform=ios]": {
+    style: Ti.UI.iPhone.TableViewStyle.GROUPED
+}
 
 "#website": {
     title: 'Visit our Website'
 },
 
-"#email": {
-    title: 'Email us'
-},
-
 "#follow": {
     title: 'Follow @piwik'
+},
+
+"#participate": {
+    title: 'Participate to Piwik'
 },
 
 "#sourceCode": {

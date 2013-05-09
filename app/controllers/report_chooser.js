@@ -42,6 +42,7 @@ function updateAvailableReportsList()
     rows.push(Alloy.createController('report_chooser_row', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_Settings'), cid: 'settings'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_Help'), cid: 'help'}).getView());
+    rows.push(Alloy.createController('report_chooser_row', {title: L('General_GiveUsYourFeedback'), cid: 'feedback'}).getView());
 
     $.reportsTable.setData(rows);
     rows = null;
@@ -83,6 +84,8 @@ function doSelectReport(event)
         openHelp();
     } else if ('accounts' == cid) {
         chooseAccount();
+    } else if ('feedback' == cid) {
+        openGiveFeedback();
     } else {
         var report = reportsCollection.getByCid(cid);
         openCompositeReport(report);
@@ -151,6 +154,13 @@ function openVisitorMap()
     var realtimemap = Alloy.createController('realtime_map');
     realtimemap.open();
     setCurrentlyOpenedReport(realtimemap);
+}
+
+function openGiveFeedback()
+{
+    var feedback = Alloy.createController('give_feedback');
+    feedback.open();
+    setCurrentlyOpenedReport(feedback);
 }
 
 function refresh()

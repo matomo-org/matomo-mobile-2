@@ -1,8 +1,8 @@
 <Alloy>
+
     <View id="index" onClick="chooseDate">
-        <View class="button">
-            <Label id="dateLabel" text=""/>
-            <ImageView class="icon"/>
-        </View>
+        <Label id="dateLabel" text=""/>
+        <ImageView class="icon"/>
     </View>
+    
 </Alloy>

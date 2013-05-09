@@ -3,27 +3,27 @@ function L(key)
     return require('L')(key);
 }
 
-function doOpenWebsite()
+function openWebsite()
 {
     require('commands/openLink').execute('http://piwik.org');
 }
 
-function doEmailUs()
-{
-    require('commands/sendEmailFeedback').execute();
-}
-
-function doFollowPiwik()
+function followPiwik()
 {
     require('commands/openLink').execute('https://www.twitter.com/piwik');
 }
 
-function doOpenSourceCode()
+function openSourceCode()
 {
     require('commands/openLink').execute('http://dev.piwik.org/svn/mobile');
 }
 
-function doOpenLicense()
+function participate()
+{
+    require('commands/openLink').execute('http://piwik.org/contribute/');
+}
+
+function openLicense()
 {
     var license = Alloy.createController('license');
     license.open();

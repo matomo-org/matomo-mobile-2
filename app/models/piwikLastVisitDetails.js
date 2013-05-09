@@ -14,7 +14,7 @@ exports.definition = {
             "cache": false
         },
         "defaultParams": {
-            filter_limit: 10,
+            filter_limit: 15,
             period: "day", 
             date: "today"
         }
@@ -69,11 +69,11 @@ exports.definition = {
                 this.period = period;
 
                 this.currentOffset = 0;
-                this.nextOffset    = 10;
+                this.nextOffset    = 15;
 
                 this.fetch({
                     account: account,
-                    params: {filter_limit: 10, 
+                    params: {filter_limit: 15, 
                              idSite: idSite,
                              period: this.getPeriod(),
                              date: this.parseDate()}
@@ -107,7 +107,7 @@ exports.definition = {
                 }
 
                 if (!this.nextOffset) {
-                    this.nextOffset = 10;
+                    this.nextOffset = 15;
                 }
 
                 var params = {filter_offset: this.currentOffset,
