@@ -13,6 +13,7 @@ var flatten        = args.flatten || 0;
 var currentMetric  = args.metric;
 var reportDate     = require('session').getReportDate();
 var showAllEntries = false;
+var shouldScrollToPositionOfPaginator = false;
 
 $.index.title = args.reportTitle || '';
 $.index.backButtonTitle = args.backButtonTitle;
@@ -42,6 +43,7 @@ function onMetricChosen(chosenMetric)
 function onTogglePaginator()
 {
     showAllEntries = !showAllEntries; 
+    shouldScrollToPositionOfPaginator = showAllEntries;
     doRefresh();
 }
 
@@ -157,6 +159,11 @@ function onStatisticsFetched(processedReportCollection)
     $.reportTable.setData(rows);
     row  = null;
     rows = null;
+
+    if (shouldScrollToPositionOfPaginator) {
+        $.reportTable.scrollToIndex(rowsFilterLimit);
+        shouldScrollToPositionOfPaginator = false;
+    }
 }
 
 function doRefresh()

@@ -12,6 +12,7 @@ var reportList      = args.reportList || {};
 var reportDate      = require('session').getReportDate();
 var flatten         = args.flatten || 0;
 var showAllEntries  = false;
+var shouldScrollToPositionOfPaginator = false;
 
 $.index.title = reportModel.getReportName();
 
@@ -79,6 +80,7 @@ function onReportChosen (chosenReportModel) {
 function onTogglePaginator()
 {
     showAllEntries = !showAllEntries; 
+    shouldScrollToPositionOfPaginator = showAllEntries;
     doRefresh();
 }
 
@@ -170,7 +172,7 @@ function renderProcessedReport(processedReportCollection)
             currentReportName: processedReportCollection.getReportName(),
             currentMetric: processedReportCollection.getSortOrder(),
             hasChild: hasSubtable,
-            reportTitle: processedReport.getTitle(),
+            reportTitle: processedReport.getTitle()
         });
 
         if (OS_IOS && !hasSubtable) {
@@ -213,6 +215,11 @@ function renderProcessedReport(processedReportCollection)
     $.reportTable.setData(rows);
     row  = null;
     rows = null;
+
+    if (shouldScrollToPositionOfPaginator) {
+        $.reportTable.scrollToIndex(rowsFilterLimit);
+        shouldScrollToPositionOfPaginator = false;
+    }
 }
 
 function doRefresh()
