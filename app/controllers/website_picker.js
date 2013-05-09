@@ -3,7 +3,8 @@ session.on('websiteChanged', updateWebsiteName);
 
 function chooseWebsite()
 {
-    require('layout').hideLeftSidebar();
+    $.trigger('selected', {});
+
     require('commands/openWebsiteChooser').execute(onWebsiteChosen);
 }
 

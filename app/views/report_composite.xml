@@ -10,6 +10,13 @@
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
 
+        <RightNavButton platform="ios" formFactor="handheld">
+            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+        </RightNavButton>
+        <RightNavButton platform="mobileweb" formFactor="handheld">
+            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+        </RightNavButton>
+
         <Require src="loading_indicator" id="loadingIndicator"/>
         
         <ScrollView id="content">

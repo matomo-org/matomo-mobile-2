@@ -110,6 +110,7 @@ function open()
     }
 }
 
+
 function close()
 {
     require('layout').close($.index);

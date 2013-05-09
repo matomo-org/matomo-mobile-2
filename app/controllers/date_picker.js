@@ -3,7 +3,7 @@ session.on('reportDateChanged', updateDisplayedDate);
 
 function chooseDate()
 {
-    require('layout').hideLeftSidebar();
+    $.trigger('selected', {});
 
     var reportDate = session.getReportDate();
     var period = reportDate.getPeriodQueryString();

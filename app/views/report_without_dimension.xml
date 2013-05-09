@@ -1,9 +1,12 @@
 <Alloy>
     <Window title="" id="index" onClose="onClose">
-        
-        <Menu id="menu" platform="android">
-            <MenuItem id="menuItemWebsite" onClick="onClose" />
-        </Menu>
+
+        <RightNavButton platform="ios" formFactor="handheld">
+            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+        </RightNavButton>
+        <RightNavButton platform="mobileweb" formFactor="handheld">
+            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+        </RightNavButton>
 
         <Require src="loading_indicator" id="loadingindicator"/>
 

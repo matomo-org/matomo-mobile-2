@@ -8,6 +8,13 @@
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         
+        <RightNavButton platform="ios" formFactor="handheld">
+            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+        </RightNavButton>
+        <RightNavButton platform="mobileweb" formFactor="handheld">
+            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+        </RightNavButton>
+        
         <WebView id="webview"></WebView>
     </Window>
 </Alloy>

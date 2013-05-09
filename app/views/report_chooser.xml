@@ -1,10 +1,10 @@
 <Alloy>
     <Collection src="piwikReports"/>
     <TableView id="reportsTable" onClick="doSelectReport">
-        <HeaderView>
+        <HeaderView formFactor="tablet">
             <View class="header">
-                <Require src="website_picker"/>
-                <Require src="date_picker"/>
+                <Require src="website_picker" onSelected="hideLeftSidebar"/>
+                <Require src="date_picker" onSelected="hideLeftSidebar"/>
             </View>
         </HeaderView>
     </TableView>

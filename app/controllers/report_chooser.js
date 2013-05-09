@@ -54,6 +54,11 @@ function closeCurrentlyOpenedReport()
     }
 }
 
+function hideLeftSidebar()
+{
+    require('layout').hideLeftSidebar();
+}
+
 function doSelectReport(event) 
 {
     if (!event.rowData.cid) {
@@ -62,7 +67,7 @@ function doSelectReport(event)
     
     var cid = event.rowData.cid;
 
-    require('layout').hideLeftSidebar();
+    hideLeftSidebar();
 
     closeCurrentlyOpenedReport();
 
@@ -109,6 +114,7 @@ function chooseAccount()
 function onAccountChosen(account)
 {
     require('account').selectWebsite(account, onWebsiteSelected);
+    this.off('accountChosen');
 }
 
 function onWebsiteSelected(siteModel, accountModel)
@@ -164,7 +170,6 @@ function openEntryReport()
 {
     closeCurrentlyOpenedReport();
 
-    // TODO we cannot just use Visits Summary
     var compositeReport = Alloy.createController('report_composite');
     compositeReport.open();
     setCurrentlyOpenedReport(compositeReport);
