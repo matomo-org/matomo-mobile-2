@@ -14,6 +14,12 @@ if (accounts.hasAccount()) {
     firstLogin.open();
 }
 
+(function () {
+    var Rating = require('Piwik/App/Rating');
+    var rating = new Rating();
+    rating.countLaunch();
+})();
+
 function onCreatedAccount(account) 
 {
     accounts.off("add", onCreatedAccount);
