@@ -18,10 +18,11 @@ function updateAvailableReportsList()
     var currentSection = null;
     var latestSection  = null;
 
-    rows.push(Alloy.createController('report_chooser_section', {title: L('General_Reports')}).getView());
+    rows.push(Alloy.createController('report_chooser_section', {title: L('General_Live')}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('UserCountryMap_RealTimeMap'), cid: 'visitormap'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Live_VisitorsInRealTime'), cid: 'live'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Live_VisitorLog'), cid: 'visitorlog'}).getView());
+    rows.push(Alloy.createController('report_chooser_section', {title: L('General_Reports')}).getView());
 
     reportsCollection.forEach(function (report) 
     {
@@ -38,7 +39,7 @@ function updateAvailableReportsList()
         }
     });
 
-    rows.push(Alloy.createController('report_chooser_section', {title: L('Mobile_Account')}).getView());
+    rows.push(Alloy.createController('report_chooser_section', {title: L('CoreAdminHome_MenuManage')}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_Settings'), cid: 'settings'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_Help'), cid: 'help'}).getView());

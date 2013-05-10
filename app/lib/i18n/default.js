@@ -1,5 +1,6 @@
 module.exports = {
     Actions_SubmenuSitesearch:                                          'Site Search',
+    CoreAdminHome_MenuManage:                                           'Manage',
     CorePluginsAdmin_Activate:                                          'Activate',
     CorePluginsAdmin_Deactivate:                                        'Deactivate',
     CoreHome_PeriodDay:                                                 'Day',
@@ -23,6 +24,7 @@ module.exports = {
     General_Details:                                                    'Details',
     General_Done:                                                       'Done',
     General_Forums:                                                     'Forums',
+    General_Live:                                                       'Live',
     General_Ok:                                                         'Ok',
     General_Settings:                                                   'Settings',
     General_Save:                                                       'Save',
