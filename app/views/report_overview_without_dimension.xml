@@ -9,6 +9,7 @@
         <View class="content" id="content">
             <Require src="graph" id="graphCtrl"/>
         </View>
+        <View class="separator"/>
         <View class="footer" onClick="openReport">
             <Label class="more">More</Label>
         </View>

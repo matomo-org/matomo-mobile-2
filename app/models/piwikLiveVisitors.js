@@ -20,7 +20,7 @@ exports.definition = {
         "defaultParams": {
             "urls": [{method: "Live.getCounters", lastMinutes: 30, format: "JSON"},
                      {method: "Live.getCounters", lastMinutes: 1440, format: "JSON"},
-                     {method: "Live.getLastVisitsDetails", filter_limit: 10, period: "day", date: "today", format: "JSON"}]
+                     {method: "Live.getLastVisitsDetails", filter_limit: 20, period: "day", date: "today", format: "JSON"}]
         }
     },      
 
@@ -75,5 +75,5 @@ exports.definition = {
         return Collection;
     }
         
-}
+};
 

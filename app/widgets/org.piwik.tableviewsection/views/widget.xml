@@ -1,3 +1,7 @@
 <Alloy>
-	<Label>I'm the default widget</Label>
+    <TableViewRow id="index">
+        <View class="headerView">
+            <Label id="title" />
+        </View>
+    </TableViewRow>
 </Alloy>

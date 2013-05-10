@@ -2,26 +2,36 @@
     title: L('Mobile_AboutPiwikMobile')
 },
 
+"TableViewRow[platform=mobileweb]": {
+    left: 10,
+    right: 10
+}
+
 "#aboutPiwikTable[platform=ios]": {
     style: Ti.UI.iPhone.TableViewStyle.GROUPED
 }
 
 "#website": {
+    hasDetail: true,
     title: 'Visit our Website'
 },
 
 "#follow": {
+    hasDetail: true,
     title: 'Follow @piwik'
 },
 
 "#participate": {
+    hasDetail: true,
     title: 'Participate to Piwik'
 },
 
 "#sourceCode": {
+    hasDetail: true,
     title: 'Browse Source Code'
 },
 
 "#license": {
+    hasChild: true,
     title: 'View License'
 },

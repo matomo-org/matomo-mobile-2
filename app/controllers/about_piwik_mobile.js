@@ -15,7 +15,7 @@ function followPiwik()
 
 function openSourceCode()
 {
-    require('commands/openLink').execute('http://dev.piwik.org/svn/mobile');
+    require('commands/openLink').execute('https://github.com/piwik/piwik-mobile');
 }
 
 function participate()

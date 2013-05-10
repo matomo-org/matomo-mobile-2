@@ -76,6 +76,9 @@ function render()
     var rows = [];
 
     var row = Ti.UI.createTableViewRow({title: L('General_Next'), color: '#336699'});
+
+    if (OS_MOBILEWEB) row.left = 10;
+
     row.addEventListener('click', fetchNext)
     rows.push(row);
 
@@ -94,6 +97,9 @@ function render()
     }
 
     var row = Ti.UI.createTableViewRow({title: L('General_Previous'), color: '#336699'});
+    
+    if (OS_MOBILEWEB) row.left = 10;
+    
     row.addEventListener('click', fetchPrevious);
     rows.push(row);
 

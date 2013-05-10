@@ -10,10 +10,11 @@ if (OS_IOS && args.style && 'native' == args.style) {
     }
 
 } else {
-    
+
+    $.title.text = args.title || '';
+
     exports.getSection = function ()
     {
-        var widget = Alloy.createWidget('org.piwik.tableviewsection', 'section', args);
-        return widget.getView();
+        return $.index;
     }
 }

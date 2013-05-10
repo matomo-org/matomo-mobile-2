@@ -7,27 +7,32 @@
     style: Ti.UI.iPhone.TableViewStyle.GROUPED
 },
 
+"TableViewRow[platform=mobileweb]": {
+    left: 10,
+    right: 10
+}
+
 "#about": {
-    hasDetail: true,
+    hasChild: true,
     title: L('Mobile_AboutPiwikMobile')
 },
 
 "#email": {
-    hasDetail: true,
+    hasChild: true,
     title: L('Mobile_EmailUs')
 },
 
 "#forums": {
-    hasDetail: true,
+    hasChild: true,
     title: L('General_Forums')
 }
 
 "#documentation": {
-    hasDetail: true,
+    hasChild: true,
     title: L('General_Documentation')
 }
 
 "#faq": {
-    hasDetail: true,
+    hasChild: true,
     title: L('General_Faq')
 },

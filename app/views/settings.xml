@@ -22,7 +22,7 @@
             <TableViewRow id="language" onClick="changeLanguage"/>
             <TableViewRow id="tracking" onClick="toggleTrackingEnabled"/>
             <TableViewRow id="graphs" onClick="toggleGraphsEnabled"/>
-            <TableViewSection id="advanced"/>
+            <Widget src="org.piwik.tableviewsection" id="advanced"/>
             <TableViewRow id="timeout" onClick="changeHttpTimeout"/>
         </TableView>
     </Window>
