@@ -13,8 +13,8 @@
     <name>Piwik Mobile 2</name>
     <version>2.0</version>
     <publisher>thomassteur</publisher>
-    <url>http://</url>
-    <description>not specified</description>
+    <url>http://piwik.org/mobile</url>
+    <description>Need your analytics on the go? Use our free Piwik Mobile app to check your stats from anywhere and show them to colleagues in meetings. Piwik Mobile offers all the same reports as the desktop interface, and displays your visitor data in real time!</description>
     <copyright>2013 by thomassteur</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
