@@ -6,14 +6,13 @@
  * @version $Id$
  */
 
-var osName = ('' + Ti.Platform.osname).toLowerCase();
+function isIpad()
+{
+    var osName = ('' + Ti.Platform.osname).toLowerCase();
+    var isIpad = ('ipad' === osName);
 
-/**
- * True if the current device is an iPad, false otherwise.
- *
- * @type  boolean
- */
-var isIpad    = ('ipad' === osName);
+    return isIpad;
+}
 
 /**
  * Converts a screen pixel to density-independent pixels.
@@ -31,6 +30,29 @@ function pixelToDp(pixel) {
     return dp;
 };
 
+function getScreenSizeInInch()
+{
+    var width  = Ti.Platform.displayCaps.platformWidth;
+    var height = Ti.Platform.displayCaps.platformHeight;
+
+    var dpi = Ti.Platform.displayCaps.dpi;
+    width   = width / dpi;
+    height  = height / dpi;
+    var screenSizeInch = Math.sqrt(width * width + height * height);
+
+    return screenSizeInch;
+}
+
+function isWideEnoughToConsiderItAsATablet(width)
+{
+    if (550 > width) {
+        // the smallest size needs at least 250dp for masterview and 300dp for detailview
+        return false;
+    }
+
+    return true;
+}
+
 /**
  * Detects whether current device is a tablet.
  * 
@@ -38,7 +60,7 @@ function pixelToDp(pixel) {
  */
 function isTablet () {
     
-    if (isIpad) {
+    if (isIpad()) {
         
         return true;
     }
@@ -47,27 +69,22 @@ function isTablet () {
     var height = Ti.Platform.displayCaps.platformHeight;
     var min    = Math.min(width, height);
 
-    if (OS_MOBILEWEB && 550 > min) {
-        // we need at least 550 pixels
-        return false;
+    if (OS_MOBILEWEB && isWideEnoughToConsiderItAsATablet(min)) {
+        return true;
 
     } else if (OS_MOBILEWEB) {
 
-        return true;
+        return false;
     }
 
     // android
-    if (550 > pixelToDp(min)) {
-        // not enough dp, we do not consider this as a tablet
-        // the smallest size needs at least 200dp for masterview and 350dp for detailview
+    var widthInDp = pixelToDp(min);
+    if (!isWideEnoughToConsiderItAsATablet(widthInDp)) {
         
         return false;
     }
      
-    var dpi = Ti.Platform.displayCaps.dpi;
-    width   = width / dpi;
-    height  = height / dpi;
-    var screenSizeInch = Math.sqrt(width * width + height * height);
+    var screenSizeInch = getScreenSizeInInch();
     
     return (screenSizeInch >= 6.0);
 };

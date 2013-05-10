@@ -9,8 +9,7 @@
 /**
  * @class     Sends tracking requests to a piwik instance. The piwik instance can be configured within the config.
  *
- * @exports   TrackerRequest as Piwik.Network.TrackerRequest
- * @augments  Piwik.Network.HttpRequest
+ * @augments  HttpRequest
  */
 function TrackerRequest () {
 
@@ -24,7 +23,7 @@ function TrackerRequest () {
 var HttpRequest = require('Piwik/Network/HttpRequest');
 
 /**
- * Extend Piwik.Network.HttpRequest.
+ * Extend HttpRequest.
  */
 TrackerRequest.prototype = new HttpRequest();
 
@@ -41,14 +40,14 @@ TrackerRequest.prototype.send = function () {
 };
 
 /**
- * @see Piwik.Network.HttpRequest#error
+ * @see HttpRequest#error
  */
 TrackerRequest.prototype.error = function () {
     this.cleanup();
 };
 
 /**
- * @see Piwik.Network.HttpRequest#load
+ * @see HttpRequest#load
  */
 TrackerRequest.prototype.load = function () {
     this.cleanup();

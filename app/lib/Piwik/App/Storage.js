@@ -13,12 +13,8 @@
  *           'cache_' to each key. Each storage entry is automatically expired as soon as the app version changes.
  *           If you need a cache which stores not beyond application sessions, {@link use Piwik.App.Session} instead.
  *           Currently, following keys are in use:
- *           accounts_available                         A list/array of all available account ids
- *           account_{accountId}                        Account information
- *           tracking_visitor_uuid                      An unique visitor tracking id for this user
- *           app_last_initialized                       Int, the app version number when it was last initialized
+ *           tracking_visitor_uuid     An unique visitor tracking id for this user
  *
- * @exports  Storage as Piwik.App.Storage
  * @static
  */
 function Storage () {
@@ -92,7 +88,7 @@ function Storage () {
 
     /**
      * Returns the item that was previously stored under the given key. If the item/key is not found or the app
-     * version of the storage entry does not match, it returns the const {@link Piwik.App.Storage#KEY_NOT_FOUND}.
+     * version of the storage entry does not match, it returns the const {@link Storage#KEY_NOT_FOUND}.
      *
      * @param    {string}  key  The previously used key to store the value.
      *

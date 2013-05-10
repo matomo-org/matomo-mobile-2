@@ -6,11 +6,6 @@
  * @version $Id$
  */
 
-/** @private */
-var trackingConfig = require('alloy').CFG.tracking;
-/** @private */
-var queue  = require('Piwik/Tracker/Queue');
-
 function getSettings()
 {
     return Alloy.createCollection('AppSettings').settings();
@@ -23,10 +18,12 @@ function getSettings()
  *           data will be sent to the Piwik Server installation. For example the name of a website (via DocumentTitle)
  *           and so on.
  *
- * @exports  Tracker as Piwik.Tracker
  * @static
  */
 function Tracker () {
+
+    var queue          = require('Piwik/Tracker/Queue');
+    var trackingConfig = require('alloy').CFG.tracking;
 
     /**
      * The siteId of the Piwik Server installation. It'll track everything into this site.

@@ -7,9 +7,8 @@
  */
 
 /**
- * @class    The top level Locale module. The module contains a few methods for querying device locale information.
+ * @class    The module contains a few methods for querying device locale information.
  * 
- * @exports  Locale as Piwik.Locale
  * @static
  */
 function Locale () {
@@ -81,8 +80,6 @@ function Locale () {
 
     /**
      * Returns a map of all available/supported languages.
-     *
-     * @see      Piwik.Locale.Translation#AVAILABLE_LANGUAGES
      *
      * @returns  {Object}  All available languages
      */

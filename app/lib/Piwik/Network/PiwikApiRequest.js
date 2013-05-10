@@ -65,7 +65,7 @@ function PiwikApiRequest () {
      * The piwik account that will be used to execute the request. The account contains the piwik accessUrl as well
      * as the authToken.
      *
-     * @see   Piwik.App.Accounts
+     * @see appAccounts
      *
      * @type  Object|null
      */
@@ -74,7 +74,7 @@ function PiwikApiRequest () {
     /**
      * The handleAs parameter specifies how to parse the received data.
      *
-     * @see      Piwik.Network.HttpRequest#handleAs
+     * @see      HttpRequest#handleAs
      * 
      * @default  "text"
      *
@@ -88,7 +88,7 @@ function PiwikApiRequest () {
 var HttpRequest = require('Piwik/Network/HttpRequest');
 
 /**
- * Extend Piwik.Network.HttpRequest.
+ * Extend HttpRequest.
  */
 PiwikApiRequest.prototype = new HttpRequest();
 
@@ -112,7 +112,7 @@ PiwikApiRequest.prototype.setUserAuthToken = function (token) {
 /**
  * Sets (overwrites) the used piwik api method.
  *
- * @see    Piwik.Network.PiwikApiRequest#method
+ * @see    PiwikApiRequest#method
  *
  * @param  {string}  method
  */
@@ -124,7 +124,7 @@ PiwikApiRequest.prototype.setMethod = function (method) {
 /**
  * Sets (overwrites) the used account.
  *
- * @see    Piwik.Network.PiwikApiRequest#account
+ * @see    PiwikApiRequest#account
  *
  * @param  {Object}  account
  */
@@ -187,7 +187,7 @@ PiwikApiRequest.prototype._mixinParameter = function (parameter) {
 /**
  * Verifies the response.
  * 
- * @see      Piwik.Network.HttpRequest#isValidResponse
+ * @see      HttpRequest#isValidResponse
  * 
  * @param    {Object|null}  The received response.
  * 
@@ -241,14 +241,6 @@ PiwikApiRequest.prototype.send = function () {
 
     if (!this.parameter) {
         this.parameter = {};
-    }
-    
-    if (this.account && this.account.tokenAuth) {
-        this.setUserAuthToken(this.account.tokenAuth);
-    }
-    
-    if (this.account && this.account.accessUrl) {
-        this.setBaseUrl(this.account.accessUrl);
     }
 
     this.parameter = this._mixinParameter(this.parameter);

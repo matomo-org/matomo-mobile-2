@@ -8,12 +8,11 @@
  
 /**
  * @class    Provides some translation related methods. The translations for each language are stored within the
- *           'Resources/i18n' folder. These files can be generated/updated via the python script
- *           'tools/updatelanguagefiles.py'.
+ *           'app/lib/i18n' folder. These files can be generated/updated via the node.js app
+ *           'tools/updatelanguagefiles'.
  *
  * @see      <a href="http://dev.piwik.org/trac/wiki/API/Reference#LanguagesManager">Piwik Languages Manager</a>
  *
- * @exports  Translation as Piwik.Locale.Translation
  * @static
  */
 function Translation () {
@@ -62,7 +61,7 @@ function Translation () {
             return this.DEFAULT_TRANSLATION[key];
         }
 
-        console.error('Missing default translation for key ' + key, 'Piwik.Locale.Translation::get');
+        console.error('Missing default translation for key ' + key, 'Translation::get');
 
         return key;
     };
@@ -78,7 +77,7 @@ function Translation () {
         try {
             this.translations = require('i18n/' + locale);
         } catch (e) {
-            console.error('Failed to load translations for locale ' + locale, 'Piwik.Locale.Translation::load');
+            console.error('Failed to load translations for locale ' + locale, 'Translation::load');
 
             var tracker = require('Piwik/Tracker');
             tracker.trackException({error: e, errorCode: 'PiTrLo35'});

@@ -38,8 +38,6 @@ var numLaunches = 1;
  * @example
  * var rating = require('Rating');
  * rating.countLaunch();
- * 
- * @exports  Rating as Piwik.App.Rating
  */
 function Rating () {
 

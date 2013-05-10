@@ -23,7 +23,6 @@ var maxTracksPerDay = require('alloy').CFG.tracking.maxTracksPerDay;
  * var queue = require('Queue');
  * queue.offer({id:5});      // Offer an element. If queue is not already running, it'll start it automatically.
  *
- * @exports  TrackerQueue as Piwik.Tracker.Queue
  * @static
  * 
  * @todo     stop proccessing tracking requests when app goes in background? On iOS this happens "automatically"
@@ -66,7 +65,7 @@ function TrackerQueue () {
      * Holds the date string in the format "Sun Jul 17 2011". This allows us to detect whether a new day has started
      * by comparing this value with the current date string.
      *
-     * @see       Piwik.Tracker.Queue#isNewDay
+     * @see       TrackerQueue#isNewDay
      *
      * @defaults  ""
      *
@@ -115,7 +114,7 @@ function TrackerQueue () {
     /**
      * Inserts the specified parameter/element into this queue, if possible. It fails to insert the parameter
      * if maxTracksPerDay is achieved. It automatically starts the queue if the queue is not already running.
-     * You do not have to call {@link Piwik.Tracker.Queue#start}.
+     * You do not have to call {@link TrackerQueue#start}.
      */
     this.offer = function (parameter) {
 

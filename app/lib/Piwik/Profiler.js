@@ -10,7 +10,6 @@
  * @class    Provides a simple profiler. The profiler logs all profiling information to the standard iOS/Android SDK log
  *           which is accessible for example in Titanium Developer.
  * 
- * @exports  Profiler as Piwik.Profiler
  * @static
  */
 function Profiler () {
@@ -63,10 +62,10 @@ function Profiler () {
      * same.
      *
      * @example
-     * Piwik.Profiler.start('renderStatisticList');
-     * Piwik.Profiler.start('renderHeaderRow');
-     * Piwik.Profiler.end('renderHeaderRow');
-     * Piwik.Profiler.end('renderStatisticList');
+     * require('Profiler').start('renderStatisticList');
+     * require('Profiler').start('renderHeaderRow');
+     * require('Profiler').end('renderHeaderRow');
+     * require('Profiler').end('renderStatisticList');
      *
      * @param  {string}  key  A key which describes the current profiling
      */
@@ -84,7 +83,7 @@ function Profiler () {
      * Finishes a previous started profiling. Logs needed time in ms and currently available free memory to console
      * using warning level.
      *
-     * @see    Piwik.Profiler#start
+     * @see    Profiler#start
      *
      * @param  {string}  key  A key which describes the current profiling and which was used in the start method.
      */
