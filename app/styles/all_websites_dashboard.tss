@@ -92,6 +92,24 @@
     visible: false
 }
 
+"#useSearchHintContainer": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    visible: false
+}
+
+"#useSearchHintLabel": {
+    font: {fontSize: 13},
+    color: '#888888',
+    height: Ti.UI.SIZE,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    top: 5,
+    bottom: 5,
+    right: 10,
+    left: 10,
+    text: L('Mobile_UseSearchBarHint', Alloy.CFG.numDisplayedWebsitesInDashboard)
+}
+
 ".websiteNameLabel": {
     verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,

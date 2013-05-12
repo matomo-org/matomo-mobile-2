@@ -30,6 +30,9 @@
                 <HeaderView>
                     <View id="noWebsiteFoundContainer"><Label id="noWebsiteFoundLabel"/></View>
                 </HeaderView>
+                <FooterView>
+                    <View id="useSearchHintContainer"><Label id="useSearchHintLabel"/></View>
+                </FooterView>
 
                 <TableViewRow modelid="{id}">
                     <Label class="websiteNameLabel" text="{label}" />

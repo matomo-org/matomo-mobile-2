@@ -1,6 +1,12 @@
-function L(key)
+function L(key, substitution)
 {
-    return require('L')(key);
+    var translation = require('L')(key);
+
+    if (substitution) {
+        return String.format(translation, '' + substitution);
+    }
+
+    return translation;
 }
 
 if (OS_IOS) {
@@ -157,9 +163,21 @@ function doSearchWebsite(event)
     require('Piwik/Tracker').trackEvent({title: 'Websites Search', url: '/all-websites-dashboard/search'});
 }
 
+function getNumberOfFoundWebsites()
+{
+    return $.piwikProcessedReport.length;
+}
+
 function hasFoundWebsites()
 {
-    return !!$.piwikProcessedReport.length;
+    return !!getNumberOfFoundWebsites();
+}
+
+function hasMoreWebsitesThanDisplayed()
+{
+    var limit = Alloy.CFG.numDisplayedWebsitesInDashboard;
+
+    return limit <= getNumberOfFoundWebsites();
 }
 
 function showMessageNoWebsitesFound()
@@ -186,6 +204,11 @@ function hideMessageNoWebsitesFound()
     }
 }
 
+function showUseSearchHint()
+{
+    $.useSearchHintContainer.show();
+}
+
 function displayMessageIfNoWebsitesFound () 
 {
     if (hasFoundWebsites()) {
@@ -193,6 +216,10 @@ function displayMessageIfNoWebsitesFound ()
     } else {
         showMessageNoWebsitesFound();
     }
+
+    if (hasMoreWebsitesThanDisplayed()) {
+        showUseSearchHint();
+    } 
 }
 
 function doRefresh()
