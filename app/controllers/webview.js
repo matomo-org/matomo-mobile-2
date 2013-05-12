@@ -7,15 +7,34 @@ var args     = arguments[0] || {};
 var webUrl   = args.url || false;
 var webTitle = args.title || false;
 
+function getUrlWithoutProtocolAndQuery(url)
+{
+    url = url + '';
+
+    var indexOfProtocol = url.indexOf('://');
+    if (-1 === indexOfProtocol) {
+        indexOfProtocol = 0;
+    } else {
+        indexOfProtocol += 3;
+    }
+
+    var indexOfQuery = url.indexOf('?');
+    if (-1 === indexOfQuery) {
+        indexOfQuery = url.length;
+    }
+
+    return url.substr(indexOfProtocol, indexOfQuery - indexOfProtocol);
+}
+
 exports.open = function () {
     $.index.title = webTitle;
     $.webview.url = webUrl;
 
     require('layout').open($.index);
 
-    var titleWithoutWhitespace = ('' + webTitle).replace(/\s+/g, '').toLowerCase();
+    var urlToTrack = getUrlWithoutProtocolAndQuery(webUrl);
 
-    require('Piwik/Tracker').trackWindow(webTitle, 'webview/' + titleWithoutWhitespace);
+    require('Piwik/Tracker').trackWindow(urlToTrack, 'webview/' + urlToTrack);
 }
 
 function close()
