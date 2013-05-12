@@ -2,7 +2,7 @@
     <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
     <Collection src="appAccounts"/>
     
-    <Window id="index">
+    <Window id="index" onClose="onClose">
         <RightNavButton platform="ios,mobileweb">
             <Button id="accountsButton" onClick="doChooseAccount"/>
         </RightNavButton>
@@ -15,6 +15,11 @@
         
         <View id="content" class="container">
             <SearchBar id="searchBar" onReturn="doSearchWebsite" onCancel="doCancelSearchWebsite" platform="android,ios"/>
+            <View class="searchBarContainer" platform="mobileweb">
+                <View class="searchBarInnerContainer">
+                    <TextField id="searchBar" onReturn="doSearchWebsite"/>
+                </View>
+            </View>
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
             <View class="shadow" formFactor="tablet"></View>
             <TableView id="websitesTable" dataCollection="$.piwikProcessedReport" 
@@ -22,6 +27,9 @@
                 <HeaderPullView platform="ios">
                     <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>
+                <HeaderView>
+                    <View id="noWebsiteFoundContainer"><Label id="noWebsiteFoundLabel"/></View>
+                </HeaderView>
 
                 <TableViewRow modelid="{id}">
                     <Label class="websiteNameLabel" text="{label}" />

@@ -19,6 +19,12 @@ if ('undefined' !== (typeof args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvail
 
 var lastUsedWebsite = null;
 
+function onClose()
+{
+    $.piwikProcessedReport.off('reset', displayMessageIfNoWebsitesFound);
+    $.destroy();
+}
+
 function websiteChosen(siteModel) 
 {
     $.trigger('websiteChosen', {site: siteModel, account: accountModel});
@@ -140,6 +146,44 @@ function doSearchWebsite(event)
     $.searchBar.blur();
 }
 
+function hasFoundWebsites()
+{
+    return !!$.piwikProcessedReport.length;
+}
+
+function showMessageNoWebsitesFound()
+{
+    if (OS_MOBILEWEB){
+        $.noWebsiteFoundContainer.height = Ti.UI.FILL;
+    } else {
+        $.websitesTable.headerView = $.noWebsiteFoundContainer;
+    }
+
+    $.noWebsiteFoundContainer.show();
+}
+
+function hideMessageNoWebsitesFound()
+{
+    $.noWebsiteFoundContainer.hide();
+
+    // this is usually not needed but looks like a bug in Titanium... 
+    // Otherwise Headerview would always stay with height=Ti.UI.FILL once displayed
+    if (OS_MOBILEWEB){
+        $.noWebsiteFoundContainer.height = 0;
+    } else {
+        $.websitesTable.headerView = null;
+    }
+}
+
+function displayMessageIfNoWebsitesFound () 
+{
+    if (hasFoundWebsites()) {
+        hideMessageNoWebsitesFound();
+    } else {
+        showMessageNoWebsitesFound();
+    }
+}
+
 function doRefresh()
 {
     if (lastUsedWebsite) {
@@ -193,6 +237,8 @@ $.piwikProcessedReport.on('error', function () {
     // TODO what should we do in this case?
     showReportContent();
 });
+
+$.piwikProcessedReport.on('reset', displayMessageIfNoWebsitesFound);
 
 exports.close = function () {
     require('layout').close($.index);
