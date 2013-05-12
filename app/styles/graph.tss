@@ -1,6 +1,6 @@
-".container": {
+"#index": {
     height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
     backgroundColor: '#efefef'
 }
 
