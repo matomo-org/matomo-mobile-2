@@ -11,6 +11,10 @@ $.metric.text    = $model.getMetricName();
 
 function openReport()
 {
+    if (!hasReportRowsToDisplay()) {
+        return;
+    }
+    
     var report = Alloy.createController('report_with_dimension', {report: $model});
     report.open();
 }
