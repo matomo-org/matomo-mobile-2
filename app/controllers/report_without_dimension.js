@@ -98,7 +98,7 @@ function toggleReportConfiguratorVisibility (event)
 {
     require('report/configurator').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/without-dimension/toggle-report-configurator'});
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/without-dimension/toggle/report-configurator'});
 }
 
 function removeAllChildrenFromContent()

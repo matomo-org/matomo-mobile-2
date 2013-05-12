@@ -13,7 +13,7 @@ exports.open = function () {
 
     require('layout').open($.index);
 
-    var titleWithoutWhitespace = ('' + webTitle).replace(/\s+/g, '');
+    var titleWithoutWhitespace = ('' + webTitle).replace(/\s+/g, '').toLowerCase();
 
     require('Piwik/Tracker').trackWindow(webTitle, 'webview/' + titleWithoutWhitespace);
 }
