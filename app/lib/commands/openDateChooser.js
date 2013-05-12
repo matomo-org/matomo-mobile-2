@@ -19,7 +19,7 @@ function isEarlier (from, to)
     } 
     
     return false;
-};
+}
 
 function formatDateToPiwikQuery (from, to, period)
 {
@@ -34,7 +34,7 @@ function formatDateToPiwikQuery (from, to, period)
     var dateQuery = piwikDate.toPiwikQueryString(period, from, to);
 
     return dateQuery;
-};
+}
 
 exports.execute = function (params, onDateChosen)
 {
@@ -43,7 +43,7 @@ exports.execute = function (params, onDateChosen)
     }
     
     var period    = params.period ? params.period : 'day';
-    var date      = params.date ? params.date : ''
+    var date      = params.date ? params.date : '';
  
     var piwikDate = new (require('report/date'));
     piwikDate.setDate(date);
@@ -71,4 +71,4 @@ exports.execute = function (params, onDateChosen)
     });
     
     picker.open();
-}
+};

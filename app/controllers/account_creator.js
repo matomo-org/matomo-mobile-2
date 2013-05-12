@@ -21,6 +21,11 @@ function onUrlReturn () {
     $.username.focus();
 }
 
+function onOpen()
+{
+    require('Piwik/Tracker').trackWindow('Create Account', 'account-create');
+}
+
 function onUsernameReturn () {
     $.password.focus();
 }

@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="index" onClose="onClose">
+	<Window id="index" onClose="onClose" onOpen="onOpen">
 
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>

@@ -3,6 +3,11 @@ function L(key)
     return require('L')(key);
 }
 
+function onOpen()
+{
+    require('Piwik/Tracker').trackWindow('Give Feedback', 'give-feedback');
+}
+
 function onClose()
 {
     $.destroy();
@@ -11,6 +16,8 @@ function onClose()
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/give-feedback/toggle/report-chooser'});
 }
 
 function platformInfo()
@@ -33,11 +40,15 @@ function versionInfo()
 function doSendEmailFeedback()
 {
     require('commands/sendEmailFeedback').execute();
+
+    require('Piwik/Tracker').trackEvent({title: 'Email Us', url: '/give-feedback/email-us'});
 }
 
 function doRateApp()
 {
     require('commands/rateApp').execute();
+
+    require('Piwik/Tracker').trackEvent({title: 'Rate-App', url: '/give-feedback/rate-app'});
 }
 
 function doParticipate()

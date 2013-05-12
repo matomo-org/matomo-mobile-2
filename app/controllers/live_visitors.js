@@ -5,7 +5,7 @@ function L(key)
 
 var refreshIntervalInMs = 45000;
 
-$.countdown.init(parseInt(refreshIntervalInMs / 1000));
+$.countdown.init(parseInt(refreshIntervalInMs / 1000, 10));
 
 var piwikLiveVisitors = Alloy.createCollection('piwikLiveVisitors');
 
@@ -16,19 +16,36 @@ if (OS_IOS) {
 function registerEvents()
 {
     var session = require('session');
-    session.on('websiteChanged', doRefresh);
+    session.on('websiteChanged', onWebsiteChanged);
 }
 
 function unregisterEvents()
 {
     var session = require('session');
-    session.off('websiteChanged', doRefresh);
+    session.off('websiteChanged', onWebsiteChanged);
+}
+
+function trackWindowRequest()
+{
+    require('Piwik/Tracker').trackWindow('Visitors in Real-time', 'visitors-in-real-time');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
 }
 
 function onClose()
 {
     unregisterEvents();
     $.destroy();
+}
+
+function onWebsiteChanged()
+{
+    require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/visitors-in-real-time/change/website'});
+
+    doRefresh();
 }
 
 var refreshTimer = null;
@@ -45,7 +62,7 @@ var stopRefreshTimer = function () {
 var startRefreshTimer = function (timeoutInMs) {
     stopRefreshTimer();
 
-    $.countdown.init(parseInt(timeoutInMs / 1000));
+    $.countdown.init(parseInt(timeoutInMs / 1000, 10));
     $.countdown.start();
 
     refreshTimer = setTimeout(function () {
@@ -53,7 +70,7 @@ var startRefreshTimer = function (timeoutInMs) {
             doRefresh();
         }
     }, timeoutInMs);
-}
+};
 
 function openVisitor(event)
 {
@@ -83,7 +100,7 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
     _.forEach(visitorDetails, function (visitorDetail) {
         var params = {account: account, visitor: visitorDetail};
         var visitorOverview = Alloy.createController('visitor_overview', params);
-        var visitorRow      = visitorOverview.getView()
+        var visitorRow      = visitorOverview.getView();
         visitorRow.visitor  = visitorDetail;
         rows.push(visitorRow);
         visitorRow = null;
@@ -162,7 +179,7 @@ function doRefresh()
         if (stopRefreshTimer) {
             stopRefreshTimer();
         }
-    }
+    };
     
     // ios
     Ti.App.addEventListener('resume', onResume);
@@ -187,9 +204,18 @@ function doRefresh()
 
 /***** HANDLE BACKGROUND EVENTS END ******/
 
+function toggleReportConfiguratorVisibility (event)
+{
+    require('report/configurator').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/visitors-in-real-time/toggle-report-configurator'});
+}
+
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/visitors-in-real-time/toggle/report-chooser'});
 }
 
 exports.open = function () 
@@ -197,7 +223,7 @@ exports.open = function ()
     registerEvents();
     doRefresh();
     require('layout').open($.index);
-}
+};
 
 function close()
 {

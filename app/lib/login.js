@@ -44,26 +44,45 @@ function onError (accountModel, error) {
     hideWaitingIndicator();
 
     var message = '';
+    var title   = '';
+    var url     = '';
+
     switch (error) {
         case 'AlreadyHandled':
             return;
         case 'MissingUsername':
             message = String.format(L('General_Required'), L('Login_Login'));
+            title   = 'Account Missing Username';
+            url     = '/account/login/error/missing-username';
             break;
         case 'MissingPassword':
             message = String.format(L('General_Required'), L('Login_Password'));
+            title   = 'Account Missing Password';
+            url     = '/account/login/error/missing-password';
             break;
         case 'InvalidUrl':
             message = String.format(L('SitesManager_ExceptionInvalidUrl'), accessUrl + '');
+            title   = 'Account Invalid Url';
+            url     = '/account/login/error/invalid-url';
             break;
         case 'ReceiveAuthTokenError':
             message = L('Mobile_SaveSuccessError');
+            title   = 'Account Receive Token Error';
+            url     = '/account/login/error/receive-token-error';
             break;
         case 'NoViewAccess':
             message = String.format(L('General_ExceptionPrivilegeAtLeastOneWebsite'), L('UsersManager_PrivView'));
+            title   = 'Account No View Access';
+            url     = '/account/login/error/no-view-access';
             break;
         default:
+            title   = 'Unknown error';
+            url     = '/account/login/error/unknown/' + error;
             message = L('An unknown error has occured:\n' + error);
+    }
+
+    if (title && url) {
+        require('Piwik/Tracker').trackEvent({title: title, url: url});
     }
 
     var alertDialog = Ti.UI.createAlertDialog({
@@ -113,6 +132,8 @@ exports.login = function(accounts, accessUrl, username, password)
                 accountModel.save();
                 accountModel.trigger('sync', accountModel);
                 accounts.add(accountModel);
+
+                require('Piwik/Tracker').trackEvent({title: 'Account Login Success', url: '/account/login/success'});
 
             }, error: function (model, event) {
 

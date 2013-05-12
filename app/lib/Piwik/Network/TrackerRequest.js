@@ -17,7 +17,7 @@ function TrackerRequest () {
     
     this.sendErrors = false;
     
-    this.userAgend  = Ti.userAgent;
+    this.userAgent  = Ti.userAgent;
 }
 
 var HttpRequest = require('Piwik/Network/HttpRequest');

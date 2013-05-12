@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" class="container">
+    <Window id="index" class="container" onOpen="onOpen">
         <TableView id="visitorTable">
         </TableView>
     </Window>

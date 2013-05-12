@@ -15,7 +15,6 @@ function chooseDate()
 
 function onDateChosen(period, date)
 {
-    console.log(period, date);
     var reportDate = new (require('report/date'));
     reportDate.setPeriod(period);
     reportDate.setDate(date);

@@ -30,6 +30,11 @@ function openLicense()
     license.open();
 }
 
+function onOpen()
+{
+    require('Piwik/Tracker').trackWindow('About Piwik Mobile', 'about-piwik-mobile');
+}
+
 function onClose()
 {
     $.destroy();

@@ -2,7 +2,7 @@
     <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
     <Collection src="appAccounts"/>
     
-    <Window id="index" onClose="onClose">
+    <Window id="index" onClose="onClose" onOpen="onOpen">
         <RightNavButton platform="ios,mobileweb">
             <Button id="accountsButton" onClick="doChooseAccount"/>
         </RightNavButton>

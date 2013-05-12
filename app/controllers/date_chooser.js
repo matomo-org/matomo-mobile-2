@@ -6,6 +6,18 @@ function L(key)
 var args   = arguments[0] || {};
 var period = args.period || 'day';
 
+function trackWindowRequest()
+{
+    require('Piwik/Tracker').setCustomVariable(1, 'period', period, 'page');
+    
+    require('Piwik/Tracker').trackWindow('Date Chooser', 'date-chooser');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
+}
+
 function setPeriod(selectedPeriod) {
     
     if (!selectedPeriod) {
@@ -50,8 +62,7 @@ function doChooseDate ()
     try {
         var fromDate = $.fromDatePicker.value;
         var toDate   = $.toDatePicker.value;
-        console.log(fromDate, toDate, period);
-        
+
         var myEvent = {from: fromDate, to: toDate, period: period, type: 'onSet'};
         $.trigger('onSet', myEvent);
         

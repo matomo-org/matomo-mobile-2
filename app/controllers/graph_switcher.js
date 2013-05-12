@@ -27,13 +27,13 @@ function nextGraphUrl()
         currentUrl = evolutionUrl;
         
         getSettings().setPreferEvolutionGraphs(true);
-        require('Piwik/Tracker').trackEvent({title: 'Switch Graph Static', url: '/graph/switch/static'});
+        require('Piwik/Tracker').trackEvent({title: 'Switch Graph Evolution', url: '/graph/switch/evolution'});
         
     } else if (currentUrl == evolutionUrl) {
         currentUrl = staticUrl;
         
         getSettings().setPreferEvolutionGraphs(false);
-        require('Piwik/Tracker').trackEvent({title: 'Switch Graph Evolution', url: '/graph/switch/evolution'});
+        require('Piwik/Tracker').trackEvent({title: 'Switch Graph Static', url: '/graph/switch/static'});
     }
     
     return currentUrl;
@@ -120,7 +120,7 @@ exports.canSwitch = canSwitch;
 exports.currentGraphUrl = function() 
 {
     return currentUrl;
-}
+};
 
 /**
  * Toggles the visibility of the toolbar. If toolbar is currently hidden, it'll be displayed afterwards. If toolbar is
@@ -145,7 +145,7 @@ exports.fadeOut = function()
         $.index.hide();
         $.index.opacity = OS_ANDROID ? 0.9 : 0.7;
     });
-}
+};
 
 /**
  * Adds a simple toolbar to the given window/view containing a button which allows to switch between graphs and a button

@@ -10,6 +10,8 @@ accounts.fetch();
 
 function doSelectAccount(event)
 {
+    require('Piwik/Tracker').trackEvent({title: 'Accounts - Account selected', url: '/accounts/account-selected'});
+
     var account = accounts.get(event.rowData.accountId);
     account.select(function () {
         $.trigger('accountChosen', account);
@@ -32,6 +34,8 @@ function doDeleteAccount(event)
         account.destroy();
     }
 
+    require('Piwik/Tracker').trackEvent({title: 'Accounts - Account Delete', url: '/accounts/account-deleted'});
+    
     // TODO if no further account is available, we will run into problems...
 }
 
@@ -63,12 +67,16 @@ var newAccountController = null;
 
 function doAddAccount()
 {
+    require('Piwik/Tracker').trackEvent({title: 'Accounts - Add Account', url: '/accounts/add-account'});
+
     newAccountController = Alloy.createController('account_creator', {accounts: accounts});
     accounts.on('add', onCreatedAccount);
     newAccountController.open();
 }
 
 function onCreatedAccount() {
+    require('Piwik/Tracker').trackEvent({title: 'Accounts - Account created', url: '/accounts/account-created'});
+
     accounts.off("add", onCreatedAccount);
     newAccountController.close();
 }
@@ -76,6 +84,13 @@ function onCreatedAccount() {
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/accounts/toggle/report-chooser'});
+}
+
+function onOpen()
+{
+    require('Piwik/Tracker').trackWindow('Accounts', 'accounts');
 }
 
 function onClose ()

@@ -24,6 +24,11 @@ exports.open = function ()
     require('layout').open($.index);
 };
 
+function onOpen()
+{
+    require('Piwik/Tracker').trackWindow('Visitor Details', 'visitor-details');
+}
+
 function createRow(params)
 {
     return Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();

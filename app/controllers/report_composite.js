@@ -26,6 +26,19 @@ function unregisterEvents()
     session.off('reportDateChanged', onDateChanged);
 }
 
+function trackWindowRequest()
+{
+    var category = reportCategory ? reportCategory : ''
+    require('Piwik/Tracker').setCustomVariable(1, 'reportCategory', category, 'page');
+
+    require('Piwik/Tracker').trackWindow('Composite Report', 'report/composite');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
+}
+
 function onClose()
 {
     unregisterEvents();
@@ -43,9 +56,18 @@ function showLoadingIndicator()
     $.loadingIndicator.show();
 }
 
+function toggleReportConfiguratorVisibility (event)
+{
+    require('report/configurator').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/composite/toggle-report-configurator'});
+}
+
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/report/composite/toggle/report-chooser'});
 }
 
 var accountModel = require('session').getAccount();
@@ -64,6 +86,8 @@ function onWebsiteChanged()
     } else {
         // let reportChooser to the refresh
     }
+
+    require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/report/composite/change/website'});
 }
 
 function onDateChanged() 
@@ -73,6 +97,8 @@ function onDateChanged()
     } else {
         // let reportChooser to the refresh
     }
+
+    require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/composite/change/date'});
 }
 
 function filterReports(collection)

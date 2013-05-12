@@ -221,22 +221,19 @@ function Tracker () {
      * Tracks a window. It'll always detect the controller / action depending on the given url. Call this method if 
      * a window gets focus. For more information see {@link Piwik.Tracker#trackPageView}.
      * 
+     * @param  {string}  title      The window's title.
      * @param  {string}  windowUrl  A window url, for example "site/index". In this case, "site" is the controller
      *                              and "index" is the action. It'll track the Title "site index" and the url
      *                              "/window/site/index".
      */
-    this.trackWindow = function (windowUrl) {
+    this.trackWindow = function (title, windowUrl) {
         
         if (!windowUrl) {
             
             return;
         }
         
-        var urlParams  = ('' + windowUrl).split('/');
-        var controller = urlParams[0];
-        var action     = ('' + urlParams[1]).split('.js')[0];
-        var title      = controller + ' ' + action;
-        var url        = '/window/' + controller + '/' + action;
+        var url = '/window/' + windowUrl;
         
         this.setDocumentTitle(title).setCurrentUrl(url).trackPageView();
     };
@@ -435,7 +432,7 @@ function Tracker () {
         this.setCustomVariable(2, 'Piwik Mobile Version', Ti.App.version, 'visit');
 
         // Locale of the device + configured locale
-        this.setCustomVariable(3, 'Locale', Ti.Platform.locale + '::' + locale.getLocale(), 'visit');
+        this.setCustomVariable(3, 'Locale', locale.getPlatformLocale() + '::' + locale.getLocale(), 'visit');
         this.setCustomVariable(4, 'Num Accounts', numAccounts, 'visit');
         
         locale   = null;

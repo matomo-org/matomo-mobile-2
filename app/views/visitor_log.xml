@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" onClose="onClose">
+    <Window id="index" onClose="onClose" onOpen="onOpen">
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
@@ -8,10 +8,10 @@
         </LeftNavButton>
         
         <RightNavButton platform="ios" formFactor="handheld">
-            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
         <RightNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
         
         <Require src="loading_indicator" id="loadingIndicator"/>

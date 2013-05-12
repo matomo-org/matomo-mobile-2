@@ -3,6 +3,11 @@ function L(key)
     return require('L')(key);
 }
 
+function onOpen()
+{
+    require('Piwik/Tracker').trackWindow('Help', 'help');
+}
+
 function onClose()
 {
     $.destroy();
@@ -22,6 +27,8 @@ function openAboutPiwikMobile()
 function emailUs()
 {
     require('commands/sendEmailFeedback').execute();
+
+    require('Piwik/Tracker').trackEvent({title: 'Email Us', url: '/help/email-us'});
 }
 
 function openForum()
@@ -39,6 +46,8 @@ function openDocumentation()
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/help/toggle/report-chooser'});
 }
 
 exports.close = function ()

@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="appAccounts"/>
     
-    <Window class="container" id="index" onClose="onClose">
+    <Window class="container" id="index" onClose="onClose" onOpen="onOpen">
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>

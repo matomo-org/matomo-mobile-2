@@ -19,6 +19,11 @@ if ('undefined' !== (typeof args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvail
 
 var lastUsedWebsite = null;
 
+function onOpen()
+{
+    require('Piwik/Tracker').trackWindow('All Websites Dashboard', 'all-websites-dashboard');
+}
+
 function onClose()
 {
     $.piwikProcessedReport.off('reset', displayMessageIfNoWebsitesFound);
@@ -32,6 +37,8 @@ function websiteChosen(siteModel)
 
 function doChooseAccount()
 {
+    require('Piwik/Tracker').trackEvent({title: 'Choose Account', url: '/all-websites-dashboard/choose-account'});
+
     var accounts = Alloy.createController('accounts_selector');
     accounts.on('accountChosen', onAccountChosen);
     accounts.open();
@@ -40,6 +47,8 @@ function doChooseAccount()
 function onAccountChosen(account)
 {
     showLoadingMessage();
+
+    require('Piwik/Tracker').trackEvent({title: 'Account Chosen', url: '/all-websites-dashboard/account-chosen'});
 
     accountModel            = account;
     var entrySiteCollection = Alloy.createCollection('piwikWebsites');
@@ -144,6 +153,8 @@ function doSearchWebsite(event)
     });
 
     $.searchBar.blur();
+
+    require('Piwik/Tracker').trackEvent({title: 'Websites Search', url: '/all-websites-dashboard/search'});
 }
 
 function hasFoundWebsites()

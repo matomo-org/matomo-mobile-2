@@ -12,6 +12,10 @@ exports.open = function () {
     $.webview.url = webUrl;
 
     require('layout').open($.index);
+
+    var titleWithoutWhitespace = ('' + webTitle).replace(/\s+/g, '');
+
+    require('Piwik/Tracker').trackWindow(webTitle, 'webview/' + titleWithoutWhitespace);
 }
 
 function close()

@@ -6,8 +6,8 @@ exports.toggle = function ()
     settings.setGraphsEnabled(enabled);
     settings.save();
 
-    var action  = enabled ? 'enable' : 'disable';
+    var action  = enabled ? 'enabled' : 'disabled';
     var tracker = require('Piwik/Tracker');
     tracker.trackEvent({title: 'Graphs ' + action,
-                        url: '/settings/graphs/' + action});
+                        url: '/settings/changed/graphs/' + action});
 }

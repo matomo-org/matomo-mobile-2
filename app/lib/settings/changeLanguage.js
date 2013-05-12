@@ -80,8 +80,8 @@ function getLanguageCodeByIndex(selectedLanguageIndex)
 function trackLanguageChange(selectedLangCode)
 {
     var tracker = require('Piwik/Tracker');
-    tracker.trackEvent({title: 'Language Change',
-                        url: '/settings/change-language/' + selectedLangCode});
+    tracker.trackEvent({title: 'Language Changed',
+                        url: '/settings/changed/language/' + selectedLangCode});
 }
 
 function changeLanguageSetting(selectedLangCode)

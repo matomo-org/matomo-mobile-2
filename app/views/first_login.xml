@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="appAccounts"/>
     
-    <Window id="index">
+    <Window id="index" onOpen="onOpen">
         <ScrollView class="container">
             <View id="mainView">
                 <View id="headerView">
@@ -11,8 +11,8 @@
                 <View class="footerSpacer" />
             </View>
             <View id="footerView">
-                <Label id="tryit" class="footerLink" onClick="onTryIt"/>
-                <Label id="faq" class="footerLink" onClick="onFaq"/>
+                <Label id="tryit" class="footerLink" onClick="tryIt"/>
+                <Label id="faq" class="footerLink" onClick="openFaq"/>
             </View>
         </ScrollView>
     </Window>

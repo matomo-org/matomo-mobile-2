@@ -40,6 +40,8 @@ function openVisitor(event)
 
 function onWebsiteChanged(website)
 {
+    require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/visitor-log/change/website'});
+
     siteModel    = website;
     accountModel = require('session').getAccount();
     doRefresh();
@@ -47,8 +49,20 @@ function onWebsiteChanged(website)
 
 function onDateChanged(date)
 {
+    require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/visitor-log/change/date'});
+
     reportDate = date;
     doRefresh();
+}
+
+function trackWindowRequest()
+{
+    require('Piwik/Tracker').trackWindow('Visitor Log', 'visitor-log');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
 }
 
 function onClose()
@@ -61,12 +75,16 @@ function fetchPrevious()
 {
     showLoadingMessage();
     visitorLog.previous(accountModel, siteModel.id);
+
+    require('Piwik/Tracker').trackEvent({title: 'Previous Visitors', url: '/visitor-log/previous'});
 }
 
 function fetchNext()
 {
     showLoadingMessage();
     visitorLog.next(accountModel, siteModel.id);
+
+    require('Piwik/Tracker').trackEvent({title: 'Next Visitors', url: '/visitor-log/next'});
 }
 
 function render()
@@ -145,9 +163,18 @@ function doRefresh()
     visitorLog.initial(accountModel, siteModel.id, period, date);
 }
 
+function toggleReportConfiguratorVisibility (event)
+{
+    require('report/configurator').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/visitor-log/toggle-report-configurator'});
+}
+
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/visitor-log/toggle/report-chooser'});
 }
 
 exports.open = function () 

@@ -12,8 +12,8 @@ function pressedCancel(event)
 function trackTimeoutChange(timeoutValue)
 {
     var tracker = require('Piwik/Tracker');
-    tracker.trackEvent({title: 'Timeout Value',
-                        url: '/settings/change-httptimeout/' + timeoutValue});
+    tracker.trackEvent({title: 'HTTP Timeout Changed',
+                        url: '/settings/changed/http-timeout/' + timeoutValue});
 
 }
 

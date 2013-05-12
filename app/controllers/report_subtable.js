@@ -29,6 +29,25 @@ if (OS_IOS) {
     $.pullToRefresh.init($.reportTable);
 }
 
+function trackWindowRequest()
+{
+    var module   = reportModel.get('module');
+    var action   = reportModel.get('action');
+    var uniqueId = reportModel.get('uniqueId');
+
+    require('Piwik/Tracker').setCustomVariable(1, 'reportModule', module, 'page');
+    require('Piwik/Tracker').setCustomVariable(2, 'reportAction', action, 'page');
+    require('Piwik/Tracker').setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
+    require('Piwik/Tracker').setCustomVariable(4, 'reportMetric', currentMetric, 'page');
+
+    require('Piwik/Tracker').trackWindow('Report Subtable', 'report/subtable');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
+}
+
 function onClose()
 {
     $.destroy();
@@ -36,12 +55,16 @@ function onClose()
 
 function onMetricChosen(chosenMetric)
 {
+    require('Piwik/Tracker').trackEvent({title: 'Metric Changed', url: '/report/subtable/change/metric/' + chosenMetric});
+
     currentMetric = chosenMetric;
     doRefresh();
 }
 
 function onTogglePaginator()
 {
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Paginator', url: '/report/subtable/toggle/paginator'});
+
     showAllEntries = !showAllEntries; 
     shouldScrollToPositionOfPaginator = showAllEntries;
     doRefresh();

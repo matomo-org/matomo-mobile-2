@@ -39,6 +39,24 @@ function unregisterEvents()
     session.off('reportDateChanged', onDateChanged);
 }
 
+function trackWindowRequest()
+{
+    var module   = reportModel.get('module');
+    var action   = reportModel.get('action');
+    var uniqueId = reportModel.get('uniqueId');
+
+    require('Piwik/Tracker').setCustomVariable(1, 'reportModule', module, 'page');
+    require('Piwik/Tracker').setCustomVariable(2, 'reportAction', action, 'page');
+    require('Piwik/Tracker').setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
+
+    require('Piwik/Tracker').trackWindow('Report With Dimension', 'report/with-dimension');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
+}
+
 function onClose()
 {
     unregisterEvents();
@@ -48,25 +66,24 @@ function onClose()
 
 function onWebsiteChanged()
 {
+    require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/report/with-dimension/change/website'});
+
     doRefresh();
 }
 
 function onDateChanged(changedReportDate) 
 {
+    require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/with-dimension/change/date'});
+
     reportDate = changedReportDate;
     doRefresh();
 }
 
 function onMetricChosen(chosenMetric)
 {
-    currentMetric = chosenMetric;
-    doRefresh();
-}
+    require('Piwik/Tracker').trackEvent({title: 'Metric Changed', url: '/report/with-dimension/change/metric/' + chosenMetric});
 
-function onDateChosen (period, dateQuery)
-{
-    reportPeriod = period;
-    reportDate   = dateQuery;
+    currentMetric = chosenMetric;
     doRefresh();
 }
 
@@ -79,9 +96,18 @@ function onReportChosen (chosenReportModel) {
 
 function onTogglePaginator()
 {
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Paginator', url: '/report/with-dimension/toggle/paginator'});
+
     showAllEntries = !showAllEntries; 
     shouldScrollToPositionOfPaginator = showAllEntries;
     doRefresh();
+}
+
+function toggleReportConfiguratorVisibility (event)
+{
+    require('report/configurator').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/with-dimension/toggle-report-configurator'});
 }
 
 function showReportContent()

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" onClose="onClose">
+    <Window id="index" onClose="onClose" onOpen="onOpen">
         <TableView id="aboutPiwikTable">
             <TableViewRow id="website" onClick="openWebsite"/>
             <TableViewRow id="follow" onClick="followPiwik"/>

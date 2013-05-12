@@ -8,6 +8,11 @@ var callbacks = {changeLanguage: changeLanguage,
                  toggleGraphsEnabled: toggleGraphsEnabled,
                  changeHttpTimeout: changeHttpTimeout}
 
+function onOpen()
+{
+    require('Piwik/Tracker').trackWindow('Settings', 'settings');
+}
+
 function onClose()
 {
     if (supportsListView()) {
@@ -37,26 +42,36 @@ function supportsListView()
 function changeLanguage()
 {
     require('settings/changeLanguage').open();
+
+    require('Piwik/Tracker').trackEvent({title: 'Settings - Change Language', url: '/settings/change/language'});
 }
 
 function toggleTrackingEnabled()
 {
     require('settings/trackingEnabled').toggle();
+
+    require('Piwik/Tracker').trackEvent({title: 'Settings - Toggle Tracking Enabled', url: '/settings/toggle/tracking-enabled'});
 }
 
 function toggleGraphsEnabled()
 {
     require('settings/graphsEnabled').toggle();
+
+    require('Piwik/Tracker').trackEvent({title: 'Settings - Toggle Graphs Enabled', url: '/settings/toggle/graphs-enabled'});
 }
 
 function changeHttpTimeout()
 {
     require('settings/changeHttpTimeout').open();
+
+    require('Piwik/Tracker').trackEvent({title: 'Settings - Change HTTP Timeout', url: '/settings/change/http-timeout'});
 }
 
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/settings/toggle/report-chooser'});
 }
 
 function close() 

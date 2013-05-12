@@ -14,6 +14,18 @@ var periodRow   = null;
 var fromDateRow = null;
 var toDateRow   = null;
 
+function trackWindowRequest()
+{
+    require('Piwik/Tracker').setCustomVariable(1, 'period', period, 'page');
+    
+    require('Piwik/Tracker').trackWindow('Date Chooser', 'date-chooser');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
+}
+
 function createRow(params)
 {
     return Alloy.createWidget('org.piwik.tableviewrow', null, params).create();
@@ -81,7 +93,7 @@ function setPeriod (periodToSet)
         fromDateRow.changeTitle(L('General_Date'));
         $.datePickerTable.setData([periodRow.getView(), fromDateRow.getView()]);
     }
-};
+}
 
 function onPeriodChange(event)
 {
@@ -132,7 +144,7 @@ function createPeriodPicker ()
     pickerRows = null;
     periods    = null;
     piwikDate  = null;
-};
+}
 
 function onFromDateChange(event)
 {
@@ -168,7 +180,7 @@ function createFromDatePicker (params)
     });
 
     $.fromPicker.show();
-};
+}
 
 function onToDateChange(event)
 {
@@ -202,7 +214,7 @@ function createToDatePicker (params)
         minDate: params.minDate, 
         maxDate: params.maxDate
     });
-};
+}
 
 function selectRow (index) 
 {
@@ -239,7 +251,7 @@ function getDisplayDate (selectedDate)
     }
     
     return selectedDate.toLocaleDateString();
-};
+}
 
 function closeWindow ()
 {
@@ -249,7 +261,7 @@ function closeWindow ()
 function doChooseDate () 
 {
     try {
-        
+
         var myEvent = {from: fromDate, to: toDate, period: period, type: 'onSet'};
         $.trigger('onSet', myEvent);
         
@@ -273,4 +285,4 @@ exports.open = function ()
     createToDatePicker(args);
     createPeriodPicker(args);
     require('layout').open($.index);
-}
+};

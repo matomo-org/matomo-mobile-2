@@ -15,6 +15,16 @@ function unregisterEvents()
     session.off('websiteChanged', openRealTimeMapInWebview);
 }
 
+function trackWindowRequest()
+{
+    require('Piwik/Tracker').trackWindow('Real-time Map', 'real-time-map');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
+}
+
 function onClose()
 {
     unregisterEvents();
@@ -42,9 +52,18 @@ exports.open = function ()
     require('layout').open($.index);
 }
 
+function toggleReportConfiguratorVisibility (event)
+{
+    require('report/configurator').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/real-time-map/toggle-report-configurator'});
+}
+
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
+    
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/real-time-map/toggle/report-chooser'});
 }
 
 function close()

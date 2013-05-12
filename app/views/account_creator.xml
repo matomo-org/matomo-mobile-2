@@ -1,5 +1,5 @@
 <Alloy>
-    <Window class="container" id="index">
+    <Window class="container" id="index" onOpen="onOpen">
         <ScrollView>
             <View id="loginform" />
         </ScrollView>

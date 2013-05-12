@@ -1,5 +1,5 @@
 <Alloy>
-    <Window class="iOSContainer" id="index">
+    <Window class="iOSContainer" id="index" onOpen="onOpen">
         <RightNavButton>
             <Button id="doneButton" onClick="doChooseDate"/>
         </RightNavButton>

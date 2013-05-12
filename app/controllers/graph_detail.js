@@ -218,6 +218,18 @@ if (require('alloy').isTablet) {
     Ti.Gesture.addEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);
 }
 
+function trackWindowRequest()
+{
+    require('Piwik/Tracker').setCustomVariable(1, 'reportName', reportName, 'page');
+
+    require('Piwik/Tracker').trackWindow('Graph Detail', 'graph/detail');
+}
+
+function onOpen()
+{
+    trackWindowRequest();
+}
+
 function destroy()
 {
     if (!require('alloy').isTablet) {

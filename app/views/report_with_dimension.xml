@@ -1,11 +1,11 @@
 <Alloy>
-    <Window title="" id="index" onClose="onClose">
+    <Window title="" id="index" onClose="onClose" onOpen="onOpen">
 
         <RightNavButton platform="ios" formFactor="handheld">
-            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
         <RightNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="reportConfiguratorButton" onClick="Alloy.toggleReportConfiguratorVisibility"/>
+            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
 
         <Require src="loading_indicator" id="loadingindicator"/>
