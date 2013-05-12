@@ -10,7 +10,7 @@ graphSwitcher.addSwitchGraph(true);
 $.index.add(graphSwitcher.getView());
 
 graphSwitcher.on('close', function () {
-    require('layout').close($.index);
+    $.index.close();
 });
 
 graphSwitcher.on('switch', function () {
@@ -227,5 +227,5 @@ function destroy()
 
 exports.open = function () 
 {
-    require('layout').open($.index);
+    $.index.open();
 }
