@@ -1,8 +1,0 @@
-"#index": {
-    title: "Piwik Mobile License",
-    backButtonTitle: L('Mobile_NavigationBack')
-},
-
-"#content": {
-    url: "/license.html"
-}
