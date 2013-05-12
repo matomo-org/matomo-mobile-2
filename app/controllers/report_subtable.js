@@ -31,12 +31,10 @@ if (OS_IOS) {
 
 function trackWindowRequest()
 {
-    var module   = reportModel.get('module');
-    var action   = reportModel.get('action');
-    var uniqueId = reportModel.get('uniqueId');
-
-    require('Piwik/Tracker').setCustomVariable(1, 'reportModule', module, 'page');
-    require('Piwik/Tracker').setCustomVariable(2, 'reportAction', action, 'page');
+    var uniqueId = reportModule + '_' + reportAction;
+    
+    require('Piwik/Tracker').setCustomVariable(1, 'reportModule', reportModule, 'page');
+    require('Piwik/Tracker').setCustomVariable(2, 'reportAction', reportAction, 'page');
     require('Piwik/Tracker').setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
     require('Piwik/Tracker').setCustomVariable(4, 'reportMetric', currentMetric, 'page');
 
