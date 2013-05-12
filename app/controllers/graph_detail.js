@@ -121,7 +121,7 @@ function getGraphUrlWithSize(width, height) {
 
     var params = {showMetricTitle: 1, showLegend: 1, legendAppendMetric: 1};
     if (require('alloy').isTablet) {
-        params.backgroundColor = 'white';
+        params.backgroundColor = 'ffffff';
     }
 
     graphUrlWithSize = graph.setParams(graphUrlWithSize, params);
