@@ -45,6 +45,8 @@ function onError (accountModel, error) {
 
     var message = '';
     switch (error) {
+        case 'AlreadyHandled':
+            return;
         case 'MissingUsername':
             message = String.format(L('General_Required'), L('Login_Login'));
             break;
@@ -112,10 +114,15 @@ exports.login = function(accounts, accessUrl, username, password)
                 accountModel.trigger('sync', accountModel);
                 accounts.add(accountModel);
 
-            }, error: function () {
+            }, error: function (model, event) {
 
                 accountModel.clear({silent: true});
-                return accountModel.trigger('error', accountModel, 'NoViewAccess');
+
+                if (!event || !event.errorMessageDisplayed) {
+                    accountModel.trigger('error', accountModel, 'NoViewAccess');
+                } else {
+                    accountModel.trigger('error', accountModel, 'AlreadyHandled');
+                }
             }
         });
     };

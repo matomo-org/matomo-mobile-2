@@ -14,7 +14,7 @@
  * var request = require('Piwik/Network/HttpRequest');
  * request.setBaseUrl('http://demo.piwik.org/');
  * request.setParameter({siteId: 5});
- * request.setCallback(anyContext, function (response, parameters) {});
+ * request.setCallback(function (response, parameters) {});
  * request.handle();
  * 
  * @exports  HttpRequest as Piwik.Network.HttpRequest
@@ -31,16 +31,6 @@ function HttpRequest () {
      * @private
      */
     this.baseUrl          = null;
-    
-    /**
-     * A given callback method will be executed in this context. This means you can access the properties of the context
-     * object within the callback using 'this'. 
-     *
-     * @see   HttpRequest#setCallback
-     * 
-     * @type  Object
-     */
-    this.context          = null;
 
     /**
      * We have to inform the user if no network connection is available. Apple requires this. Additionally, we want to
@@ -94,7 +84,7 @@ function HttpRequest () {
 
     /**
      * The callback method will be executed as soon as the readyState is finished. The callback method will be executed
-     * in context of {@link HttpRequest#context}. The callback method will be executed on a valid result
+     * in context of HttpRequest. The callback method will be executed on a valid result
      * and on any error. If an error occurred, it does not pass the result to the callback method.
      *
      * @see   Piwik.Network.HttpRequest#setCallback
@@ -144,26 +134,19 @@ HttpRequest.prototype.setParameter = function (parameter) {
 };
 
 /**
- * Sets (overwrites) the callback method and the context. The context object defines in which context the callback
- * method will be executed.
+ * Sets (overwrites) the callback method.
  *
- * @param  {Object}    context     A given callback method will be executed in this context. This means you
- *                                 can access the properties of the context object within the callback
- *                                 using 'this'. See {@link HttpRequest#context}
- * @param  {Function}  [callback]  Optional. The callback is called as soon as the response is received.
- *                                 The callback is called even on any error. Possible errors are:
- *                                 Network is not available, no base url is given, timeout, ...
- *                                 In such a case the callback method does not receive the response as an
- *                                 argument. Ensure that your callback method is able to handle such a case.
- *                                 The first argument the method does receive is the response, the second is
- *                                 the used parameters. See {@link HttpRequest#callback}
+ * @param  {Function}  callback  The callback is called as soon as the response is received.
+ *                               The callback is called even on any error. Possible errors are:
+ *                               Network is not available, no base url is given, timeout, ...
+ *                               In such a case the callback method does not receive the response as an
+ *                               argument. Ensure that your callback method is able to handle such a case.
+ *                               The first argument the method does receive is the response, the second is
+ *                               the used parameters. See {@link HttpRequest#callback}
  */
-HttpRequest.prototype.setCallback = function (context, callback) {
-    this.context  = context;
+HttpRequest.prototype.setCallback = function (callback) {
     this.callback = callback;
-    
     callback      = null;
-    context       = null;
 };
 
 /**
@@ -176,10 +159,6 @@ HttpRequest.prototype.handle = function () {
 
     if (!parameter) {
         parameter    = {};
-    }
-    
-    if (!this.context) {
-        this.context = {};
     }
 
     if (!this.baseUrl) {
@@ -343,8 +322,7 @@ HttpRequest.prototype.load = function (xhr) {
     var parameter = this.parameter;
 
     try {
-        // execute callback in defined context
-        callback.apply(this.context, [response, parameter]);
+        callback.apply(this, [response, parameter]);
  
     } catch (e) {
         console.warn('Failed to call callback method: ' + e.message, 
@@ -533,7 +511,7 @@ HttpRequest.prototype.error = function (e) {
         callback  = function () {};
     }
 
-    callback.apply(this.context, []);
+    callback.apply(this, []);
 
     // onload hook
     if (this.onload) {
@@ -579,7 +557,6 @@ HttpRequest.prototype.cleanup = function () {
 
     this.xhr       = null;
     this.parameter = null;
-    this.context   = null;
     this.callback  = null;
     this.onload    = null;
 };

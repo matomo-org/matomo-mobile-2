@@ -17,6 +17,8 @@ function Sync(method, model, opts) {
                     
             var _ = require("alloy/underscore");
 
+            var opts = _.extend({}, opts);
+
             if (opts.params) {
                 params = _.extend(_.clone(params), opts.params);
             }
@@ -31,14 +33,21 @@ function Sync(method, model, opts) {
                 request.setUserAuthToken(opts.account.get('tokenAuth'));
             }
             
-            request.setCallback(this, function (response) {
-                if (_.isUndefined(response) || null === response) {
-                    opts.error && opts.error(null);
+            request.setCallback(function (response) {
+
+                if (_.isUndefined(response) || _.isNull(response)) {
+
+                    opts.error && opts.error(model, {errorMessageDisplayed: this.errorMessageSent});
+
                 } else if (_.isFunction(model.validResponse) && !model.validResponse(response)) {
-                    opts.error && opts.error(null);
+
+                    opts.error && opts.error(model, {errorMessageDisplayed: this.errorMessageSent});
+
                 } else {
                     opts.success && opts.success(response);
                 }
+
+                model = null;
             });
             
             if (false === settings.displayErrors) {
