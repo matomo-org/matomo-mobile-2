@@ -43,9 +43,7 @@
     "env:production": {},
     "os:ios": {},
     "os:android": {},
-    "os:mobileweb": {
-        "numDisplayedWebsitesInDashboard": -1
-    },
+    "os:mobileweb": {},
     "dependencies": {
         "org.piwik.tableviewrow": "1.0",
         "org.piwik.tableviewsection": "1.0",

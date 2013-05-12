@@ -25,7 +25,8 @@ function participate()
 
 function openLicense()
 {
-    var license = Alloy.createController('license');
+    var params  = {title: 'Piwik Mobile License', url: 'http://piwik.org/free-software/mobile/'};
+    var license = Alloy.createController('webview', params);
     license.open();
 }
 

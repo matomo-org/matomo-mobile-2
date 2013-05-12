@@ -11,18 +11,34 @@ function centerLoadingLabel()
 
 var args = arguments[0] || {};
 
+function updateContainer(properties)
+{
+    $.loading.applyProperties(properties);
+}
+
+function updateContainerIfSet(property)
+{
+    if (args && args[property]) {
+        var properties = {};
+        properties[property] = args[property];
+        updateContainer(properties);
+    }
+}
+
 if (args && args.rounded) {
-    $.loading.applyProperties({
+    updateContainer({
         borderRadius: 5,
         borderColor: "#d3d3d3",
         borderWidth: 1
     });
 }
 
+updateContainerIfSet('backgroundColor');
+updateContainerIfSet('color');
+updateContainerIfSet('width');
+
 if (args && args.height) {
-    $.loading.applyProperties({
-        height: args.height
-    });
+    updateContainer({height: args.height});
     
     centerLoadingLabel();
 }

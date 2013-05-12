@@ -18,7 +18,7 @@
 
 "#title": {
     height: Ti.UI.SIZE,
-    left: 15,
+    left: 10,
     right: 95,
     color: '#7e7e7e',
     top: 16,

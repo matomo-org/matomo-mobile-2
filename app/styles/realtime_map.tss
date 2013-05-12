@@ -2,3 +2,8 @@
     title: L('Real-time Map'),
     backButtonTitle: L('Mobile_NavigationBack')
 }
+
+"#webview": {
+    disableBounce: true,
+    scalesPageToFit: false
+}

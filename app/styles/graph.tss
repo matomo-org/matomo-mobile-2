@@ -6,7 +6,6 @@
 
 "#image": {
     top: 15,
-    image: 'graphDefault.png',
     height: 150,
     left: 10,
     right: 10,

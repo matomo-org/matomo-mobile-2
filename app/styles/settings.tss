@@ -13,7 +13,7 @@
 }
 
 "#settingsTable": {
-    footerTitle: L('Piwik Mobile uses your Piwik user settings "Report to load by default" and "Report date to load by default"')
+    footerTitle: L('Mobile_LoginToPiwikToChangeSettings')
 },
 
 "#settingsTable[platform=ios]": {

@@ -27,6 +27,12 @@ function showReportHasNoData()
     $.noData.show();
 }
 
+function hideMoreLink()
+{
+    $.footer.hide();
+    $.footer.height = 0;
+}
+
 function hasReportRowsToDisplay()
 {
     return ($.piwikProcessedReport && $.piwikProcessedReport.length);
@@ -36,6 +42,7 @@ function showReportContent()
 {
     if (!hasReportRowsToDisplay()) {
         showReportHasNoData();
+        hideMoreLink();
     }
 
     $.loadingIndicator.hide();

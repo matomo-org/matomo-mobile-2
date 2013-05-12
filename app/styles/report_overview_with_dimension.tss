@@ -8,7 +8,10 @@
 }
 
 "#loadingIndicator": {
-    height: 160
+    height: 160,
+    backgroundColor: '#efefef',
+    color: '#7e7e7e',
+    width: Ti.UI.FILL,
 }
 
 ".separator": {
@@ -26,7 +29,7 @@
     color: '#191919',
     font: {fontWeight: 'bold'},
     left: 0,
-    width: Ti.UI.SIZE,
+    width: Ti.UI.SIZE
 }
 
 ".header": {
@@ -51,6 +54,7 @@
 "#noData": {
     visible: false,
     height: 0,
+    backgroundColor: '#efefef',
 }
 
 ".no_data": {
@@ -96,6 +100,7 @@
 ".more": {
     left: 10,
     width: Ti.UI.SIZE,
+    text: L('General_More')
 }
 
 ".description_dimension": {
