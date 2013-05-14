@@ -223,7 +223,7 @@ exports.definition = {
                 }
             },
 
-            getEntryReport: function (response) {
+            getEntryReport: function () {
 
                 if (this.hasDashboardReport()) {
                     return this.at(0);

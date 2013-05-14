@@ -8,6 +8,8 @@ reportsCollection.on('reset', updateAvailableReportsList);
 
 var currentlyActiveReport = null;
 
+var cidToSelect = '';
+
 function updateAvailableReportsList()
 {
     if (!reportsCollection) {
@@ -23,6 +25,10 @@ function updateAvailableReportsList()
     rows.push(Alloy.createController('report_chooser_row', {title: L('Live_VisitorsInRealTime'), cid: 'live'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Live_VisitorLog'), cid: 'visitorlog'}).getView());
     rows.push(Alloy.createController('report_chooser_section', {title: L('General_Reports')}).getView());
+
+    if (!cidToSelect) {
+        setCurrentlySelectedCid(getCidOfEntryReport(reportsCollection));
+    }
 
     reportsCollection.forEach(function (report) 
     {
@@ -46,7 +52,38 @@ function updateAvailableReportsList()
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_GiveUsYourFeedback'), cid: 'feedback'}).getView());
 
     $.reportsTable.setData(rows);
+
+    makeSureSelectedRowIsStillSelected(rows);
+
     rows = null;
+}
+
+function setCurrentlySelectedCid(cidOfReport)
+{
+    cidToSelect = cidOfReport;
+}
+
+function makeSureSelectedRowIsStillSelected(rows)
+{
+    if ($.reportsTable.selectRow && cidToSelect) {
+        for (var index = 0; index < rows.length; index++) {
+            if (cidToSelect == rows[index].cid) {
+                $.reportsTable.selectRow(index);
+                break;
+            }
+        }
+    }
+
+    rows = null;
+}
+
+function getCidOfEntryReport(reportsCollection)
+{
+    var entryReport = reportsCollection.getEntryReport();
+
+    if (entryReport) {
+        return entryReport.cid;
+    }
 }
 
 function closeCurrentlyOpenedReport()
@@ -68,6 +105,8 @@ function doSelectReport(event)
     }
     
     var cid = event.rowData.cid;
+
+    setCurrentlySelectedCid(cid);
 
     hideLeftSidebar();
 
@@ -125,7 +164,11 @@ function onWebsiteSelected(siteModel, accountModel)
 {
     require('session').setWebsite(siteModel, accountModel);
 
+    setCurrentlySelectedCid('');
+
     openEntryReport();
+
+    refresh();
 }
 
 function openCompositeReport(chosenReportModel)
