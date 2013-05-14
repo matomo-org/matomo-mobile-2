@@ -3,7 +3,7 @@
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
-"ListItem": {
+"ListItem[platform=ios]": {
     selectionStyle: Ti.UI.iPhone.ListViewCellSelectionStyle.NONE
 }
 
