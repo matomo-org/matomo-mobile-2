@@ -32,15 +32,10 @@
     height: Ti.UI.SIZE,
 }
 
-"#addAccountButton[platform=mobileweb]": {
+"#addAccountButton": {
     backgroundImage: "ic_action_accounts.png",
     width: 32,
     height: 32
-},
-
-"#addAccountButton[platform=ios]": {
-    title: '',
-    systemButton: Titanium.UI.iPhone.SystemButton.ADD
 },
 
 "#menuItemAddAccount[platform=android]": {

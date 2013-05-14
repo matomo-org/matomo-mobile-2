@@ -10,10 +10,6 @@
     height: 32
 }
 
-"#accountsButton[platform=mobileweb]": {
-    width: 32
-}
-
 "#searchBar": {
     top: 0,
     barColor: "#cccccc",
