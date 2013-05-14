@@ -11,7 +11,7 @@
 }
 
 "#accountsButton[platform=mobileweb]": {
-    width: "42"
+    width: 32
 }
 
 "#searchBar": {

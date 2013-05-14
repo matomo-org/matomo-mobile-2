@@ -34,7 +34,7 @@
 
 "#addAccountButton[platform=mobileweb]": {
     backgroundImage: "ic_action_accounts.png",
-    width: 42,
+    width: 32,
     height: 32
 },
 
