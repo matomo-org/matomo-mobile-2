@@ -12,6 +12,10 @@
     right: 10
 }
 
+"#settingsTable[platform=ios]": {
+    footerTitle: L('Mobile_LoginToPiwikToChangeSettings'),
+}
+
 "#loginHint": {
     text: L('Mobile_LoginToPiwikToChangeSettings'),
     font: {fontWeight: 'bold', fontSize: 14},
