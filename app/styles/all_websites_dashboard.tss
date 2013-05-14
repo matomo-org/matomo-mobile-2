@@ -25,8 +25,8 @@
     borderColor: '#E6E6E6',
     borderWidth: 2,
     height: Ti.UI.SIZE,
-    left: 10,
-    right: 10,
+    left: 5,
+    right: 5,
     top: 5,
     bottom: 5,
     backgroundColor: '#fff',
@@ -35,8 +35,9 @@
 "#searchBar[platform=mobileweb]": {
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
     autocorrect: false,
-    left: 10,
-    right: 10,
+    left: 5,
+    right: 5,
+    color: '#7e7e7e',
     height: Ti.UI.SIZE,
     hintText: L('Mobile_SearchWebsite')
 }

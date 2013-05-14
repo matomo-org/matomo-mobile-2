@@ -16,6 +16,9 @@
             <MenuItem id="menuItemAddAccount" onClick="doAddAccount" />
         </Menu>
         <TableView id="accounts" onDelete="doDeleteAccount" onLongpress="doSelectAction" onClick="doSelectAccount" dataCollection="appAccounts">
+            <FooterView platform="android,mobileweb">
+                <View class="footer"><Label id="howToDeleteHint"/></View>
+            </FooterView>
             <TableViewRow title="{name}" accountId="{id}"/>
         </TableView>
     </Window>

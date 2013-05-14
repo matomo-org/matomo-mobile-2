@@ -12,9 +12,21 @@
     right: 10
 }
 
-"#settingsTable": {
-    footerTitle: L('Mobile_LoginToPiwikToChangeSettings')
+"#loginHint": {
+    text: L('Mobile_LoginToPiwikToChangeSettings'),
+    font: {fontWeight: 'bold', fontSize: 14},
+    color: '#7e7e7e',
+    left: 10,
+    right: 10,
 },
+
+".footer": {
+    top: 10,
+    bottom: 10,
+    left: 0,
+    right: 0,
+    height: Ti.UI.SIZE,
+}
 
 "#settingsTable[platform=ios]": {
     style: Ti.UI.iPhone.ListViewStyle.GROUPED
