@@ -16,7 +16,7 @@
         "numDisplayedWebsitesInDashboard": 50,
         "tracking": {
             "enabled": true,
-            "siteId": 25,
+            "siteId": 34,
             "apiVersion": 1,
             "baseUrl": "http://mobileapp.piwik.org",
             "piwikServerUrl": "http://demo.piwik.org/piwik.php",
