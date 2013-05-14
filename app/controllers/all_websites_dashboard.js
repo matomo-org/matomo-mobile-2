@@ -43,7 +43,8 @@ function websiteChosen(siteModel)
 
 function doChooseAccount()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Choose Account', url: '/all-websites-dashboard/choose-account'});
+    require('Piwik/Tracker').trackEvent({title: 'Choose Account', 
+                                         url: '/all-websites-dashboard/choose-account'});
 
     var accounts = Alloy.createController('accounts_selector');
     accounts.on('accountChosen', onAccountChosen);
@@ -52,9 +53,14 @@ function doChooseAccount()
 
 function onAccountChosen(account)
 {
-    showLoadingMessage();
+    require('Piwik/Tracker').trackEvent({title: 'Account Chosen', 
+                                         url: '/all-websites-dashboard/account-chosen'});
+    loadWebsitesForAccount(account);
+}
 
-    require('Piwik/Tracker').trackEvent({title: 'Account Chosen', url: '/all-websites-dashboard/account-chosen'});
+function loadWebsitesForAccount(account)
+{
+    showLoadingMessage();
 
     accountModel            = account;
     var entrySiteCollection = Alloy.createCollection('piwikWebsites');
@@ -286,7 +292,7 @@ exports.close = function () {
 exports.open = function (alreadyOpened) {
     showLoadingMessage();
 
-    onAccountChosen(accountModel);
+    loadWebsitesForAccount(accountModel);
 
     require('layout').open($.index);
 };
