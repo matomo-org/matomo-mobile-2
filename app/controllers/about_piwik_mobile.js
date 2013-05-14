@@ -5,7 +5,8 @@ function L(key)
 
 function openWebsite()
 {
-    require('commands/openLink').execute('http://piwik.org');
+    var params = {title: 'Piwik', url: 'http://piwik.org/'};
+    Alloy.createController('webview', params).open();
 }
 
 function followPiwik()
@@ -20,7 +21,8 @@ function openSourceCode()
 
 function participate()
 {
-    require('commands/openLink').execute('http://piwik.org/contribute/');
+    var params = {title: 'Contribute', url: 'http://piwik.org/contribute/'};
+    Alloy.createController('webview', params).open();
 }
 
 function openLicense()

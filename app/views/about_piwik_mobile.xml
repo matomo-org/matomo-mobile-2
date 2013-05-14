@@ -2,10 +2,10 @@
     <Window id="index" onClose="onClose" onOpen="onOpen">
         <TableView id="aboutPiwikTable">
             <TableViewRow id="website" onClick="openWebsite"/>
-            <TableViewRow id="follow" onClick="followPiwik"/>
             <TableViewRow id="participate" onClick="participate"/>
-            <TableViewRow id="sourceCode" onClick="openSourceCode"/>
             <TableViewRow id="license" onClick="openLicense"/>
+            <TableViewRow id="follow" onClick="followPiwik" platform="ios,android"/>
+            <TableViewRow id="sourceCode" onClick="openSourceCode" platform="ios,android"/>
         </TableView>
     </Window>
 </Alloy>

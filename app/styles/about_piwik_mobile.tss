@@ -12,7 +12,7 @@
 }
 
 "#website": {
-    hasDetail: true,
+    hasChild: true,
     title: 'Visit our Website'
 },
 
@@ -22,7 +22,7 @@
 },
 
 "#participate": {
-    hasDetail: true,
+    hasChild: true,
     title: 'Participate to Piwik'
 },
 
