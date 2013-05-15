@@ -43,7 +43,16 @@
     "env:production": {},
     "os:ios": {},
     "os:android": {},
-    "os:mobileweb": {},
+    "os:mobileweb": {
+        "tracking": {
+            "enabled": false,
+            "siteId": 34,
+            "apiVersion": 1,
+            "baseUrl": "http://mobileapp.piwik.org",
+            "piwikServerUrl": "http://demo.piwik.org/piwik.php",
+            "maxTracksPerDay": 200
+        }
+    },
     "dependencies": {
         "org.piwik.tableviewrow": "1.0",
         "org.piwik.tableviewsection": "1.0",
