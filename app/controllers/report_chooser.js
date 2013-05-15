@@ -86,13 +86,6 @@ function getCidOfEntryReport(reportsCollection)
     }
 }
 
-function closeCurrentlyOpenedReport()
-{
-    if (currentlyActiveReport) {
-        currentlyActiveReport.close();
-    }
-}
-
 function hideLeftSidebar()
 {
     require('layout').hideLeftSidebar();
@@ -126,7 +119,7 @@ function doSelectReport(event)
 
     hideLeftSidebar();
 
-    closeCurrentlyOpenedReport();
+    require('layout').closeRecordedWindows();
 
     if ('live' == cid) {
         openLiveVisitors();
@@ -152,14 +145,12 @@ function openHelp()
 {
     var help = Alloy.createController('help');
     help.open();
-    setCurrentlyOpenedReport(help);
 }
 
 function openSettings()
 {
     var settings = Alloy.createController('settings');
     settings.open();
-    setCurrentlyOpenedReport(settings);
 }
 
 function chooseAccount()
@@ -167,7 +158,6 @@ function chooseAccount()
     var accounts = Alloy.createController('accounts');
     accounts.on('accountChosen', onAccountChosen);
     accounts.open();
-    setCurrentlyOpenedReport(accounts);
 }
 
 function onAccountChosen(account)
@@ -192,35 +182,30 @@ function openCompositeReport(chosenReportModel)
     var reportCategory = chosenReportModel.get('category');
     var statistics     = Alloy.createController('report_composite', {reportCategory: reportCategory});
     statistics.open();
-    setCurrentlyOpenedReport(statistics);
 }
 
 function openLiveVisitors()
 {
     var live = Alloy.createController('live_visitors');
     live.open();
-    setCurrentlyOpenedReport(live);
 }
 
 function openVisitorLog()
 {
     var log = Alloy.createController('visitor_log');
     log.open();
-    setCurrentlyOpenedReport(log);
 }
 
 function openVisitorMap()
 {
     var realtimemap = Alloy.createController('realtime_map');
     realtimemap.open();
-    setCurrentlyOpenedReport(realtimemap);
 }
 
 function openGiveFeedback()
 {
     var feedback = Alloy.createController('give_feedback');
     feedback.open();
-    setCurrentlyOpenedReport(feedback);
 }
 
 function refresh()
@@ -231,23 +216,18 @@ function refresh()
     reportsCollection.fetchAllReports(accountModel, siteModel);
 }
 
-function setCurrentlyOpenedReport(controller)
-{
-    currentlyActiveReport = controller;
-}
-
 function openEntryReport()
 {
-    closeCurrentlyOpenedReport();
+    require('layout').closeRecordedWindows();
 
     var compositeReport = Alloy.createController('report_composite');
     compositeReport.open();
-    setCurrentlyOpenedReport(compositeReport);
 }
 
 exports.open = function() 
 {
     require('layout').setLeftSidebar($.reportsTable);
+    require('layout').startRecordingWindows();
 
     Alloy.createCollection('AppSettings').settings().on('change:language', refresh);
 

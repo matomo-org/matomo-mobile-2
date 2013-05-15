@@ -2,6 +2,8 @@ var navGroup = null;
 var isBootstrapped = false;
 
 var rootWindow = null;
+var recordWindows   = false;
+var recordedWindows = [];
 
 function bootstrap (win) 
 {
@@ -12,11 +14,19 @@ function bootstrap (win)
 
     isBootstrapped = true;
 
+    if (recordWindows) {
+        recordedWindows.push(win);
+    }
+
     win = null;
 }
 
 exports.close = function (win) 
 {
+    if (!win) {
+        return;
+    }
+
     navGroup.close(win, {animated : true});
     win = null;
 };
@@ -29,8 +39,42 @@ exports.open = function (win)
         bootstrap(win);
     }
 
+    recordWindowIfEnabled(win);
+
     win = null;
 };
+
+exports.startRecordingWindows = function () {
+    recordWindows = true;
+};
+
+exports.closeRecordedWindows = function () {
+    while (recordedWindows.length) {
+        exports.close(recordedWindows.shift());
+    }
+};
+
+function recordWindowIfEnabled(win)
+{
+    if (recordWindows) {
+        recordedWindows.push(win);
+        win.addEventListener('close', removeWindowFromRecordedWindows);
+    }
+    
+    win = null;
+}
+
+function removeWindowFromRecordedWindows()
+{
+    var _     = require('alloy')._;
+    var index = _.indexOf(recordedWindows, this);
+
+    if (-1 != index) {
+        delete recordedWindows[index];
+    }
+
+    this.removeEventListener('close', removeWindowFromRecordedWindows);
+}
 
 
 // we have to create this window before any other window, 
