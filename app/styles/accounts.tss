@@ -27,7 +27,7 @@
 }
 
 "#noAccountSelectedLabel": {
-    text: L("You have to select an account. Add a new account if you haven't configured one."),
+    text: L("Mobile_NoAccountIsSelected"),
     font: {fontWeight: 'bold', fontSize: 14},
     color: '#CD1628',
     left: 10,

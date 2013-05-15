@@ -155,6 +155,7 @@ module.exports = {
     Mobile_NavigationBack:                                              'Back',
     Mobile_NetworkErrorWithStatusCode:                                  'There was an error "%s". The request returned the status "%s". URL was "%s". Please check your entered URL and the error logs on this server for more information about the error and how to resolve it.',
     Mobile_NetworkNotReachable:                                         'Network not reachable',
+    Mobile_NoAccountIsSelected:                                         "You have to select an account. Add a new account if you haven't configured one.",
     Mobile_NoPiwikAccount:                                              'No Piwik Account?',
     Mobile_NoVisitorFound:                                              'No visitor found',
     Mobile_NoWebsiteFound:                                              'No website found',
