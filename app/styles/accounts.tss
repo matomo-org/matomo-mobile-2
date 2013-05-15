@@ -2,7 +2,7 @@
     title: L('Mobile_Accounts')
 },
 
-"#accounts": {
+"#accountsTable": {
     editable: true,
 },
 
@@ -11,9 +11,31 @@
     right: 10
 }
 
-"#accounts[platform=ios]": {
+"#accountsTable[platform=ios]": {
     style: Ti.UI.iPhone.TableViewStyle.GROUPED,
     footerTitle: L('Mobile_HowtoDeleteAnAccountOniOS')
+}
+
+"#noAccountSelectedContainer": {
+    visible: false,
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+}
+
+"#noAccountSelectedContainer[platform=mobileweb]": {
+    height: 0
+}
+
+"#noAccountSelectedLabel": {
+    text: L("You have to select an account. Add a new account if you haven't configured one."),
+    font: {fontWeight: 'bold', fontSize: 14},
+    color: '#CD1628',
+    left: 10,
+    right: 10,
+    top: 10,
+    bottom: 10,
+    height: Ti.UI.SIZE,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
 }
 
 "#howToDeleteHint": {

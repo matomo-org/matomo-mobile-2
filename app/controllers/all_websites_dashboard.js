@@ -41,7 +41,7 @@ function websiteChosen(siteModel)
     $.trigger('websiteChosen', {site: siteModel, account: accountModel});
 }
 
-function doChooseAccount()
+function chooseAccount()
 {
     require('Piwik/Tracker').trackEvent({title: 'Choose Account', 
                                          url: '/all-websites-dashboard/choose-account'});
@@ -81,7 +81,7 @@ function loadWebsitesForAccount(account)
     });
 }
 
-function doSelectWebsite(event)
+function selectWebsite(event)
 {
     if (!event || !event.rowData || null === event.rowData.modelid) {
         console.log('ModelID not defined, cannot select website');
@@ -129,7 +129,7 @@ function showLoadingMessage()
     $.loading.show();
 }
 
-function doCancelSearchWebsite() 
+function cancelSearchWebsite() 
 {
     if (!$.searchBar) {
 
@@ -142,7 +142,7 @@ function doCancelSearchWebsite()
     doRefresh();
 }
 
-function doSearchWebsite(event) 
+function searchWebsite(event) 
 {
     showLoadingMessage();
 

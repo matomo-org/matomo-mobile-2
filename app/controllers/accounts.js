@@ -8,39 +8,42 @@ var hideCloseButton = args.hideCloseButton || false;
 var accounts = Alloy.Collections.appAccounts;
 accounts.fetch();
 
-function doSelectAccount(event)
+function chooseAccount(event)
 {
     require('Piwik/Tracker').trackEvent({title: 'Accounts - Account selected', url: '/accounts/account-selected'});
 
-    var account = accounts.get(event.rowData.accountId);
+    var account = accounts.get(event.row.accountId);
     account.select(function () {
         $.trigger('accountChosen', account);
         close();
     });
 }
 
-function doDeleteAccount(event)
+function deleteAccount(event)
 {
-    var account = accounts.get(event.rowData.accountId);
+    var account = accounts.get(event.row.accountId);
 
-    // TODO this will result in an error cause other windows will no longer get an account
-    // var currentActiveAccount = require('session').getAccount();
-    // if (account == currentActiveAccount) {
-    //     require('session').setWebsite(null, null);
-    // }
+    var currentActiveAccount = require('session').getAccount();
+    if (currentActiveAccount && account.get('id') == currentActiveAccount.get('id')) {
+        require('session').setWebsite(null, null);
+    } 
 
     if (account) {
         accounts.remove(account);
         account.destroy();
     }
 
+    displayNoAccountSelectedHintIfNoAccountIsSelected();
+
     require('Piwik/Tracker').trackEvent({title: 'Accounts - Account Delete', url: '/accounts/account-deleted'});
-    
-    // TODO if no further account is available, we will run into problems...
 }
 
-function doSelectAction(event)
+function deleteAccountIfUserConfirmsButNotOniOS(event)
 {
+    if (OS_IOS) {
+        return;
+    }
+    
     var dialog = Ti.UI.createAlertDialog({
         cancel: 1,
         buttonNames: [L('General_Yes'), L('General_No')],
@@ -57,15 +60,31 @@ function doSelectAction(event)
             return;
         }
 
-        doDeleteAccount(event);
+        deleteAccount(event);
     });
 
     dialog.show();
 }
 
+function isAnAccountSelected()
+{
+    return !!require('session').getAccount();
+}
+
+function displayNoAccountSelectedHintIfNoAccountIsSelected()
+{
+    if (!isAnAccountSelected()) {
+        if (OS_MOBILEWEB) {
+            $.noAccountSelectedContainer.height = Ti.UI.SIZE;
+        }
+
+        $.noAccountSelectedContainer.show();
+    }
+}
+
 var newAccountController = null;
 
-function doAddAccount()
+function addAccount()
 {
     require('Piwik/Tracker').trackEvent({title: 'Accounts - Add Account', url: '/accounts/add-account'});
 
@@ -105,6 +124,8 @@ function close ()
 
 exports.open = function ()
 {
+    displayNoAccountSelectedHintIfNoAccountIsSelected();
+
     require('layout').open($.index);
 };
 

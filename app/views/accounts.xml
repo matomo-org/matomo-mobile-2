@@ -10,12 +10,15 @@
         </LeftNavButton>
         
         <RightNavButton platform="ios,mobileweb">
-            <Button id="addAccountButton" onClick="doAddAccount"/>
+            <Button id="addAccountButton" onClick="addAccount"/>
         </RightNavButton>
         <Menu id="menu" platform="android">
-            <MenuItem id="menuItemAddAccount" onClick="doAddAccount" />
+            <MenuItem id="menuItemAddAccount" onClick="addAccount" />
         </Menu>
-        <TableView id="accounts" onDelete="doDeleteAccount" onLongpress="doSelectAction" onClick="doSelectAccount" dataCollection="appAccounts">
+        <TableView id="accountsTable" onDelete="deleteAccount" onLongpress="deleteAccountIfUserConfirmsButNotOniOS" onClick="chooseAccount" dataCollection="appAccounts">
+            <HeaderView>
+                <View id="noAccountSelectedContainer"><Label id="noAccountSelectedLabel"/></View>
+            </HeaderView>
             <FooterView platform="android,mobileweb">
                 <View class="footer"><Label id="howToDeleteHint"/></View>
             </FooterView>

@@ -98,6 +98,18 @@ function hideLeftSidebar()
     require('layout').hideLeftSidebar();
 }
 
+function isAnAccountSelected()
+{
+    return !!require('session').getAccount();
+}
+
+function isActionThatRequiresAnAccount(cid)
+{
+    var cidsWhichDontRequireAnAccount = ['settings', 'help', 'accounts', 'feedback'];
+
+    return (-1 === cidsWhichDontRequireAnAccount.indexOf(cid));
+}
+
 function doSelectReport(event) 
 {
     if (!event.rowData.cid) {
@@ -105,6 +117,10 @@ function doSelectReport(event)
     }
     
     var cid = event.rowData.cid;
+
+    if (!isAnAccountSelected() && isActionThatRequiresAnAccount(cid)) {
+        cid = 'accounts';
+    }
 
     setCurrentlySelectedCid(cid);
 

@@ -25,7 +25,7 @@ function onDateChosen(period, date)
 function updateDisplayedDate(reportDate)
 {
     var dateFormatter = require('date/formatter');
-    $.dateLabel.text  = dateFormatter.getPrettyDate(reportDate);
+    $.dateLabel.text  = dateFormatter ? dateFormatter.getPrettyDate(reportDate) : '';
 }
 
 updateDisplayedDate(session.getReportDate());

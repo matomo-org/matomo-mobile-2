@@ -4,26 +4,26 @@
     
     <Window id="index" onClose="onClose" onOpen="onOpen">
         <RightNavButton platform="ios,mobileweb">
-            <Button id="accountsButton" onClick="doChooseAccount"/>
+            <Button id="accountsButton" onClick="chooseAccount"/>
         </RightNavButton>
         
         <Menu id="menu" platform="android">
-            <MenuItem id="menuItemAccount" onClick="doChooseAccount" />
+            <MenuItem id="menuItemAccount" onClick="chooseAccount" />
         </Menu>
 
         <View id="loading"><Label id="loadingLabel"></Label></View>
         
         <View id="content" class="container">
-            <SearchBar id="searchBar" onReturn="doSearchWebsite" onCancel="doCancelSearchWebsite" platform="android,ios"/>
+            <SearchBar id="searchBar" onReturn="searchWebsite" onCancel="cancelSearchWebsite" platform="android,ios"/>
             <View class="searchBarContainer" platform="mobileweb">
                 <View class="searchBarInnerContainer">
-                    <TextField id="searchBar" onReturn="doSearchWebsite"/>
+                    <TextField id="searchBar" onReturn="searchWebsite"/>
                 </View>
             </View>
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
             <View class="shadow" formFactor="tablet"></View>
             <TableView id="websitesTable" dataCollection="$.piwikProcessedReport" 
-                       onClick="doSelectWebsite" dataTransform="formatWebsite">
+                       onClick="selectWebsite" dataTransform="formatWebsite">
                 <HeaderPullView platform="ios">
                     <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>
