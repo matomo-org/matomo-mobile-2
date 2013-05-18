@@ -9,8 +9,8 @@
 ".icon": {
     image: "ic_action_menu_website.png", 
     right: 10,
-    width: 19,
-    height: 19
+    width: 22,
+    height: 22
 }
 
 "#websiteName": {
