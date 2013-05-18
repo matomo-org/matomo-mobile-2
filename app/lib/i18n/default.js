@@ -14,7 +14,7 @@ module.exports = {
     Feedback_DoYouHaveBugReportOrFeatureRequest:                        'Do you have a bug to report or a feature request?',
     Feedback_ThankYou:                                                  'Thank you for helping us to make Piwik better!',
     General_AboutPiwikX:                                                'About Piwik %s',
-    General_AllWebsitesDashboard:                                       'All Websites dashboard',
+    General_AllWebsitesDashboard:                                       'All Websites Dashboard',
     General_Date:                                                       'Date',
     General_DateRangeFrom_js:                                           'From',
     General_DateRangeTo_js:                                             'To',
