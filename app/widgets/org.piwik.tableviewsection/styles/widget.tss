@@ -2,6 +2,7 @@
     className: "tableViewSection",
     height: Ti.UI.SIZE,
     selectedBackgroundColor: '#B2AEA5',
+    selectedBackgroundImage: 'org.piwik.tableviewsection/tableviewsectionbackground.png',
     opacity: 0.95,
 },
 
@@ -14,7 +15,7 @@
     width: Ti.UI.SIZE,
     top: 3,
     bottom: 4,
-    textAlign: 'left',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     color: '#ffffff',
     left: 10,
     font: {fontSize: 15, fontWeight: 'bold'},
