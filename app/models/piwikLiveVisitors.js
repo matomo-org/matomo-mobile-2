@@ -15,7 +15,7 @@ exports.definition = {
         },
         "settings": {
             "method": "API.getBulkRequest",
-            "cache": true
+            "cache": false
         },
         "defaultParams": {
             "urls": [{method: "Live.getCounters", lastMinutes: 30, format: "JSON"},

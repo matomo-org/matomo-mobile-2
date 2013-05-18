@@ -1,61 +1,5 @@
 var Alloy = require('alloy');
 
-function getDashboards()
-{
-    return [
-      {
-        "name": "Dashboard",
-        "widgets": [
-          {
-            "module": "VisitsSummary",
-            "action": "getEvolutionGraph"
-          },
-          {
-            "module": "Live",
-            "action": "widget"
-          },
-          {
-            "module": "VisitorInterest",
-            "action": "getNumberOfVisitsPerVisitDuration"
-          },
-          {
-            "module": "CoreHome",
-            "action": "getPromoVideo"
-          },
-          {
-            "module": "Referers",
-            "action": "getKeywords"
-          },
-          {
-            "module": "Referers",
-            "action": "getWebsites"
-          },
-          {
-            "module": "UserCountryMap",
-            "action": "visitorMap"
-          },
-          {
-            "module": "UserSettings",
-            "action": "getBrowser"
-          },
-          {
-            "module": "Referers",
-            "action": "getSearchEngines"
-          },
-          {
-            "module": "VisitTime",
-            "action": "getVisitInformationPerServerTime"
-          },
-          {
-            "module": "ExampleRssWidget",
-            "action": "rssPiwik"
-          }
-        ]
-      }
-    ];
-}
-
-
 exports.definition = {
     
     config: {
@@ -74,12 +18,12 @@ exports.definition = {
             "collection_name": "piwikreports"
         },
         "settings": {
-            "method": "API.getReportMetadata",
+            "method": "API.getBulkRequest",
             "cache": true
         },
         "defaultParams": {
-            showSubtableReports: 0,
-            hideMetricsDoc: 1
+            "urls": [{method: "API.getReportMetadata", hideMetricsDoc: 1, showSubtableReports: 0, format: "JSON"},
+                     {method: "Dashboard.getDashboards", format: "JSON"}]
         }
     },        
 
@@ -199,10 +143,13 @@ exports.definition = {
             preformattedReports: null,
 
             fetchAllReports: function (accountModel, siteModel) {
+                this.config.defaultParams.urls[0].idSites = siteModel.get('idsite');
+                this.config.defaultParams.urls[1].idSite  = siteModel.get('idsite');
+                this.config.defaultParams.idSite = siteModel.get('idsite');
+
                 this.fetch({
                     reset: true,
-                    account: accountModel,
-                    params: {idSites: siteModel.id}
+                    account: accountModel
                 });
             },
 
@@ -246,11 +193,39 @@ exports.definition = {
                 return !!reports.length;
             },
 
+            extractReportsFromResponse: function (response) {
+                var reports = [];
+                if (_.isString(response[0])) {
+                    reports = JSON.parse(response[0]);
+                } 
+
+                if (!_.isArray(reports)) {
+                    return [];
+                }
+
+                return reports;
+            },
+
+            extractDashboardsFromResponse: function (response) {
+                var dashboards = [];
+                if (_.isString(response[1])) {
+                    dashboards = JSON.parse(response[1]);
+                } 
+
+                if (!_.isArray(dashboards)) {
+                    return [];
+                }
+
+                return dashboards;
+            },
+
             parse: function (response) {
-                //var dashboards = response[0];
-                //var reports    = response[1];
-                var dashboards = getDashboards();
-                var reports    = response;
+                if (!response) {
+                    return [];
+                }
+
+                var reports    = this.extractReportsFromResponse(response);
+                var dashboards = this.extractDashboardsFromResponse(response);
 
                 // TODO optimize algorithm from mapping of dashboards to reports
                 this.preformattedReports = preformatReportsForFasterSearch(reports);

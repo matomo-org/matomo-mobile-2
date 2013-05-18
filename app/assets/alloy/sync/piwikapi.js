@@ -17,7 +17,7 @@ function Sync(method, model, opts) {
                     
             var _ = require("alloy/underscore");
 
-            var opts = _.extend({}, opts);
+            var opts = _.clone(opts);
 
             if (opts.params) {
                 params = _.extend(_.clone(params), opts.params);

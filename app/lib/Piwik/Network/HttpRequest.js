@@ -16,8 +16,6 @@
  * request.setParameter({siteId: 5});
  * request.setCallback(function (response, parameters) {});
  * request.handle();
- * 
- * @exports  HttpRequest as Piwik.Network.HttpRequest
  */
 function HttpRequest () {
     
@@ -87,7 +85,7 @@ function HttpRequest () {
      * in context of HttpRequest. The callback method will be executed on a valid result
      * and on any error. If an error occurred, it does not pass the result to the callback method.
      *
-     * @see   Piwik.Network.HttpRequest#setCallback
+     * @see   HttpRequest#setCallback
      *
      * @type  Function|null
      */
@@ -208,7 +206,7 @@ HttpRequest.prototype.handle = function () {
    
     requestUrl = this.baseUrl + requestUrl;
     
-    console.debug('RequestUrl is ' + requestUrl, 'Piwik.Network.HttpRequest::handle');
+    console.debug('RequestUrl is ' + requestUrl, 'HttpRequest::handle');
     
     this.xhr         = Ti.Network.createHTTPClient({validatesSecureCertificate: false, enableKeepAlive: false});
     var that         = this;
@@ -273,7 +271,7 @@ HttpRequest.prototype.abort = function () {
  */
 HttpRequest.prototype.load = function (xhr) {
 
-    console.debug('Received response ' + xhr.responseText, 'Piwik.Network.HttpRequest::load');
+    console.debug('Received response ' + xhr.responseText, 'HttpRequest::load');
 
     try {
         // parse response
@@ -326,7 +324,7 @@ HttpRequest.prototype.load = function (xhr) {
  
     } catch (e) {
         console.warn('Failed to call callback method: ' + e.message, 
-                     'Piwik.Network.HttpRequest::load#callback');
+                     'HttpRequest::load#callback');
 
         var tracker = require('Piwik/Tracker');
         tracker.trackException({error: e, errorCode: 'PiHrLo29'});
@@ -357,7 +355,7 @@ HttpRequest.prototype.error = function (e) {
         e = null;
     }
 
-    console.warn(e, 'Piwik.Network.HttpRequest::error');
+    console.warn(e, 'HttpRequest::error');
     
     var L         = require('L');
     // if set, the user will see a dialog containing this message
