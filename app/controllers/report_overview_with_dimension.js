@@ -79,7 +79,9 @@ function fetchProcessedReport()
             flat: flatten,
             filter_truncate: 3,
             apiModule: module, 
-            apiAction: action
+            apiAction: action,
+            showColumns: metric,
+            hideMetricsDoc: 1
         }
     });
 }

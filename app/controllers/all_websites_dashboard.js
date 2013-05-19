@@ -83,12 +83,12 @@ function loadWebsitesForAccount(account)
 
 function selectWebsite(event)
 {
-    if (!event || !event.rowData || null === event.rowData.modelid) {
+    if (!event || !event.row || null === event.row.modelid) {
         console.log('ModelID not defined, cannot select website');
         return;
     }
 
-    var id      = event.rowData.modelid;
+    var id      = event.row.modelid;
     var website = $.piwikProcessedReport.get(id);
 
     if (!website) {
@@ -248,8 +248,9 @@ function fetchListOfAvailableWebsites(site)
             period: reportDate.getPeriodQueryString(), 
             date: reportDate.getDateQueryString(), 
             idSite: site.id,
-            apiModule: "MultiSites",
-            apiAction: "getAll",
+            apiModule: 'MultiSites',
+            apiAction: 'getAll',
+            showColumns: 'nb_visits,visits_evolution',
             filter_limit: Alloy.CFG.numDisplayedWebsitesInDashboard
         },
         error: function () {
