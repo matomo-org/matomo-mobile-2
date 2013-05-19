@@ -3,9 +3,12 @@
     <TableView id="reportsTable" onClick="doSelectReport">
         <HeaderView formFactor="tablet">
             <View class="header">
-                <Require src="website_picker" onSelected="hideLeftSidebar"/>
-                <View class="separator"/>
-                <Require src="date_picker" onSelected="hideLeftSidebar"/>
+                <View class="websitePicker">
+                    <Require src="website_picker" onSelected="hideLeftSidebar"/>
+                </View>
+                <View class="datePicker">
+                    <Require src="date_picker" onSelected="hideLeftSidebar"/>
+                </View>
             </View>
         </HeaderView>
     </TableView>

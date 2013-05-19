@@ -1,8 +1,12 @@
 <Alloy>
-
     <View id="index" onClick="chooseWebsite">
-        <Label id="websiteName" text=" - "/>
-        <ImageView class="icon"/>
+        <View class="button">
+            <View class="topLine"/>
+            <View class="inner">
+                <Label id="websiteName" text=" - "/>
+                <ImageView class="icon"/>
+            </View>
+            <View class="bottomLine"/>
+        </View>
     </View>
-
 </Alloy>

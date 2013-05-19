@@ -9,6 +9,22 @@
     separatorColor: '#2D2D2D'
 }
 
+".websitePicker": {
+    top: 12,
+    bottom: 0,
+    left: 8,
+    right: 8,
+    height: Ti.UI.SIZE,
+}
+
+".datePicker": {
+    top: 10,
+    bottom: 12,
+    left: 8,
+    right: 8,
+    height: Ti.UI.SIZE,
+}
+
 ".header": {
     layout: 'vertical',
     height: Ti.UI.SIZE,

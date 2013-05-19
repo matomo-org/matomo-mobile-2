@@ -1,13 +1,24 @@
 <Alloy>
+    <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
+
     <Window id="index" onClose="onClose">
         <ScrollView class="container">
-
-            <Require src="website_picker" onSelected="hideRightSidebar"/>
+            <View class="websitePicker">
+                <Require src="website_picker" onSelected="hideRightSidebar"/>
+            </View>
+            <View class="datePicker">
+                <Require src="date_picker" onSelected="hideRightSidebar"/>
+            </View>
             <View class="separator"/>
-            <Require src="date_picker" onSelected="hideRightSidebar"/>
-            <View class="separator"/>
-            
+            <View class="siteHeader">
+                <Label id="siteTitle" />
+            </View>
+            <View id="websitesList" dataCollection="$.piwikProcessedReport">
+                <View id="websiteContainer" modelid="{id}" onClick="selectWebsite">
+                    <Label id="websiteTitle" text="{title}"/>
+                </View>
+                <View class="separator"/>
+            </View>
         </ScrollView>
     </Window>
-
 </Alloy>
