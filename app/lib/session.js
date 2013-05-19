@@ -19,7 +19,13 @@ var Session = function () {
         },
 
         setAccount: function (accountModel) {
+            var oldAccount = account;
             account = accountModel;
+
+            if (account && oldAccount && account.get('id') == oldAccount.get('id')) {
+                return;
+            }
+
             this.trigger('accountChanged', account);
         },
         getAccount: function () {
