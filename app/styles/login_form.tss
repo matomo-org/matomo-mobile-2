@@ -61,7 +61,8 @@
     left: 10, right: 10,
     autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
-    autocorrect: false
+    autocorrect: false,
+    clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS
 },
 
 ".textfield[platform=android]": {
