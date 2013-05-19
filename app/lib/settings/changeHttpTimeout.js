@@ -1,3 +1,10 @@
+/**
+ * Piwik - Open source web analytics
+ *
+ * @link http://piwik.org
+ * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
+ */
+
 function getTimeoutValues()
 {
     return ['15s', '30s', '45s', '60s', '90s', '120s', '150s', '180s', '300s', '450s', '600s', '1000s'];
