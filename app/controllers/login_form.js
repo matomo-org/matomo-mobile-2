@@ -13,20 +13,24 @@ function L(key)
 var args = arguments[0] || {};
 var accounts = args.accounts || false;
 
-function onUrlReturn () {
+function onUrlReturn () 
+{
     onUrlBlur();
 
     $.username.focus();
 }
 
-function onUrlBlur () {
-    if ($.url.value && -1 === $.url.value.indexOf('http')) {
-        // user has not specified any http protocol. automatically prepend 'http'.
-        $.url.value = 'http://' + $.url.value;
+function onUrlBlur () 
+{
+    var url = require('url');
+
+    if ($.url.value && !url.startsWithHttp($.url.value)) {
+        $.url.value = url.addHttpProtocol($.url.value);
     }
 }
 
-function onUsernameReturn () {
+function onUsernameReturn () 
+{
     $.password.focus();
 }
 

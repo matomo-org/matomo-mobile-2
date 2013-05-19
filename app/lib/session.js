@@ -29,7 +29,7 @@ var Session = function () {
             var oldAccount = account;
             account = accountModel;
 
-            if (account && oldAccount && account.get('id') == oldAccount.get('id')) {
+            if (account && oldAccount && account.isSameAccount(oldAccount)) {
                 return;
             }
 
@@ -45,7 +45,7 @@ var Session = function () {
         },
         getReportDate: function () {
             return reportDate;
-        },
+        }
     });
 };
 

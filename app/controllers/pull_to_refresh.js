@@ -6,7 +6,7 @@
  */
 
 $.reloading = false;
-$.pulling = false;
+$.pulling   = false;
 $.tableView = null;
 
 function L(key)
@@ -95,8 +95,6 @@ function onScrollTable(event)
 function onDragEnd()
 {
     if ($.pulling && !$.reloading) {
-        //  var refreshEvent = {title: 'Refresh Page',
-        //                      url: '/refresh/ios-pull-to-refresh'};
         //  TODO ADD TRACKING
 
         // the user was pulling, no reloading is currently running, the user scrolled to the correct section

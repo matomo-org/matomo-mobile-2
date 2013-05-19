@@ -178,12 +178,12 @@ function searchWebsite(event)
 
 function getNumberOfFoundWebsites()
 {
-    return $.piwikProcessedReport.length;
+    return $.piwikProcessedReport.getNumberOfReports();
 }
 
 function hasFoundWebsites()
 {
-    return !!getNumberOfFoundWebsites();
+    return $.piwikProcessedReport.hasReports();
 }
 
 function hasMoreWebsitesThanDisplayed()

@@ -192,16 +192,7 @@ function doRefresh()
     Ti.App.addEventListener('resume', onResume);
     Ti.App.addEventListener('pause', onPause);
 
-    var activity = null;
-    
-    // get activity on android
-    if (Ti.Android && Ti.Android.currentActivity) {
-        activity = Ti.Android.currentActivity;
-    } else if (!activity && Ti.UI.currentWindow && Ti.UI.currentWindow.activity) {
-        activity = Ti.UI.currentWindow.activity;
-    } else if (!activity && $.index && $.index.activity) {
-        activity = $.indexactivity;
-    }
+    var activity = require('ui/helper').getAndroidActivity($.index);
 
     // android
     if (activity) {

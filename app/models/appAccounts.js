@@ -5,55 +5,26 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+var url = require('url');
+
 function appendIndexPhpIfNecessary(accessUrl)
 {
     accessUrl = appendSlashIfNecessary(accessUrl);
     
-    if (!endsWithPhp(accessUrl)) {
+    if (!url.endsWithPhp(accessUrl)) {
         accessUrl = accessUrl + 'index.php';
     }
 
     return accessUrl;
 }
 
-function endsWithSlash(accessUrl)
-{
-    var lastCharPos = accessUrl.length - 1;
-    var lastUrlChar = accessUrl.substr(lastCharPos, 1)
-
-    return ('/' === lastUrlChar);
-}
-
 function appendSlashIfNecessary(accessUrl)
 {
-    if (!endsWithSlash(accessUrl) && !endsWithPhp(accessUrl)) {
+    if (!url.endsWithSlash(accessUrl) && !url.endsWithPhp(accessUrl)) {
         accessUrl = accessUrl + '/';
     } 
 
     return accessUrl;
-}
-
-function startsWithHttp(accessUrl)
-{
-    var first4Chars = accessUrl.substr(0, 4);
-
-    return ('http' === first4Chars.toLowerCase());
-}
-
-function endsWithPhp(accessUrl)
-{
-    var posLast4Char = accessUrl.length - 4;
-    var last4Chars   = accessUrl.substr(posLast4Char, 4);
-
-    return ('.php' === last4Chars.toLowerCase());
-}
-
-function absolutePath(accessUrl)
-{
-    var posLastSlash = accessUrl.lastIndexOf('/');
-    var absolutePath = accessUrl.substr(0, posLastSlash + 1);
-
-    return absolutePath;
 }
 
 var Alloy = require('alloy');
@@ -114,6 +85,10 @@ exports.definition = {
             getDefaultReportDate: function () {
                 return this.get('defaultReportDate');
             },
+
+            isSameAccount: function (account) {
+                return (account && this.get('id') == account.get('id'));
+            },
             
             completeAccessUrl: function (accountModel, accessUrl) {
                 
@@ -141,7 +116,7 @@ exports.definition = {
                 
                 var accessUrl = attrs.accessUrl;
 
-                if (!accessUrl || !startsWithHttp(accessUrl)) {
+                if (!accessUrl || !url.startsWithHttp(accessUrl)) {
 
                     return 'InvalidUrl';
                 }
@@ -250,8 +225,8 @@ exports.definition = {
                 
                 accessUrl = accessUrl + '';
 
-                if (endsWithPhp(accessUrl)) {
-                    return absolutePath(accessUrl);
+                if (url.endsWithPhp(accessUrl)) {
+                    return url.getAbsolutePath(accessUrl);
                 }
             
                 accessUrl = appendSlashIfNecessary(accessUrl);

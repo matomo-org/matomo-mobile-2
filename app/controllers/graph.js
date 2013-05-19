@@ -12,28 +12,12 @@ var reportDate = '';
 
 function width (image) 
 {
-    if (image.size && image.size.width) {
-        return image.size.width;
-    } else if (image.width) {
-        return image.width;
-    } else {
-        console.error('TODO NOT ABLE TO GET IMAGE WIDTH');
-    }
-
-    return 0;
+    return require('ui/helper').getWidth(image);
 }
 
 function height (image) 
 {
-    if (image.size && image.size.height) {
-        return image.size.height;
-    } else if (image.height) {
-        return image.height;
-    } else {
-        console.error('TODO NOT ABLE TO GET IMAGE WIDTH');
-    }
-
-    return 0;
+    return require('ui/helper').getHeight(image);
 }
 
 function getGraphOptions()

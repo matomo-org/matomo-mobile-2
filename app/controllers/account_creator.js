@@ -19,22 +19,9 @@ var loginform = Alloy.createController('login_form', {
 
 $.loginform.add(loginform.getView());
 
-function onUrlReturn () {
-    if ($.url.value && -1 === $.url.value.indexOf('http')) {
-        // user has not specified any http protocol. automatically prepend 'http'.
-        $.url.value = 'http://' + $.url.value;
-    }
-    
-    $.username.focus();
-}
-
 function onOpen()
 {
     require('Piwik/Tracker').trackWindow('Create Account', 'account-create');
-}
-
-function onUsernameReturn () {
-    $.password.focus();
 }
 
 exports.open = function () 

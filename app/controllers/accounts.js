@@ -31,7 +31,7 @@ function deleteAccount(event)
     var account = accounts.get(event.row.accountId);
 
     var currentActiveAccount = require('session').getAccount();
-    if (currentActiveAccount && account.get('id') == currentActiveAccount.get('id')) {
+    if (currentActiveAccount && currentActiveAccount.isSameAccount(account)) {
         require('session').setWebsite(null, null);
     } 
 

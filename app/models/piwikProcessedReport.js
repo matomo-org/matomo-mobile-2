@@ -93,6 +93,14 @@ exports.definition = {
             website: null,
             columns: null,
 
+            hasReports: function () {
+                return !!this.getNumberOfReports();
+            },
+
+            getNumberOfReports: function () {
+                return this.length;
+            },
+
             getModule: function () {
                 var metadata = this.getMetadata();
 
