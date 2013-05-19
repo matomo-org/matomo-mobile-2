@@ -1,3 +1,7 @@
+"#loadingindicator": {
+    rounded: true
+}
+
 "#index": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,

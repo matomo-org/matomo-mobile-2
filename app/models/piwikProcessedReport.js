@@ -135,7 +135,7 @@ exports.definition = {
                     return metrics[sortOrder];
                 }
 
-                return ''
+                return '';
             },
 
             getReportDate: function () {
@@ -234,7 +234,7 @@ exports.definition = {
                         row.value = value;
 
                         row.id       = index;
-                        row.reportMetadata  = metadata
+                        row.reportMetadata  = metadata;
                         row.sortOrderColumn = this.sortOrderColumn;
                         row.hasDimension    = true;
                     
@@ -285,5 +285,5 @@ exports.definition = {
         return Collection;
     }
         
-}
+};
 

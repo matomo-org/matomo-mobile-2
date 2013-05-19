@@ -1,4 +1,6 @@
 <Alloy>
+    <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
+    
     <Window title="" id="index" onClose="onClose" onOpen="onOpen">
 
         <RightNavButton platform="ios" formFactor="handheld">
@@ -14,7 +16,7 @@
             
             <TableView id="reportTable" class="container">
                 <HeaderPullView platform="ios">
-                    <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
+                    <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="$.doRefresh"/>
                 </HeaderPullView>
                 <FooterView>
                     <View class="footerView">

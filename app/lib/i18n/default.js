@@ -15,6 +15,7 @@ module.exports = {
     CoreHome_PeriodMonth:                                               'Month',
     CoreHome_PeriodYear:                                                'Year',
     CoreHome_PeriodRange:                                               'Range',
+    CoreHome_ThereIsNoDataForThisReport:                                'There is no data for this report.',
     CoreHome_TableNoData:                                               'No data for this table.',
     CoreUpdater_UpdateTitle:                                            'Update',
     CustomVariables_CustomVariables:                                    'Custom Variables',
