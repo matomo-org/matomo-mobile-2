@@ -30,8 +30,6 @@ var processedReports = Alloy.createCollection('piwikProcessedReport');
 
 var rowsFilterLimit = Alloy.CFG.piwik.filterLimit;
 
-var reportRowsCtrl = null;
-
 if (OS_IOS) {
     $.pullToRefresh.init($.reportTable);
 }
@@ -93,18 +91,33 @@ function showLoadingMessage()
     $.loadingindicator.show();
 }
 
-function onStatisticsFetched(processedReportCollection)
+function showReportHasNoData()
+{
+    var row = Ti.UI.createTableViewRow({
+        height: Ti.UI.SIZE, 
+        color: '#7e7e7e',
+        title: L('CoreHome_ThereIsNoDataForThisReport')
+    });
+
+    $.reportTable.setData([row]);
+}
+
+function hasReportData(processedReportCollection) {
+    return (processedReportCollection && processedReportCollection.length);
+}
+
+function renderProcessedReport(processedReportCollection)
 {
     var accountModel = require('session').getAccount();
     
     showReportContent();
 
-    if (!processedReportCollection) {
-        console.error('msising report model');
+    $.reportTable.setData([]);
+
+    if (!hasReportData(processedReportCollection)) {
+        showReportHasNoData();
         return;
     }
-    
-    $.reportTable.setData([]);
 
     if ($.reportInfoCtrl) {
         $.reportInfoCtrl.update(processedReportCollection);
@@ -114,12 +127,15 @@ function onStatisticsFetched(processedReportCollection)
 
     var rows = [];
 
-    var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+    var settings = Alloy.createCollection('AppSettings').settings();
+    if (settings.areGraphsEnabled()) {
+        var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
+        if (OS_IOS) {
+            row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+        }
+        row.add($.reportGraphCtrl.getView());
+        rows.push(row);
     }
-    row.add($.reportGraphCtrl.getView());
-    rows.push(row);
 
     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
     if (OS_IOS) {
@@ -127,10 +143,6 @@ function onStatisticsFetched(processedReportCollection)
     }
     row.add($.reportInfoCtrl.getView());
     rows.push(row);
-
-    if (reportRowsCtrl) {
-        reportRowsCtrl.destroy();
-    }
     
     processedReportCollection.forEach(function (processedReport) {
         if (!processedReport) {
@@ -216,7 +228,7 @@ function doRefresh()
         error: function () {
             processedReports.trigger('error', {type: 'loadingProcessedReport'});
         },
-        success: onStatisticsFetched
+        success: renderProcessedReport
     });
 }
 

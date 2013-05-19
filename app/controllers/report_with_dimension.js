@@ -140,7 +140,7 @@ function showReportHasNoData()
     var row = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE, 
         color: '#7e7e7e',
-        title: 'No data for this table'
+        title: L('CoreHome_ThereIsNoDataForThisReport')
     });
 
     $.reportTable.setData([row]);
