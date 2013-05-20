@@ -9,17 +9,17 @@ var layoutName = '';
 var alloy      = require('alloy');
 
 if (OS_IOS && alloy.isHandheld) {
-    layoutName = 'layout/iphone';
+    layoutName = 'layout/ios/iphone';
 } else if (OS_IOS && alloy.isTablet) {
-    layoutName = 'layout/ipad';
+    layoutName = 'layout/ios/ipad';
 } else if (OS_MOBILEWEB && alloy.isTablet) {
-    layoutName = 'layout/mobilewebtablet';
+    layoutName = 'layout/mobileweb/tablet';
 } else if (OS_MOBILEWEB) {
-    layoutName = 'layout/mobileweb';
+    layoutName = 'layout/mobileweb/handheld';
 } else if (OS_ANDROID && alloy.isTablet) {
-    layoutName = 'layout/androidtablet';
+    layoutName = 'layout/android/tablet';
 } else if (OS_ANDROID) {
-    layoutName = 'layout/android';
+    layoutName = 'layout/android/handheld';
 }
 
 module.exports = require(layoutName);

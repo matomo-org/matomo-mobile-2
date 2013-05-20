@@ -5,36 +5,43 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
-var openedWindows = [];
+var Alloy = require('alloy');
+var Backbone = Alloy.Backbone;
+var _ = Alloy._;
 
-function hasOpenedWindow()
+function AndroidLayout()
 {
-    return !!openedWindows.length;
-}
-function getCurrentlyOpenedWindow()
-{
-    return openedWindows[openedWindows.length - 1];
-}
+    function close (win) {
+        if (!win) {
+            return;
+        }
 
-function closeCurrentlyOpenedWindow()
-{
-    if (hasOpenedWindow()) {
-        exports.close(getCurrentlyOpenedWindow());
+        win.close();
+        win = null;
     }
+
+    function open (win) {
+        if (!win) {
+            return;
+        }
+        
+        win.addEventListener('androidback', closeThisWindow);
+        win.open();
+
+        this.trigger('open', win);
+
+        win = null;
+    }
+
+    function closeThisWindow()
+    {
+        close(this);
+    }
+
+    _.extend(this, Backbone.Events, {
+        close: close,
+        open: open
+    });
 }
 
-exports.close = function(win) {
-    
-    var _ = require('alloy/underscore');
-    openedWindows = _.without(openedWindows, win);
-
-    win.close();
-    win = null;
-};
-
-exports.open = function(win) {
-    win.addEventListener('androidback', closeCurrentlyOpenedWindow);
-    win.open();
-    openedWindows.push(win);
-    win = null;
-};
+exports = AndroidLayout;

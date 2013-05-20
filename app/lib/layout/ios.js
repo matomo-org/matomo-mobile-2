@@ -9,20 +9,19 @@ var Alloy = require('alloy');
 var Backbone = Alloy.Backbone;
 var _ = Alloy._;
 
-function MobileWebLayout(rootWindow)
+function iOsLayout(rootWindow)
 {
-    var navGroup       = null;
+    var navGroup = null;
     var isBootstrapped = false;
 
     function bootstrap (win) 
     {
-        var NavigationGroup = require('org.piwik.navigationgroup');
-        
-        navGroup = new NavigationGroup({window: win});
+        navGroup   = Ti.UI.iPhone.createNavigationGroup({window: win});
         rootWindow.add(navGroup);
         rootWindow.open();
 
         isBootstrapped = true;
+
         win = null;
     }
 
@@ -32,12 +31,10 @@ function MobileWebLayout(rootWindow)
                 return;
             }
 
-            navGroup.close(win, {animated: true});
+            navGroup.close(win, {animated : true});
             win = null;
         },
         open: function (win) {
-            win.zIndex = 0;
-            
             if (isBootstrapped) {
                 navGroup.open(win, {animated : true});
             } else {
@@ -51,4 +48,4 @@ function MobileWebLayout(rootWindow)
     });
 };
 
-exports = MobileWebLayout;
+exports = iOsLayout;
