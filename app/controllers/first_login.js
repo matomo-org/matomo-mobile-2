@@ -10,6 +10,12 @@ function L(key)
     return require('L')(key);
 }
 
+function onClose()
+{
+    $.destroy();
+    $.off();
+}
+
 var args     = arguments[0] || {};
 var accounts = Alloy.Collections.appAccounts;
 
@@ -44,7 +50,6 @@ function onOpen()
 exports.close = function ()
 {
     require('layout').close($.index);
-    $.destroy();
 };
 
 exports.open = function ()

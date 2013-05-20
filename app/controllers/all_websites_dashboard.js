@@ -41,6 +41,7 @@ function onClose()
 {
     $.piwikProcessedReport.off('reset', displayMessageIfNoWebsitesFound);
     $.destroy();
+    $.off();
 }
 
 function websiteChosen(siteModel) 
@@ -296,7 +297,6 @@ $.piwikProcessedReport.on('reset', displayMessageIfNoWebsitesFound);
 
 exports.close = function () {
     require('layout').close($.index);
-    $.destroy();
 };
 
 exports.open = function (alreadyOpened) {

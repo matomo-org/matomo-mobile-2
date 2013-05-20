@@ -122,6 +122,7 @@ function onOpen()
 function onClose ()
 {
     $.destroy();
+    $.off();
 }
 
 function close () 

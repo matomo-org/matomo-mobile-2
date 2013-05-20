@@ -19,6 +19,7 @@ function L(key, substitution)
 function onClose()
 {
     $.destroy();
+    $.off();
 }
 
 function hideRightSidebar () {

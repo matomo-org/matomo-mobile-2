@@ -36,6 +36,7 @@ function onClose()
 {
     unregisterEvents();
     $.destroy();
+    $.off();
 }
 
 function openRealTimeMapInWebview()

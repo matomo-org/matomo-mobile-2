@@ -28,6 +28,7 @@ function onClose()
     }
 
     $.destroy();
+    $.off();
 }
 
 function onItemClick(event)

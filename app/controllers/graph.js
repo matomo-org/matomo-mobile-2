@@ -139,6 +139,7 @@ exports.update = function (processedReportCollection, accountModel)
         $.index.height = 0;
         $.index.hide();
         $.destroy();
+        $.off();
         // TODO remove from parent?
         return;
     }

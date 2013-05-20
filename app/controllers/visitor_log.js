@@ -76,6 +76,7 @@ function onClose()
 {
     unregisterEvents();
     $.destroy();
+    $.off();
 }
 
 function fetchPrevious()

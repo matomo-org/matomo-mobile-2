@@ -46,6 +46,7 @@ function onClose()
 {
     unregisterEvents();
     $.destroy();
+    $.off();
 }
 
 function onWebsiteChanged()

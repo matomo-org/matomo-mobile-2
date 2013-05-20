@@ -33,4 +33,5 @@ exports.close = function ()
 {
     require('layout').close($.index);
     $.destroy();
+    $.off();
 }

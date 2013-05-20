@@ -51,6 +51,7 @@ function onClose()
     unregisterEvents();
 
     $.destroy();
+    $.off();
 }
 
 function hideLoadingIndicator()

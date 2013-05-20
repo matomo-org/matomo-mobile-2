@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="appAccounts"/>
     
-    <Window id="index" onOpen="onOpen">
+    <Window id="index" onOpen="onOpen" onClose="onClose">
         <ScrollView class="container">
             <View id="mainView">
                 <View id="headerView">
