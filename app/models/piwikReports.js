@@ -183,6 +183,10 @@ exports.definition = {
             preformattedReports: null,
 
             fetchAllReports: function (accountModel, siteModel) {
+                if (!siteModel || !accountModel) {
+                    return;
+                }
+                
                 this.config.defaultParams.urls[0].idSites = siteModel.get('idsite');
                 this.config.defaultParams.urls[1].idSite  = siteModel.get('idsite');
                 this.config.defaultParams.idSite = siteModel.get('idsite');
