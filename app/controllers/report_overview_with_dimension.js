@@ -70,6 +70,10 @@ function fetchProcessedReport()
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
+    if (!accountModel || !siteModel) {
+        return;
+    }
+
     var module = $model.get('module');
     var action = $model.get('action');
     var metric = $model.getSortOrder();
