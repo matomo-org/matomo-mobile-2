@@ -184,14 +184,6 @@ function onAccountChosen(account)
     this.off('accountChosen');
 }
 
-function onWebsiteSelected(siteModel, accountModel)
-{
-    openEntryReport();
-
-    setCurrentlySelectedCid(getCidOfEntryReport(reportsCollection));
-    makeSureSelectedRowIsStillSelected();
-}
-
 function openCompositeReport(chosenReportModel)
 {
     var reportCategory = chosenReportModel.get('category');
@@ -244,7 +236,6 @@ exports.open = function()
     require('layout').setLeftSidebar($.reportsTable);
     require('layout').startRecordingWindows();
 
-    require('session').on('websiteChanged', onWebsiteSelected);
     require('session').on('accountChanged', refresh);
     Alloy.createCollection('AppSettings').settings().on('change:language', refresh);
 
