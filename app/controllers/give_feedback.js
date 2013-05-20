@@ -79,7 +79,7 @@ function render()
 
     var row = createRow({
         title: 'Email Us', 
-        description: 'Send us fedback, report a bug or a feature wish.'
+        description: 'Send us feedback, report a bug or a feature wish.'
     });
     row.addEventListener('click', doSendEmailFeedback);
     rows.push(row);
