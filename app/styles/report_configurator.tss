@@ -22,7 +22,7 @@
 }
 
 "#siteTitle": {
-    text: L('Mobile_TopXVisitedWebsites', '15'),
+    text: L('Mobile_TopXVisitedWebsites', '20'),
     top: 8,
     left: 10,
     wordWrap: true,
@@ -61,6 +61,7 @@
     font: {fontSize: 14, fontWeight: 'bold'},
     right: 10,
     height: Ti.UI.SIZE,
+    selectedBackgroundColor: '#333333',
 }
 
 ".websiteRow[platform=mobileweb]": {

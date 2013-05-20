@@ -125,7 +125,7 @@ function fetchWebsites()
             period: reportDate.getPeriodQueryString(), 
             date: reportDate.getDateQueryString(), 
             idSite: website.get('idsite'),
-            filter_limit: 15,
+            filter_limit: 20,
             hideMetricsDoc: 1,
             apiModule: "MultiSites",
             apiAction: "getAll",

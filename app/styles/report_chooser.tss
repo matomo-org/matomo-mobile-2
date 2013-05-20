@@ -5,7 +5,6 @@
 }
 
 "#reportsTable[platform=mobileweb]": {
-  //  separatorStyle: Titanium.UI.MobileWeb.TableViewSeparatorStyle.NONE,
     separatorColor: '#2D2D2D'
 }
 
