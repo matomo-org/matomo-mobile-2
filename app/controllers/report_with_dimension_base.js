@@ -112,6 +112,7 @@ exports.renderProcessedReport = function (processedReportCollection)
             subtableModule: processedReportCollection.getModule(),
             currentReportName: processedReportCollection.getReportName(),
             currentMetric: processedReport.getSortOrder(),
+            reportTitle: processedReport.getTitle(),
             hasChild: hasSubtable
         });
         
@@ -130,6 +131,7 @@ exports.renderProcessedReport = function (processedReportCollection)
                     apiAction: this.subtableAction,
                     subtableId: this.subtableId,
                     metric: this.currentMetric,
+                    reportTitle: this.reportTitle
                 };
             
                 var subtableReport = Alloy.createController('report_subtable', params);
