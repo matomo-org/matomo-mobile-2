@@ -1,15 +1,20 @@
 "#index": {
-    backgroundImage: 'org.piwik.tableviewrow/background.png',
-    backgroundSelectedImage: 'org.piwik.tableviewrow/background.png',
-    backgroundColor: '#222222',
-    backgroundSelectedColor: '#222222',
     right: 0,
     width: 250
 }
 
-".container": {
+"TableView": {
+    backgroundImage: 'org.piwik.tableviewrow/background.png',
+    backgroundSelectedImage: 'org.piwik.tableviewrow/background.png',
+    backgroundColor: '#222222',
+    backgroundSelectedColor: '#222222',
+    separatorColor: '#2d2d2d'
+}
+
+".headerView": {
     layout: 'vertical',
-    disableBounce: true,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
 }
 
 ".separator": {
@@ -19,7 +24,7 @@
 }
 
 "#siteTitle": {
-    text: L('Top 25 visited websites'),
+    text: L('Top 15 visited websites'),
     top: 8,
     left: 10,
     wordWrap: true,
@@ -34,18 +39,6 @@
 ".siteHeader": {
     backgroundImage: 'org.piwik.tableviewsection/tableviewsectionbackground.png',
     height: Ti.UI.SIZE,
-}
-
-"#websitesList": {
-    layout: 'vertical',
-    height: Ti.UI.SIZE,
-    top: 10,
-    bottom: 10,
-    left: 10,
-    right: 10,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#2d2d2d'
 }
 
 ".websitePicker": {
@@ -64,22 +57,15 @@
     height: Ti.UI.SIZE,
 }
 
-"#websiteContainer": {
-    backgroundImage: 'org.piwik.tableviewrow/background.png',
-    selectedBackgroundColor: '#333333',
-    backgroundFocusedColor: 'black',
-    height: Ti.UI.SIZE,
-}
-
-"#websiteTitle": {
-    touchEnabled: false,
-    top: 12,
+".websiteRow": {
     left: 10,
-    wordWrap: true,
-    ellipsize: false,
     color: '#e5e5e5',
     font: {fontSize: 14, fontWeight: 'bold'},
     right: 10,
     height: Ti.UI.SIZE,
-    bottom: 12
+}
+
+".websiteRow[platform=mobileweb]": {
+    top: 10,
+    bottom: 10,
 }

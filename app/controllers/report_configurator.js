@@ -25,14 +25,69 @@ function toggleVisibility()
     require('layout').toggleRightSidebar();
 }
 
+function uncheckAllWebsites()
+{
+    _.forEach($.configTable.data, function (tableViewRowOrSection) {
+        uncheckWebsite(tableViewRowOrSection);
+
+        if (tableViewRowOrSection.rows) {
+            _.forEach(tableViewRowOrSection.rows, function (tableViewRow) {
+                uncheckWebsite(tableViewRow);
+            });
+        }
+    });
+}
+
+function uncheckWebsite(tableViewRow)
+{
+    tableViewRow.rightImage = null;
+}
+
+function checkWebsite(tableViewRow)
+{
+    tableViewRow.rightImage = 'tick.png';
+}
+
+function transformWebsite(processedReport)
+{
+    if (processedReport && 
+        processedReport.getReportMetadata() && 
+        processedReport.getReportMetadata().idsite) {
+        processedReport.idsite = processedReport.getReportMetadata().idsite;
+    } else {
+        processedReport.idsite = null;
+    }
+
+    if (isCurrentWebsite(processedReport)) {
+        checkWebsite(processedReport);
+    } else {
+        uncheckWebsite(processedReport);
+    }
+
+    return processedReport;
+}
+
+function isCurrentWebsite(processedReport)
+{
+    var currentWebsiteId = getSiteIdOfActiveWebsite();
+
+    if (null !== currentWebsiteId && 
+        processedReport && 
+        processedReport.idsite == currentWebsiteId) {
+        return true;
+    }
+
+    return false;
+}
+
 function selectWebsite(event)
 {
-    if (!event || !event.source || null === event.source.modelid) {
+    if (!event || !event.row || _.isUndefined(event.row.modelid) || _.isNull(event.row.modelid)) {
         console.log('ModelID in source not defined, cannot select website');
         return;
     }
 
-    var id      = event.source.modelid;
+    var id      = event.row.modelid;
     var website = $.piwikProcessedReport.get(id);
 
     if (!website) {
@@ -59,7 +114,7 @@ function fetchWebsites()
             period: reportDate.getPeriodQueryString(), 
             date: reportDate.getDateQueryString(), 
             idSite: website.get('idsite'),
-            filter_limit: 25,
+            filter_limit: 15,
             hideMetricsDoc: 1,
             apiModule: "MultiSites",
             apiAction: "getAll",
@@ -69,7 +124,50 @@ function fetchWebsites()
     });
 }
 
+function getActiveWebsiteModel()
+{
+    return require('session').getWebsite();
+}
+
+function getSiteIdOfActiveWebsite()
+{
+    var websiteModel = getActiveWebsiteModel();
+
+    if (!websiteModel) {
+        return null;
+    }
+
+    return websiteModel.getSiteId();
+}
+
+function checkWebsiteIfRowIsHasSiteId(tableViewRowOrSection, siteId)
+{
+    if (tableViewRowOrSection &&
+        null !== tableViewRowOrSection.idsite && 
+        tableViewRowOrSection.idsite == siteId) {
+        checkWebsite(tableViewRowOrSection);
+    }
+}
+
+function checkCurrentlyActiveWebsite()
+{
+    uncheckAllWebsites();
+
+    var activeSiteId = getSiteIdOfActiveWebsite();
+
+    _.forEach($.configTable.data, function (tableViewRowOrSection) {
+        checkWebsiteIfRowIsHasSiteId(tableViewRowOrSection, activeSiteId);
+
+        if (tableViewRowOrSection.rows) {
+            _.forEach(tableViewRowOrSection.rows, function (tableViewRow) {
+                checkWebsiteIfRowIsHasSiteId(tableViewRow, activeSiteId);
+            });
+        }
+    });
+}
+
 require('session').on('accountChanged', fetchWebsites);
+require('session').on('websiteChanged', checkCurrentlyActiveWebsite);
 
 exports.open = open;
 exports.toggleVisibility = toggleVisibility;

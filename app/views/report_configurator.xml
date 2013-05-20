@@ -2,23 +2,22 @@
     <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
 
     <Window id="index" onClose="onClose">
-        <ScrollView class="container">
-            <View class="websitePicker">
-                <Require src="website_picker" onSelected="hideRightSidebar"/>
-            </View>
-            <View class="datePicker">
-                <Require src="date_picker" onSelected="hideRightSidebar"/>
-            </View>
-            <View class="separator"/>
-            <View class="siteHeader">
-                <Label id="siteTitle" />
-            </View>
-            <View id="websitesList" dataCollection="$.piwikProcessedReport">
-                <View id="websiteContainer" modelid="{id}" onClick="selectWebsite">
-                    <Label id="websiteTitle" text="{title}"/>
+        <TableView id="configTable" dataTransform="transformWebsite" dataCollection="$.piwikProcessedReport" onClick="selectWebsite">
+            <HeaderView>
+                <View class="headerView">
+                    <View class="websitePicker">
+                        <Require src="website_picker" onSelected="hideRightSidebar"/>
+                    </View>
+                    <View class="datePicker">
+                        <Require src="date_picker" onSelected="hideRightSidebar"/>
+                    </View>
+                    <View class="separator"/>
+                    <View class="siteHeader">
+                        <Label id="siteTitle" />
+                    </View>
                 </View>
-                <View class="separator"/>
-            </View>
-        </ScrollView>
+            </HeaderView>
+            <TableViewRow class="websiteRow" idsite="{idsite}" rightImage="{rightImage}" modelid="{id}" title="{title}"/>
+        </TableView>
     </Window>
 </Alloy>

@@ -49,6 +49,9 @@ exports.definition = {
 */
             getName: function () {
                 return this.get('name');
+            },
+            getSiteId: function () {
+                return this.get('idsite');
             }
 
     
