@@ -4,8 +4,6 @@
 }
 
 "TableView": {
-    backgroundImage: 'org.piwik.tableviewrow/background.png',
-    backgroundSelectedImage: 'org.piwik.tableviewrow/background.png',
     backgroundColor: '#222222',
     backgroundSelectedColor: '#222222',
     separatorColor: '#2d2d2d'
@@ -37,7 +35,7 @@
 },
 
 ".siteHeader": {
-    backgroundImage: 'org.piwik.tableviewsection/tableviewsectionbackground.png',
+    backgroundImage: 'tableviewsection_background_dark.png',
     height: Ti.UI.SIZE,
 }
 

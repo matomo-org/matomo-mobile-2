@@ -1,7 +1,7 @@
 "#reportsTable[platform=ios]": {
     separatorColor: '#2D2D2D',
     allowsSelection: true,
-    backgroundImage: 'org.piwik.tableviewrow/background.png',
+    backgroundColor: '#222222',
 }
 
 "#reportsTable[platform=mobileweb]": {
@@ -29,7 +29,7 @@
     layout: 'vertical',
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-    backgroundImage: 'org.piwik.tableviewrow/background.png',
+    backgroundColor: '#222222',
 }
 
 ".separator": {

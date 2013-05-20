@@ -1,5 +1,5 @@
 "#index": {
-    backgroundImage: 'org.piwik.tableviewsection/tableviewsectionbackground.png',
+    backgroundImage: 'tableviewsection_background_dark.png',
     height: Ti.UI.SIZE,
 }
 

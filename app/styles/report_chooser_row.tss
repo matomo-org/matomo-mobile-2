@@ -1,5 +1,5 @@
 "#index": {
-    backgroundImage: 'org.piwik.tableviewrow/background.png',
+    backgroundColor: '#222222',
     selectedBackgroundColor: '#333333',
     backgroundFocusedColor: 'black',
    // hasChild: true,
