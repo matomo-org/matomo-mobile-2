@@ -47,8 +47,14 @@ THIRD-PARTY COMPONENTS AND LIBRARIES
 =======
 Name: pull_arrow.png  
 Link: https://github.com/andmej/PullToRefresh
-License: See tools/Licenses/MIT-LICENSE-pulltorefresh.txt
+License: See tools/licenses/MIT-LICENSE-pulltorefresh.txt
 
+=======
+Name: Moment.js
+Link: https://github.com/timrwood/moment/
+License: See tools/licenses/MIT-LICENSE-moment.js.txt
+
+=======
 Name: spinner_default_holo_light.png
 Name: textfield_activated_holo_light.9.png
 Name: textfield_disabled_holo_light.9.png
@@ -60,4 +66,4 @@ Name: ic_action_website.png
 Name: ic_action_add_account.png
 Name: ic_action_refresh.png
 Link: http://android-ui-utils.googlecode.com/hg/asset-studio/dist/index.html
-License: Creative Commons Attribution 3.0 Unported License. See tools/Licenses/CC30UNPORTED-LICENSE-AndroidAssetStudio.txt
+License: Creative Commons Attribution 3.0 Unported License. See tools/licenses/CC30UNPORTED-LICENSE-AndroidAssetStudio.txt
