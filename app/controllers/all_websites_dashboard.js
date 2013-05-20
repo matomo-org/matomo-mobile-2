@@ -152,12 +152,14 @@ function cancelSearchWebsite()
 function searchWebsite(event) 
 {
     showLoadingMessage();
+    
+    var reportDate = require('session').getReportDate();
 
     $.piwikProcessedReport.fetchProcessedReports('nb_visits', {
         account: accountModel,
         params: {
-            period: 'day',
-            date: 'today',
+            period: reportDate.getPeriodQueryString(), 
+            date: reportDate.getDateQueryString(), 
             enhanced: 1,
             idSite: lastUsedWebsite.id,
             apiModule: "MultiSites",
