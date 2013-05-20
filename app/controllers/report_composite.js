@@ -81,9 +81,7 @@ var accountModel = require('session').getAccount();
 
 function accountDidNotChange()
 {
-    var currentAccount = require('session').getAccount();
-
-    return currentAccount === accountModel;
+    return require('session').getAccount().isSameAccount(accountModel);
 }
 
 function onWebsiteChanged()

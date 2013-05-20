@@ -60,7 +60,7 @@ function updateAvailableReportsList()
 
     $.reportsTable.setData(rows);
 
-    makeSureSelectedRowIsStillSelected(rows);
+    makeSureSelectedRowIsStillSelected();
 
     rows = null;
 }
@@ -70,15 +70,23 @@ function setCurrentlySelectedCid(cidOfReport)
     cidToSelect = cidOfReport;
 }
 
-function makeSureSelectedRowIsStillSelected(rows)
+function makeSureSelectedRowIsStillSelected()
 {
     if ($.reportsTable.selectRow && cidToSelect) {
-        for (var index = 0; index < rows.length; index++) {
-            if (cidToSelect == rows[index].cid) {
-                $.reportsTable.selectRow(index);
-                break;
+        var index = 0;
+        _.forEach($.reportsTable.data, function (section) {
+            if (!section || !section.rows) {
+                return;
             }
-        }
+            
+            _.forEach(section.rows, function (row) {
+                if (cidToSelect == row.cid) {
+                    $.reportsTable.selectRow(index);
+                }
+
+                index++;
+            });
+        });
     }
 
     rows = null;
@@ -166,22 +174,22 @@ function chooseAccount()
     accounts.on('accountChosen', onAccountChosen);
     accounts.open();
 }
-
+ 
 function onAccountChosen(account)
 {
-    require('account').selectWebsite(account, onWebsiteSelected);
+    require('account').selectWebsite(account, function (siteModel, accountModel) {
+        require('session').setWebsite(siteModel, accountModel);
+    });
+
     this.off('accountChosen');
 }
 
 function onWebsiteSelected(siteModel, accountModel)
 {
-    require('session').setWebsite(siteModel, accountModel);
-
-    setCurrentlySelectedCid('');
-
     openEntryReport();
 
-    refresh();
+    setCurrentlySelectedCid(getCidOfEntryReport(reportsCollection));
+    makeSureSelectedRowIsStillSelected();
 }
 
 function openCompositeReport(chosenReportModel)
@@ -236,6 +244,8 @@ exports.open = function()
     require('layout').setLeftSidebar($.reportsTable);
     require('layout').startRecordingWindows();
 
+    require('session').on('websiteChanged', onWebsiteSelected);
+    require('session').on('accountChanged', refresh);
     Alloy.createCollection('AppSettings').settings().on('change:language', refresh);
 
     openEntryReport();
