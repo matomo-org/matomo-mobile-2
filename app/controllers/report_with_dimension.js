@@ -100,6 +100,10 @@ exports.doRefresh = function()
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
+    if (!siteModel || !accountModel) {
+        return;
+    }
+
     var module = reportModel.get('module');
     var action = reportModel.get('action');
     var metric = reportModel.getSortOrder(currentMetric);

@@ -14,7 +14,7 @@ exports.initLoadingMessage = function ()
     if (OS_IOS) {
         $.pullToRefresh.init($.reportTable);
     }
-}
+};
 
 function showReportContent()
 {
@@ -60,8 +60,6 @@ function hasReportData(processedReportCollection) {
 
 exports.renderProcessedReport = function (processedReportCollection)
 {
-    var accountModel = require('session').getAccount();
-    
     showReportContent();
 
     $.reportTable.setData([]);
@@ -74,6 +72,8 @@ exports.renderProcessedReport = function (processedReportCollection)
     if ($.reportInfoCtrl) {
         $.reportInfoCtrl.update(processedReportCollection);
     }
+
+    var accountModel = require('session').getAccount();
 
     $.reportGraphCtrl.update(processedReportCollection, accountModel);
 

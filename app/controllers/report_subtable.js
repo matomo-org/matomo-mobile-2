@@ -63,6 +63,10 @@ exports.doRefresh = function()
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
+    if (!siteModel || !accountModel) {
+        return;
+    }
+
     $.piwikProcessedReport.fetchProcessedReports(currentMetric, {
         account: accountModel,
         params: {period: reportDate.getPeriodQueryString(), 
