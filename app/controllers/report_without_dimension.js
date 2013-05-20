@@ -205,6 +205,11 @@ function doRefresh()
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
+    if (!accountModel || !siteModel) {
+        console.log('account or site not found, cannot refresh report without dimension');
+        return;
+    }
+
     var module = reportModel.get('module');
     var action = reportModel.get('action');
     var metric = reportModel.getSortOrder(currentMetric);

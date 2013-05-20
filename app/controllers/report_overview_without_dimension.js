@@ -39,6 +39,7 @@ function fetchProcessedReport()
     var siteModel    = require('session').getWebsite();
 
     if (!accountModel || !siteModel) {
+        console.log('account or site not found, cannot refresh report overview without dimension');
         return;
     }
 

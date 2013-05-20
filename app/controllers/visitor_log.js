@@ -168,6 +168,11 @@ function doRefresh()
     var period = reportDate.getPeriodQueryString();
     var date   = reportDate.getDateQueryString();
 
+    if (!accountModel || !siteModel) {
+        console.log('account or site not found, cannot refresh visitor log');
+        return;
+    }
+
     visitorLog.initial(accountModel, siteModel.id, period, date);
 }
 

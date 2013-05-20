@@ -149,6 +149,11 @@ function doRefresh()
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
+    if (!accountModel || !siteModel) {
+        console.log('account or site not found, cannot refresh live visitors');
+        return;
+    }
+
     showLoadingMessage();
     piwikLiveVisitors.fetchVisitors(accountModel, siteModel.id, render, onFetchError);
 }

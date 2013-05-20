@@ -101,6 +101,7 @@ exports.doRefresh = function()
     var siteModel    = require('session').getWebsite();
 
     if (!siteModel || !accountModel) {
+        console.log('account or site not found, cannot refresh report with dimension');
         return;
     }
 
