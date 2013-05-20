@@ -186,7 +186,7 @@ exports.definition = {
                 if (!siteModel || !accountModel) {
                     return;
                 }
-                
+
                 this.config.defaultParams.urls[0].idSites = siteModel.get('idsite');
                 this.config.defaultParams.urls[1].idSite  = siteModel.get('idsite');
                 this.config.defaultParams.idSite = siteModel.get('idsite');
@@ -198,6 +198,12 @@ exports.definition = {
             },
 
             hasDashboardReport: function () {
+                var firstReport = this.at(0);
+                
+                if (!firstReport) {
+                    return false;
+                }
+
                 return this.at(0).get('isDashboard');
             },
 

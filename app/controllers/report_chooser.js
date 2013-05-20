@@ -179,6 +179,7 @@ function onAccountChosen(account)
 {
     require('account').selectWebsite(account, function (siteModel, accountModel) {
         require('session').setWebsite(siteModel, accountModel);
+        openEntryReport();
     });
 
     this.off('accountChosen');
@@ -234,6 +235,9 @@ function openEntryReport()
 
     var compositeReport = Alloy.createController('report_composite');
     compositeReport.open();
+    
+    setCurrentlySelectedCid(getCidOfEntryReport(reportsCollection));
+    makeSureSelectedRowIsStillSelected();
 }
 
 exports.open = function() 
