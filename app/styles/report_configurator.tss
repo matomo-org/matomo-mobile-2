@@ -22,7 +22,7 @@
 }
 
 "#siteTitle": {
-    text: L('Top 15 visited websites'),
+    text: L('Mobile_TopXVisitedWebsites', '15'),
     top: 8,
     left: 10,
     wordWrap: true,

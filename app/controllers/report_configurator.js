@@ -5,6 +5,17 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+function L(key, substitution)
+{
+    var translation = require('L')(key);
+
+    if (substitution) {
+        return String.format(translation, '' + substitution);
+    }
+
+    return translation;
+}
+
 function onClose()
 {
     $.destroy();

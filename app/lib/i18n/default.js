@@ -179,6 +179,7 @@ module.exports = {
     Mobile_SearchWebsite:                                               'Search websites',
     Mobile_ShowAll:                                                     'Show all',
     Mobile_ShowLess:                                                    'Show less',
+    Mobile_TopXVisitedWebsites:                                         'Top %s visited websites',
     Mobile_TryIt:                                                       'Try It!',
     Mobile_UseSearchBarHint:                                            'Only the first %s websites are displayed here. Please use the search bar to access your other websites.',
     Mobile_HttpTimeout:                                                 'HTTP Timeout',
