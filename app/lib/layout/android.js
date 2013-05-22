@@ -44,4 +44,4 @@ function AndroidLayout()
     });
 }
 
-exports = AndroidLayout;
+module.exports = AndroidLayout;

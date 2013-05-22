@@ -8,9 +8,10 @@
 var rootWindow = Ti.UI.createWindow();
 
 var AndroidLayout = require('layout/android');
+
 var layout    = new (AndroidLayout)(rootWindow);
 
 require('layout/window/recorder').apply(layout, []);
 require('layout/sidebar/handheld').apply(layout, [rootWindow]);
 
-exports = layout;
+module.exports = layout;

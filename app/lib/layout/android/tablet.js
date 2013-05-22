@@ -13,4 +13,4 @@ var layout    = new (AndroidLayout)(rootWindow);
 require('layout/window/recorder').apply(layout, []);
 require('layout/sidebar/tablet').apply(layout, [rootWindow]);
 
-exports = layout;
+module.exports = layout;

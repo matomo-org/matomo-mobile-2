@@ -34,4 +34,4 @@ function TabletSidebar(detailRootWindow)
     this.toggleRightSidebar = function() {};
 }
 
-exports = TabletSidebar;
+module.exports = TabletSidebar;

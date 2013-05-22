@@ -45,4 +45,4 @@ function WindowRecorder() {
     };
 }
 
-exports = WindowRecorder;
+module.exports = WindowRecorder;
