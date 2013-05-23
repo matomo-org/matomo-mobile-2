@@ -17,6 +17,7 @@
 
 "#name[platform=android]": {
     top: '20dp',
+    bottom: '20dp',
     font: {
         fontSize: '20sp'
     }
@@ -26,4 +27,8 @@
     backgroundColor: "#dcdcdc",
     height: 1,
     top: 0
+}
+
+".top_separator[platform=android]": {
+    height: '1dp',
 }

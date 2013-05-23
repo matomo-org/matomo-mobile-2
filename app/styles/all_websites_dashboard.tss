@@ -1,7 +1,7 @@
 "#menuItemAccount[platform=android]": {
     icon: '/ic_action_accounts.png',
     title: L('Mobile_Accounts'),
-    showAsAction: Ti.Android.SHOW_AS_ACTION_NEVER
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
 }
 
 "#accountsButton": {
@@ -59,10 +59,18 @@
     left: 0
 }
 
+".quickInfoName[platform=android]": {
+    font: {fontSize: '13sp'},
+}
+
 ".quickInfoValue": {
     font: {fontSize: 13},
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     left: 0
+}
+
+".quickInfoValue[platform=android]": {
+    font: {fontSize: '13sp'},
 }
 
 "#index": {
@@ -83,6 +91,10 @@
     text: L('Mobile_NoWebsiteFound'),
     color: '#7e7e7e',
     font: {fontWeight: 'bold', fontSize: 18}
+}
+
+"#noWebsiteFoundLabel[platform=android]": {
+    font: {fontWeight: 'bold', fontSize: '18sp'}
 }
 
 "#noWebsiteFoundContainer": {
@@ -107,6 +119,14 @@
     text: L('Mobile_UseSearchBarHint', Alloy.CFG.numDisplayedWebsitesInDashboard)
 }
 
+"#useSearchHintLabel[platform=android]": {
+    font: {fontSize: '13sp'},
+    top: '5dp',
+    bottom: '5dp',
+    right: '10dp',
+    left: '10dp',
+}
+
 ".websiteNameLabel": {
     verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -114,6 +134,11 @@
     right: 120,
     ellipsize: true,
     wordWrap: false
+}
+
+".websiteNameLabel[platform=android]": {
+    left: '10dp', 
+    right: '120dp',
 }
 
 "#loading": {
@@ -130,6 +155,24 @@
     backgroundColor: 'white',
     zIndex: 3
 },
+
+".evolutionContainer": {
+    right: 10,
+    width: 100,
+    layout: 'vertical',
+    height: Ti.UI.SIZE,
+}
+
+".evolutionContainer[platform=android]": {
+    right: '10dp',
+    width: '100dp',
+}
+
+".evolutionValue": {
+    right: 0, 
+    layout: 'horizontal',
+    height: Ti.UI.SIZE,
+}
 
 "TableViewRow[platform=ios]": {
     height: Ti.UI.SIZE

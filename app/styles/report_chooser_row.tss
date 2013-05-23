@@ -1,6 +1,7 @@
 "#index": {
     backgroundColor: '#222222',
     selectedBackgroundColor: '#333333',
+    backgroundSelectedColor: '#333333',
     backgroundFocusedColor: 'black',
    // hasChild: true,
     height: Ti.UI.SIZE,
@@ -16,4 +17,12 @@
     right: 10,
     height: Ti.UI.SIZE,
     bottom: 12
+}
+
+"#title[platform=android]": {
+    top: '12dp',
+    left: '10dp',
+    font: {fontSize: '15sp'},
+    right: '10dp',
+    bottom: '12dp'
 }

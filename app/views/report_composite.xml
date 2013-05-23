@@ -17,6 +17,10 @@
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
 
+        <Menu id="menu" platform="android" formFactor="handheld">
+            <MenuItem class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility" />
+        </Menu>
+
         <Require src="loading_indicator" id="loadingIndicator"/>
         
         <ScrollView id="content">

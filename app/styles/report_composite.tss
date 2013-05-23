@@ -14,12 +14,26 @@
     top: 10,
 }
 
+".reportContainer[platform=android]": {
+    left: '8dp',
+    right: '8dp',
+    top: '8dp',
+}
+
 ".footerLogo": {
     top: 2,
     bottom: 25,
     width: 55,
     height: 19,
     image: 'piwik_logo_dark_footer.png'
+}
+
+".footerLogo[platform=android]": {
+    top: '2dp',
+    bottom: '25dp',
+    width: '55dp',
+    height: '19dp',
+    image: '/piwik_logo_dark_footer.png'
 }
 
 "#content": {
@@ -31,4 +45,8 @@
 
 ".reportOverviewSeparator": {
     height: 10
+}
+
+".reportOverviewSeparator[platform=android]": {
+    height: '8dp'
 }

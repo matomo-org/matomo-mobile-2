@@ -48,3 +48,11 @@
     image: 'piwik_logo_light_footer.png'
 }
 
+".footerLogo[platform=android]": {
+    top: '12dp',
+    bottom: '25dp',
+    width: '55dp',
+    height: '19dp',
+    image: '/piwik_logo_light_footer.png'
+}
+

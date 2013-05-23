@@ -1,5 +1,0 @@
-<Alloy>
-    <TableViewRow id="index">
-        <Label id="title" />
-    </TableViewRow>
-</Alloy>

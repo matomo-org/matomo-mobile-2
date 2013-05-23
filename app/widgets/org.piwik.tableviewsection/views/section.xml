@@ -1,8 +1,0 @@
-<Alloy>
-    <!-- This should be TableViewSection + HeaderView but is currently not supported by Alloy -->
-    <TableViewRow id="index">
-        <View class="headerView">
-            <Label id="title" />
-        </View>
-    </TableViewRow>
-</Alloy>

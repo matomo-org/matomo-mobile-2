@@ -17,11 +17,6 @@
 "#reportTable": {
     top: 0,
     separatorColor: '#e8e8e8'
-  //  left: 10,
-  //  right: 10,
-  //  bottom: 10,
-  //  borderRadius: 5,
-  //  borderColor: "#e6e6e6"
 },
 
 "TableViewRow[platform=ios]": {
@@ -46,4 +41,12 @@
     width: 55,
     height: 19,
     image: 'piwik_logo_light_footer.png'
+}
+
+".footerLogo[platform=android]": {
+    top: '12dp',
+    bottom: '25dp',
+    width: '55dp',
+    height: '19dp',
+    image: '/piwik_logo_light_footer.png'
 }

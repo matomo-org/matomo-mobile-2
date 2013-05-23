@@ -54,9 +54,9 @@ exports.definition = {
                     account: account, 
                     success: function (collection, response) {
 
-                        var last30Min   = JSON.parse(response[0]);
-                        var last24Hours = JSON.parse(response[1]);
-                        var visitorDetails = JSON.parse(response[2]);
+                        var last30Min   = response[0];
+                        var last24Hours = response[1];
+                        var visitorDetails = response[2];
 
                         if (success) {
                             success(account, last30Min[0], last24Hours[0], visitorDetails);

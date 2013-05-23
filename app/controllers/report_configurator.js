@@ -16,12 +16,6 @@ function L(key, substitution)
     return translation;
 }
 
-function onClose()
-{
-    $.destroy();
-    $.off();
-}
-
 function hideRightSidebar () {
     require('layout').hideRightSidebar();
 }
@@ -52,12 +46,12 @@ function uncheckAllWebsites()
 
 function uncheckWebsite(tableViewRow)
 {
-    tableViewRow.rightImage = null;
+    tableViewRow.rightImage = OS_ANDROID ? '/blank.png' : null;
 }
 
 function checkWebsite(tableViewRow)
 {
-    tableViewRow.rightImage = 'tick.png';
+    tableViewRow.rightImage = OS_ANDROID ? '/tick.png' : 'tick.png';
 }
 
 function transformWebsite(processedReport)

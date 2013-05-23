@@ -7,10 +7,18 @@
     layout: 'vertical'
 }
 
+"#index[platform=android]": {
+    borderWidth: '1dp',
+}
+
 ".separator": {
     backgroundColor: '#dcdcdc',
     height: 1,
     bottom: 0,
+}
+
+".separator[platform=android]": {
+    height: '1dp',
 }
 
 "View": {
@@ -25,14 +33,28 @@
     width: Ti.UI.SIZE,
 }
 
+".headline[platform=android]": {
+    font: {fontWeight: 'bold', fontSize: '16sp'},
+}
+
 ".header": {
     top: 18,
     bottom: 18,
     left: 10
 }
 
+".header[platform=android]": {
+    top: '16dp',
+    bottom: '16dp',
+    left: '10dp'
+}
+
 ".footer": {
     height: 35,
+}
+
+".footer[platform=android]": {
+    height: '32dp',
 }
 
 ".content": {
@@ -43,4 +65,8 @@
 ".more": {
     left: 10,
     width: Ti.UI.SIZE,
+}
+
+".more[platform=android]": {
+    left: '10dp',
 }

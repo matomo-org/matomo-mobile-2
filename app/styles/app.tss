@@ -6,7 +6,7 @@
 
 "Window[platform=android]": {
     fullscreen: false,
-    displayHomeAsUp: true
+    exitOnClose: true
 },
 
 "Window[platform=ios]": {
@@ -21,14 +21,33 @@
     color: "#333333"
 }
 
+"TableViewRow[platform=android]": {
+    font: {fontSize: '16sp'}
+}
+
+"Label[platform=android]": {
+    font: {fontSize: '16sp'}
+}
+
 ".reportChooserButton": {
     backgroundImage: "ic_action_menu.png",
     width: 32,
     height: 32
 }
 
-".reportConfiguratorButton": {
+".reportConfiguratorButton[platform=ios]": {
     backgroundImage: "ic_action_reportmenu.png",
     width: 32,
     height: 32
+},
+
+".reportConfiguratorButton[platform=mobileweb]": {
+    backgroundImage: "ic_action_reportmenu.png",
+    width: 32,
+    height: 32
+},
+
+".reportConfiguratorButton[platform=android]": {
+    icon: "/ic_action_reportmenu.png",
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
 },

@@ -11,10 +11,10 @@
 }
 
 "#title": {
-    fontSize: 14,
+    font: {fontSize: 14},
     color: 'white',
 }
 
 "#title[platform=android]": {
-    fontSize: 14
+    font: {fontSize: '14sp'},
 }

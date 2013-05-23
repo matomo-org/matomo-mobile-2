@@ -6,6 +6,11 @@
     opacity: 0.95,
 },
 
+"#index[platform=android]": {
+    backgroundSelectedColor: '#B2AEA5',
+    backgroundSelectedImage: '/org.piwik.tableviewsection/tableviewsectionbackground.png'
+}
+
 "#index[platform=ios]": {
     selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
 }
@@ -27,4 +32,8 @@
     height: Ti.UI.SIZE,
     opacity: 0.95,
     backgroundImage: 'org.piwik.tableviewsection/tableviewsectionbackground.png',
+}
+
+".headerView[platform=android]": {
+    backgroundImage: '/org.piwik.tableviewsection/tableviewsectionbackground.png',
 }

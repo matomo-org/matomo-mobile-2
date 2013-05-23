@@ -7,6 +7,11 @@
     layout: 'vertical'
 }
 
+"#index[platform=android]": {
+    borderRadius: 5,
+    borderWidth: '1dp',
+}
+
 "#loadingIndicator": {
     height: 160,
     backgroundColor: '#efefef',
@@ -14,10 +19,18 @@
     width: Ti.UI.FILL,
 }
 
+"#loadingIndicator[platform=android]": {
+    height: '160dp',
+}
+
 ".separator": {
     backgroundColor: '#dcdcdc',
     height: 1,
     bottom: 0,
+}
+
+".separator[platform=android]": {
+    height: '1dp',
 }
 
 "View": {
@@ -32,14 +45,28 @@
     width: Ti.UI.SIZE
 }
 
+".headline[platform=android]": {
+    font: {fontWeight: 'bold', fontSize: '16sp'},
+}
+
 ".header": {
     top: 18,
     bottom: 18,
     left: 10
 }
 
+".header[platform=android]": {
+    top: '16dp',
+    bottom: '16dp',
+    left: '10dp'
+}
+
 ".footer": {
     height: 35,
+}
+
+".footer[platform=android]": {
+    height: '32dp',
 }
 
 ".description": {
@@ -66,6 +93,12 @@
     color: '#7e7e7e',
 }
 
+".no_data[platform=android]": {
+    top: '18dp',
+    bottom: '18dp',
+    left: '10dp',
+}
+
 ".report_row": {
     left: 0,
     right: 0,
@@ -77,11 +110,18 @@
     color: '#7e7e7e',
     font: {fontWeight: 'bold'},
     top: 16,
-    bottom: 10,
     left: 10,
     bottom: 16,
     right: 95,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+}
+
+".report_title[platform=android]": {
+    top: '16dp',
+    left: '10dp',
+    bottom: '16dp',
+    right: '95dp',
+    font: {fontWeight: 'bold', fontSize: '16sp'},
 }
 
 ".report_value": {
@@ -90,17 +130,28 @@
     color: '#191919',
     font: {fontWeight: 'bold'},
     top: 16,
-    bottom: 10,
     right: 10,
     bottom: 16,
     width: 75,
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
 }
 
+".report_value[platform=android]": {
+    top: '16dp',
+    right: '10dp',
+    bottom: '16dp',
+    width: '75dp',
+    font: {fontWeight: 'bold', fontSize: '16sp'},
+}
+
 ".more": {
     left: 10,
     width: Ti.UI.SIZE,
     text: L('General_More')
+}
+
+".more[platform=android]": {
+    left: '10dp',
 }
 
 ".description_dimension": {
@@ -113,6 +164,13 @@
     font: {fontWeight: 'normal'}
 }
 
+".description_dimension[platform=android]": {
+    top: '16dp',
+    bottom: '16dp',
+    left: '10dp',
+    font: {fontWeight: 'normal', fontSize: '16sp'},
+}
+
 ".description_metric": {
     color: '#191919',
     top: 14,
@@ -122,4 +180,11 @@
     height: Ti.UI.SIZE,
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     font: {fontWeight: 'normal'}
+}
+
+".description_metric[platform=android]": {
+    top: '16dp',
+    bottom: '16dp',
+    right: '10dp',
+    font: {fontWeight: 'normal', fontSize: '16sp'},
 }

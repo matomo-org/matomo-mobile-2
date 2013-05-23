@@ -113,7 +113,7 @@ exports.renderProcessedReport = function (processedReportCollection)
             currentReportName: processedReportCollection.getReportName(),
             currentMetric: processedReport.getSortOrder(),
             reportTitle: processedReport.getTitle(),
-            hasChild: hasSubtable
+            hasChild: Boolean(hasSubtable)
         });
         
         if (OS_IOS && !hasSubtable) {

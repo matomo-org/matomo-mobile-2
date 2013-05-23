@@ -14,6 +14,10 @@
         <RightNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
+
+        <Menu id="menu" platform="android" formFactor="handheld">
+            <MenuItem class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility" />
+        </Menu>
         
         <WebView id="webview"></WebView>
     </Window>
