@@ -134,7 +134,11 @@ function doSelectReport(event)
 
     hideLeftSidebar();
 
-    require('layout').closeRecordedWindows();
+    if (!OS_ANDROID) {
+        // app crashes on Android if we are closing the windows here. but we need to do close it here on iOS and 
+        // MobileWeb to prevent weird rendering of the navigationBar / backButton.
+        require('layout').closeRecordedWindows();
+    }
 
     if ('live' == cid) {
         openLiveVisitors();
@@ -153,6 +157,10 @@ function doSelectReport(event)
     } else {
         var report = reportsCollection.getByCid(cid);
         openCompositeReport(report);
+    }
+
+    if (OS_ANDROID) {
+        require('layout').closeRecordedWindows();
     }
 }
 
