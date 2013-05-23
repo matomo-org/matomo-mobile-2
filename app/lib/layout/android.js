@@ -17,6 +17,7 @@ function AndroidLayout()
         }
 
         win.close();
+
         win = null;
     }
 
@@ -26,9 +27,8 @@ function AndroidLayout()
         }
         
         win.addEventListener('androidback', closeThisWindow);
-        win.open();
-
         this.trigger('open', win);
+        win.open();
 
         win = null;
     }

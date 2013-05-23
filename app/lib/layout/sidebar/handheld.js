@@ -5,7 +5,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
-var widthSidebar = OS_ANDROID ? '250dp' : 250;
+var widthSidebar = 250;
 
 function HandheldSidebar(detailRootWindow)
 {
