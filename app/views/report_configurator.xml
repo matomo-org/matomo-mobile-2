@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
 
-    <Window id="index" onClose="onClose">
+    <View id="index">
         <TableView id="configTable" dataTransform="transformWebsite" dataCollection="$.piwikProcessedReport" onClick="selectWebsite">
             <HeaderView>
                 <View class="headerView">
@@ -19,5 +19,5 @@
             </HeaderView>
             <TableViewRow class="websiteRow" idsite="{idsite}" rightImage="{rightImage}" modelid="{id}" title="{title}"/>
         </TableView>
-    </Window>
+    </View>
 </Alloy>
