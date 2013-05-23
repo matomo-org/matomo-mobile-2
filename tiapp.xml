@@ -8,7 +8,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.1.0.v20130412191547</sdk-version>
+    <sdk-version>3.2.0.v20130522115134</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Piwik Mobile 2</name>
     <version>2.0</version>
@@ -48,7 +48,7 @@
             <application android:theme="@android:style/Theme.Holo.Light.DarkActionBar"/>
             <supports-screens android:anyDensity="true"
                 android:largeScreens="true" android:normalScreens="true"
-                android:smallScreens="true" xlargeScreens="true"/>
+                android:smallScreens="false" xlargeScreens="true"/>
             <uses-sdk android:installLocation="preferExternal"
                 android:minSdkVersion="14" android:targetSdkVersion="16"/>
         </manifest>
