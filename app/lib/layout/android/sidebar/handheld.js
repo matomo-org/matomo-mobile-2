@@ -11,11 +11,14 @@ function HandheldSidebar()
 {
     var leftSidebarView = null;
     var leftSidebarWindow = null;
+    var leftSidebarOuterWindow = Ti.UI.createWindow({left: widthSidebar, right: 0, backgroundColor: 'transparent', zIndex: 997});
+    leftSidebarOuterWindow.addEventListener('click', hideLeftSidebar);
 
     function hideLeftSidebar()
     {
         if (leftSidebarWindow) {
             leftSidebarWindow.close();
+            leftSidebarOuterWindow.close();
             leftSidebarWindow = null;
         }
     }
@@ -33,10 +36,11 @@ function HandheldSidebar()
 
         hideRightSidebar();
 
-        leftSidebarWindow = Ti.UI.createWindow({left: 0, width: widthSidebar});
+        leftSidebarWindow = Ti.UI.createWindow({left: 0, top: '48dp', width: widthSidebar, zIndex: 999});
         leftSidebarWindow.add(leftSidebarView);
-        leftSidebarWindow.addEventListener('androidback',hideLeftSidebar);
+        leftSidebarWindow.addEventListener('androidback', hideLeftSidebar);
         leftSidebarWindow.open();
+        leftSidebarOuterWindow.open();
     }
 
     this.setLeftSidebar = function(view)
@@ -49,28 +53,20 @@ function HandheldSidebar()
 
 
 
-    this.on('open', function (window) {
-        var displayMenuLogo = !!leftSidebarView;
-        window.activity.onPrepareOptionsMenu = function(e) {
-            var actionBar  = this.actionBar;
-            if (displayMenuLogo) {
-                actionBar.logo = '/ic_action_menu.png';
-            } 
-            actionBar.backgroundImage = '/navbar.png';
-            actionBar.onHomeIconItemSelected = toggleLeftSidebar;
-        };
-    });
-
 
 
     // we have to create this window before any other window, 
     // otherwise the menu will be always displayed on top of the root window.
-    var rightSidebarView = null;
+    var rightSidebarView   = null;
     var rightSidebarWindow = null;
+    var rightSidebarOuterWindow = Ti.UI.createWindow({left: 0, right: widthSidebar, backgroundColor: 'transparent', zIndex: 996});
+    rightSidebarOuterWindow.addEventListener('click', hideRightSidebar);
+
     function hideRightSidebar()
     {
         if (rightSidebarWindow) {
             rightSidebarWindow.close();
+            rightSidebarOuterWindow.close();
             rightSidebarWindow = null;
         }
     }
@@ -83,10 +79,11 @@ function HandheldSidebar()
 
         hideLeftSidebar();
 
-        rightSidebarWindow = Ti.UI.createWindow({right: 0, width: widthSidebar});
+        rightSidebarWindow = Ti.UI.createWindow({right: 0, top: '48dp', width: widthSidebar, zIndex: 998});
         rightSidebarWindow.add(rightSidebarView);
         rightSidebarWindow.addEventListener('androidback', hideRightSidebar);
         rightSidebarWindow.open();
+        rightSidebarOuterWindow.open();
     }
 
     this.setRightSidebar = function(view)

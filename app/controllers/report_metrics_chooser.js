@@ -28,12 +28,13 @@ for (var metricInternalName in metrics) {
     internalNames.push(String(metricInternalName));
 }
 
-options.push(L('SitesManager_Cancel_js'));
-
+if (!OS_ANDROID) {
+    options.push(L('SitesManager_Cancel_js'));
+}
 
 function doChangeMetric(event)
 {
-    if (!event || event.cancel === event.index || true === event.cancel) {
+    if (!event || event.cancel === event.index || true === event.cancel || 0 > event.index) {
 
         return;
     }
@@ -46,7 +47,7 @@ exports.open = function()
     var dialog = Ti.UI.createOptionDialog({
         options: options, 
         title: L('Mobile_ChooseMetric'), 
-        cancel: options.length - 1
+        cancel: OS_ANDROID ? -1 : options.length - 1
     });
     
     dialog.addEventListener('click', doChangeMetric);

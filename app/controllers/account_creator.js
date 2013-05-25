@@ -24,14 +24,17 @@ function onOpen()
     require('Piwik/Tracker').trackWindow('Create Account', 'account-create');
 }
 
-exports.open = function () 
+function open() 
 {
     require('layout').open($.index);
 }
 
-exports.close = function () 
+function close() 
 {
     require('layout').close($.index);
     $.destroy();
     $.off();
 }
+
+exports.open  = open;
+exports.close = close;

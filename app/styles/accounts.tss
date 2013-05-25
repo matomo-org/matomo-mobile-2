@@ -1,14 +1,41 @@
 "#index": {
     title: L('Mobile_Accounts')
-},
+}
+
+"#index[platform=android]": {
+    backgroundColor: "#F5F5F5"
+}
+
+"#headerBar": {
+    title: L('Mobile_Accounts'),
+    actionItem1: {icon: '/ic_action_accounts.png'}
+}
+
+"#headerBar[formFactor=handheld]": {
+    homeIcon: '/ic_action_menu.png'
+}
 
 "#accountsTable": {
     editable: true,
 },
 
+"#accountsTable[platform=android]": {
+    top: '48dp',
+    separatorColor: '#e0e0e0'
+}
+
+"TableViewRow[platform=android]": {
+    left: '10dp',
+    right: '10dp',
+    top: '10dp',
+    bottom: '10dp',
+    color: '#333'
+}
+
 "TableViewRow[platform=mobileweb]": {
     left: 10,
-    right: 10
+    right: 10,
+    color: '#333'
 }
 
 "#accountsTable[platform=ios]": {
@@ -20,6 +47,11 @@
     visible: false,
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
+}
+
+"#noAccountSelectedContainer[platform=android]": {
+    backgroundColor: '#222222',
+    height: 0,
 }
 
 "#noAccountSelectedContainer[platform=mobileweb]": {
@@ -38,13 +70,35 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
 }
 
+"#noAccountSelectedLabel[platform=android]": {
+    height: 0,
+    visible: false,
+    left: '10dp',
+    right: '10dp',
+    top: '12dp',
+    bottom: '12dp',
+    color: '#e5e5e5',
+    font: {fontWeight: 'bold', fontSize: '14sp'},
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+}
+
 "#howToDeleteHint": {
     text: L('Mobile_HowtoDeleteAnAccount'),
     font: {fontWeight: 'bold', fontSize: 14},
     color: '#7e7e7e',
     left: 10,
     right: 10,
-},
+}
+
+"#howToDeleteHint[platform=android]": {
+    left: '10dp',
+    right: '10dp',
+    font: {fontWeight: 'bold', fontSize: '14sp'},
+    color: '#e5e5e5',
+    top: '8dp',
+    bottom: '8dp',
+    height: Ti.UI.SIZE,
+}
 
 ".footer": {
     top: 10,
@@ -52,16 +106,17 @@
     left: 0,
     right: 0,
     height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+}
+
+".footer[platform=android]": {
+    top: '10dp',
+    bottom: '10dp',
+    backgroundColor: '#222222',
 }
 
 "#addAccountButton": {
     backgroundImage: "ic_action_accounts.png",
     width: 32,
     height: 32
-},
-
-"#menuItemAddAccount[platform=android]": {
-    icon: '/ic_action_accounts.png',
-    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
-    title: L('Mobile_AddAccount')
 },

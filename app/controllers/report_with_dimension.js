@@ -20,7 +20,7 @@ var reportModel     = args.report || false;
 var reportList      = args.reportList || {};
 var reportDate      = require('session').getReportDate();
 
-$.index.title       = reportModel.getReportName();
+updateWindowTitle(reportModel.getReportName());
 
 $.initLoadingMessage();
 
@@ -93,6 +93,22 @@ function toggleReportConfiguratorVisibility (event)
     require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/with-dimension/toggle/report-configurator'});
 }
 
+function toggleReportChooserVisibility(event)
+{
+    require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/report/with-dimension/toggle/report-chooser'});
+}
+
+function updateWindowTitle(title)
+{
+    if (OS_ANDROID) {
+        $.headerBar.setTitle(title || '');
+    } else {
+        $.index.title = title || '';
+    }
+}
+
 exports.doRefresh = function()
 {
     $.showLoadingMessage();
@@ -121,7 +137,7 @@ exports.doRefresh = function()
     });
 };
 
-exports.open = function () {
+function open () {
 
     registerEvents();
 
@@ -129,3 +145,10 @@ exports.open = function () {
 
     require('layout').open($.index);
 };
+
+function close () {
+    require('layout').close($.index);
+};
+
+exports.open = open;
+exports.close = close;

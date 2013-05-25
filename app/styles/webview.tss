@@ -1,3 +1,11 @@
 "#index": {
     backButtonTitle: L('Mobile_NavigationBack')
 }
+
+"#headerBar": {
+    canGoBack: true,
+}
+
+"#webview[platform=android]": {
+    top: '48dp'
+}

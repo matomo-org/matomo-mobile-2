@@ -7,9 +7,10 @@
             <Button id="accountsButton" onClick="chooseAccount"/>
         </RightNavButton>
         
-        <Menu id="menu" platform="android">
-            <MenuItem id="menuItemAccount" onClick="chooseAccount" />
-        </Menu>
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onActionItem1="chooseAccount"
+                platform="android" />
 
         <View id="loading"><Label id="loadingLabel"></Label></View>
         

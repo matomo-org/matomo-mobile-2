@@ -1,6 +1,11 @@
 <Alloy>
-    <Window class="container" id="index" onOpen="onOpen">
-        <ScrollView>
+    <Window id="index" onOpen="onOpen">
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onBack="close"
+                platform="android" />
+
+        <ScrollView class="container">
             <View id="loginform" />
         </ScrollView>
     </Window>

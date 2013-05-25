@@ -102,6 +102,13 @@ function showLoadingMessage()
     $.loadingindicator.show();
 }
 
+function toggleReportChooserVisibility(event)
+{
+    require('report/chooser').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/report/without-dimension/toggle/report-chooser'});
+}
+
 function toggleReportConfiguratorVisibility (event)
 {
     require('report/configurator').toggleVisibility();
@@ -113,6 +120,20 @@ function removeAllChildrenFromContent()
 {
     var children = $.content.children;
     for (var d = children.length - 1; d >= 0; d--) $.content.remove(children[d]);
+}
+
+function updateWindowTitle(title)
+{
+    if (OS_ANDROID) {
+        $.headerBar.setTitle(title || '');
+    } else {
+        $.index.title = title || '';
+    }
+}
+
+function toUnit(size)
+{
+    return OS_ANDROID ? (size + 'dp') : size;
 }
 
 var containerRow = null;
@@ -129,10 +150,10 @@ function renderMetricTile (processedReportModel, index) {
             containerRow = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, layout: 'horizontal'});
             $.content.add(containerRow);
         } 
-        var outerContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: '50%'});
-        var metricContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, top: 22, bottom: 25, layout: 'vertical'});
-        var value = Ti.UI.createLabel({text: value, textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 0, font: {fontSize: 25, fontWeight: 'bold'}, color: labelColor, left: 10, right: 10, height: Ti.UI.SIZE});
-        var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: 13, fontWeight: 'bold'}, height: Ti.UI.SIZE, top: 5, color: '#7e7e7e', left: 10, right: 10});
+        var outerContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: OS_ANDROID ? '49%' : '50%'});
+        var metricContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, top: toUnit(22), bottom: toUnit(25), layout: 'vertical'});
+        var value = Ti.UI.createLabel({text: value, textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 0, font: {fontSize: toUnit(25), fontWeight: 'bold'}, color: labelColor, left: toUnit(10), right: toUnit(10), height: Ti.UI.SIZE});
+        var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: toUnit(13), fontWeight: 'bold'}, height: Ti.UI.SIZE, top: toUnit(5), color: '#7e7e7e', left: toUnit(10), right: toUnit(10)});
         metricContainer.add(value);
         metricContainer.add(label);
 
@@ -149,7 +170,7 @@ function renderMetricTile (processedReportModel, index) {
         containerRow.add(outerContainer);
 
         if (1 == (index % 2)) {
-            var horizontalSeparator = Ti.UI.createView({height: 1, backgroundColor: '#e6e6e6', width: Ti.UI.FILL});
+            var horizontalSeparator = Ti.UI.createView({height: toUnit(1), backgroundColor: '#e6e6e6', width: Ti.UI.FILL});
             $.content.add(horizontalSeparator);
         }
     }
@@ -160,7 +181,7 @@ function onStatisticsFetched(processedReportCollection)
 
     var accountModel = require('session').getAccount();
 
-    $.index.title = processedReportCollection.getReportName();
+    updateWindowTitle(processedReportCollection.getReportName());
     
     showReportContent();
 
@@ -228,11 +249,19 @@ function doRefresh()
     });
 }
 
-exports.open = function () {
-
+function open() 
+{
     $.content.addEventListener('postlayout', fixVerticalSeparatorHeight);
 
     onReportChosen(reportModel);
 
     require('layout').open($.index);
-};
+}
+
+function close() 
+{
+    require('layout').close($.index);
+}
+
+exports.open  = open;
+exports.close = close;

@@ -16,6 +16,8 @@ var reportDate   = require('session').getReportDate();
 var $model       = args ? args["$model"] : null;
 $.metric.text    = $model.getMetricName();
 
+$.piwikProcessedReport.on('reset', showReportContent);
+
 function openReport()
 {
     if (!hasReportRowsToDisplay()) {
@@ -56,7 +58,10 @@ function showReportContent()
         hideMoreLink();
     }
 
+    $.loadingIndicator.height = 0;
     $.loadingIndicator.hide();
+    $.content.height = Ti.UI.SIZE;
+    $.content.show();
 }
 
 function showLoadingMessage()
@@ -80,7 +85,6 @@ function fetchProcessedReport()
     var metric = $model.getSortOrder();
 
     showLoadingMessage();
-    $.piwikProcessedReport.on('reset', showReportContent);
 
     $.piwikProcessedReport.fetchProcessedReports(metric, {
         account: accountModel,

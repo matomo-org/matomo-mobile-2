@@ -1,14 +1,31 @@
 "#index": {
     title: L('Mobile_AboutPiwikMobile')
-},
+}
+
+"#headerBar": {
+    title: L('Mobile_AboutPiwikMobile'),
+    canGoBack: true,
+}
 
 "TableViewRow[platform=mobileweb]": {
     left: 10,
     right: 10
 }
 
+"TableViewRow[platform=android]": {
+    top: '16dp',
+    bottom: '16dp',
+    color: '#333333',
+    left: '16dp'
+}
+
 "#aboutPiwikTable[platform=ios]": {
     style: Ti.UI.iPhone.TableViewStyle.GROUPED
+}
+
+"#aboutPiwikTable[platform=android]": {
+    top: '48dp',
+    separatorColor: '#e0e0e0'
 }
 
 "#website": {

@@ -32,7 +32,11 @@
 }
 
 "#graphWidget[platform=android]": {
-    defaultImage: '/graphDefault.png'
+    defaultImage: '/graphDefault.png',
+    left: '10dp',
+    right: '10dp',
+    top: '10dp',
+    bottom: '10dp'
 }
 
 ".separator": {
@@ -41,6 +45,10 @@
     backgroundColor: '#bbbbbb',
     left: 0,
     right: 0,
+}
+
+".separator[platform=android]": {
+    height: '2dp'
 }
 
 "#bottomContainer": {
@@ -77,6 +85,14 @@
     }
 }
 
+"#reportName[platform=android]": {
+    left: '20dp',
+    right: '20dp',
+    font: { 
+        fontSize: '48sp'
+    }
+}
+
 "#reportDate": {
     text: ' ',
     ellipsize: true,
@@ -88,5 +104,14 @@
     color: '#666666',
     font: { 
         fontSize: 36
+    }
+}
+
+"#reportDate[platform=android]": {
+    top: '25dp',
+    left: '20dp',
+    right: '20dp',
+    font: { 
+        fontSize: '36sp'
     }
 }

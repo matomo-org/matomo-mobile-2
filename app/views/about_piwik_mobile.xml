@@ -1,5 +1,10 @@
 <Alloy>
     <Window id="index" onClose="onClose" onOpen="onOpen">
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onBack="close"
+                platform="android" />
+
         <TableView id="aboutPiwikTable">
             <TableViewRow id="website" onClick="openWebsite"/>
             <TableViewRow id="participate" onClick="participate"/>

@@ -14,3 +14,11 @@ exports.baseController = "accounts";
 
 $.index.leftNavButton   = null;
 $.index.backButtonTitle = L('Mobile_NavigationBack');
+
+if (OS_ANDROID) {
+    $.headerBar.enableCanGoBack();
+    $.headerBar.on('back', function () {
+        $.close();
+    });
+    $.headerBar.resetHomeIcon();
+}

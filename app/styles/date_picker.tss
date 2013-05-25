@@ -26,6 +26,7 @@
 
 ".topLine[platform=android]": {
     height: '1dp',
+    top: '1dp',
 }
 
 ".topLine[platform=ios]": {
@@ -41,6 +42,7 @@
 
 ".bottomLine[platform=android]": {
     height: '1dp',
+    bottom: '1dp',
 }
 
 ".bottomLine[platform=ios]": {
@@ -83,10 +85,10 @@
 }
 
 ".inner[platform=android]": {
-    left: '8dp',
-    top: '5dp',
-    bottom: '5dp',
-    right: '5dp',
+    left: '9dp',
+    top: '6dp',
+    bottom: '6dp',
+    right: '6dp',
 }
 
 ".inner[platform=ios]": {

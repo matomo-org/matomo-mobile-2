@@ -28,6 +28,13 @@
     shadowOffset: {x: 1, y: 1}
 },
 
+"#title[platform=android]": {
+    top: '3dp',
+    bottom: '4dp',
+    left: '10dp',
+    font: {fontSize: '15sp', fontWeight: 'bold'},
+},
+
 ".headerView": {
     height: Ti.UI.SIZE,
     opacity: 0.95,

@@ -73,9 +73,10 @@
     backgroundColor: '#efefef',
 }
 
-".content": {
+"#content": {
     backgroundColor: '#efefef',
     layout: "vertical",
+    visible: false
 }
 
 "#noData": {

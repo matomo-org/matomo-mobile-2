@@ -21,7 +21,7 @@ var subtableId     = args.subtableId || '';
 var currentMetric  = args.metric;
 var reportDate     = require('session').getReportDate();
 
-$.index.title           = args.reportTitle || '';
+updateWindowTitle(args.reportTitle);
 $.index.backButtonTitle = args.backButtonTitle;
 
 $.initLoadingMessage();
@@ -56,6 +56,22 @@ function onMetricChosen(chosenMetric)
     $.doRefresh();
 }
 
+function toggleReportConfiguratorVisibility (event)
+{
+    require('report/configurator').toggleVisibility();
+
+    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/composite/toggle/report-configurator'});
+}
+
+function updateWindowTitle(title)
+{
+    if (OS_ANDROID) {
+        $.headerBar.setTitle(title || '');
+    } else {
+        $.index.title = title || '';
+    }
+}
+
 exports.doRefresh = function()
 {
     $.showLoadingMessage();
@@ -81,9 +97,14 @@ exports.doRefresh = function()
     });
 };
 
-exports.open = function () {
-
+function open () {
     $.doRefresh();
-
     require('layout').open($.index);
 };
+
+function close () {
+    require('layout').close($.index);
+};
+
+exports.open = open;
+exports.close = close;

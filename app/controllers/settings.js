@@ -13,7 +13,7 @@ function L(key)
 var callbacks = {changeLanguage: changeLanguage,
                  toggleTrackingEnabled: toggleTrackingEnabled,
                  toggleGraphsEnabled: toggleGraphsEnabled,
-                 changeHttpTimeout: changeHttpTimeout}
+                 changeHttpTimeout: changeHttpTimeout};
 
 function onOpen()
 {
@@ -115,10 +115,33 @@ function updateDisplayedGraphsValue()
     setHasCheck($.graphs, 2, settings.areGraphsEnabled());
 }
 
+function setTitle(section, itemIndex, title)
+{
+    if (!supportsListView()) {
+        return uiRowIfTableView.setHasCheck(enabled);
+    }
+    
+    var item = section.getItemAt(itemIndex);
+
+    if (OS_ANDROID) {
+        item.title = {text: title};
+    } else {
+        item.properties.title = title;
+    }
+
+    section.updateItemAt(itemIndex, item, {animated: true});
+}
+
 function setSubtitle(section, itemIndex, subtitle)
 {
     var item = section.getItemAt(itemIndex);
-    item.properties.subtitle = subtitle;
+
+    if (OS_ANDROID) {
+        item.subtitle = {text: subtitle};
+    } else {
+        item.properties.subtitle = subtitle;
+    }
+
     section.updateItemAt(itemIndex, item, {animated: true});
 }
 
@@ -130,9 +153,13 @@ function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
 
     var item = $.basic.getItemAt(indexOfItemIfListView);
 
-    if (enabled) {
+    if (enabled && OS_ANDROID) {
+        item.template = 'checkedTemplate';
+    } else if (OS_ANDROID) {
+        item.template = 'uncheckedTemplate';
+    } else if (enabled) {
         item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
-    }  else {
+    } else {
         item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
     }
     
@@ -141,6 +168,11 @@ function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
 
 function updateAllDisplayedSettingsValues()
 {
+    setTitle($.basic, 0, L('General_Language'));
+    setTitle($.basic, 1, L('Mobile_AnonymousTracking'));
+    setTitle($.basic, 2, L('Mobile_EnableGraphsLabel'));
+    setTitle($.advanced, 0, L('Mobile_HttpTimeout'));
+
     updateDisplayedLanguageValue();
     updateDisplayedHttpTimeoutValue();
     updateDisplayedTrackingValue();

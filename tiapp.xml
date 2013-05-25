@@ -18,11 +18,11 @@
     <copyright>2013 by thomassteur</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
-    <prerendered-icon>false</prerendered-icon>
+    <prerendered-icon>true</prerendered-icon>
     <statusbar-style>default</statusbar-style>
     <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
-    <navbar-hidden>false</navbar-hidden>
+    <navbar-hidden>true</navbar-hidden>
     <analytics>false</analytics>
     <guid>024a65cf-84ce-4ace-bd18-cacf73bbbd91</guid>
     <property name="ti.ui.defaultunit">system</property>
@@ -60,6 +60,10 @@
             <inline-css-images>true</inline-css-images>
         </splash>
         <theme>default</theme>
+        <disable_error_screen>true</disable_error_screen>
+        <filesystem>
+            <registry>preload</registry>
+        </filesystem>
     </mobileweb>
     <modules>
         <module platform="android" version="1.0">ti.physicalSizeCategory</module>

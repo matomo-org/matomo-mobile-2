@@ -1,10 +1,23 @@
 "#index": {
     title: L('General_Settings'),
     backButtonTitle: L('Mobile_NavigationBack')
-},
+}
+
+"#headerBar": {
+    title: L('General_Settings')
+}
+
+"#headerBar[formFactor=handheld]": {
+    homeIcon: '/ic_action_menu.png',
+}
 
 "ListItem[platform=ios]": {
     selectionStyle: Ti.UI.iPhone.ListViewCellSelectionStyle.NONE
+}
+
+"ListItem[platform=android]": {
+    color: '#333333',
+    font: {fontSize: '16sp'}
 }
 
 "TableViewRow[platform=mobileweb]": {
@@ -18,6 +31,12 @@
     color: '#7e7e7e',
     left: 10,
     right: 10,
+}
+
+"#loginHint[platform=android]": {
+    font: {fontWeight: 'bold', fontSize: '14sp'},
+    left: '10dp',
+    right: '10dp',
 },
 
 ".footer": {
@@ -28,27 +47,95 @@
     height: Ti.UI.SIZE,
 }
 
+".footer[platform=android]": {
+    top: '10dp',
+    bottom: '10dp',
+},
+
+"#settingsTable[platform=android]": {
+    top: '48dp',
+    separatorColor: '#e0e0e0'
+}
+
 "#settingsTable[platform=ios]": {
     style: Ti.UI.iPhone.ListViewStyle.GROUPED,
     footerTitle: L('Mobile_LoginToPiwikToChangeSettings')
 },
+
+".titleLabel": {
+    left: '10dp',
+    width: Ti.UI.SIZE,
+    top: '16dp',
+    bottom: '16dp',
+    color: '#333333'
+}
+
+"#settingsLabel": {
+    right: '100dp',
+}
+
+"#settingsValue": {
+    right: '10dp',
+    width: '80dp',
+    top: '16dp',
+    bottom: '16dp',
+    color: '#0099CC'
+}
+
+"#uncheckedLabel": {
+    right: '52dp',
+}
+
+"#checkedLabel": {
+    right: '52dp',
+}
+
+"#uncheckedIcon": {
+    image: '/btn_check_off_holo_light.png',
+    width: '32dp',
+    height: '32dp',
+    right: '3dp'
+}
+
+"#checkedIcon": {
+    image: '/btn_check_on_holo_light.png',
+    width: '32dp',
+    height: '32dp',
+    right: '3dp'
+}
+
+"ItemTemplate[platform=android]": {
+    height: Ti.UI.SIZE,
+}
 
 "#language": {
     accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE, 
     template: Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS,
     hasChild: true,
     title: L('General_Language')
-},
+}
+
+"#language[platform=android]": {
+    template: 'settingsTemplate',
+}
 
 "#tracking": {
     hasCheck: true,
     title: L('Mobile_AnonymousTracking')
-},
+}
+
+"#tracking[platform=android]": {
+    template: 'uncheckedTemplate'
+}
 
 "#graphs": {
     hasCheck: true,
     title: L('Mobile_EnableGraphsLabel')
-},
+}
+
+"#graphs[platform=android]": {
+    template: 'uncheckedTemplate'
+}
 
 "#timeout": {
     accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE, 
@@ -56,6 +143,10 @@
     hasChild: true,
     title: L('Mobile_HttpTimeout')
 },
+
+"#timeout[platform=android]": {
+    template: 'settingsTemplate'
+}
 
 "#advanced[platform=ios]": {
     headerTitle: L('Mobile_Advanced')

@@ -2,6 +2,12 @@
     <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
     
     <Window title="" id="index" onClose="onClose" onOpen="onOpen">
+        
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onBack="close"
+                onActionItem1="toggleReportConfiguratorVisibility"
+                platform="android" />
 
         <Require src="loading_indicator" id="loadingindicator"/>
 

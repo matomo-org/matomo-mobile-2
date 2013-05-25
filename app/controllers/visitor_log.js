@@ -101,11 +101,17 @@ function render()
 
     var rows = [];
 
-    var row = Ti.UI.createTableViewRow({title: L('General_Next'), color: '#336699'});
+    var nextRow = {title: L('General_Next'), color: '#336699'};
+    if (OS_MOBILEWEB) nextRow.left = 10;
+    if (OS_ANDROID) {
+        nextRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
+        nextRow.left   = '16dp';
+        nextRow.top    = '12dp';
+        nextRow.bottom = '12dp';
+    }
 
-    if (OS_MOBILEWEB) row.left = 10;
-
-    row.addEventListener('click', fetchNext)
+    var row = Ti.UI.createTableViewRow(nextRow);
+    row.addEventListener('click', fetchNext);
     rows.push(row);
 
     if (visitorLog.length) {
@@ -122,10 +128,16 @@ function render()
         rows.push(row);
     }
 
-    var row = Ti.UI.createTableViewRow({title: L('General_Previous'), color: '#336699'});
-    
-    if (OS_MOBILEWEB) row.left = 10;
-    
+    var prevRow = {title: L('General_Previous'), color: '#336699'};
+    if (OS_MOBILEWEB) prevRow.left = 10;
+    if (OS_ANDROID) {
+        prevRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
+        prevRow.left   = '16dp';
+        prevRow.top    = '12dp';
+        prevRow.bottom = '12dp';
+    }
+
+    var row = Ti.UI.createTableViewRow(prevRow);
     row.addEventListener('click', fetchPrevious);
     rows.push(row);
 
@@ -195,7 +207,7 @@ exports.open = function ()
     registerEvents();
     doRefresh();
     require('layout').open($.index);
-}
+};
 
 function close()
 {

@@ -29,19 +29,18 @@
 },
 
 "#headerView[platform=android]": {
-    top: '0dp',
     height: '180dp'
 },
 
 "#logoImage": {
-    image:"/logo-png-page.png",
+    image: "/logo-png-page.png",
     width: 140,
     height: 51,
     zIndex: 1
 },
 
 "#logoImage[platform=mobileweb]": {
-    image:"logo-png-page.png"
+    image: "logo-png-page.png"
 },
 
 "#logoImage[platform=android]": {

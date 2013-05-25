@@ -3,11 +3,16 @@
 }
 
 "#index": {
-    title: L('Visitor')
+    title: L('General_Visitor')
 }
 
-"#visitorTableView": {
+"#headerBar": {
+    title: L('General_Visitor'),
+    canGoBack: true
+}
 
+"#visitorTable[platform=android]": {
+    top: '48dp'
 }
 
 ".visitorTableViewRow": {

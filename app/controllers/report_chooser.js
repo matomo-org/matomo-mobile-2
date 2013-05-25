@@ -120,7 +120,7 @@ function isActionThatRequiresAnAccount(cid)
 
 function doSelectReport(event) 
 {
-    if (!event.rowData.cid) {
+    if (!event || !event.rowData || !event.rowData.cid) {
         return;
     }
     
@@ -134,11 +134,7 @@ function doSelectReport(event)
 
     hideLeftSidebar();
 
-    if (!OS_ANDROID) {
-        // app crashes on Android if we are closing the windows here. but we need to do close it here on iOS and 
-        // MobileWeb to prevent weird rendering of the navigationBar / backButton.
-        require('layout').closeRecordedWindows();
-    }
+    require('layout').closeRecordedWindows();
 
     if ('live' == cid) {
         openLiveVisitors();
@@ -157,10 +153,6 @@ function doSelectReport(event)
     } else {
         var report = reportsCollection.getByCid(cid);
         openCompositeReport(report);
-    }
-
-    if (OS_ANDROID) {
-        require('layout').closeRecordedWindows();
     }
 }
 

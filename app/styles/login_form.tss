@@ -58,7 +58,8 @@
 ".textfield": {
     top: 2,
     height: 40,
-    left: 10, right: 10,
+    left: 10, 
+    right: 10,
     autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
     autocorrect: false,
@@ -70,7 +71,7 @@
     height: '45dp',
     left: '10dp',
     right: '10dp',
-    backgroundImage: '/white.png',
+    backgroundColor: '#fff',
 },
 
 "#url": {
@@ -99,7 +100,8 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     text: L('Mobile_HowtoLoginAnonymous'),
     wordWrap: true,
-    left: 0, right: 0
+    left: 0, 
+    right: 0
 },
 
 "#anonymousLoginNotice[platform=android]": {

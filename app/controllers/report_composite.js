@@ -107,6 +107,15 @@ function onDateChanged()
     require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/composite/change/date'});
 }
 
+function updateWindowTitle(title)
+{
+    if (OS_ANDROID) {
+        $.headerBar.setTitle(title || '');
+    } else {
+        $.index.title = title || '';
+    }
+}
+
 function filterReports(collection)
 {
     if (!reportCategory) {
@@ -119,7 +128,7 @@ function filterReports(collection)
         reportCategory  = entryReport.get('category');
     }
 
-    $.index.title = reportCategory;
+    updateWindowTitle(reportCategory);
 
     return collection.where({category: reportCategory});
 }

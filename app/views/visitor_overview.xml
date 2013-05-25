@@ -1,5 +1,5 @@
 <Alloy>
-	<TableViewRow id="index">
+    <TableViewRow id="index">
         <View class="dateContainer">
             <Label id="visittime"/>
             <ImageView id="countryFlag" class="firstIcon"/>
@@ -9,5 +9,5 @@
         <Label id="referrer" class="visitorInfo"/>
         <Label id="goalConversions" class="visitorInfo"/>
         <Label id="pageViews" class="visitorInfo"/>
-	</TableViewRow>
+    </TableViewRow>
 </Alloy>

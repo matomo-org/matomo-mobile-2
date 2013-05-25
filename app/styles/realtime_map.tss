@@ -1,9 +1,23 @@
 "#index": {
-    title: L('Real-time Map'),
+    title: L('UserCountryMap_RealTimeMap'),
     backButtonTitle: L('Mobile_NavigationBack')
+}
+
+"#headerBar": {
+    title: L('UserCountryMap_RealTimeMap'),
+}
+
+"#headerBar[formFactor=handheld]": {
+    actionItem1: {icon: '/ic_action_reportmenu.png'},
+    homeIcon: '/ic_action_menu.png'
 }
 
 "#webview": {
     disableBounce: true,
-    scalesPageToFit: false
+    scalesPageToFit: false,
+    enableZoomControls: false
+}
+
+"#webview[platform=android]": {
+    top: '48dp'
 }

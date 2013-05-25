@@ -6,8 +6,27 @@
         <LeftNavButton platform="ios" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
+        
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onHomeIconItemSelected="toggleReportChooserVisibility"
+                platform="android" />
 
         <ListView id="settingsTable" platform="ios,android" onItemclick="onItemClick">
+            <Templates platform="android">
+                <ItemTemplate name="settingsTemplate">
+                    <Label bindId="title" class="titleLabel" id="settingsLabel"/>
+                    <Label bindId="subtitle" id="settingsValue"/>
+                </ItemTemplate>
+                <ItemTemplate name="checkedTemplate">
+                    <Label bindId="title" class="titleLabel" id="checkedLabel"/>
+                    <ImageView id="checkedIcon"/>
+                </ItemTemplate>
+                <ItemTemplate name="uncheckedTemplate">
+                    <Label bindId="title" class="titleLabel" id="uncheckedLabel"/>
+                    <ImageView id="uncheckedIcon"/>
+                </ItemTemplate>
+            </Templates>
             <ListSection id="basic">
                 <ListItem id="language" callback="changeLanguage"/>
                 <ListItem id="tracking" callback="toggleTrackingEnabled"/>

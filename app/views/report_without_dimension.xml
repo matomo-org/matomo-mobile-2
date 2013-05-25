@@ -8,9 +8,11 @@
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
 
-        <Menu id="menu" platform="android" formFactor="handheld">
-            <MenuItem class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility" />
-        </Menu>
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onBack="close"
+                onActionItem1="toggleReportConfiguratorVisibility"
+                platform="android" />
 
         <Require src="loading_indicator" id="loadingindicator"/>
 

@@ -1,17 +1,23 @@
-".container": {
-    backgroundColor: "#F5F5F5"
-},
-
 "#index": {
+    backgroundColor: "#F5F5F5",
     title: L('Mobile_AddAccount')
-},
+}
+
+"#headerBar": {
+    title: L('Mobile_AddAccount'),
+    canGoBack: true
+}
+
+".container[platform=android]": {
+    top: '48dp'
+}
 
 "#loginform": {
     top: 10,
     left: 20,
     right: 20,
     height: Ti.UI.SIZE
-},
+}
 
 "#loginform[platform=android]": {
     top: '10dp',

@@ -1,6 +1,19 @@
 "#index": {
     title: L('General_GiveUsYourFeedback')
-},
+}
+
+"#headerBar": {
+    title: L('General_GiveUsYourFeedback')
+}
+
+"#headerBar[formFactor=handheld]": {
+    homeIcon: '/ic_action_menu.png',
+}
+
+"#feedbackTable[platform=android]": {
+    top: '48dp',
+    separatorColor: '#e0e0e0'
+}
 
 "#feedbackTable[platform=ios]": {
     style: Ti.UI.iPhone.TableViewStyle.GROUPED

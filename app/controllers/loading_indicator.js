@@ -43,6 +43,7 @@ if (args && args.rounded) {
 updateContainerIfSet('backgroundColor');
 updateContainerIfSet('color');
 updateContainerIfSet('width');
+updateContainerIfSet('top');
 
 if (args && args.height) {
     updateContainer({height: args.height});

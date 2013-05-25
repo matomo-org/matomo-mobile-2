@@ -1,5 +1,11 @@
 <Alloy>
     <Window id="index" title=" ">
+        
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onBack="close"
+                platform="android" />
+                
         <WebView id="webview"></WebView>
     </Window>
 </Alloy>

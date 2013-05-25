@@ -26,10 +26,18 @@ createActionDetails(visitor, accessUrl);
 $.visitorTable.setData(rows);
 rows = null;
 
-exports.open = function ()
+function open()
 {
     require('layout').open($.index);
-};
+}
+
+function close()
+{
+    require('layout').close($.index);
+}
+
+exports.open  = open;
+exports.close = close;
 
 function onOpen()
 {
@@ -489,14 +497,17 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
     visitor      = null;
 }
 
-
+function toUnit(size)
+{
+    return OS_ANDROID ? (size + 'dp') : size;
+}
 
 function helperVisitorActionActionPageTitleLabel(text) {
     return {
         text: (text+'') || '',
-        left: 10,
-        font: {fontSize: 13, fontWeight: 'bold'},
-        top: 5,
+        left: toUnit(10),
+        font: {fontSize: toUnit(13), fontWeight: 'bold'},
+        top: toUnit(5),
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -504,10 +515,10 @@ function helperVisitorActionActionPageTitleLabel(text) {
 function helperVisitorActionActionUrlLabel(text) {
     return {
         text: (text+'') || '',
-        left: 10,
+        left: toUnit(10),
         color: '#555555',
-        font: {fontSize: 13},
-        top: 3,
+        font: {fontSize: toUnit(13)},
+        top: toUnit(3),
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -515,10 +526,10 @@ function helperVisitorActionActionUrlLabel(text) {
 function helperVisitorActionActionServerTimeLabel(text) {
     return {
         text: (text+'') || '',
-        bottom: 5,
-        top: 3,
-        left: 10,
-        font: {fontSize: 13},
+        bottom: toUnit(5),
+        top: toUnit(3),
+        left: toUnit(10),
+        font: {fontSize: toUnit(13)},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -543,8 +554,8 @@ function helperVisitorActionDefaultTableViewRow() {
 function helperVisitorActionDefaultHeadlineView() {
     return {
         layout: 'horizontal',
-        left: 10,
-        top: 5,
+        left: toUnit(10),
+        top: toUnit(5),
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL};
 }
@@ -553,9 +564,9 @@ function helperVisitorActionDefaultIconImageView(image) {
     return {
         image: image,
         left: 0,
-        top: 4,
-        width: 10,
-        height: 9,
+        top: toUnit(4),
+        width: toUnit(10),
+        height: toUnit(9),
         canScale: false,
         enableZoomControls: false};
 }
@@ -564,8 +575,8 @@ function helperVisitorActionDefaultTypeLabel(text) {
     return {
         text: (text+'') || '',
         top: 0,
-        left: 10,
-        font: {fontSize: 13, fontWeight: 'bold'},
+        left: toUnit(10),
+        font: {fontSize: toUnit(13), fontWeight: 'bold'},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -574,10 +585,10 @@ function helperVisitorActionDefaultUrlLabel(text) {
     return {
         text: (text+'') || '',
         color: '#808080',
-        bottom: 5,
-        left: 10,
-        top: 4,
-        font: {fontSize: 13},
+        bottom: toUnit(5),
+        left: toUnit(10),
+        top: toUnit(4),
+        font: {fontSize: toUnit(13)},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -593,8 +604,8 @@ function helperVisitorActionEcommerceTableViewRow() {
 function helperVisitorActionEcommerceHeadlineView() {
     return {
         layout: 'horizontal',
-        left: 10,
-        top: 5,
+        left: toUnit(10),
+        top: toUnit(5),
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL};
 }
@@ -602,10 +613,10 @@ function helperVisitorActionEcommerceHeadlineView() {
 function helperVisitorActionEcommerceIconImageView(image) {
     return {
         image: image,
-        top: 4,
+        top: toUnit(4),
         left: 0,
-        width: 10,
-        height: 10,
+        width: toUnit(10),
+        height: toUnit(10),
         canScale: false,
         enableZoomControls: false};
 }
@@ -613,9 +624,9 @@ function helperVisitorActionEcommerceIconImageView(image) {
 function helperVisitorActionEcommerceTypeLabel(text) {
     return {
         text: (text+'') || '',
-        top: 1,
-        left: 10,
-        font: {fontSize: 13, fontWeight: 'bold'},
+        top: toUnit(1),
+        left: toUnit(10),
+        font: {fontSize: toUnit(13), fontWeight: 'bold'},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -626,8 +637,8 @@ function helperVisitorActionEcommerceDetailsView() {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         left: 0,
-        bottom: 5,
-        top: 4};
+        bottom: toUnit(5),
+        top: toUnit(4)};
 }
 
 function helperVisitorActionEcommerceDetailsItemView() {
@@ -635,7 +646,7 @@ function helperVisitorActionEcommerceDetailsItemView() {
         layout: 'horizontal',
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
-        left: 10};
+        left: toUnit(10)};
 }
 
 function helperVisitorActionEcommerceDetailsItemStarLabel(text) {
@@ -643,19 +654,19 @@ function helperVisitorActionEcommerceDetailsItemStarLabel(text) {
         text: (text+'') || '',
         left: 0,
         color: '#808080',
-        font: {fontSize: 13},
-        top: 3,
-        width: 15,
+        font: {fontSize: toUnit(13)},
+        top: toUnit(3),
+        width: toUnit(15),
         height: Ti.UI.SIZE};
 }
 
 function helperVisitorActionEcommerceDetailsItemNameLabel(text) {
     return {
         text: (text+'') || '',
-        left: 5,
+        left: toUnit(5),
         color: '#808080',
-        font: {fontSize: 13},
-        top: 3,
+        font: {fontSize: toUnit(13)},
+        top: toUnit(3),
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -663,9 +674,9 @@ function helperVisitorActionEcommerceDetailsItemNameLabel(text) {
 function helperVisitorActionEcommerceRevenueLabel(text) {
     return {
         text: (text+'') || '',
-        left: 10,
-        font: {fontSize: 13},
-        top: 4,
+        left: toUnit(10),
+        font: {fontSize: toUnit(13)},
+        top: toUnit(4),
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -673,9 +684,9 @@ function helperVisitorActionEcommerceRevenueLabel(text) {
 function helperVisitorActionEcommerceDetailsListLabel(text) {
     return {
         text: (text+'') || '',
-        left: 10,
-        font: {fontSize: 13},
-        top: 4,
+        left: toUnit(10),
+        font: {fontSize: toUnit(13)},
+        top: toUnit(4),
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -683,10 +694,10 @@ function helperVisitorActionEcommerceDetailsListLabel(text) {
 function helperVisitorActionEcommerceDetailsPriceLabel(text) {
     return {
         text: (text+'') || '',
-        left: 30,
+        left: toUnit(30),
         color: '#808080',
-        font: {fontSize: 13},
-        top: 4,
+        font: {fontSize: toUnit(13)},
+        top: toUnit(4),
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }

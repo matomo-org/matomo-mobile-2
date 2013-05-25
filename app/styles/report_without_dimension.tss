@@ -4,6 +4,14 @@
     backButtonTitle: L('Mobile_NavigationBack')
 }
 
+"#headerBar": {
+    canGoBack: true,
+}
+
+"#headerBar[formFactor=handheld]": {
+    actionItem1: {icon: '/ic_action_reportmenu.png'}
+}
+
 "#loadingindicator": {
     rounded: true
 }
@@ -26,6 +34,10 @@
     top: 0,
     height: Ti.UI.SIZE,
     contentHeight: 'auto',
+}
+
+".container[platform=android]": {
+    top: '48dp'
 }
 
 ".innerContainer": {

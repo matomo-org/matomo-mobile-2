@@ -198,7 +198,13 @@ function hasMoreWebsitesThanDisplayed()
 
 function showMessageNoWebsitesFound()
 {
-    if (OS_MOBILEWEB){
+    if (OS_ANDROID) {
+        $.noWebsiteFoundLabel.height = Ti.UI.SIZE;
+        $.noWebsiteFoundLabel.show();
+        $.noWebsiteFoundContainer.height = Ti.UI.FILL;
+    }
+
+    if (OS_MOBILEWEB) {
         $.noWebsiteFoundContainer.height = Ti.UI.FILL;
     } else {
         $.websitesTable.headerView = $.noWebsiteFoundContainer;
@@ -209,11 +215,17 @@ function showMessageNoWebsitesFound()
 
 function hideMessageNoWebsitesFound()
 {
+    if (OS_ANDROID) {
+        $.noWebsiteFoundLabel.height = 0;
+        $.noWebsiteFoundLabel.hide();
+        $.noWebsiteFoundContainer.height = 0;
+    }
+
     $.noWebsiteFoundContainer.hide();
 
     // this is usually not needed but looks like a bug in Titanium... 
     // Otherwise Headerview would always stay with height=Ti.UI.FILL once displayed
-    if (OS_MOBILEWEB){
+    if (OS_MOBILEWEB) {
         $.noWebsiteFoundContainer.height = 0;
     } else {
         $.websitesTable.headerView = null;

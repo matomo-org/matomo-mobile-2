@@ -7,6 +7,11 @@
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onHomeIconItemSelected="toggleReportChooserVisibility"
+                platform="android" />
+        
         <TableView id="helpTable">
             <TableViewRow id="about" onClick="openAboutPiwikMobile"/>
             <TableViewRow id="faq" onClick="openFaq"/>

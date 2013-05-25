@@ -1,9 +1,3 @@
-"#menuItemAccount[platform=android]": {
-    icon: '/ic_action_accounts.png',
-    title: L('Mobile_Accounts'),
-    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
-}
-
 "#accountsButton": {
     backgroundImage: "ic_action_accounts.png",
     width: 32,
@@ -14,6 +8,10 @@
     top: 0,
     barColor: "#cccccc",
     showCancel: true
+},
+
+"#searchBar[platform=android]": {
+    backgroundColor: '#efefef'
 },
 
 ".searchBarInnerContainer": {
@@ -52,6 +50,10 @@
     layout: "vertical"
 },
 
+"#websitesTable": {
+    separatorColor: '#e0e0e0'
+}
+
 ".quickInfoName": {
     font: {fontSize: 13},
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -74,13 +76,16 @@
 }
 
 "#index": {
-    fullscreen: false,
     title: L('General_AllWebsitesDashboard'),
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
-"#index[platform=android]": {
-    exitOnClose: true
+"#index[platform=mobileweb]": {
+    fullscreen: false,
+}
+
+"#index[platform=ios]": {
+    fullscreen: false,
 }
 
 "#loadingLabel": {
@@ -98,7 +103,7 @@
 }
 
 "#noWebsiteFoundContainer": {
-    visible: false
+    visible: false,
 }
 
 "#useSearchHintContainer": {
@@ -149,12 +154,20 @@
     zIndex: 5
 },
 
+"#loading[platform=android]": {
+    top: '48dp'
+}
+
 "#content": {
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,
     backgroundColor: 'white',
     zIndex: 3
 },
+
+"#content[platform=android]": {
+    top: '48dp'
+}
 
 ".evolutionContainer": {
     right: 10,
@@ -196,4 +209,9 @@
 
 ".shadow[platform=android]": {
     height: '1dp'
+}
+
+"#headerBar": {
+    title: L('General_AllWebsitesDashboard'),
+    actionItem1: {icon: '/ic_action_accounts.png'}
 }

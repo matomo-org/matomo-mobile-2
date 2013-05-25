@@ -9,24 +9,39 @@ var widthLeftSidebar = '250dp';
 
 function TabletSidebar()
 {
-    // we have to create this window before any other window, 
-    // otherwise the menu will be always displayed on top of the root window.
-    var leftSidebarWindow = Ti.UI.createWindow({
-        left: 0, 
-        width: widthLeftSidebar
-    });
-    leftSidebarWindow.open();
+    var isLeftSidebarSet  = false;
+
+    function initLeftSidebarWindow()
+    {
+        var leftSidebarWindow = Ti.UI.createWindow({
+            left: 0, 
+            backgroundColor: '#e5e5e5',
+            exitOnClose: true
+        });
+
+        leftSidebarWindow.open();
+
+        return leftSidebarWindow;
+    }
 
     this.on('open', function (window) {
-        window.left = widthLeftSidebar;
-        window.activity.onPrepareOptionsMenu = function(e) {
-            this.actionBar.backgroundImage = '/navbar.png';
-        };
+        if (isLeftSidebarSet) {
+            window.left = widthLeftSidebar;
+        }
     });
 
     this.setLeftSidebar = function(view)
     {
+        if (!view) {
+            return;
+        }
+
+        var leftSidebarWindow = initLeftSidebarWindow();
+
+        view.left  = 0;
+        view.width = widthLeftSidebar;
         leftSidebarWindow.add(view);
+        isLeftSidebarSet = true;
     };
 
     this.hideLeftSidebar = function () {};

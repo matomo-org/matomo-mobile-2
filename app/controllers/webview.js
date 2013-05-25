@@ -10,12 +10,21 @@ function L(key)
     return require('L')(key);
 }
 
+function updateWindowTitle(title)
+{
+    if (OS_ANDROID) {
+        $.headerBar.setTitle(title || '');
+    } else {
+        $.index.title = title || '';
+    }
+}
+
 var args     = arguments[0] || {};
 var webUrl   = args.url || false;
 var webTitle = args.title || false;
 
 exports.open = function () {
-    $.index.title = webTitle;
+    updateWindowTitle(webTitle);
     $.webview.url = webUrl;
 
     require('layout').open($.index);

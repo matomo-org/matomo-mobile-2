@@ -3,10 +3,27 @@
     backButtonTitle: L('Mobile_NavigationBack')
 }
 
+"#visitorLogTable": {
+    separatorColor: '#e0e0e0'
+}
+
+"#headerBar": {
+    title: L('Live_VisitorLog'),
+}
+
+"#headerBar[formFactor=handheld]": {
+    homeIcon: '/ic_action_menu.png',
+    actionItem1: {icon: '/ic_action_reportmenu.png'}
+}
+
 "#loadingIndicator": {
     rounded: true
 }
 
 "#content": {
     layout: "vertical"
+}
+
+"#content[platform=android]": {
+    top: '48dp'
 }

@@ -3,13 +3,33 @@
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
+"#headerBar": {
+    title: L('General_Help')
+}
+
+"#headerBar[formFactor=handheld]": {
+    homeIcon: '/ic_action_menu.png',
+}
+
+"#helpTable[platform=android]": {
+    top: '48dp',
+    separatorColor: '#e0e0e0'
+}
+
 "#helpTable[platform=ios]": {
     style: Ti.UI.iPhone.TableViewStyle.GROUPED
-},
+}
 
 "TableViewRow[platform=mobileweb]": {
     left: 10,
     right: 10
+}
+
+"TableViewRow[platform=android]": {
+    top: '16dp',
+    bottom: '16dp',
+    color: '#333333',
+    left: '16dp'
 }
 
 "#about": {

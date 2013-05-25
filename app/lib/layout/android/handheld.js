@@ -6,7 +6,6 @@
  */
 
 var AndroidLayout = require('layout/android');
-
 var layout = new (AndroidLayout)();
 
 require('layout/window/recorder').apply(layout, []);

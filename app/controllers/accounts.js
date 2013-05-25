@@ -28,7 +28,17 @@ function chooseAccount(event)
 
 function deleteAccount(event)
 {
+    if (!event || !event.row) {
+        console.log('cannot delete account, row not defined');
+        return;
+    }
+
     var account = accounts.get(event.row.accountId);
+
+    if (!account) {
+        console.log('cannot delete account, account not found');
+        return;
+    }
 
     var currentActiveAccount = require('session').getAccount();
     if (currentActiveAccount && currentActiveAccount.isSameAccount(account)) {
@@ -50,7 +60,7 @@ function deleteAccountIfUserConfirmsButNotOniOS(event)
     if (OS_IOS) {
         return;
     }
-    
+
     var dialog = Ti.UI.createAlertDialog({
         cancel: 1,
         buttonNames: [L('General_Yes'), L('General_No')],
@@ -85,8 +95,14 @@ function displayNoAccountSelectedHintIfNoAccountIsSelected()
             $.noAccountSelectedContainer.height = Ti.UI.SIZE;
         }
 
+        if (OS_ANDROID) {
+            $.noAccountSelectedLabel.height = Ti.UI.SIZE;
+            $.noAccountSelectedLabel.show();
+            $.noAccountSelectedContainer.height = Ti.UI.SIZE;
+        }
+
         $.noAccountSelectedContainer.show();
-    }
+    } 
 }
 
 var newAccountController = null;

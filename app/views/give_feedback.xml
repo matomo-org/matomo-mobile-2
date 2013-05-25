@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="index" onClose="onClose" onOpen="onOpen">
+    <Window id="index" onClose="onClose" onOpen="onOpen">
 
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
@@ -8,7 +8,12 @@
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar" 
+                onHomeIconItemSelected="toggleReportChooserVisibility"
+                platform="android" />
+        
         <TableView id="feedbackTable">
         </TableView>
-	</Window>
+    </Window>
 </Alloy>
