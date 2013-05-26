@@ -1,0 +1,81 @@
+"#index": {
+    backgroundColor: 'white',
+    contentWidth: 'auto',
+    contentHeight: 'auto',
+    layout: 'vertical',
+    showVerticalScrollIndicator: true,
+    showHorizontalScrollIndicator: true,
+}
+
+".pickerContainer": {
+    left: 0,
+    width: '100%',
+    top: '16dp',
+    layout: 'vertical',
+    height: Ti.UI.SIZE,
+}
+
+".pickerLabel": {
+    left: '16dp',
+    font: {fontSize: '18sp'},
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    ellipsize: false,
+    wordWrap: true,
+    color: '#333333',
+}
+
+"#periodHeadline": {
+    text: L('General_Period')
+}
+
+"#periodPicker": {
+    top: '8dp',
+    left: '16dp',
+    right: '16dp',
+}
+
+"#fromDateHeadline": {
+    text: L('General_Date')
+}
+
+"#fromDatePicker": {
+    top: '8dp',
+    left: '16dp',
+    type: Ti.UI.PICKER_TYPE_DATE,
+}
+
+"#toDateHeadline": {
+    text: L('General_DateRangeTo_js')
+}
+
+"#toDatePicker": {
+    top: '8dp',
+    left: '16dp',
+    bottom: '16dp',
+    type: Ti.UI.PICKER_TYPE_DATE,
+}
+
+"#period_day": {
+    title: L('CoreHome_PeriodDay'),
+    period: 'day'
+}
+
+"#period_week": {
+    title: L('CoreHome_PeriodWeek'),
+    period: 'week'
+}
+
+"#period_month": {
+    title: L('CoreHome_PeriodMonth'),
+    period: 'month'
+}
+
+"#period_year": {
+    title: L('CoreHome_PeriodYear'),
+    period: 'year'
+}
+
+"#period_range": {
+    title: L('CoreHome_PeriodRange'),
+    period: 'range'
+}

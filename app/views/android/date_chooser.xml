@@ -1,0 +1,22 @@
+<Alloy>
+    <ScrollView id="index">
+        <View class="pickerContainer">
+            <Label id="periodHeadline" class="pickerLabel"/>
+            <Picker id="periodPicker" onChange="onPeriodChange">
+                <PickerRow id="period_day"/>
+                <PickerRow id="period_week"/>
+                <PickerRow id="period_month"/>
+                <PickerRow id="period_year"/>
+                <PickerRow id="period_range"/>
+            </Picker>
+        </View>
+        <View class="pickerContainer">
+            <Label id="fromDateHeadline" class="pickerLabel"/>
+            <Picker id="fromDatePicker" onChange="onPeriodChange"/>
+        </View>
+        <View id="toDateContainer" class="pickerContainer">
+            <Label id="toDateHeadline" class="pickerLabel"/>
+            <Picker id="toDatePicker" onChange="onPeriodChange"/>
+        </View>
+    </ScrollView>
+</Alloy>
