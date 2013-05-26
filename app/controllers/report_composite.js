@@ -22,6 +22,8 @@ function registerEvents()
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
     session.on('reportDateChanged', onDateChanged);
+
+    $.content.addEventListener('scroll', notifyModelsAboutNewScrollPosition);
 }
 
 function unregisterEvents()
@@ -31,11 +33,13 @@ function unregisterEvents()
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
     session.off('reportDateChanged', onDateChanged);
+
+    $.content.removeEventListener('scroll', notifyModelsAboutNewScrollPosition);
 }
 
 function trackWindowRequest()
 {
-    var category = reportCategory ? reportCategory : ''
+    var category = reportCategory ? reportCategory : '';
     require('Piwik/Tracker').setCustomVariable(1, 'reportCategory', category, 'page');
 
     require('Piwik/Tracker').trackWindow('Composite Report', 'report/composite');
@@ -131,6 +135,13 @@ function filterReports(collection)
     updateWindowTitle(reportCategory);
 
     return collection.where({category: reportCategory});
+}
+
+function notifyModelsAboutNewScrollPosition (event) 
+{
+    _.forEach(filterReports(reportsCollection), function (model) {
+        model.trigger('scrollPosition', {y: event.y});
+    });
 }
 
 function isDataAlreadyFetched()

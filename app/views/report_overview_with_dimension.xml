@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
 
-    <View id="index">
+    <View id="index" onPostlayout="setMyYPositionAndTryToRender">
         <View onClick="openReport">
             <View class="header"> 
                 <Label class="headline" text="{name}"/>
@@ -18,7 +18,7 @@
             <Label class="no_data"/>
             <View class="separator"/>
         </View>
-        <View id="content" dataCollection="$.piwikProcessedReport">
+        <View id="content" dataCollection="$.piwikProcessedReport" dataFunction="renderStatistics">
             <View class="report_row">
                 <Label class="report_title" text="{title}"></Label>
                 <Label class="report_value" text="{value}"></Label>

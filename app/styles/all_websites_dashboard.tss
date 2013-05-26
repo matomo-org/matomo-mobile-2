@@ -191,7 +191,8 @@
     height: Ti.UI.SIZE
 },
 "TableViewRow[platform=android]": {
-    height: Ti.UI.SIZE
+    height: Ti.UI.SIZE,
+    backgroundSelectedColor: '#a9a9a9'
 },
 
 ".space": {

@@ -16,7 +16,8 @@ var reportDate   = require('session').getReportDate();
 var $model       = args ? args["$model"] : null;
 $.metric.text    = $model.getMetricName();
 
-$.piwikProcessedReport.on('reset', showReportContent);
+var isFetched  = false;
+var isRendered = false;
 
 function openReport()
 {
@@ -98,8 +99,80 @@ function fetchProcessedReport()
             apiAction: action,
             showColumns: metric,
             hideMetricsDoc: 1
+        },
+        success: function () {
+            isFetched = true;
+            renderStatisticsIfViewIsInViewport();
         }
     });
 }
 
+
+
+var lastParentYPosition = null;
+var lastMyYPosition     = null;
+
+$model.on('scrollPosition', updateParentYPositionAndTryToRender);
+
+function updateParentYPositionAndTryToRender(event) {
+    lastParentYPosition = event.y;
+    renderStatisticsIfViewIsInViewport();
+}
+
+function setMyYPositionAndTryToRender()
+{
+    lastMyYPosition = $.index.rect ? $.index.rect.y : null;
+    renderStatisticsIfViewIsInViewport();
+}
+
+function isMyViewLayouted()
+{
+    return !_.isNull(lastMyYPosition);
+}
+
+// actually, we should use the parentScrollview.height but platformHeight is a bit higher and 
+// that makes sure the view will be rendered a view pixels before the user sees the box 
+// when user scrolls to this view, it'll be already rendered depending on performance of device
+var platformHeight = Ti.Platform.displayCaps.platformHeight;
+
+function isViewInViewport()
+{
+    if (!isMyViewLayouted()) {
+        return false;
+    }
+
+    var scrollYPosition = platformHeight;
+
+    if (lastParentYPosition) {
+        scrollYPosition += lastParentYPosition;
+    }
+
+    return (lastMyYPosition < scrollYPosition);
+}
+
+function renderStatisticsIfViewIsInViewport()
+{
+    if (!isRendered && isFetched && isViewInViewport()) {
+        isRendered = true;
+        renderStatisticsAndClose();
+    }
+}
+
+function renderStatisticsAndClose()
+{
+    renderStatistics();
+    showReportContent();
+    onClose();
+}
+
+function onClose()
+{
+    $.index.removeEventListener('postlayout', setMyYPositionAndTryToRender);
+    $model.off('scrollPosition', updateParentYPositionAndTryToRender);
+
+    $.destroy();
+    $.off();
+}
+
+$.piwikProcessedReport.off("fetch destroy change add remove reset", renderStatistics);
 fetchProcessedReport();
