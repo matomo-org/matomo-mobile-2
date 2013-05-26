@@ -9,10 +9,41 @@ var widthSidebar = '250dp';
 
 function HandheldSidebar()
 {
+
+    function createUnderlayWindow(left, right)
+    {
+        var underlayWindow = Ti.UI.createWindow({left: left, right: right, top: '48dp', zIndex: 997});
+
+        return underlayWindow;
+    }
+
+    function createLeftUnderlayWindow()
+    {
+        var leftUnderlay = createUnderlayWindow(widthSidebar, 0);
+        var separator = Ti.UI.createView({backgroundColor: '#000', left: 0, width: '2dp', height: Ti.UI.FILL});
+        leftUnderlay.add(separator);
+        var separator = Ti.UI.createView({backgroundColor: '#000', left: '2dp', opacity: 0.6, right: 0});
+        leftUnderlay.add(separator);
+        leftUnderlay.addEventListener('click', hideLeftSidebar);
+
+        return leftUnderlay;
+    }
+
+    function createRightUnderlayWindow()
+    {
+        var rightUnderlay = createUnderlayWindow(0, widthSidebar);
+        var separator = Ti.UI.createView({backgroundColor: '#000', right: 0, width: '2dp', height: Ti.UI.FILL});
+        rightUnderlay.add(separator);
+        var separator = Ti.UI.createView({backgroundColor: '#000', right: '2dp', opacity: 0.6, left: 0});
+        rightUnderlay.add(separator);
+        rightUnderlay.addEventListener('click', hideRightSidebar);
+
+        return rightUnderlay;
+    }
+
     var leftSidebarView = null;
     var leftSidebarWindow = null;
-    var leftSidebarOuterWindow = Ti.UI.createWindow({left: widthSidebar, right: 0, backgroundColor: 'transparent', zIndex: 997});
-    leftSidebarOuterWindow.addEventListener('click', hideLeftSidebar);
+    var leftSidebarOuterWindow = createLeftUnderlayWindow();
 
     function hideLeftSidebar()
     {
@@ -53,14 +84,11 @@ function HandheldSidebar()
 
 
 
-
-
     // we have to create this window before any other window, 
     // otherwise the menu will be always displayed on top of the root window.
     var rightSidebarView   = null;
     var rightSidebarWindow = null;
-    var rightSidebarOuterWindow = Ti.UI.createWindow({left: 0, right: widthSidebar, backgroundColor: 'transparent', zIndex: 996});
-    rightSidebarOuterWindow.addEventListener('click', hideRightSidebar);
+    var rightSidebarOuterWindow = createRightUnderlayWindow();
 
     function hideRightSidebar()
     {
