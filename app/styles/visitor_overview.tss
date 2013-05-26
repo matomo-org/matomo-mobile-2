@@ -4,6 +4,11 @@
     height: Ti.UI.SIZE,
 },
 
+"TableViewRow[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
+},
+
 ".dateContainer": {
     top: 8,
     layout: 'horizontal',

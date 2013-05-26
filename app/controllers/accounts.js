@@ -88,20 +88,25 @@ function isAnAccountSelected()
     return !!require('session').getAccount();
 }
 
+$.showNoAccountSelectedHint = function ()
+{
+    if (OS_MOBILEWEB) {
+        $.noAccountSelectedContainer.height = Ti.UI.SIZE;
+    }
+
+    if (OS_ANDROID) {
+        $.noAccountSelectedLabel.height = Ti.UI.SIZE;
+        $.noAccountSelectedLabel.show();
+        $.noAccountSelectedContainer.height = Ti.UI.SIZE;
+    }
+
+    $.noAccountSelectedContainer.show();
+};
+
 function displayNoAccountSelectedHintIfNoAccountIsSelected()
 {
     if (!isAnAccountSelected()) {
-        if (OS_MOBILEWEB) {
-            $.noAccountSelectedContainer.height = Ti.UI.SIZE;
-        }
-
-        if (OS_ANDROID) {
-            $.noAccountSelectedLabel.height = Ti.UI.SIZE;
-            $.noAccountSelectedLabel.show();
-            $.noAccountSelectedContainer.height = Ti.UI.SIZE;
-        }
-
-        $.noAccountSelectedContainer.show();
+        $.showNoAccountSelectedHint();
     } 
 }
 

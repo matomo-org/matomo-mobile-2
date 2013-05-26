@@ -13,7 +13,7 @@
 }
 
 "#backangle": {
-    left: '1dp',
+    left: '3dp',
     height: '40dp',
     width: '10dp'
 }

@@ -29,22 +29,37 @@
     top: '16dp',
     bottom: '16dp',
     color: '#333333',
-    left: '16dp'
+    leftImage: '/spacer_16x16.png',
 }
 
 "#about": {
     hasChild: true,
     title: L('Mobile_AboutPiwikMobile')
-},
+}
+
+"#about[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
+}
 
 "#email": {
     hasChild: true,
     title: L('Mobile_EmailUs')
-},
+}
+
+"#email[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
+}
 
 "#forums": {
     hasChild: true,
     title: L('General_Forums')
+}
+
+"#forums[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
 }
 
 "#documentation": {
@@ -52,7 +67,17 @@
     title: L('General_Documentation')
 }
 
+"#documentation[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
+}
+
 "#faq": {
     hasChild: true,
     title: L('General_Faq')
-},
+}
+
+"#faq[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
+}

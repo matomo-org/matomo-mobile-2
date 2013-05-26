@@ -149,6 +149,7 @@ exports.renderProcessedReport = function (processedReportCollection)
         // filter limit value...
         var row = Ti.UI.createTableViewRow({color: '#336699', title: $.showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')});
         if (OS_MOBILEWEB) row.left = 10;
+        if (OS_AMDROID) row.leftImage = '/spacer_16x16.png';
         
         row.addEventListener('click', onTogglePaginator);
         rows.push(row);

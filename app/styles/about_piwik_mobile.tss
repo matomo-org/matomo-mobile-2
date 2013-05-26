@@ -16,7 +16,7 @@
     top: '16dp',
     bottom: '16dp',
     color: '#333333',
-    left: '16dp'
+    leftImage: '/spacer_16x16.png',
 }
 
 "#aboutPiwikTable[platform=ios]": {
@@ -31,24 +31,39 @@
 "#website": {
     hasChild: true,
     title: 'Visit our Website'
-},
+}
+
+"#website[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
+}
 
 "#follow": {
     hasDetail: true,
     title: 'Follow @piwik'
-},
+}
 
 "#participate": {
     hasChild: true,
     title: 'Participate to Piwik'
-},
+}
+
+"#participate[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
+}
 
 "#sourceCode": {
     hasDetail: true,
     title: 'Browse Source Code'
-},
+}
 
 "#license": {
     hasChild: true,
     title: 'View License'
-},
+}
+
+"#license[platform=android]": {
+    hasChild: false,
+    rightImage: '/navigation_next_item.png'
+}

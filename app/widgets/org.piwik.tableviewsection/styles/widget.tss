@@ -31,7 +31,7 @@
 "#title[platform=android]": {
     top: '3dp',
     bottom: '4dp',
-    left: '10dp',
+    left: '16dp',
     font: {fontSize: '15sp', fontWeight: 'bold'},
 },
 

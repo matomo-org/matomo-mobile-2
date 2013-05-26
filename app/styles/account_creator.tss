@@ -20,7 +20,7 @@
 }
 
 "#loginform[platform=android]": {
-    top: '10dp',
+    top: '16dp',
     left: '16dp',
     right: '16dp'
 }

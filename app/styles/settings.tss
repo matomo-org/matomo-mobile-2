@@ -54,7 +54,8 @@
 
 "#settingsTable[platform=android]": {
     top: '48dp',
-    separatorColor: '#e0e0e0'
+    separatorColor: '#e0e0e0',
+    footerTitle: L('Mobile_LoginToPiwikToChangeSettings')
 }
 
 "#settingsTable[platform=ios]": {
@@ -63,7 +64,7 @@
 },
 
 ".titleLabel": {
-    left: '10dp',
+    left: '16dp',
     width: Ti.UI.SIZE,
     top: '16dp',
     bottom: '16dp',
@@ -75,11 +76,14 @@
 }
 
 "#settingsValue": {
-    right: '10dp',
+    right: '24dp',
+    ellipsize: true,
+    wordWrap: false,
     width: '80dp',
     top: '16dp',
     bottom: '16dp',
-    color: '#0099CC'
+    color: '#0099CC',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
 }
 
 "#uncheckedLabel": {

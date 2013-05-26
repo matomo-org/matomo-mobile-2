@@ -235,13 +235,13 @@ function createSystem(visitor, accessUrl) {
         for (var index = 0; index < visitor.pluginsIcons.length; index++) {
             var pluginIcon = visitor.pluginsIcons[index];
 
-            // @todo not all icons are 14x14
+            // TODO not all icons are 14x14
             if (pluginIcon.pluginIcon) {
                 row.add(Ti.UI.createImageView({image: accessUrl + pluginIcon.pluginIcon,
-                                               right: right,
-                                               width: 14,
-                                               height: 14, 
-                                               top: 14,
+                                               right: OS_ANDROID ? (right + 'dp') : right,
+                                               width: OS_ANDROID ? '14dp' : 14,
+                                               height: OS_ANDROID ? '14dp' : 14, 
+                                               top: OS_ANDROID ? '14dp' : 14,
                                                className: 'pluginIcon'}));
             }
 
@@ -505,7 +505,7 @@ function toUnit(size)
 function helperVisitorActionActionPageTitleLabel(text) {
     return {
         text: (text+'') || '',
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13), fontWeight: 'bold'},
         top: toUnit(5),
         width: Ti.UI.SIZE,
@@ -515,7 +515,7 @@ function helperVisitorActionActionPageTitleLabel(text) {
 function helperVisitorActionActionUrlLabel(text) {
     return {
         text: (text+'') || '',
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         color: '#555555',
         font: {fontSize: toUnit(13)},
         top: toUnit(3),
@@ -528,7 +528,7 @@ function helperVisitorActionActionServerTimeLabel(text) {
         text: (text+'') || '',
         bottom: toUnit(5),
         top: toUnit(3),
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13)},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
@@ -554,7 +554,7 @@ function helperVisitorActionDefaultTableViewRow() {
 function helperVisitorActionDefaultHeadlineView() {
     return {
         layout: 'horizontal',
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         top: toUnit(5),
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL};
@@ -575,7 +575,7 @@ function helperVisitorActionDefaultTypeLabel(text) {
     return {
         text: (text+'') || '',
         top: 0,
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13), fontWeight: 'bold'},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
@@ -586,7 +586,7 @@ function helperVisitorActionDefaultUrlLabel(text) {
         text: (text+'') || '',
         color: '#808080',
         bottom: toUnit(5),
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         top: toUnit(4),
         font: {fontSize: toUnit(13)},
         width: Ti.UI.SIZE,
@@ -604,7 +604,7 @@ function helperVisitorActionEcommerceTableViewRow() {
 function helperVisitorActionEcommerceHeadlineView() {
     return {
         layout: 'horizontal',
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         top: toUnit(5),
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL};
@@ -625,7 +625,7 @@ function helperVisitorActionEcommerceTypeLabel(text) {
     return {
         text: (text+'') || '',
         top: toUnit(1),
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13), fontWeight: 'bold'},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
@@ -674,7 +674,7 @@ function helperVisitorActionEcommerceDetailsItemNameLabel(text) {
 function helperVisitorActionEcommerceRevenueLabel(text) {
     return {
         text: (text+'') || '',
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13)},
         top: toUnit(4),
         width: Ti.UI.SIZE,
@@ -684,7 +684,7 @@ function helperVisitorActionEcommerceRevenueLabel(text) {
 function helperVisitorActionEcommerceDetailsListLabel(text) {
     return {
         text: (text+'') || '',
-        left: toUnit(10),
+        left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13)},
         top: toUnit(4),
         width: Ti.UI.SIZE,
@@ -694,7 +694,7 @@ function helperVisitorActionEcommerceDetailsListLabel(text) {
 function helperVisitorActionEcommerceDetailsPriceLabel(text) {
     return {
         text: (text+'') || '',
-        left: toUnit(30),
+        left: OS_ANDROID ? '36dp' : toUnit(30),
         color: '#808080',
         font: {fontSize: toUnit(13)},
         top: toUnit(4),

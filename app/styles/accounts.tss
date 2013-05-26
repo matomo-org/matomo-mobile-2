@@ -25,7 +25,7 @@
 }
 
 "TableViewRow[platform=android]": {
-    left: '10dp',
+    leftImage: '/spacer_16x16.png',
     right: '10dp',
     top: '10dp',
     bottom: '10dp',
@@ -50,7 +50,7 @@
 }
 
 "#noAccountSelectedContainer[platform=android]": {
-    backgroundColor: '#222222',
+    backgroundColor: '#a9a9a9',
     height: 0,
 }
 
@@ -73,12 +73,12 @@
 "#noAccountSelectedLabel[platform=android]": {
     height: 0,
     visible: false,
-    left: '10dp',
-    right: '10dp',
+    left: '16dp',
+    right: '16dp',
     top: '12dp',
     bottom: '12dp',
-    color: '#e5e5e5',
-    font: {fontWeight: 'bold', fontSize: '14sp'},
+    color: '#ffffff',
+    font: {fontSize: '14sp'},
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
 }
 
@@ -91,10 +91,10 @@
 }
 
 "#howToDeleteHint[platform=android]": {
-    left: '10dp',
-    right: '10dp',
-    font: {fontWeight: 'bold', fontSize: '14sp'},
-    color: '#e5e5e5',
+    left: '16dp',
+    right: '16dp',
+    font: {fontSize: '14sp'},
+    color: '#ffffff',
     top: '8dp',
     bottom: '8dp',
     height: Ti.UI.SIZE,
@@ -112,7 +112,7 @@
 ".footer[platform=android]": {
     top: '10dp',
     bottom: '10dp',
-    backgroundColor: '#222222',
+    backgroundColor: '#a9a9a9',
 }
 
 "#addAccountButton": {

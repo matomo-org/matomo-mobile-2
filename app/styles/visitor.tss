@@ -12,7 +12,8 @@
 }
 
 "#visitorTable[platform=android]": {
-    top: '48dp'
+    top: '48dp',
+    separatorColor: '#e0e0e0'
 }
 
 ".visitorTableViewRow": {

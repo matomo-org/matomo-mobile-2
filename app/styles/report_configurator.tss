@@ -44,7 +44,7 @@
 
 "#siteTitle[platform=android]": {
     top: '8dp',
-    left: '10dp',
+    left: '12dp',
     font: {fontSize: '13sp'},
     right: '10dp',
     bottom: '8dp'
@@ -98,8 +98,7 @@
 }
 
 ".websiteRow[platform=android]": {
-    left: '10dp',
-    right: '10dp',
+    leftImage: '/spacer_10x10.png',
     font: {fontSize: '14sp', fontWeight: 'bold'},
     top: '10dp',
     bottom: '10dp',

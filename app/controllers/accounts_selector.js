@@ -22,3 +22,9 @@ if (OS_ANDROID) {
     });
     $.headerBar.resetHomeIcon();
 }
+
+$.showNoAccountSelectedHint = function ()
+{
+    // never dispay this hint here.
+    return;
+}

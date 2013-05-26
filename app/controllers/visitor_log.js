@@ -104,8 +104,8 @@ function render()
     var nextRow = {title: L('General_Next'), color: '#336699'};
     if (OS_MOBILEWEB) nextRow.left = 10;
     if (OS_ANDROID) {
+        nextRow.leftImage = '/spacer_16x16.png';
         nextRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
-        nextRow.left   = '16dp';
         nextRow.top    = '12dp';
         nextRow.bottom = '12dp';
     }
@@ -131,6 +131,7 @@ function render()
     var prevRow = {title: L('General_Previous'), color: '#336699'};
     if (OS_MOBILEWEB) prevRow.left = 10;
     if (OS_ANDROID) {
+        prevRow.leftImage = '/spacer_16x16.png';
         prevRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
         prevRow.left   = '16dp';
         prevRow.top    = '12dp';

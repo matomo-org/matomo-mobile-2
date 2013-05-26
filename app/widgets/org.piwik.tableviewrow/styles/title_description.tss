@@ -7,10 +7,11 @@
 },
 
 "#title": {
-    textAlign: 'left',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
     left: 10,
+    right: 10,
     color: '#333333',
     ellipsize: true,
     wordWrap: false,
@@ -29,10 +30,11 @@
 
 "#description": {
     font: {fontSize: 13},
-    textAlign: 'left',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
     left: 10,
+    right: 10,
     top: 4,
     bottom: 11,
     color: '#808080',

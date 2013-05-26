@@ -19,8 +19,8 @@
 
 "#loginbutton[platform=android]": {
     borderWidth: '1dp',
-    borderRadius: '3dp',
-    top: '10dp',
+    borderRadius: 5,
+    top: '16dp',
     height: '45dp',
     font: { 
         fontSize: '18sp',
@@ -67,7 +67,7 @@
 },
 
 ".textfield[platform=android]": {
-    top: '2dp',
+    top: '5dp',
     height: '45dp',
     left: '10dp',
     right: '10dp',
@@ -105,8 +105,8 @@
 },
 
 "#anonymousLoginNotice[platform=android]": {
-    top: '10dp',
+    top: '16dp',
     font: { 
-        fontSize: '12sp'
+        fontSize: '13sp'
     }
 },
