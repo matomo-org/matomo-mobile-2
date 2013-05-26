@@ -20,6 +20,7 @@ function addActionBarItem(actionBarItem, index)
         height: '32dp',
         left: '8dp',
         right: '8dp',
+        backgroundSelectedColor: '#a9a9a9',
     });
 
     item.addEventListener('click', function (event) {
@@ -34,6 +35,7 @@ function addActionBarItem(actionBarItem, index)
 function setHomeIcon(image)
 {
     $.homeIcon.backgroundImage = image;
+    $.homeIcon.backgroundSelectedColor = '#a9a9a9';
 }
 
 function setDefaultHomeIcon()
@@ -54,6 +56,8 @@ function syncWidthOfTitleAndActionBar()
 function enableBackButton() 
 {
     $.backangle.backgroundImage = '/back.png';
+    $.backangle.backgroundSelectedColor = '#a9a9a9';
+
     $.backangle.addEventListener('click', function (event) {
         event.cancelBubble = true;
         $.trigger('back');

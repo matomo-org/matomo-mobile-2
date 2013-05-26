@@ -100,8 +100,8 @@
 ".websiteRow[platform=android]": {
     leftImage: '/spacer_10x10.png',
     font: {fontSize: '14sp', fontWeight: 'bold'},
-    top: '10dp',
-    bottom: '10dp',
+    top: '13dp',
+    bottom: '13dp',
 }
 
 ".websiteRow[platform=mobileweb]": {

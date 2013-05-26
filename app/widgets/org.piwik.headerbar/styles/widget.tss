@@ -9,20 +9,20 @@
     left: 0,
     width: '46dp',
     height: '46dp',
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
 }
 
 "#backangle": {
     left: '3dp',
     height: '40dp',
-    width: '10dp'
+    width: '10dp',
 }
 
 "#homeIcon": {
     left: '16dp',
     height: '30dp',
     width: '30dp',
-    backgroundColor:'transparent'
+    backgroundColor:'transparent',
 }
 
 "#headerTitle": {
