@@ -48,7 +48,7 @@
             <application android:theme="@android:style/Theme.Holo.Light.DarkActionBar"/>
             <supports-screens android:anyDensity="true"
                 android:largeScreens="true" android:normalScreens="true"
-                android:smallScreens="false" xlargeScreens="true"/>
+                android:smallScreens="true" xlargeScreens="true"/>
             <uses-sdk android:installLocation="preferExternal"
                 android:minSdkVersion="14" android:targetSdkVersion="16"/>
         </manifest>
