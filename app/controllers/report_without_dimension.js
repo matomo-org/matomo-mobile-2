@@ -253,6 +253,8 @@ function open()
 {
     $.content.addEventListener('postlayout', fixVerticalSeparatorHeight);
 
+    registerEvents();
+
     onReportChosen(reportModel);
 
     require('layout').open($.index);
