@@ -5,6 +5,11 @@ npm-debug.log
 tmp
 .idea
 .svn
+*.sublime-workspace
+.Trashes
+.Spotlight-V100
+*.apk
+*.ap_
 
 .settings/com.appcelerator.titanium.mobile.prefs
 Resources
