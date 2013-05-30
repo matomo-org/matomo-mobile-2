@@ -4,6 +4,7 @@ build
 npm-debug.log
 tmp
 .idea
+.svn
 
 .settings/com.appcelerator.titanium.mobile.prefs
 Resources
