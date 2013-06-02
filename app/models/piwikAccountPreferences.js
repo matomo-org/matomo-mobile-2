@@ -52,12 +52,15 @@ exports.definition = {
                 this.fetch({
                     account: account, 
                     success: function (collection, response) {
+                        if (!_.isArray(response)) {
+                            return;
+                        }
 
-                        var defaultReport     = JSON.parse(response[0]);
-                        var defaultReportDate = JSON.parse(response[1]);
+                        var defaultReport     = response[0];
+                        var defaultReportDate = response[1];
 
                         if (success) {
-                            success(account, defaultReport.value, defaultReportDate.value);
+                            success(account, defaultReport, defaultReportDate);
                             success = null;
                             account = null;
                         }
@@ -80,5 +83,5 @@ exports.definition = {
         return Collection;
     }
         
-}
+};
 
