@@ -54,13 +54,19 @@ function createSection(params)
     return Alloy.createWidget('org.piwik.tableviewsection', null, params).getSection();
 }
 
+function createFirstVisitTimeRow(visitor)
+{
+    var visitDateLabel = String.format('%s %s - (%s)', 
+                                        '' + visitor.serverDatePrettyFirstAction,
+                                        '' + visitor.serverTimePrettyFirstAction, 
+                                        '' + visitor.visitDurationPretty);
+
+    return createRow({title: visitDateLabel, className: 'visitorTableViewRow'});
+}
+
 function createOverview (visitor, accessUrl) 
 {
-    var visitDateLabel = String.format('%s - %s (%s)', '' + visitor.serverDatePretty,
-                                                       '' + visitor.serverTimePretty,
-                                                       '' + visitor.visitDurationPretty);
-
-    rows.push(createRow({title: visitDateLabel, className: 'visitorTableViewRow'}));
+    rows.push(createFirstVisitTimeRow(visitor));
 
     if (visitor.visitIp) {
         rows.push(createRow({title: L('General_VisitorIP'),

@@ -12,7 +12,6 @@ function L(key)
 
 var args = arguments[0] || {};
 var accountModel      = args.account || false;
-var useFirstVisitTime = args.useFirstVisit || false;
 var visitor = args.visitor || {};
 
 function goalConversionDescription(visitor)
@@ -68,15 +67,7 @@ function referrerDescription(visitor)
 
 function visitTime(visitor)
 {
-    var timeLabel = '';
-
-    if (useFirstVisitTime) {
-        timeLabel = visitor.serverDatePrettyFirstAction + ' - ' + visitor.serverTimePrettyFirstAction;
-    } else {
-        timeLabel = visitor.serverDatePretty + ' - ' + visitor.serverTimePretty;
-    }
-
-    return timeLabel;
+    return visitor.serverDatePretty + ' ' + visitor.serverTimePretty;
 }
 
 function updateDisplayedValues(visitor)
