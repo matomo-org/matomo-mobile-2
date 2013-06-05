@@ -5,6 +5,9 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+function doesNotContainWhitespace (url) {
+    return -1 == ('' + url).indexOf(' ');
+}
 
 exports.definition = {
     // TODO get filter limit from config
@@ -52,7 +55,7 @@ exports.definition = {
             getLogo: function () {
                 var metadata = this.getReportMetadata();
 
-                if (metadata && metadata.logo) {
+                if (metadata && metadata.logo && doesNotContainWhitespace(metadata.logo)) {
                     return metadata.logo;
                 }
             },
