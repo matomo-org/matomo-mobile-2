@@ -6,20 +6,6 @@
     rounded: true
 }
 
-".reportContainer": {
-    layout: "vertical",
-    height: Ti.UI.SIZE,
-    left: 10,
-    right: 10,
-    top: 10,
-}
-
-".reportContainer[platform=android]": {
-    left: '8dp',
-    right: '8dp',
-    top: '8dp',
-}
-
 ".changeWebsiteButton": {
     icon: "/ic_action_menu_website.png",
     showAsAction: Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW,
@@ -32,20 +18,9 @@
     title: 'May 25th 2013',
 }
 
-".footerLogo": {
-    top: 2,
-    bottom: 25,
-    width: 55,
-    height: 19,
-    image: 'piwik_logo_dark_footer.png'
-}
-
-".footerLogo[platform=android]": {
-    top: '2dp',
-    bottom: '25dp',
-    width: '55dp',
-    height: '19dp',
-    image: '/piwik_logo_dark_footer.png'
+".reportOverviewContainer": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
 }
 
 "#content": {
@@ -56,15 +31,11 @@
 }
 
 "#content[platform=android]": {
-    top: '48dp'
+    top: '48dp',
 }
 
-".reportOverviewSeparator": {
-    height: 10
-}
-
-".reportOverviewSeparator[platform=android]": {
-    height: '8dp'
+"#content[platform=mobileweb]": {
+    disableBounce: true,
 }
 
 "#headerBar[formFactor=handheld]": {

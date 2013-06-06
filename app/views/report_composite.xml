@@ -25,12 +25,8 @@
 
         <Require src="loading_indicator" id="loadingIndicator"/>
         
-        <ScrollView id="content">
-            <View class="reportContainer" dataCollection="piwikReports" dataFilter="filterReports" dataFunction="renderListOfReports">
-                <Require src="report_overview" title="{name}"/>
-                <View class="reportOverviewSeparator"/>
-            </View>
-            <ImageView class="footerLogo"/>
+        <ScrollView id="content" dataCollection="piwikReports" dataFilter="filterReports" dataFunction="renderListOfReports">
+            <Require src="report_overview" title="{name}"/>
         </ScrollView>
     </Window>
 </Alloy>

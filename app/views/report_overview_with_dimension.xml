@@ -12,19 +12,21 @@
             <Label class="description_dimension" text="{dimension}"/>
             <Label class="description_metric" id="metric"/>
         </View>
-        <View class="separator"/>
+        <View class="separator" platform="ios,android"/>
         <Require src="loading_indicator" id="loadingIndicator"/>
         <View id="noData">
             <Label class="no_data"/>
             <View class="separator"/>
         </View>
-        <View id="content" dataCollection="$.piwikProcessedReport" dataFunction="renderStatistics">
-            <View class="report_row">
-                <Label class="report_title" text="{title}"></Label>
-                <Label class="report_value" text="{value}"></Label>
-                <View class="separator"/>
-            </View>
-        </View>
+        <TableView id="content" dataCollection="$.piwikProcessedReport" dataFunction="renderStatistics">
+            <TableViewRow>
+                <View class="report_row">
+                    <Label class="report_title" text="{title}"></Label>
+                    <Label class="report_value" text="{value}"></Label>
+                </View>
+            </TableViewRow>
+        </TableView>
+        <View class="separator" platform="android"/>
         <View id="footer" class="footer" onClick="openReport">
             <Label class="more"/>
         </View>

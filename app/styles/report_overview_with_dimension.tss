@@ -3,13 +3,26 @@
     borderColor: "#d3d3d3",
     borderWidth: 1,
     backgroundColor: 'white',
-    top: 0,
-    layout: 'vertical'
+    top: 10,
+    left: 10,
+    right: 10,
+    layout: 'vertical',
+}
+
+"#index[platform=mobileweb]": {
+    width: null,
 }
 
 "#index[platform=android]": {
-    borderRadius: 5,
     borderWidth: '1dp',
+    top: '8dp',
+    left: '8dp',
+    right: '8dp',
+}
+
+"TableViewRow": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
 }
 
 "#loadingIndicator": {
@@ -75,8 +88,10 @@
 
 "#content": {
     backgroundColor: '#efefef',
-    layout: "vertical",
-    visible: false
+    visible: true,
+    height: Ti.UI.SIZE,
+    scrollable: false,
+    separatorColor: "#dcdcdc"
 }
 
 "#noData": {

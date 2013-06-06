@@ -3,12 +3,21 @@
     borderColor: "#d3d3d3",
     borderWidth: 1,
     backgroundColor: 'white',
-    top: 0,
-    layout: 'vertical'
+    top: 10,
+    left: 10,
+    right: 10,
+    layout: 'vertical',
+}
+
+"#index[platform=mobileweb]": {
+    width: null,
 }
 
 "#index[platform=android]": {
     borderWidth: '1dp',
+    top: '8dp',
+    left: '8dp',
+    right: '8dp',
 }
 
 ".separator": {

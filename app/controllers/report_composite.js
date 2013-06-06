@@ -18,6 +18,7 @@ var reportDate        = require('session').getReportDate();
 function registerEvents()
 {
     Alloy.Collections.piwikReports.on('reset', hideLoadingIndicator);
+    Alloy.Collections.piwikReports.on('reset', addPiwikIcon);
 
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
@@ -29,6 +30,7 @@ function registerEvents()
 function unregisterEvents()
 {
     Alloy.Collections.piwikReports.off('reset', hideLoadingIndicator);
+    Alloy.Collections.piwikReports.off('reset', addPiwikIcon);
     
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
@@ -92,7 +94,7 @@ function accountDidNotChange()
 function onWebsiteChanged()
 {
     if (accountDidNotChange()) {
-        renderListOfReports();
+        render();
     } else {
         // let reportChooser to the refresh
     }
@@ -103,7 +105,7 @@ function onWebsiteChanged()
 function onDateChanged() 
 {
     if (accountDidNotChange()) {
-        renderListOfReports();
+        render();
     } else {
         // let reportChooser to the refresh
     }
@@ -149,6 +151,33 @@ function isDataAlreadyFetched()
     return !!reportsCollection.length;
 }
 
+function addPiwikIcon()
+{
+    if (OS_ANDROID) {
+        $.content.add(Ti.UI.createImageView({
+            top: '10dp',
+            bottom: '25dp',
+            width: '55dp',
+            height: '19dp',
+            image: '/piwik_logo_dark_footer.png'
+        }));
+    } else {
+        $.content.add(Ti.UI.createImageView({
+            top: 12,
+            bottom: 25,
+            width: 55,
+            height: 19,
+            image: 'piwik_logo_dark_footer.png'
+        }));
+    }
+}
+
+function render()
+{
+    renderListOfReports();
+    addPiwikIcon();
+}
+
 function open()
 {
     registerEvents();
@@ -156,7 +185,7 @@ function open()
 
     if (isDataAlreadyFetched()) {
         hideLoadingIndicator();
-        renderListOfReports();
+        render();
     } else {
         showLoadingIndicator();
     }
