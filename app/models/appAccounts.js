@@ -70,6 +70,10 @@ exports.definition = {
                 return 'MultiSites' === this.get('defaultReport');
             },
 
+            getAuthToken: function () {
+                return this.get('tokenAuth');
+            },
+
             entrySiteId: function () {
                 return this.get('defaultReport');
             },
