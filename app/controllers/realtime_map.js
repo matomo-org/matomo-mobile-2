@@ -44,10 +44,15 @@ function openRealTimeMapInWebview()
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
+    if (!accountModel || !siteModel) {
+        return;
+    }
+
     var url = accountModel.getBasePath();
     url    += "index.php?module=Widgetize&action=iframe&widget=1&moduleToWidgetize=UserCountryMap&actionToWidgetize=realtimeMap&idSite=";
     url    += siteModel.id;
-    url    += "&period=month&date=today&disableLink=1&widget=1";
+    url    += "&period=month&date=today&disableLink=1&widget=1&token_auth=";
+    url    += accountModel.getAuthToken();
 
     $.webview.url = url;
 }
