@@ -139,41 +139,41 @@ function toUnit(size)
 var containerRow = null;
 function renderMetricTile (processedReportModel, index) {
 
-        var title = processedReportModel.getTitle();
-        var value = processedReportModel.getValue();
-        var sortColumnModel  = processedReportModel.getSortOrder();
-        var sortColumnReport = processedReportCollection.getSortOrder(); 
+    var title = processedReportModel.getTitle();
+    var value = processedReportModel.getValue();
+    var sortColumnModel  = processedReportModel.getSortOrder();
+    var sortColumnReport = processedReportCollection.getSortOrder(); 
 
-        var labelColor = (sortColumnReport == sortColumnModel) ? '#cb2026' : 'black';
+    var labelColor = (sortColumnReport == sortColumnModel) ? '#cb2026' : 'black';
 
-        if (0 == (index % 2)) {
-            containerRow = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, layout: 'horizontal'});
-            $.content.add(containerRow);
-        } 
-        var outerContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: OS_ANDROID ? '49%' : '50%'});
-        var metricContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, top: toUnit(22), bottom: toUnit(25), layout: 'vertical'});
-        var value = Ti.UI.createLabel({text: value, textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 0, font: {fontSize: toUnit(25), fontWeight: 'bold'}, color: labelColor, left: toUnit(10), right: toUnit(10), height: Ti.UI.SIZE});
-        var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: toUnit(13), fontWeight: 'bold'}, height: Ti.UI.SIZE, top: toUnit(5), color: '#7e7e7e', left: toUnit(10), right: toUnit(10)});
-        metricContainer.add(value);
-        metricContainer.add(label);
+    if (0 == (index % 2)) {
+        containerRow = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, layout: 'horizontal'});
+        $.content.add(containerRow);
+    } 
+    var outerContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: OS_ANDROID ? '49%' : '50%'});
+    var metricContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, top: toUnit(22), bottom: toUnit(25), layout: 'vertical'});
+    var value = Ti.UI.createLabel({text: value, textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 0, font: {fontSize: toUnit(25), fontWeight: 'bold'}, color: labelColor, left: toUnit(10), right: toUnit(10), height: Ti.UI.SIZE});
+    var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: toUnit(13), fontWeight: 'bold'}, height: Ti.UI.SIZE, top: toUnit(5), color: '#7e7e7e', left: toUnit(10), right: toUnit(10)});
+    metricContainer.add(value);
+    metricContainer.add(label);
 
-        metricContainer.addEventListener('click', (function (metric) {
-            var changeMetric = function () {
-                currentMetric = metric;
-                doRefresh();
-            };
+    metricContainer.addEventListener('click', (function (metric) {
+        var changeMetric = function () {
+            currentMetric = metric;
+            doRefresh();
+        };
 
-            return changeMetric;
-        })(sortColumnModel));
+        return changeMetric;
+    })(sortColumnModel));
 
-        outerContainer.add(metricContainer);
-        containerRow.add(outerContainer);
+    outerContainer.add(metricContainer);
+    containerRow.add(outerContainer);
 
-        if (1 == (index % 2)) {
-            var horizontalSeparator = Ti.UI.createView({height: toUnit(1), backgroundColor: '#e6e6e6', width: Ti.UI.FILL});
-            $.content.add(horizontalSeparator);
-        }
+    if (1 == (index % 2)) {
+        var horizontalSeparator = Ti.UI.createView({height: toUnit(1), backgroundColor: '#e6e6e6', width: Ti.UI.FILL});
+        $.content.add(horizontalSeparator);
     }
+}
 
 function onStatisticsFetched(processedReportCollection)
 {
@@ -211,6 +211,9 @@ function fixVerticalSeparatorHeight()
         if (OS_MOBILEWEB) {
             // don't know why but on MobileWeb height will be only changed if there is a small delay. Tried lots of different implementations but didn't find a better solution
             setTimeout(function () {
+                if (!$ || !$.verticalSeparator || !$.content) {
+                    return;
+                }
                 $.verticalSeparator.setHeight($.content.size.height);
             }, 100);
         } else {
