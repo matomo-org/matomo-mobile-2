@@ -3,6 +3,21 @@ function isProduction(alloyConfig)
     return 'production' == alloyConfig.deployType;
 }
 
+function isMobileWebPlatform(alloyConfig)
+{
+    return 'mobileweb' == alloyConfig.platform;
+}
+
+function readContentFromFile(file)
+{
+    return require('fs').readFileSync(file).toString();
+}
+
+function writeContentToFile(file, content)
+{
+    require('fs').writeFileSync(file, content);
+}
+
 function removeUnimportantLogCallsFromContent(content)
 {
     if (!content) {
@@ -17,12 +32,10 @@ function removeUnimportantLogCallsFromContent(content)
 
 function removeUnimportantLogCallsFromFile(file)
 {
-    var fs = require('fs');
-
-    var resourceContent = fs.readFileSync(file).toString();
+    var resourceContent = readContentFromFile(file);
     var replacedContent = removeUnimportantLogCallsFromContent(resourceContent);
 
-    fs.writeFileSync(file, replacedContent);
+    writeContentToFile(file, replacedContent);
 }
 
 function isJsFile(filename)
@@ -47,11 +60,25 @@ function removeUnimportantLogCallsFromJsFiles(dir)
     });
 }
 
+function copyPhonegapConfiguration(dir) 
+{
+    var sourceFile = require('path').join(dir.project, 'config.xml');
+    var targetFile = require('path').join(dir.resources, 'config.xml');
+
+    var content = readContentFromFile(sourceFile);
+
+    writeContentToFile(targetFile, content);
+}
+
 task("post:compile", function(event, logger) {
 
     if (isProduction(event.alloyConfig)) {
         logger.warn("Removing Unimportant Log Calls");
         removeUnimportantLogCallsFromJsFiles(event.dir);
+    }
+
+    if (isMobileWebPlatform(event.alloyConfig)) {
+        copyPhonegapConfiguration(event.dir);
     }
 
 });
