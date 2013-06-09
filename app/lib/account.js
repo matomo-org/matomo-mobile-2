@@ -9,13 +9,23 @@ var onSiteSelectedCallback = null;
 
 function openEntrySite(account) 
 {
+    if (!account) {
+        console.warn('Cannot open entry site, no account given', 'account');
+        return;
+    }
+
     var entrySiteId = account.entrySiteId();
     var site        = Alloy.createCollection('PiwikWebsitesById');
     site.fetch({
         params: {idSite: entrySiteId},
         account: account,
         success: function (sites) {
-            onSiteSelected({site: sites.entrySite(), account: account})
+            if (!sites) {
+                console.warn('Failed to fetch entry site', 'account');
+                return;
+            }
+
+            onSiteSelected({site: sites.entrySite(), account: account});
         },
         error: function () {
             // TODO what now?
@@ -25,6 +35,11 @@ function openEntrySite(account)
 
 function onSiteSelected(event)
 {
+    if (!event || !onSiteSelectedCallback) {
+        console.log('cannot select site', 'account');
+        return;
+    }
+
     onSiteSelectedCallback(event.site, event.account);
 }
 
@@ -41,6 +56,11 @@ function openDashboard(account)
 
 function updateDefaultReportDateInSession(accountModel)
 {
+    if (!accountModel) {
+        console.warn('Cannot update default report date in session, no account', 'account');
+        return;
+    }
+
     var reportDate = new (require('report/date'));
     reportDate.setReportDate(accountModel.getDefaultReportDate());
 
@@ -49,6 +69,11 @@ function updateDefaultReportDateInSession(accountModel)
 
 exports.selectWebsite = function (accountModel, callback)
 {
+    if (!accountModel) {
+        console.log('Cannot select website, no account given', 'account');
+        return;
+    }
+
     onSiteSelectedCallback = callback;
 
     accountModel.select(function (account) {
@@ -59,4 +84,4 @@ exports.selectWebsite = function (accountModel, callback)
             openEntrySite(account);
         }
     });
-}
+};

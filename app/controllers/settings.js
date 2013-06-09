@@ -33,8 +33,17 @@ function onClose()
 
 function onItemClick(event)
 {
+    if (!event || !$.settingsTable || !$.settingsTable.sections || !$.settingsTable.sections[event.sectionIndex]) {
+        return;
+    }
+
     var section = $.settingsTable.sections[event.sectionIndex];
     var item    = section.getItemAt(event.itemIndex);
+
+    if (!item || !item.properties) {
+        console.log('cannot handle item click, no item properties');
+        return;
+    }
 
     var callback = item.properties.callback;
     if (callback && callbacks[callback]) {
@@ -117,11 +126,16 @@ function updateDisplayedGraphsValue()
 
 function setTitle(section, itemIndex, title)
 {
-    if (!supportsListView()) {
-        return uiRowIfTableView.setHasCheck(enabled);
+    if (!supportsListView() || !section) {
+        return;
     }
     
     var item = section.getItemAt(itemIndex);
+
+    if (!item) {
+        console.log('set title not possible, no item');
+        return;
+    }
 
     if (OS_ANDROID) {
         item.title = {text: title};
@@ -134,7 +148,16 @@ function setTitle(section, itemIndex, title)
 
 function setSubtitle(section, itemIndex, subtitle)
 {
+    if (!supportsListView() || !section) {
+        return;
+    }
+    
     var item = section.getItemAt(itemIndex);
+
+    if (!item) {
+        console.log('set subtitle not possible, no item');
+        return;
+    }
 
     if (OS_ANDROID) {
         item.subtitle = {text: subtitle};
@@ -152,6 +175,11 @@ function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
     }
 
     var item = $.basic.getItemAt(indexOfItemIfListView);
+
+    if (!item) {
+        console.log('set has check not possible, no item');
+        return;
+    }
 
     if (enabled && OS_ANDROID) {
         item.template = 'checkedTemplate';

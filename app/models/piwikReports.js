@@ -55,8 +55,12 @@ exports.definition = {
     extendModel: function(Model) {        
         _.extend(Model.prototype, {
 
+            hasDimension: function () {
+                return 'get' != this.get('action');
+            },
+
             getMetricName: function () {
-                var metrics = this.getMetrics();
+                var metrics   = this.getMetrics();
                 var sortOrder = this.getSortOrder();
 
                 if (metrics && metrics[sortOrder]) {
@@ -68,6 +72,15 @@ exports.definition = {
             getReportName: function () {
                 return this.get('name');
             },
+            getModule: function () {
+                return this.get('module');
+            },
+            getAction: function () {
+                return this.get('action');
+            },
+            getUniqueId: function () {
+                return this.get('uniqueId');
+            },
             getMetrics: function () {
                 return this.get('metrics');
             },
@@ -78,7 +91,7 @@ exports.definition = {
                     return metric;
                 }
 
-                var _ = require("alloy/underscore");
+                var _             = require('alloy/underscore');
                 var preferredRows = Alloy.CFG.piwik.preferredMetrics;
                 var sortOrder     = _.first(preferredRows);
                 
@@ -138,6 +151,10 @@ exports.definition = {
             reports     = _.compact(reports); 
 
             _.each(reports, function (report) {
+                if (!report) {
+                    return;
+                }
+
                 report.category    = dashboardName;
                 report.isDashboard = true;
             });
@@ -146,10 +163,19 @@ exports.definition = {
         };
 
         var preformatReportsForFasterSearch = function (reports) {
+            if (!reports) {
+                return;
+            }
+
             var formatted = {};
 
             for (var index = 0; index < reports.length; index++) {
                 var report = reports[index];
+
+                if (!report) {
+                    continue;
+                }
+
                 var module = report.module;
                 var action = report.action;
 
@@ -169,6 +195,7 @@ exports.definition = {
 
             fetchAllReports: function (accountModel, siteModel) {
                 if (!siteModel || !accountModel) {
+                    console.info('Cannot fetch all reports, no account or site', 'piwikReports');
                     return;
                 }
 
@@ -194,7 +221,7 @@ exports.definition = {
             getFirstReportThatIsNotMultiSites: function () {
                 var index = 0;
                 while (this.at(index)) {
-                    var module = this.at(index).get('module');
+                    var module = this.at(index).getModule();
 
                     if ('MultiSites' != module) {
                         return this.at(index);
@@ -220,8 +247,12 @@ exports.definition = {
             },
 
             containsAction: function (searchReport) {
-                var searchAction = searchReport.get('action');
-                var searchModule = searchReport.get('module');
+                if (!searchReport) {
+                    return false;
+                }
+
+                var searchAction = searchReport.getAction();
+                var searchModule = searchReport.getModule();
 
                 var reports = this.where({action: searchAction, module: searchModule});
                 return !!reports.length;
@@ -248,6 +279,11 @@ exports.definition = {
                 this.preformattedReports = null;
 
                 return reports;
+            },
+
+            validResponse: function (response) {
+
+                return _.isArray(response) && _.has(response, 0);
             }
 
             // extended functions go here            

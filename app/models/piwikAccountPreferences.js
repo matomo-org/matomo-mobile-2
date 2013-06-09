@@ -44,6 +44,11 @@ exports.definition = {
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
             fetchPreferences: function (account, success, error) {
+                if (!account) {
+                    console.warn('Unable to fetch preferences, no account');
+                    return;
+                }
+
                 for (var index in this.config.defaultParams.urls) {
                     var defaultParam = this.config.defaultParams.urls[index];
                     defaultParam.userLogin = account.get('username');
@@ -74,6 +79,11 @@ exports.definition = {
                     }
                 });
 
+            },
+
+            validResponse: function (response) {
+
+                return _.isArray(response) && _.has(response, 0) && _.has(response, 1);
             }
 
             // extended functions go here           

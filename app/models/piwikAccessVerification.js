@@ -43,7 +43,6 @@ exports.definition = {
                 return this.get('name');
             }
 
-    
             // extended functions go here
 
         }); // end extend
@@ -57,7 +56,7 @@ exports.definition = {
 
             validResponse: function (response) {
 
-                if (!response || !response[0]) {
+                if (!response || !_.isArray(response) || !response[0]) {
                     return false;
                 }
                 

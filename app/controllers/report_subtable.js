@@ -22,7 +22,7 @@ var currentMetric  = args.metric;
 var reportDate     = require('session').getReportDate();
 
 updateWindowTitle(args.reportTitle);
-$.index.backButtonTitle = args.backButtonTitle;
+$.index.backButtonTitle = args.backButtonTitle || '';
 
 $.initLoadingMessage();
 
@@ -30,12 +30,13 @@ function trackWindowRequest()
 {
     var uniqueId = reportModule + '_' + reportAction;
     
-    require('Piwik/Tracker').setCustomVariable(1, 'reportModule', reportModule, 'page');
-    require('Piwik/Tracker').setCustomVariable(2, 'reportAction', reportAction, 'page');
-    require('Piwik/Tracker').setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
-    require('Piwik/Tracker').setCustomVariable(4, 'reportMetric', currentMetric, 'page');
+    var tracker = require('Piwik/Tracker'); 
+    tracker.setCustomVariable(1, 'reportModule', reportModule, 'page');
+    tracker.setCustomVariable(2, 'reportAction', reportAction, 'page');
+    tracker.setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
+    tracker.setCustomVariable(4, 'reportMetric', currentMetric, 'page');
 
-    require('Piwik/Tracker').trackWindow('Report Subtable', 'report/subtable');
+    tracker.trackWindow('Report Subtable', 'report/subtable');
 }
 
 function onOpen()
@@ -46,6 +47,7 @@ function onOpen()
 function onClose()
 {
     $.destroy();
+    $.off();
 }
 
 function onMetricChosen(chosenMetric)
@@ -74,8 +76,6 @@ function updateWindowTitle(title)
 
 exports.doRefresh = function()
 {
-    $.showLoadingMessage();
-
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
@@ -84,10 +84,16 @@ exports.doRefresh = function()
         return;
     }
 
+    $.showLoadingMessage();
+
+    // TODO fallback to day/today is not a good solution cause user won't notice we've fallen back to a different date
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
+
     $.piwikProcessedReport.fetchProcessedReports(currentMetric, {
         account: accountModel,
-        params: {period: reportDate.getPeriodQueryString(), 
-                 date: reportDate.getDateQueryString(), 
+        params: {period: piwikPeriod, 
+                 date: piwikDate, 
                  idSite: siteModel.id, 
                  idSubtable: subtableId,
                  filter_limit: $.showAllEntries ? -1 : $.rowsFilterLimit,
@@ -100,11 +106,11 @@ exports.doRefresh = function()
 function open () {
     $.doRefresh();
     require('layout').open($.index);
-};
+}
 
 function close () {
     require('layout').close($.index);
-};
+}
 
 exports.open = open;
 exports.close = close;

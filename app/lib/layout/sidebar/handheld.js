@@ -45,6 +45,12 @@ function HandheldSidebar(detailRootWindow)
 
     function showLeftSidebar()
     {
+        if (leftSidebarVisible) {
+            return;
+        }
+
+        leftSidebarVisible = true;
+
         leftSidebarOuterWindow = Ti.UI.createWindow({left: widthSidebar, right: 0, backgroundColor: 'transparent'});
         leftSidebarOuterWindow.addEventListener('click', hideLeftSidebar);
         leftSidebarOuterWindow.open();
@@ -56,13 +62,13 @@ function HandheldSidebar(detailRootWindow)
             right: '-' + widthSidebar,
             curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
         });
-
-        leftSidebarVisible = true;
     }
 
     this.setLeftSidebar = function(view)
     {
-        leftSidebarWindow.add(view);
+        if (view) {
+            leftSidebarWindow.add(view);
+        }
     };
 
     this.hideLeftSidebar = hideLeftSidebar;
@@ -111,6 +117,12 @@ function HandheldSidebar(detailRootWindow)
 
     function showRightSidebar()
     {
+        if (rightSidebarVisible) {
+            return;
+        }
+
+        rightSidebarVisible = true;
+
         rightSidebarOuterWindow = Ti.UI.createWindow({left: 0, right: widthSidebar, backgroundColor: 'transparent'});
         rightSidebarOuterWindow.addEventListener('click', hideRightSidebar);
         rightSidebarOuterWindow.open();
@@ -123,13 +135,13 @@ function HandheldSidebar(detailRootWindow)
             left: '-' + widthSidebar,
             curve:Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
         });
-
-        rightSidebarVisible = true;
     }
 
     this.setRightSidebar = function(view)
     {
-        rightSidebarWindow.add(view);
+        if (view) {
+            rightSidebarWindow.add(view);
+        }
     };
 
     this.hideRightSidebar = hideRightSidebar;

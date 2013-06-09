@@ -44,6 +44,11 @@ var Session = function () {
             this.trigger('reportDateChanged', reportDate);
         },
         getReportDate: function () {
+
+            if (!reportDate) {
+                console.warn('you need to fallback to default report date');
+            }
+
             return reportDate;
         }
     });

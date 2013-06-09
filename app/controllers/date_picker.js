@@ -13,8 +13,8 @@ function chooseDate()
     $.trigger('selected', {});
 
     var reportDate = session.getReportDate();
-    var period = reportDate.getPeriodQueryString();
-    var date   = reportDate.getDateQueryString();
+    var period = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var date   = reportDate ? reportDate.getDateQueryString() : 'today';
 
     var params = {date: date, period: period};
     require('commands/openDateChooser').execute(params, onDateChosen);

@@ -76,7 +76,9 @@ function HandheldSidebar()
 
     this.setLeftSidebar = function(view)
     {
-        leftSidebarView = view;
+        if (view) {
+            leftSidebarView = view;
+        }
     };
 
     this.hideLeftSidebar = hideLeftSidebar;
@@ -116,7 +118,9 @@ function HandheldSidebar()
 
     this.setRightSidebar = function(view)
     {
-        rightSidebarView = view;
+        if (view) {
+            rightSidebarView = view;
+        }
     };
 
     this.hideRightSidebar = hideRightSidebar;

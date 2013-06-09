@@ -30,4 +30,4 @@ exports.toggle = function ()
     
     alertDialog.show();
     alertDialog = null;
-}
+};

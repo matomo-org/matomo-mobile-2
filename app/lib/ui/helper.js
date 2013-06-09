@@ -17,7 +17,7 @@ exports.getWidth = function (view)
     } else if (view.width) {
         return view.width;
     } else {
-        console.error('TODO NOT ABLE TO GET WIDTH');
+        console.warn('TODO NOT ABLE TO GET WIDTH');
     }
 
     return 0;
@@ -35,7 +35,7 @@ exports.getHeight = function (view)
     } else if (view.height) {
         return view.height;
     } else {
-        console.error('TODO NOT ABLE TO GET HEIGHT');
+        console.warn('TODO NOT ABLE TO GET HEIGHT');
     }
 
     return 0;
@@ -56,4 +56,13 @@ exports.getAndroidActivity = function (window)
     window = null;
 
     return activity;
+};
+
+function doesNotContainWhitespace (url) {
+    return -1 == ('' + url).indexOf(' ');
 }
+
+exports.isTitaniumCompatibleImageUrl = function (url)
+{
+    return doesNotContainWhitespace(url);
+};

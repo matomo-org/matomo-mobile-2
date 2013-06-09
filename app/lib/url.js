@@ -7,7 +7,7 @@
 
 exports.startsWithHttp = function(url)
 {
-    return (url && 0 === url.indexOf('http'));
+    return (url && 0 === (''+url).indexOf('http'));
 };
 
 exports.addHttpProtocol = function(url)
@@ -17,14 +17,22 @@ exports.addHttpProtocol = function(url)
 
 exports.getAbsolutePath = function (url)
 {
-    var posLastSlash = url.lastIndexOf('/');
+    if (!url) {
+        return '';
+    }
+
+    var posLastSlash = (url + '').lastIndexOf('/');
     var absolutePath = url.substr(0, posLastSlash + 1);
 
     return absolutePath;
-}
+};
 
 exports.endsWithSlash = function (url)
 {
+    if (!url) {
+        return false;
+    }
+
     url             = url + '';
     var lastCharPos = url.length - 1;
     var lastUrlChar = url.substr(lastCharPos, 1);
@@ -34,6 +42,10 @@ exports.endsWithSlash = function (url)
 
 exports.endsWithPhp = function (url)
 {
+    if (!url) {
+        return false;
+    }
+    
     url              = url + '';
     var posLast4Char = url.length - 4;
     var last4Chars   = url.substr(posLast4Char, 4);

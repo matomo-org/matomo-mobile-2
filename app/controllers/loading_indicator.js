@@ -55,7 +55,7 @@ exports.hide = function()
 {
     $.loading.hide();
     $.loading.height = 0;
-}
+};
 
 exports.show = function()
 {
@@ -66,4 +66,4 @@ exports.show = function()
     }
 
     $.loading.show();
-}
+};

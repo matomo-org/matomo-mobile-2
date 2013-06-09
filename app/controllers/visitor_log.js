@@ -56,6 +56,10 @@ function onWebsiteChanged(website)
 
 function onDateChanged(date)
 {
+    if (!date) {
+        return;
+    }
+
     require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/visitor-log/change/date'});
 
     reportDate = date;
@@ -114,8 +118,12 @@ function render()
     row.addEventListener('click', fetchNext);
     rows.push(row);
 
-    if (visitorLog.length) {
+    if (visitorLog && visitorLog.length) {
         visitorLog.forEach(function (visitorDetail) {
+            if (!visitorDetail) {
+                return;
+            }
+
             var params = {account: accountModel, visitor: visitorDetail.attributes};
             var visitorOverview = Alloy.createController('visitor_overview', params);
             var visitorRow      = visitorOverview.getView();
@@ -176,27 +184,28 @@ function onFetchError()
 
 function doRefresh()
 {
-    showLoadingMessage();
-
-    var period = reportDate.getPeriodQueryString();
-    var date   = reportDate.getDateQueryString();
-
     if (!accountModel || !siteModel) {
         console.log('account or site not found, cannot refresh visitor log');
         return;
     }
 
-    visitorLog.initial(accountModel, siteModel.id, period, date);
+    showLoadingMessage();
+
+    // TODO fallback to day/today is not a good solution cause user won't notice we've fallen back to a different date
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
+
+    visitorLog.initial(accountModel, siteModel.id, piwikPeriod, piwikDate);
 }
 
-function toggleReportConfiguratorVisibility (event)
+function toggleReportConfiguratorVisibility()
 {
     require('report/configurator').toggleVisibility();
 
     require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/visitor-log/toggle/report-configurator'});
 }
 
-function toggleReportChooserVisibility(event)
+function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 

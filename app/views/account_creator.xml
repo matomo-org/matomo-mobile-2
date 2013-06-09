@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" onOpen="onOpen">
+    <Window id="index" onOpen="onOpen" onClose="onClose">
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 
                 onBack="close"

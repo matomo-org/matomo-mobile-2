@@ -41,4 +41,4 @@ exports.open = function()
     });
 
     alertDialog.show();
-}
+};

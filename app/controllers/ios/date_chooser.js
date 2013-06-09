@@ -12,10 +12,9 @@ function L(key)
 
 var args = arguments[0] || {};
 
-// a list of all available accounts
 var fromDate = args.from || new Date();
-var toDate = args.to || new Date();
-var period = args.period || 'day';
+var toDate   = args.to || new Date();
+var period   = args.period || 'day';
 
 var periodRow   = null;
 var fromDateRow = null;
@@ -40,7 +39,7 @@ function createRow(params)
 
 function doSelectPicker (event)
 {
-    if (!$.toPicker || !$.fromPicker || !$.iOSPeriodPicker) {
+    if (!$.toPicker || !$.fromPicker || !$.iOSPeriodPicker || !event) {
         
         return;
     }
@@ -86,7 +85,7 @@ function createTableViewRows ()
 
 function setPeriod (periodToSet) 
 {
-    if (!periodToSet) {
+    if (!periodToSet || !fromDateRow || !periodRow || !toDateRow) {
         
         return;
     }
@@ -210,7 +209,7 @@ function onToDateChange(event)
 
 function createToDatePicker (params)
 {
-    if (!$.index || !params) {
+    if (!params) {
         
         return;
     }
@@ -251,7 +250,6 @@ function selectRow (index)
 }
 function getDisplayDate (selectedDate) 
 {
-    
     if (!selectedDate) {
         
         return '';

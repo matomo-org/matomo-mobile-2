@@ -68,6 +68,11 @@ function onAccountChosen(account)
 
 function loadWebsitesForAccount(account)
 {
+    if (!account) {
+        console.info('No account given, cannot load websites for account', 'all_websites_dashboard');
+        return;
+    }
+
     showLoadingMessage();
 
     accountModel            = account;
@@ -76,6 +81,11 @@ function loadWebsitesForAccount(account)
         params: {limit: 2},
         account: accountModel,
         success: function (entrySiteCollection) {
+            if (!entrySiteCollection) {
+                console.log('No entrySiteCollection defined, cannot select a website');
+
+                return;
+            }
 
             if (autoOpen && 1 == entrySiteCollection.length) {
                 websiteChosen(entrySiteCollection.first());
@@ -91,7 +101,7 @@ function loadWebsitesForAccount(account)
 
 function selectWebsite(event)
 {
-    if (!event || !event.row || null === event.row.modelid) {
+    if (!event || !event.row || !_.has(event.row, 'modelid')) {
         console.log('ModelID not defined, cannot select website');
         return;
     }
@@ -104,8 +114,10 @@ function selectWebsite(event)
         return;
     }
 
-    var siteModel = Alloy.createModel('PiwikWebsites', {idsite: website.get('reportMetadata').idsite,
-                                                        name: website.get('label')});
+    var idSite = website.getReportMetadata() ? website.getReportMetadata().idsite : null;
+    var websiteName = website.getTitle();
+
+    var siteModel = Alloy.createModel('PiwikWebsites', {idsite: idSite, name: websiteName});
     websiteChosen(siteModel);
 }
 
@@ -152,15 +164,27 @@ function cancelSearchWebsite()
 
 function searchWebsite(event) 
 {
+    if (!accountModel) {
+        console.info('cannot search website, no account set', 'all_websites_dashboard');
+        return;
+    }
+
+    if (!lastUsedWebsite) {
+        console.info('cannot search website, no last used website', 'all_websites_dashboard');
+        return;
+    }
+
     showLoadingMessage();
     
-    var reportDate = require('session').getReportDate();
+    var reportDate  = require('session').getReportDate();
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
     $.piwikProcessedReport.fetchProcessedReports('nb_visits', {
         account: accountModel,
         params: {
-            period: reportDate.getPeriodQueryString(), 
-            date: reportDate.getDateQueryString(), 
+            period: piwikPeriod, 
+            date: piwikDate, 
             enhanced: 1,
             idSite: lastUsedWebsite.id,
             apiModule: "MultiSites",
@@ -259,16 +283,23 @@ function doRefresh()
 
 function fetchListOfAvailableWebsites(site) 
 {
+    if (!site) {
+        console.info('Cannot fetch list of available websites, no website given', 'all_websites_dashboard');
+        return;
+    }
+
     lastUsedWebsite = site;
     showLoadingMessage();
 
-    var reportDate = require('session').getReportDate();
+    var reportDate  = require('session').getReportDate();
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
     $.piwikProcessedReport.fetchProcessedReports("nb_visits", {
         account: accountModel,
         params: {
-            period: reportDate.getPeriodQueryString(), 
-            date: reportDate.getDateQueryString(), 
+            period: piwikPeriod, 
+            date: piwikDate, 
             idSite: site.id,
             apiModule: 'MultiSites',
             apiAction: 'getAll',
@@ -289,6 +320,11 @@ function isNegativeEvolution(evolution)
 
 function formatWebsite(model)
 {
+    if (!model) {
+
+        return model;
+    }
+
     var evolution = model.get('visits_evolution');
 
     if (isNegativeEvolution(evolution)) {
@@ -311,9 +347,7 @@ exports.close = function () {
     require('layout').close($.index);
 };
 
-exports.open = function (alreadyOpened) {
-    showLoadingMessage();
-
+exports.open = function () {
     loadWebsitesForAccount(accountModel);
 
     require('layout').open($.index);

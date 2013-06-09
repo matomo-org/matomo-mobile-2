@@ -121,13 +121,22 @@ exports.login = function(accounts, accessUrl, username, password)
     showWaitingIndicator();
 
     account.on('sync', function (accountModel) {
+        if (!accountModel) {
+            console.info('Cannot update piwik version, no account given', 'login');
+            return;
+        }
+
         accountModel.updatePiwikVersion();
     });
 
-    var verifyAuthToken = function (accountModel)
+    var makeSureUserHasAccessToAtLeastOneWebsite = function (accountModel)
     {
+        if (!accountModel) {
+            console.info('Cannot verify auth token, no account given', 'login');
+            return;
+        }
+
         var site = Alloy.createCollection('piwikAccessVerification');
-        // verify if user has access to at least one website using the given authToken
 
         site.fetch({
             account: accountModel,
@@ -155,7 +164,7 @@ exports.login = function(accounts, accessUrl, username, password)
         });
     };
 
-    account.on('change:tokenAuth', verifyAuthToken);
+    account.on('change:tokenAuth', makeSureUserHasAccessToAtLeastOneWebsite);
 
     account.updateAuthToken();
-}
+};

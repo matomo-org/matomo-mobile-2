@@ -141,6 +141,10 @@ function filterReports(collection)
 
 function notifyModelsAboutNewScrollPosition (event) 
 {
+    if (!event || !_.has(event, 'y')) {
+        return;
+    }
+    
     _.forEach(filterReports(reportsCollection), function (model) {
         model.trigger('scrollPosition', {y: event.y});
     });

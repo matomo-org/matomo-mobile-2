@@ -72,6 +72,11 @@ exports.definition = {
             },
 
             initial: function (account, idSite, period, date) {
+                if (!account) {
+                    console.info('Unable to init lastVisitDetails, no account given');
+                    return;
+                }
+
                 this.date   = date; 
                 this.period = period;
 
@@ -88,6 +93,10 @@ exports.definition = {
             },
 
             previous: function (account, idSite) {
+                if (!account) {
+                    console.info('Unable to fetch previous lastVisitDetails, no account given');
+                    return;
+                }
 
                 var filterLimit    = Alloy.CFG.piwik.filterLimit;
                 this.currentOffset = this.nextOffset;
@@ -104,6 +113,10 @@ exports.definition = {
             },
 
             next: function (account, idSite) {
+                if (!account) {
+                    console.info('Unable to fetch next lastVisitDetails, no account given');
+                    return;
+                }
 
                 var filterLimit = Alloy.CFG.piwik.filterLimit;
                 this.nextOffset = this.currentOffset;
@@ -124,6 +137,11 @@ exports.definition = {
                               date: this.parseDate()};
 
                 this.fetch({account: account, params: params});
+            },
+
+            validResponse: function (response) {
+
+                return _.isArray(response);
             }
             
             // extended functions go here           

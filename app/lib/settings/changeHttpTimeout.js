@@ -42,6 +42,11 @@ function getCurrentHttpTimeoutName()
 function getSelectedTimeoutInMs(index)
 {
     var timeoutValues = getTimeoutValues();
+
+    if (!timeoutValues[index]) {
+        return;
+    }
+
     var timeoutValue  = timeoutValues[index];
     timeoutValue      = parseInt(timeoutValue.replace('s', ''), 10) * 1000;
 
@@ -57,8 +62,10 @@ function onTimeoutSelected(event)
 
     var timeoutValue = getSelectedTimeoutInMs(event.index);
 
-    trackTimeoutChange(timeoutValue);
-    changeTimeoutSetting(timeoutValue);
+    if (timeoutValue) {
+        trackTimeoutChange(timeoutValue);
+        changeTimeoutSetting(timeoutValue);
+    }
 }
 
 exports.getCurrentHttpTimeoutName = getCurrentHttpTimeoutName;

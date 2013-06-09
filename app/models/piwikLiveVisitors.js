@@ -53,13 +53,19 @@ exports.definition = {
                 this.fetch({
                     account: account, 
                     success: function (collection, response) {
+                        if (!_.isArray(response)) {
+                            return;
+                        }
 
-                        var last30Min   = response[0];
-                        var last24Hours = response[1];
+                        var last30Min      = response[0];
+                        var last24Hours    = response[1];
                         var visitorDetails = response[2];
 
+                        last30Min   = (last30Min && last30Min[0]) ? last30Min[0] : '-';
+                        last24Hours = (last24Hours && last24Hours[0]) ? last24Hours[0] : '-';
+
                         if (success) {
-                            success(account, last30Min[0], last24Hours[0], visitorDetails);
+                            success(account, last30Min, last24Hours, visitorDetails);
                             success = null;
                             account = null;
                         }
@@ -73,6 +79,11 @@ exports.definition = {
                     }
                 });
 
+            },
+
+            validResponse: function (response) {
+
+                return _.isArray(response) && _.has(response, 0) && _.has(response, 1) && _.has(response, 2);
             }
 
             // extended functions go here           

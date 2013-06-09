@@ -25,7 +25,7 @@ function getGraphOptions()
     return {imageGraphUrl: imageGraphUrl,
             imageGraphEvolutionUrl: imageGraphEvolutionUrl,
             reportName: reportName, 
-            reportDate: reportDate}
+            reportDate: reportDate};
 }
 
 function showDetail ()
@@ -39,7 +39,11 @@ function updateImage(graphUrl)
     var graph = require('Piwik/PiwikGraph');
     var imageWithSize = graph.appendSize(graphUrl, width($.image.getView()), height($.image.getView()), OS_IOS);
 
-    console.log(imageWithSize);
+    console.debug('imageUrlWithSize', imageWithSize);
+
+    if (!imageWithSize || !require('ui/helper').isTitaniumCompatibleImageUrl(imageWithSize)) {
+        return;
+    }
 
     if ($.image.getView()) {
         $.image.getView().image = imageWithSize;
@@ -144,6 +148,11 @@ exports.update = function (processedReportCollection, accountModel)
         return;
     }
 
+    if (!processedReportCollection || !accountModel) {
+        console.log('Cannot update graph, missing parameters');
+        return;
+    }
+
     imageGraphUrl = processedReportCollection.getImageGraphUrl();
     reportName    = processedReportCollection.getReportName();
     reportDate    = processedReportCollection.getReportDate();
@@ -176,5 +185,5 @@ exports.update = function (processedReportCollection, accountModel)
         animateFadeOutDetailIcon();
     }
     
-    $.image.getView().addEventListener('click', toggleDetailIcon)
-}
+    $.image.getView().addEventListener('click', toggleDetailIcon);
+};

@@ -18,7 +18,7 @@ function availableLanguages()
 function currentLanguageName() 
 {
     var languages = availableLanguages();
-    var settings  = Alloy.createCollection('AppSettings').settings();
+    var settings  = getSettings();
             
     var currentLanguageCode = settings.languageCode();
     var currentLanguage     = 'English';
@@ -37,7 +37,7 @@ function availableLanguageNames()
 {
     var languages = availableLanguages();
     // an array like ['English', 'German', ...]
-    var languageNames   = [];
+    var languageNames = [];
 
     // languages: an object like {en: 'English', de: 'German', ...}
     for (var langCode in languages) {
@@ -93,15 +93,25 @@ function trackLanguageChange(selectedLangCode)
 
 function changeLanguageSetting(selectedLangCode)
 {
-    var settings = Alloy.createCollection('AppSettings').settings();
+    var settings = getSettings();
     settings.setLanguageCode(selectedLangCode);
     settings.save();
+}
+
+function getSettings()
+{
+    return Alloy.createCollection('AppSettings').settings();
 }
 
 function pressedCancel(event)
 {
     // android reports cancel = true whereas iOS returns the previous defined cancel index
     return (!event || event.cancel === event.index || true === event.cancel);
+}
+
+function userHasSelectedSameValueAsAlreadySelected(index)
+{
+    return (index == currentSelectedLanguageIndex());
 }
 
 function onLanguageSelected (event) 
@@ -111,8 +121,7 @@ function onLanguageSelected (event)
         return;
     }
 
-    // user selected same value as already selected
-    if (event.index == currentSelectedLanguageIndex()) {
+    if (userHasSelectedSameValueAsAlreadySelected(event.index)) {
 
         return;
     }
@@ -126,7 +135,7 @@ function onLanguageSelected (event)
 }
 
 exports.getCurrentLanguageName = currentLanguageName;
-exports.open = function (appSettings) {
+exports.open = function () {
 
     var languageNames = availableLanguageNamesSortedByAlphabet();
     languageNames.push(L('SitesManager_Cancel_js'));

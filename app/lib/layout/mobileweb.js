@@ -28,7 +28,7 @@ function MobileWebLayout(rootWindow)
 
     _.extend(this, Backbone.Events, {
         close: function (win) {
-            if (!win) {
+            if (!win || !navGroup) {
                 return;
             }
 
@@ -36,6 +36,10 @@ function MobileWebLayout(rootWindow)
             win = null;
         },
         open: function (win) {
+            if (!win) {
+                return;
+            }
+
             win.zIndex = 0;
             
             if (isBootstrapped) {
@@ -49,6 +53,6 @@ function MobileWebLayout(rootWindow)
             win = null;
         }
     });
-};
+}
 
 exports = MobileWebLayout;

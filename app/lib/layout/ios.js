@@ -27,7 +27,7 @@ function iOsLayout(rootWindow)
 
     _.extend(this, Backbone.Events, {
         close: function (win) {
-            if (!win) {
+            if (!win || !navGroup) {
                 return;
             }
 
@@ -35,6 +35,10 @@ function iOsLayout(rootWindow)
             win = null;
         },
         open: function (win) {
+            if (!win) {
+                return;
+            }
+
             if (isBootstrapped) {
                 navGroup.open(win, {animated : true});
             } else {
@@ -46,6 +50,6 @@ function iOsLayout(rootWindow)
             win = null;
         }
     });
-};
+}
 
 exports = iOsLayout;

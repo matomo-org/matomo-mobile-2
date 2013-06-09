@@ -16,7 +16,7 @@ var args = arguments[0] || {};
 
 var currentMetric   = null;
 // the currently selected report
-var reportModel     = args.report || false;
+var reportModel     = args.report;
 var reportList      = args.reportList || {};
 var reportDate      = require('session').getReportDate();
 
@@ -40,15 +40,16 @@ function unregisterEvents()
 
 function trackWindowRequest()
 {
-    var module   = reportModel.get('module');
-    var action   = reportModel.get('action');
-    var uniqueId = reportModel.get('uniqueId');
+    var module   = reportModel.getModule();
+    var action   = reportModel.getAction();
+    var uniqueId = reportModel.getUniqueId();
 
-    require('Piwik/Tracker').setCustomVariable(1, 'reportModule', module, 'page');
-    require('Piwik/Tracker').setCustomVariable(2, 'reportAction', action, 'page');
-    require('Piwik/Tracker').setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
+    var tracker  = require('Piwik/Tracker');
+    tracker.setCustomVariable(1, 'reportModule', module, 'page');
+    tracker.setCustomVariable(2, 'reportAction', action, 'page');
+    tracker.setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
 
-    require('Piwik/Tracker').trackWindow('Report With Dimension', 'report/with-dimension');
+    tracker.trackWindow('Report With Dimension', 'report/with-dimension');
 }
 
 function onOpen()
@@ -73,6 +74,10 @@ function onWebsiteChanged()
 
 function onDateChanged(changedReportDate) 
 {
+    if (!changedReportDate) {
+        return;
+    }
+    
     require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/with-dimension/change/date'});
 
     reportDate = changedReportDate;
@@ -81,20 +86,24 @@ function onDateChanged(changedReportDate)
 
 function onMetricChosen(chosenMetric)
 {
+    if (!chosenMetric) {
+        return;
+    }
+
     require('Piwik/Tracker').trackEvent({title: 'Metric Changed', url: '/report/with-dimension/change/metric/' + chosenMetric});
 
     currentMetric = chosenMetric;
     $.doRefresh();
 }
 
-function toggleReportConfiguratorVisibility (event)
+function toggleReportConfiguratorVisibility ()
 {
     require('report/configurator').toggleVisibility();
 
     require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/with-dimension/toggle/report-configurator'});
 }
 
-function toggleReportChooserVisibility(event)
+function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 
@@ -112,8 +121,6 @@ function updateWindowTitle(title)
 
 exports.doRefresh = function()
 {
-    $.showLoadingMessage();
-
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
@@ -122,14 +129,20 @@ exports.doRefresh = function()
         return;
     }
 
-    var module = reportModel.get('module');
-    var action = reportModel.get('action');
+    $.showLoadingMessage();
+
+    var module = reportModel.getModule();
+    var action = reportModel.getAction();
     var metric = reportModel.getSortOrder(currentMetric);
+
+    // TODO fallback to day/today is not a good solution cause user won't notice we've fallen back to a different date
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
     $.piwikProcessedReport.fetchProcessedReports(metric, {
         account: accountModel,
-        params: {period: reportDate.getPeriodQueryString(), 
-                 date: reportDate.getDateQueryString(), 
+        params: {period: piwikPeriod, 
+                 date: piwikDate, 
                  idSite: siteModel.id, 
                  filter_limit: $.showAllEntries ? -1 : $.rowsFilterLimit,
                  apiModule: module, 
@@ -145,11 +158,11 @@ function open () {
     $.doRefresh();
 
     require('layout').open($.index);
-};
+}
 
 function close () {
     require('layout').close($.index);
-};
+}
 
 exports.open = open;
 exports.close = close;

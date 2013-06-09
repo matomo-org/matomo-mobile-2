@@ -13,7 +13,7 @@ function L(key)
 var args = arguments[0] || {};
 
 var currentMetric = null;
-var reportModel   = args.report || false;
+var reportModel   = args.report;
 var reportList    = args.reportList || {};
 var reportDate    = require('session').getReportDate();
 
@@ -38,13 +38,14 @@ function unregisterEvents()
 
 function trackWindowRequest()
 {
-    var module   = reportModel.get('module');
-    var action   = reportModel.get('action');
-    var uniqueId = reportModel.get('uniqueId');
+    var module   = reportModel.getModule();
+    var action   = reportModel.getAction();
+    var uniqueId = reportModel.getUniqueId();
 
-    require('Piwik/Tracker').setCustomVariable(1, 'reportModule', module, 'page');
-    require('Piwik/Tracker').setCustomVariable(2, 'reportAction', action, 'page');
-    require('Piwik/Tracker').setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
+    var tracker  = require('Piwik/Tracker');
+    tracker.setCustomVariable(1, 'reportModule', module, 'page');
+    tracker.setCustomVariable(2, 'reportAction', action, 'page');
+    tracker.setCustomVariable(3, 'reportUniqueId', uniqueId, 'page');
 
     require('Piwik/Tracker').trackWindow('Report Without Dimension', 'report/without-dimension');
 }
@@ -71,6 +72,10 @@ function onWebsiteChanged()
 
 function onDateChanged(changedReportDate) 
 {
+    if (!changedReportDate) {
+        return;
+    }
+
     require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/without-dimension/change/date'});
 
     reportDate = changedReportDate;
@@ -79,6 +84,10 @@ function onDateChanged(changedReportDate)
 
 function onMetricChosen(chosenMetric)
 {
+    if (!chosenMetric) {
+        return;
+    }
+
     require('Piwik/Tracker').trackEvent({title: 'Metric Changed', url: '/report/without-dimension/change/metric/' + chosenMetric});
 
     currentMetric = chosenMetric;
@@ -86,6 +95,10 @@ function onMetricChosen(chosenMetric)
 }
 
 function onReportChosen (chosenReportModel) {
+    if (!chosenReportModel) {
+        return;
+    }
+
     reportModel   = chosenReportModel;
     currentMetric = null;
 
@@ -102,14 +115,14 @@ function showLoadingMessage()
     $.loadingindicator.show();
 }
 
-function toggleReportChooserVisibility(event)
+function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 
     require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/report/without-dimension/toggle/report-chooser'});
 }
 
-function toggleReportConfiguratorVisibility (event)
+function toggleReportConfiguratorVisibility ()
 {
     require('report/configurator').toggleVisibility();
 
@@ -119,6 +132,11 @@ function toggleReportConfiguratorVisibility (event)
 function removeAllChildrenFromContent()
 {
     var children = $.content.children;
+
+    if (!children) {
+        return;
+    }
+
     for (var d = children.length - 1; d >= 0; d--) $.content.remove(children[d]);
 }
 
@@ -137,7 +155,11 @@ function toUnit(size)
 }
 
 var containerRow = null;
-function renderMetricTile (processedReportModel, index) {
+function renderMetricTile (processedReportModel, index) 
+{
+    if (!processedReportModel) {
+        return;
+    }
 
     var title = processedReportModel.getTitle();
     var value = processedReportModel.getValue();
@@ -177,6 +199,10 @@ function renderMetricTile (processedReportModel, index) {
 
 function onStatisticsFetched(processedReportCollection)
 {
+    if (!processedReportCollection) {
+        return;
+    }
+
     removeAllChildrenFromContent();
 
     var accountModel = require('session').getAccount();
@@ -224,8 +250,6 @@ function fixVerticalSeparatorHeight()
 
 function doRefresh()
 {
-    showLoadingMessage();
-
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
@@ -234,18 +258,25 @@ function doRefresh()
         return;
     }
 
-    var module = reportModel.get('module');
-    var action = reportModel.get('action');
+    showLoadingMessage();
+
+    var module = reportModel.getModule();
+    var action = reportModel.getAction();
     var metric = reportModel.getSortOrder(currentMetric);
+
+    // TODO fallback to day/today is not a good solution cause user won't notice we've fallen back to a different date
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
     processedReportCollection.fetchProcessedReports(metric, {
         account: accountModel,
-        params: {period: reportDate.getPeriodQueryString(), 
-                 date: reportDate.getDateQueryString(), 
+        params: {period: piwikPeriod, 
+                 date: piwikDate, 
                  idSite: siteModel.id, 
                  apiModule: module, 
                  apiAction: action},
         error: function () {
+            // TODO handle error
             processedReportCollection.trigger('error', {type: 'loadingProcessedReport'});
         },
         success: onStatisticsFetched

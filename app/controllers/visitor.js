@@ -10,11 +10,11 @@ function L(key)
     return require('L')(key);
 }
 
-var args      = arguments[0] || {};
-var visitor   = args.visitor;
+var args    = arguments[0] || {};
+var visitor = args.visitor;
 
 var accountModel = require('session').getAccount();
-var accessUrl    = accountModel.getBasePath();
+var accessUrl    = accountModel ? accountModel.getBasePath() : 'http://demo.piwik.org/';
 
 var rows = [];
 

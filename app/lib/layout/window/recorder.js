@@ -14,7 +14,7 @@ function WindowRecorder() {
 
     function recordWindowIfEnabled(win)
     {
-        if (recordWindows) {
+        if (recordWindows && win) {
             recordedWindows.push(win);
             win.addEventListener('close', removeWindowFromRecordedWindows);
         }

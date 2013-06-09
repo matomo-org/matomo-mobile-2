@@ -43,7 +43,11 @@ exports.definition = {
     
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
-            
+
+            validResponse: function (response) {
+
+                return !!response && _.isObject(response) && _.has(response, 'value');
+            }
             // extended functions go here            
             
         }); // end extend

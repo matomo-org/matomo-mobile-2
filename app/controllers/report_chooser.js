@@ -39,6 +39,10 @@ function updateAvailableReportsList()
 
     reportsCollection.forEach(function (report) 
     {
+        if (!report) {
+            return;
+        }
+
         currentSection = report.get('category');
 
         if ('MultiSites' == report.get('module') || 'API' == report.get('module')) {
@@ -72,7 +76,7 @@ function setCurrentlySelectedCid(cidOfReport)
 
 function makeSureSelectedRowIsStillSelected()
 {
-    if ($.reportsTable.selectRow && cidToSelect) {
+    if ($.reportsTable && $.reportsTable.selectRow && cidToSelect) {
         var index = 0;
         _.forEach($.reportsTable.data, function (section) {
             if (!section || !section.rows) {
@@ -94,6 +98,10 @@ function makeSureSelectedRowIsStillSelected()
 
 function getCidOfEntryReport(reportsCollection)
 {
+    if (!reportsCollection) {
+        return;
+    }
+
     var entryReport = reportsCollection.getEntryReport();
 
     if (entryReport) {
@@ -187,6 +195,11 @@ function onAccountChosen(account)
 
 function openCompositeReport(chosenReportModel)
 {
+    if (!chosenReportModel) {
+        console.log('Cannot open compositeReport, no report given', 'report_chooser');
+        return;
+    }
+
     var reportCategory = chosenReportModel.get('category');
     var statistics     = Alloy.createController('report_composite', {reportCategory: reportCategory});
     statistics.open();

@@ -20,4 +20,4 @@ exports.execute = function (link)
         
         console.warn('Failed to open url: ' + url + ': ' + e.message, 'OpenLinkCommand::execute');
     }
-}
+};

@@ -39,6 +39,13 @@ exports.definition = {
             
             idAttribute: "idsite",
 
+            getName: function () {
+                return this.get('name');
+            },
+            getSiteId: function () {
+                return this.get('idsite');
+            }
+
         }); // end extend
         
         return Model;
@@ -50,10 +57,19 @@ exports.definition = {
 
             entrySite: function () {
                 var entrysite  = this.first();
+                if (!entrysite) {
+                    return;
+                }
+
                 var attributes = entrysite.toJSON();
 
                 var siteModel  = Alloy.createModel('PiwikWebsites', attributes);
                 return siteModel;
+            },
+            
+            validResponse: function (response) {
+
+                return _.isArray(response) && _.has(response, 0);
             }
 
         }); // end extend
@@ -61,4 +77,4 @@ exports.definition = {
         return Collection;
     }
         
-}
+};

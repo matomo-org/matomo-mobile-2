@@ -21,6 +21,10 @@ function TabletSidebar(detailRootWindow)
 
     this.setLeftSidebar = function(view)
     {
+        if (!view) {
+            return;
+        }
+        
         leftSidebarWindow.add(view);
         detailRootWindow.left = widthLeftSidebar;
     };

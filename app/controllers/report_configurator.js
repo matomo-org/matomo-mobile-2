@@ -33,10 +33,14 @@ function toggleVisibility()
 
 function uncheckAllWebsites()
 {
+    if (!$.configTable || !$.configTable.data) {
+        return;
+    }
+
     _.forEach($.configTable.data, function (tableViewRowOrSection) {
         uncheckWebsite(tableViewRowOrSection);
 
-        if (tableViewRowOrSection.rows) {
+        if (tableViewRowOrSection && tableViewRowOrSection.rows) {
             _.forEach(tableViewRowOrSection.rows, function (tableViewRow) {
                 uncheckWebsite(tableViewRow);
             });
@@ -46,11 +50,19 @@ function uncheckAllWebsites()
 
 function uncheckWebsite(tableViewRow)
 {
+    if (!tableViewRow) {
+        return;
+    }
+
     tableViewRow.rightImage = OS_ANDROID ? '/blank.png' : null;
 }
 
 function checkWebsite(tableViewRow)
 {
+    if (!tableViewRow) {
+        return;
+    }
+    
     tableViewRow.rightImage = OS_ANDROID ? '/tick.png' : 'tick.png';
 }
 
@@ -101,8 +113,11 @@ function selectWebsite(event)
         return;
     }
 
-    var siteModel = Alloy.createModel('PiwikWebsites', {idsite: website.get('reportMetadata').idsite,
-                                                        name: website.get('label')});
+
+    var idSite = website.getReportMetadata() ? website.getReportMetadata().idsite : null;
+    var websiteName = website.getTitle();
+
+    var siteModel = Alloy.createModel('PiwikWebsites', {idsite: idSite, name: websiteName});
     var account   = require('session').getAccount();
 
     require('session').setWebsite(siteModel, account);
@@ -111,15 +126,24 @@ function selectWebsite(event)
 
 function fetchWebsites()
 {
-    var reportDate = require('session').getReportDate();
-    var website    = require('session').getWebsite();
-    var account    = require('session').getAccount();
+    var website = require('session').getWebsite();
+    var account = require('session').getAccount();
+
+    if (!website || !account) {
+        console.info('cannot fetch website, no account or website', 'report_configurator');
+
+        return;
+    }
+
+    var reportDate  = require('session').getReportDate();
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
     $.piwikProcessedReport.fetchProcessedReports('nb_visits', {
         params: {
-            period: reportDate.getPeriodQueryString(), 
-            date: reportDate.getDateQueryString(), 
-            idSite: website.get('idsite'),
+            period: piwikPeriod, 
+            date: piwikDate, 
+            idSite: website.getSiteId(),
             filter_limit: 20,
             hideMetricsDoc: 1,
             apiModule: "MultiSites",
@@ -159,12 +183,16 @@ function checkCurrentlyActiveWebsite()
 {
     uncheckAllWebsites();
 
+    if (!$.configTable || !$.configTable.data) {
+        return;
+    }
+
     var activeSiteId = getSiteIdOfActiveWebsite();
 
     _.forEach($.configTable.data, function (tableViewRowOrSection) {
         checkWebsiteIfRowIsHasSiteId(tableViewRowOrSection, activeSiteId);
 
-        if (tableViewRowOrSection.rows) {
+        if (tableViewRowOrSection && tableViewRowOrSection.rows) {
             _.forEach(tableViewRowOrSection.rows, function (tableViewRow) {
                 checkWebsiteIfRowIsHasSiteId(tableViewRow, activeSiteId);
             });

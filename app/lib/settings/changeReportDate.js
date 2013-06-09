@@ -32,12 +32,10 @@ function getAvailableReportDateNames()
 
 function currentSelectedReportDateIndex()
 {
-    var settings = Alloy.createCollection('AppSettings').settings();
+    var settings = getSettings();
 
     var availableReportDates = getAvailableDateRanges();
-    console.log(availableReportDates);
-    console.log(settings.getReportDate());
-    console.log(settings.getReportPeriod());
+
     for (var index in availableReportDates) {
         
         if (availableReportDates[index] &&
@@ -64,6 +62,11 @@ function getSelectedReportDateAndPeriodByIndex(index)
     }
 }
 
+function getSettings()
+{
+    return Alloy.createCollection('AppSettings').settings();
+}
+
 function onReportDateChosen(event)
 {
     // android reports cancel = true whereas iOS returns the previous defined cancel index
@@ -83,7 +86,7 @@ function onReportDateChosen(event)
         return;
     }
 
-    var settings = Alloy.createCollection('AppSettings').settings();
+    var settings = getSettings();
     settings.setReportDateAndPeriod(reportDate.period, reportDate.date);
 
     trackReportDateChange(settings.getReportPeriod(), settings.getReportDate());
@@ -104,14 +107,13 @@ exports.open = function ()
     var dialog  = Ti.UI.createOptionDialog({
         title: L('Mobile_DefaultReportDate'),
         options: options,
-        cancel: options.length - 1,
+        cancel: options.length - 1
     });
 
-console.warn(currentSelectedReportDateIndex()+'');
     dialog.selectedIndex = currentSelectedReportDateIndex();
     dialog.addEventListener('click', onReportDateChosen);
 
     dialog.show();
     dialog = null;
 
-}
+};

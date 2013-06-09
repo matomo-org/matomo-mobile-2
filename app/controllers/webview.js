@@ -30,7 +30,6 @@ exports.open = function () {
     require('layout').open($.index);
 
     var urlToTrack = require('url').getUrlWithoutProtocolAndQuery(webUrl);
-
     require('Piwik/Tracker').trackWindow(urlToTrack, 'webview/' + urlToTrack);
 }
 

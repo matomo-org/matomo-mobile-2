@@ -47,7 +47,7 @@ function setPeriod(selectedPeriod) {
         $.toDateContainer.hide();
         $.fromDateLabel.text = L('General_Date');
     }
-};
+}
 
 function onPeriodChange(event)
 {
@@ -86,8 +86,12 @@ function preSelectPeriod(initialPeriod)
     var piwikDate  = new PiwikDates();
     var periods    = piwikDate.getAvailablePeriods();
 
+    if (!$.periodPicker) {
+        return;
+    }
+
     var index = 0;
-    for (period in periods) {
+    for (var period in periods) {
         if (period == initialPeriod) {
             $.periodPicker.setSelectedRow(0, index, false);
             return;
@@ -121,4 +125,4 @@ exports.open = function ()
     initToDatePicker();
 
     require('layout').open($.index);
-}
+};

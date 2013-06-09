@@ -7,14 +7,30 @@
 
 var processedReport = arguments[0] || {};
 
+function isTitaniumCompatibleImageUrl(url)
+{
+    return require('ui/helper').isTitaniumCompatibleImageUrl(url);
+}
+
 function showLogo(processedReport)
 {
+    var logoPath = processedReport.getLogo();
+
+    if (!isTitaniumCompatibleImageUrl(logoPath)) {
+        return;
+    }
+
     var accountModel = require('session').getAccount();
+
+    if (!accountModel) {
+        console.log('cannot display logo, no account', 'report_row');
+        return;
+    }
     
     $.icon.width  = processedReport.getLogoWidth() || 16;
     $.icon.height = processedReport.getLogoHeight() || 16;
     $.icon.left   = OS_ANDROID ? '10dp' : 10;
-    $.icon.image  = accountModel.getBasePath() + processedReport.getLogo();
+    $.icon.image  = accountModel.getBasePath() + logoPath;
     $.icon.show();
 }
 

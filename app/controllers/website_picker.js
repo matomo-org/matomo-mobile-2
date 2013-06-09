@@ -21,6 +21,10 @@ function chooseWebsite()
 
 function onWebsiteChosen(event)
 {
+    if (!event) {
+        return;
+    }
+    
     session.setWebsite(event.site, event.account);
 }
 

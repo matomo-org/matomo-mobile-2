@@ -24,6 +24,12 @@ function onOpen()
     require('Piwik/Tracker').trackWindow('Create Account', 'account-create');
 }
 
+function onClose()
+{
+    $.destroy();
+    $.off();
+}
+
 function open() 
 {
     require('layout').open($.index);
@@ -32,8 +38,6 @@ function open()
 function close() 
 {
     require('layout').close($.index);
-    $.destroy();
-    $.off();
 }
 
 exports.open  = open;

@@ -9,6 +9,10 @@ var url = require('url');
 
 function appendIndexPhpIfNecessary(accessUrl)
 {
+    if (!accessUrl) {
+        return '';
+    }
+
     accessUrl = appendSlashIfNecessary(accessUrl);
     
     if (!url.endsWithPhp(accessUrl)) {
@@ -20,6 +24,10 @@ function appendIndexPhpIfNecessary(accessUrl)
 
 function appendSlashIfNecessary(accessUrl)
 {
+    if (!accessUrl) {
+        return '';
+    }
+
     if (!url.endsWithSlash(accessUrl) && !url.endsWithPhp(accessUrl)) {
         accessUrl = accessUrl + '/';
     } 
@@ -63,7 +71,7 @@ exports.definition = {
         _.extend(Model.prototype, {
             
             initialize: function () {
-                this.on('change:accessUrl', this.completeAccessUrl)
+                this.on('change:accessUrl', this.completeAccessUrl);
             },
 
             startWithAllWebsitesDashboard: function () {
@@ -96,11 +104,12 @@ exports.definition = {
             
             completeAccessUrl: function (accountModel, accessUrl) {
                 
-                if (!accessUrl) {
+                if (!accessUrl || !accountModel) {
+                    console.info('Unable to complete access url, missing account or url', 'appaccounts');
                     return;
                 }
 
-                accessUrl = appendIndexPhpIfNecessary(accessUrl)
+                accessUrl = appendIndexPhpIfNecessary(accessUrl);
                 
                 accountModel.set({accessUrl: accessUrl}, {silent: true});
             },
@@ -243,8 +252,10 @@ exports.definition = {
                 var password = this.get('password');
                 var account  = this;
 
-                var onSuccess = function (model, response) {
-                    account.set({tokenAuth: response.value});
+                var onSuccess = function (model) {
+                    if (model && model.getTokenAuth()) {
+                        account.set({tokenAuth: model.getTokenAuth()});
+                    } 
                 };
 
                 var onError = function (model) {
@@ -295,5 +306,5 @@ exports.definition = {
         return Collection;
     }
         
-}
+};
 

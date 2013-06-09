@@ -18,6 +18,7 @@ function onOpen()
 function onClose()
 {
     $.destroy();
+    $.off();
 }
 
 function toggleReportChooserVisibility(event)

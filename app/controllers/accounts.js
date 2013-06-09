@@ -12,16 +12,28 @@ function L(key)
 
 var args = arguments[0] || {};
 var hideCloseButton = args.hideCloseButton || false;
+
 var accounts = Alloy.Collections.appAccounts;
 accounts.fetch();
 
 function chooseAccount(event)
 {
-    require('Piwik/Tracker').trackEvent({title: 'Accounts - Account selected', url: '/accounts/account-selected'});
+    if (!event || !event.row || _.isNull(event.row.accountId) || _.isUndefined(event.row.accountId)) {
+        console.info('Cannot select account, there is no accountId', 'accounts::chooseAccount');
+        return;
+    }
+
+    require('Piwik/Tracker').trackEvent({title: 'Accounts - Account selected', 
+                                         url: '/accounts/account-selected'});
 
     var account = accounts.get(event.row.accountId);
-    account.select(function () {
-        $.trigger('accountChosen', account);
+
+    if (!account) {
+        console.info('Cannot select account, account does not exist', 'accounts::chooseAccount');
+    }
+
+    account.select(function (accountModel) {
+        $.trigger('accountChosen', accountModel);
         close();
     });
 }

@@ -39,7 +39,7 @@ $.index.addEventListener('click', function () {
  */
 function getViewWidth() {
     if ($.index && $.index.size && $.index.size.width) {
-        $.index.size.width;
+        return $.index.size.width;
     }
 
     return Ti.Platform.displayCaps.platformWidth;
@@ -97,7 +97,7 @@ function getOrientationSpecificWidth() {
     var pictureWidth = Ti.Platform.displayCaps.platformWidth - navBarHeight - 20;
     
     return pictureWidth;
-};
+}
 
 /**
  * Gets the calculated height of the graph after a window orientation change on Android. We have to detect 
@@ -109,7 +109,7 @@ function getOrientationSpecificHeight() {
     var pictureHeight = Ti.Platform.displayCaps.platformHeight - navBarHeight - 20;
     
     return pictureHeight;
-};
+}
 
 /**
  * Gets the graph url for the given width and height.
@@ -144,7 +144,7 @@ function getGraphUrlWithSize(width, height) {
  */
 function getImageView(url, width, height) {
 
-    console.log('piwik graphUrl is ' + url, 'graphdetail::getImageView');
+    console.debug('piwik graphUrl is ' + url, 'graphdetail::getImageView');
 
     var options = {width: width,
                    height: height,
@@ -205,9 +205,6 @@ if (require('alloy').isTablet) {
         } catch (e) {
             console.warn('Failed to update (remove and add) graph', 'graphdetail');
             console.warn(e, 'graphdetail');
-            for (var ind in e) {
-                console.log(ind, e[ind]);
-            }
         }
     }
     
@@ -247,4 +244,4 @@ function destroy()
 exports.open = function () 
 {
     $.index.open();
-}
+};

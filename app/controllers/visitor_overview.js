@@ -10,9 +10,9 @@ function L(key)
     return require('L')(key);
 }
 
-var args = arguments[0] || {};
-var accountModel      = args.account || false;
-var visitor = args.visitor || {};
+var args      = arguments[0] || {};
+var accessUrl = args.account ? args.account.getBasePath() : 'http://demo.piwik.org/';
+var visitor   = args.visitor || null;
 
 function goalConversionDescription(visitor)
 {
@@ -87,15 +87,15 @@ function updateDisplayedValues(visitor)
     $.goalConversions.text = pageviewsDescription(visitor);
 
     if (visitor.countryFlag) {
-        $.countryFlag.image = accountModel.getBasePath() + visitor.countryFlag;
+        $.countryFlag.image = accessUrl + visitor.countryFlag;
     }
 
     if (visitor.browserIcon) {
-        $.browserIcon.image = accountModel.getBasePath() + visitor.browserIcon;
+        $.browserIcon.image = accessUrl + visitor.browserIcon;
     }
 
     if (visitor.operatingSystemIcon) {
-        $.operatingSystemIcon.image = accountModel.getBasePath() + visitor.operatingSystemIcon;
+        $.operatingSystemIcon.image = accessUrl + visitor.operatingSystemIcon;
     }
 }
 

@@ -30,6 +30,10 @@ exports.definition = {
                 return Ti.Utils.md5HexDigest(password);
             },
 
+            getTokenAuth: function () {
+                return this.get('value');
+            },
+
             getAnonymousLoginToken: function () {
                 return 'anonymous';
             },
@@ -37,12 +41,17 @@ exports.definition = {
             fetchToken: function (accountModel, username, password, onSuccess, onError) {
 
                 if (!username && !password) {
+                    this.set({value: this.getAnonymousLoginToken()});
 
-                    onSuccess(this, {value: this.getAnonymousLoginToken()});
+                    onSuccess(this);
 
                 } else {
 
-                    // fetch token via API
+                    if (!accountModel) {
+                        console.info('Cannot fetch token, no account', 'piwikTokenAuth');
+                        return;
+                    }
+
                     var passwordHash = this.getPasswordHash(password);
                     
                     this.fetch({
@@ -55,7 +64,7 @@ exports.definition = {
             },
 
             validResponse: function (response) {
-                var _ = require("alloy/underscore");
+                var _ = require('alloy/underscore');
                  
                 if (!response || !_.isObject(response) || !response.value) {
         
@@ -74,10 +83,14 @@ exports.definition = {
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
             
+            validResponse: function (response) {
+
+                return _.isObject(response) && _.has(response, 'value');
+            }
         }); // end extend
         
         return Collection;
     }
         
-}
+};
 

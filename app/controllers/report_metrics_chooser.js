@@ -11,7 +11,7 @@ function L(key)
 }
 
 var args    = arguments[0] || {};
-var metrics = args.metrics || [];
+var metrics = args.metrics || {};
 
 var options           = [];
 var internalNames     = [];
@@ -36,6 +36,11 @@ function doChangeMetric(event)
 {
     if (!event || event.cancel === event.index || true === event.cancel || 0 > event.index) {
 
+        return;
+    }
+
+    if (!internalNames || !internalNames[event.index]) {
+        console.warn('selected metric cannot be chosen, it is empty', 'report_metric_chooser');
         return;
     }
     

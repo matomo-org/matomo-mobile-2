@@ -9,7 +9,7 @@ function detectPeriodFromReportDate(reportDate)
 {
     var reportDateToPeriodMapping = {week: 'week', month: 'month', year: 'year'};
 
-    if (reportDateToPeriodMapping[reportDate]) {
+    if (reportDate && reportDateToPeriodMapping[reportDate]) {
         return reportDateToPeriodMapping[reportDate];
     }
 
@@ -20,14 +20,14 @@ function detectDateFromReportDate(reportDate)
 {
     var reportDateToDateMapping = {week: 'today', month: 'today', year: 'today'};
 
-    if (reportDateToDateMapping[reportDate]) {
+    if (reportDate && reportDateToDateMapping[reportDate]) {
         return reportDateToDateMapping[reportDate];
     }
 
     return reportDate;
 }
 
-function reportDate()
+function ReportDate()
 {
     this.period = null;
     this.date   = null;
@@ -39,7 +39,7 @@ function reportDate()
  * @param  {string}  date  A date in format 'YYYY-MM-DD' or 'YYYY-MM-DD,YYYY-MM-DD' or something like 'today' or 
  *                        'yesterday'
  */
-reportDate.prototype.setDate = function (date) {
+ReportDate.prototype.setDate = function (date) {
     this.date = date;
 };
 
@@ -48,26 +48,28 @@ reportDate.prototype.setDate = function (date) {
  *
  * @param  {string}  period  A period like 'week' or 'range'.
  */
-reportDate.prototype.setPeriod = function (period) {
+ReportDate.prototype.setPeriod = function (period) {
     this.period = period;
 };
-reportDate.prototype.getPeriod = function () {
-    return this.period;
-};
-reportDate.prototype.getPeriodQueryString = function () {
+
+ReportDate.prototype.getPeriod = function () {
     return this.period;
 };
 
-reportDate.prototype.getDateQueryString = function () {
+ReportDate.prototype.getPeriodQueryString = function () {
+    return this.period;
+};
+
+ReportDate.prototype.getDateQueryString = function () {
     return this.date;
 };
 
 /**
  * Sets (overwrites) the current period and date.
  *
- * @param  {string}  reportDate  A report date (eg from Piwik settings) like 'week' or 'last7'.
+ * @param  {string}  ReportDate  A report date (eg from Piwik settings) like 'week' or 'last7'.
  */
-reportDate.prototype.setReportDate = function (reportDate) {
+ReportDate.prototype.setReportDate = function (reportDate) {
     this.period = detectPeriodFromReportDate(reportDate);
     this.date   = detectDateFromReportDate(reportDate);
 };
@@ -81,7 +83,7 @@ reportDate.prototype.setReportDate = function (reportDate) {
  *                      [1] => [{Date}, 'to' date]  
  *                    )
  */
-reportDate.prototype.getRangeDate = function () {
+ReportDate.prototype.getRangeDate = function () {
     if (!this.date) {
         
         return [new Date(), new Date()];
@@ -114,8 +116,8 @@ reportDate.prototype.getRangeDate = function () {
         
     } else if ('week' == this.period) {
 
-        var fromDate = this.toDate(this.date);
-        var toDate   = this.toDate(this.date);
+        fromDate = this.toDate(this.date);
+        toDate   = this.toDate(this.date);
         if (0 === fromDate.getDay()) {
             fromDate = moment().subtract('days', 7).toDate();
             toDate   = moment().subtract('days', 7).toDate();
@@ -152,7 +154,7 @@ reportDate.prototype.getRangeDate = function () {
  *                        )
  *                    )
  */
-reportDate.prototype.getAvailableDateRanges = function () {
+ReportDate.prototype.getAvailableDateRanges = function () {
 
     var L = require('L');
     
@@ -177,7 +179,7 @@ reportDate.prototype.getAvailableDateRanges = function () {
  *                         [{string}, Piwik internal name, eg 'day'] => [string Human readble format, eg 'Day']
  *                     )
  */
-reportDate.prototype.getAvailablePeriods = function () {
+ReportDate.prototype.getAvailablePeriods = function () {
     
     var L = require('L');
     
@@ -201,7 +203,7 @@ reportDate.prototype.getAvailablePeriods = function () {
  *
  * @returns  {Date}    The created date object.
  */
-reportDate.prototype.toDate = function (str) {
+ReportDate.prototype.toDate = function (str) {
 
     if (!str || 'today' == str) {
     
@@ -245,7 +247,7 @@ reportDate.prototype.toDate = function (str) {
  *
  * @returns  {string}  The in Piwik API required date format.
  */
-reportDate.prototype.toPiwikQueryString = function (period, from, to) {
+ReportDate.prototype.toPiwikQueryString = function (period, from, to) {
     
     if (!from) {
         from = new Date();
@@ -284,4 +286,4 @@ reportDate.prototype.toPiwikQueryString = function (period, from, to) {
     return dateString;
 };
 
-module.exports = reportDate;
+module.exports = ReportDate;

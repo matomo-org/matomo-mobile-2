@@ -45,6 +45,7 @@ function onOpen()
 function onClose()
 {
     unregisterEvents();
+    $.countdown && $.countdown.stop();
     $.destroy();
     $.off();
 }
@@ -141,7 +142,7 @@ function showLoadingMessage()
 
 function onFetchError()
 {
-    console.log('error fetching data');
+    console.warn('error fetching data');
 }
 
 function doRefresh()

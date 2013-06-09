@@ -6,17 +6,23 @@
  */
 
 var intervalInSeconds = 60;
-var interval = null;
-var currentInterval = 0;
-
+var interval          = null;
+var currentInterval   = 0;
 
 function setTitle(title)
 {
-    $.title.text = title + '';
+    if ($.title) { 
+        $.title.text = title + '';
+    }
 }
 
-function getTitle(title)
+function getTitle()
 {
+    if (!$.title) {
+
+        return '-';
+    }
+    
     return $.title.text;
 }
 
@@ -39,14 +45,14 @@ function decrementCounter()
 exports.init = function (seconds) 
 {
     intervalInSeconds = seconds;
-}
+};
 
 exports.stop = function ()
 {
     setTitle('-');
     clearInterval(interval);
     interval = null;
-}
+};
 
 exports.start = function ()
 {
@@ -56,4 +62,4 @@ exports.start = function ()
 
     currentInterval = intervalInSeconds;
     setTitle(intervalInSeconds);
-}
+};

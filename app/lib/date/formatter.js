@@ -44,6 +44,10 @@ function tryToLoadLanguageBasedOnLocale()
 tryToLoadLanguageBasedOnLocale();
 
 exports.getPrettyDate = function (reportDate) {
+    if (!reportDate) {
+        return '';
+    }
+
     var rangeDates = reportDate.getRangeDate();
     var fromDate   = rangeDates[0];
     var toDate     = rangeDates[1];

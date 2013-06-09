@@ -13,7 +13,7 @@ function L(key)
 var args         = arguments[0] || {};
 var flatten      = args.flatten || 0;
 var reportDate   = require('session').getReportDate();
-var $model       = args ? args["$model"] : null;
+var $model       = args["$model"];
 
 $.headline.text = String.format('%s (%s)', '' + $model.getReportName(), '' + $model.getMetricName());
 
@@ -43,15 +43,19 @@ function fetchProcessedReport()
         return;
     }
 
-    var module = $model.get('module');
-    var action = $model.get('action');
+    var module = $model.getModule();
+    var action = $model.getAction();
     var metric = $model.getSortOrder();
+
+    // TODO fallback to day/today is not a good solution cause user won't notice we've fallen back to a different date
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
     $.piwikProcessedReport.fetchProcessedReports(metric, {
         account: accountModel,
         params: {
-            period: reportDate.getPeriodQueryString(), 
-            date: reportDate.getDateQueryString(), 
+            period: piwikPeriod, 
+            date: piwikDate, 
             idSite: siteModel.id, 
             flat: flatten,
             filter_limit: 1,
@@ -61,5 +65,5 @@ function fetchProcessedReport()
     });
 }
 
-$.piwikProcessedReport.on('reset', renderGraph)
+$.piwikProcessedReport.on('reset', renderGraph);
 fetchProcessedReport();

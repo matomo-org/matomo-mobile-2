@@ -172,6 +172,13 @@ exports.definition = {
             },
 
             fetchProcessedReports: function (sortOrderColumn, options) {
+                if (!options) {
+                    options = {};
+                }
+                if (!options.params) {
+                    options.params = {};
+                }
+
                 this.sortOrderColumn = sortOrderColumn;
 
                 options.params.sortOrderColumn    = sortOrderColumn;
@@ -235,8 +242,7 @@ exports.definition = {
                         row = report;
                         row.title = label;
                         row.value = value;
-
-                        row.id       = index;
+                        row.id    = index;
                         row.reportMetadata  = metadata;
                         row.sortOrderColumn = this.sortOrderColumn;
                         row.hasDimension    = true;
@@ -281,6 +287,11 @@ exports.definition = {
                 reportMetadata = null;
 
                 return rows;
+            },
+
+            validResponse: function (response) {
+
+                return !!response;
             }
             
         }); // end extend

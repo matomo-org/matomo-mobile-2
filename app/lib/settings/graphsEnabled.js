@@ -17,4 +17,4 @@ exports.toggle = function ()
     var tracker = require('Piwik/Tracker');
     tracker.trackEvent({title: 'Graphs ' + action,
                         url: '/settings/changed/graphs/' + action});
-}
+};

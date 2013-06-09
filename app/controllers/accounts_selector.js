@@ -27,4 +27,4 @@ $.showNoAccountSelectedHint = function ()
 {
     // never dispay this hint here.
     return;
-}
+};
