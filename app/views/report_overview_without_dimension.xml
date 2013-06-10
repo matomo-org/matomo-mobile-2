@@ -3,7 +3,8 @@
 
     <View id="index">
         <View class="header" onClick="openReport">
-            <Label class="headline" id="headline"/>
+            <Label id="metric"/>
+            <Label id="metric_value"/>
         </View>
         <View class="separator"/>
         <View class="content" id="content">

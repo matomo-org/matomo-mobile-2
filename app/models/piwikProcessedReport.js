@@ -270,8 +270,8 @@ exports.definition = {
                         row.title = label;
                         row.value = value;
                         row.id    = rows.length;
-                        row.sortOrderColumn = key;
                         row.reportMetadata  = reportMetadata ? reportMetadata[key] : null;
+                        row.sortOrderColumn = key;
                         row.hasDimension    = false;
 
                         rows.push(row);

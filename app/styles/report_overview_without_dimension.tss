@@ -35,15 +35,34 @@
     width: Ti.UI.FILL,
 }
 
-".headline": {
+"#metric": {
     color: '#191919',
     font: {fontWeight: 'bold'},
     left: 0,
-    width: Ti.UI.SIZE,
+    right: 100,
+    ellipsize: false,
+    wordWrap: true
 }
 
-".headline[platform=android]": {
+"#metric[platform=android]": {
     font: {fontWeight: 'bold', fontSize: '16sp'},
+    right: '100dp',
+}
+
+"#metric_value": {
+    color: '#8b8b8b',
+    font: {fontWeight: 'bold'},
+    right: 10,
+    width: 90,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+    ellipsize: false,
+    wordWrap: true
+}
+
+"#metric_value[platform=android]": {
+    font: {fontWeight: 'bold', fontSize: '16sp'},
+    right: '10dp',
+    width: '90dp',
 }
 
 ".header": {

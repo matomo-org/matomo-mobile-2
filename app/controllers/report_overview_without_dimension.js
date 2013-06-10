@@ -15,7 +15,7 @@ var flatten      = args.flatten || 0;
 var reportDate   = require('session').getReportDate();
 var $model       = args["$model"];
 
-$.headline.text = String.format('%s (%s)', '' + $model.getReportName(), '' + $model.getMetricName());
+$.metric.text = String.format('%s (%s)', '' + $model.getReportName(), '' + $model.getMetricName());
 
 function openReport()
 {
@@ -28,6 +28,7 @@ function renderGraph()
     var accountModel = require('session').getAccount();
     if ($.piwikProcessedReport.first()) {
         $.graphCtrl.update($.piwikProcessedReport, accountModel);
+        $.metric_value.text = $.piwikProcessedReport.first().getValue();
     } else {
         // TODO ... this.hide(); this.destroy()??
     }
