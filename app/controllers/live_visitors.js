@@ -48,6 +48,7 @@ function onOpen()
 function onClose()
 {
     unregisterEvents();
+    stopHandleBackgroundEvents();
     stopRefreshTimer();
     $.countdown && $.countdown.stop();
     $.destroy();
@@ -163,29 +164,29 @@ function doRefresh()
     piwikLiveVisitors.fetchVisitors(accountModel, siteModel.id, render, onFetchError);
 }
 
-/***** HANDLE BACKGROUND EVENTS ******/
-    
-    function restartTimerIfSomeVisitorsAreAlreadyDisplayed() {
-        if ($.liveTable && $.liveTable.data && $.liveTable.data.length) {
-            // start auto refresh again if user returns to this window from a previous displayed window
-            
-            startRefreshTimer(20000);
-        }
+function restartTimerIfSomeVisitorsAreAlreadyDisplayed() {
+    if ($.liveTable && $.liveTable.data && $.liveTable.data.length) {
+        // start auto refresh again if user returns to this window from a previous displayed window
+        
+        startRefreshTimer(20000);
     }
-    
-    var onResume = function () {
-        if ($.liveTable && $.liveTable.data && $.liveTable.data.length) {
+}
 
-            startRefreshTimer(3000);
-        }
-    };
-    
-    var onPause = function () {
-        if (stopRefreshTimer) {
-            stopRefreshTimer();
-        }
-    };
-    
+function onResume () {
+    if ($.liveTable && $.liveTable.data && $.liveTable.data.length) {
+
+        startRefreshTimer(3000);
+    }
+}
+
+function onPause () {
+    if (stopRefreshTimer) {
+        stopRefreshTimer();
+    }
+}
+
+function handleBackgroundEvents()
+{
     // ios
     Ti.App.addEventListener('resume', onResume);
     Ti.App.addEventListener('pause', onPause);
@@ -197,8 +198,22 @@ function doRefresh()
         activity.addEventListener('pause', stopRefreshTimer);
         activity.addEventListener('stop', stopRefreshTimer);
     }
+}
 
-/***** HANDLE BACKGROUND EVENTS END ******/
+function stopHandleBackgroundEvents()
+{
+    // ios
+    Ti.App.removeEventListener('resume', onResume);
+    Ti.App.removeEventListener('pause', onPause);
+
+    var activity = require('ui/helper').getAndroidActivity($.index);
+
+    // android
+    if (activity) {
+        activity.removeEventListener('pause', stopRefreshTimer);
+        activity.removeEventListener('stop', stopRefreshTimer);
+    }
+}
 
 function toggleReportConfiguratorVisibility (event)
 {
@@ -217,6 +232,7 @@ function toggleReportChooserVisibility(event)
 exports.open = function () 
 {
     registerEvents();
+    handleBackgroundEvents();
     doRefresh();
     require('layout').open($.index);
 };
