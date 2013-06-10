@@ -11,6 +11,7 @@ function L(key)
 }
 
 var refreshIntervalInMs = 45000;
+var refreshTimer = null;
 
 $.countdown.init(parseInt(refreshIntervalInMs / 1000, 10));
 
@@ -30,6 +31,8 @@ function unregisterEvents()
 {
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
+    
+    $.index.removeEventListener('focus', restartTimerIfSomeVisitorsAreAlreadyDisplayed);
 }
 
 function trackWindowRequest()
@@ -45,6 +48,7 @@ function onOpen()
 function onClose()
 {
     unregisterEvents();
+    stopRefreshTimer();
     $.countdown && $.countdown.stop();
     $.destroy();
     $.off();
@@ -57,8 +61,7 @@ function onWebsiteChanged()
     doRefresh();
 }
 
-var refreshTimer = null;
-var stopRefreshTimer = function () {
+function stopRefreshTimer() {
 
     if (refreshTimer) {
         // do no longer execute autoRefresh if user opens another app or returns the home screen (only for iOS)
@@ -68,7 +71,7 @@ var stopRefreshTimer = function () {
     $.countdown.stop();
 };
 
-var startRefreshTimer = function (timeoutInMs) {
+function startRefreshTimer (timeoutInMs) {
     stopRefreshTimer();
 
     $.countdown.init(parseInt(timeoutInMs / 1000, 10));
@@ -87,6 +90,7 @@ function openVisitor(event)
         return;
     }
 
+    stopRefreshTimer();
     var params  = {visitor: event.row.visitor};
     var visitor = Alloy.createController('visitor', params);
     visitor.open();
@@ -160,27 +164,14 @@ function doRefresh()
 }
 
 /***** HANDLE BACKGROUND EVENTS ******/
-    /*
-    this.addEventListener('closeWindow', function () {
-        if (stopRefreshTimer) {
-            stopRefreshTimer();
-        }
-    });
-
-    this.addEventListener('blurWindow', function () {
-        if (stopRefreshTimer) {
-            stopRefreshTimer();
-        }
-    });
-
-    this.addEventListener('focusWindow', function () {
-        if (params && params.autoRefresh && tableView && tableView.data && tableView.data.length && that) {
+    
+    function restartTimerIfSomeVisitorsAreAlreadyDisplayed() {
+        if ($.liveTable && $.liveTable.data && $.liveTable.data.length) {
             // start auto refresh again if user returns to this window from a previous displayed window
             
             startRefreshTimer(20000);
         }
-    });
-    */
+    }
     
     var onResume = function () {
         if ($.liveTable && $.liveTable.data && $.liveTable.data.length) {

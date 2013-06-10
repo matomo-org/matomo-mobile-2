@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" onClose="onClose" onOpen="onOpen">
+    <Window id="index" onClose="onClose" onOpen="onOpen" onFocus="restartTimerIfSomeVisitorsAreAlreadyDisplayed">
         
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
