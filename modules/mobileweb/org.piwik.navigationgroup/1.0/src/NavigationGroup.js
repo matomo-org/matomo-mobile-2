@@ -41,22 +41,29 @@ define(['Ti/_/css', 'Ti/_/declare', 'Ti/UI/View', 'Ti/UI/MobileWeb/NavigationGro
         },
 
         close: function(win) {
+            if (!win) {
+                console.log('No window, cannot close it');
+                return;
+            }
+            
             var windows = this._windows;
             var windowIdx = windows.indexOf(win);
                 
-            if (0 < windowIdx) {
-                NavigationGroup.prototype.close.apply(this, arguments);
-            } else if (0 === windowIdx) {
-                win._navGroup = void 0;
-                
-                var self = this;
-                windows.splice(windowIdx, 1);
-                win.fireEvent('blur');
-                self._contentContainer.remove(win);
-                win.fireEvent('close');
-                win._opened = 0;
+            var self = this;
+            windows.splice(windowIdx, 1);
+            win.fireEvent('blur');
+            self._contentContainer.remove(win);
+            
+            try {
+                win.destroy();
+            } catch (e) {
+                console.error('Failed to destroy window', e);
+            }
 
-                this._updateNavBar();
+            this._updateNavBar();
+            
+            if (windows.length && windows[windows.length - 1]) {
+                windows[windows.length - 1].fireEvent('focus');
             }
         }
 
