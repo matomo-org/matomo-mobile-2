@@ -22,10 +22,8 @@ function onOpen()
 
 function onClose()
 {
-    if (supportsListView()) {
-        var settings = Alloy.createCollection('AppSettings').settings();
-        settings.off('change', updateAllDisplayedSettingsValues);
-    }
+    var settings = Alloy.createCollection('AppSettings').settings();
+    settings.off('change', updateAllDisplayedSettingsValues);
 
     $.destroy();
     $.off();
@@ -107,7 +105,12 @@ function updateDisplayedLanguageValue()
 function updateDisplayedHttpTimeoutValue()
 {
     var httpTimeout = require('settings/changeHttpTimeout').getCurrentHttpTimeoutName();
-    setSubtitle($.advanced, 0, httpTimeout);
+
+    if (supportsListView()) {
+        setSubtitle($.advanced, 0, httpTimeout);
+    } else {
+        $.timeout.title = String.format('%s (%s)', L('Mobile_HttpTimeout'), '' + httpTimeout);
+    }
 }
 
 function updateDisplayedTrackingValue()
@@ -196,12 +199,15 @@ function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
 
 function updateAllDisplayedSettingsValues()
 {
-    setTitle($.basic, 0, L('General_Language'));
-    setTitle($.basic, 1, L('Mobile_AnonymousTracking'));
-    setTitle($.basic, 2, L('Mobile_EnableGraphsLabel'));
-    setTitle($.advanced, 0, L('Mobile_HttpTimeout'));
+    if (supportsListView()) {
+        setTitle($.basic, 0, L('General_Language'));
+        setTitle($.basic, 1, L('Mobile_AnonymousTracking'));
+        setTitle($.basic, 2, L('Mobile_EnableGraphsLabel'));
+        setTitle($.advanced, 0, L('Mobile_HttpTimeout'));
 
-    updateDisplayedLanguageValue();
+        updateDisplayedLanguageValue();
+    }
+
     updateDisplayedHttpTimeoutValue();
     updateDisplayedTrackingValue();
     updateDisplayedGraphsValue();
@@ -211,11 +217,10 @@ exports.close = close;
 
 exports.open = function() 
 {
-    if (supportsListView()) {
-        var settings = Alloy.createCollection('AppSettings').settings();
-        settings.on('change', updateAllDisplayedSettingsValues);
-        updateAllDisplayedSettingsValues();
-    }
+    var settings = Alloy.createCollection('AppSettings').settings();
+    settings.on('change', updateAllDisplayedSettingsValues);
 
+    updateAllDisplayedSettingsValues();
+    
     require('layout').open($.index);
 };
