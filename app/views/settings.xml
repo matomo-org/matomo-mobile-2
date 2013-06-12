@@ -41,6 +41,7 @@
             <FooterView>
                 <View class="footer"><Label id="loginHint"/></View>
             </FooterView>
+            <TableViewRow id="language" onClick="changeLanguage"/>
             <TableViewRow id="tracking" onClick="toggleTrackingEnabled"/>
             <TableViewRow id="graphs" onClick="toggleGraphsEnabled"/>
             <Widget src="org.piwik.tableviewsection" id="advanced"/>
