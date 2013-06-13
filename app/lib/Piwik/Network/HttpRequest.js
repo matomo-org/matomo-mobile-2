@@ -14,6 +14,13 @@
  */
 
 /**
+ * @private
+ */
+function encode(param) {
+    return Ti.Network.encodeURIComponent(param);
+}
+
+/**
  * @class    Can be used to send a GET http request to any url. Attend that synchronous requests are not supported at 
  *           the moment.
  *
@@ -35,7 +42,7 @@ function HttpRequest () {
      * 
      * @private
      */
-    this.baseUrl          = null;
+    this.baseUrl = null;
 
     /**
      * We have to inform the user if no network connection is available. Apple requires this. Additionally, we want to
@@ -57,17 +64,7 @@ function HttpRequest () {
      *
      * @type     boolean
      */
-    this.sendErrors       = true;
-    
-    /**
-     * The handleAs parameter specifices how to parse the received data before the callback method is called.
-     * Supported values are 'json', 'xml' and 'text'.
-     * 
-     * @default  "text"
-     *
-     * @type     string
-     */
-    this.handleAs         = 'text';
+    this.sendErrors = true;
     
     /**
      * The user agent used when sending requests.
@@ -76,7 +73,7 @@ function HttpRequest () {
      *
      * @type     string
      */
-    this.userAgent        = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1';
+    this.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1';
 
     /**
      * An object containing key/value pairs. These are used as GET parameters when executing the request.
@@ -85,7 +82,7 @@ function HttpRequest () {
      *
      * @type  Object|null
      */
-    this.parameter        = null;
+    this.parameter = null;
 
     /**
      * The callback method will be executed as soon as the readyState is finished. The callback method will be executed
@@ -96,7 +93,7 @@ function HttpRequest () {
      *
      * @type  Function|null
      */
-    this.callback         = null;
+    this.callback = null;
 
     /**
      * An instance of the Titanium HTTP Client instance we have used to send the request. Is only set if the request is
@@ -104,7 +101,7 @@ function HttpRequest () {
      *
      * @type  Titanium.Network.HTTPClient
      */
-    this.xhr              = null;
+    this.xhr = null;
 }
 
 /**
@@ -154,17 +151,53 @@ HttpRequest.prototype.setCallback = function (callback) {
     callback      = null;
 };
 
+HttpRequest.prototype.buildEncodedUrlQuery = function (parameter) 
+{
+    if (!parameter) {
+
+        return '';
+    }
+
+    var requestUrl = '?';
+
+    for (var paramName in parameter) {
+        // hack for PiwikBulkApiRequests
+        if ('urls' == paramName) {
+            for (var index in parameter.urls) {
+                var url = parameter.urls[index];
+                requestUrl += encode('urls[' + index + ']') + '=';
+                for (var key in url) {
+                    requestUrl += encode(key) + '%3d' + encode(url[key]) + '%26';
+                }
+
+                requestUrl += '&';
+            }
+
+            continue;
+        }
+
+        requestUrl += encode(paramName) + '=' + encode(parameter[paramName]) + '&';
+    }
+   
+    return requestUrl;
+};
+
+HttpRequest.prototype.getRequestUrl = function () {
+
+    var parameter  = this.parameter || {};
+    var requestUrl = this.baseUrl + this.buildEncodedUrlQuery(parameter);
+    parameter      = null;
+    
+    console.debug('RequestUrl is ' + requestUrl, 'HttpRequest::handle');
+
+    return requestUrl;
+};
+
 /**
  * Fires a single http request. Fires a callback method as soon as the response is received. Make sure to set
  * all data needed to handle the request before calling this method.
  */
 HttpRequest.prototype.handle = function () {
-
-    var parameter    = this.parameter;
-
-    if (!parameter) {
-        parameter    = {};
-    }
 
     if (!this.baseUrl) {
 
@@ -180,43 +213,8 @@ HttpRequest.prototype.handle = function () {
         return;
     }
 
-    var requestUrl  = '';
-
-    var encode = function (param) {
-        return Ti.Network.encodeURIComponent(param);
-    };
-    
-    if (parameter) {
-        
-        requestUrl += '?';
-
-        for (var paramName in parameter) {
-            // hack for PiwikBulkApiRequests
-            if ('urls' == paramName) {
-                for (var index in parameter.urls) {
-                    var url = parameter.urls[index];
-                    requestUrl += encode('urls[' + index + ']') + '=';
-                    for (var key in url) {
-                        requestUrl += encode(key) + '%3d' + encode(url[key]) + '%26';
-                    }
-
-                    requestUrl += '&';
-                }
-
-                continue;
-            }
-
-            requestUrl += encode(paramName) + '=' + encode(parameter[paramName]) + '&';
-        }
-
-    }
-   
-    requestUrl = this.baseUrl + requestUrl;
-    
-    console.debug('RequestUrl is ' + requestUrl, 'HttpRequest::handle');
-    
-    this.xhr         = Ti.Network.createHTTPClient({validatesSecureCertificate: false, enableKeepAlive: false});
-    var that         = this;
+    this.xhr = Ti.Network.createHTTPClient({validatesSecureCertificate: false, enableKeepAlive: false});
+    var that = this;
     
     this.xhr.onload  = function () { that.load(this); that = null; };
     this.xhr.onerror = function (e) { 
@@ -234,7 +232,7 @@ HttpRequest.prototype.handle = function () {
     var timeoutValue = parseInt(settings.httpTimeout(), 10);
     this.xhr.setTimeout(timeoutValue);
 
-    this.xhr.open("GET", requestUrl);
+    this.xhr.open('GET', this.getRequestUrl());
 
     if (this.userAgent) {
         this.xhr.setRequestHeader('User-Agent', this.userAgent);
@@ -242,8 +240,7 @@ HttpRequest.prototype.handle = function () {
 
     this.xhr.send({});
     
-    parameter = null;
-    settings  = null;
+    settings = null;
 };
 
 /**
@@ -253,14 +250,13 @@ HttpRequest.prototype.handle = function () {
  * @returns  {boolean}  True if there was a pending request which we have aborted. False otherwise.
  */
 HttpRequest.prototype.abort = function () {
-
     if (this.xhr && this.xhr.abort) {
 
         // make sure not to notify the user about this abort
         this.sendErrors = false;
         
         // make sure no callback method will be called.
-        this.setCallback({}, function () {});
+        this.setCallback(null);
         
         this.xhr.abort();
 
@@ -280,22 +276,11 @@ HttpRequest.prototype.load = function (xhr) {
 
     console.debug('Received response ' + xhr.responseText, 'HttpRequest::load');
 
+    // parse response
+    var response;
+
     try {
-        // parse response
-        var response;
-
-        if ('json' === this.handleAs) {
-
-            response = JSON.parse(xhr.responseText);
-
-        } else if ('text' === this.handleAs) {
-
-            response = xhr.responseText;
-
-        } else if ('xml' === this.handleAs) {
-
-            response = xhr.responseXML;
-        }
+        response = JSON.parse(xhr.responseText);
 
     } catch (exception) {
 
@@ -319,15 +304,10 @@ HttpRequest.prototype.load = function (xhr) {
         return;
     }
 
-    var callback  = this.callback;
-    if (!callback) {
-        callback  = function () {};
-    }
-
-    var parameter = this.parameter;
-
     try {
-        callback.apply(this, [response, parameter]);
+        if (this.callback) {
+            this.callback.apply(this, [response]);
+        }
  
     } catch (e) {
         console.warn('Failed to call callback method: ' + e.message, 
@@ -342,10 +322,8 @@ HttpRequest.prototype.load = function (xhr) {
         this.onload();
     }
 
-    parameter = null;
-    callback  = null;
-    response  = null;
-    xhr       = null;
+    response = null;
+    xhr      = null;
     
     this.cleanup();
 };
@@ -511,20 +489,16 @@ HttpRequest.prototype.error = function (e) {
         }
     }
 
-    var callback  = this.callback;
-    if (!callback) {
-        callback  = function () {};
+    if (this.callback) {
+        this.callback.apply(this, []);
     }
-
-    callback.apply(this, []);
 
     // onload hook
     if (this.onload) {
         this.onload();
     }
 
-    callback = null;
-    e        = null;
+    e = null;
     
     this.cleanup();
 };

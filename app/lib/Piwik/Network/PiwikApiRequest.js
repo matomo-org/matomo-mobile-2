@@ -77,19 +77,6 @@ function PiwikApiRequest () {
      * @type  Object|null
      */
     this.account       = null;
-    
-    /**
-     * The handleAs parameter specifies how to parse the received data.
-     *
-     * @see      HttpRequest#handleAs
-     * 
-     * @default  "text"
-     *
-     * @type     string
-     *
-     * @override
-     */
-    this.handleAs      = 'json';
 }
 
 var HttpRequest = require('Piwik/Network/HttpRequest');
@@ -185,7 +172,7 @@ PiwikApiRequest.prototype._mixinParameter = function (parameter) {
     settings     = null;
     
     if (language) {
-        parameter.language   = language;
+        parameter.language = language;
     }
     
     return parameter;
