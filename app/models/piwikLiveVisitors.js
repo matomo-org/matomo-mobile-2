@@ -50,6 +50,7 @@ exports.definition = {
                     defaultParam.idSite = idSite;
                 }
 
+                this.abortRunningRequests();
                 this.fetch({
                     account: account, 
                     success: function (collection, response) {

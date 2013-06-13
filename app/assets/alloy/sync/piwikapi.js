@@ -13,10 +13,10 @@ function InitAdapter(config) {
 function Sync(method, model, opts) {
    // var name = model.config.adapter.collection_name;
     var settings = model.config.settings;
-    var params = model.config.defaultParams;
+    var params   = model.config.defaultParams;
 
-    Ti.API.info("method " + method);
-    
+    model.isSyncing = true;
+
     switch (method) {
         case "read":
         
@@ -24,14 +24,14 @@ function Sync(method, model, opts) {
                     
             var _ = require("alloy/underscore");
 
-            var opts = _.clone(opts);
+            opts = _.clone(opts);
 
             if (opts.params) {
                 params = _.extend(_.clone(params), opts.params);
             }
 
             var PiwikApiRequest = require('Piwik/Network/PiwikApiRequest');
-            var request  = new PiwikApiRequest();
+            var request = model.xhrRequest = new PiwikApiRequest();
             request.setMethod(settings.method);
             request.setParameter(params);
             
@@ -41,6 +41,8 @@ function Sync(method, model, opts) {
             }
             
             request.setCallback(function (response) {
+                model.isSyncing  = false;
+                model.xhrRequest = null;
 
                 if (_.isUndefined(response) || _.isNull(response)) {
 
@@ -73,24 +75,31 @@ function Sync(method, model, opts) {
     }
 }
 
-module.exports.sync = Sync;
-
-module.exports.beforeModelCreate = function (config, name)
-{
-    config = config || {};
-
-    config.data = {}; // for localStorage or case where entire collection is needed to maintain store
-
-    InitAdapter(config);
-
-    return config;
-};
-
-module.exports.afterModelCreate = function (Model, name)
-{
+function addAbortXhrFeature (Model)
+{    
     Model = Model || {};
 
-    Model.prototype.config.Model = Model; // needed for fetch operations to initialize the collection from persistent store
+    Model.prototype.abort = function () 
+    {
+        console.debug('Model abort requested.');
+
+        if (this.xhrRequest) {
+            console.info('XHR found, will try to abort');
+            this.xhrRequest.abort();
+            this.xhrRequest = null;
+            this.isSyncing  = false;
+        }
+    };
+
+    Model.prototype.abortRunningRequests = function ()
+    {
+        if (this.isSyncing) {
+            this.abort();
+        }
+    };
 
     return Model;
-};
+}
+
+module.exports.sync = Sync;
+module.exports.afterCollectionCreate = addAbortXhrFeature;

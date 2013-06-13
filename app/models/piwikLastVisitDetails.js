@@ -83,6 +83,7 @@ exports.definition = {
                 this.currentOffset = 0;
                 this.nextOffset    = 15;
 
+                this.abortRunningRequests();
                 this.fetch({
                     account: account,
                     params: {filter_limit: 15, 
@@ -102,6 +103,7 @@ exports.definition = {
                 this.currentOffset = this.nextOffset;
                 this.nextOffset    = this.currentOffset + filterLimit;
 
+                this.abortRunningRequests();
                 this.fetch({
                     account: account,
                     params: {filter_offset: this.currentOffset,
@@ -136,6 +138,7 @@ exports.definition = {
                               period: this.getPeriod(), 
                               date: this.parseDate()};
 
+                this.abortRunningRequests();
                 this.fetch({account: account, params: params});
             },
 

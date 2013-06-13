@@ -172,6 +172,7 @@ exports.definition = {
             },
 
             fetchProcessedReports: function (sortOrderColumn, options) {
+
                 if (!options) {
                     options = {};
                 }
@@ -185,6 +186,7 @@ exports.definition = {
                 options.params.filter_sort_column = sortOrderColumn;
                 options.reset = true;
 
+                this.abortRunningRequests();
                 this.fetch(options);
             },
             parse: function (response) {
