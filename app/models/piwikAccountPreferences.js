@@ -22,7 +22,8 @@ exports.definition = {
         },
         "settings": {
             "method": "API.getBulkRequest",
-            "cache": true
+            "cache": true,
+            "displayErrors": false
         },
         "defaultParams": {
             "urls": [{method: "UsersManager.getUserPreference", preferenceName: "defaultReport", format: "JSON"},
