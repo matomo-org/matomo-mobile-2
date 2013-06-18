@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="piwikReports"/>
 
-    <Window title="" id="index" onClose="onClose" onOpen="onOpen">
+    <Window title="" id="index" onClose="onClose" onOpen="onOpen" onBlur="onBlur" onFocus="onFocus">
         
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>

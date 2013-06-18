@@ -13,12 +13,15 @@ function L(key)
 var args = arguments[0] || {};
 var reportCategory    = args.reportCategory || null;
 var reportsCollection = Alloy.Collections.piwikReports;
-var reportDate        = require('session').getReportDate();
+reportsCollection.off("fetch destroy change add remove reset", renderListOfReports);
+
+var dateHasChanged    = true;
+var websiteHasChanged = true;
+var reportIsDisplayed = true;
 
 function registerEvents()
 {
-    Alloy.Collections.piwikReports.on('reset', hideLoadingIndicator);
-    Alloy.Collections.piwikReports.on('reset', addPiwikIcon);
+    Alloy.Collections.piwikReports.on('reset', render);
 
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
@@ -29,8 +32,7 @@ function registerEvents()
 
 function unregisterEvents()
 {
-    Alloy.Collections.piwikReports.off('reset', hideLoadingIndicator);
-    Alloy.Collections.piwikReports.off('reset', addPiwikIcon);
+    Alloy.Collections.piwikReports.off('reset', render);
     
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
@@ -45,6 +47,17 @@ function trackWindowRequest()
     require('Piwik/Tracker').setCustomVariable(1, 'reportCategory', category, 'page');
 
     require('Piwik/Tracker').trackWindow('Composite Report', 'report/composite');
+}
+
+function onBlur()
+{
+    reportIsDisplayed = false;
+}
+
+function onFocus()
+{
+    reportIsDisplayed = true;
+    renderIfNeeded();
 }
 
 function onOpen()
@@ -84,33 +97,38 @@ function toggleReportChooserVisibility(event)
     require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/report/composite/toggle/report-chooser'});
 }
 
-var accountModel = require('session').getAccount();
-
-function accountDidNotChange()
-{
-    return require('session').getAccount().isSameAccount(accountModel);
-}
-
 function onWebsiteChanged()
 {
-    if (accountDidNotChange()) {
-        render();
-    } else {
-        // let reportChooser to the refresh
-    }
+    websiteHasChanged = true;
 
     require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/report/composite/change/website'});
+
+    renderIfNeeded();
 }
 
 function onDateChanged() 
 {
-    if (accountDidNotChange()) {
-        render();
-    } else {
-        // let reportChooser to the refresh
-    }
+    dateHasChanged = true;
 
     require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/composite/change/date'});
+
+    renderIfNeeded();
+}
+
+function renderIfNeeded()
+{
+    if (reportIsDisplayed && (dateHasChanged || websiteHasChanged)) {
+        render();
+        dateHasChanged    = false;
+        websiteHasChanged = false;
+    }
+}
+
+function render()
+{
+    hideLoadingIndicator();
+    renderListOfReports();
+    addPiwikIcon();
 }
 
 function updateWindowTitle(title)
@@ -131,7 +149,7 @@ function filterReports(collection)
             return collection;
         }
         
-        reportCategory  = entryReport.get('category');
+        reportCategory = entryReport.get('category');
     }
 
     updateWindowTitle(reportCategory);
@@ -176,20 +194,13 @@ function addPiwikIcon()
     }
 }
 
-function render()
-{
-    renderListOfReports();
-    addPiwikIcon();
-}
-
 function open()
 {
     registerEvents();
     require('layout').open($.index);
 
     if (isDataAlreadyFetched()) {
-        hideLoadingIndicator();
-        render();
+        renderIfNeeded();
     } else {
         showLoadingIndicator();
     }
