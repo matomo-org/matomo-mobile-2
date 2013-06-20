@@ -27,9 +27,10 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwikaccessverification"
         },
+        "cache": false,
         "settings": {
             "method": "SitesManager.getSitesWithAtLeastViewAccess",
-            "cache": false
+            "displayErrors": true
         },
         "defaultParams": {"limit": 1}
     },      

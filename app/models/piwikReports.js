@@ -42,9 +42,10 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwikreports"
         },
+        "cache": {time: 60 * 60 * 24, type: 'session'},// 24 hours
         "settings": {
             "method": "API.getBulkRequest",
-            "cache": true
+            "displayErrors": true
         },
         "defaultParams": {
             "urls": [{method: "API.getReportMetadata", hideMetricsDoc: 1, showSubtableReports: 0, format: "JSON"},

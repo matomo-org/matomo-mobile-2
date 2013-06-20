@@ -20,9 +20,10 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwikaccountpreference"
         },
+        "cache": false,
         "settings": {
             "method": "API.getBulkRequest",
-            "cache": false
+            "displayErrors": true
         },
         "defaultParams": {
             "urls": [{method: "Live.getCounters", lastMinutes: 30, format: "JSON"},

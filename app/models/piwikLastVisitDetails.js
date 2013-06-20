@@ -16,9 +16,10 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwiklastvisitdetails"
         },
+        "cache": false,
         "settings": {
             "method": "Live.getLastVisitsDetails",
-            "cache": false
+            "displayErrors": true
         },
         "defaultParams": {
             filter_limit: 15,

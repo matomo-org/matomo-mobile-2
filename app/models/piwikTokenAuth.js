@@ -15,9 +15,10 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwiktokenauth"
         },
+        "cache": false,
         "settings": {
             "method": "UsersManager.getTokenAuth",
-            "cache": false
+            "displayErrors": true
         },
         "defaultParams": {}
     },        

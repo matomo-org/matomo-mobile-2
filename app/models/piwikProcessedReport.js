@@ -24,9 +24,10 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwikprocessedreport"
         },
+        "cache": false,
         "settings": {
             "method": "API.getProcessedReport",
-            "cache": false
+            "displayErrors": true
         },
         "defaultParams": {
             hideMetricsDoc: 1, 

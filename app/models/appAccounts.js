@@ -187,23 +187,10 @@ exports.definition = {
             },
 
             updatePiwikVersion: function() {
-                var dateVersionUpdated = this.get('dateVersionUpdated');
-                if (!dateVersionUpdated) {
-                    // version not updated yet. Set it to null. new Date(null) will be Jan 01 1970 and therefore force an update
-                    dateVersionUpdated = null;
-                }
-            
-                var dateNow             = (new Date()).toDateString();
-                var lastUpdatedDate     = new Date(dateVersionUpdated);
-                var alreadyUpdatedToday = dateNow == lastUpdatedDate.toDateString();
-            
-                if (alreadyUpdatedToday) {
-                    // request it max once per day
-                    
-                    return;
-                }
-                
-                var that = this;
+
+                var that    = this;
+                var account = this;
+
                 var version = Alloy.createModel('piwikVersion');
                 version.fetch({
                     account: this,
@@ -221,6 +208,8 @@ exports.definition = {
                         }
                         
                         that.save();
+                        that    = null;
+                        account = null;
                     },
                     error : function(model, resp) {
                         // just ignore, piwik installation is too old

@@ -22,6 +22,9 @@
             }
         },
         "numDisplayedWebsitesInDashboard": 50,
+        "caching": {
+            "enabled": true
+        },
         "tracking": {
             "enabled": true,
             "siteId": 34,

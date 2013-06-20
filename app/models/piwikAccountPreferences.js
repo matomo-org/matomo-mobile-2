@@ -20,9 +20,9 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwikaccountpreference"
         },
+        "cache": {time: 60 * 60 * 24, type: 'persistent'},// 24hours
         "settings": {
             "method": "API.getBulkRequest",
-            "cache": true,
             "displayErrors": false
         },
         "defaultParams": {

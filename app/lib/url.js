@@ -5,6 +5,13 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+/**
+ * @private
+ */
+function encode(param) {
+    return Ti.Network.encodeURIComponent(param);
+}
+
 exports.startsWithHttp = function(url)
 {
     return (url && 0 === (''+url).indexOf('http'));
@@ -70,4 +77,35 @@ exports.getUrlWithoutProtocolAndQuery = function (url)
     }
 
     return url.substr(indexOfProtocol, indexOfQuery - indexOfProtocol);
+};
+
+exports.buildEncodedUrlQuery = function (parameter)
+{
+    if (!parameter) {
+
+        return '';
+    }
+
+    var requestUrl = '?';
+
+    for (var paramName in parameter) {
+        // hack for PiwikBulkApiRequests
+        if ('urls' == paramName) {
+            for (var index in parameter.urls) {
+                var url = parameter.urls[index];
+                requestUrl += encode('urls[' + index + ']') + '=';
+                for (var key in url) {
+                    requestUrl += encode(key) + '%3d' + encode(url[key]) + '%26';
+                }
+
+                requestUrl += '&';
+            }
+
+            continue;
+        }
+
+        requestUrl += encode(paramName) + '=' + encode(parameter[paramName]) + '&';
+    }
+
+    return requestUrl;
 };

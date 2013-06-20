@@ -228,6 +228,14 @@ PiwikApiRequest.prototype.isValidResponse = function (response) {
     return true;
 };
 
+PiwikApiRequest.prototype.getUrl = function () {
+
+    var buildEncodedUrlQuery = require('url').buildEncodedUrlQuery;
+    var parameter = this._mixinParameter(this.parameter || {});
+
+    return this.baseUrl + buildEncodedUrlQuery(parameter);
+};
+
 /**
  * Sends the request to the piwik api (async).
  */

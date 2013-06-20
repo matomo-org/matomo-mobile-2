@@ -14,13 +14,6 @@
  */
 
 /**
- * @private
- */
-function encode(param) {
-    return Ti.Network.encodeURIComponent(param);
-}
-
-/**
  * @class    Can be used to send a GET http request to any url. Attend that synchronous requests are not supported at 
  *           the moment.
  *
@@ -151,42 +144,10 @@ HttpRequest.prototype.setCallback = function (callback) {
     callback      = null;
 };
 
-HttpRequest.prototype.buildEncodedUrlQuery = function (parameter) 
-{
-    if (!parameter) {
-
-        return '';
-    }
-
-    var requestUrl = '?';
-
-    for (var paramName in parameter) {
-        // hack for PiwikBulkApiRequests
-        if ('urls' == paramName) {
-            for (var index in parameter.urls) {
-                var url = parameter.urls[index];
-                requestUrl += encode('urls[' + index + ']') + '=';
-                for (var key in url) {
-                    requestUrl += encode(key) + '%3d' + encode(url[key]) + '%26';
-                }
-
-                requestUrl += '&';
-            }
-
-            continue;
-        }
-
-        requestUrl += encode(paramName) + '=' + encode(parameter[paramName]) + '&';
-    }
-   
-    return requestUrl;
-};
-
 HttpRequest.prototype.getRequestUrl = function () {
 
-    var parameter  = this.parameter || {};
-    var requestUrl = this.baseUrl + this.buildEncodedUrlQuery(parameter);
-    parameter      = null;
+    var buildEncodedUrlQuery = require('url').buildEncodedUrlQuery;
+    var requestUrl = this.baseUrl + buildEncodedUrlQuery(this.parameter || {});
     
     console.debug('RequestUrl is ' + requestUrl, 'HttpRequest::handle');
 

@@ -27,9 +27,10 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwikwebsitesbyid"
         },
+        "cache": {time: 60 * 60 * 12, type: 'session'}, // 12 hours
         "settings": {
             "method": "SitesManager.getSiteFromId",
-            "cache": true
+            "displayErrors": true
         },
         "defaultParams": {}
     },
