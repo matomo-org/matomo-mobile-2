@@ -59,8 +59,7 @@
 }
 
 "#settingsTable[platform=ios]": {
-    style: Ti.UI.iPhone.ListViewStyle.GROUPED,
-    footerTitle: L('Mobile_LoginToPiwikToChangeSettings')
+    style: Ti.UI.iPhone.ListViewStyle.GROUPED
 },
 
 ".titleLabel": {
