@@ -30,6 +30,10 @@ Piwik Mobile is released under the GPL v3 license, see app/assets/license.html
 
 See http://dev.piwik.org/trac/wiki/PiwikMobile
 
+## Tests
+
+See http://dev.piwik.org/trac/wiki/PiwikMobile/Tests
+
 ## Changelog
 
 See http://piwik.org/blog/category/piwik-mobile-changelog/
