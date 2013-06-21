@@ -15,6 +15,16 @@ function getExpireTimestamp(expiration_seconds)
     return getCurrentTimestamp() + expiration_seconds;
 }
 
+function decodeValue(value)
+{
+    return JSON.parse(value);
+}
+
+function encodeValue(value)
+{
+    return JSON.stringify(value);
+}
+
 var cachingEnabled = require('alloy').CFG.caching.enabled;
 
 exports.definition = {
@@ -26,7 +36,7 @@ exports.definition = {
             "value":"string"
         },
         "adapter": {
-            "type": "properties",
+            "type": "session",
             "collection_name": "cache"
         },
         "modelName": "baseCache"
@@ -34,6 +44,13 @@ exports.definition = {
 
     extendModel: function(Model) {      
         _.extend(Model.prototype, {
+
+            initialize: function () {
+                var value = this.get('value');
+                if (value) {
+                    this.set({value: encodeValue(value)}, {silent: true});
+                }
+            },
 
             isExpired: function () {
                 var expireTimestamp = this.get('expireTimestamp');
@@ -51,7 +68,7 @@ exports.definition = {
 
             getCachedValue: function () {
 
-                return JSON.parse(this.get('value'));
+                return decodeValue(this.get('value'));
             }
 
             // extended functions go here
@@ -99,7 +116,7 @@ exports.definition = {
                 this.cleanup();
                 var model = Alloy.createModel(this.config.modelName, {
                     key: key,
-                    value: JSON.stringify(value),
+                    value: value,
                     expireTimestamp: getExpireTimestamp(timeout)
                 });
 
@@ -110,7 +127,7 @@ exports.definition = {
 
             get: function (key) {
                 if (!cachingEnabled) {
-                    return;
+                    return null;
                 }
 
                 var self = this;
@@ -132,6 +149,8 @@ exports.definition = {
                 }
 
                 console.debug('Cache miss: ' + key);
+
+                return null;
             }
             // extended functions go here           
             
