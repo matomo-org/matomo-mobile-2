@@ -22,6 +22,7 @@ function Suite(descText) {
 Suite.prototype.evaluate = function(cb) {
 	tests.push({suite: true, name: this.desc});
 
+    log(' ');
 	log('Describing '+this.desc+':');
 	var executing = false,
 		that = this;
@@ -121,7 +122,6 @@ Expectation.prototype.evaluate = function() {
 
 	if (this.satisfied) {
 		successes++;
-		log('I expected '+this.someValue+' '+ this.comparisonText +' '+this.otherValue);
 
 		test.name = 'I expected '+this.someValue+' '+ this.comparisonText +' '+this.otherValue;
 		test.success = true;
