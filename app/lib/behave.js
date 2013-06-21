@@ -268,6 +268,10 @@ exports.run = function() {
 			//Flush output
 			Ti.API.info(output.join('\n'));
 			clearInterval(timer);
+
+            if (failures) {
+                console.warn('behave] There were failures!');
+            }
 	    }
     },50);
 };
