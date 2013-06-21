@@ -11,8 +11,9 @@ Alloy.isHandheld = !Alloy.isTablet;
 if ('test' == Ti.App.deployType) {
 
     // TODO iterate over all existing files and include them dynamically
-    require('specs/models/baseCache_spec')
+    require('specs/models/baseCache_spec');
     require('specs/models/piwikVersion_spec');
+    require('specs/models/piwikWebsites_spec');
 
     require('behave').run(this);
 }

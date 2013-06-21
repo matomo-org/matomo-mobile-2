@@ -52,7 +52,7 @@ exports.definition = {
                 return this.get('name');
             },
             getSiteId: function () {
-                return this.get('idsite');
+                return parseInt(this.get('idsite'), 10);
             }
 
     
