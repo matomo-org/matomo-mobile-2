@@ -50,6 +50,11 @@ Link: https://github.com/andmej/PullToRefresh
 License: See tools/licenses/MIT-LICENSE-pulltorefresh.txt
 
 =======
+Name: app/lib/behave.js
+Link: https://github.com/appcelerator/Codestrong/blob/master/app/lib/behave.js
+License: See tools/licenses/APACHE-LICENSE-V2-behave.js
+
+=======
 Name: Moment.js
 Link: https://github.com/timrwood/moment/
 License: See tools/licenses/MIT-LICENSE-moment.js.txt
