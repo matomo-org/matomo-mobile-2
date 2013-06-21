@@ -15,16 +15,6 @@ function getExpireTimestamp(expiration_seconds)
     return getCurrentTimestamp() + expiration_seconds;
 }
 
-function decodeValue(value)
-{
-    return JSON.parse(value);
-}
-
-function encodeValue(value)
-{
-    return JSON.stringify(value);
-}
-
 var cachingEnabled = require('alloy').CFG.caching.enabled;
 
 exports.definition = {
@@ -45,13 +35,6 @@ exports.definition = {
     extendModel: function(Model) {      
         _.extend(Model.prototype, {
 
-            initialize: function () {
-                var value = this.get('value');
-                if (value) {
-                    this.set({value: encodeValue(value)}, {silent: true});
-                }
-            },
-
             isExpired: function () {
                 var expireTimestamp = this.get('expireTimestamp');
 
@@ -67,8 +50,7 @@ exports.definition = {
             },
 
             getCachedValue: function () {
-
-                return decodeValue(this.get('value'));
+                return this.get('value');
             }
 
             // extended functions go here
@@ -93,7 +75,15 @@ exports.definition = {
                 model.destroy();
             },
 
-            cleanup: function () {
+            removeAll: function () {
+                var self = this;
+                this.forEach(function (model) {
+                    self.cleanupModel(model);
+                });
+                self = null;
+            },
+
+            cleanupExpired: function () {
 
                 var self = this;
 
@@ -113,7 +103,7 @@ exports.definition = {
 
                 console.debug('Putting cache key: ' + key);
 
-                this.cleanup();
+                this.cleanupExpired();
                 var model = Alloy.createModel(this.config.modelName, {
                     key: key,
                     value: value,
