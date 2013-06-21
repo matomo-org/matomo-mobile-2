@@ -7,7 +7,7 @@
 
 function getBaseCacheDefinition()
 {
-    return require('alloy/models/baseCache').definition;
+    return require('alloy/models/BaseCache').definition;
 }
 
 function shallowCopy(obj)
