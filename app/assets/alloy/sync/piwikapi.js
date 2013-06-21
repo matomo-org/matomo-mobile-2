@@ -24,7 +24,7 @@ function isSuccessfulResponse(collection, response)
 {
     var isResponseSet       = !_.isUndefined(response) && !_.isNull(response);
     var canValidateResponse = _.isFunction(collection.validResponse);
-    var isInvalidResponse   = canValidateResponse && collection.validResponse(response);
+    var isInvalidResponse   = canValidateResponse && !collection.validResponse(response);
 
     return (isResponseSet && !isInvalidResponse);
 }
@@ -33,11 +33,11 @@ function sendResponse(response, collection, opts, errorMessageDisplayed)
 {
     if (isSuccessfulResponse(collection, response)) {
 
-        opts.error && opts.error(collection, {errorMessageDisplayed: errorMessageDisplayed});
+        opts.success && opts.success(response);
 
     } else {
 
-        opts.success && opts.success(response);
+        opts.error && opts.error(collection, {errorMessageDisplayed: errorMessageDisplayed});
     }
 }
 
