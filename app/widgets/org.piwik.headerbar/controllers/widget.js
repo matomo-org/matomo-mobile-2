@@ -32,17 +32,6 @@ function addActionBarItem(actionBarItem, index)
     widthOfActionBarItem += 48;
 }
 
-function setHomeIcon(image)
-{
-    $.homeIcon.backgroundImage = image;
-    $.homeIcon.backgroundSelectedColor = '#a9a9a9';
-}
-
-function setDefaultHomeIcon()
-{
-    setHomeIcon('/appicon.png');
-}
-
 function setTitle(title)
 {
     $.headerTitle.text = title || '';
@@ -53,10 +42,15 @@ function syncWidthOfTitleAndActionBar()
     $.headerTitle.right = widthOfActionBarItem + 'dp';
 }
 
+function setBackAngleImage(image)
+{
+    $.backangle.backgroundImage = image;
+    $.backangle.backgroundSelectedColor = '#a9a9a9';
+}
+
 function enableBackButton() 
 {
-    $.backangle.backgroundImage = '/back.png';
-    $.backangle.backgroundSelectedColor = '#a9a9a9';
+    setBackAngleImage('/back.png');
 
     $.backangle.addEventListener('click', function (event) {
         event.cancelBubble = true;
@@ -69,16 +63,19 @@ function enableBackButton()
     });
 }
 
+function showNavigationDrawer()
+{
+    setBackAngleImage('/navigation_drawer.png');
+}
+
 function applyCustomProperties(args)
 {
-    if (args.homeIcon) {
-        setHomeIcon(args.homeIcon);
-    } else {
-        setDefaultHomeIcon();
-    }
-
     if (args.actionItem1) {
         addActionBarItem(args.actionItem1, 1);
+    }
+
+    if (args.hasNavigation) {
+        showNavigationDrawer();
     }
 
     if (args.canGoBack) {
@@ -97,5 +94,4 @@ $.homeIcon.addEventListener('click',function (event) {
 });
 
 exports.setTitle = setTitle;
-exports.resetHomeIcon = setDefaultHomeIcon;
 exports.enableCanGoBack = enableBackButton;

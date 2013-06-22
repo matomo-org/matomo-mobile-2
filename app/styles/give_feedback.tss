@@ -7,7 +7,7 @@
 }
 
 "#headerBar[formFactor=handheld]": {
-    homeIcon: '/ic_action_menu.png',
+    hasNavigation: true,
 }
 
 "#feedbackTable[platform=android]": {

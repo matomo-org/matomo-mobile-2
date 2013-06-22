@@ -8,7 +8,7 @@
 }
 
 "#headerBar[formFactor=handheld]": {
-    homeIcon: '/ic_action_menu.png',
+    hasNavigation: true,
 }
 
 "ListItem[platform=ios]": {

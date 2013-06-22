@@ -13,9 +13,9 @@
 }
 
 "#backangle": {
-    left: '3dp',
+    left: '0dp',
     height: '40dp',
-    width: '10dp',
+    width: '14dp',
 }
 
 "#homeIcon": {
@@ -23,6 +23,8 @@
     height: '30dp',
     width: '30dp',
     backgroundColor:'transparent',
+    backgroundImage: '/appicon.png',
+    backgroundSelectedColor: '#a9a9a9',
 }
 
 "#headerTitle": {

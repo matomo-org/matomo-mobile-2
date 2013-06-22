@@ -20,7 +20,6 @@ if (OS_ANDROID) {
     $.headerBar.on('back', function () {
         $.close();
     });
-    $.headerBar.resetHomeIcon();
 }
 
 $.showNoAccountSelectedHint = function ()
