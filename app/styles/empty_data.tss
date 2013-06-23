@@ -1,0 +1,55 @@
+".container": {
+    layout: 'vertical',
+    visible: false,
+    height: Ti.UI.SIZE
+}
+
+"#icon": {
+    image: 'nodata.png',
+    height: 48,
+    width: 48
+}
+
+"#headline": {
+    text: L('No Data'),
+    font: {fontWeight: 'bold', fontSize: 20},
+    color: '#7e7e7e',
+    top: 20,
+    height: Ti.UI.SIZE,
+}
+
+"#message": {
+    text: L('CoreHome_ThereIsNoDataForThisReport'),
+    font: {fontSize: 16},
+    color: '#7e7e7e',
+    top: 20,
+    height: Ti.UI.SIZE,
+}
+
+".refreshContainer": {
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "#c0c0c0",
+    width: Ti.UI.SIZE,
+    height: 40,
+    top: 40,
+    backgroundColor: "#c0c0c0",
+}
+
+"#refresh": {
+    title: L('Mobile_Refresh'),
+    width: Ti.UI.SIZE,
+    height: Ti.UI.FILL,
+    left: 50,
+    right: 50,
+    color: '#ffffff',
+    selectedColor: "#000000",
+    font: {
+        fontSize: 16,
+        fontWeight: "bold"
+    }
+},
+
+"#refresh[platform=ios]": {
+    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+},

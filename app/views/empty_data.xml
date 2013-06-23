@@ -1,0 +1,14 @@
+<Alloy>
+    <View class="container" id="index">
+
+        <ImageView id="icon"/>
+
+        <Label id="headline"/>
+
+        <Label id="message"/>
+
+        <View class="refreshContainer">
+            <Button id="refresh" onClick="refresh"/>
+        </View>
+    </View>
+</Alloy>
