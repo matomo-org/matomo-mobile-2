@@ -8,12 +8,8 @@
 Alloy.isTablet = require('Piwik/Platform').isTablet;
 Alloy.isHandheld = !Alloy.isTablet;
 
-if ('test' == Ti.App.deployType) {
+if ('test' === Ti.App.deployType && OS_IOS) {
 
-    // TODO iterate over all existing files and include them dynamically
-    require('specs/models/baseCache_spec');
-    require('specs/models/piwikVersion_spec');
-    require('specs/models/piwikWebsites_spec');
-
+    require('behave/loader').loadSuits();
     require('behave').run(this);
 }
