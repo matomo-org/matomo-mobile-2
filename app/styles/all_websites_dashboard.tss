@@ -92,20 +92,6 @@
     text: L('General_LoadingData')
 },
 
-"#noWebsiteFoundLabel": {
-    text: L('Mobile_NoWebsiteFound'),
-    color: '#7e7e7e',
-    font: {fontWeight: 'bold', fontSize: 18}
-}
-
-"#noWebsiteFoundLabel[platform=android]": {
-    font: {fontWeight: 'bold', fontSize: '18sp'}
-}
-
-"#noWebsiteFoundContainer": {
-    visible: false,
-}
-
 "#useSearchHintContainer": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,

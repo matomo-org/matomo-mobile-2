@@ -145,7 +145,7 @@ function showLoadingMessage()
     if (OS_IOS) {
         $.pullToRefresh.refresh();
     }
-    
+
     $.loading.show();
 }
 
@@ -160,6 +160,20 @@ function cancelSearchWebsite()
     $.searchBar.blur();
 
     doRefresh();
+}
+
+function getSearchText()
+{
+    if ($.searchBar) {
+        return $.searchBar.value;
+    }
+
+    return '';
+}
+
+function hasUsedSearch()
+{
+    return !!getSearchText();
 }
 
 function searchWebsite(event) 
@@ -189,7 +203,7 @@ function searchWebsite(event)
             idSite: lastUsedWebsite.id,
             apiModule: "MultiSites",
             apiAction: "getAll",
-            pattern: $.searchBar.value,
+            pattern: getSearchText(),
             filter_limit: Alloy.CFG.numDisplayedWebsitesInDashboard
         },
         error: function () {
@@ -222,38 +236,16 @@ function hasMoreWebsitesThanDisplayed()
 
 function showMessageNoWebsitesFound()
 {
-    if (OS_ANDROID) {
-        $.noWebsiteFoundLabel.height = Ti.UI.SIZE;
-        $.noWebsiteFoundLabel.show();
-        $.noWebsiteFoundContainer.height = Ti.UI.FILL;
-    }
-
-    if (OS_MOBILEWEB) {
-        $.noWebsiteFoundContainer.height = Ti.UI.FILL;
-    } else {
-        $.websitesTable.headerView = $.noWebsiteFoundContainer;
-    }
-
-    $.noWebsiteFoundContainer.show();
+    $.nodata.show({title: L('Mobile_NoWebsitesShort'), message: L('Mobile_NoWebsiteFound')});
+    $.content.hide();
+    $.loading.hide();
 }
 
 function hideMessageNoWebsitesFound()
 {
-    if (OS_ANDROID) {
-        $.noWebsiteFoundLabel.height = 0;
-        $.noWebsiteFoundLabel.hide();
-        $.noWebsiteFoundContainer.height = 0;
-    }
-
-    $.noWebsiteFoundContainer.hide();
-
-    // this is usually not needed but looks like a bug in Titanium... 
-    // Otherwise Headerview would always stay with height=Ti.UI.FILL once displayed
-    if (OS_MOBILEWEB) {
-        $.noWebsiteFoundContainer.height = 0;
-    } else {
-        $.websitesTable.headerView = null;
-    }
+    $.nodata.hide();
+    $.content.show();
+    $.loading.hide();
 }
 
 function showUseSearchHint()
@@ -263,10 +255,12 @@ function showUseSearchHint()
 
 function displayMessageIfNoWebsitesFound () 
 {
-    if (hasFoundWebsites()) {
-        hideMessageNoWebsitesFound();
-    } else {
+    if (!hasFoundWebsites() && hasUsedSearch()) {
+        $.websitesTable.setData([{title: L('SitesManager_NotFound') + ' ' + getSearchText()}]);
+    } else if (!hasFoundWebsites()) {
         showMessageNoWebsitesFound();
+    } else {
+        hideMessageNoWebsitesFound();
     }
 
     if (hasMoreWebsitesThanDisplayed()) {

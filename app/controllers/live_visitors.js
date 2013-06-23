@@ -70,7 +70,7 @@ function stopRefreshTimer() {
     }
     
     $.countdown.stop();
-};
+}
 
 function startRefreshTimer (timeoutInMs) {
     stopRefreshTimer();
@@ -83,7 +83,7 @@ function startRefreshTimer (timeoutInMs) {
             doRefresh();
         }
     }, timeoutInMs);
-};
+}
 
 function openVisitor(event)
 {
@@ -99,6 +99,11 @@ function openVisitor(event)
 
 function render(account, counter30Min, counter24Hours, visitorDetails)
 {
+    if (!visitorDetails || !visitorDetails.length) {
+        showReportHasNoVisitors();
+        return;
+    }
+
     showReportContent();
 
     var rows = [];
@@ -132,6 +137,15 @@ function showReportContent()
         $.pullToRefresh.refreshDone();
     } 
 
+    $.content.show();
+    $.loadingindicator.hide();
+    $.nodata.hide();
+}
+
+function showReportHasNoVisitors()
+{
+    $.nodata.show({title: L('Mobile_NoVisitorsShort'), message: L('Mobile_NoVisitorFound')});
+    $.content.hide();
     $.loadingindicator.hide();
 }
 
@@ -142,6 +156,8 @@ function showLoadingMessage()
     } 
 
     $.loadingindicator.show();
+    $.content.hide();
+    $.nodata.hide();
     stopRefreshTimer();
 }
 

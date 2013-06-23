@@ -30,13 +30,13 @@
     top: '17dp', 
 }
 
-".container": {
+"#content": {
     top: 0,
     height: Ti.UI.SIZE,
     contentHeight: 'auto',
 }
 
-".container[platform=android]": {
+"#content[platform=android]": {
     top: '48dp'
 }
 
@@ -78,7 +78,7 @@
     bottom: 0,
 }
 
-"#content": {
+"#dimensions": {
     height: Ti.UI.SIZE,
     layout: "vertical",
     top: 17,
@@ -90,7 +90,7 @@
     borderColor: "#e6e6e6"
 }
 
-"#content[platform=android]": {
+"#dimensions[platform=android]": {
     top: '17dp',
     left: '10dp',
     right: '10dp',

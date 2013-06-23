@@ -3,12 +3,12 @@
 
         <ImageView id="icon"/>
 
-        <Label id="headline"/>
+        <Label id="title"/>
 
         <Label id="message"/>
 
-        <View class="refreshContainer">
-            <Button id="refresh" onClick="refresh"/>
+        <View class="refreshContainer" onClick="refresh">
+            <Button id="refresh"/>
         </View>
     </View>
 </Alloy>

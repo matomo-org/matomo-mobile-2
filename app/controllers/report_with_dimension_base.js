@@ -22,6 +22,15 @@ function showReportContent()
         $.pullToRefresh.refreshDone();
     } 
 
+    $.content.show();
+    $.loadingindicator.hide();
+    $.nodata.hide();
+}
+
+function showReportHasNoData()
+{
+    $.nodata.show();
+    $.content.hide();
     $.loadingindicator.hide();
 }
 
@@ -32,6 +41,8 @@ exports.showLoadingMessage = function ()
     }
     
     $.loadingindicator.show();
+    $.nodata.hide();
+    $.content.hide();
 };
 
 function onTogglePaginator()
@@ -41,17 +52,6 @@ function onTogglePaginator()
     $.showAllEntries = !$.showAllEntries; 
     shouldScrollToPositionOfPaginator = $.showAllEntries;
     $.doRefresh();
-}
-
-function showReportHasNoData()
-{
-    var row = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE, 
-        color: '#7e7e7e',
-        title: L('CoreHome_ThereIsNoDataForThisReport')
-    });
-
-    $.reportTable.setData([row]);
 }
 
 function hasReportData(processedReportCollection) {

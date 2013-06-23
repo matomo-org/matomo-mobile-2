@@ -107,12 +107,23 @@ function onReportChosen (chosenReportModel) {
 
 function showReportContent()
 {
+    $.content.show();
+    $.nodata.hide();
+    $.loadingindicator.hide();
+}
+
+function showReportHasNoData()
+{
+    $.nodata.show();
+    $.content.hide();
     $.loadingindicator.hide();
 }
 
 function showLoadingMessage()
 {
     $.loadingindicator.show();
+    $.content.hide();
+    $.nodata.hide();
 }
 
 function toggleReportChooserVisibility()
@@ -131,13 +142,13 @@ function toggleReportConfiguratorVisibility ()
 
 function removeAllChildrenFromContent()
 {
-    var children = $.content.children;
+    var children = $.dimensions.children;
 
     if (!children) {
         return;
     }
 
-    for (var d = children.length - 1; d >= 0; d--) $.content.remove(children[d]);
+    for (var d = children.length - 1; d >= 0; d--) $.dimensions.remove(children[d]);
 }
 
 function updateWindowTitle(title)
@@ -170,7 +181,7 @@ function renderMetricTile (processedReportModel, index)
 
     if (0 == (index % 2)) {
         containerRow = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, layout: 'horizontal'});
-        $.content.add(containerRow);
+        $.dimensions.add(containerRow);
     } 
     var outerContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: OS_ANDROID ? '49%' : '50%'});
     var metricContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, top: toUnit(22), bottom: toUnit(25), layout: 'vertical'});
@@ -193,28 +204,29 @@ function renderMetricTile (processedReportModel, index)
 
     if (1 == (index % 2)) {
         var horizontalSeparator = Ti.UI.createView({height: toUnit(1), backgroundColor: '#e6e6e6', width: Ti.UI.FILL});
-        $.content.add(horizontalSeparator);
+        $.dimensions.add(horizontalSeparator);
     }
 }
 
 function onStatisticsFetched(processedReportCollection)
 {
     if (!processedReportCollection) {
+        console.error('msising report model');
         return;
     }
 
     removeAllChildrenFromContent();
+
+    if (!processedReportCollection.length) {
+        showReportHasNoData();
+        return;
+    }
 
     var accountModel = require('session').getAccount();
 
     updateWindowTitle(processedReportCollection.getReportName());
     
     showReportContent();
-
-    if (!processedReportCollection) {
-        console.error('msising report model');
-        return;
-    }
 
     $.reportGraphCtrl.update(processedReportCollection, accountModel);
 
@@ -225,25 +237,25 @@ function fixVerticalSeparatorHeight()
 {
     console.log('attention: this may cause an endless loop because of postlayout event. hopefully you do not see this too often');
 
-    if (!$.content || !$.content.size || !$.content.size.height) { 
+    if (!$.dimensions || !$.dimensions.size || !$.dimensions.size.height) {
 
         return;
     }
 
-    var height = parseInt($.content.size.height, 10);
+    var height = parseInt($.dimensions.size.height, 10);
 
     if (5 < height) {
 
         if (OS_MOBILEWEB) {
             // don't know why but on MobileWeb height will be only changed if there is a small delay. Tried lots of different implementations but didn't find a better solution
             setTimeout(function () {
-                if (!$ || !$.verticalSeparator || !$.content) {
+                if (!$ || !$.verticalSeparator || !$.dimensions) {
                     return;
                 }
-                $.verticalSeparator.setHeight($.content.size.height);
+                $.verticalSeparator.setHeight($.dimensions.size.height);
             }, 100);
         } else {
-            $.verticalSeparator.setHeight($.content.size.height);
+            $.verticalSeparator.setHeight($.dimensions.size.height);
         }
     } 
 }
@@ -285,7 +297,7 @@ function doRefresh()
 
 function open() 
 {
-    $.content.addEventListener('postlayout', fixVerticalSeparatorHeight);
+    $.dimensions.addEventListener('postlayout', fixVerticalSeparatorHeight);
 
     registerEvents();
 

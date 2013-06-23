@@ -16,12 +16,14 @@
 
         <Require src="loading_indicator" id="loadingindicator"/>
 
-        <ScrollView class="container">
+        <Require src="empty_data" id="nodata" onRefresh="doRefresh"/>
+
+        <ScrollView id="content" class="container">
             <View class="innerContainer">
                 <Require src="graph" id="reportGraphCtrl"/>
                 <View class="separator"/>
                 <View id="outerContent">
-                    <View id="content"/>
+                    <View id="dimensions"/>
                     <View id="verticalSeparator"/>
                 </View>
                 <ImageView class="footerLogo"/>

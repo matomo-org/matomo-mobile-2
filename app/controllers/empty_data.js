@@ -15,12 +15,27 @@ function refresh()
     $.trigger('refresh');
 }
 
-exports.show = function (message) {
-    $.index.show();
+function setTitle(title)
+{
+    $.title.text = title + '';
+}
 
-    if (_.isString(message)) {
-        $.message.text = message;
+function setMessage(message)
+{
+    $.message.text = message + '';
+}
+
+exports.show = function (options) {
+
+    if (options && _.isString(options.title)) {
+        setTitle(options.title);
     }
+
+    if (options && _.isString(options.message)) {
+        setMessage(options.message);
+    }
+
+    $.index.show();
 };
 
 exports.hide = function () {

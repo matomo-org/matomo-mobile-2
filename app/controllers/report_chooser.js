@@ -12,6 +12,7 @@ function L(key)
 
 var reportsCollection = Alloy.Collections.piwikReports;
 reportsCollection.on('reset', updateAvailableReportsList);
+reportsCollection.on('forceRefresh', refresh);
 
 var currentlyActiveReport = null;
 

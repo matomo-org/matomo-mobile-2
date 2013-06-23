@@ -81,6 +81,22 @@ function hideLoadingIndicator()
 function showLoadingIndicator()
 {
     $.loadingIndicator.show();
+    $.content.hide();
+    $.nodata.hide();
+}
+
+function showReportContent()
+{
+    $.content.show();
+    $.nodata.hide();
+    hideLoadingIndicator();
+}
+
+function showReportHasNoData()
+{
+    $.nodata.show({title: L('Mobile_NoReportsShort')});
+    $.content.hide();
+    hideLoadingIndicator();
 }
 
 function toggleReportConfiguratorVisibility (event)
@@ -124,11 +140,21 @@ function renderIfNeeded()
     }
 }
 
+function refresh()
+{
+    showLoadingIndicator();
+    reportsCollection.trigger('forceRefresh');
+}
+
 function render()
 {
-    hideLoadingIndicator();
-    renderListOfReports();
-    addPiwikIcon();
+    if (hasReportsToShow()) {
+        showReportContent();
+        renderListOfReports();
+        addPiwikIcon();
+    } else {
+        showReportHasNoData();
+    }
 }
 
 function updateWindowTitle(title)
@@ -166,6 +192,11 @@ function notifyModelsAboutNewScrollPosition (event)
     _.forEach(filterReports(reportsCollection), function (model) {
         model.trigger('scrollPosition', {y: event.y});
     });
+}
+
+function hasReportsToShow()
+{
+    return !!reportsCollection.length;
 }
 
 function isDataAlreadyFetched()

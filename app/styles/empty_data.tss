@@ -10,12 +10,24 @@
     width: 48
 }
 
-"#headline": {
-    text: L('No Data'),
+"#icon[platform=android]": {
+    top: '48dp',
+    image: '/nodata.png',
+    height: '48dp',
+    width: '48dp'
+}
+
+"#title": {
+    text: L('Mobile_NoDataShort'),
     font: {fontWeight: 'bold', fontSize: 20},
     color: '#7e7e7e',
     top: 20,
-    height: Ti.UI.SIZE,
+    height: Ti.UI.SIZE
+}
+
+"#title[platform=android]": {
+    top: '20dp',
+    font: {fontWeight: 'bold', fontSize: '20sp'},
 }
 
 "#message": {
@@ -24,6 +36,23 @@
     color: '#7e7e7e',
     top: 20,
     height: Ti.UI.SIZE,
+    left: 30,
+    right: 30,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
+}
+
+"#message[platform=android]": {
+    left: '30dp',
+    right: '30dp',
+    top: '20dp',
+    font: {fontSize: '16sp'},
+}
+
+".refreshContainer[platform=android]": {
+    left: '30dp',
+    right: '30dp',
+    top: '20dp',
+    font: {fontSize: '16sp'},
 }
 
 ".refreshContainer": {
@@ -36,6 +65,11 @@
     backgroundColor: "#c0c0c0",
 }
 
+".refreshContainer[platform=android]": {
+    height: '40dp',
+    top: '40dp',
+}
+
 "#refresh": {
     title: L('Mobile_Refresh'),
     width: Ti.UI.SIZE,
@@ -43,6 +77,7 @@
     left: 50,
     right: 50,
     color: '#ffffff',
+    backgroundColor: "#c0c0c0",
     selectedColor: "#000000",
     font: {
         fontSize: 16,
@@ -52,4 +87,13 @@
 
 "#refresh[platform=ios]": {
     style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+},
+
+"#refresh[platform=android]": {
+    left: '50dp',
+    right: '50dp',
+    font: {
+        fontSize: '16sp',
+        fontWeight: "bold"
+    }
 },

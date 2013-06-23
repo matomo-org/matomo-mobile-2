@@ -132,7 +132,7 @@ function render()
             visitorRow = null;
         });
     } else {
-        var row = Ti.UI.createTableViewRow({title: L('Mobile_NoVisitorFound')});
+        var row = Ti.UI.createTableViewRow({title: L('Mobile_NoVisitorsShort')});
         rows.push(row);
     }
 

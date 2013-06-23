@@ -24,6 +24,8 @@
                 platform="android" />
 
         <Require src="loading_indicator" id="loadingIndicator"/>
+
+        <Require src="empty_data" id="nodata" onRefresh="refresh"/>
         
         <ScrollView id="content" dataCollection="piwikReports" dataFilter="filterReports" dataFunction="renderListOfReports">
             <Require src="report_overview" title="{name}"/>

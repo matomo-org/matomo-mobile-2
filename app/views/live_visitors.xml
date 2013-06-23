@@ -23,6 +23,8 @@
         
         <Require src="loading_indicator" id="loadingindicator"/>
 
+        <Require src="empty_data" id="nodata" onRefresh="doRefresh"/>
+
         <View id="content">
 
             <TableView id="liveTable" onClick="openVisitor">
