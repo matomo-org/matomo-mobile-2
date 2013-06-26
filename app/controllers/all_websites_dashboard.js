@@ -23,14 +23,12 @@ if (OS_IOS) {
 var accountsCollection = Alloy.Collections.appAccounts;
 var accountModel       = accountsCollection.lastUsedAccount();
 
-var args     = arguments[0] || {};
-var autoOpen = true;
-if ('undefined' !== (typeof args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable) &&
-    null !== args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable) {
-    autoOpen = args.openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable;
-}
-
-var lastUsedWebsite = null;
+$.piwikWebsites.on('reset', render);
+$.piwikWebsites.on('error', function (undefined, error) {
+    if (error) {
+        showMessageNoWebsitesFound(error.getError(), error.getMessage());
+    }
+});
 
 function onOpen()
 {
@@ -39,7 +37,6 @@ function onOpen()
 
 function onClose()
 {
-    $.piwikProcessedReport.off('reset', displayMessageIfNoWebsitesFound);
     $.destroy();
     $.off();
 }
@@ -51,8 +48,7 @@ function websiteChosen(siteModel)
 
 function chooseAccount()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Choose Account', 
-                                         url: '/all-websites-dashboard/choose-account'});
+    require('Piwik/Tracker').trackEvent({title: 'Choose Account', url: '/all-websites-dashboard/choose-account'});
 
     var accounts = Alloy.createController('accounts_selector');
     accounts.on('accountChosen', onAccountChosen);
@@ -61,42 +57,10 @@ function chooseAccount()
 
 function onAccountChosen(account)
 {
-    require('Piwik/Tracker').trackEvent({title: 'Account Chosen', 
-                                         url: '/all-websites-dashboard/account-chosen'});
-    loadWebsitesForAccount(account);
-}
+    require('Piwik/Tracker').trackEvent({title: 'Account Chosen', url: '/all-websites-dashboard/account-chosen'});
 
-function loadWebsitesForAccount(account)
-{
-    if (!account) {
-        console.info('No account given, cannot load websites for account', 'all_websites_dashboard');
-        return;
-    }
-
-    showLoadingMessage();
-
-    accountModel            = account;
-    var entrySiteCollection = Alloy.createCollection('piwikWebsites');
-    entrySiteCollection.fetch({
-        params: {limit: 2},
-        account: accountModel,
-        success: function (entrySiteCollection) {
-            if (!entrySiteCollection) {
-                console.log('No entrySiteCollection defined, cannot select a website');
-
-                return;
-            }
-
-            if (autoOpen && 1 == entrySiteCollection.length) {
-                websiteChosen(entrySiteCollection.first());
-            } else if (!entrySiteCollection.length) {
-                // TODO no access to any account
-                console.error('no access to any website');
-            } else {
-                fetchListOfAvailableWebsites(entrySiteCollection.first());
-            }
-        }
-    });
+    accountModel = account;
+    fetchListOfAvailableWebsites();
 }
 
 function selectWebsite(event)
@@ -106,28 +70,34 @@ function selectWebsite(event)
         return;
     }
 
-    var id      = event.row.modelid;
-    var website = $.piwikProcessedReport.get(id);
+    var id = event.row.modelid;
+    var siteModel = $.piwikWebsites.get(id);
 
-    if (!website) {
+    if (!siteModel) {
         console.log('websiteModel not found in collection, cannot select website');
         return;
     }
 
-    var idSite = website.getReportMetadata() ? website.getReportMetadata().idsite : null;
-    var websiteName = website.getTitle();
-
-    var siteModel = Alloy.createModel('PiwikWebsites', {idsite: idSite, name: websiteName});
     websiteChosen(siteModel);
 }
 
-var reportRowsCtrl = null;
-function onStatisticsFetched(statisticsCollection)
+function render(statisticsCollection)
 {
-    showReportContent();
+    if (!hasFoundWebsites() && hasUsedSearch()) {
+        $.websitesTable.setData([{title: L('SitesManager_NotFound') + ' ' + getSearchText()}]);
+        showReportContent();
+    } else if (!hasFoundWebsites()) {
+        showMessageNoWebsitesFound(L('Mobile_NoWebsitesShort'), L('Mobile_NoWebsiteFound'));
+    } else {
+        showReportContent();
+    }
 
     if ($.reportGraphCtrl) {
         $.reportGraphCtrl.update(statisticsCollection, accountModel);
+    }
+
+    if (hasMoreWebsitesThanDisplayed()) {
+        showUseSearchHint();
     }
 }
 
@@ -137,7 +107,9 @@ function showReportContent()
         $.pullToRefresh.refreshDone();
     } 
 
+    $.content.show();
     $.loading.hide();
+    hideMessageNoWebsitesFound();
 }
 
 function showLoadingMessage()
@@ -159,7 +131,7 @@ function cancelSearchWebsite()
     $.searchBar.value = '';
     $.searchBar.blur();
 
-    doRefresh();
+    fetchListOfAvailableWebsites();
 }
 
 function getSearchText()
@@ -183,33 +155,21 @@ function searchWebsite(event)
         return;
     }
 
-    if (!lastUsedWebsite) {
-        console.info('cannot search website, no last used website', 'all_websites_dashboard');
-        return;
-    }
-
     showLoadingMessage();
     
     var reportDate  = require('session').getReportDate();
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
-    $.piwikProcessedReport.fetchProcessedReports('nb_visits', {
+    $.piwikWebsites.fetchWebsites('nb_visits', {
         account: accountModel,
         params: {
             period: piwikPeriod, 
             date: piwikDate, 
             enhanced: 1,
-            idSite: lastUsedWebsite.id,
-            apiModule: "MultiSites",
-            apiAction: "getAll",
             pattern: getSearchText(),
             filter_limit: Alloy.CFG.numDisplayedWebsitesInDashboard
-        },
-        error: function () {
-            $.piwikProcessedReport.trigger('error', {type: 'loadingProcessedReport'});
-        },
-        success: onStatisticsFetched
+        }
     });
 
     $.searchBar.blur();
@@ -219,12 +179,12 @@ function searchWebsite(event)
 
 function getNumberOfFoundWebsites()
 {
-    return $.piwikProcessedReport.getNumberOfReports();
+    return $.piwikWebsites.getNumberOfWebsites();
 }
 
 function hasFoundWebsites()
 {
-    return $.piwikProcessedReport.hasReports();
+    return $.piwikWebsites.hasWebsites();
 }
 
 function hasMoreWebsitesThanDisplayed()
@@ -234,9 +194,9 @@ function hasMoreWebsitesThanDisplayed()
     return limit <= getNumberOfFoundWebsites();
 }
 
-function showMessageNoWebsitesFound()
+function showMessageNoWebsitesFound(title, message)
 {
-    $.nodata.show({title: L('Mobile_NoWebsitesShort'), message: L('Mobile_NoWebsiteFound')});
+    $.nodata.show({title: title, message: message});
     $.content.hide();
     $.loading.hide();
 }
@@ -253,57 +213,22 @@ function showUseSearchHint()
     $.useSearchHintContainer.show();
 }
 
-function displayMessageIfNoWebsitesFound () 
+function fetchListOfAvailableWebsites()
 {
-    if (!hasFoundWebsites() && hasUsedSearch()) {
-        $.websitesTable.setData([{title: L('SitesManager_NotFound') + ' ' + getSearchText()}]);
-    } else if (!hasFoundWebsites()) {
-        showMessageNoWebsitesFound();
-    } else {
-        hideMessageNoWebsitesFound();
-    }
-
-    if (hasMoreWebsitesThanDisplayed()) {
-        showUseSearchHint();
-    } 
-}
-
-function doRefresh()
-{
-    if (lastUsedWebsite) {
-        fetchListOfAvailableWebsites(lastUsedWebsite);
-    }
-}
-
-function fetchListOfAvailableWebsites(site) 
-{
-    if (!site) {
-        console.info('Cannot fetch list of available websites, no website given', 'all_websites_dashboard');
-        return;
-    }
-
-    lastUsedWebsite = site;
     showLoadingMessage();
 
     var reportDate  = require('session').getReportDate();
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
-    $.piwikProcessedReport.fetchProcessedReports("nb_visits", {
+    $.piwikWebsites.fetchWebsites("nb_visits", {
         account: accountModel,
         params: {
             period: piwikPeriod, 
-            date: piwikDate, 
-            idSite: site.id,
-            apiModule: 'MultiSites',
-            apiAction: 'getAll',
+            date: piwikDate,
             showColumns: 'nb_visits,visits_evolution',
             filter_limit: Alloy.CFG.numDisplayedWebsitesInDashboard
-        },
-        error: function () {
-            $.piwikProcessedReport.trigger('error', {type: 'loadingProcessedReport'});
-        },
-        success: onStatisticsFetched
+        }
     });
 }
 
@@ -330,19 +255,12 @@ function formatWebsite(model)
     return model;
 }
 
-$.piwikProcessedReport.on('error', function () {
-    // TODO what should we do in this case?
-    showReportContent();
-});
-
-$.piwikProcessedReport.on('reset', displayMessageIfNoWebsitesFound);
-
 exports.close = function () {
     require('layout').close($.index);
 };
 
 exports.open = function () {
-    loadWebsitesForAccount(accountModel);
+    fetchListOfAvailableWebsites();
 
     require('layout').open($.index);
 };
