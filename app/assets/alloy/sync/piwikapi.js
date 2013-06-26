@@ -5,20 +5,28 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+var _ = require('alloy/underscore');
+var PiwikApiError = require('Piwik/Network/PiwikApiError');
 
 function InitAdapter(config) {
     
 }
 
-var _      = require('alloy/underscore');
-var persistentCache = Alloy.createCollection('persistentCache');
-persistentCache.fetch();
+function getPersistentCache()
+{
+    var persistentCache = Alloy.createCollection('persistentCache');
+    persistentCache.fetch();
+    return persistentCache;
+}
 
-var sessionCache = Alloy.createCollection('sessionCache');
-sessionCache.fetch();
+function getSessionCache()
+{
+    var sessionCache = Alloy.createCollection('sessionCache');
+    sessionCache.fetch();
+    return sessionCache;
+}
 
-var caches = {persistent: persistentCache,
-              session: sessionCache};
+var caches = {persistent: getPersistentCache(), session: getSessionCache()};
 
 function isSuccessfulResponse(collection, response)
 {
@@ -29,29 +37,14 @@ function isSuccessfulResponse(collection, response)
     return (isResponseSet && !isInvalidResponse);
 }
 
-function sendResponse(response, collection, opts, errorMessageDisplayed)
+function readFromApi(preparedRequest, onSuccess, onError)
 {
-    if (isSuccessfulResponse(collection, response)) {
-
-        opts.success && opts.success(response);
-
-    } else {
-
-        opts.error && opts.error(collection, {errorMessageDisplayed: errorMessageDisplayed});
-    }
-}
-
-function readFromApi(preparedRequest, displayErrorIfOneOccurs, callback)
-{
-    preparedRequest.setCallback(callback);
-
-    if (false === displayErrorIfOneOccurs) {
-        preparedRequest.sendErrors = false;
-    }
-
+    preparedRequest.onSuccess(onSuccess);
+    preparedRequest.onError(onError);
     preparedRequest.send();
 
-    callback = null;
+    onSuccess = null;
+    onError   = null;
 }
 
 function prepareApiRequest(apiMethod, params, account)
@@ -94,11 +87,9 @@ function tryToGetValidResponseFromCache(cacheKey, cache, collection)
     }
 }
 
-function cacheValidResponse(cacheKey, cache, response, collection)
+function cacheResponse(cacheKey, cache, response)
 {
-    if (isSuccessfulResponse(collection, response)) {
-        caches[cache.type].put(cacheKey, response, cache.time);
-    }
+    caches[cache.type].put(cacheKey, response, cache.time);
 }
 
 function Sync(method, collection, opts)
@@ -127,22 +118,34 @@ function Sync(method, collection, opts)
 
         if (cachedResponse) {
             cleanupApiRequest(collection);
-            sendResponse(cachedResponse, collection, opts, false);
+            opts.success && opts.success(cachedResponse);
             collection = null;
             return;
         }
     }
 
-    readFromApi(collection.xhrRequest, settings.displayErrors, function (response) {
-
-        if (useCache) {
-            cacheValidResponse(cacheKey, cache, response, collection);
-        }
+    readFromApi(collection.xhrRequest, function (response) {
 
         cleanupApiRequest(collection);
-        sendResponse(response, collection, opts, this.errorMessageSent);
+
+        if (isSuccessfulResponse(collection, response)) {
+            useCache && cacheResponse(cacheKey, cache, response);
+            opts.success && opts.success(response);
+        } else {
+            opts.error && opts.error(new PiwikApiError('Invalid Response', 'Response does not have the correct format.'));
+        }
 
         collection = null;
+        opts       = null;
+        cache      = null;
+
+    }, function (error) {
+
+        cleanupApiRequest(collection);
+        error && opts.error && opts.error(new PiwikApiError(error.error, error.message));
+        collection = null;
+        opts       = null;
+        cache      = null;
     });
 }
 
