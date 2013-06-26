@@ -29,7 +29,7 @@ exports.definition = {
         },
         "cache": false,
         "settings": {
-            "method": "SitesManager.getSitesWithAtLeastViewAccess",
+            "method": "SitesManager.getSitesIdWithAtLeastViewAccess",
             "displayErrors": true
         },
         "defaultParams": {"limit": 1}
@@ -57,15 +57,7 @@ exports.definition = {
 
             validResponse: function (response) {
 
-                if (!response || !_.isArray(response) || !response[0]) {
-                    return false;
-                }
-                
-                if (!response[0].idsite) {
-                    return false;
-                }
-                
-                return true;
+                return (response && _.isArray(response));
             }
             // extended functions go here           
             
