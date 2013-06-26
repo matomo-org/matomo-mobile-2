@@ -38,28 +38,6 @@ function HttpRequest () {
     this.baseUrl = null;
 
     /**
-     * We have to inform the user if no network connection is available. Apple requires this. Additionally, we want to
-     * inform the user if the request timed out or the url does not exist. This property is set to true as soon as an
-     * error message was sent to the user. We do not want to inform the user more than once if an error occurs.
-     * 
-     * @default  "false"
-     *
-     * @type     boolean
-     */
-    this.errorMessageSent = false;
-    
-    /**
-     * Disables the notification of an error message to the user on any error. Disable this only if a request is totally 
-     * unimportant and does not effect the app. This is important because Apple requires to inform the user if 
-     * no network connection is available.
-     * 
-     * @default  "true"
-     *
-     * @type     boolean
-     */
-    this.sendErrors = true;
-    
-    /**
      * The user agent used when sending requests.
      * 
      * @default  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1"
@@ -79,14 +57,15 @@ function HttpRequest () {
 
     /**
      * The callback method will be executed as soon as the readyState is finished. The callback method will be executed
-     * in context of HttpRequest. The callback method will be executed on a valid result
-     * and on any error. If an error occurred, it does not pass the result to the callback method.
+     * in context of HttpRequest. The successCallback method will be executed on a valid result, the errorCallback
+     * on any error.
      *
      * @see   HttpRequest#setCallback
      *
      * @type  Function|null
      */
-    this.callback = null;
+    this.successCallback = null;
+    this.errorCallback   = null;
 
     /**
      * An instance of the Titanium HTTP Client instance we have used to send the request. Is only set if the request is
@@ -136,12 +115,15 @@ HttpRequest.prototype.setParameter = function (parameter) {
  *                               Network is not available, no base url is given, timeout, ...
  *                               In such a case the callback method does not receive the response as an
  *                               argument. Ensure that your callback method is able to handle such a case.
- *                               The first argument the method does receive is the response, the second is
- *                               the used parameters. See {@link HttpRequest#callback}
  */
-HttpRequest.prototype.setCallback = function (callback) {
-    this.callback = callback;
-    callback      = null;
+HttpRequest.prototype.onSuccess = function (callback) {
+    this.successCallback = callback;
+    callback = null;
+};
+
+HttpRequest.prototype.onError = function (callback) {
+    this.errorCallback = callback;
+    callback = null;
 };
 
 HttpRequest.prototype.getRequestUrl = function () {
@@ -212,12 +194,10 @@ HttpRequest.prototype.handle = function () {
  */
 HttpRequest.prototype.abort = function () {
     if (this.xhr && this.xhr.abort) {
-
-        // make sure not to notify the user about this abort
-        this.sendErrors = false;
         
         // make sure no callback method will be called.
-        this.setCallback(null);
+        this.onSuccess(null);
+        this.onError(null);
         
         this.xhr.abort();
 
@@ -254,33 +234,25 @@ HttpRequest.prototype.load = function (xhr) {
     }
 
     // validate response
-    var isValidResponse = this.isValidResponse(response);
+    var errorMessage = this.getErrorIfInvalidResponse(response);
 
-    if (!isValidResponse) {
-        response        = null;
-        xhr             = null;
+    if (errorMessage) {
+        response = null;
+        xhr      = null;
 
-        this.error({error: 'Invalid response'});
+        this.error({error: errorMessage});
 
         return;
     }
 
     try {
-        if (this.callback) {
-            this.callback.apply(this, [response]);
+        if (this.successCallback) {
+            this.successCallback.apply(this, [response]);
         }
  
     } catch (e) {
-        console.warn('Failed to call callback method: ' + e.message, 
-                     'HttpRequest::load#callback');
-
-        var tracker = require('Piwik/Tracker');
-        tracker.trackException({error: e, errorCode: 'PiHrLo29'});
-    }
-
-    // onload hook
-    if (this.onload) {
-        this.onload();
+        console.warn('Failed to call success callback method: ' + e.message, 'HttpRequest::load#callback');
+        require('Piwik/Tracker').trackException({error: e, errorCode: 'PiHrLo29'});
     }
 
     response = null;
@@ -289,9 +261,68 @@ HttpRequest.prototype.load = function (xhr) {
     this.cleanup();
 };
 
+function convertXhrStatusCodeToHumanReadable(statusCode)
+{
+    return String.format(L('Mobile_NetworkErrorWithStatusCodeShort'), statusCode + '');
+}
+
+function convertXhrErrorMessageToHumanReadable (xhrError) {
+    if (-1 != xhrError.indexOf('Host is unresolved') || -1 != xhrError.indexOf('Unable to resolve host')) {
+        // convert error message "Host is unresolved: notExistingDomain.org:80" to: "Host is unresolved" and
+        // Unable to resolve host "example.com": No address associated with hostname.
+        xhrError = 'Host is unresolved';
+    }
+
+    // ASIHTTPRequestErrorDomain errors
+    if (-1 != xhrError.indexOf('A connection failure occurred')) {
+        xhrError = 'A connection failure occurred';
+    } else if (-1 != xhrError.indexOf('The request timed out')) {
+        xhrError = 'The request timed out';
+    } else if (-1 != xhrError.indexOf('Authentication needed')) {
+        xhrError = 'Authentication needed';
+    } else if (-1 != xhrError.indexOf('Unable to create request')) {
+        xhrError = 'Unable to create request (bad url?)';
+    } else if (-1 != xhrError.indexOf('The request failed because it redirected too many times')) {
+        xhrError = 'The request failed because it redirected too many times';
+    } else if (-1 != xhrError.indexOf('Unable to start HTTP connection')) {
+        xhrError = 'Unable to start HTTP connection';
+    } else if (-1 != xhrError.indexOf('SSL problem')) {
+        xhrError = 'SSL problem (Possible causes may include a bad/expired/self-signed certificate, clock set to wrong date)';
+    } else if (-1 != xhrError.indexOf('Service Temporarily Unavailable')) {
+        xhrError = 'Service Temporarily Unavailable';
+    } else if (-1 != xhrError.indexOf('Internal Server Error')) {
+        xhrError = 'Internal Server Error';
+    } else if (-1 != xhrError.indexOf('Connection reset by peer')) {
+        // recvfrom failed: ECONNRESET (Connection reset by peer
+        xhrError = 'Connection reset by peer';
+    } else if (-1 != xhrError.indexOf('Cannot convert host to URI')) {
+        xhrError = 'Cannot convert host to URI';
+    } else if (-1 != xhrError.indexOf('The target server failed to respond')) {
+        xhrError = 'The target server failed to respond';
+    } else if (-1 != xhrError.indexOf('Gateway Time-out')) {
+        xhrError = 'Gateway Time-out';
+    } else if (-1 != xhrError.indexOf('The target server failed to respond')) {
+        xhrError = 'The target server failed to respond';
+    } else if (-1 != xhrError.indexOf('SSL handshake aborted')) {
+        xhrError = 'SSL handshake aborted: Failure in SSL library, usually a protocol error';
+    } else if (-1 != xhrError.indexOf('java.net.SocketTimeoutException')) {
+        xhrError = 'SocketTimeoutException';
+    } else if (-1 != xhrError.indexOf('SSL shutdown failed')) {
+        xhrError = 'SSL shutdown failed I/O error during system call';
+    } else if (-1 != xhrError.indexOf('Connection timed out')) {
+        // recvfrom failed:
+        xhrError = 'ETIMEDOUT Connection timed out';
+    } else if (-1 != xhrError.indexOf('Connect to') && -1 != xhrError.indexOf('timed out')) {
+        xhrError = 'Connect timed out';
+    } else if (-1 != xhrError.indexOf('Connect to') && -1 != xhrError.indexOf('refused')) {
+        xhrError = 'Connect refused';
+    }
+
+    return xhrError;
+}
+
 /**
- * This method will be executed on any error. Displays a notification about the occurred error, if sendErrors is
- * enabled and if no error message was already sent. Executes the previous defined callback method afterwards.
+ * This method will be executed on any error. Executes the previous defined error callback method.
  *
  * @param  {Object}  e  An Error Object that contains at least a property named error.
  */
@@ -307,7 +338,7 @@ HttpRequest.prototype.error = function (e) {
     // if set, the user will see a dialog containing this message
     var message   = '';
     // the title of the message
-    var title     = L('General_Error');
+    var title     = L('Mobile_NetworkError');
     // null|string|Error if set, the error will be tracked
     var exception = null;
     // the type of the error, for example TypeError, SyntaxError, ...
@@ -317,65 +348,14 @@ HttpRequest.prototype.error = function (e) {
     if ((!e || !e.error) && this.xhr && 200 != this.xhr.status) {
         
         exception = this.xhr.statusText ? this.xhr.statusText : this.xhr.status;
+        title     = convertXhrStatusCodeToHumanReadable(this.xhr.status);
         message   = String.format(L('Mobile_NetworkErrorWithStatusCode'), 'Unknown', '' + exception, baseUrl);
         
     } else if (e && e.error) {
-        
-        e.error = '' + e.error;
-        var originalErrorMessage = e.error;
 
-        if (-1 != e.error.indexOf('Host is unresolved') || -1 != e.error.indexOf('Unable to resolve host')) {
-            // convert error message "Host is unresolved: notExistingDomain.org:80" to: "Host is unresolved" and 
-            // Unable to resolve host "example.com": No address associated with hostname.
-            e.error = 'Host is unresolved';
-        }
-        
-        // ASIHTTPRequestErrorDomain errors
-        if (-1 != e.error.indexOf('A connection failure occurred')) {
-            e.error = 'A connection failure occurred';
-        } else if (-1 != e.error.indexOf('The request timed out')) {
-            e.error = 'The request timed out';
-        } else if (-1 != e.error.indexOf('Authentication needed')) {
-            e.error = 'Authentication needed';
-        } else if (-1 != e.error.indexOf('Unable to create request')) {
-            e.error = 'Unable to create request (bad url?)';
-        } else if (-1 != e.error.indexOf('The request failed because it redirected too many times')) {
-            e.error = 'The request failed because it redirected too many times';
-        } else if (-1 != e.error.indexOf('Unable to start HTTP connection')) {
-            e.error = 'Unable to start HTTP connection';
-        } else if (-1 != e.error.indexOf('SSL problem')) {
-            e.error = 'SSL problem (Possible causes may include a bad/expired/self-signed certificate, clock set to wrong date)';
-        } else if (-1 != e.error.indexOf('Service Temporarily Unavailable')) {
-            e.error = 'Service Temporarily Unavailable';
-        } else if (-1 != e.error.indexOf('Internal Server Error')) {
-            e.error = 'Internal Server Error';
-        } else if (-1 != e.error.indexOf('Connection reset by peer')) {
-            // recvfrom failed: ECONNRESET (Connection reset by peer
-            e.error = 'Connection reset by peer';
-        } else if (-1 != e.error.indexOf('Cannot convert host to URI')) {
-            e.error = 'Cannot convert host to URI';
-        } else if (-1 != e.error.indexOf('The target server failed to respond')) {
-            e.error = 'The target server failed to respond';
-        } else if (-1 != e.error.indexOf('Gateway Time-out')) {
-            e.error = 'Gateway Time-out';
-        } else if (-1 != e.error.indexOf('The target server failed to respond')) {
-            e.error = 'The target server failed to respond';
-        } else if (-1 != e.error.indexOf('SSL handshake aborted')) {
-            e.error = 'SSL handshake aborted: Failure in SSL library, usually a protocol error';
-        } else if (-1 != e.error.indexOf('java.net.SocketTimeoutException')) {
-            e.error = 'SocketTimeoutException';
-        } else if (-1 != e.error.indexOf('SSL shutdown failed')) {
-            e.error = 'SSL shutdown failed I/O error during system call';
-        } else if (-1 != e.error.indexOf('Connection timed out')) {
-            // recvfrom failed: 
-            e.error = 'ETIMEDOUT Connection timed out';
-        } else if (-1 != e.error.indexOf('Connect to') && -1 != e.error.indexOf('timed out')) {
-            e.error = 'Connect timed out';
-        } else if (-1 != e.error.indexOf('Connect to') && -1 != e.error.indexOf('refused')) {
-            e.error = 'Connect refused';
-        }
+        var errorMessage = convertXhrErrorMessageToHumanReadable('' + e.error);
 
-        switch (e.error.toLowerCase()) {
+        switch (errorMessage.toLowerCase()) {
 
             case 'no connection':
                 // apple requires that we inform the user if no network connection is available
@@ -389,14 +369,15 @@ HttpRequest.prototype.error = function (e) {
             case 'timeout':
             case 'the request timed out':
             case 'chunked stream ended unexpectedly':
-    
+
+                title   = L('Mobile_RequestTimedOutShort');
                 message = String.format(L('General_RequestTimedOut'), baseUrl);
     
                 break;
     
             case 'host is unresolved':
             case 'not found':
-    
+
                 message = String.format(L('General_NotValid'), baseUrl);
     
                 break;
@@ -418,76 +399,36 @@ HttpRequest.prototype.error = function (e) {
                  */
                 
                 var statusText = '';
-                errorType      = e.error;
-                exception      = originalErrorMessage;
+                errorType      = e.error + '';
+                exception      = e.error + '';
 
-                if (this.xhr && 'undefined' != (typeof this.xhr.status)) {
+                if (this.xhr && ('undefined' != (typeof this.xhr.status))) {
                     statusText  = '' + (this.xhr.statusText ? this.xhr.statusText : this.xhr.status);
                     errorType  += '-' + this.xhr.status;
                 }
                 
-                message = String.format(L('Mobile_NetworkErrorWithStatusCode'), e.error, statusText, baseUrl);
-        }
-    }
-    
-    if (message && this.displayErrorAllowed()) {
-        this.errorMessageSent = true;
-
-        var alertDialog = Ti.UI.createAlertDialog({
-            title: title,
-            message: message,
-            buttonNames: [L('General_Ok')]
-        });
-
-        alertDialog.show();
-        alertDialog = null;
-        
-        if (exception) {
-            var tracker = require('Piwik/Tracker');
-            tracker.trackException({error: exception, type: errorType,
-                                    file: 'Piwik/Network/HttpRequest.js', 
-                                    errorCode: 'PiHrLe39'});
+                message = String.format(L('Mobile_NetworkErrorWithStatusCode'), e.error + '', statusText, baseUrl);
         }
     }
 
-    if (this.callback) {
-        this.callback.apply(this, []);
+    if (exception) {
+        require('Piwik/Tracker').trackException({error: exception, type: errorType, errorCode: 'PiHrLe39',
+                                                 file: 'Piwik/Network/HttpRequest.js'});
     }
 
-    // onload hook
-    if (this.onload) {
-        this.onload();
+    try {
+        if (this.errorCallback) {
+            this.errorCallback.apply(this, [{error: title , message: message}]);
+        }
+
+    } catch (e) {
+        console.warn('Failed to call error callback method: ' + e.message, 'HttpRequest::load#callback');
+        require('Piwik/Tracker').trackException({error: e, errorCode: 'PiHrEr17'});
     }
 
     e = null;
     
     this.cleanup();
-};
-
-/**
- * Detects whether it is ok to display an error message. 
- *
- * @returns  {boolean}  true if we are allowed to display an error message, false otherwise.
- */
-HttpRequest.prototype.displayErrorAllowed = function () {
-    if (!this.sendErrors) {
-        // displaying errors are not allowed for this request
-
-        return false;
-    }
-
-    if (this.errorMessageSent) {
-        // an error message was already displayed. Do not display an error again.
-
-        return false;
-    }
-
-    if (this.onDisplayErrorAllowed) {
-
-        return this.onDisplayErrorAllowed();
-    }
-
-    return true;
 };
 
 /**
@@ -497,29 +438,21 @@ HttpRequest.prototype.cleanup = function () {
 
     this.xhr       = null;
     this.parameter = null;
-    this.callback  = null;
-    this.onload    = null;
-};
-
-/**
- * The onload method will be called as soon as the load or error event was executed. 
- */
-HttpRequest.prototype.onload = function () {
-    // overwrite me
+    this.errorCallback   = null;
+    this.successCallback = null;
 };
 
 /**
  * Is called to validate the response before the success callback method will be called. If the response is not
- * valid, the errorHandler will be triggered which notifies the user about an error.
+ * valid, the errorHandler will be triggered.
  * 
  * @param    {Object|null}  response  The received response.
  * 
- * @returns  {boolean}      true if the response is valid, false otherwise.
+ * @returns  {string|null}  An error message if response is invalid, null otherwise.
  */
-HttpRequest.prototype.isValidResponse = function (response) {
+HttpRequest.prototype.getErrorIfInvalidResponse = function (response) {
     response = null;
-    
-    return true;
+    return null;
 };
 
 module.exports = HttpRequest;

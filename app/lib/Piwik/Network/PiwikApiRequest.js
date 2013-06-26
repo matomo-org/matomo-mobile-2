@@ -185,47 +185,22 @@ PiwikApiRequest.prototype._mixinParameter = function (parameter) {
  * 
  * @param    {Object|null}  The received response.
  * 
- * @returns  {boolean}      true if the response is valid, false otherwise.
+ * @returns  {string|null}  An error message if response is invalid, null otherwise.
  *
  * @override
  */
-PiwikApiRequest.prototype.isValidResponse = function (response) {
+PiwikApiRequest.prototype.getErrorIfInvalidResponse = function (response) {
     var _ = require('alloy/underscore')._;
     
     if (response && _.isObject(response) && response.result && 'error' == response.result) {
         // the piwik response contains an error
-        
-        if (!this.displayErrorAllowed()) {
-            // verify whether we are authorized to display an error message
-            response = null;
-            
-            return false;
-        }
-        
-        this.errorMessageSent = true;
 
-        var L       = require('L');
-        
-        var message = L('General_InvalidResponse');
-        if (response.message) {
-            message = response.message;
-        }
-
-        var alertDialog = Ti.UI.createAlertDialog({
-            title: L('General_Error'),
-            message: message,
-            buttonNames: [L('General_Ok')]
-        });
-
-        alertDialog.show();
-        response = null;
-        
-        return false;
+        return response.message + '';
     }
     
     response = null;
     
-    return true;
+    return null;
 };
 
 PiwikApiRequest.prototype.getUrl = function () {
