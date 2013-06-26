@@ -15,6 +15,7 @@ var siteModel    = require('session').getWebsite();
 var reportDate   = require('session').getReportDate();
 var visitorLog   = Alloy.createCollection('piwikLastVisitDetails');
 visitorLog.on('reset', render);
+visitorLog.on('error', onFetchError);
 
 if (OS_IOS) {
     $.pullToRefresh.init($.visitorLogTable);
@@ -165,7 +166,9 @@ function showReportContent()
         $.pullToRefresh.refreshDone();
     } 
 
+    $.content.show();
     $.loadingIndicator.hide();
+    $.nodata.hide();
 }
 
 function showLoadingMessage()
@@ -175,11 +178,22 @@ function showLoadingMessage()
     } 
 
     $.loadingIndicator.show();
+    $.content.hide();
+    $.nodata.hide();
 }
 
-function onFetchError()
+function showReportHasNoVisitors(title, message)
 {
-    console.log('error fetching data');
+    $.nodata.show({title: title, message: message});
+    $.content.hide();
+    $.loadingIndicator.hide();
+}
+
+function onFetchError(undefined, error)
+{
+    if (error) {
+        showReportHasNoVisitors(error.getError(), error.getMessage());
+    }
 }
 
 function doRefresh()

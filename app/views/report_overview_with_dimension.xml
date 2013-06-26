@@ -15,7 +15,7 @@
         <View class="separator" platform="ios,android"/>
         <Require src="loading_indicator" id="loadingIndicator"/>
         <View id="noData">
-            <Label class="no_data"/>
+            <Label id="noDataDescription"/>
             <View class="separator"/>
         </View>
         <TableView id="content" dataCollection="$.piwikProcessedReport" dataFunction="renderStatistics">

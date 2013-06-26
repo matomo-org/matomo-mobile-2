@@ -112,9 +112,9 @@ function showReportContent()
     $.loadingindicator.hide();
 }
 
-function showReportHasNoData()
+function showReportHasNoData(title, message)
 {
-    $.nodata.show();
+    $.nodata.show({title: title, message: message});
     $.content.hide();
     $.loadingindicator.hide();
 }
@@ -218,7 +218,7 @@ function onStatisticsFetched(processedReportCollection)
     removeAllChildrenFromContent();
 
     if (!processedReportCollection.length) {
-        showReportHasNoData();
+        showReportHasNoData(L('Mobile_NoWebsitesShort'), L('Mobile_NoWebsiteFound'));
         return;
     }
 
@@ -287,9 +287,10 @@ function doRefresh()
                  idSite: siteModel.id, 
                  apiModule: module, 
                  apiAction: action},
-        error: function () {
-            // TODO handle error
-            processedReportCollection.trigger('error', {type: 'loadingProcessedReport'});
+        error: function (undefined, error) {
+            if (error) {
+                showReportHasNoData(error.getError(), error.getMessage());
+            }
         },
         success: onStatisticsFetched
     });

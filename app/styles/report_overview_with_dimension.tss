@@ -100,7 +100,7 @@
     backgroundColor: '#efefef',
 }
 
-".no_data": {
+"#noDataDescription": {
     top: 18,
     bottom: 18,
     left: 10,
@@ -109,7 +109,7 @@
     color: '#7e7e7e',
 }
 
-".no_data[platform=android]": {
+"#noDataDescription[platform=android]": {
     top: '18dp',
     bottom: '18dp',
     left: '10dp',

@@ -45,13 +45,14 @@ exports.definition = {
     
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
-            fetchVisitors: function (account, idSite, success, error) {
+            fetchVisitors: function (account, idSite, onSuccess, onError) {
                 for (var index in this.config.defaultParams.urls) {
                     var defaultParam    = this.config.defaultParams.urls[index];
                     defaultParam.idSite = idSite;
                 }
 
                 this.abortRunningRequests();
+
                 this.fetch({
                     account: account, 
                     success: function (collection, response) {
@@ -66,18 +67,18 @@ exports.definition = {
                         last30Min   = (last30Min && last30Min[0]) ? last30Min[0] : '-';
                         last24Hours = (last24Hours && last24Hours[0]) ? last24Hours[0] : '-';
 
-                        if (success) {
-                            success(account, last30Min, last24Hours, visitorDetails);
-                            success = null;
+                        if (onSuccess) {
+                            onSuccess(account, last30Min, last24Hours, visitorDetails);
+                            onSuccess = null;
+                            onError   = null;
                             account = null;
                         }
                     },
-                    error: function () {
-                        if (error) {
-                            error(account);
-                            error   = null;
-                            account = null;
-                        }
+                    error: function (collection, error) {
+                        onError(collection, error);
+                        onError   = null;
+                        onSuccess = null;
+                        account   = null;
                     }
                 });
 

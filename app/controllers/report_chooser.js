@@ -12,9 +12,6 @@ function L(key)
 
 var reportsCollection = Alloy.Collections.piwikReports;
 reportsCollection.on('reset', updateAvailableReportsList);
-reportsCollection.on('forceRefresh', refresh);
-
-var currentlyActiveReport = null;
 
 var cidToSelect = '';
 
@@ -232,15 +229,7 @@ function openGiveFeedback()
 
 function refresh()
 {
-    var accountModel = require('session').getAccount();
-    var siteModel    = require('session').getWebsite();
-
-    if (!siteModel || !accountModel) {
-        console.log('no website/account selected', 'report_chooser');
-        return;
-    }
-
-    reportsCollection.fetchAllReports(accountModel, siteModel);
+    reportsCollection.trigger('forceRefresh');
 }
 
 function openEntryReport()
@@ -263,6 +252,4 @@ exports.open = function()
     Alloy.createCollection('AppSettings').settings().on('change:language', refresh);
 
     openEntryReport();
-
-    refresh();
 };

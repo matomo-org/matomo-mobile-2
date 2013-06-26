@@ -26,8 +26,18 @@ function open()
     fetchWebsites();
 }
 
+function reloadWebsitesIfNotLoadedDueToConnectivityIssues()
+{
+    if (!$.piwikWebsites.hasWebsites()) {
+        // try to reload websites if
+        fetchWebsites();
+    }
+}
+
 function toggleVisibility() 
 {
+    reloadWebsitesIfNotLoadedDueToConnectivityIssues();
+
     require('layout').toggleRightSidebar();
 }
 
@@ -68,10 +78,8 @@ function checkWebsite(tableViewRow)
 
 function transformWebsite(processedReport)
 {
-    if (processedReport && 
-        processedReport.getReportMetadata() && 
-        processedReport.getReportMetadata().idsite) {
-        processedReport.idsite = processedReport.getReportMetadata().idsite;
+    if (processedReport && processedReport.getSiteId()) {
+        processedReport.idsite = processedReport.getSiteId();
     } else {
         processedReport.idsite = null;
     }
@@ -105,23 +113,18 @@ function selectWebsite(event)
         return;
     }
 
-    var id      = event.row.modelid;
-    var website = $.piwikProcessedReport.get(id);
+    var id = event.row.modelid;
+    var siteModel = $.piwikWebsites.get(id);
 
-    if (!website) {
-        console.log('websiteModel not found in collection, cannot select website');
+    if (!siteModel) {
+        console.log('siteModel not found in collection, cannot select website');
         return;
     }
 
-
-    var idSite = website.getReportMetadata() ? website.getReportMetadata().idsite : null;
-    var websiteName = website.getTitle();
-
-    var siteModel = Alloy.createModel('PiwikWebsites', {idsite: idSite, name: websiteName});
-    var account   = require('session').getAccount();
+    var account = require('session').getAccount();
 
     require('session').setWebsite(siteModel, account);
-    toggleVisibility();
+    hideRightSidebar();
 }
 
 function fetchWebsites()
@@ -139,7 +142,7 @@ function fetchWebsites()
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
-    $.piwikProcessedReport.fetchProcessedReports('nb_visits', {
+    $.piwikWebsites.fetchWebsites('nb_visits', {
         params: {
             period: piwikPeriod, 
             date: piwikDate, 

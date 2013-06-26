@@ -55,8 +55,6 @@ function onError (accountModel, error) {
     var url     = '';
 
     switch (error) {
-        case 'AlreadyHandled':
-            return;
         case 'MissingUsername':
             message = String.format(L('General_Required'), L('Login_Login'));
             title   = 'Account Missing Username';
@@ -101,6 +99,29 @@ function onError (accountModel, error) {
     alertDialog.show();
 }
 
+function onNetworkError(undefined, error) {
+    hideWaitingIndicator();
+
+    if (error) {
+
+        var dialog = Ti.UI.createAlertDialog({title: error.getError(), message: error.getMessage(), buttonNames: [L('General_Ok')]});
+        dialog.show();
+        dialog = null;
+    }
+}
+
+function fetchAuthToken(account)
+{
+    var username = account.getUsername();
+    var password = account.getPassword();
+
+    var tokenAuth = Alloy.createModel('piwikTokenAuth');
+    tokenAuth.fetchToken(account, username, password, function (model) {
+        if (model && model.getTokenAuth()) {
+            account.set({tokenAuth: model.getTokenAuth()});
+        }
+    }, onNetworkError);
+}
 
 exports.login = function(accounts, accessUrl, username, password)
 {
@@ -118,17 +139,6 @@ exports.login = function(accounts, accessUrl, username, password)
         return;
     }
 
-    showWaitingIndicator();
-
-    account.on('sync', function (accountModel) {
-        if (!accountModel) {
-            console.info('Cannot update piwik version, no account given', 'login');
-            return;
-        }
-
-        accountModel.updatePiwikVersion();
-    });
-
     var makeSureUserHasAccessToAtLeastOneWebsite = function (accountModel)
     {
         if (!accountModel) {
@@ -140,31 +150,37 @@ exports.login = function(accounts, accessUrl, username, password)
 
         site.fetch({
             account: accountModel,
-            success: function () {
+            success: function (siteCollection) {
                 // it has access to at least one webistes
 
                 hideWaitingIndicator();
 
+                if (!siteCollection.length) {
+                    accountModel.trigger('error', accountModel, 'NoViewAccess');
+
+                    return;
+                }
+
                 accountModel.save();
-                accountModel.trigger('sync', accountModel);
+                accountModel.off();
                 accounts.add(accountModel);
+                accountModel = null;
 
                 require('Piwik/Tracker').trackEvent({title: 'Account Login Success', url: '/account/login/success'});
 
-            }, error: function (model, event) {
+            }, error: function (undefined, error) {
 
                 accountModel.clear({silent: true});
+                accountModel = null;
 
-                if (!event || !event.errorMessageDisplayed) {
-                    accountModel.trigger('error', accountModel, 'NoViewAccess');
-                } else {
-                    accountModel.trigger('error', accountModel, 'AlreadyHandled');
-                }
+                onNetworkError(undefined, error);
             }
         });
     };
 
     account.on('change:tokenAuth', makeSureUserHasAccessToAtLeastOneWebsite);
 
-    account.updateAuthToken();
+    showWaitingIndicator();
+
+    fetchAuthToken(account);
 };

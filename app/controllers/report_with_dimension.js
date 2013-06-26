@@ -147,7 +147,12 @@ exports.doRefresh = function()
                  filter_limit: $.showAllEntries ? -1 : $.rowsFilterLimit,
                  apiModule: module, 
                  apiAction: action},
-        success: $.renderProcessedReport
+        success: $.renderProcessedReport,
+        error: function (undefined, error) {
+            if (error) {
+                $.showReportHasNoData(error.getError(), error.getMessage());
+            }
+        }
     });
 };
 

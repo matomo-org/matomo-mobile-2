@@ -7,9 +7,7 @@
 
 exports.execute = function (callback)
 {
-    var params   = {openWebsiteAutomaticallyIfOnlyOneWebsiteIsAvailable: false};
-
-    var websites = Alloy.createController('all_websites_dashboard', params);
+    var websites = Alloy.createController('all_websites_dashboard');
     
     if (callback) {
         websites.on('websiteChosen', callback);

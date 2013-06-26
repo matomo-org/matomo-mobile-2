@@ -100,7 +100,7 @@ function openVisitor(event)
 function render(account, counter30Min, counter24Hours, visitorDetails)
 {
     if (!visitorDetails || !visitorDetails.length) {
-        showReportHasNoVisitors();
+        showReportHasNoVisitors(L('Mobile_NoVisitorsShort'), L('Mobile_NoVisitorFound'));
         return;
     }
 
@@ -142,9 +142,9 @@ function showReportContent()
     $.nodata.hide();
 }
 
-function showReportHasNoVisitors()
+function showReportHasNoVisitors(title, message)
 {
-    $.nodata.show({title: L('Mobile_NoVisitorsShort'), message: L('Mobile_NoVisitorFound')});
+    $.nodata.show({title: title, message: message});
     $.content.hide();
     $.loadingindicator.hide();
 }
@@ -161,9 +161,11 @@ function showLoadingMessage()
     stopRefreshTimer();
 }
 
-function onFetchError()
+function onFetchError(undefined, error)
 {
-    console.warn('error fetching data');
+    if (error) {
+        showReportHasNoVisitors(error.getError(), error.getMessage());
+    }
 }
 
 function doRefresh()

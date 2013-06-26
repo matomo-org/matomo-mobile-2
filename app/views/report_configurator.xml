@@ -1,8 +1,8 @@
 <Alloy>
-    <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
+    <Collection src="piwikWebsites" id="piwikWebsites" instance="true"/>
 
     <View id="index">
-        <TableView id="configTable" dataTransform="transformWebsite" dataCollection="$.piwikProcessedReport" onClick="selectWebsite">
+        <TableView id="configTable" dataTransform="transformWebsite" dataCollection="$.piwikWebsites" onClick="selectWebsite">
             <HeaderView>
                 <View class="headerView">
                     <View class="websitePicker">
@@ -17,7 +17,7 @@
                     </View>
                 </View>
             </HeaderView>
-            <TableViewRow class="websiteRow" idsite="{idsite}" rightImage="{rightImage}" modelid="{id}" title="{title}"/>
+            <TableViewRow class="websiteRow" idsite="{idsite}" rightImage="{rightImage}" modelid="{id}" title="{name}"/>
         </TableView>
     </View>
 </Alloy>

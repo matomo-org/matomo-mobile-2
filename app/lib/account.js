@@ -26,9 +26,18 @@ function openEntrySite(account)
             }
 
             onSiteSelected({site: sites.entrySite(), account: account});
+            account = null;
         },
-        error: function () {
-            // TODO what now?
+        error: function (undefined, error) {
+            if (error && error.getError) {
+
+               var L      = require('L');
+               var dialog = Ti.UI.createAlertDialog({title: error.getError(), message: error.getMessage(), buttonNames: [L('Mobile_Refresh')]});
+               dialog.addEventListener('click', function () { openEntrySite(account);account = null; });
+               dialog.show();
+               dialog = null;
+
+            }
         }
     });
 }

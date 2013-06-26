@@ -10,18 +10,16 @@ exports.definition = {
     config: {
         "columns": {
             "idsite":"integer",
+            "label":"string",
             "name":"string",
-            "main_url":"string",
-            "ts_created":"string",
-            "timezone":"string",
-            "currency":"string",
-            "excluded_ips":"integer",
-            "excluded_parameters":"string",
-            "sitesearch":"integer",
-            "sitesearch_keyword_parameters":"string",
-            "sitesearch_category_parameters":"string",
-            "group":"string",
-            "ecommerce":"integer"
+            "nb_visits":"integer",
+            "nb_actions":"integer",
+            "nb_pageviews":"integer",
+            "revenue":"integer",
+            "visits_evolution":"string",
+            "actions_evolution":"string",
+            "pageviews_evolution":"string",
+            "revenue_evolution":"string"
         },
         "adapter": {
             "type": "piwikapi",
@@ -29,7 +27,7 @@ exports.definition = {
         },
         "cache": {time: 60 * 60, type: 'session'}, // 1 hour
         "settings": {
-            "method": "SitesManager.getSitesWithAtLeastViewAccess",
+            "method": "MultiSites.getAll",
             "displayErrors": true
         },
         "defaultParams": {}
@@ -39,23 +37,22 @@ exports.definition = {
         _.extend(Model.prototype, {
             
             idAttribute: "idsite",
-/*
-            parse: function (response) {
-                if (response && response[0]) {
-                    return response[0];
+
+            initialize: function (attributes) {
+                // label comes from MultiSites.getAll API but should be name as in SitesManager
+                if (attributes && attributes.label) {
+                    this.set({name: attributes.label}, {silent: true});
                 }
-                
-                return null;
             },
-*/
+
             getName: function () {
                 return this.get('name');
             },
+
             getSiteId: function () {
                 return parseInt(this.get('idsite'), 10);
             }
 
-    
             // extended functions go here
 
         }); // end extend
@@ -67,17 +64,38 @@ exports.definition = {
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
 
+            getNumberOfWebsites: function () {
+                return this.length;
+            },
+
+            hasWebsites: function () {
+                return !!this.getNumberOfWebsites();
+            },
+
+            fetchWebsites: function (sortOrderColumn, options) {
+
+                if (!options) {
+                    options = {};
+                }
+                if (!options.params) {
+                    options.params = {};
+                }
+
+                options.params.sortOrderColumn    = sortOrderColumn;
+                options.params.filter_sort_column = sortOrderColumn;
+                options.reset = true;
+
+                this.abortRunningRequests();
+                this.fetch(options);
+            },
+
             validResponse: function (response) {
 
-                if (!response || !response[0]) {
-                    return false;
+                if (response && _.isArray(response)) {
+                    return true;
                 }
-                
-                if (!response[0].idsite) {
-                    return false;
-                }
-                
-                return true;
+
+                return false;
             }
             // extended functions go here           
             

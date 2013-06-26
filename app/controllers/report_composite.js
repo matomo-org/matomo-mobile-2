@@ -14,6 +14,12 @@ var args = arguments[0] || {};
 var reportCategory    = args.reportCategory || null;
 var reportsCollection = Alloy.Collections.piwikReports;
 reportsCollection.off("fetch destroy change add remove reset", renderListOfReports);
+reportsCollection.on('forceRefresh', refresh);
+reportsCollection.on('error', function (undefined, error) {
+    if (error) {
+        showReportHasNoData(error.getError(), error.getMessage());
+    }
+});
 
 var dateHasChanged    = true;
 var websiteHasChanged = true;
@@ -92,9 +98,9 @@ function showReportContent()
     hideLoadingIndicator();
 }
 
-function showReportHasNoData()
+function showReportHasNoData(title, message)
 {
-    $.nodata.show({title: L('Mobile_NoReportsShort')});
+    $.nodata.show({title: title, message: message});
     $.content.hide();
     hideLoadingIndicator();
 }
@@ -142,8 +148,16 @@ function renderIfNeeded()
 
 function refresh()
 {
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
+
+    if (!siteModel || !accountModel) {
+        console.log('no website/account selected', 'report_chooser');
+        return;
+    }
+
     showLoadingIndicator();
-    reportsCollection.trigger('forceRefresh');
+    reportsCollection.fetchAllReports(accountModel, siteModel);
 }
 
 function render()
@@ -153,7 +167,7 @@ function render()
         renderListOfReports();
         addPiwikIcon();
     } else {
-        showReportHasNoData();
+        showReportHasNoData(L('Mobile_NoReportsShort'), null);
     }
 }
 
@@ -233,7 +247,7 @@ function open()
     if (isDataAlreadyFetched()) {
         renderIfNeeded();
     } else {
-        showLoadingIndicator();
+        refresh();
     }
 }
 

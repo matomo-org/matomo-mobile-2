@@ -90,6 +90,14 @@ exports.definition = {
 
             },
 
+            getUsername: function () {
+                return this.get('username');
+            },
+
+            getPassword: function () {
+                return this.get('password');
+            },
+
             getName: function () {
                 return this.get('name');
             },
@@ -235,7 +243,7 @@ exports.definition = {
             
                 return accessUrl;
             },
-            
+
             updateAuthToken: function () {
                 var username = this.get('username');
                 var password = this.get('password');
@@ -244,7 +252,7 @@ exports.definition = {
                 var onSuccess = function (model) {
                     if (model && model.getTokenAuth()) {
                         account.set({tokenAuth: model.getTokenAuth()});
-                    } 
+                    }
                 };
 
                 var onError = function (model) {

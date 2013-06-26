@@ -27,12 +27,12 @@ function showReportContent()
     $.nodata.hide();
 }
 
-function showReportHasNoData()
+exports.showReportHasNoData = function (title, message)
 {
-    $.nodata.show();
+    $.nodata.show({title: title, message: message});
     $.content.hide();
     $.loadingindicator.hide();
-}
+};
 
 exports.showLoadingMessage = function ()
 {
@@ -65,7 +65,7 @@ exports.renderProcessedReport = function (processedReportCollection)
     $.reportTable.setData([]);
 
     if (!hasReportData(processedReportCollection)) {
-        showReportHasNoData();
+        exports.showReportHasNoData(L('Mobile_NoWebsitesShort'), L('Mobile_NoWebsiteFound'));
         return;
     }
 

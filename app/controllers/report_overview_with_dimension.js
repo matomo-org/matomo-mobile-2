@@ -22,10 +22,6 @@ var isRendered = false;
 
 function openReport()
 {
-    if (!hasReportRowsToDisplay()) {
-        return;
-    }
-    
     var report = Alloy.createController('report_with_dimension', {report: $model});
     report.open();
 }
@@ -36,10 +32,14 @@ function hideReportHasNoData()
     $.noData.height = 0;
 }
 
-function showReportHasNoData()
+function showReportHasNoData(message)
 {
+    $.noDataDescription.text = '' + message;
+
     $.noData.height = Ti.UI.SIZE;
     $.noData.show();
+
+    hideLoadingIndicator();
 }
 
 function hideMoreLink()
@@ -55,15 +55,16 @@ function hasReportRowsToDisplay()
 
 function showReportContent()
 {
-    if (!hasReportRowsToDisplay()) {
-        showReportHasNoData();
-        hideMoreLink();
-    }
-
-    $.loadingIndicator.height = 0;
-    $.loadingIndicator.hide();
+    hideLoadingIndicator();
+    hideReportHasNoData();
     $.content.height = Ti.UI.SIZE;
     $.content.show();
+}
+
+function hideLoadingIndicator()
+{
+    $.loadingIndicator.height = 0;
+    $.loadingIndicator.hide();
 }
 
 function showLoadingMessage()
@@ -108,6 +109,11 @@ function fetchProcessedReport()
         success: function () {
             isFetched = true;
             renderStatisticsIfViewIsInViewport();
+        },
+        error: function (undefined, error) {
+            if (error) {
+                showReportHasNoData(error.getError());
+            }
         }
     });
 }
@@ -169,8 +175,14 @@ function renderStatisticsIfViewIsInViewport()
 
 function renderStatisticsAndClose()
 {
-    renderStatistics();
-    showReportContent();
+    if (!hasReportRowsToDisplay()) {
+        showReportHasNoData(L('CoreHome_TableNoData'));
+        hideMoreLink();
+    } else {
+        renderStatistics();
+        showReportContent();
+    }
+
     onClose();
 }
 
