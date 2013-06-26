@@ -14,7 +14,7 @@ function getFakeAccount()
 
 function getFakeWebsite()
 {
-    return {"idsite":"3","name":"virtual-drums.com","main_url":"http:\/\/www.virtual-drums.com","ts_created":"2008-01-27 01:41:53","timezone":"UTC","currency":"USD","excluded_ips":"","excluded_parameters":"","excluded_user_agents":"","sitesearch":"1","sitesearch_keyword_parameters":"","sitesearch_category_parameters":"","group":"","keep_url_fragment":"0","ecommerce":"0"};
+    return {"label":"virtual-drums.com","nb_visits":37,"nb_actions":64,"nb_pageviews":64,"revenue":null,"visits_evolution":"0%","actions_evolution":"-3%","pageviews_evolution":"-3%","idsite":3};
 }
 
 function expectNumberOfReturnedWebsites(params, numWebsitesExpectec, done)
@@ -44,7 +44,7 @@ describe('piwikWebsites Collection', function() {
 
     it.eventually('should fetch only a limited number of websites if a limit is set', function(done) {
 
-        expectNumberOfReturnedWebsites({limit: 1}, 1, done);
+        expectNumberOfReturnedWebsites({filter_limit: 1}, 1, done);
     });
 });
 
@@ -56,6 +56,6 @@ describe('piwikWebsites model', function() {
 
         expect(website.getName()).toBe('virtual-drums.com');
         expect(website.getSiteId()).toBe(3);
-        expect(website.id).toBe('3');
+        expect(website.id).toBe(3);
     });
 });
