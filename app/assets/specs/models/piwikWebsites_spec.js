@@ -6,6 +6,7 @@
  */
 
 require('behave').andSetup(this);
+var Alloy = require('alloy');
 
 function getFakeAccount()
 {

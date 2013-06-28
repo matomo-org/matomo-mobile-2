@@ -6,6 +6,7 @@
  */
 
 var _ = require('alloy/underscore');
+var Alloy = require("alloy");
 var PiwikApiError = require('Piwik/Network/PiwikApiError');
 
 function InitAdapter(config) {
