@@ -7,9 +7,3 @@
 
 Alloy.isTablet = require('Piwik/Platform').isTablet;
 Alloy.isHandheld = !Alloy.isTablet;
-
-if ('test' === Ti.App.deployType && OS_IOS) {
-
-    require('behave/loader').loadSuits();
-    require('behave').run(this);
-}
