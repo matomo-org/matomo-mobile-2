@@ -1,17 +1,34 @@
 ".container": {
-    layout: 'vertical',
     visible: false,
-    height: Ti.UI.SIZE
+}
+
+".container[platform=mobileweb]": {
+    height: Ti.UI.FILL
+}
+
+".container[platform=ios]": {
+    height: Ti.UI.FILL
+}
+
+".container[platform=android]": {
+    top: '48dp',
+    bottom: 0
+}
+
+".centerContainer": {
+    height: Ti.UI.SIZE,
+    layout: 'vertical',
 }
 
 "#icon": {
     image: 'nodata.png',
     height: 48,
-    width: 48
+    width: 48,
+    top: 20,
 }
 
 "#icon[platform=android]": {
-    top: '48dp',
+    top: '16dp',
     image: '/nodata.png',
     height: '48dp',
     width: '48dp'
@@ -62,12 +79,14 @@
     width: Ti.UI.SIZE,
     height: 40,
     top: 40,
+    bottom: 20,
     backgroundColor: "#c0c0c0",
 }
 
 ".refreshContainer[platform=android]": {
     height: '40dp',
     top: '40dp',
+    bottom: '16dp'
 }
 
 "#refresh": {

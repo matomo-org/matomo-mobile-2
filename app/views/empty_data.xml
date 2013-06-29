@@ -1,14 +1,17 @@
 <Alloy>
-    <View class="container" id="index">
+    <ScrollView class="container" id="index">
 
-        <ImageView id="icon"/>
+        <View class="centerContainer">
+            <ImageView id="icon"/>
 
-        <Label id="title"/>
+            <Label id="title"/>
 
-        <Label id="message"/>
+            <Label id="message"/>
 
-        <View class="refreshContainer" onClick="refresh">
-            <Button id="refresh"/>
+            <View class="refreshContainer" onClick="refresh">
+                <Button id="refresh"/>
+            </View>
         </View>
-    </View>
+
+    </ScrollView>
 </Alloy>
