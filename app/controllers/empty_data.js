@@ -10,34 +10,24 @@ function L(key)
     return require('L')(key);
 }
 
+var args = arguments[0] || {};
+
+if (args && _.isString(args.title)) {
+    $.title.text = args.title;
+} else {
+    $.title.text = L('Mobile_NoDataShort');
+}
+
+if (args && _.isString(args.message)) {
+    $.message.text = args.message;
+}
+
 function refresh()
 {
     $.trigger('refresh');
 }
 
-function setTitle(title)
-{
-    $.title.text = title + '';
-}
-
-function setMessage(message)
-{
-    $.message.text = message + '';
-}
-
-exports.show = function (options) {
-
-    if (options && _.isString(options.title)) {
-        setTitle(options.title);
-    }
-
-    if (options && _.isString(options.message)) {
-        setMessage(options.message);
-    }
-
-    $.index.show();
-};
-
-exports.hide = function () {
-    $.index.hide();
+exports.close = function () {
+    $.off();
+    $.destroy();
 };

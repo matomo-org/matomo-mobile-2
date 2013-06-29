@@ -13,8 +13,6 @@
                 platform="android" />
 
         <View id="loading"><Label id="loadingLabel"></Label></View>
-
-        <Require src="empty_data" id="nodata" onRefresh="fetchListOfAvailableWebsites"/>
         
         <View id="content" class="container">
             <SearchBar id="searchBar" onReturn="searchWebsite" onCancel="cancelSearchWebsite" platform="android,ios"/>

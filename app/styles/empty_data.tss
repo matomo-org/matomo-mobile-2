@@ -1,7 +1,3 @@
-".container": {
-    visible: false,
-}
-
 ".container[platform=mobileweb]": {
     height: Ti.UI.FILL
 }
@@ -35,7 +31,6 @@
 }
 
 "#title": {
-    text: L('Mobile_NoDataShort'),
     font: {fontWeight: 'bold', fontSize: 20},
     color: '#7e7e7e',
     top: 20,
@@ -48,7 +43,6 @@
 }
 
 "#message": {
-    text: L('CoreHome_ThereIsNoDataForThisReport'),
     font: {fontSize: 16},
     color: '#7e7e7e',
     top: 20,

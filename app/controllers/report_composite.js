@@ -21,9 +21,10 @@ reportsCollection.on('error', function (undefined, error) {
     }
 });
 
-var dateHasChanged    = true;
-var websiteHasChanged = true;
+var dateHasChanged    = false;
+var websiteHasChanged = false;
 var reportIsDisplayed = true;
+var emptyData = null;
 
 function registerEvents()
 {
@@ -69,40 +70,55 @@ function onFocus()
 function onOpen()
 {
     trackWindowRequest();
+
+    if (isDataAlreadyFetched()) {
+        render();
+    } else {
+        refresh();
+    }
 }
 
 function onClose()
 {
+    cleanupNoDataScreenIfExists();
     unregisterEvents();
 
     $.destroy();
     $.off();
 }
 
-function hideLoadingIndicator()
-{
-    $.loadingIndicator.hide();
-}
-
 function showLoadingIndicator()
 {
     $.loadingIndicator.show();
     $.content.hide();
-    $.nodata.hide();
+    cleanupNoDataScreenIfExists();
 }
 
 function showReportContent()
 {
     $.content.show();
-    $.nodata.hide();
-    hideLoadingIndicator();
+    $.loadingIndicator.hide();
+    cleanupNoDataScreenIfExists();
 }
 
 function showReportHasNoData(title, message)
 {
-    $.nodata.show({title: title, message: message});
+    cleanupNoDataScreenIfExists();
+    emptyData = Alloy.createController('empty_data', {title: title, message: message});
+    emptyData.on('refresh', refresh);
+    emptyData.setParent($.index);
+
     $.content.hide();
-    hideLoadingIndicator();
+    $.loadingIndicator.hide();
+}
+
+function cleanupNoDataScreenIfExists()
+{
+    if (emptyData) {
+        $.index.remove(emptyData.getView());
+        emptyData.close();
+        emptyData = null;
+    }
 }
 
 function toggleReportConfiguratorVisibility (event)
@@ -167,7 +183,7 @@ function render()
         renderListOfReports();
         addPiwikIcon();
     } else {
-        showReportHasNoData(L('Mobile_NoReportsShort'), null);
+        showReportHasNoData(L('Mobile_NoReportsShort'), L('CoreHome_ThereIsNoDataForThisReport'));
     }
 }
 
@@ -243,12 +259,6 @@ function open()
 {
     registerEvents();
     require('layout').open($.index);
-
-    if (isDataAlreadyFetched()) {
-        renderIfNeeded();
-    } else {
-        refresh();
-    }
 }
 
 

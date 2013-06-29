@@ -12,9 +12,9 @@ function L(key)
 
 var args = arguments[0] || {};
 
+var emptyData     = null;
 var currentMetric = null;
 var reportModel   = args.report;
-var reportList    = args.reportList || {};
 var reportDate    = require('session').getReportDate();
 
 // the fetched statistics that belongs to the currently selected report
@@ -57,6 +57,7 @@ function onOpen()
 
 function onClose()
 {
+    cleanupNoDataScreenIfExists();
     unregisterEvents();
 
     $.destroy();
@@ -108,22 +109,35 @@ function onReportChosen (chosenReportModel) {
 function showReportContent()
 {
     $.content.show();
-    $.nodata.hide();
     $.loadingindicator.hide();
+    cleanupNoDataScreenIfExists();
 }
 
 function showReportHasNoData(title, message)
 {
-    $.nodata.show({title: title, message: message});
+    cleanupNoDataScreenIfExists();
+    emptyData = Alloy.createController('empty_data', {title: title, message: message});
+    emptyData.on('refresh', doRefresh);
+    emptyData.setParent($.index);
+
     $.content.hide();
     $.loadingindicator.hide();
+}
+
+function cleanupNoDataScreenIfExists()
+{
+    if (emptyData) {
+        $.index.remove(emptyData.getView());
+        emptyData.close();
+        emptyData = null;
+    }
 }
 
 function showLoadingMessage()
 {
     $.loadingindicator.show();
     $.content.hide();
-    $.nodata.hide();
+    cleanupNoDataScreenIfExists();
 }
 
 function toggleReportChooserVisibility()
@@ -218,7 +232,7 @@ function onStatisticsFetched(processedReportCollection)
     removeAllChildrenFromContent();
 
     if (!processedReportCollection.length) {
-        showReportHasNoData(L('Mobile_NoWebsitesShort'), L('Mobile_NoWebsiteFound'));
+        showReportHasNoData(L('Mobile_NoDataShort'), L('CoreHome_ThereIsNoDataForThisReport'));
         return;
     }
 

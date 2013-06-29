@@ -1,3 +1,4 @@
+var emptyData = null;
 
 $.rowsFilterLimit = Alloy.CFG.piwik.filterLimit;
 $.showAllEntries  = false;
@@ -24,15 +25,28 @@ function showReportContent()
 
     $.content.show();
     $.loadingindicator.hide();
-    $.nodata.hide();
+    exports.cleanupNoDataScreenIfExists();
 }
 
 exports.showReportHasNoData = function (title, message)
 {
-    $.nodata.show({title: title, message: message});
+    exports.cleanupNoDataScreenIfExists();
+    emptyData = Alloy.createController('empty_data', {title: title, message: message});
+    emptyData.on('refresh', $.doRefresh);
+    emptyData.setParent($.index);
+
     $.content.hide();
     $.loadingindicator.hide();
 };
+
+exports.cleanupNoDataScreenIfExists = function()
+{
+    if (emptyData) {
+        $.index.remove(emptyData.getView());
+        emptyData.close();
+        emptyData = null;
+    }
+}
 
 exports.showLoadingMessage = function ()
 {
@@ -41,8 +55,8 @@ exports.showLoadingMessage = function ()
     }
     
     $.loadingindicator.show();
-    $.nodata.hide();
     $.content.hide();
+    exports.cleanupNoDataScreenIfExists();
 };
 
 function onTogglePaginator()
@@ -65,7 +79,7 @@ exports.renderProcessedReport = function (processedReportCollection)
     $.reportTable.setData([]);
 
     if (!hasReportData(processedReportCollection)) {
-        exports.showReportHasNoData(L('Mobile_NoWebsitesShort'), L('Mobile_NoWebsiteFound'));
+        exports.showReportHasNoData(L('Mobile_NoDataShort'), L('CoreHome_ThereIsNoDataForThisReport'));
         return;
     }
 

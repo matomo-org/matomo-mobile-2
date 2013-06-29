@@ -18,8 +18,6 @@
 
         <Require src="loading_indicator" id="loadingindicator"/>
 
-        <Require src="empty_data" id="nodata" onRefresh="exports.doRefresh"/>
-
         <View id="content">
             
             <TableView id="reportTable" class="container">

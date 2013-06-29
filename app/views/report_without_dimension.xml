@@ -16,8 +16,6 @@
 
         <Require src="loading_indicator" id="loadingindicator"/>
 
-        <Require src="empty_data" id="nodata" onRefresh="doRefresh"/>
-
         <ScrollView id="content" class="container">
             <View class="innerContainer">
                 <Require src="graph" id="reportGraphCtrl"/>

@@ -10,6 +10,7 @@ function L(key)
     return require('L')(key);
 }
 
+var emptyData    = null;
 var accountModel = require('session').getAccount();
 var siteModel    = require('session').getWebsite();
 var reportDate   = require('session').getReportDate();
@@ -79,6 +80,7 @@ function onOpen()
 
 function onClose()
 {
+    cleanupNoDataScreenIfExists();
     unregisterEvents();
     $.destroy();
     $.off();
@@ -168,7 +170,7 @@ function showReportContent()
 
     $.content.show();
     $.loadingIndicator.hide();
-    $.nodata.hide();
+    cleanupNoDataScreenIfExists();
 }
 
 function showLoadingMessage()
@@ -179,14 +181,27 @@ function showLoadingMessage()
 
     $.loadingIndicator.show();
     $.content.hide();
-    $.nodata.hide();
+    cleanupNoDataScreenIfExists();
 }
 
 function showReportHasNoVisitors(title, message)
 {
-    $.nodata.show({title: title, message: message});
+    cleanupNoDataScreenIfExists();
+    emptyData = Alloy.createController('empty_data', {title: title, message: message});
+    emptyData.on('refresh', doRefresh);
+    emptyData.setParent($.index);
+
     $.content.hide();
     $.loadingIndicator.hide();
+}
+
+function cleanupNoDataScreenIfExists()
+{
+    if (emptyData) {
+        $.index.remove(emptyData.getView());
+        emptyData.close();
+        emptyData = null;
+    }
 }
 
 function onFetchError(undefined, error)

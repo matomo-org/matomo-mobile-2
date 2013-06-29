@@ -22,8 +22,6 @@
         
         <Require src="loading_indicator" id="loadingIndicator"/>
 
-        <Require src="empty_data" id="nodata" onRefresh="doRefresh"/>
-
         <View id="content">
 
             <TableView id="visitorLogTable" onClick="openVisitor">
