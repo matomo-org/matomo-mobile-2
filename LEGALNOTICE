@@ -50,9 +50,15 @@ Link: https://github.com/andmej/PullToRefresh
 License: See tools/licenses/MIT-LICENSE-pulltorefresh.txt
 
 =======
-Name: app/lib/behave.js
-Link: https://github.com/appcelerator/Codestrong/blob/master/app/lib/behave.js
-License: See tools/licenses/APACHE-LICENSE-V2-behave.js
+Name: specs/jasmine/jasmine.js
+Name: specs/jasmine/jasmine-html.js
+License: See tools/licenses/JASMINE.MIT.LICENSE.txt
+Link: https://github.com/pivotal/jasmine
+
+=======
+Name: specs/jasmine/jasmine-reporters/jasmine.phantomjs-reporter.js
+Licensing: Public Domain
+Link: https://github.com/detro/phantomjs-jasminexml-example
 
 =======
 Name: Moment.js

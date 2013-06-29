@@ -5,8 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
-require('behave').andSetup(this);
-
 function getBaseCache()
 {
     var Alloy = require('alloy');
@@ -35,7 +33,7 @@ function serializeObjectForComparison(obj)
 
 function expectNumberOfEntriesToBeInCache(cache, numEntries)
 {
-    expect(cache.length).toBe(numEntries);
+    expect(cache.length).toEqual(numEntries);
 }
 
 describe('baseCache collection', function() {
@@ -64,14 +62,14 @@ describe('baseCache collection', function() {
 
         var cacheEntry = cache.get(cacheKey);
 
-        expect(cacheEntry.getCachedValue()).toBe(value);
+        expect(cacheEntry.getCachedValue()).toEqual(value);
     });
 
     it('should return null if cache key does not exist', function() {
 
         var cacheEntry = getBaseCache().get('NotExisTingCacHeKey0815');
 
-        expect(cacheEntry).toBe(null);
+        expect(cacheEntry).toEqual(null);
     });
 });
 
@@ -82,7 +80,7 @@ describe('baseCache model', function() {
 
         var model = getCacheModel({key: cacheKey, value: {}, expireTimestamp: 555});
 
-        expect(model.getKey()).toBe(cacheKey);
+        expect(model.getKey()).toEqual(cacheKey);
     });
 
     it('should be able to cache objects', function() {
@@ -93,20 +91,20 @@ describe('baseCache model', function() {
         var expected = serializeObjectForComparison(model.getCachedValue());
         var shouldBe = serializeObjectForComparison(value);
 
-        expect(expected).toBe(shouldBe);
+        expect(expected).toEqual(shouldBe);
     });
 
     it('should be expired if timeout is in the past', function() {
 
         var model = getCacheModel({key: 'testExpired', value: {}, expireTimestamp: getCurrentTimestamp() - 15});
 
-        expect(model.isExpired()).toBe(true);
+        expect(model.isExpired()).toEqual(true);
     });
 
     it('should not be expired if timeout is in the future', function() {
 
         var model = getCacheModel({key: 'testNotExpired', value: {}, expireTimestamp: getCurrentTimestamp() + 15});
 
-        expect(model.isExpired()).toBe(false);
+        expect(model.isExpired()).toEqual(false);
     });
 });

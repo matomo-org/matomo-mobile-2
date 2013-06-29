@@ -5,7 +5,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
-require('behave').andSetup(this);
 var Alloy = require('alloy');
 
 function getFakeAccount()
@@ -15,22 +14,24 @@ function getFakeAccount()
 
 describe('piwikVersion model', function() {
 
-    it.eventually('should fetch the correct piwik version from demo.piwik.org', function(done) {
+    it('should fetch the correct piwik version from demo.piwik.org', function() {
 
+        var versionNumber = null;
         var version = Alloy.createModel('piwikVersion');
         version.fetch({
             account: getFakeAccount(),
             success : function(model) {
-                var versionNumber   = model.getVersion(); // eg "1.12"
-                var isValidResponse = parseFloat(versionNumber) > 1.11;
-
-                expect(isValidResponse).toBe(true);
-                done();
-
-            }, error: function () {
-                expect('Version number is greater than 1.11').toBe("");
-                done();
+                versionNumber = model.getVersion(); // eg "1.12"
             }
+        });
+
+        waitsFor(function() {
+            return (null !== versionNumber);
+        }, 'Loading Piwik version never completed', 10000);
+
+        runs(function() {
+            var isValidResponse = parseFloat(versionNumber) > 1.11;
+            expect(isValidResponse).toEqual(true);
         });
     });
 });
