@@ -32,7 +32,7 @@ See http://dev.piwik.org/trac/wiki/PiwikMobile
 
 ## Tests
 
-See http://dev.piwik.org/trac/wiki/PiwikMobile/Tests
+See https://github.com/tsteur/titanium-alloy-jasmine-testing/
 
 ## Changelog
 
