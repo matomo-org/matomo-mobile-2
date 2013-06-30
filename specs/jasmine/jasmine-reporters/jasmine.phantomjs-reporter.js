@@ -31,6 +31,25 @@
             .replace(/\'/g, "&apos;");
     }
 
+    function getTotalTestCount(runner)
+    {
+        var passedCount = 0;
+        var totalCount  = 0;
+        var suites = runner.suites();
+
+        for (var index in suites) {
+            var suite = suites[index];
+
+            if (suite) {
+                var results = suite.results();
+                passedCount += results.passedCount;
+                totalCount += results.totalCount;
+            }
+        }
+
+        return {passedCount: passedCount, totalCount: totalCount};
+    }
+
     /**
      * PhantomJS Reporter generates JUnit XML for the given spec run.
      * Allows the test results to be used in java based CI.
@@ -134,14 +153,31 @@
         },
 
         reportRunnerResults: function(runner) {
-            this.log("Runner Finished.");
-            var suites = runner.suites(),
-                passed = true;
+            var testCount = getTotalTestCount(runner);
+
+            this.log('');
+            this.log('Runner Finished: ' + testCount.passedCount + ' of ' + testCount.totalCount + ' expectations passed.');
+
+            this.generateXmlReport(runner);
+        },
+
+        getNestedOutput: function(suite) {
+            var output = suite.output;
+            for (var i = 0; i < suite.suites().length; i++) {
+                output += this.getNestedOutput(suite.suites()[i]);
+            }
+            return output;
+        },
+
+        generateXmlReport: function(runner) {
+            var suites = runner.suites();
+            var passed = true;
+
             for (var i = 0; i < suites.length; i++) {
                 var suite = suites[i],
                     filename = 'TEST-' + this.getFullName(suite, true) + '.xml',
                     output = '<?xml version="1.0" encoding="UTF-8" ?>';
-                    
+
                 passed = !suite.statusPassed ? false : passed;
 
                 // if we are consolidating, only write out top-level suites
@@ -160,14 +196,6 @@
                 }
             }
             this.createTestFinishedContainer(passed);
-        },
-
-        getNestedOutput: function(suite) {
-            var output = suite.output;
-            for (var i = 0; i < suite.suites().length; i++) {
-                output += this.getNestedOutput(suite.suites()[i]);
-            }
-            return output;
         },
 
         createSuiteResultContainer: function(filename, xmloutput) {
