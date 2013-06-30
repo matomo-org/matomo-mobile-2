@@ -10,7 +10,8 @@ function L(key)
     return require('L')(key);
 }
 
-var emptyData    = null;
+$.emptyData = new (require('ui/emptydata'));
+
 var accountModel = require('session').getAccount();
 var siteModel    = require('session').getWebsite();
 var reportDate   = require('session').getReportDate();
@@ -80,7 +81,9 @@ function onOpen()
 
 function onClose()
 {
-    cleanupNoDataScreenIfExists();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
+    $.emptyData = null;
+
     unregisterEvents();
     $.destroy();
     $.off();
@@ -170,7 +173,7 @@ function showReportContent()
 
     $.content.show();
     $.loadingIndicator.hide();
-    cleanupNoDataScreenIfExists();
+    $.emptyData.cleanupIfNeeded();
 }
 
 function showLoadingMessage()
@@ -181,27 +184,15 @@ function showLoadingMessage()
 
     $.loadingIndicator.show();
     $.content.hide();
-    cleanupNoDataScreenIfExists();
+    $.emptyData.cleanupIfNeeded();
 }
 
 function showReportHasNoVisitors(title, message)
 {
-    cleanupNoDataScreenIfExists();
-    emptyData = Alloy.createController('empty_data', {title: title, message: message});
-    emptyData.on('refresh', doRefresh);
-    emptyData.setParent($.index);
+    $.emptyData.show($.index, doRefresh, title, message);
 
     $.content.hide();
     $.loadingIndicator.hide();
-}
-
-function cleanupNoDataScreenIfExists()
-{
-    if (emptyData) {
-        $.index.remove(emptyData.getView());
-        emptyData.close();
-        emptyData = null;
-    }
 }
 
 function onFetchError(undefined, error)

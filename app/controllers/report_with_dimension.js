@@ -60,7 +60,8 @@ function onOpen()
 function onClose()
 {
     unregisterEvents();
-    $.cleanupNoDataScreenIfExists();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
+    $.emptyData = null;
 
     $.destroy();
     $.off();

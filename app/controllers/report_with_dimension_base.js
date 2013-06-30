@@ -1,7 +1,7 @@
-var emptyData = null;
 
 $.rowsFilterLimit = Alloy.CFG.piwik.filterLimit;
 $.showAllEntries  = false;
+exports.emptyData = new (require('ui/emptydata'));
 
 var shouldScrollToPositionOfPaginator = false;
 
@@ -25,28 +25,16 @@ function showReportContent()
 
     $.content.show();
     $.loadingindicator.hide();
-    exports.cleanupNoDataScreenIfExists();
+    $.emptyData.cleanupIfNeeded();
 }
 
 exports.showReportHasNoData = function (title, message)
 {
-    exports.cleanupNoDataScreenIfExists();
-    emptyData = Alloy.createController('empty_data', {title: title, message: message});
-    emptyData.on('refresh', $.doRefresh);
-    emptyData.setParent($.index);
+    $.emptyData.show($.index, $.doRefresh, title, message);
 
     $.content.hide();
     $.loadingindicator.hide();
 };
-
-exports.cleanupNoDataScreenIfExists = function()
-{
-    if (emptyData) {
-        $.index.remove(emptyData.getView());
-        emptyData.close();
-        emptyData = null;
-    }
-}
 
 exports.showLoadingMessage = function ()
 {
@@ -56,7 +44,7 @@ exports.showLoadingMessage = function ()
     
     $.loadingindicator.show();
     $.content.hide();
-    exports.cleanupNoDataScreenIfExists();
+    $.emptyData.cleanupIfNeeded();
 };
 
 function onTogglePaginator()

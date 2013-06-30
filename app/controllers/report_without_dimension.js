@@ -12,7 +12,7 @@ function L(key)
 
 var args = arguments[0] || {};
 
-var emptyData     = null;
+var emptyData     = new (require('ui/emptydata'));
 var currentMetric = null;
 var reportModel   = args.report;
 var reportDate    = require('session').getReportDate();
@@ -57,7 +57,9 @@ function onOpen()
 
 function onClose()
 {
-    cleanupNoDataScreenIfExists();
+    emptyData && emptyData.cleanupIfNeeded();
+    emptyData = null;
+
     unregisterEvents();
 
     $.destroy();
@@ -110,34 +112,22 @@ function showReportContent()
 {
     $.content.show();
     $.loadingindicator.hide();
-    cleanupNoDataScreenIfExists();
+    emptyData.cleanupIfNeeded();
 }
 
 function showReportHasNoData(title, message)
 {
-    cleanupNoDataScreenIfExists();
-    emptyData = Alloy.createController('empty_data', {title: title, message: message});
-    emptyData.on('refresh', doRefresh);
-    emptyData.setParent($.index);
+    emptyData.show($.index, doRefresh, title, message);
 
     $.content.hide();
     $.loadingindicator.hide();
-}
-
-function cleanupNoDataScreenIfExists()
-{
-    if (emptyData) {
-        $.index.remove(emptyData.getView());
-        emptyData.close();
-        emptyData = null;
-    }
 }
 
 function showLoadingMessage()
 {
     $.loadingindicator.show();
     $.content.hide();
-    cleanupNoDataScreenIfExists();
+    emptyData.cleanupIfNeeded();
 }
 
 function toggleReportChooserVisibility()

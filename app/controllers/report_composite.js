@@ -24,7 +24,8 @@ reportsCollection.on('error', function (undefined, error) {
 var dateHasChanged    = false;
 var websiteHasChanged = false;
 var reportIsDisplayed = true;
-var emptyData = null;
+
+$.emptyData = new (require('ui/emptydata'));
 
 function registerEvents()
 {
@@ -80,7 +81,9 @@ function onOpen()
 
 function onClose()
 {
-    cleanupNoDataScreenIfExists();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
+    $.emptyData = null;
+
     unregisterEvents();
 
     $.destroy();
@@ -91,34 +94,22 @@ function showLoadingIndicator()
 {
     $.loadingIndicator.show();
     $.content.hide();
-    cleanupNoDataScreenIfExists();
+    $.emptyData.cleanupIfNeeded();
 }
 
 function showReportContent()
 {
     $.content.show();
     $.loadingIndicator.hide();
-    cleanupNoDataScreenIfExists();
+    $.emptyData.cleanupIfNeeded();
 }
 
 function showReportHasNoData(title, message)
 {
-    cleanupNoDataScreenIfExists();
-    emptyData = Alloy.createController('empty_data', {title: title, message: message});
-    emptyData.on('refresh', refresh);
-    emptyData.setParent($.index);
+    $.emptyData.show($.index, refresh, title, message);
 
     $.content.hide();
     $.loadingIndicator.hide();
-}
-
-function cleanupNoDataScreenIfExists()
-{
-    if (emptyData) {
-        $.index.remove(emptyData.getView());
-        emptyData.close();
-        emptyData = null;
-    }
 }
 
 function toggleReportConfiguratorVisibility (event)

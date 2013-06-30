@@ -46,7 +46,9 @@ function onOpen()
 
 function onClose()
 {
-    $.cleanupNoDataScreenIfExists();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
+    $.emptyData = null;
+
     $.destroy();
     $.off();
 }

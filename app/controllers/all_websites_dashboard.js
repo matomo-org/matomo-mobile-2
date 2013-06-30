@@ -20,7 +20,7 @@ if (OS_IOS) {
     $.pullToRefresh.init($.websitesTable);
 }
 
-var emptyData = null;
+var emptyData = new (require('ui/emptydata'));
 var accountsCollection = Alloy.Collections.appAccounts;
 var accountModel       = accountsCollection.lastUsedAccount();
 
@@ -38,7 +38,9 @@ function onOpen()
 
 function onClose()
 {
-    cleanupNoDataScreenIfExists();
+    emptyData && emptyData.cleanupIfNeeded();
+    emptyData = null;
+
     $.destroy();
     $.off();
 }
@@ -111,7 +113,7 @@ function showReportContent()
 
     $.content.show();
     $.loading.hide();
-    cleanupNoDataScreenIfExists();
+    emptyData.cleanupIfNeeded();
 }
 
 function showLoadingMessage()
@@ -207,22 +209,10 @@ function hasMoreWebsitesThanDisplayed()
 
 function showMessageNoWebsitesFound(title, message)
 {
-    cleanupNoDataScreenIfExists();
-    emptyData = Alloy.createController('empty_data', {title: title, message: message});
-    emptyData.on('refresh', refresh);
-    emptyData.setParent($.index);
+    emptyData.show($.index, refresh, title, message);
 
     $.content.hide();
     $.loading.hide();
-}
-
-function cleanupNoDataScreenIfExists()
-{
-    if (emptyData) {
-        $.index.remove(emptyData.getView());
-        emptyData.close();
-        emptyData = null;
-    }
 }
 
 function showUseSearchHint()

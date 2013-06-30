@@ -12,7 +12,7 @@ function L(key)
 
 var refreshIntervalInMs = 45000;
 var refreshTimer = null;
-var emptyData    = null;
+$.emptyData = new (require('ui/emptydata'));
 
 $.countdown.init(parseInt(refreshIntervalInMs / 1000, 10));
 
@@ -48,7 +48,9 @@ function onOpen()
 
 function onClose()
 {
-    cleanupNoDataScreenIfExists();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
+    $.emptyData = null;
+
     unregisterEvents();
     stopHandleBackgroundEvents();
     stopRefreshTimer();
@@ -141,27 +143,15 @@ function showReportContent()
 
     $.content.show();
     $.loadingindicator.hide();
-    cleanupNoDataScreenIfExists();
+    $.emptyData.cleanupIfNeeded();
 }
 
 function showReportHasNoVisitors(title, message)
 {
-    cleanupNoDataScreenIfExists();
-    emptyData = Alloy.createController('empty_data', {title: title, message: message});
-    emptyData.on('refresh', doRefresh);
-    emptyData.setParent($.index);
+    $.emptyData.show($.index, doRefresh, title, message);
 
     $.content.hide();
     $.loadingindicator.hide();
-}
-
-function cleanupNoDataScreenIfExists()
-{
-    if (emptyData) {
-        $.index.remove(emptyData.getView());
-        emptyData.close();
-        emptyData = null;
-    }
 }
 
 function showLoadingMessage()
@@ -172,7 +162,7 @@ function showLoadingMessage()
 
     $.loadingindicator.show();
     $.content.hide();
-    cleanupNoDataScreenIfExists();
+    $.emptyData.cleanupIfNeeded();
     stopRefreshTimer();
 }
 
