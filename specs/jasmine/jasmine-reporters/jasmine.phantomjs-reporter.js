@@ -59,17 +59,29 @@
                 spec.suite.startTime = spec.startTime;
             }
 
-            this.log(spec.suite.description + ' : ' + spec.description + ' ... ');
+            if (!spec.suite.descriptionLogged) {
+                this.log(spec.suite.description);
+                spec.suite.descriptionLogged = true;
+            }
+
+            this.log('    ' + spec.description + '.');
         },
 
         reportSpecResults: function(spec) {
-            var results = spec.results();
-            spec.didFail = !results.passed();
-            spec.status = spec.didFail ? 'Failed.' : 'Passed.';
+            var results     = spec.results();
+            var resultItems = results.getItems();
+            spec.didFail    = !results.passed();
+
             if (results.skipped) {
-                spec.status = 'Skipped.';
+                this.log('    Skipped.');
+            } else if (!results.passed()) {
+                for (var index in resultItems) {
+                    var result = resultItems[index];
+                    if (result && !result.passed()) {
+                        this.log('        Failed: ' + result.message);
+                    }
+                }
             }
-            this.log(spec.status);
 
             spec.duration = elapsed(spec.startTime, new Date());
             spec.output = '<testcase classname="' + this.getFullName(spec.suite) +
@@ -77,7 +89,6 @@
 
             var failure = "";
             var failures = 0;
-            var resultItems = results.getItems();
             for (var i = 0; i < resultItems.length; i++) {
                 var result = resultItems[i];
 
@@ -119,7 +130,7 @@
                 '" time="' + suite.duration + '" timestamp="' + ISODateString(suite.startTime) + '">';
             suite.output += specOutput;
             suite.output += "\n</testsuite>";
-            this.log(suite.description + ": " + results.passedCount + " of " + results.totalCount + " expectations passed.");
+            this.log('    ' + results.passedCount + " of " + results.totalCount + " expectations passed. (" + suite.description + ")");
         },
 
         reportRunnerResults: function(runner) {
