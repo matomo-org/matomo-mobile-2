@@ -151,11 +151,10 @@ exports.login = function(accounts, accessUrl, username, password)
         site.fetch({
             account: accountModel,
             success: function (siteCollection) {
-                // it has access to at least one webistes
 
                 hideWaitingIndicator();
 
-                if (!siteCollection.length) {
+                if (!siteCollection.hasAccessToAtLeastOneWebsite()) {
                     accountModel.trigger('error', accountModel, 'NoViewAccess');
 
                     return;

@@ -55,6 +55,10 @@ exports.definition = {
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
 
+            hasAccessToAtLeastOneWebsite: function () {
+                return !!this.length;
+            },
+
             validResponse: function (response) {
 
                 return (response && _.isArray(response));
