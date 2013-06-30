@@ -1,6 +1,6 @@
 export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin
 
-titanium build -p mobileweb
+titanium build -p mobileweb --log-level warn
 cd tools/mobilewebserver
 npm install .
 node app.js 8061 &
