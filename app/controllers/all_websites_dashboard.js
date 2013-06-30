@@ -88,7 +88,8 @@ function selectWebsite(event)
 function render(statisticsCollection)
 {
     if (!hasFoundWebsites() && hasUsedSearch()) {
-        $.websitesTable.setData([{title: L('SitesManager_NotFound') + ' ' + getSearchText()}]);
+        var params = {title: L('SitesManager_NotFound') + ' ' + getSearchText()};
+        $.websitesTable.setData([Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow()]);
         showReportContent();
     } else if (!hasFoundWebsites()) {
         showMessageNoWebsitesFound(L('Mobile_NoWebsitesShort'), L('Mobile_NoWebsiteFound'));
