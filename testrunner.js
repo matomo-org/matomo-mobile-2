@@ -116,7 +116,7 @@ function saveResultOfTestInFile(suiteResult)
     }
 }
 
-page.open('http://127.0.0.1:8020/index.html', function (status) {
+page.open('http://127.0.0.1:8060/index.html', function (status) {
     if ('success' !== status) {
         console.error('Failed to load page');
         phantom.exit(1);
