@@ -26,7 +26,7 @@
             <TableView id="websitesTable" dataCollection="$.piwikWebsites"
                        onClick="selectWebsite" dataTransform="formatWebsite">
                 <HeaderPullView platform="ios">
-                    <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="fetchListOfAvailableWebsites"/>
+                    <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="refresh"/>
                 </HeaderPullView>
                 <FooterView>
                     <View id="useSearchHintContainer"><Label id="useSearchHintLabel"/></View>
