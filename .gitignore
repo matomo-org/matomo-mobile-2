@@ -10,6 +10,7 @@ tmp
 .Spotlight-V100
 *.apk
 *.ap_
+node_modules
 
 .settings/com.appcelerator.titanium.mobile.prefs
 Resources
