@@ -59,6 +59,8 @@ exports.definition = {
                 if (metadata && metadata.logo && doesNotContainWhitespace(metadata.logo)) {
                     return metadata.logo;
                 }
+
+                return null;
             },
             getLogoWidth: function () {
                 var metadata = this.getReportMetadata();
@@ -66,6 +68,8 @@ exports.definition = {
                 if (metadata && metadata.logoWidth) {
                     return metadata.logoWidth;
                 }
+
+                return null;
             },
             getLogoHeight: function () {
                 var metadata = this.getReportMetadata();
@@ -73,6 +77,8 @@ exports.definition = {
                 if (metadata && metadata.logoHeight) {
                     return metadata.logoHeight;
                 }
+
+                return null;
             },
             getSubtableId: function () {
                 var metadata = this.getReportMetadata();
@@ -80,6 +86,8 @@ exports.definition = {
                 if (metadata && metadata.idsubdatatable) {
                     return metadata.idsubdatatable;
                 }
+
+                return null;
             }
 
         }); // end extend
@@ -172,6 +180,10 @@ exports.definition = {
                 return this.sortOrderColumn;
             },
 
+            setSortOrder: function (sortOrderColumn) {
+                this.sortOrderColumn = sortOrderColumn;
+            },
+
             fetchProcessedReports: function (sortOrderColumn, options) {
 
                 if (!options) {
@@ -181,7 +193,7 @@ exports.definition = {
                     options.params = {};
                 }
 
-                this.sortOrderColumn = sortOrderColumn;
+                this.setSortOrder(sortOrderColumn);
 
                 options.params.sortOrderColumn    = sortOrderColumn;
                 options.params.filter_sort_column = sortOrderColumn;
