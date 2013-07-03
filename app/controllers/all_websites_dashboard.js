@@ -16,10 +16,6 @@ function L(key, substitution)
     return translation;
 }
 
-if (OS_IOS) {
-    $.pullToRefresh.init($.websitesTable);
-}
-
 var emptyData = new (require('ui/emptydata'));
 var accountsCollection = Alloy.Collections.appAccounts;
 var accountModel       = accountsCollection.lastUsedAccount();
@@ -108,10 +104,6 @@ function render(statisticsCollection)
 
 function showReportContent()
 {
-    if (OS_IOS) {
-        $.pullToRefresh.refreshDone();
-    } 
-
     $.content.show();
     $.loading.hide();
     emptyData.cleanupIfNeeded();
@@ -119,10 +111,6 @@ function showReportContent()
 
 function showLoadingMessage()
 {
-    if (OS_IOS) {
-        $.pullToRefresh.refresh();
-    }
-
     $.loading.show();
 }
 
