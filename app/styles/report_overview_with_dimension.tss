@@ -14,6 +14,7 @@
 }
 
 "#index[platform=android]": {
+    borderRadius: 0,
     borderWidth: '1dp',
     top: '8dp',
     left: '8dp',
@@ -88,9 +89,9 @@
 
 "#content": {
     backgroundColor: '#efefef',
-    visible: true,
-    height: Ti.UI.SIZE,
+    visible: false,
     scrollable: false,
+    height: Ti.UI.SIZE,
     separatorColor: "#dcdcdc"
 }
 
@@ -115,14 +116,8 @@
     left: '10dp',
 }
 
-".report_row": {
-    left: 0,
-    right: 0,
-}
-
 ".report_title": {
     height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
     color: '#7e7e7e',
     font: {fontWeight: 'bold'},
     top: 16,
@@ -141,13 +136,12 @@
 }
 
 ".report_value": {
+    top: 16,
+    bottom: 16,
     height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
     color: '#191919',
     font: {fontWeight: 'bold'},
-    top: 16,
     right: 10,
-    bottom: 16,
     width: 75,
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
 }
