@@ -301,7 +301,7 @@ function TrackerQueue () {
             this.stop();
             
             return;
-        };
+        }
         
         if (this.isEmpty()) {
             // This should just happen if one clear's the queue. If the queue is empty it'll never delay the
