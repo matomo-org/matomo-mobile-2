@@ -5,6 +5,8 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+(function () {
+
 var Alloy = require('alloy');
 
 function getFixtures()
@@ -307,3 +309,5 @@ describe('piwikProcessedReport CollectionToModel Interaction', function() {
         expect(reportCollection.first().getValue()).toEqual('-');
     });
 });
+
+})();
