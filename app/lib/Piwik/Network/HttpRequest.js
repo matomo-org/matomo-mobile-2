@@ -164,9 +164,11 @@ HttpRequest.prototype.handle = function () {
         if ('undefined' == (typeof e)) {
             e = null;
         }
-        
-        that.error(e); 
-        that = null; 
+
+        if (that) {
+            that.error(e);
+            that = null;
+        }
     };
 
     var settings = Alloy.createCollection('AppSettings').settings();
