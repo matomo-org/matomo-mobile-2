@@ -218,6 +218,11 @@ describe('piwikProcessedReport Collection', function() {
 
         expect(reportCollection.getMetrics()).toEqual(getSearchEngineReport().columns);
     });
+
+    it('should be able to detect whether response is a valid response', function() {
+        expect(reportCollection.validResponse(getSearchEngineReport())).toBeTruthy();
+        expect(reportCollection.validResponse(null)).toBeFalsy();
+    });
 });
 
 

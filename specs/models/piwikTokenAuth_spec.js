@@ -5,6 +5,8 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+(function () {
+
 var Alloy = require('alloy');
 
 function getValidAccount()
@@ -12,7 +14,7 @@ function getValidAccount()
     return require('specs/utils/account').getValidAccount();
 }
 
-describe('piwikTokenAuth Model', function() {
+describe('piwikTokenAuth Model integration', function() {
     var tokenAuth = null;
 
     beforeEach(function() {
@@ -55,4 +57,13 @@ describe('piwikTokenAuth Model', function() {
         expect(tokenAuth.getPasswordHash('1')).toEqual('c4ca4238a0b923820dcc509a6f75849b');
     });
 
+    it('should be able to detect whether response is a valid response', function() {
+        expect(tokenAuth.validResponse({value: 'any'})).toBeTruthy();
+        expect(tokenAuth.validResponse({value: null})).toBeTruthy();
+        expect(tokenAuth.validResponse({})).toBeFalsy();
+        expect(tokenAuth.validResponse([])).toBeFalsy();
+        expect(tokenAuth.validResponse(null)).toBeFalsy();
+    });
 });
+
+})();

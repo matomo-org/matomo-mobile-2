@@ -38,7 +38,7 @@ function expectAccessTokenToBe(account, valid)
     });
 }
 
-describe('piwikAccessVerification Collection', function() {
+describe('piwikAccessVerification Collection integration', function() {
 
     it('should have access to at least one website when authToken is valid', function() {
 

@@ -65,14 +65,8 @@ exports.definition = {
             },
 
             validResponse: function (response) {
-                var _ = require('alloy/underscore');
-                 
-                if (!response || !_.isObject(response) || !response.value) {
-        
-                    return false;
-                }
-                
-                return true;
+
+                return _.isObject(response) && _.has(response, 'value');
             }
 
         }); // end extend

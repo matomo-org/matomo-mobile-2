@@ -5,6 +5,8 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+(function () {
+
 var Alloy = require('alloy');
 
 function getFakeAccount()
@@ -12,7 +14,7 @@ function getFakeAccount()
     return require('specs/utils/account').getValidAccount();
 }
 
-describe('piwikVersion model', function() {
+describe('piwikVersion model integration', function() {
 
     it('should fetch the correct piwik version from demo.piwik.org', function() {
 
@@ -35,3 +37,21 @@ describe('piwikVersion model', function() {
         });
     });
 });
+
+describe('piwikVersion model', function() {
+    var piwikVersion = null;
+
+    beforeEach(function() {
+        piwikVersion = Alloy.createModel('piwikVersion');
+    });
+
+    it('should be able to detect whether response is a valid response', function() {
+        expect(piwikVersion.validResponse({value: '1.12'})).toBeTruthy();
+        expect(piwikVersion.validResponse({value: null})).toBeTruthy();
+        expect(piwikVersion.validResponse({})).toBeFalsy();
+        expect(piwikVersion.validResponse([])).toBeFalsy();
+        expect(piwikVersion.validResponse(null)).toBeFalsy();
+    });
+});
+
+})();

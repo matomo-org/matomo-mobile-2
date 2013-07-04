@@ -123,6 +123,12 @@ describe('piwikReports Collection', function() {
         expect(reportCollection.containsAction(notExistingReport)).toBeFalsy();
     });
 
+    it('should be able to detect whether response is a valid response', function() {
+        expect(reportCollection.validResponse([{}])).toBeTruthy();
+        expect(reportCollection.validResponse([{}, {}, {}])).toBeTruthy();
+        expect(reportCollection.validResponse([])).toBeFalsy();
+        expect(reportCollection.validResponse(null)).toBeFalsy();
+    });
 });
 
 
@@ -173,7 +179,6 @@ describe('piwikReports Model', function() {
     });
 
 });
-
 
 
 })();

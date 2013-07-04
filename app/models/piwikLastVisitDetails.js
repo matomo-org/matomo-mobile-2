@@ -6,6 +6,7 @@
  */
 
 var Alloy = require('alloy');
+var numVisitorsToLoadInitially = 15;
 
 exports.definition = {
     
@@ -22,7 +23,7 @@ exports.definition = {
             "displayErrors": true
         },
         "defaultParams": {
-            filter_limit: 15,
+            filter_limit: numVisitorsToLoadInitially,
             period: "day", 
             date: "today"
         }
@@ -82,12 +83,12 @@ exports.definition = {
                 this.period = period;
 
                 this.currentOffset = 0;
-                this.nextOffset    = 15;
+                this.nextOffset    = numVisitorsToLoadInitially;
 
                 this.abortRunningRequests();
                 this.fetch({
                     account: account,
-                    params: {filter_limit: 15, 
+                    params: {filter_limit: numVisitorsToLoadInitially,
                              idSite: idSite,
                              period: this.getPeriod(),
                              date: this.parseDate()}
@@ -127,10 +128,11 @@ exports.definition = {
 
                 if (0 > this.currentOffset) {
                     this.currentOffset = 0;
+                    this.nextOffset    = numVisitorsToLoadInitially;
                 }
 
                 if (!this.nextOffset) {
-                    this.nextOffset = 15;
+                    this.nextOffset = numVisitorsToLoadInitially;
                 }
 
                 var params = {filter_offset: this.currentOffset,

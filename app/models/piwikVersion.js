@@ -33,6 +33,11 @@ exports.definition = {
 
             getVersion: function () {
                 return this.get('value');
+            },
+
+            validResponse: function (response) {
+
+                return !!response && _.isObject(response) && _.has(response, 'value');
             }
 
         }); // end extend
