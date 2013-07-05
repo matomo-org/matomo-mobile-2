@@ -1,0 +1,34 @@
+"#index": {
+    height: 336,
+    borderRadius: 5,
+    borderColor: "#d3d3d3",
+    borderWidth: 1,
+    backgroundColor: 'white',
+    top: 10,
+    left: 10,
+    right: 10,
+}
+
+"#index[platform=mobileweb]": {
+    width: null,
+}
+
+"#index[platform=android]": {
+    borderRadius: 0,
+    borderWidth: '1dp',
+    top: '8dp',
+    left: '8dp',
+    right: '8dp'
+}
+
+"#loading": {
+    text: '',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    left: 10,
+    right: 10,
+}
+
+"#loading[platform=android]": {
+    left: '16dp',
+    right: '16dp'
+}

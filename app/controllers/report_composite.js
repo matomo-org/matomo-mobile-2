@@ -34,8 +34,6 @@ function registerEvents()
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
     session.on('reportDateChanged', onDateChanged);
-
-    $.content.addEventListener('scroll', notifyModelsAboutNewScrollPosition);
 }
 
 function unregisterEvents()
@@ -45,8 +43,6 @@ function unregisterEvents()
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
     session.off('reportDateChanged', onDateChanged);
-
-    $.content.removeEventListener('scroll', notifyModelsAboutNewScrollPosition);
 }
 
 function trackWindowRequest()
@@ -82,9 +78,9 @@ function onOpen()
 function onClose()
 {
     $.emptyData && $.emptyData.cleanupIfNeeded();
-    $.emptyData = null;
 
     unregisterEvents();
+    notifyModelsAboutWindowClose();
 
     $.destroy();
     $.off();
@@ -204,14 +200,10 @@ function filterReports(collection)
     return collection.where({category: reportCategory});
 }
 
-function notifyModelsAboutNewScrollPosition (event) 
+function notifyModelsAboutWindowClose ()
 {
-    if (!event || !_.has(event, 'y')) {
-        return;
-    }
-    
     _.forEach(filterReports(reportsCollection), function (model) {
-        model.trigger('scrollPosition', {y: event.y});
+        model.trigger('windowClose');
     });
 }
 

@@ -10,10 +10,8 @@ function L(key)
     return require('L')(key);
 }
 
-var args         = arguments[0] || {};
-var flatten      = args.flatten || 0;
-var reportDate   = require('session').getReportDate();
-var $model       = args["$model"];
+var args = arguments[0] || {};
+$.piwikProcessedReport = args.processedReport;
 
 $.metric.text = String.format('%s (%s)', '' + $model.getReportName(), '' + $model.getMetricName());
 
@@ -30,41 +28,19 @@ function renderGraph()
         $.graphCtrl.update($.piwikProcessedReport, accountModel);
         $.metric_value.text = $.piwikProcessedReport.first().getValue();
     } else {
-        // TODO ... this.hide(); this.destroy()??
+        $.graphCtrl.hide();
     }
 }
 
-function fetchProcessedReport()
+function close()
 {
-    var accountModel = require('session').getAccount();
-    var siteModel    = require('session').getWebsite();
-
-    if (!accountModel || !siteModel) {
-        console.log('account or site not found, cannot refresh report overview without dimension');
-        return;
-    }
-
-    var module = $model.getModule();
-    var action = $model.getAction();
-    var metric = $model.getSortOrder();
-
-    // TODO fallback to day/today is not a good solution cause user won't notice we've fallen back to a different date
-    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
-    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
-
-    $.piwikProcessedReport.fetchProcessedReports(metric, {
-        account: accountModel,
-        params: {
-            period: piwikPeriod, 
-            date: piwikDate, 
-            idSite: siteModel.id, 
-            flat: flatten,
-            filter_limit: 1,
-            apiModule: module, 
-            apiAction: action
-        }
-    });
+    $.piwikProcessedReport.off();
+    $.destroy();
+    $.off();
 }
 
-$.piwikProcessedReport.on('reset', renderGraph);
-fetchProcessedReport();
+exports.open = function () {
+    // do not render this directly, because the image view width and so on will be wrong
+    renderGraph();
+    close();
+};

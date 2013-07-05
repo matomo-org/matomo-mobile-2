@@ -1,9 +1,9 @@
 <Alloy>
     <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
 
-    <View id="index" onPostlayout="setMyYPositionAndTryToRender">
+    <View id="index">
         <View onClick="openReport">
-            <View class="header"> 
+            <View class="header">
                 <Label class="headline" text="{name}"/>
             </View>
         </View>
@@ -13,7 +13,6 @@
             <Label class="description_metric" id="metric"/>
         </View>
         <View class="separator" platform="ios,android"/>
-        <Require src="loading_indicator" id="loadingIndicator"/>
         <View id="noData">
             <Label id="noDataDescription"/>
             <View class="separator"/>

@@ -6,18 +6,6 @@
     rounded: true
 }
 
-".changeWebsiteButton": {
-    icon: "/ic_action_menu_website.png",
-    showAsAction: Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW,
-    title: 'Piwik Forums',
-}
-
-".changeDateButton": {
-    icon: "/ic_action_menu_date.png",
-    showAsAction: Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW,
-    title: 'May 25th 2013',
-}
-
 ".reportOverviewContainer": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,

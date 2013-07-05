@@ -1,3 +1,6 @@
 <Alloy>
-    <View class="container"/>
+    <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
+    <View id="index">
+        <Label id="loading"/>
+    </View>
 </Alloy>

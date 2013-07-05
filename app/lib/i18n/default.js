@@ -157,6 +157,7 @@ module.exports = {
     Mobile_HowtoLoginAnonymous:                                         'Leave username and password empty for anonymous login',
     Mobile_HttpIsNotSecureWarning:                                      "Your Piwik authorization token (token_auth) is sent in clear text if you use 'HTTP'. For this reason we recommend HTTPS for secure transport of data over the internet. Do you want to proceed?",
     Mobile_LastUpdated:                                                 'Last Updated: %s',
+    Mobile_LoadingReport:                                               'Loading %s',
     Mobile_LoginCredentials:                                            'Credentials',
     Mobile_LoginUseHttps:                                               'Use https',
     Mobile_LoginToPiwikToChangeSettings:                                'Login to your Piwik server to create and update websites, users or to change General Settings like "Report to load by default" and "Report date to load by default".',

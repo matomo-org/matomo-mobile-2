@@ -1,6 +1,4 @@
 <Alloy>
-    <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
-
     <View id="index">
         <View class="header" onClick="openReport">
             <Label id="metric"/>
@@ -12,7 +10,7 @@
         </View>
         <View class="separator"/>
         <View class="footer" onClick="openReport">
-            <Label class="more">More</Label>
+            <Label class="more"/>
         </View>
     </View>
 </Alloy>

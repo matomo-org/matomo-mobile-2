@@ -1,23 +1,5 @@
 "#index": {
-    borderRadius: 5,
-    borderColor: "#d3d3d3",
-    borderWidth: 1,
-    backgroundColor: 'white',
-    top: 10,
-    left: 10,
-    right: 10,
     layout: 'vertical',
-}
-
-"#index[platform=mobileweb]": {
-    width: null,
-}
-
-"#index[platform=android]": {
-    borderWidth: '1dp',
-    top: '8dp',
-    left: '8dp',
-    right: '8dp',
 }
 
 ".separator": {
@@ -93,6 +75,7 @@
 ".more": {
     left: 10,
     width: Ti.UI.SIZE,
+    text: L('General_More')
 }
 
 ".more[platform=android]": {

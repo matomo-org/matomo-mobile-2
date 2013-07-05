@@ -1,24 +1,5 @@
 "#index": {
-    borderRadius: 5,
-    borderColor: "#d3d3d3",
-    borderWidth: 1,
-    backgroundColor: 'white',
-    top: 10,
-    left: 10,
-    right: 10,
     layout: 'vertical',
-}
-
-"#index[platform=mobileweb]": {
-    width: null,
-}
-
-"#index[platform=android]": {
-    borderRadius: 0,
-    borderWidth: '1dp',
-    top: '8dp',
-    left: '8dp',
-    right: '8dp',
 }
 
 "TableViewRow": {
@@ -59,6 +40,14 @@
     width: Ti.UI.SIZE
 }
 
+".headline[platform=mobileweb]": {
+    wordWrap: true,
+    left: 0,
+    right: 0,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    width: null,
+}
+
 ".headline[platform=android]": {
     font: {fontWeight: 'bold', fontSize: '16sp'},
 }
@@ -66,13 +55,17 @@
 ".header": {
     top: 18,
     bottom: 18,
-    left: 10
+    left: 10,
+    right: 10,
+    width: null,
 }
 
 ".header[platform=android]": {
     top: '16dp',
     bottom: '16dp',
-    left: '10dp'
+    left: '10dp',
+    right: '16dp',
+    width: null,
 }
 
 ".footer": {
