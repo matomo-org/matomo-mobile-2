@@ -44,6 +44,10 @@ function loadImageViaXhr(imageView, urlToLoad)
     imageLoader.send();
 }
 
+function doPostLayout() {
+    $.trigger('postlayout');
+}
+
 function userHasNoInternetConnection()
 {
     return (!Ti.Network || !Ti.Network.online);

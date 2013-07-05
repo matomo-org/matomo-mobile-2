@@ -10,12 +10,14 @@ var imageGraphEvolutionUrl;
 var reportName = '';
 var reportDate = '';
 
-function width (image) 
+var currentGraphUrlToDislay = '';
+
+function width(image)
 {
     return require('ui/helper').getWidth(image);
 }
 
-function height (image) 
+function height(image)
 {
     return require('ui/helper').getHeight(image);
 }
@@ -38,7 +40,7 @@ function updateImage(graphUrl)
 {
     var graph = require('Piwik/PiwikGraph');
     var imageWithSize = graph.appendSize(graphUrl, width($.image.getView()), height($.image.getView()), OS_IOS);
-
+    
     console.debug('imageUrlWithSize', imageWithSize);
 
     if (!imageWithSize || !require('ui/helper').isTitaniumCompatibleImageUrl(imageWithSize)) {
@@ -137,13 +139,44 @@ function areGraphsEnabled()
     return settings.areGraphsEnabled();
 }
 
+function hide()
+{
+    $.index.height = 0;
+    $.index.hide();
+    $.destroy();
+    $.off();
+}
+
+exports.hide = hide;
+
+function renderIfPossibleAndNeeded()
+{
+    if (!currentGraphUrlToDislay || !width($.image.getView())) {
+        return;
+    }
+
+    if (!$.image) {
+        return;
+    }
+
+    $.image.off('postlayout', renderIfPossibleAndNeeded);
+
+    updateImage(currentGraphUrlToDislay);
+
+    if (OS_IOS) {
+        // we need to wait till view is visible otherwise animation will never be executed.
+        $.image.getView().addEventListener('load', animateFadeOutDetailIcon);
+    } else {
+        animateFadeOutDetailIcon();
+    }
+
+    $.image.getView().addEventListener('click', toggleDetailIcon);
+}
+
 exports.update = function (processedReportCollection, accountModel) 
 {
     if (!areGraphsEnabled()) {
-        $.index.height = 0;
-        $.index.hide();
-        $.destroy();
-        $.off();
+        hide();
         // TODO remove from parent?
         return;
     }
@@ -176,14 +209,6 @@ exports.update = function (processedReportCollection, accountModel)
         addGraphSwitcher(graphSwitcher);
     }
 
-    updateImage(graphSwitcher.currentGraphUrl());
-
-    if (OS_IOS) {
-        // we need to wait till view is visible otherwise animation will never be executed.
-        $.image.getView().addEventListener('load', animateFadeOutDetailIcon);
-    } else {
-        animateFadeOutDetailIcon();
-    }
-    
-    $.image.getView().addEventListener('click', toggleDetailIcon);
+    currentGraphUrlToDislay = graphSwitcher.currentGraphUrl();
+    renderIfPossibleAndNeeded();
 };
