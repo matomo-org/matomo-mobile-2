@@ -92,11 +92,25 @@ function fetchProcessedReport()
             renderOverviewReport();
         },
         error: function (undefined, error) {
-            if (error) {
-          //      showReportHasNoData(error.getError());
+            if (error && $.loading) {
+                showErrorMessage(error.getError());
             }
         }
     });
+}
+
+function sizeBoxToContent()
+{
+    $.index.height = Ti.UI.SIZE;
+}
+
+function showErrorMessage(message)
+{
+    $.loading.text   = '' + message;
+    $.loading.top    = OS_ANDROID ? '16dp' : 10;
+    $.loading.bottom = OS_ANDROID ? '16dp' : 10;
+    $.loading.height = Ti.UI.SIZE;
+    sizeBoxToContent();
 }
 
 function renderOverviewReport()
@@ -115,7 +129,7 @@ function renderOverviewReport()
     var controller = hasDimension ? 'report_overview_with_dimension' : 'report_overview_without_dimension';
     var report     = Alloy.createController(controller, params);
 
-    $.index.height = Ti.UI.SIZE;
+    sizeBoxToContent();
     report.setParent($.index);
     report.open();
 

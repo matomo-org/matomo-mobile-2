@@ -23,6 +23,7 @@
 
 "#loading": {
     text: '',
+    color: '#7e7e7e',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     left: 10,
     right: 10,
