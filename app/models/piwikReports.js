@@ -86,6 +86,15 @@ exports.definition = {
                 return this.get('metrics');
             },
 
+            getParameters: function () {
+                return this.get('parameters');
+            },
+
+            hasParameters: function () {
+                var params = this.getParameters();
+                return _.isObject(params) && !_.isEmpty(params);
+            },
+
             getSortOrder: function (metric) {
 
                 if (metric) {

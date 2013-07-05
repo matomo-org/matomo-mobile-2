@@ -34,6 +34,11 @@ function getVisitsSummaryReport()
     return getFixtures().getVisitsSummaryReport();
 }
 
+function getAGoalReport()
+{
+    return getFixtures().getAGoalReport();
+}
+
 function loadFixture(collection, fixture)
 {
     var parsedData = collection.parse(fixture, {});
@@ -134,9 +139,11 @@ describe('piwikReports Collection', function() {
 
 describe('piwikReports Model', function() {
     var mobileReport = null;
+    var goalReport = null;
     var visitsSummaryReport = null;
 
     beforeEach(function() {
+        goalReport = Alloy.createModel('piwikReports', getAGoalReport());
         mobileReport = Alloy.createModel('piwikReports', getMobileVsDesktopReport());
         visitsSummaryReport = Alloy.createModel('piwikReports', getVisitsSummaryReport());
     });
@@ -176,6 +183,21 @@ describe('piwikReports Model', function() {
 
     it('should be able to return all available metrics', function() {
         expect(mobileReport.getMetrics()).toEqual(getMobileVsDesktopReport().metrics);
+    });
+
+    it('should be able to detect whether a report has parameters', function() {
+
+        expect(goalReport.hasParameters()).toBeTruthy();
+        expect(mobileReport.hasParameters()).toBeFalsy();
+    });
+
+    it('should be able to detect whether a report has parameters', function() {
+        expect(goalReport.hasParameters()).toBeTruthy();
+        expect(mobileReport.hasParameters()).toBeFalsy();
+    });
+
+    it('should be able to return the parameters of a report', function() {
+        expect(goalReport.getParameters()).toEqual({idGoal: '4'});
     });
 
 });

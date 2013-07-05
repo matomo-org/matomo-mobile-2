@@ -61,6 +61,10 @@ function getRequestParams()
                   apiAction: action,
                   hideMetricsDoc: 1};
 
+    if ($model.hasParameters()) {
+        _.extend(params, $model.getParameters());
+    }
+
     if (hasDimension) {
         params.filter_truncate = 3;
         params.showColumns     = getMetric();
