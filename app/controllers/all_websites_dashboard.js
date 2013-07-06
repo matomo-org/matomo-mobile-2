@@ -18,6 +18,7 @@ function L(key, substitution)
 
 var emptyData = new (require('ui/emptydata'));
 var accountsCollection = Alloy.Collections.appAccounts;
+var processedReport    = Alloy.createCollection('piwikProcessedReport');
 var accountModel       = accountsCollection.lastUsedAccount();
 
 $.piwikWebsites.on('reset', render);
@@ -36,6 +37,10 @@ function onClose()
 {
     emptyData && emptyData.cleanupIfNeeded();
     emptyData = null;
+
+    if (processedReport) {
+        processedReport.abortRunningRequests();
+    }
 
     $.destroy();
     $.off();
@@ -81,7 +86,58 @@ function selectWebsite(event)
     websiteChosen(siteModel);
 }
 
-function render(statisticsCollection)
+function fetchImageGraphUrlToRenderGraph()
+{
+    if (!$.reportGraphCtrl) {
+        return;
+    }
+
+    if (!accountModel || !hasFoundWebsites()) {
+        console.info('cannot fetch image graph url to render graph, no account set or no website', 'all_websites_dashboard');
+        return;
+    }
+
+    var siteId = $.piwikWebsites.first().getSiteId();
+
+    // TODO fallback to day/today is not a good solution cause user won't notice we've fallen back to a different date
+    var reportDate  = require('session').getReportDate();
+    var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
+    var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
+
+    // You are wondering why we do not directly fetch the websites using "API.getProcessedReport"? Because
+    // "API.getProcessedReport" needs a websiteId although "MultiSites.getAll" does not need it. So there are two
+    // possibilities... We execute a request to fetch one websiteID up-front and then fetch all Websites using
+    // "API.getProcessedReport". Or we use "MultiSites.getAll" and do the additional request only for devices that
+    // actually display the graph (tablets). We go with the second possibility because an additional request is
+    // expensive, especially on mobile. That means we fetch the websites using "MultiSites.getAll". Once this is done,
+    // we execute an additional request on tablets using "API.getProcessedReport(module=MultiSites,action=getAll)"
+    // to get the corresponding ImageGraphUrl. Only a "ProcessedReport" contains the imageGraphUrl.
+    processedReport.fetchProcessedReports('nb_visits', {
+        account: accountModel,
+        params: {
+            period: piwikPeriod,
+            date: piwikDate,
+            idSite: siteId,
+            apiModule: 'MultiSites',
+            apiAction: 'getAll',
+            filter_limit: 1,
+            showColumns: 'nb_visits',
+            hideMetricsDoc: 1
+        },
+        success: function () {
+            if (hasUsedSearch()) {
+                $.reportGraphCtrl.update(processedReport, accountModel, {pattern: getSearchText()});
+            } else {
+                $.reportGraphCtrl.update(processedReport, accountModel);
+            }
+        },
+        error: function (undefined, error) {
+            // TODO what should we do here? maybe we need some kind of an "error" image but should not contain any text
+        }
+    });
+}
+
+function render()
 {
     if (!hasFoundWebsites() && hasUsedSearch()) {
         var params = {title: L('SitesManager_NotFound') + ' ' + getSearchText()};
@@ -93,9 +149,7 @@ function render(statisticsCollection)
         showReportContent();
     }
 
-    if ($.reportGraphCtrl) {
-        $.reportGraphCtrl.update(statisticsCollection, accountModel);
-    }
+    fetchImageGraphUrlToRenderGraph();
 
     if (hasMoreWebsitesThanDisplayed()) {
         showUseSearchHint();
