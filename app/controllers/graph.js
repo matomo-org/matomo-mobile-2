@@ -12,6 +12,8 @@ var reportDate = '';
 
 var currentGraphUrlToDislay = '';
 
+$.image.getView().addEventListener('click', toggleDetailIcon);
+
 function width(image)
 {
     return require('ui/helper').getWidth(image);
@@ -185,8 +187,6 @@ function renderIfPossibleAndNeeded()
     } else {
         animateFadeOutDetailIcon();
     }
-
-    $.image.getView().addEventListener('click', toggleDetailIcon);
 }
 
 exports.update = function (processedReportCollection, accountModel, additonalParams)
