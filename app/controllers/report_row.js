@@ -26,12 +26,21 @@ function showLogo(processedReport)
         console.log('cannot display logo, no account', 'report_row');
         return;
     }
+
+    var iconWidth = processedReport.getLogoWidth() || 16;
+    var iconLeft  = OS_ANDROID ? '10dp' : 10;
     
-    $.icon.width  = processedReport.getLogoWidth() || 16;
+    $.icon.width  = iconWidth;
     $.icon.height = processedReport.getLogoHeight() || 16;
     $.icon.left   = OS_ANDROID ? '10dp' : 10;
     $.icon.image  = accountModel.getBasePath() + logoPath;
     $.icon.show();
+
+    if (!_.isNumber(iconLeft)) {
+        iconLeft = Ti.UI.convertUnits(iconLeft, Ti.UI.UNIT_PX);
+    }
+
+    $.stats.left  = iconWidth + (iconLeft * 2);
 }
 
 if (processedReport) {

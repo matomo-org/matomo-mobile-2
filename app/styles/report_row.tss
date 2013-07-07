@@ -1,19 +1,30 @@
 ".container": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-    layout: "horizontal"
 },
 
-".data": {
+"#stats": {
     height: Ti.UI.SIZE,
-    width: Ti.UI.FILL
+    width: Ti.UI.FILL,
+    top: 16,
+    bottom: 16,
 },
+
+"#stats[platform=android]": {
+    top: '16dp',
+    bottom: '18dp',
+}
 
 "#icon": {
+    top: 18,
     height: 0,
     width: 0,
     visible: 0,
-    left: 0
+    left: 0,
+}
+
+"#icon[platform=android]": {
+    top: '22dp',
 }
 
 "#title": {
@@ -21,16 +32,12 @@
     left: 10,
     right: 95,
     color: '#7e7e7e',
-    top: 16,
-    bottom: 16,
     font: {fontSize: 16, fontWeight: 'bold'}
 },
 
 "#title[platform=android]": {
     left: '16dp',
     right: '100dp',
-    top: '16dp',
-    bottom: '16dp',
     font: {fontSize: '16sp', fontWeight: 'bold'}
 },
 
@@ -38,8 +45,6 @@
     height: Ti.UI.SIZE,
     right: 15,
     width: 75,
-    top: 13,
-    bottom: 10,
     font: {fontSize: 16, fontWeight: 'bold'},
     color: '#191919',
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
@@ -49,7 +54,5 @@
     right: '16dp',
     width: '75dp',
     color: '#191919',
-    top: '10dp',
-    bottom: '10dp',
     font: {fontSize: '16sp', fontWeight: 'bold'}
 }

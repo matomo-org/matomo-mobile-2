@@ -1,7 +1,7 @@
 <Alloy>
     <View id="index" class="container">
         <ImageView id="icon"/>
-        <View class="data">
+        <View id="stats">
             <Label id="title"> - </Label>
             <Label id="value"> - </Label>
         </View>
