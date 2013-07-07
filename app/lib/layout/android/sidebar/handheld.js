@@ -12,17 +12,17 @@ function HandheldSidebar()
 
     function createUnderlayWindow(left, right)
     {
-        var underlayWindow = Ti.UI.createWindow({left: left, right: right, top: '48dp', zIndex: 997});
+        var underlayWindow = Ti.UI.createWindow({top: '48dp', zIndex: 997});
 
         return underlayWindow;
     }
 
     function createLeftUnderlayWindow()
     {
-        var leftUnderlay = createUnderlayWindow(widthSidebar, 0);
-        var separator = Ti.UI.createView({backgroundColor: '#000', left: 0, width: '2dp', height: Ti.UI.FILL});
-        leftUnderlay.add(separator);
-        var separator = Ti.UI.createView({backgroundColor: '#000', left: '2dp', opacity: 0.6, right: 0});
+        var leftUnderlay = createUnderlayWindow();
+        var background = Ti.UI.createView({backgroundColor: '#000', opacity: 0.6});
+        leftUnderlay.add(background);
+        var separator = Ti.UI.createView({backgroundColor: '#000', left: widthSidebar, width: '2dp', height: Ti.UI.FILL});
         leftUnderlay.add(separator);
         leftUnderlay.addEventListener('click', hideLeftSidebar);
 
@@ -31,10 +31,10 @@ function HandheldSidebar()
 
     function createRightUnderlayWindow()
     {
-        var rightUnderlay = createUnderlayWindow(0, widthSidebar);
-        var separator = Ti.UI.createView({backgroundColor: '#000', right: 0, width: '2dp', height: Ti.UI.FILL});
-        rightUnderlay.add(separator);
-        var separator = Ti.UI.createView({backgroundColor: '#000', right: '2dp', opacity: 0.6, left: 0});
+        var rightUnderlay = createUnderlayWindow();
+        var background = Ti.UI.createView({backgroundColor: '#000', opacity: 0.6});
+        rightUnderlay.add(background);
+        var separator = Ti.UI.createView({backgroundColor: '#000', right: widthSidebar, width: '2dp', height: Ti.UI.FILL});
         rightUnderlay.add(separator);
         rightUnderlay.addEventListener('click', hideRightSidebar);
 
