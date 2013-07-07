@@ -118,7 +118,7 @@ exports.renderProcessedReport = function (processedReportCollection)
         };
 
         if (OS_ANDROID && Boolean(hasSubtable)) {
-            rowOptions.rightImage =  '/navigation_next_item.png';
+            rowOptions.rightImage = '/navigation_next_item.png';
         } else if (Boolean(hasSubtable)) {
             rowOptions.hasChild = true;
         }
@@ -130,7 +130,6 @@ exports.renderProcessedReport = function (processedReportCollection)
         }
 
         var row = Ti.UI.createTableViewRow(rowOptions);
-
 
         if (hasSubtable) {
             row.addEventListener('click', function () {
@@ -157,10 +156,12 @@ exports.renderProcessedReport = function (processedReportCollection)
     if ($.rowsFilterLimit <= processedReportCollection.length) {
         // a show all or show less button only makes sense if there are more or equal results than the used
         // filter limit value...
-        var row = Ti.UI.createTableViewRow({color: '#336699', title: $.showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')});
-        if (OS_MOBILEWEB) row.left = 10;
-        if (OS_ANDROID) row.leftImage = '/spacer_16x16.png';
-        
+        var showAllOptions = {color: '#336699', title: $.showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')};
+        if (OS_MOBILEWEB) showAllOptions.left = 10;
+        if (OS_ANDROID) showAllOptions.leftImage = '/spacer_16x16.png';
+        if (OS_ANDROID) showAllOptions.font = {fontSize: '16sp', fontWeight: 'bold'};
+
+        var row = Ti.UI.createTableViewRow(showAllOptions);
         row.addEventListener('click', onTogglePaginator);
         rows.push(row);
     }
