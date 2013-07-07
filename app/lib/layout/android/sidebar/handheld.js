@@ -10,46 +10,32 @@ var widthSidebar = '250dp';
 function HandheldSidebar()
 {
 
-    function createUnderlayWindow(left, right)
+    function addLeftUnderlay(win)
     {
-        var underlayWindow = Ti.UI.createWindow({top: '48dp', zIndex: 997});
-
-        return underlayWindow;
-    }
-
-    function createLeftUnderlayWindow()
-    {
-        var leftUnderlay = createUnderlayWindow();
-        var background = Ti.UI.createView({backgroundColor: '#000', opacity: 0.6});
-        leftUnderlay.add(background);
         var separator = Ti.UI.createView({backgroundColor: '#000', left: widthSidebar, width: '2dp', height: Ti.UI.FILL});
-        leftUnderlay.add(separator);
-        leftUnderlay.addEventListener('click', hideLeftSidebar);
-
-        return leftUnderlay;
+        win.add(separator);
+        var background = Ti.UI.createView({backgroundColor: '#000', left: '252dp', opacity: 0.6});
+        win.add(background);
+        background.addEventListener('click', hideLeftSidebar);
     }
 
-    function createRightUnderlayWindow()
+    function addRightUnderlay(win)
     {
-        var rightUnderlay = createUnderlayWindow();
-        var background = Ti.UI.createView({backgroundColor: '#000', opacity: 0.6});
-        rightUnderlay.add(background);
         var separator = Ti.UI.createView({backgroundColor: '#000', right: widthSidebar, width: '2dp', height: Ti.UI.FILL});
-        rightUnderlay.add(separator);
-        rightUnderlay.addEventListener('click', hideRightSidebar);
-
-        return rightUnderlay;
+        win.add(separator);
+        var background = Ti.UI.createView({backgroundColor: '#000', right: '252dp', opacity: 0.6});
+        win.add(background);
+        win.addEventListener('click', hideRightSidebar);
     }
 
     var leftSidebarView = null;
     var leftSidebarWindow = null;
-    var leftSidebarOuterWindow = createLeftUnderlayWindow();
 
     function hideLeftSidebar()
     {
         if (leftSidebarWindow) {
+            leftSidebarWindow.removeEventListener('androidback', hideLeftSidebar);
             leftSidebarWindow.close();
-            leftSidebarOuterWindow.close();
             leftSidebarWindow = null;
         }
     }
@@ -67,10 +53,11 @@ function HandheldSidebar()
 
         hideRightSidebar();
 
-        leftSidebarWindow = Ti.UI.createWindow({left: 0, top: '48dp', width: widthSidebar, zIndex: 999});
-        leftSidebarWindow.add(leftSidebarView);
+        leftSidebarWindow = Ti.UI.createWindow({top: '48dp', zIndex: 999});
         leftSidebarWindow.addEventListener('androidback', hideLeftSidebar);
-        leftSidebarOuterWindow.open();
+        leftSidebarWindow.add(leftSidebarView);
+        addLeftUnderlay(leftSidebarWindow);
+
         leftSidebarWindow.open();
     }
 
@@ -78,6 +65,8 @@ function HandheldSidebar()
     {
         if (view) {
             leftSidebarView = view;
+            leftSidebarView.left  = 0;
+            leftSidebarView.width = widthSidebar;
         }
     };
 
@@ -85,18 +74,14 @@ function HandheldSidebar()
     this.toggleLeftSidebar = toggleLeftSidebar;
 
 
-
-    // we have to create this window before any other window, 
-    // otherwise the menu will be always displayed on top of the root window.
     var rightSidebarView   = null;
     var rightSidebarWindow = null;
-    var rightSidebarOuterWindow = createRightUnderlayWindow();
 
     function hideRightSidebar()
     {
         if (rightSidebarWindow) {
+            rightSidebarWindow.removeEventListener('androidback', hideRightSidebar);
             rightSidebarWindow.close();
-            rightSidebarOuterWindow.close();
             rightSidebarWindow = null;
         }
     }
@@ -109,10 +94,11 @@ function HandheldSidebar()
 
         hideLeftSidebar();
 
-        rightSidebarWindow = Ti.UI.createWindow({right: 0, top: '48dp', width: widthSidebar, zIndex: 998});
-        rightSidebarWindow.add(rightSidebarView);
+        rightSidebarWindow = Ti.UI.createWindow({top: '48dp', zIndex: 998});
         rightSidebarWindow.addEventListener('androidback', hideRightSidebar);
-        rightSidebarOuterWindow.open();
+        rightSidebarWindow.add(rightSidebarView);
+        addRightUnderlay(rightSidebarWindow);
+
         rightSidebarWindow.open();
     }
 
@@ -120,6 +106,8 @@ function HandheldSidebar()
     {
         if (view) {
             rightSidebarView = view;
+            rightSidebarView.right = 0;
+            rightSidebarView.width = widthSidebar;
         }
     };
 
