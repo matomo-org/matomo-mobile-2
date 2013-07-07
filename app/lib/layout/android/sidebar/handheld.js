@@ -70,8 +70,8 @@ function HandheldSidebar()
         leftSidebarWindow = Ti.UI.createWindow({left: 0, top: '48dp', width: widthSidebar, zIndex: 999});
         leftSidebarWindow.add(leftSidebarView);
         leftSidebarWindow.addEventListener('androidback', hideLeftSidebar);
-        leftSidebarWindow.open();
         leftSidebarOuterWindow.open();
+        leftSidebarWindow.open();
     }
 
     this.setLeftSidebar = function(view)
@@ -112,8 +112,8 @@ function HandheldSidebar()
         rightSidebarWindow = Ti.UI.createWindow({right: 0, top: '48dp', width: widthSidebar, zIndex: 998});
         rightSidebarWindow.add(rightSidebarView);
         rightSidebarWindow.addEventListener('androidback', hideRightSidebar);
-        rightSidebarWindow.open();
         rightSidebarOuterWindow.open();
+        rightSidebarWindow.open();
     }
 
     this.setRightSidebar = function(view)

@@ -36,6 +36,7 @@ function AndroidLayout()
             return;
         }
 
+        win.removeEventListener('androidback', closeThisWindow);
         win.close();
 
         if (checkAppShouldBeClosedTimeout) {
