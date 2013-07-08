@@ -8,7 +8,7 @@
 
 "#headerBar": {
     title: L('Mobile_Accounts'),
-    actionItem1: {icon: '/ic_action_accounts.png'}
+    actionItem1: {icon: '/ic_action_add_account.png'}
 }
 
 "#headerBar[formFactor=handheld]": {
