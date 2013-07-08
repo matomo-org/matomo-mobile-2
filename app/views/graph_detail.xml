@@ -1,5 +1,5 @@
 <Alloy>
-    <Window formFactor="handheld" id="index" class="container" onClose="destroy" onOpen="onOpen">
+    <Window formFactor="handheld" id="index" onClose="destroy" onOpen="onOpen">
         <Require id="graphWidget" type="widget" src="org.piwik.imageview"/>
     </Window>
     <Window formFactor="tablet" id="index" onClose="destroy">

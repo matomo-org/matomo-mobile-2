@@ -16,9 +16,7 @@ var graphSwitcher = Alloy.createController('graph_switcher', args);
 graphSwitcher.addSwitchGraph(true);
 $.index.add(graphSwitcher.getView());
 
-graphSwitcher.on('close', function () {
-    $.index.close();
-});
+graphSwitcher.on('close', close);
 
 graphSwitcher.on('switch', function () {
     $.graph.image = getGraphUrlWithSize(getPictureWidth(), getPictureHeight());
@@ -208,7 +206,7 @@ if (require('alloy').isTablet) {
         }
     }
     
-    function rotateImage (event) {
+    function rotateImage () {
 
         var pictureWidth  = getPictureWidth();
         var pictureHeight = getPictureHeight();
@@ -241,7 +239,16 @@ function destroy()
     }
 }
 
-exports.open = function () 
+function close()
 {
+    $.index.close();
+}
+
+function open()
+{
+    if (OS_ANDROID) $.index.addEventListener('androidback', close);
+
     $.index.open();
-};
+}
+
+exports.open = open;
