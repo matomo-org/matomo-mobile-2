@@ -221,6 +221,10 @@ function onStatisticsFetched(processedReportCollection)
 
     removeAllChildrenFromContent();
 
+    if ($.content.scrollTo) {
+        $.content.scrollTo(0, 0);
+    }
+
     if (!processedReportCollection.length) {
         showReportHasNoData(L('Mobile_NoDataShort'), L('CoreHome_ThereIsNoDataForThisReport'));
         return;
