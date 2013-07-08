@@ -105,8 +105,18 @@ function fetchNext()
     require('Piwik/Tracker').trackEvent({title: 'Next Visitors', url: '/visitor-log/next'});
 }
 
+function scrollToTop()
+{
+    $.visitorLogTable.setData([]);
+    
+    if (OS_MOBILEWEB) {
+        $.visitorLogTable.scrollToTop(0);
+    }
+}
+
 function render()
 {
+    scrollToTop();
     showReportContent();
 
     var rows = [];
