@@ -106,7 +106,7 @@ function sizeBoxToContent()
 
 function showErrorMessage(message)
 {
-    $.loading.text   = '' + message;
+    $.loading.text   = String.format('%s (%s)', message + '', $model.getReportName() + '');
     $.loading.top    = OS_ANDROID ? '16dp' : 10;
     $.loading.bottom = OS_ANDROID ? '16dp' : 10;
     $.loading.height = Ti.UI.SIZE;
