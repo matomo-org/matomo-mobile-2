@@ -14,6 +14,7 @@
 }
 
 "#index[platform=android]": {
+    height: '352dp',
     borderRadius: 0,
     borderWidth: '1dp',
     top: '8dp',

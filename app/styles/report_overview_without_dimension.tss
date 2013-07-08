@@ -64,7 +64,7 @@
 }
 
 ".footer[platform=android]": {
-    height: '32dp',
+    height: '48dp',
 }
 
 ".content": {

@@ -13,7 +13,7 @@ var hasDimension = $model.hasDimension();
 $.loading.text = String.format(L('Mobile_LoadingReport'), '' + $model.getReportName());
 
 if (!hasDimension) {
-    $.index.height = 265;
+    $.index.height = OS_ANDROID ? '281dp' : 265;
 }
 
 $model.on('windowClose', close);
