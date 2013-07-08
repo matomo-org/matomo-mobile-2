@@ -1,6 +1,5 @@
 "#index": {
     backgroundColor: 'white',
-    zIndex: 3,
     backButtonTitle: L('Mobile_NavigationBack')
 }
 
