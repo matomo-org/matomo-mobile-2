@@ -14,6 +14,12 @@ var currentGraphUrlToDislay = '';
 
 $.image.getView().addEventListener('click', toggleDetailIcon);
 
+if (!OS_MOBILEWEB) {
+    // we need to wait till view is visible otherwise animation will never be executed.
+    // load event is not supported on MobileWeb
+    $.image.getView().addEventListener('load', animateFadeOutDetailIcon);
+}
+
 function width(image)
 {
     return require('ui/helper').getWidth(image);
@@ -131,7 +137,7 @@ function toggleDetailIcon()
     }
 }
 
-function fadeOutDetailIcon()
+function hideDetailIcon()
 {
     if (!$.showDetailIcon) {
         return;
@@ -146,8 +152,8 @@ function animateFadeOutDetailIcon()
     if (!$.showDetailIcon) {
         return;
     }
-    
-    $.showDetailIcon.animate({opacity: 0, delay: 600, duration: 600}, fadeOutDetailIcon);
+
+    $.showDetailIcon.animate({opacity: 0, delay: 600, duration: 600}, hideDetailIcon);
 }
 
 function areGraphsEnabled()
@@ -181,11 +187,8 @@ function renderIfPossibleAndNeeded()
 
     updateImage(currentGraphUrlToDislay);
 
-    if (OS_IOS) {
-        // we need to wait till view is visible otherwise animation will never be executed.
-        $.image.getView().addEventListener('load', animateFadeOutDetailIcon);
-    } else {
-        animateFadeOutDetailIcon();
+    if (OS_MOBILEWEB) {
+        hideDetailIcon();
     }
 }
 
