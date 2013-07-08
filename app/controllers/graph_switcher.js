@@ -172,6 +172,8 @@ exports.addSwitchGraph = function(showCloseButton)
     if (OS_ANDROID) {
 
         if (!canSwitch()) {
+            $.index.height  = 0;
+            $.index.visible = false;
             $.index.hide();
             
             return;
