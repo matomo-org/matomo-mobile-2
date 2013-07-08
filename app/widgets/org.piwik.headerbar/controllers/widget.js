@@ -15,17 +15,17 @@ function addActionBarItem(actionBarItem, index)
 
     var item = Ti.UI.createImageView({
         image: actionBarItem.icon, 
-        top: '8dp',
-        width: '32dp', 
-        height: '32dp',
-        left: '8dp',
-        right: '8dp',
-        backgroundSelectedColor: '#a9a9a9',
+        top: 0,
+        width: '48dp',
+        height: '48dp',
+        left: 0,
+        right: 0,
+        backgroundSelectedColor: '#a9a9a9'
     });
 
     item.addEventListener('click', function (event) {
         event.cancelBubble = true;
-        $.trigger('actionItem' + index)
+        $.trigger('actionItem' + index);
     });
 
     $.actionButtons.add(item);
@@ -45,19 +45,14 @@ function syncWidthOfTitleAndActionBar()
 function setBackAngleImage(image)
 {
     $.backangle.backgroundImage = image;
-    $.backangle.backgroundSelectedColor = '#a9a9a9';
+    $.backButton.backgroundSelectedColor = '#a9a9a9';
 }
 
 function enableBackButton() 
 {
     setBackAngleImage('/back.png');
 
-    $.backangle.addEventListener('click', function (event) {
-        event.cancelBubble = true;
-        $.trigger('back');
-    });
-
-    $.homeIcon.addEventListener('click', function (event) {
+    $.backButton.addEventListener('click', function (event) {
         event.cancelBubble = true;
         $.trigger('back');
     });
@@ -88,7 +83,7 @@ function applyCustomProperties(args)
 
 applyCustomProperties(arguments[0] || {});
 
-$.homeIcon.addEventListener('click',function (event) {
+$.backButton.addEventListener('click',function (event) {
     event.cancelBubble = true;
     $.trigger('homeIconItemSelected');
 });

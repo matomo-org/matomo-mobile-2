@@ -7,8 +7,8 @@
 
 "#backButton": {
     left: 0,
-    width: '46dp',
-    height: '46dp',
+    width: '48dp',
+    height: '48dp',
     backgroundColor: "transparent",
 }
 
@@ -22,9 +22,9 @@
     left: '16dp',
     height: '30dp',
     width: '30dp',
-    backgroundColor:'transparent',
+    touchEnabled: false,
+    backgroundColor: 'transparent',
     backgroundImage: '/appicon.png',
-    backgroundSelectedColor: '#a9a9a9',
 }
 
 "#headerTitle": {
