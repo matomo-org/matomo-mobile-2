@@ -581,7 +581,7 @@ function helperVisitorActionDefaultTypeLabel(text) {
     return {
         text: (text+'') || '',
         top: 0,
-        left: OS_ANDROID ? '16dp' : toUnit(10),
+        left: OS_ANDROID ? '10dp' : toUnit(10),
         font: {fontSize: toUnit(13), fontWeight: 'bold'},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
