@@ -67,7 +67,8 @@
     width: Ti.UI.SIZE,
     top: '16dp',
     bottom: '16dp',
-    color: '#333333'
+    color: '#333333',
+    touchEnabled: false
 }
 
 "#settingsLabel": {
@@ -83,6 +84,7 @@
     bottom: '16dp',
     color: '#0099CC',
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+    touchEnabled: false
 }
 
 "#uncheckedLabel": {
@@ -97,14 +99,16 @@
     image: '/btn_check_off_holo_light.png',
     width: '32dp',
     height: '32dp',
-    right: '3dp'
+    right: '3dp',
+    touchEnabled: false,
 }
 
 "#checkedIcon": {
     image: '/btn_check_on_holo_light.png',
     width: '32dp',
     height: '32dp',
-    right: '3dp'
+    right: '3dp',
+    touchEnabled: false,
 }
 
 "ItemTemplate[platform=android]": {
