@@ -14,12 +14,6 @@ var args = arguments[0] || {};
 var reportCategory    = args.reportCategory || null;
 var reportsCollection = Alloy.Collections.piwikReports;
 reportsCollection.off("fetch destroy change add remove reset", renderListOfReports);
-reportsCollection.on('forceRefresh', refresh);
-reportsCollection.on('error', function (undefined, error) {
-    if (error) {
-        showReportHasNoData(error.getError(), error.getMessage());
-    }
-});
 
 var dateHasChanged    = false;
 var websiteHasChanged = false;
@@ -29,7 +23,9 @@ $.emptyData = new (require('ui/emptydata'));
 
 function registerEvents()
 {
-    Alloy.Collections.piwikReports.on('reset', render);
+    reportsCollection.on('reset', render);
+    reportsCollection.on('forceRefresh', refresh);
+    reportsCollection.on('error', onFetchReportError);
 
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
@@ -38,8 +34,10 @@ function registerEvents()
 
 function unregisterEvents()
 {
-    Alloy.Collections.piwikReports.off('reset', render);
-    
+    reportsCollection.off('reset', render);
+    reportsCollection.off('forceRefresh', refresh);
+    reportsCollection.off('error', onFetchReportError);
+
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
     session.off('reportDateChanged', onDateChanged);
@@ -61,7 +59,14 @@ function onBlur()
 function onFocus()
 {
     reportIsDisplayed = true;
-    renderIfNeeded();
+    updateDisplayedReportsIfNeeded();
+}
+
+function onFetchReportError(undefined, error)
+{
+    if (error) {
+        showReportHasNoData(error.getError(), error.getMessage());
+    }
 }
 
 function onOpen()
@@ -124,25 +129,32 @@ function toggleReportChooserVisibility(event)
 
 function onWebsiteChanged()
 {
-    websiteHasChanged = true;
-
     require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/report/composite/change/website'});
 
-    renderIfNeeded();
+    websiteHasChanged = true;
+    updateDisplayedReportsIfNeeded();
 }
 
 function onDateChanged() 
 {
-    dateHasChanged = true;
-
     require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/composite/change/date'});
 
-    renderIfNeeded();
+    dateHasChanged = true;
+    updateDisplayedReportsIfNeeded();
 }
 
-function renderIfNeeded()
+function updateDisplayedReportsIfNeeded()
 {
-    if (reportIsDisplayed && (dateHasChanged || websiteHasChanged)) {
+    if (reportIsDisplayed && websiteHasChanged) {
+        // website has changed and the available reports maybe changes (Goals), we need to fetch the list of reports
+        // for then new website
+        refresh();
+        dateHasChanged    = false;
+        websiteHasChanged = false;
+
+    } else if (reportIsDisplayed && dateHasChanged) {
+        // there is no need to fetch the list of reports again, we already have the list and there is no change
+        // simply render the boxes again, those will recognize the new date
         render();
         dateHasChanged    = false;
         websiteHasChanged = false;
@@ -166,8 +178,8 @@ function refresh()
 function render()
 {
     if (hasReportsToShow()) {
-        showReportContent();
         renderListOfReports();
+        showReportContent();
         addPiwikIcon();
     } else {
         showReportHasNoData(L('Mobile_NoReportsShort'), L('CoreHome_ThereIsNoDataForThisReport'));
