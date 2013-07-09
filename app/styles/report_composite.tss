@@ -3,8 +3,20 @@
 }
 
 "#loadingIndicator": {
-    rounded: true
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL,
+    visible: true,
+    backgroundColor: 'white',
+    zIndex: 5
+},
+
+"#loadingIndicator[platform=android]": {
+    top: '48dp'
 }
+
+"#loadingLabel": {
+    text: L('General_LoadingData')
+},
 
 ".reportOverviewContainer": {
     height: Ti.UI.SIZE,

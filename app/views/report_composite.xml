@@ -23,7 +23,7 @@
                 onActionItem1="toggleReportConfiguratorVisibility"
                 platform="android" />
 
-        <Require src="loading_indicator" id="loadingIndicator"/>
+        <View id="loadingIndicator"><Label id="loadingLabel"></Label></View>
 
         <ScrollView id="content" dataCollection="piwikReports" dataFilter="filterReports" dataFunction="renderListOfReports">
             <Require src="report_overview" title="{name}"/>
