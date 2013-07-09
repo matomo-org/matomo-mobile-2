@@ -81,8 +81,7 @@ function tryToGetValidResponseFromCache(cacheKey, cache, collection)
         return;
     }
 
-    var cachedResponse = cachedEntry.getCachedValue();
-
+    var cachedResponse = JSON.parse(cachedEntry.getCachedValue());
     if (isSuccessfulResponse(collection, cachedResponse)) {
         return cachedResponse;
     }
@@ -90,7 +89,7 @@ function tryToGetValidResponseFromCache(cacheKey, cache, collection)
 
 function cacheResponse(cacheKey, cache, response)
 {
-    caches[cache.type].put(cacheKey, response, cache.time);
+    caches[cache.type].put(cacheKey, JSON.stringify(response), cache.time);
 }
 
 function Sync(method, collection, opts)
