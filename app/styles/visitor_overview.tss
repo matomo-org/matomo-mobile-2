@@ -4,9 +4,18 @@
     height: Ti.UI.SIZE,
 },
 
+"TableViewRow[platform=ios]": {
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY
+},
+
 "TableViewRow[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/navigation_next_item.png',
+    backgroundSelectedColor: '#a9a9a9',
+},
+
+"TableViewRow[platform=mobileweb]": {
+    backgroundSelectedColor: '#a9a9a9',
 },
 
 ".dateContainer": {

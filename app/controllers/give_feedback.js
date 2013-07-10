@@ -69,6 +69,32 @@ function createRow(params)
     return Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
 }
 
+function createNonSelectableRow(params)
+{
+    var row = createRow(params);
+
+    if (OS_IOS) {
+        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+    } else {
+        row.backgroundSelectedColor = '#ffffff';
+    }
+
+    return row;
+}
+
+function createSelectableRow(params)
+{
+    var row = createRow(params);
+
+    if (OS_IOS) {
+        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+    } else {
+        row.backgroundSelectedColor = '#dcdcdc';
+    }
+
+    return row;
+}
+
 function createSection(params)
 {
     return Alloy.createWidget('org.piwik.tableviewsection', null, params).getSection();
@@ -78,7 +104,7 @@ function render()
 {
     var rows = [];
 
-    var row = createRow({
+    var row = createSelectableRow({
         title: 'Email Us', 
         description: 'Send us feedback, report a bug or a feature wish.'
     });
@@ -87,7 +113,7 @@ function render()
 
     var appRating = new (require('Piwik/App/Rating'));
     if (appRating.canRate()) {
-        row = createRow({
+        row = createSelectableRow({
             title: 'Rate us on the App Store', 
             description: 'Piwik Mobile App is a Free Software, we would really appreciate if you took 1 minute to rate us.'
         });
@@ -95,7 +121,7 @@ function render()
         rows.push(row);
     }
 
-    row = createRow({
+    row = createSelectableRow({
         title: 'Learn how you can participate', 
         description: 'Piwik is a project made by the community, you can participate in the Piwik Mobile App or Piwik.'
     });
@@ -103,8 +129,8 @@ function render()
     rows.push(row);
 
     rows.push(createSection({title: 'About', style: 'native'}));
-    rows.push(createRow({title: 'Version', description: versionInfo()}));
-    rows.push(createRow({title: 'Platform', description: platformInfo()}));
+    rows.push(createNonSelectableRow({title: 'Version', description: versionInfo()}));
+    rows.push(createNonSelectableRow({title: 'Platform', description: platformInfo()}));
 
     $.feedbackTable.setData(rows);
     rows = null;

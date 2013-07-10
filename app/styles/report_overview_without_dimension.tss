@@ -23,7 +23,8 @@
     left: 0,
     right: 100,
     ellipsize: false,
-    wordWrap: true
+    wordWrap: true,
+    touchEnabled: false,
 }
 
 "#metric[platform=android]": {
@@ -38,7 +39,8 @@
     width: 90,
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     ellipsize: false,
-    wordWrap: true
+    wordWrap: true,
+    touchEnabled: false,
 }
 
 "#metric_value[platform=android]": {
@@ -50,7 +52,7 @@
 ".header": {
     top: 18,
     bottom: 18,
-    left: 10
+    left: 10,
 }
 
 ".header[platform=android]": {
@@ -61,6 +63,7 @@
 
 ".footer": {
     height: 35,
+    backgroundSelectedColor: '#dcdcdc',
 }
 
 ".footer[platform=android]": {
@@ -75,7 +78,8 @@
 ".more": {
     left: 10,
     width: Ti.UI.SIZE,
-    text: L('General_More')
+    text: L('General_More'),
+    touchEnabled: false,
 }
 
 ".more[platform=android]": {

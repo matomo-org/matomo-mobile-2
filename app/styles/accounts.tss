@@ -24,12 +24,17 @@
     separatorColor: '#e0e0e0'
 }
 
+"TableViewRow[platform=ios]": {
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY
+}
+
 "TableViewRow[platform=android]": {
     leftImage: '/spacer_16x16.png',
     right: '10dp',
     top: '10dp',
     bottom: '10dp',
-    color: '#333'
+    color: '#333',
+    backgroundSelectedColor: '#a9a9a9'
 }
 
 "TableViewRow[platform=mobileweb]": {

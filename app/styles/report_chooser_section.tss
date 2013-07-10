@@ -3,6 +3,10 @@
     height: Ti.UI.SIZE,
 }
 
+"#index[platform=ios]": {
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+}
+
 "#index[platform=android]": {
     backgroundImage: '/tableviewsection_background_dark.png'
 }

@@ -129,6 +129,11 @@ function render()
         nextRow.top    = '12dp';
         nextRow.bottom = '12dp';
     }
+    if (OS_IOS) {
+        nextRow.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+    } else {
+        nextRow.backgroundSelectedColor = '#a9a9a9';
+    }
 
     var row = Ti.UI.createTableViewRow(nextRow);
     row.addEventListener('click', fetchNext);
@@ -149,6 +154,9 @@ function render()
         });
     } else {
         var row = Ti.UI.createTableViewRow({title: L('Mobile_NoVisitorsShort')});
+        if (OS_IOS) {
+            row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+        }
         rows.push(row);
     }
 
@@ -160,6 +168,11 @@ function render()
         prevRow.left   = '16dp';
         prevRow.top    = '12dp';
         prevRow.bottom = '12dp';
+    }
+    if (OS_IOS) {
+        prevRow.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+    } else {
+        prevRow.backgroundSelectedColor = '#a9a9a9';
     }
 
     var row = Ti.UI.createTableViewRow(prevRow);

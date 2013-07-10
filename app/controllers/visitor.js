@@ -44,9 +44,35 @@ function onOpen()
     require('Piwik/Tracker').trackWindow('Visitor Details', 'visitor-details');
 }
 
+function addNonSelectableSelectionStyleToRow(row)
+{
+    if (OS_IOS) {
+        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+    } else {
+        row.backgroundSelectedColor = '#ffffff';
+    }
+
+    return row;
+}
+
+function createSelectableRow(params)
+{
+    var row = Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
+
+    if (OS_IOS) {
+        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+    } else {
+        row.backgroundSelectedColor = '#a9a9a9';
+    }
+
+    return row;
+}
+
 function createRow(params)
 {
-    return Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
+    var row = Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
+
+    return addNonSelectableSelectionStyleToRow(row);
 }
 
 function createSection(params)
@@ -137,7 +163,7 @@ function createOverview (visitor, accessUrl)
             referrerParams.title += String.format(": '%s'", '' + visitor.referrerKeyword);
         }
 
-        var referrerRow = createRow(referrerParams);
+        var referrerRow = createSelectableRow(referrerParams);
 
         referrerRow.addEventListener('click', function () {
             if (visitor.referrerUrl) {
@@ -316,6 +342,7 @@ function createActionDetails(visitor, accessUrl) {
 function createActionAction(actionDetail) {
 
     var row = Ti.UI.createTableViewRow(helperVisitorActionActionTableViewRow());
+    addNonSelectableSelectionStyleToRow(row);
 
     if (actionDetail.pageTitle) {
         row.add(Ti.UI.createLabel(helperVisitorActionActionPageTitleLabel(actionDetail.pageTitle)));
@@ -344,6 +371,7 @@ function createActionAction(actionDetail) {
 function createDefaultAction(actionDetail, visitor, accessUrl) {
 
     var row       = Ti.UI.createTableViewRow(helperVisitorActionDefaultTableViewRow());
+    addNonSelectableSelectionStyleToRow(row);
 
     var view      = Ti.UI.createView(helperVisitorActionDefaultHeadlineView());
 
@@ -405,6 +433,7 @@ function createDefaultAction(actionDetail, visitor, accessUrl) {
 function createEcommerceAction(actionDetail, visitor, accessUrl) {
 
     var row           = Ti.UI.createTableViewRow(helperVisitorActionEcommerceTableViewRow());
+    addNonSelectableSelectionStyleToRow(row);
     var ecommerceView = Ti.UI.createView(helperVisitorActionEcommerceHeadlineView());
     var ecommerceText = '';
 

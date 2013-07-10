@@ -2,6 +2,7 @@
     top: 0,
     backgroundColor: 'white',
     height: Ti.UI.SIZE,
+    backgroundSelectedColor: '#dcdcdc',
 }
 
 "#name": {
@@ -12,7 +13,8 @@
     font: {
         fontWeight: 'bold',
         fontSize: 15
-    }
+    },
+    touchEnabled: false
 },
 
 "#name[platform=android]": {

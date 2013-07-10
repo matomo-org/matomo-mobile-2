@@ -37,7 +37,8 @@
     color: '#191919',
     font: {fontWeight: 'bold'},
     left: 0,
-    width: Ti.UI.SIZE
+    width: Ti.UI.SIZE,
+    touchEnabled: false,
 }
 
 ".headline[platform=mobileweb]": {
@@ -70,6 +71,7 @@
 
 ".footer": {
     height: 35,
+    backgroundSelectedColor: '#dcdcdc',
 }
 
 ".footer[platform=android]": {
@@ -150,7 +152,8 @@
 ".more": {
     left: 10,
     width: Ti.UI.SIZE,
-    text: L('General_More')
+    text: L('General_More'),
+    touchEnabled: false
 }
 
 ".more[platform=android]": {

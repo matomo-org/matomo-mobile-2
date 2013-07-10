@@ -20,6 +20,10 @@
     style: Ti.UI.iPhone.TableViewStyle.GROUPED
 }
 
+"TableViewRow[platform=ios]": {
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY,
+}
+
 "TableViewRow[platform=mobileweb]": {
     left: 10,
     right: 10
@@ -30,6 +34,7 @@
     bottom: '16dp',
     color: '#333333',
     leftImage: '/spacer_16x16.png',
+    backgroundSelectedColor: '#dcdcdc',
 }
 
 "#about": {

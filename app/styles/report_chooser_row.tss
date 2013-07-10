@@ -3,7 +3,6 @@
     selectedBackgroundColor: '#333333',
     backgroundSelectedColor: '#333333',
     backgroundFocusedColor: 'black',
-   // hasChild: true,
     height: Ti.UI.SIZE,
 }
 
@@ -20,6 +19,7 @@
 }
 
 "#title[platform=android]": {
+    touchEnabled: false,
     top: '12dp',
     left: '10dp',
     font: {fontSize: '15sp'},
