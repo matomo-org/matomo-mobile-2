@@ -16,7 +16,7 @@
 
         <Require src="loading_indicator" id="loadingindicator"/>
 
-        <ScrollView id="content" class="container">
+        <ScrollView id="content">
             <View class="innerContainer">
                 <Require src="graph" id="reportGraphCtrl"/>
                 <View class="separator"/>

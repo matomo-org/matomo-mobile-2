@@ -31,7 +31,7 @@
 
 "#content": {
     top: 0,
-    height: Ti.UI.SIZE,
+    height: Ti.UI.FILL,
     contentHeight: 'auto',
 }
 
@@ -40,6 +40,7 @@
 }
 
 ".innerContainer": {
+    top: 0,
     layout: "vertical",
     height: Ti.UI.SIZE,
 }
