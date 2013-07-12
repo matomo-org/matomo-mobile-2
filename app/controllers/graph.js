@@ -85,17 +85,17 @@ function addGraphSwitcher(graphSwitcher)
         graphSwitcher.toggleVisibility();
     });
     
-    if (OS_IOS) {
+    if (OS_MOBILEWEB) {
+        graphSwitcher.fadeOut();
+    } else {
         $.image.getView().addEventListener('load', function () {
             // we need to wait till view is visible otherwise animation will never be executed.
             if (!graphSwitcher) {
                 return;
             }
-            
+
             graphSwitcher.fadeOut();
         });
-    } else {
-        graphSwitcher.fadeOut();
     }
 }
 
