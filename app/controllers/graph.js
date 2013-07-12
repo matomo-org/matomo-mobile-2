@@ -12,12 +12,26 @@ var reportDate = '';
 
 var currentGraphUrlToDislay = '';
 
-$.image.getView().addEventListener('click', toggleDetailIcon);
+var graphSwitcher = null;
+
+$.image.getView().addEventListener('click', function () {
+    toggleDetailIcon();
+
+    if (graphSwitcher) {
+        graphSwitcher.toggleVisibility();
+    }
+});
 
 if (!OS_MOBILEWEB) {
     // we need to wait till view is visible otherwise animation will never be executed.
     // load event is not supported on MobileWeb
-    $.image.getView().addEventListener('load', animateFadeOutDetailIcon);
+    $.image.getView().addEventListener('load', function () {
+        animateFadeOutDetailIcon();
+
+        if (graphSwitcher) {
+            graphSwitcher.fadeOut();
+        }
+    });
 }
 
 function width(image)
@@ -60,11 +74,16 @@ function updateImage(graphUrl)
     }
 }
 
-function addGraphSwitcher(graphSwitcher)
+function addGraphSwitcher(switcher)
 {
-    graphSwitcher.addSwitchGraph(false);
+    if (graphSwitcher) {
+        // prevent from adding graph switcher twice
+        $.index.remove(graphSwitcher.getView());
+    }
 
-    $.index.add(graphSwitcher.getView());
+    switcher.addSwitchGraph(false);
+    $.index.add(switcher.getView());
+    graphSwitcher = switcher;
 
     graphSwitcher.on('switch', function (event) {
         if (!event || !event.graphUrl) {
@@ -77,25 +96,8 @@ function addGraphSwitcher(graphSwitcher)
         $.showDetailIcon.hide();
     });
 
-    $.image.getView().addEventListener('click', function () {
-        if (!graphSwitcher) {
-            return;
-        }
-        
-        graphSwitcher.toggleVisibility();
-    });
-    
     if (OS_MOBILEWEB) {
         graphSwitcher.fadeOut();
-    } else {
-        $.image.getView().addEventListener('load', function () {
-            // we need to wait till view is visible otherwise animation will never be executed.
-            if (!graphSwitcher) {
-                return;
-            }
-
-            graphSwitcher.fadeOut();
-        });
     }
 }
 
