@@ -254,8 +254,10 @@ function showMessageNoWebsitesFound(title, message)
 {
     emptyData.show($.index, refresh, title, message);
 
-    $.content.hide();
     $.loading.hide();
+    $.loading.visible = false;
+    $.content.hide();
+    $.content.visible = false;
 }
 
 function showUseSearchHint()

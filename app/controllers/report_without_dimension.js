@@ -20,8 +20,6 @@ var reportDate    = require('session').getReportDate();
 // the fetched statistics that belongs to the currently selected report
 var processedReportCollection = Alloy.createCollection('piwikProcessedReport');
 
-var reportRowsCtrl = null;
-
 function registerEvents()
 {
     var session = require('session');
@@ -120,6 +118,7 @@ function showReportHasNoData(title, message)
     emptyData.show($.index, doRefresh, title, message);
 
     $.content.hide();
+    $.content.visible = false;
     $.loadingindicator.hide();
 }
 

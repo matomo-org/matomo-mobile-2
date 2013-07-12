@@ -33,6 +33,7 @@ exports.showReportHasNoData = function (title, message)
     $.emptyData.show($.index, $.doRefresh, title, message);
 
     $.content.hide();
+    $.content.visible = false;
     $.loadingindicator.hide();
 };
 

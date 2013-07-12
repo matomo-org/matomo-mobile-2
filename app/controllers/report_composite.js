@@ -110,7 +110,9 @@ function showReportHasNoData(title, message)
     $.emptyData.show($.index, refresh, title, message);
 
     $.content.hide();
+    $.content.visible = false;
     $.loadingIndicator.hide();
+    $.loadingIndicator.visible = false;
 }
 
 function toggleReportConfiguratorVisibility (event)
