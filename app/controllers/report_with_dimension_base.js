@@ -143,7 +143,9 @@ exports.renderProcessedReport = function (processedReportCollection)
                     metric: this.currentMetric,
                     reportTitle: this.reportTitle
                 };
-            
+
+                // TODO add possible report params (eg needed by goals)
+
                 var subtableReport = Alloy.createController('report_subtable', params);
                 subtableReport.open();
             });

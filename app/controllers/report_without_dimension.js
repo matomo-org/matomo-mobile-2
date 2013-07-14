@@ -287,13 +287,19 @@ function doRefresh()
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
+    var params =  {period: piwikPeriod,
+                   date: piwikDate,
+                   idSite: siteModel.id,
+                   apiModule: module,
+                   apiAction: action};
+
+    if (reportModel.hasParameters()) {
+        _.extend(params, reportModel.getParameters());
+    }
+
     processedReportCollection.fetchProcessedReports(metric, {
         account: accountModel,
-        params: {period: piwikPeriod, 
-                 date: piwikDate, 
-                 idSite: siteModel.id, 
-                 apiModule: module, 
-                 apiAction: action},
+        params: params,
         error: function (undefined, error) {
             if (error) {
                 showReportHasNoData(error.getError(), error.getMessage());

@@ -1,3 +1,4 @@
+
 /**
  * Piwik - Open source web analytics
  *
@@ -17,7 +18,6 @@ var args = arguments[0] || {};
 var currentMetric   = null;
 // the currently selected report
 var reportModel     = args.report;
-var reportList      = args.reportList || {};
 var reportDate      = require('session').getReportDate();
 
 updateWindowTitle(reportModel.getReportName());
@@ -141,14 +141,20 @@ exports.doRefresh = function()
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
+    var params = {period: piwikPeriod,
+                  date: piwikDate,
+                  idSite: siteModel.id,
+                  filter_limit: $.showAllEntries ? -1 : $.rowsFilterLimit,
+                  apiModule: module,
+                  apiAction: action};
+
+    if (reportModel.hasParameters()) {
+        _.extend(params, reportModel.getParameters());
+    }
+
     $.piwikProcessedReport.fetchProcessedReports(metric, {
         account: accountModel,
-        params: {period: piwikPeriod, 
-                 date: piwikDate, 
-                 idSite: siteModel.id, 
-                 filter_limit: $.showAllEntries ? -1 : $.rowsFilterLimit,
-                 apiModule: module, 
-                 apiAction: action},
+        params: params,
         success: $.renderProcessedReport,
         error: function (undefined, error) {
             if (error) {
