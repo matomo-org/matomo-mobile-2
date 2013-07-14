@@ -32,6 +32,7 @@ function onClose()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
     settings.off('change', updateAllDisplayedSettingsValues);
+    settings.off('change:language', updateWindowTitle);
 
     $.destroy();
     $.off();
@@ -205,8 +206,21 @@ function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
     $.basic.updateItemAt(indexOfItemIfListView, item, {animated: true});
 }
 
+function updateWindowTitle()
+{
+    var title = L('General_Settings');
+
+    if (OS_ANDROID) {
+        $.headerBar.setTitle(title || '');
+    } else {
+        $.index.title = title || '';
+    }
+}
+
 function updateAllDisplayedSettingsValues()
 {
+    updateWindowTitle();
+
     if (supportsListView()) {
         setTitle($.basic, 0, L('General_Language'));
         setTitle($.basic, 1, L('Mobile_AnonymousTracking'));
@@ -227,8 +241,10 @@ exports.open = function()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
     settings.on('change', updateAllDisplayedSettingsValues);
+    settings.on('change:language', updateWindowTitle);
 
     updateAllDisplayedSettingsValues();
+    updateWindowTitle();
     
     require('layout').open($.index);
 };
