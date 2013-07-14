@@ -3,13 +3,13 @@
   "contributors": [
     "Thomas Steur <thomas.steur@gmail.com>"
   ],
-  "name": "updatelanguagefiles",
+  "name": "findnewtranslationkeys",
   "keywords" : [
     "piwik",
     "mobile",
     "i18n"
   ],
-  "description": "Creates a file for each available language within the i18n directory.",
+  "description": "Finds new translation keys which are not added to Piwik languagefiles yet",
   "version": "0.0.1",
   "homepage": "http://piwik.org",
   "bugs": "http://dev.piwik.org",
@@ -21,9 +21,9 @@
     "lib" : "lib"
   },
   "license":"GPL v3 or later",
-  "main": "./lib/updatelanguagefiles.js",
+  "main": "./lib/findnewtranslationkeys.js",
   "bin": {
-    "updatelanguagefiles": "./bin/updatelanguagefiles"
+    "findnewtranslationkeys": "./bin/findnewtranslationkeys"
   },
   "dependencies": {
     "piwik-client": "0.2.x"

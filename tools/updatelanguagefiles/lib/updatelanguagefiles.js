@@ -2,7 +2,7 @@
 if (readPathToI18nDirFromCommandLineArgument()) {
     updateTranslationsForAllAvailableLanguages();
 } else {
-    console.log('please parameter to i18n dir. For instance "./updatelanguagefiles ../../../app/lib/i18n/"');
+    console.log('please add parameter to i18n dir. For instance "./updatelanguagefiles ../../../app/lib/i18n/"');
 }
 
 function updateTranslationsForAllAvailableLanguages(callback)
