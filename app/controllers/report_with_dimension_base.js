@@ -164,6 +164,12 @@ exports.renderProcessedReport = function (processedReportCollection)
         if (OS_ANDROID) showAllOptions.leftImage = '/images/spacer_10x10.png';
         if (OS_ANDROID) showAllOptions.font = {fontSize: '16sp', fontWeight: 'bold'};
 
+        if (OS_IOS) {
+            showAllOptions.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+        } else {
+            showAllOptions.backgroundSelectedColor = '#a9a9a9';
+        }
+
         var row = Ti.UI.createTableViewRow(showAllOptions);
         row.addEventListener('click', onTogglePaginator);
         rows.push(row);
