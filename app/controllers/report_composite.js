@@ -24,7 +24,6 @@ $.emptyData = new (require('ui/emptydata'));
 function registerEvents()
 {
     reportsCollection.on('reset', render);
-    reportsCollection.on('forceRefresh', refresh);
     reportsCollection.on('error', onFetchReportError);
 
     var session = require('session');
@@ -37,7 +36,6 @@ function registerEvents()
 function unregisterEvents()
 {
     reportsCollection.off('reset', render);
-    reportsCollection.off('forceRefresh', refresh);
     reportsCollection.off('error', onFetchReportError);
 
     var session = require('session');
@@ -173,7 +171,7 @@ function refresh()
     var siteModel    = require('session').getWebsite();
 
     if (!siteModel || !accountModel) {
-        console.log('no website/account selected', 'report_chooser');
+        console.log('no website/account selected', 'report_composite');
         return;
     }
 

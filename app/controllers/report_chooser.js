@@ -229,7 +229,15 @@ function openGiveFeedback()
 
 function refresh()
 {
-    reportsCollection.trigger('forceRefresh');
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
+
+    if (!siteModel || !accountModel) {
+        console.log('no website/account selected', 'report_chooser');
+        return;
+    }
+
+    reportsCollection.fetchAllReports(accountModel, siteModel);
 }
 
 function openEntryReport()
