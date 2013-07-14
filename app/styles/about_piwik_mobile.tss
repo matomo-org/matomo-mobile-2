@@ -20,7 +20,7 @@
     top: '16dp',
     bottom: '16dp',
     color: '#333333',
-    leftImage: '/images/spacer_16x16.png',
+    leftImage: '/images/spacer_10x10.png',
     backgroundSelectedColor: '#dcdcdc',
 }
 

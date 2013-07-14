@@ -159,7 +159,7 @@ exports.renderProcessedReport = function (processedReportCollection)
         // filter limit value...
         var showAllOptions = {color: '#336699', title: $.showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')};
         if (OS_MOBILEWEB) showAllOptions.left = 10;
-        if (OS_ANDROID) showAllOptions.leftImage = '/images/spacer_16x16.png';
+        if (OS_ANDROID) showAllOptions.leftImage = '/images/spacer_10x10.png';
         if (OS_ANDROID) showAllOptions.font = {fontSize: '16sp', fontWeight: 'bold'};
 
         var row = Ti.UI.createTableViewRow(showAllOptions);

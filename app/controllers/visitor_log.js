@@ -121,10 +121,10 @@ function render()
 
     var rows = [];
 
-    var nextRow = {title: L('General_Next'), color: '#336699'};
+    var nextRow = {title: L('General_Next'), color: '#336699', className: 'visitorlogPaginator'};
     if (OS_MOBILEWEB) nextRow.left = 10;
     if (OS_ANDROID) {
-        nextRow.leftImage = '/images/spacer_16x16.png';
+        nextRow.leftImage = '/images/spacer_10x10.png';
         nextRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
         nextRow.top    = '12dp';
         nextRow.bottom = '12dp';
@@ -160,12 +160,11 @@ function render()
         rows.push(row);
     }
 
-    var prevRow = {title: L('General_Previous'), color: '#336699'};
+    var prevRow = {title: L('General_Previous'), color: '#336699', className: 'visitorlogPaginator'};
     if (OS_MOBILEWEB) prevRow.left = 10;
     if (OS_ANDROID) {
-        prevRow.leftImage = '/images/spacer_16x16.png';
+        prevRow.leftImage = '/images/spacer_10x10.png';
         prevRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
-        prevRow.left   = '16dp';
         prevRow.top    = '12dp';
         prevRow.bottom = '12dp';
     }
