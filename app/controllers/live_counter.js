@@ -11,8 +11,18 @@ function L(key)
 }
 
 var args    = arguments[0] || {};
-var visits  = args.visits || '-';
-var actions = args.actions || '-';
+
+var visits  = '-';
+var actions = '-';
+
+if (!_.isNull(args.visits) && !_.isUndefined(args.visits)) {
+    visits = parseInt(args.visits, 10);
+}
+
+if (!_.isNull(args.actions) && !_.isUndefined(args.actions)) {
+    actions = parseInt(args.actions, 10);
+}
+
 var title   = args.title || '-';
 
 function counterValue(visits, actions)
