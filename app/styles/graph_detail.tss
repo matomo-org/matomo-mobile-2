@@ -32,7 +32,7 @@
 }
 
 "#graphWidget[platform=android]": {
-    defaultImage: '/graphDefault.png',
+    defaultImage: '/images/graphDefault.png',
     left: '10dp',
     right: '10dp',
     top: '10dp',
@@ -68,8 +68,6 @@
     layout: 'vertical',
     height: Ti.UI.SIZE,
     width: Ti.UI.SIZE,
-    left: 0,
-    right: 0,
 }
 
 "#reportName": {

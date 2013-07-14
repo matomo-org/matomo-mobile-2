@@ -25,7 +25,7 @@
 
 "#icon[platform=android]": {
     top: '16dp',
-    image: '/nodata.png',
+    image: '/images/nodata.png',
     height: '48dp',
     width: '48dp'
 }

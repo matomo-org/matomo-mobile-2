@@ -14,7 +14,7 @@
 }
 
 "#headerBar[formFactor=handheld]": {
-    actionItem1: {icon: '/ic_action_reportmenu.png'}
+    actionItem1: {icon: '/images/ic_action_reportmenu.png'}
 }
 
 "#content": {
@@ -59,5 +59,5 @@
     bottom: '25dp',
     width: '55dp',
     height: '19dp',
-    image: '/piwik_logo_light_footer.png'
+    image: '/images/piwik_logo_light_footer.png'
 }

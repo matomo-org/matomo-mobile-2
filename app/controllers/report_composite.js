@@ -237,9 +237,9 @@ function addPiwikIcon()
         $.content.add(Ti.UI.createImageView({
             top: '10dp',
             bottom: '25dp',
-            width: '55dp',
-            height: '19dp',
-            image: '/piwik_logo_dark_footer.png'
+            width: '56dp',
+            height: '20dp',
+            image: '/images/piwik_logo_dark_footer.png'
         }));
     } else {
         $.content.add(Ti.UI.createImageView({

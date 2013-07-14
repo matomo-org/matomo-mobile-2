@@ -8,7 +8,7 @@
 
 "#headerBar": {
     title: L('Mobile_Accounts'),
-    actionItem1: {icon: '/ic_action_add_account.png'}
+    actionItem1: {icon: '/images/ic_action_add_account.png'}
 }
 
 "#headerBar[formFactor=handheld]": {
@@ -29,7 +29,7 @@
 }
 
 "TableViewRow[platform=android]": {
-    leftImage: '/spacer_16x16.png',
+    leftImage: '/images/spacer_16x16.png',
     right: '10dp',
     top: '10dp',
     bottom: '10dp',

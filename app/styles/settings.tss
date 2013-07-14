@@ -96,7 +96,9 @@
 }
 
 "#uncheckedIcon": {
-    image: '/btn_check_off_holo_light.png',
+    image: '/images/btn_check_off_holo_light.png',
+    backgroundFocusedImage: '/images/btn_check_on_focused_holo_light.png',
+    backgroundSelectedImage: '/images/btn_check_on_focused_holo_light.png',
     width: '32dp',
     height: '32dp',
     right: '3dp',
@@ -104,7 +106,9 @@
 }
 
 "#checkedIcon": {
-    image: '/btn_check_on_holo_light.png',
+    image: '/images/btn_check_on_holo_light.png',
+    backgroundFocusedImage: '/images/btn_check_on_focused_holo_light.png',
+    backgroundSelectedImage: '/images/btn_check_on_focused_holo_light.png',
     width: '32dp',
     height: '32dp',
     right: '3dp',

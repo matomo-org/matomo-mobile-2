@@ -20,7 +20,7 @@
     top: '16dp',
     bottom: '16dp',
     color: '#333333',
-    leftImage: '/spacer_16x16.png',
+    leftImage: '/images/spacer_16x16.png',
     backgroundSelectedColor: '#dcdcdc',
 }
 
@@ -40,7 +40,7 @@
 
 "#website[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/images/navigation_next_item.png'
 }
 
 "#follow": {
@@ -55,7 +55,7 @@
 
 "#participate[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/images/navigation_next_item.png'
 }
 
 "#sourceCode": {
@@ -70,5 +70,5 @@
 
 "#license[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/images/navigation_next_item.png'
 }

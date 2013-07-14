@@ -23,7 +23,7 @@
 
 "#image[platform=android]": {
     top: '15dp',
-    image: '/graphDefault.png',
+    image: '/images/graphDefault.png',
     left: '16dp',
     right: '16dp',
     height: '150dp',
@@ -43,7 +43,7 @@
 }
 
 "#showDetailIcon[platform=android]": {
-    image: '/ic_action_fullscreen.png',
+    image: '/images/ic_action_fullscreen.png',
     bottom: '8dp',
     right: '8dp',
     width: '32dp',

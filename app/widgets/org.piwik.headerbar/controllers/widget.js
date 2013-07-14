@@ -50,7 +50,7 @@ function setBackAngleImage(image)
 
 function enableBackButton() 
 {
-    setBackAngleImage('/back.png');
+    setBackAngleImage('/images/back.png');
 
     $.backButton.addEventListener('click', function (event) {
         event.cancelBubble = true;
@@ -60,7 +60,7 @@ function enableBackButton()
 
 function showNavigationDrawer()
 {
-    setBackAngleImage('/navigation_drawer.png');
+    setBackAngleImage('/images/navigation_drawer.png');
 }
 
 function applyCustomProperties(args)

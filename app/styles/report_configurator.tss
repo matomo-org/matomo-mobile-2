@@ -56,7 +56,7 @@
 }
 
 ".siteHeader[platform=android]": {
-    backgroundImage: '/tableviewsection_background_dark.png',
+    backgroundImage: '/images/tableviewsection_background_dark.png',
 }
 
 ".websitePicker": {
@@ -98,7 +98,7 @@
 }
 
 ".websiteRow[platform=android]": {
-    leftImage: '/spacer_10x10.png',
+    leftImage: '/images/spacer_10x10.png',
     font: {fontSize: '14sp', fontWeight: 'bold'},
     top: '13dp',
     bottom: '13dp',

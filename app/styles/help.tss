@@ -33,7 +33,7 @@
     top: '16dp',
     bottom: '16dp',
     color: '#333333',
-    leftImage: '/spacer_16x16.png',
+    leftImage: '/images/spacer_16x16.png',
     backgroundSelectedColor: '#dcdcdc',
 }
 
@@ -44,7 +44,7 @@
 
 "#about[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/images/navigation_next_item.png'
 }
 
 "#email": {
@@ -54,7 +54,7 @@
 
 "#email[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/images/navigation_next_item.png'
 }
 
 "#forums": {
@@ -64,7 +64,7 @@
 
 "#forums[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/images/navigation_next_item.png'
 }
 
 "#documentation": {
@@ -74,7 +74,7 @@
 
 "#documentation[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/images/navigation_next_item.png'
 }
 
 "#faq": {
@@ -84,5 +84,5 @@
 
 "#faq[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png'
+    rightImage: '/images/navigation_next_item.png'
 }

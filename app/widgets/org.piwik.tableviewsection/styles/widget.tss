@@ -8,7 +8,7 @@
 
 "#index[platform=android]": {
     backgroundSelectedColor: '#B2AEA5',
-    backgroundSelectedImage: '/org.piwik.tableviewsection/tableviewsectionbackground.png'
+    backgroundSelectedImage: '/images/tableviewsection_background_dark.png'
 }
 
 "#index[platform=ios]": {
@@ -42,5 +42,5 @@
 }
 
 ".headerView[platform=android]": {
-    backgroundImage: '/org.piwik.tableviewsection/tableviewsectionbackground.png',
+    backgroundImage: '/images/tableviewsection_background_dark.png',
 }

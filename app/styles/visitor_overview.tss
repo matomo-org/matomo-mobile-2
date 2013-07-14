@@ -10,7 +10,7 @@
 
 "TableViewRow[platform=android]": {
     hasChild: false,
-    rightImage: '/navigation_next_item.png',
+    rightImage: '/images/navigation_next_item.png',
     backgroundSelectedColor: '#a9a9a9',
 },
 

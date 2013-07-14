@@ -12,7 +12,7 @@
 }
 
 ".icon[platform=android]": {
-    image: "/ic_action_menu_date.png",
+    image: "/images/ic_action_menu_date.png",
     width: '22dp',
     height: '22dp',
 }
@@ -58,7 +58,7 @@
 }
 
 ".button[platform=android]": {
-    backgroundImage: '/menu_button_background.png',
+    backgroundImage: '/images/menu_button_background.png',
     borderWidth: '1dp',
 }
 

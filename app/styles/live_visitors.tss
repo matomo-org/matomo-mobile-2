@@ -12,7 +12,7 @@
 }
 
 "#headerBar[formFactor=handheld]": {
-    actionItem1: {icon: '/ic_action_reportmenu.png'},
+    actionItem1: {icon: '/images/ic_action_reportmenu.png'},
     hasNavigation: true,
 }
 

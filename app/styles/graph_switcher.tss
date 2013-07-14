@@ -50,10 +50,10 @@
     right: '16dp',
     top: '1dp',
     height: '38dp',
-    backgroundImage: '/btn_default_normal_holo_light.9.png',
-    backgroundFocusedImage: '/btn_default_focused_holo_light.9.png',
-    backgroundSelectedImage: '/btn_default_focused_holo_light.9.png',
-    backgroundDisabledImage: '/btn_default_disabled_holo_light.9.png',
+    backgroundImage: '/images/btn_default_normal_holo_light.9.png',
+    backgroundFocusedImage: '/images/btn_default_focused_holo_light.9.png',
+    backgroundSelectedImage: '/images/btn_default_focused_holo_light.9.png',
+    backgroundDisabledImage: '/images/btn_default_disabled_holo_light.9.png',
 }
 
 "#switchButton[platform=mobileweb]": {

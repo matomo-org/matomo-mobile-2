@@ -7,7 +7,7 @@
 
 var args = arguments[0] || {};
 
-var errorImage = OS_ANDROID ? '/image_load_error.png' : 'image_load_error.png';
+var errorImage = OS_ANDROID ? '/images/image_load_error.png' : 'image_load_error.png';
 var supportsWidthDetectionOfImage = (OS_ANDROID || OS_IOS);
 
 function loadImageViaXhr(imageView, urlToLoad)

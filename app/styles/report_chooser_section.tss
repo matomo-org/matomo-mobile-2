@@ -8,7 +8,7 @@
 }
 
 "#index[platform=android]": {
-    backgroundImage: '/tableviewsection_background_dark.png'
+    backgroundImage: '/images/tableviewsection_background_dark.png'
 }
 
 "#title": {

@@ -19,12 +19,12 @@
 }
 
 "#homeIcon": {
-    left: '16dp',
-    height: '30dp',
-    width: '30dp',
+    left: '14dp',
+    height: '32dp',
+    width: '32dp',
     touchEnabled: false,
     backgroundColor: 'transparent',
-    backgroundImage: '/appicon.png',
+    backgroundImage: '/images/appicon.png',
 }
 
 "#headerTitle": {
