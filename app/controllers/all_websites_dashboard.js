@@ -159,7 +159,9 @@ function render()
 function showReportContent()
 {
     $.content.show();
+    $.content.visible = true;
     $.loading.hide();
+    $.loading.visible = false;
     emptyData.cleanupIfNeeded();
 }
 
