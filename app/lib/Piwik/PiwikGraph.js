@@ -176,9 +176,10 @@ function PiwikGraph () {
             parameter.fontSize = parameter.fontSize * 2;
             parameter.width    = parameter.width * 2;
             parameter.height   = parameter.height * 2;
-        } else if (hires && OS_ANDROID) {
-            parameter.legendFontSize = Math.round(parameter.fontSize * 1.5);
-            parameter.fontSize = Math.round(parameter.fontSize * 1.5);
+        } else if (OS_ANDROID) {
+            var densityFaktor = parseFloat(Ti.Platform.displayCaps.logicalDensityFactor);
+            parameter.legendFontSize = Math.round(parameter.fontSize * densityFaktor);
+            parameter.fontSize = Math.round(parameter.fontSize * densityFaktor);
         } 
         
         // prevents graph from caching
