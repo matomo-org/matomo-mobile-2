@@ -7,6 +7,7 @@
 
 var params = arguments[0];
 
+var isFetched    = false;
 var isClosed     = false;
 var hasDimension = $model.hasDimension();
 
@@ -16,6 +17,7 @@ if (!hasDimension) {
     $.index.height = OS_ANDROID ? '281dp' : 265;
 }
 
+$model.on('scrollPosition', updateParentYPositionAndTryToRender);
 $model.on('windowClose', close);
 
 fetchProcessedReport();
@@ -31,6 +33,8 @@ function close()
     $.piwikProcessedReport.abortRunningRequests();
 
     $model.off('windowClose', close);
+    $model.off('scrollPosition', updateParentYPositionAndTryToRender);
+    $.index.removeEventListener('postlayout', renderStatisticsIfViewIsInViewport);
 
     $.piwikProcessedReport.off();
     $.destroy();
@@ -89,7 +93,8 @@ function fetchProcessedReport()
         account: accountModel,
         params: getRequestParams(),
         success: function () {
-            renderOverviewReport();
+            isFetched = true;
+            renderStatisticsIfViewIsInViewport();
         },
         error: function (undefined, error) {
             if (error && $.loading) {
@@ -111,14 +116,74 @@ function showErrorMessage(message)
     $.loading.bottom = OS_ANDROID ? '16dp' : 10;
     $.loading.height = Ti.UI.SIZE;
     sizeBoxToContent();
+    close();
 }
 
-function renderOverviewReport()
-{
-    if (isClosed) {
+
+var lastParentYScrollPosition = null;
+function updateParentYPositionAndTryToRender(event) {
+    if (!event || isClosed) {
         return;
     }
 
+    if (_.has(event, 'y')) {
+        lastParentYScrollPosition = event.y;
+    }
+
+    renderStatisticsIfViewIsInViewport();
+}
+
+function getMyYPosition()
+{
+    return $.index.rect ? $.index.rect.y : null;
+}
+
+var isLayouted = false;
+function isMyViewLayouted()
+{
+    if (isLayouted) {
+        // code looks stupid but we want to cache this to prevent it from executing too often.
+        return true;
+    }
+
+    isLayouted = !_.isNull(getMyYPosition());
+
+    return isLayouted;
+}
+
+// actually, we should use the parentScrollview.height but platformHeight is a bit higher and
+// that makes sure the view will be rendered a view pixels before the user sees the box
+// when user scrolls to this view, it'll be already rendered depending on performance of device
+var platformHeight = Ti.Platform.displayCaps.platformHeight + 100;
+
+function isViewInViewport()
+{
+    if (!isMyViewLayouted()) {
+        return false;
+    }
+
+    var scrollYPosition = platformHeight;
+
+    if (lastParentYScrollPosition) {
+        scrollYPosition += lastParentYScrollPosition;
+    }
+
+    return (getMyYPosition() < scrollYPosition);
+}
+
+function renderStatisticsIfViewIsInViewport()
+{
+    if (!isClosed && isFetched && isViewInViewport()) {
+        // prevent from race conditions rendering twice
+        isClosed = true;
+        renderOverviewReport();
+        close();
+    }
+}
+
+
+function renderOverviewReport()
+{
     if ($.loading) {
         $.index.remove($.loading);
         $.loading = null;

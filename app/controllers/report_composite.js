@@ -30,6 +30,8 @@ function registerEvents()
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
     session.on('reportDateChanged', onDateChanged);
+
+    $.content.addEventListener('scroll', notifyModelsAboutNewScrollPosition);
 }
 
 function unregisterEvents()
@@ -41,6 +43,8 @@ function unregisterEvents()
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
     session.off('reportDateChanged', onDateChanged);
+
+    $.content.removeEventListener('scroll', notifyModelsAboutNewScrollPosition);
 }
 
 function trackWindowRequest()
@@ -213,6 +217,33 @@ function filterReports(collection)
 
     return collection.where({category: reportCategory});
 }
+
+
+var lastYScrollPosition = 0;
+function notifyModelsAboutNewScrollPosition (event)
+{
+    if (!event || !_.has(event, 'y')) {
+        return;
+    }
+
+    if (lastYScrollPosition && event.y < (lastYScrollPosition + 50)) {
+        // ignore if scroll change was only 50 pixel or less since last update. otherwise we end up firing
+        // thousands of events
+        return;
+    }
+
+    lastYScrollPosition = event.y;
+
+    _.forEach(filterReports(reportsCollection), function (model) {
+        if (lastYScrollPosition == event.y) {
+            // the notifyModelsAboutNewScrollPosition can be triggered multiple times async. If meanwhile the
+            // "global" variable lastYScrollPosition changes, trigger this event only if we are still the highest
+            // lastYPosition
+            model.trigger('scrollPosition', {y: lastYScrollPosition});
+        }
+    });
+}
+
 
 function notifyModelsAboutWindowClose ()
 {
