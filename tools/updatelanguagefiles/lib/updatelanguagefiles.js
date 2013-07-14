@@ -28,10 +28,19 @@ function onAllAvailableLanguagesFetched(err, languages)
         return;
     }
 
+    var interval = 1000;
+    var delay    = interval;
+
     for (var index = 0; index < languages.length; index++) {
         var languageCode = languages[index];
 
-        updateTranslationForLanguageCode(languageCode);
+        setTimeout((function (languageCode) {
+            return function () {
+                updateTranslationForLanguageCode(languageCode);
+            };
+        })(languageCode), delay);
+
+        delay+=interval;
     }
 }
 
