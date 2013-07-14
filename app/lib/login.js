@@ -56,7 +56,7 @@ function onError (accountModel, error) {
 
     switch (error) {
         case 'MissingUsername':
-            message = String.format(L('General_Required'), L('Login_Login'));
+            message = String.format(L('General_Required'), L('General_Username'));
             title   = 'Account Missing Username';
             url     = '/account/login/error/missing-username';
             break;

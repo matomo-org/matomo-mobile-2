@@ -81,7 +81,7 @@
 },
 
 "#username": {
-    hintText: L('Login_Login'),
+    hintText: L('General_Username'),
     keyboardType: Ti.UI.KEYBOARD_DEFAULT,
     returnKeyType: Ti.UI.RETURNKEY_NEXT
 },
