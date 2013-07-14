@@ -2,6 +2,7 @@
     top: 0,
     height: '48dp',
     width: Ti.UI.FILL,
+    backgroundImage: '/images/ab_solid_example.9.png',
     backgroundColor: '#CD1628'
 }
 
