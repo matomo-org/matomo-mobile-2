@@ -3,6 +3,8 @@
 }
 
 "#loadingIndicator": {
+    left: 0,
+    top: 0,
     height: Ti.UI.FILL,
     width: Ti.UI.FILL,
     visible: true,
