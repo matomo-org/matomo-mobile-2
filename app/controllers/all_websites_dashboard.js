@@ -309,6 +309,16 @@ function formatWebsite(model)
     return model;
 }
 
+exports.enableCanGoBack = function ()
+{
+    if (OS_ANDROID) {
+        $.headerBar.enableCanGoBack();
+        $.headerBar.on('back', function () {
+            $.close();
+        });
+    }
+};
+
 exports.close = function () {
     require('layout').close($.index);
 };

@@ -8,6 +8,7 @@
 exports.execute = function (callback)
 {
     var websites = Alloy.createController('all_websites_dashboard');
+    websites.enableCanGoBack();
     
     if (callback) {
         websites.on('websiteChosen', callback);
