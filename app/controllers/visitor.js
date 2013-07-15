@@ -300,7 +300,7 @@ function createActionDetails(visitor, accessUrl) {
 
     var numActions = parseInt(visitor.actions, 10);
     
-    rows.push(createSection({title: String.format(L('VisitsSummary_NbActions'),
+    rows.push(createSection({title: String.format(L('VisitsSummary_NbActionsDescription'),
                              '' + numActions)}));
 
     for (var index = 0; index < visitor.actionDetails.length; index++) {

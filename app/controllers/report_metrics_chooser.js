@@ -29,7 +29,7 @@ for (var metricInternalName in metrics) {
 }
 
 if (!OS_ANDROID) {
-    options.push(L('SitesManager_Cancel_js'));
+    options.push(L('General_Cancel'));
 }
 
 function doChangeMetric(event)

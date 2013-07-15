@@ -138,7 +138,7 @@ exports.getCurrentLanguageName = currentLanguageName;
 exports.open = function () {
 
     var languageNames = availableLanguageNamesSortedByAlphabet();
-    languageNames.push(L('SitesManager_Cancel_js'));
+    languageNames.push(L('General_Cancel'));
 
     var langDialog = Ti.UI.createOptionDialog({
         title: L('General_ChooseLanguage'),

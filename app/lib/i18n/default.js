@@ -69,7 +69,6 @@ module.exports = {
     General_NewVisitor:                                                 'New Visitor',
     General_Next:                                                       'Next',
     General_No:                                                         'No',
-    General_NoDataForGraph:                                             'No data for this graph.',
     General_NotValid:                                                   '%s is not valid',
     General_NumberOfVisits:                                             'Number of visits',
     General_Others:                                                     'Others',
@@ -101,7 +100,7 @@ module.exports = {
     Live_VisitorLog:                                                    'Visitor Log',
     Login_Password:                                                     'Password',
     SEO_Rank:                                                           'Rank',
-    SitesManager_Cancel_js:                                             'Cancel',
+    General_Cancel:                                                     'Cancel',
     SitesManager_ExceptionInvalidUrl:                                   "The url '%s' is not a valid URL.",
     SitesManager_NotFound:                                              "No websites found for",
     UserCountry_Country:                                                'Country',
@@ -113,8 +112,7 @@ module.exports = {
     UserSettings_ColumnResolution:                                      'Resolution',
     UserSettings_VisitorSettings:                                       'Visitor Settings',
     VisitsSummary_NbVisits:                                             '%s visits',
-    VisitsSummary_EvolutionOverLastPeriods:                             'Evolution over the last %s',
-    VisitsSummary_NbActions:                                            '%s actions',
+    VisitsSummary_NbActionsDescription:                                 '%s actions',
 
     // New Strings
     General_InvalidResponse:                                            'The received data is invalid.',

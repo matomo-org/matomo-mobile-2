@@ -76,7 +76,7 @@ exports.open = function ()
 
     // an array of all available timeout options
     var timeoutValues = getTimeoutValues();
-    timeoutValues.push(L('SitesManager_Cancel_js'));
+    timeoutValues.push(L('General_Cancel'));
 
     var timeoutDialog = Ti.UI.createOptionDialog({
         title: L('Mobile_ChooseHttpTimeout'),

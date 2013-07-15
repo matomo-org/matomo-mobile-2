@@ -119,7 +119,7 @@ exports.open = function ()
         title: L('General_ChooseDate'),
         androidView: $.index,
         options: null,
-        buttonNames: [L('CoreUpdater_UpdateTitle'), L('SitesManager_Cancel_js')],
+        buttonNames: [L('CoreUpdater_UpdateTitle'), L('General_Cancel')],
         cancel: 1
     });
 

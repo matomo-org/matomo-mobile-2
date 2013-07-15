@@ -25,7 +25,7 @@ function getAvailableReportDateNames()
         reportNames.push(availableReportDates[index].label);
     }
     
-    reportNames.push(L('SitesManager_Cancel_js'));
+    reportNames.push(L('General_Cancel'));
 
     return reportNames;
 }
