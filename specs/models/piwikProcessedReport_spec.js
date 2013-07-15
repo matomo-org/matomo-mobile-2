@@ -223,6 +223,15 @@ describe('piwikProcessedReport Collection', function() {
         expect(reportCollection.validResponse(getSearchEngineReport())).toBeTruthy();
         expect(reportCollection.validResponse(null)).toBeFalsy();
     });
+
+    it('should be able to detect whether the report has a dimension or not', function() {
+
+        loadFixture(reportCollection, getSearchEngineReport());
+        expect(reportCollection.hasDimension()).toBeTruthy();
+
+        loadFixture(reportCollection, getReportHavingNoDimension());
+        expect(reportCollection.hasDimension()).toBeFalsy();
+    });
 });
 
 

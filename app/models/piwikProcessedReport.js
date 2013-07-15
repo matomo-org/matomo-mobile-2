@@ -104,6 +104,11 @@ exports.definition = {
             prettyDate: null,
             website: null,
             columns: null,
+            hasReportDimension: true,
+
+            hasDimension: function () {
+                return this.hasReportDimension;
+            },
 
             hasReports: function () {
                 return !!this.getNumberOfReports();
@@ -225,6 +230,7 @@ exports.definition = {
                 var reportMetadata = response.reportMetadata;
 
                 if (_.isArray(reportData) && 0 < reportData.length) {
+                    this.hasReportDimension = true;
 
                     for (var index = 0; index < reportData.length; index++) {
                         if (!reportData[index]) {
@@ -260,12 +266,13 @@ exports.definition = {
                         row.id    = index;
                         row.reportMetadata  = metadata;
                         row.sortOrderColumn = this.sortOrderColumn;
-                        row.hasDimension    = true;
+                        row.hasDimension    = this.hasReportDimension;
                     
                         rows.push(row);
                     }
                     
                 } else if (_.isObject(reportData)) {
+                    this.hasReportDimension = false;
                     // since Piwik Server 1.5.0: for reports with no dimensions, like VisitsSummary.get
 
                     for (var key in reportData) {
@@ -287,7 +294,7 @@ exports.definition = {
                         row.id    = rows.length;
                         row.reportMetadata  = reportMetadata ? reportMetadata[key] : null;
                         row.sortOrderColumn = key;
-                        row.hasDimension    = false;
+                        row.hasDimension    = this.hasReportDimension;
 
                         rows.push(row);
                     }
