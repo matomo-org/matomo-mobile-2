@@ -11,7 +11,6 @@ function L(key)
 }
 
 var args = arguments[0] || {};
-var hideCloseButton = args.hideCloseButton || false;
 
 var accounts = Alloy.Collections.appAccounts;
 accounts.fetch();
