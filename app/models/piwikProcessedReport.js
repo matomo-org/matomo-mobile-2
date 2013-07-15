@@ -229,7 +229,7 @@ exports.definition = {
                 var reportData     = response.reportData;
                 var reportMetadata = response.reportMetadata;
 
-                if (_.isArray(reportData) && 0 < reportData.length) {
+                if (_.isArray(reportData)) {
                     this.hasReportDimension = true;
 
                     for (var index = 0; index < reportData.length; index++) {
