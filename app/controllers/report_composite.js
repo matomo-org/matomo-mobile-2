@@ -15,6 +15,7 @@ var reportCategory    = args.reportCategory || null;
 var reportsCollection = Alloy.Collections.piwikReports;
 reportsCollection.off("fetch destroy change add remove reset", renderListOfReports);
 
+var lastYScrollPosition = 0;
 var dateHasChanged    = false;
 var websiteHasChanged = false;
 var reportIsDisplayed = true;
@@ -182,6 +183,7 @@ function refresh()
 function render()
 {
     if (hasReportsToShow()) {
+        lastYScrollPosition = 0;
         renderListOfReports();
         showReportContent();
         addPiwikIcon();
@@ -217,7 +219,6 @@ function filterReports(collection)
 }
 
 
-var lastYScrollPosition = 0;
 function notifyModelsAboutNewScrollPosition (event)
 {
     if (!event || !_.has(event, 'y')) {
