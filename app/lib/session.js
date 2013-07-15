@@ -16,9 +16,9 @@ var Session = function () {
     Alloy._.extend(this, Alloy.Backbone.Events, {
 
         setWebsite: function (siteModel, accountModel) {
-            this.setAccount(accountModel);
-
             website = siteModel;
+
+            this.setAccount(accountModel);
             this.trigger('websiteChanged', website);
         },
         getWebsite: function () {
