@@ -301,7 +301,6 @@ exports.definition = {
                 }
 
                 response       = null;
-                account        = null;
                 metadata       = null;
                 row            = null;
                 report         = null;
