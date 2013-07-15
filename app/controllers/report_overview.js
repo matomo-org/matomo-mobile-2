@@ -63,7 +63,8 @@ function getRequestParams()
                   idSite: siteModel.id,
                   apiModule: module,
                   apiAction: action,
-                  hideMetricsDoc: 1};
+                  hideMetricsDoc: 1,
+                  showColumns: getMetric()};
 
     if ($model.hasParameters()) {
         _.extend(params, $model.getParameters());
@@ -71,7 +72,6 @@ function getRequestParams()
 
     if (hasDimension) {
         params.filter_truncate = 3;
-        params.showColumns     = getMetric();
     } else {
         params.filter_limit = 1;
     }
@@ -191,7 +191,7 @@ function renderOverviewReport()
 
     params.processedReport = $.piwikProcessedReport;
 
-    var controller = hasDimension ? 'report_overview_with_dimension' : 'report_overview_without_dimension';
+    var controller = $.piwikProcessedReport.hasDimension() ? 'report_overview_with_dimension' : 'report_overview_without_dimension';
     var report     = Alloy.createController(controller, params);
 
     sizeBoxToContent();
