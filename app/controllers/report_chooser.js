@@ -185,6 +185,9 @@ function onAccountChosen(account)
 {
     require('account').selectWebsite(account, function (siteModel, accountModel) {
         require('session').setWebsite(siteModel, accountModel);
+        // force fetching the list of available reports for chosen website / account. We need to find a better
+        // solution for this. CompositeReport will reload list of reports because reportsCollection is empty afterwards.
+        reportsCollection.reset([], {silent: true});
         openEntryReport();
     });
 
