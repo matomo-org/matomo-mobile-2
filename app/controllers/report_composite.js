@@ -12,8 +12,7 @@ function L(key)
 
 var args = arguments[0] || {};
 var reportCategory    = args.reportCategory || null;
-var reportsCollection = Alloy.Collections.piwikReports;
-reportsCollection.off("fetch destroy change add remove reset", renderListOfReports);
+$.reportsCollection.off("fetch destroy change add remove reset", renderListOfReports);
 
 var lastYScrollPosition = 0;
 var dateHasChanged    = false;
@@ -24,8 +23,8 @@ $.emptyData = new (require('ui/emptydata'));
 
 function registerEvents()
 {
-    reportsCollection.on('reset', render);
-    reportsCollection.on('error', onFetchReportError);
+    $.reportsCollection.on('reset', render);
+    $.reportsCollection.on('error', onFetchReportError);
 
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
@@ -36,8 +35,8 @@ function registerEvents()
 
 function unregisterEvents()
 {
-    reportsCollection.off('reset', render);
-    reportsCollection.off('error', onFetchReportError);
+    $.reportsCollection.off('reset', render);
+    $.reportsCollection.off('error', onFetchReportError);
 
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
@@ -75,12 +74,6 @@ function onFetchReportError(undefined, error)
 function onOpen()
 {
     trackWindowRequest();
-
-    if (isDataAlreadyFetched()) {
-        render();
-    } else {
-        refresh();
-    }
 }
 
 function onClose()
@@ -177,7 +170,7 @@ function refresh()
     }
 
     showLoadingIndicator();
-    reportsCollection.fetchAllReports(accountModel, siteModel);
+    $.reportsCollection.fetchAllReports(accountModel, siteModel);
 }
 
 function render()
@@ -233,7 +226,7 @@ function notifyModelsAboutNewScrollPosition (event)
 
     lastYScrollPosition = event.y;
 
-    _.forEach(filterReports(reportsCollection), function (model) {
+    _.forEach(filterReports($.reportsCollection), function (model) {
         if (lastYScrollPosition == event.y) {
             // the notifyModelsAboutNewScrollPosition can be triggered multiple times async. If meanwhile the
             // "global" variable lastYScrollPosition changes, trigger this event only if we are still the highest
@@ -246,19 +239,19 @@ function notifyModelsAboutNewScrollPosition (event)
 
 function notifyModelsAboutWindowClose ()
 {
-    _.forEach(filterReports(reportsCollection), function (model) {
+    _.forEach(filterReports($.reportsCollection), function (model) {
         model.trigger('windowClose');
     });
 }
 
 function hasReportsToShow()
 {
-    return !!reportsCollection.length;
+    return !!$.reportsCollection.length;
 }
 
 function isDataAlreadyFetched()
 {
-    return !!reportsCollection.length;
+    return !!$.reportsCollection.length;
 }
 
 function addPiwikIcon()
@@ -286,6 +279,7 @@ function open()
 {
     registerEvents();
     require('layout').open($.index);
+    refresh();
 }
 
 

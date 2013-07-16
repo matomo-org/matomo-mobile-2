@@ -1,5 +1,5 @@
 <Alloy>
-    <Collection src="piwikReports"/>
+    <Collection src="piwikReports" instance="true" id="reportsCollection"/>
 
     <Window title="" id="index" onClose="onClose" onOpen="onOpen" onBlur="onBlur" onFocus="onFocus">
         
@@ -25,7 +25,7 @@
 
         <View id="loadingIndicator"><Label id="loadingLabel"></Label></View>
 
-        <ScrollView id="content" dataCollection="piwikReports" dataFilter="filterReports" dataFunction="renderListOfReports">
+        <ScrollView id="content" dataCollection="$.reportsCollection" dataFilter="filterReports" dataFunction="renderListOfReports">
             <Require src="report_overview" title="{name}"/>
         </ScrollView>
     </Window>

@@ -1,5 +1,6 @@
 <Alloy>
-    <Collection src="piwikReports"/>
+    <Collection src="piwikReports" instance="true" id="reportsCollection"/>
+
     <TableView id="reportsTable" onClick="doSelectReport">
         <HeaderView formFactor="tablet">
             <View class="header">

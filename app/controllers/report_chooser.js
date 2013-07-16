@@ -10,14 +10,13 @@ function L(key)
     return require('L')(key);
 }
 
-var reportsCollection = Alloy.Collections.piwikReports;
-reportsCollection.on('reset', updateAvailableReportsList);
+$.reportsCollection.on('reset', updateAvailableReportsList);
 
 var cidToSelect = '';
 
 function updateAvailableReportsList()
 {
-    if (!reportsCollection) {
+    if (!$.reportsCollection) {
         return;
     }
     
@@ -32,10 +31,10 @@ function updateAvailableReportsList()
     rows.push(Alloy.createController('report_chooser_section', {title: L('General_Reports')}).getView());
 
     if (!cidToSelect) {
-        setCurrentlySelectedCid(getCidOfEntryReport(reportsCollection));
+        setCurrentlySelectedCid(getCidOfEntryReport($.reportsCollection));
     }
 
-    reportsCollection.forEach(function (report) 
+    $.reportsCollection.forEach(function (report)
     {
         if (!report) {
             return;
@@ -157,7 +156,7 @@ function doSelectReport(event)
     } else if ('feedback' == cid) {
         openGiveFeedback();
     } else {
-        var report = reportsCollection.getByCid(cid);
+        var report = $.reportsCollection.getByCid(cid);
         openCompositeReport(report);
     }
 }
@@ -185,9 +184,6 @@ function onAccountChosen(account)
 {
     require('account').selectWebsite(account, function (siteModel, accountModel) {
         require('session').setWebsite(siteModel, accountModel);
-        // force fetching the list of available reports for chosen website / account. We need to find a better
-        // solution for this. CompositeReport will reload list of reports because reportsCollection is empty afterwards.
-        reportsCollection.reset([], {silent: true});
         openEntryReport();
     });
 
@@ -240,7 +236,7 @@ function refresh()
         return;
     }
 
-    reportsCollection.fetchAllReports(accountModel, siteModel);
+    $.reportsCollection.fetchAllReports(accountModel, siteModel);
 }
 
 function openEntryReport()
@@ -250,7 +246,7 @@ function openEntryReport()
     var compositeReport = Alloy.createController('report_composite');
     compositeReport.open();
     
-    setCurrentlySelectedCid(getCidOfEntryReport(reportsCollection));
+    setCurrentlySelectedCid(getCidOfEntryReport($.reportsCollection));
     makeSureSelectedRowIsStillSelected();
 }
 
@@ -261,6 +257,10 @@ exports.open = function()
 
     require('session').on('accountChanged', refresh);
     Alloy.createCollection('AppSettings').settings().on('change:language', refresh);
+
+    // TODO find a way to do the initial refresh when report_chooser is opened the first time. --> At this time
+    // the reportMetadata is already cached
+    refresh();
 
     openEntryReport();
 };
