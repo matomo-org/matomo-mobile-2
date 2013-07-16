@@ -12,16 +12,9 @@ function L(key)
 
 $.emptyData = new (require('ui/emptydata'));
 
-var accountModel = require('session').getAccount();
-var siteModel    = require('session').getWebsite();
-var reportDate   = require('session').getReportDate();
-var visitorLog   = Alloy.createCollection('piwikLastVisitDetails');
+var visitorLog = Alloy.createCollection('piwikLastVisitDetails');
 visitorLog.on('reset', render);
 visitorLog.on('error', onFetchError);
-
-if (OS_IOS) {
-    $.pullToRefresh.init($.visitorLogTable);
-}
 
 function registerEvents()
 {
@@ -52,8 +45,6 @@ function onWebsiteChanged(website)
 {
     require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/visitor-log/change/website'});
 
-    siteModel    = website;
-    accountModel = require('session').getAccount();
     doRefresh();
 }
 
@@ -65,7 +56,6 @@ function onDateChanged(date)
 
     require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/visitor-log/change/date'});
 
-    reportDate = date;
     doRefresh();
 }
 
@@ -91,6 +81,9 @@ function onClose()
 
 function fetchPrevious()
 {
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
+
     showLoadingMessage();
     visitorLog.previous(accountModel, siteModel.id);
 
@@ -99,6 +92,9 @@ function fetchPrevious()
 
 function fetchNext()
 {
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
+
     showLoadingMessage();
     visitorLog.next(accountModel, siteModel.id);
 
@@ -170,6 +166,8 @@ function render()
                 return;
             }
 
+            var accountModel = require('session').getAccount();
+
             var params = {account: accountModel, visitor: visitorDetail.attributes};
             var visitorOverview = Alloy.createController('visitor_overview', params);
             var visitorRow      = visitorOverview.getView();
@@ -202,10 +200,6 @@ function render()
 
 function showReportContent()
 {
-    if (OS_IOS) {
-        $.pullToRefresh.refreshDone();
-    } 
-
     $.content.show();
     $.loadingIndicator.hide();
     $.emptyData.cleanupIfNeeded();
@@ -213,10 +207,6 @@ function showReportContent()
 
 function showLoadingMessage()
 {
-    if (OS_IOS) {
-        $.pullToRefresh.refresh();
-    } 
-
     $.loadingIndicator.show();
     $.content.hide();
     $.emptyData.cleanupIfNeeded();
@@ -239,6 +229,9 @@ function onFetchError(undefined, error)
 
 function doRefresh()
 {
+    var accountModel = require('session').getAccount();
+    var siteModel    = require('session').getWebsite();
+
     if (!accountModel || !siteModel) {
         console.log('account or site not found, cannot refresh visitor log');
         return;
@@ -247,6 +240,7 @@ function doRefresh()
     showLoadingMessage();
 
     // TODO fallback to day/today is not a good solution cause user won't notice we've fallen back to a different date
+    var reportDate  = require('session').getReportDate();
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
