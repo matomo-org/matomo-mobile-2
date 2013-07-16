@@ -7,6 +7,10 @@
     width: Ti.UI.FILL,
 }
 
+"TableViewRow[platform=ios]": {
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+}
+
 "#loadingIndicator": {
     height: 160,
     backgroundColor: '#efefef',
