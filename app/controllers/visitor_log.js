@@ -84,6 +84,11 @@ function fetchPrevious()
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
 
+    if (!accountModel || !siteModel) {
+        console.log('account or site not found, cannot fetch previous visitors');
+        return;
+    }
+
     showLoadingMessage();
     visitorLog.previous(accountModel, siteModel.id);
 
@@ -94,6 +99,11 @@ function fetchNext()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+
+    if (!accountModel || !siteModel) {
+        console.log('account or site not found, cannot fetch next visitors');
+        return;
+    }
 
     showLoadingMessage();
     visitorLog.next(accountModel, siteModel.id);
@@ -155,10 +165,10 @@ function render()
 
     var rows = [];
 
-    var row = Ti.UI.createTableViewRow(getNextRowParams());
-    row.addEventListener('click', fetchNext);
-    rows.push(row);
-    row = null;
+    var nextRow = Ti.UI.createTableViewRow(getNextRowParams());
+    nextRow.addEventListener('click', fetchNext);
+    rows.push(nextRow);
+    nextRow = null;
 
     if (visitorLog && visitorLog.length) {
         visitorLog.forEach(function (visitorDetail) {
@@ -176,18 +186,18 @@ function render()
             visitorRow = null;
         });
     } else {
-        var row = Ti.UI.createTableViewRow({title: L('Mobile_NoVisitorsShort')});
+        var noVisitsRow = Ti.UI.createTableViewRow({title: L('Mobile_NoVisitorsShort')});
         if (OS_IOS) {
-            row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+            noVisitsRow.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
         }
-        rows.push(row);
-        row = null;
+        rows.push(noVisitsRow);
+        noVisitsRow = null;
     }
 
-    var row = Ti.UI.createTableViewRow(getPrevRowParams());
-    row.addEventListener('click', fetchPrevious);
-    rows.push(row);
-    row = null;
+    var prevRow = Ti.UI.createTableViewRow(getPrevRowParams());
+    prevRow.addEventListener('click', fetchPrevious);
+    rows.push(prevRow);
+    prevRow = null;
 
     $.visitorLogTable.setData(rows);
 

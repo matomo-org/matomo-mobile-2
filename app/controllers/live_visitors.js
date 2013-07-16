@@ -115,10 +115,12 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
     counter30Min.title = String.format(L('Live_LastMinutes'), '30');
     var last30minutes = Alloy.createController('live_counter', counter30Min);
     rows.push(last30minutes.getView());
+    last30minutes = null;
 
     counter24Hours.title = String.format(L('Live_LastHours'), '24');
     var last24hours = Alloy.createController('live_counter', counter24Hours);
     rows.push(last24hours.getView());
+    last24hours = null;
 
     _.forEach(visitorDetails, function (visitorDetail) {
         var params = {account: account, visitor: visitorDetail};
@@ -131,6 +133,7 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
 
     $.liveTable.setData(rows);
     rows = null;
+    account = null;
 
     startRefreshTimer(refreshIntervalInMs);
 }
