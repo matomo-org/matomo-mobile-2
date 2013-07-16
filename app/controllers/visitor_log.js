@@ -114,13 +114,8 @@ function scrollToTop()
     }
 }
 
-function render()
+function getNextRowParams()
 {
-    scrollToTop();
-    showReportContent();
-
-    var rows = [];
-
     var nextRow = {title: L('General_Next'), color: '#336699', className: 'visitorlogPaginator'};
     if (OS_MOBILEWEB) nextRow.left = 10;
     if (OS_ANDROID) {
@@ -135,9 +130,39 @@ function render()
         nextRow.backgroundSelectedColor = '#a9a9a9';
     }
 
-    var row = Ti.UI.createTableViewRow(nextRow);
+    return nextRow;
+}
+
+function getPrevRowParams()
+{
+    var prevRow = {title: L('General_Previous'), color: '#336699', className: 'visitorlogPaginator'};
+    if (OS_MOBILEWEB) prevRow.left = 10;
+    if (OS_ANDROID) {
+        prevRow.leftImage = '/images/spacer_10x10.png';
+        prevRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
+        prevRow.top    = '12dp';
+        prevRow.bottom = '12dp';
+    }
+    if (OS_IOS) {
+        prevRow.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+    } else {
+        prevRow.backgroundSelectedColor = '#a9a9a9';
+    }
+
+    return prevRow;
+}
+
+function render()
+{
+    scrollToTop();
+    showReportContent();
+
+    var rows = [];
+
+    var row = Ti.UI.createTableViewRow(getNextRowParams());
     row.addEventListener('click', fetchNext);
     rows.push(row);
+    row = null;
 
     if (visitorLog && visitorLog.length) {
         visitorLog.forEach(function (visitorDetail) {
@@ -158,25 +183,13 @@ function render()
             row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
         }
         rows.push(row);
+        row = null;
     }
 
-    var prevRow = {title: L('General_Previous'), color: '#336699', className: 'visitorlogPaginator'};
-    if (OS_MOBILEWEB) prevRow.left = 10;
-    if (OS_ANDROID) {
-        prevRow.leftImage = '/images/spacer_10x10.png';
-        prevRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
-        prevRow.top    = '12dp';
-        prevRow.bottom = '12dp';
-    }
-    if (OS_IOS) {
-        prevRow.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
-    } else {
-        prevRow.backgroundSelectedColor = '#a9a9a9';
-    }
-
-    var row = Ti.UI.createTableViewRow(prevRow);
+    var row = Ti.UI.createTableViewRow(getPrevRowParams());
     row.addEventListener('click', fetchPrevious);
     rows.push(row);
+    row = null;
 
     $.visitorLogTable.setData(rows);
 
