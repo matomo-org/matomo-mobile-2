@@ -54,7 +54,11 @@ function showEntryScreen(account)
 function openStatistics(siteModel, accountModel)
 {
     require('session').setWebsite(siteModel, accountModel);
-    
-    var reportChooser = Alloy.createController('report_chooser');
-    reportChooser.open();
+
+    if (Alloy.isTablet) {
+        Alloy.createController('report_chooser').open();
+    }
+
+    require('layout').startRecordingWindows();
+    Alloy.createController('report_composite').open();
 }

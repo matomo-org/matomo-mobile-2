@@ -253,14 +253,9 @@ function openEntryReport()
 exports.open = function() 
 {
     require('layout').setLeftSidebar($.reportsTable);
-    require('layout').startRecordingWindows();
 
     require('session').on('accountChanged', refresh);
     Alloy.createCollection('AppSettings').settings().on('change:language', refresh);
 
-    // TODO find a way to do the initial refresh when report_chooser is opened the first time. --> At this time
-    // the reportMetadata is already cached
     refresh();
-
-    openEntryReport();
 };
