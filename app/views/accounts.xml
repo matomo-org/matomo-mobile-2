@@ -17,6 +17,13 @@
                 id="headerBar" 
                 onHomeIconItemSelected="toggleReportChooserVisibility"
                 onActionItem1="addAccount"
+                formFactor="handheld"
+                platform="android" />
+
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
+                onActionItem1="addAccount"
+                formFactor="tablet"
                 platform="android" />
 
         <TableView id="accountsTable" onDelete="deleteAccount" onLongpress="deleteAccountIfUserConfirmsButNotOniOS" onClick="chooseAccount" dataCollection="appAccounts">

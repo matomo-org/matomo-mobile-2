@@ -19,6 +19,12 @@
                 id="headerBar" 
                 onHomeIconItemSelected="toggleReportChooserVisibility"
                 onActionItem1="toggleReportConfiguratorVisibility"
+                formFactor="handheld"
+                platform="android" />
+
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
+                formFactor="tablet"
                 platform="android" />
         
         <WebView id="webview"></WebView>

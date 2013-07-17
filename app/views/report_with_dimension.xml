@@ -14,6 +14,13 @@
                 id="headerBar" 
                 onBack="close"
                 onActionItem1="toggleReportConfiguratorVisibility"
+                formFactor="handheld"
+                platform="android" />
+
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
+                onBack="close"
+                formFactor="tablet"
                 platform="android" />
 
         <Require src="loading_indicator" id="loadingindicator"/>

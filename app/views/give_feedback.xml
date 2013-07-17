@@ -11,6 +11,12 @@
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 
                 onHomeIconItemSelected="toggleReportChooserVisibility"
+                formFactor="handheld"
+                platform="android" />
+
+        <Widget src="org.piwik.headerbar"
+                id="headerBar" 
+                formFactor="tablet"
                 platform="android" />
         
         <TableView id="feedbackTable">
