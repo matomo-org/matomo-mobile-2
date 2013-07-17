@@ -36,12 +36,13 @@ function TabletSidebar()
             return;
         }
 
+        isLeftSidebarSet = true;
+
         var leftSidebarWindow = initLeftSidebarWindow();
 
         view.left  = 0;
         view.width = widthLeftSidebar;
         leftSidebarWindow.add(view);
-        isLeftSidebarSet = true;
     };
 
     this.hideLeftSidebar = function () {};

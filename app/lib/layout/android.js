@@ -65,7 +65,12 @@ function AndroidLayout()
         
         win.addEventListener('androidback', closeThisWindow);
         this.trigger('open', win);
-        win.open();
+
+        if (win.left) {
+            win.open({left: win.left});
+        } else {
+            win.open();
+        }
 
         win = null;
     }
