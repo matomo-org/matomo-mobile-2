@@ -34,6 +34,11 @@ function open()
 function close()
 {
     require('layout').close($.index);
+
+    if (OS_ANDROID) {
+        // this prevents the tableViewRows from leaking memory
+        $.visitorTable.setData([]);
+    }
 }
 
 exports.open  = open;
@@ -165,13 +170,14 @@ function createOverview (visitor, accessUrl)
 
         var referrerRow = createSelectableRow(referrerParams);
 
-        referrerRow.addEventListener('click', function () {
-            if (visitor.referrerUrl) {
-
-                require('Piwik/Tracker').trackLink('/visitor/referrer-url', 'link');
-                Ti.Platform.openURL(visitor.referrerUrl);
-            }
-        });
+        referrerRow.addEventListener('click', (function (referrerUrl) {
+            return function () {
+                if (referrerUrl) {
+                    require('Piwik/Tracker').trackLink('/visitor/referrer-url', 'link');
+                    Ti.Platform.openURL(referrerUrl);
+                }
+            };
+        })(visitor.referrerUrl));
 
         rows.push(referrerRow);
         referrerRow = null;
@@ -183,6 +189,8 @@ function createOverview (visitor, accessUrl)
                              className: 'visitorTableViewRow'}));
         // leftImage: {url: accessUrl + visitor.countryFlag}
     }
+
+    visitor = null;
 }
 
 /**
