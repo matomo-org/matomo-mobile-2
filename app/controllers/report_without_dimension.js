@@ -196,16 +196,14 @@ function renderMetricTile (processedReportModel, index)
     var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: toUnit(13), fontWeight: 'bold'}, height: Ti.UI.SIZE, top: toUnit(5), color: '#7e7e7e', left: toUnit(10), right: toUnit(10), touchEnabled: false});
     metricContainer.add(value);
     metricContainer.add(label);
-    value = null;
     label = null;
+    value = null;
 
     outerContainer.addEventListener('click', (function (metric) {
-        var changeMetric = function () {
+        return function () {
             currentMetric = metric;
             doRefresh();
         };
-
-        return changeMetric;
     })(sortColumnModel));
 
     outerContainer.add(metricContainer);
@@ -322,9 +320,9 @@ function open()
 {
     registerEvents();
 
-    onReportChosen(reportModel);
-
     require('layout').open($.index);
+
+    onReportChosen(reportModel);
 }
 
 function close() 

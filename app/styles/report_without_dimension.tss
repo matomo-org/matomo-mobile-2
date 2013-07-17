@@ -96,4 +96,5 @@
     right: '10dp',
     bottom: '10dp',
     borderWidth: '1dp',
+    borderRadius: 0,
 }
