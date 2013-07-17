@@ -68,4 +68,4 @@
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>
     <property name="ti.android.useLegacyWindow" type="bool">true</property>
-<property name="ti.deploytype">test</property></ti:app>
+</ti:app>
