@@ -163,6 +163,25 @@ function getPrevRowParams()
     return prevRow;
 }
 
+function getNoVisitorsRowParams()
+{
+    var rowParams = {title: L('Mobile_NoVisitorsShort')};
+
+    if (OS_ANDROID) {
+        rowParams.leftImage = '/images/spacer_10x10.png';
+        rowParams.color  = '#cccccc';
+        rowParams.font   = {fontSize: '16sp', fontWeight: 'bold'};
+        rowParams.top    = '12dp';
+        rowParams.bottom = '12dp';
+    }
+
+    if (OS_IOS) {
+        rowParams.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+    }
+
+    return rowParams;
+}
+
 function render()
 {
     scrollToTop();
@@ -192,10 +211,7 @@ function render()
             visitorOverview = null;
         });
     } else {
-        var noVisitsRow = Ti.UI.createTableViewRow({title: L('Mobile_NoVisitorsShort')});
-        if (OS_IOS) {
-            noVisitsRow.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
-        }
+        var noVisitsRow = Ti.UI.createTableViewRow(getNoVisitorsRowParams());
         rows.push(noVisitsRow);
         noVisitsRow = null;
     }
