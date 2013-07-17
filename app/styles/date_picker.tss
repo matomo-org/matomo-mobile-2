@@ -9,6 +9,7 @@
     right: 0,
     width: 22,
     height: 22,
+    touchEnabled: false,
 }
 
 ".icon[platform=android]": {
@@ -69,6 +70,7 @@
     right: 42,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     height: Ti.UI.SIZE,
+    touchEnabled: false,
 }
 
 "#dateLabel[platform=android]": {
@@ -82,6 +84,7 @@
     bottom: 5,
     right: 5,
     height: Ti.UI.SIZE,
+    touchEnabled: false,
 }
 
 ".inner[platform=android]": {
