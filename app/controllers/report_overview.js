@@ -32,6 +32,10 @@ function L(key)
 
 function close()
 {
+    if (isClosed) {
+        return;
+    }
+
     isClosed = true;
 
     if (renderedReport) {

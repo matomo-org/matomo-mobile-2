@@ -241,8 +241,6 @@ function refresh()
 
 function openEntryReport()
 {
-    require('layout').closeRecordedWindows();
-
     var compositeReport = Alloy.createController('report_composite');
     compositeReport.open();
     

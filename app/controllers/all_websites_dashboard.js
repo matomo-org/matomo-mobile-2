@@ -36,10 +36,14 @@ function onOpen()
 function onClose()
 {
     emptyData && emptyData.cleanupIfNeeded();
-    emptyData = null;
 
     if (processedReport) {
         processedReport.abortRunningRequests();
+    }
+
+    if (OS_ANDROID && $.websitesTable) {
+        // prevent tableViewRows from leaking memory
+        $.websitesTable.setData([]);
     }
 
     $.destroy();
