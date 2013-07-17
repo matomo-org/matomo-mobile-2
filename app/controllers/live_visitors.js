@@ -32,8 +32,11 @@ function unregisterEvents()
 {
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
-    
+
     $.index.removeEventListener('focus', restartTimerIfSomeVisitorsAreAlreadyDisplayed);
+    $.index.removeEventListener('open', onOpen);
+    $.liveTable.removeEventListener('click', openVisitor);
+    $.headerBar.off();
 }
 
 function trackWindowRequest()
@@ -54,6 +57,12 @@ function onClose()
     unregisterEvents();
     stopHandleBackgroundEvents();
     stopRefreshTimer();
+
+    if (OS_ANDROID) {
+        // this frees a lot of memory
+        $.liveTable.setData([]);
+    }
+
     $.countdown && $.countdown.stop();
     $.destroy();
     $.off();
@@ -129,11 +138,15 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
         visitorRow.visitor  = visitorDetail;
         rows.push(visitorRow);
         visitorRow = null;
+        visitorOverview = null;
     });
 
     $.liveTable.setData(rows);
     rows = null;
     account = null;
+    visitorDetails = null;
+    counter30Min   = null;
+    counter24Hours = null;
 
     startRefreshTimer(refreshIntervalInMs);
 }
@@ -213,42 +226,46 @@ function onPause () {
 
 function handleBackgroundEvents()
 {
-    // ios
-    Ti.App.addEventListener('resume', onResume);
-    Ti.App.addEventListener('pause', onPause);
+    if (OS_IOS) {
+        Ti.App.addEventListener('resume', onResume);
+        Ti.App.addEventListener('pause', onPause);
+    }
 
-    var activity = require('ui/helper').getAndroidActivity($.index);
+    if (OS_ANDROID) {
+        var activity = require('ui/helper').getAndroidActivity($.index);
 
-    // android
-    if (activity) {
-        activity.addEventListener('pause', stopRefreshTimer);
-        activity.addEventListener('stop', stopRefreshTimer);
+        if (activity) {
+            activity.addEventListener('pause', stopRefreshTimer);
+            activity.addEventListener('stop', stopRefreshTimer);
+        }
     }
 }
 
 function stopHandleBackgroundEvents()
 {
-    // ios
-    Ti.App.removeEventListener('resume', onResume);
-    Ti.App.removeEventListener('pause', onPause);
+    if (OS_IOS) {
+        Ti.App.removeEventListener('resume', onResume);
+        Ti.App.removeEventListener('pause', onPause);
+    }
 
-    var activity = require('ui/helper').getAndroidActivity($.index);
+    if (OS_ANDROID) {
+        var activity = require('ui/helper').getAndroidActivity($.index);
 
-    // android
-    if (activity) {
-        activity.removeEventListener('pause', stopRefreshTimer);
-        activity.removeEventListener('stop', stopRefreshTimer);
+        if (activity) {
+            activity.removeEventListener('pause', stopRefreshTimer);
+            activity.removeEventListener('stop', stopRefreshTimer);
+        }
     }
 }
 
-function toggleReportConfiguratorVisibility (event)
+function toggleReportConfiguratorVisibility ()
 {
     require('report/configurator').toggleVisibility();
 
     require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/visitors-in-real-time/toggle/report-configurator'});
 }
 
-function toggleReportChooserVisibility(event)
+function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 

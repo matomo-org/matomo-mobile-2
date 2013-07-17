@@ -74,6 +74,11 @@ function onClose()
     $.emptyData && $.emptyData.cleanupIfNeeded();
     $.emptyData = null;
 
+    if (OS_ANDROID) {
+        // this frees a lot of memory
+        $.visitorLogTable.setData([]);
+    }
+
     unregisterEvents();
     $.destroy();
     $.off();
@@ -184,6 +189,7 @@ function render()
             visitorRow.visitor  = visitorDetail.attributes;
             rows.push(visitorRow);
             visitorRow = null;
+            visitorOverview = null;
         });
     } else {
         var noVisitsRow = Ti.UI.createTableViewRow({title: L('Mobile_NoVisitorsShort')});

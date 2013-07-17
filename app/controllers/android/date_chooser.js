@@ -101,14 +101,14 @@ function preSelectPeriod(initialPeriod)
 
 function initFromDatePicker()
 {
-    var params   = _.clone(args);
+    var params   = _.clone(_.omit(args, 'id', '__parentSymbol', '__itemTemplate', '$model'));
     params.value = args.from || new Date();
     $.fromDatePicker.applyProperties(params);
 }
 
 function initToDatePicker()
 {
-    var params   = _.clone(args);
+    var params   = _.clone(_.omit(args, 'id', '__parentSymbol', '__itemTemplate', '$model'));
     params.value = args.to || new Date();
     $.toDatePicker.applyProperties(params);
 }

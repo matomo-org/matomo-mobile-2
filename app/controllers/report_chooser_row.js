@@ -10,4 +10,8 @@ var args = arguments[0] || {};
 $.title.text = args.title;
 delete args.title;
 
-$.index.applyProperties(args);
+var params = _.omit(args, 'id', '__parentSymbol', '__itemTemplate', '$model');
+
+if (!_.isEmpty(params)) {
+    $.index.applyProperties(params);
+}

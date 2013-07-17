@@ -105,14 +105,16 @@ function preSelectPeriod(initialPeriod)
 
 function initFromDatePicker()
 {
-    var params   = JSON.parse(JSON.stringify(args));
+    var params   = _.omit(args, 'id', '__parentSymbol', '__itemTemplate', '$model');
+    params       = JSON.parse(JSON.stringify(params));
     params.value = args.from || new Date();
     $.fromDatePicker.applyProperties(params);
 }
 
 function initToDatePicker()
 {
-    var params   = JSON.parse(JSON.stringify(args));
+    var params   = _.omit(args, 'id', '__parentSymbol', '__itemTemplate', '$model');
+    params       = JSON.parse(JSON.stringify(args));
     params.value = args.to || new Date();
     $.toDatePicker.applyProperties(params);
 }

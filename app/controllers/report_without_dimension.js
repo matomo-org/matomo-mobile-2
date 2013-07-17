@@ -22,6 +22,8 @@ var processedReportCollection = Alloy.createCollection('piwikProcessedReport');
 
 function registerEvents()
 {
+    $.dimensions.addEventListener('postlayout', fixVerticalSeparatorHeight);
+
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
     session.on('reportDateChanged', onDateChanged);
@@ -32,6 +34,8 @@ function unregisterEvents()
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
     session.off('reportDateChanged', onDateChanged);
+
+    $.dimensions.removeEventListener('postlayout', fixVerticalSeparatorHeight);
 }
 
 function trackWindowRequest()
@@ -192,6 +196,8 @@ function renderMetricTile (processedReportModel, index)
     var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: toUnit(13), fontWeight: 'bold'}, height: Ti.UI.SIZE, top: toUnit(5), color: '#7e7e7e', left: toUnit(10), right: toUnit(10), touchEnabled: false});
     metricContainer.add(value);
     metricContainer.add(label);
+    value = null;
+    label = null;
 
     outerContainer.addEventListener('click', (function (metric) {
         var changeMetric = function () {
@@ -204,10 +210,13 @@ function renderMetricTile (processedReportModel, index)
 
     outerContainer.add(metricContainer);
     containerRow.add(outerContainer);
+    metricContainer = null;
+    outerContainer  = null;
 
     if (1 == (index % 2)) {
         var horizontalSeparator = Ti.UI.createView({height: toUnit(1), backgroundColor: '#e6e6e6', width: Ti.UI.FILL});
         $.dimensions.add(horizontalSeparator);
+        horizontalSeparator = null;
     }
 }
 
@@ -311,8 +320,6 @@ function doRefresh()
 
 function open() 
 {
-    $.dimensions.addEventListener('postlayout', fixVerticalSeparatorHeight);
-
     registerEvents();
 
     onReportChosen(reportModel);

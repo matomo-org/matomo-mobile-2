@@ -63,6 +63,11 @@ function onClose()
     $.emptyData && $.emptyData.cleanupIfNeeded();
     $.emptyData = null;
 
+    if (OS_ANDROID) {
+        // this frees a lot of memory
+        $.reportTable.setData([]);
+    }
+
     $.destroy();
     $.off();
 }

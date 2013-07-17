@@ -153,6 +153,11 @@ function onOpen()
 
 function onClose ()
 {
+    if (OS_ANDROID) {
+        // this prevents leaking tableViewRows
+        $.accountsTable.setData([]);
+    }
+
     $.destroy();
     $.off();
 }

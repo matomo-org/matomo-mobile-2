@@ -97,4 +97,4 @@ function tryAlternativeDownloadMethod(event) {
     loadImageViaXhr(this, this.image);
 }
 
-$.image.applyProperties(args);
+$.image.applyProperties(_.omit(args, 'id', '__parentSymbol', '__itemTemplate', '$model'));
