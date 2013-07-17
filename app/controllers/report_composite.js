@@ -37,6 +37,7 @@ function unregisterEvents()
 {
     $.reportsCollection.off('reset', render);
     $.reportsCollection.off('error', onFetchReportError);
+    $.reportsCollection.off();
 
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
@@ -146,6 +147,7 @@ function updateDisplayedReportsIfNeeded()
     if (reportIsDisplayed && websiteHasChanged) {
         // website has changed and the available reports maybe changes (Goals), we need to fetch the list of reports
         // for then new website
+        notifyModelsAboutWindowClose();
         refresh();
         dateHasChanged    = false;
         websiteHasChanged = false;
@@ -153,6 +155,7 @@ function updateDisplayedReportsIfNeeded()
     } else if (reportIsDisplayed && dateHasChanged) {
         // there is no need to fetch the list of reports again, we already have the list and there is no change
         // simply render the boxes again, those will recognize the new date
+        notifyModelsAboutWindowClose();
         render();
         dateHasChanged    = false;
         websiteHasChanged = false;
@@ -249,11 +252,6 @@ function hasReportsToShow()
     return !!$.reportsCollection.length;
 }
 
-function isDataAlreadyFetched()
-{
-    return !!$.reportsCollection.length;
-}
-
 function addPiwikIcon()
 {
     if (OS_ANDROID) {
@@ -281,7 +279,6 @@ function open()
     require('layout').open($.index);
     refresh();
 }
-
 
 function close()
 {

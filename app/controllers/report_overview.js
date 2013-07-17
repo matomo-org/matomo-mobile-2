@@ -9,7 +9,9 @@ var params = arguments[0];
 
 var isFetched    = false;
 var isClosed     = false;
+var isRendered   = false;
 var hasDimension = $model.hasDimension();
+var renderedReport = null;
 
 $.loading.text = String.format(L('Mobile_LoadingReport'), '' + $model.getReportName());
 
@@ -18,6 +20,7 @@ if (!hasDimension) {
 }
 
 $model.on('scrollPosition', updateParentYPositionAndTryToRender);
+$model.on('windowClose', unregisterEvents);
 $model.on('windowClose', close);
 
 fetchProcessedReport();
@@ -30,15 +33,27 @@ function L(key)
 function close()
 {
     isClosed = true;
-    $.piwikProcessedReport.abortRunningRequests();
+
+    if (renderedReport) {
+        renderedReport.close();
+        renderedReport = null;
+    }
 
     $model.off('windowClose', close);
-    $model.off('scrollPosition', updateParentYPositionAndTryToRender);
-    $.index.removeEventListener('postlayout', renderStatisticsIfViewIsInViewport);
+}
 
+function unregisterEvents()
+{
+    $.piwikProcessedReport.abortRunningRequests();
+
+    $.index.removeEventListener('postlayout', renderStatisticsIfViewIsInViewport);
     $.piwikProcessedReport.off();
+
     $.destroy();
     $.off();
+
+    $model.off('windowClose', unregisterEvents);
+    $model.off('scrollPosition', updateParentYPositionAndTryToRender);
 }
 
 function getMetric()
@@ -173,14 +188,13 @@ function isViewInViewport()
 
 function renderStatisticsIfViewIsInViewport()
 {
-    if (!isClosed && isFetched && isViewInViewport()) {
+    if (!isRendered && !isClosed && isFetched && isViewInViewport()) {
         // prevent from race conditions rendering twice
-        isClosed = true;
+        isRendered = true;
         renderOverviewReport();
-        close();
+        unregisterEvents();
     }
 }
-
 
 function renderOverviewReport()
 {
@@ -192,11 +206,11 @@ function renderOverviewReport()
     params.processedReport = $.piwikProcessedReport;
 
     var controller = $.piwikProcessedReport.hasDimension() ? 'report_overview_with_dimension' : 'report_overview_without_dimension';
-    var report     = Alloy.createController(controller, params);
+    renderedReport = Alloy.createController(controller, params);
 
     sizeBoxToContent();
-    report.setParent($.index);
-    report.open();
+    renderedReport.setParent($.index);
+    renderedReport.open();
 
     params = null;
 }

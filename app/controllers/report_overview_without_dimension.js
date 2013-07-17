@@ -44,3 +44,7 @@ exports.open = function () {
     renderGraph();
     close();
 };
+
+exports.close = function () {
+
+};

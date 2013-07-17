@@ -73,6 +73,14 @@ function render()
 render();
 close();
 
-exports.open = function () {
+exports.open = function ()
+{
+};
 
+exports.close = function ()
+{
+    if (OS_ANDROID) {
+        // prevent leaking tableViwRows
+        $.content.setData([]);
+    }
 };
