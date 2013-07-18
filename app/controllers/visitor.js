@@ -551,6 +551,7 @@ function helperVisitorActionActionPageTitleLabel(text) {
         left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13), fontWeight: 'bold'},
         top: toUnit(5),
+        color: '#333333',
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -572,6 +573,7 @@ function helperVisitorActionActionServerTimeLabel(text) {
         bottom: toUnit(5),
         top: toUnit(3),
         left: OS_ANDROID ? '16dp' : toUnit(10),
+        color: '#333333',
         font: {fontSize: toUnit(13)},
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
@@ -620,6 +622,7 @@ function helperVisitorActionDefaultTypeLabel(text) {
         top: 0,
         left: OS_ANDROID ? '10dp' : toUnit(10),
         font: {fontSize: toUnit(13), fontWeight: 'bold'},
+        color: '#333333',
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -670,6 +673,7 @@ function helperVisitorActionEcommerceTypeLabel(text) {
         top: toUnit(1),
         left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13), fontWeight: 'bold'},
+        color: '#333333',
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
 }
@@ -729,6 +733,7 @@ function helperVisitorActionEcommerceDetailsListLabel(text) {
         text: (text+'') || '',
         left: OS_ANDROID ? '16dp' : toUnit(10),
         font: {fontSize: toUnit(13)},
+        color: '#333333',
         top: toUnit(4),
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE};
