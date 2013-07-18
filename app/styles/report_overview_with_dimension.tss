@@ -169,7 +169,7 @@
     top: 14,
     bottom: 14,
     left: 10,
-    right: 85,
+    right: 110,
     height: Ti.UI.SIZE,
     font: {fontWeight: 'normal'}
 }
@@ -178,7 +178,7 @@
     top: '16dp',
     bottom: '16dp',
     left: '10dp',
-    right: '85dp',
+    right: '110dp',
     wordWrap: true,
     ellipsize: false,
     font: {fontWeight: 'normal', fontSize: '16sp'},
@@ -189,7 +189,7 @@
     top: 14,
     bottom: 14,
     right: 10,
-    width: 70,
+    width: 100,
     height: Ti.UI.SIZE,
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     font: {fontWeight: 'normal'}
@@ -199,6 +199,6 @@
     top: '16dp',
     bottom: '16dp',
     right: '10dp',
-    width: '70dp',
+    width: '100dp',
     font: {fontWeight: 'normal', fontSize: '16sp'},
 }
