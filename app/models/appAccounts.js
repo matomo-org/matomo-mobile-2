@@ -159,10 +159,10 @@ exports.definition = {
 
             markAccountAsLastUsed: function () {
                 var lastUsedAccountKey = this.config.lastUsedAccountPropertyKey;
-                var accountId = parseInt(this.id, 10);
+                var accountId = '' + this.id;
 
                 if (accountId) {
-                    Ti.App.Properties.setInt(lastUsedAccountKey, accountId);
+                    Ti.App.Properties.setString(lastUsedAccountKey, accountId);
                 }
             },
 
@@ -285,7 +285,7 @@ exports.definition = {
                     return this.first();
                 }
 
-                var lastUsedAccountId = Ti.App.Properties.getInt(lastUsedAccountKey);
+                var lastUsedAccountId = Ti.App.Properties.getString(lastUsedAccountKey);
                 var lastUsedAccount   = this.get(lastUsedAccountId);
 
                 if (!lastUsedAccount) {
