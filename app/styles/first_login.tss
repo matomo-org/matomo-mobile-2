@@ -69,14 +69,14 @@
 },
 
 "#footerView": {
-    bottom: 16,
+    bottom: 0,
     height: 40,
     width: Ti.UI.FILL
 },
 
 "#footerView[platform=android]": {
-    bottom: '16dp',
-    height: '40dp'
+    bottom: '0dp',
+    height: '48dp'
 },
 
 ".footerLink": {
@@ -94,22 +94,52 @@
     }
 },
 
+".tryItContainer": {
+    left: 0,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    backgroundSelectedColor: '#dcdcdc',
+}
+
 "#tryit": {
     left: 10,
+    top: 10,
+    bottom: 10,
+    right: 10,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    text: L('Mobile_TryIt')
+    text: L('Mobile_TryIt'),
+    touchEnabled: false,
 },
 
 "#tryit[platform=android]": {
-    left: '16dp'
+    left: '16dp',
+    top: '8dp',
+    bottom: '16dp',
+    right: '16dp',
 },
 
+".faqContainer": {
+    right: 0,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE,
+    backgroundSelectedColor: '#dcdcdc',
+}
+
 "#faq": {
+    left: 10,
+    top: 10,
+    bottom: 10,
     right: 10,
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
-    text: L('General_Faq')
+    text: L('General_Faq'),
+    touchEnabled: false,
 },
 
 "#faq[platform=android]": {
-    right: '16dp'
+    left: '16dp',
+    top: '8dp',
+    bottom: '16dp',
+    right: '16dp',
 }

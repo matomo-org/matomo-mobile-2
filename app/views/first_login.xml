@@ -11,8 +11,12 @@
                 <View class="footerSpacer" />
             </View>
             <View id="footerView">
-                <Label id="tryit" class="footerLink" onClick="tryIt"/>
-                <Label id="faq" class="footerLink" onClick="openFaq"/>
+                <View class="tryItContainer" onClick="tryIt">
+                    <Label id="tryit" class="footerLink"/>
+                </View>
+                <View class="faqContainer" onClick="openFaq">
+                    <Label id="faq" class="footerLink"/>
+                </View>
             </View>
         </ScrollView>
     </Window>
