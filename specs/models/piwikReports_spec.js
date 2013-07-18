@@ -128,6 +128,16 @@ describe('piwikReports Collection', function() {
         expect(reportCollection.containsAction(notExistingReport)).toBeFalsy();
     });
 
+    it('should be able to detect whether the collection contains a specific category', function() {
+        loadFixture(reportCollection, [getReportMetadata(), getDashboards()]);
+
+        expect(reportCollection.containsReportCategory('All Websites')).toBeTruthy();
+        expect(reportCollection.containsReportCategory('Visits Summary')).toBeTruthy();
+        expect(reportCollection.containsReportCategory('Visits Undefined')).toBeFalsy();
+        expect(reportCollection.containsReportCategory('')).toBeFalsy();
+        expect(reportCollection.containsReportCategory(null)).toBeFalsy();
+    });
+
     it('should be able to detect whether response is a valid response', function() {
         expect(reportCollection.validResponse([{}])).toBeTruthy();
         expect(reportCollection.validResponse([{}, {}, {}])).toBeTruthy();

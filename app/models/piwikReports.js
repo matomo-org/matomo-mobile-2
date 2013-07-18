@@ -242,6 +242,18 @@ exports.definition = {
                 }
             },
 
+            containsReportCategory: function (category) {
+                if (!category) {
+                    return false;
+                }
+
+                var searchedModel = this.find(function (model) {
+                    return model.get('category') == category;
+                });
+
+                return !!searchedModel;
+            },
+
             getEntryReport: function () {
 
                 if (this.hasDashboardReport()) {

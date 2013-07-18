@@ -112,14 +112,14 @@ function showReportHasNoData(title, message)
     $.loadingIndicator.visible = false;
 }
 
-function toggleReportConfiguratorVisibility (event)
+function toggleReportConfiguratorVisibility ()
 {
     require('report/configurator').toggleVisibility();
 
     require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/composite/toggle/report-configurator'});
 }
 
-function toggleReportChooserVisibility(event)
+function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 
@@ -199,6 +199,13 @@ function updateWindowTitle(title)
 
 function filterReports(collection)
 {
+    if (reportCategory && !collection.containsReportCategory(reportCategory)) {
+        // we need to reset current selected category. For instance if user chooses different account, it is not
+        // guarranteed he will have same dashboard name/category in that newly selected account. Otherwise we would
+        // display nothing because it won't find same category there.
+        reportCategory = null;
+    }
+
     if (!reportCategory) {
         var entryReport = collection.getEntryReport();
 
