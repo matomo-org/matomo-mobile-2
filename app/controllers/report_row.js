@@ -28,11 +28,11 @@ function showLogo(processedReport)
     }
 
     var iconWidth = processedReport.getLogoWidth() || 16;
-    var iconLeft  = OS_ANDROID ? '10dp' : 10;
+    var iconLeft  = OS_ANDROID ? '8dp' : 10;
     
     $.icon.width  = iconWidth;
     $.icon.height = processedReport.getLogoHeight() || 16;
-    $.icon.left   = OS_ANDROID ? '10dp' : 10;
+    $.icon.left   = iconLeft;
     $.icon.image  = accountModel.getBasePath() + logoPath;
     $.icon.show();
 
@@ -40,7 +40,7 @@ function showLogo(processedReport)
         iconLeft = Ti.UI.convertUnits(iconLeft, Ti.UI.UNIT_PX);
     }
 
-    $.stats.left  = iconWidth + (iconLeft * 2);
+    $.stats.left  = iconWidth + iconLeft;
 }
 
 if (processedReport) {
