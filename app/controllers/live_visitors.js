@@ -36,7 +36,10 @@ function unregisterEvents()
     $.index.removeEventListener('focus', restartTimerIfSomeVisitorsAreAlreadyDisplayed);
     $.index.removeEventListener('open', onOpen);
     $.liveTable.removeEventListener('click', openVisitor);
-    $.headerBar.off();
+
+    if (OS_ANDROID) {
+        $.headerBar.off();
+    }
 }
 
 function trackWindowRequest()
@@ -52,7 +55,6 @@ function onOpen()
 function onClose()
 {
     $.emptyData && $.emptyData.cleanupIfNeeded();
-    $.emptyData = null;
 
     unregisterEvents();
     stopHandleBackgroundEvents();
@@ -276,8 +278,8 @@ exports.open = function ()
 {
     registerEvents();
     handleBackgroundEvents();
-    doRefresh();
     require('layout').open($.index);
+    doRefresh();
 };
 
 function close()
