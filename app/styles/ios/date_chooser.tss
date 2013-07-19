@@ -48,3 +48,11 @@
 "#doneButton[platform=ios]": {
     style: Ti.UI.iPhone.SystemButtonStyle.DONE
 }
+
+"#cancelButton": {
+    title: L('General_Cancel')
+}
+
+"#cancelButton[platform=ios]": {
+    style: Ti.UI.iPhone.SystemButtonStyle.CANCEL
+}

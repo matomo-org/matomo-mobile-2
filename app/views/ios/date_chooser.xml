@@ -1,5 +1,8 @@
 <Alloy>
-    <Window class="iOSContainer" id="index" onOpen="onOpen">
+    <Window class="iOSContainer" id="index" onOpen="onOpen" formFactor="handheld">
+        <LeftNavButton>
+            <Button id="cancelButton" onClick="closeWindow"/>
+        </LeftNavButton>
         <RightNavButton>
             <Button id="doneButton" onClick="doChooseDate"/>
         </RightNavButton>
@@ -12,4 +15,17 @@
         <TableView id="datePickerTable" onClick="doSelectPicker">
         </TableView>
     </Window>
+    <Popover class="iOSContainer" id="index" onOpen="onOpen" formFactor="tablet" width="320" height="400">
+        <RightNavButton>
+            <Button id="doneButton" onClick="doChooseDate"/>
+        </RightNavButton>
+        <Picker id="fromPicker" onChange="onFromDateChange">
+        </Picker>
+        <Picker id="toPicker" onChange="onToDateChange">
+        </Picker>
+        <Picker id="iOSPeriodPicker" onChange="onPeriodChange">
+        </Picker>
+        <TableView id="datePickerTable" onClick="doSelectPicker">
+        </TableView>
+    </Popover>
 </Alloy>

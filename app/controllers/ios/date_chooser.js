@@ -15,6 +15,7 @@ var args = arguments[0] || {};
 var fromDate = args.from || new Date();
 var toDate   = args.to || new Date();
 var period   = args.period || 'day';
+var popoverSource = args.source || null;
 
 var periodRow   = null;
 var fromDateRow = null;
@@ -260,7 +261,14 @@ function getDisplayDate (selectedDate)
 
 function closeWindow ()
 {
-    require('layout').close($.index);
+    if (Alloy.isTablet) {
+        $.index.hide();
+    } else {
+        $.index.close();
+    }
+
+    $.destroy();
+    $.off();
 }
 
 function doChooseDate () 
@@ -280,6 +288,13 @@ function doChooseDate ()
 exports.open = function ()
 {
     createTableViewRows();
+    createPeriodPicker(args);
+
+    if (Alloy.isTablet) {
+        $.index.show({view: popoverSource});
+    } else {
+        $.index.open({modal: true});
+    }
 
     setPeriod(period);
     selectRow(1);
@@ -288,6 +303,4 @@ exports.open = function ()
     $.datePickerTable.applyProperties({bottom: $.fromPicker.size.height});
 
     createToDatePicker(args);
-    createPeriodPicker(args);
-    require('layout').open($.index);
 };
