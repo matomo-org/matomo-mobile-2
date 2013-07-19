@@ -23,7 +23,7 @@
             </View>
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
             <View class="shadow" formFactor="tablet"></View>
-            <TableView id="websitesTable" dataCollection="$.piwikWebsites"
+            <TableView id="websitesTable" dataCollection="$.piwikWebsites" dataFunction="renderWebsites"
                        onClick="selectWebsite" dataTransform="formatWebsite">
                 <FooterView>
                     <View id="useSearchHintContainer"><Label id="useSearchHintLabel"/></View>
@@ -33,15 +33,8 @@
                     <Label class="websiteNameLabel" text="{name}" />
 
                     <View class="evolutionContainer">
-                        <View class="space"></View>
                         <Label text="Visits" class="quickInfoName" />
-                        <View class="evolutionValue">
-                            <Label text="{nb_visits}" color="{evolution_color}" class="quickInfoValue"/>
-                            <Label text=" (" color="{evolution_color}" class="quickInfoValue"/>
-                            <Label text="{visits_evolution}" color="{evolution_color}" class="quickInfoValue"/>
-                            <Label text=")" color="{evolution_color}" class="quickInfoValue"/>
-                        </View>
-                        <View class="space"></View>
+                        <Label text="{evolution}" color="{evolution_color}" class="quickInfoValue" />
                     </View>
                 </TableViewRow>
 

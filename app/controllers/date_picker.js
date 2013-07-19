@@ -10,14 +10,19 @@ session.on('reportDateChanged', updateDisplayedDate);
 
 function chooseDate()
 {
-    $.trigger('selected', {});
-
     var reportDate = session.getReportDate();
+
     var period = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var date   = reportDate ? reportDate.getDateQueryString() : 'today';
-
     var params = {date: date, period: period};
+
+    if (Alloy.isTablet && OS_IOS) {
+        params.source = $.index;
+    }
+
     require('commands/openDateChooser').execute(params, onDateChosen);
+
+    $.trigger('selected', {});
 }
 
 function onDateChosen(period, date)

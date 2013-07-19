@@ -296,8 +296,8 @@ function toggleReportChooserVisibility()
 exports.open = function () 
 {
     registerEvents();
-    doRefresh();
     require('layout').open($.index);
+    doRefresh();
 };
 
 function close()

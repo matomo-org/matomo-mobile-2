@@ -112,8 +112,9 @@ exports.doRefresh = function()
 };
 
 function open () {
-    $.doRefresh();
     require('layout').open($.index);
+
+    $.doRefresh();
 }
 
 function close () {

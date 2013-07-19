@@ -113,6 +113,7 @@ function onReportChosen (chosenReportModel) {
 function showReportContent()
 {
     $.content.show();
+    $.content.visible = true;
     $.loadingindicator.hide();
     emptyData.cleanupIfNeeded();
 }
@@ -121,15 +122,18 @@ function showReportHasNoData(title, message)
 {
     emptyData.show($.index, doRefresh, title, message);
 
+    $.loadingindicator.hide();
     $.content.hide();
     $.content.visible = false;
-    $.loadingindicator.hide();
 }
 
 function showLoadingMessage()
 {
-    $.loadingindicator.show();
     $.content.hide();
+    $.content.visible = false;
+
+    $.loadingindicator.show();
+
     emptyData.cleanupIfNeeded();
 }
 

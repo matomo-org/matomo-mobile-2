@@ -55,7 +55,9 @@
 }
 
 ".quickInfoName": {
+    top: 10,
     font: {fontSize: 13},
+    height: Ti.UI.SIZE,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     color: "#000000",
     left: 0
@@ -63,17 +65,21 @@
 
 ".quickInfoName[platform=android]": {
     font: {fontSize: '13sp'},
+    top: '10dp',
 }
 
 ".quickInfoValue": {
     font: {fontSize: 13},
+    height: Ti.UI.SIZE,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    left: 0
+    left: 0,
+    bottom: 10
 }
 
 ".quickInfoValue[platform=android]": {
     font: {fontSize: '13sp'},
-    touchEnabled: false
+    touchEnabled: false,
+    bottom: '10dp',
 }
 
 "#index": {
@@ -172,19 +178,9 @@
     touchEnabled: false
 }
 
-".evolutionValue": {
-    right: 0, 
-    layout: 'horizontal',
-    height: Ti.UI.SIZE,
-}
-
-".evolutionValue[platform=android]": {
-    touchEnabled: false
-}
-
 "TableViewRow[platform=ios]": {
     height: Ti.UI.SIZE,
-    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY,
 },
 
 "TableViewRow[platform=android]": {

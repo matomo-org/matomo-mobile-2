@@ -21,6 +21,7 @@ var accountsCollection = Alloy.Collections.appAccounts;
 var processedReport    = Alloy.createCollection('piwikProcessedReport');
 var accountModel       = accountsCollection.lastUsedAccount();
 
+$.piwikWebsites.off("fetch destroy change add remove reset", renderWebsites);
 $.piwikWebsites.on('reset', render);
 $.piwikWebsites.on('error', function (undefined, error) {
     if (error) {
@@ -152,6 +153,8 @@ function render()
     } else {
         showReportContent();
     }
+
+    renderWebsites();
 
     fetchImageGraphUrlToRenderGraph();
 
@@ -302,13 +305,16 @@ function formatWebsite(model)
         return model;
     }
 
-    var evolution = model.get('visits_evolution');
+    var visitsEvolution = model.get('visits_evolution');
 
-    if (isNegativeEvolution(evolution)) {
+    if (isNegativeEvolution(visitsEvolution)) {
         model.set('evolution_color', '#800000');
     } else {
         model.set('evolution_color', '#008000');
     }
+
+    var evolution = String.format('%s (%s)', '' + model.get('nb_visits'), '' + visitsEvolution);
+    model.set('evolution', evolution);
 
     return model;
 }
@@ -328,7 +334,7 @@ exports.close = function () {
 };
 
 exports.open = function () {
-    fetchListOfAvailableWebsites();
-
     require('layout').open($.index);
+
+    fetchListOfAvailableWebsites();
 };

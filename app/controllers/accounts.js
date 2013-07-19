@@ -13,7 +13,6 @@ function L(key)
 var args = arguments[0] || {};
 
 var accounts = Alloy.Collections.appAccounts;
-accounts.fetch();
 
 function chooseAccount(event)
 {
@@ -172,6 +171,8 @@ exports.open = function ()
     displayNoAccountSelectedHintIfNoAccountIsSelected();
 
     require('layout').open($.index);
+
+    accounts.fetch();
 };
 
 exports.close = close;

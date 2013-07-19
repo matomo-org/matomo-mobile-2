@@ -169,13 +169,13 @@ exports.doRefresh = function()
     });
 };
 
-function open () {
-
+function open ()
+{
     registerEvents();
 
-    $.doRefresh();
-
     require('layout').open($.index);
+
+    $.doRefresh();
 }
 
 function close () {

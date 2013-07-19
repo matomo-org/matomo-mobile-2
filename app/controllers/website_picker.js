@@ -14,9 +14,9 @@ function chooseWebsite()
         return;
     }
     
-    $.trigger('selected', {});
-
     require('commands/openWebsiteChooser').execute(onWebsiteChosen);
+
+    $.trigger('selected', {});
 }
 
 function onWebsiteChosen(event)

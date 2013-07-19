@@ -59,10 +59,11 @@ function openRealTimeMapInWebview()
 
 exports.open = function () 
 {
-    openRealTimeMapInWebview();
-    registerEvents();
-
     require('layout').open($.index);
+
+    openRealTimeMapInWebview();
+
+    registerEvents();
 }
 
 function toggleReportConfiguratorVisibility (event)
