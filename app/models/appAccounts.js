@@ -75,7 +75,14 @@ exports.definition = {
             },
 
             startWithAllWebsitesDashboard: function () {
-                return 'MultiSites' === this.get('defaultReport');
+                var defaultReport = this.get('defaultReport');
+
+                return ('MultiSites' === defaultReport || _.isEmpty(defaultReport));
+                // the isEmpty check is a workaround for http://dev.piwik.org/trac/ticket/3781 to make sure the app
+                // won't crash or output an error. We get an empty defaultReport when  the user has not saved his
+                // settings yet. In this case, Piwik opens the first existing website by default. We're doing the
+                // opposite because we do not know the ID of any website. We could go with siteId 1 by default but
+                // it is not guaranteed this site exists. Therefore we're loading the MultiSites dashboard by default. 
             },
 
             getAuthToken: function () {
