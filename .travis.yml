@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- '0.10'
+env:
+  global:
+  - secure: OefxvtNS4ZTlsdOonHMBr7uHyb9nUckgboTP1e4lHxClpYkJZhnQv83FaFXRRVGIzQ71PRd4HWg4SGOUUayA93fz0+6qQHjh9v5fOEJAR+ik4srY1soyilbfHJ6SaHFoDCNYiSoEdKWiTGNzhMAnW1qxw+IETbFeDhj/BaRubW0=
+  - secure: gUOJQ18Yg8PiUYry4822lqXI26ZCccfnSpY6VUqWr9OLzQ+zclXKcNfqxanGjDI1nIl00hG2mJQ7BdufTmSsF/k1ozdgfNjZO5MUI44xAFkjrV0FQItjRx6RK5JaKKsxZDYVA/5Pg+m1PnFoPwbSf2GpXYxUhA/Ta7nXuHUfv3U=
+before_script:
+- npm install -g alloy
+- npm install -g titanium
+- npm install connect
+- titanium login "$TI_LOGIN" "$TI_PASS"
+- titanium sdk install  3.1.1.GA
+- sudo apt-get update
+- sudo apt-get install openjdk-7-jdk
+- node tools/mobilewebserver/app.js 8061 &
+- titanium build -p mobileweb --sdk 3.1.1.GA
+- sleep 5
+script: phantomjs --web-security=no --local-to-remote-url-access=yes testrunner.js
