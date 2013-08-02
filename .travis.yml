@@ -13,7 +13,7 @@ before_script:
 - titanium sdk install  3.1.1.GA
 - sudo apt-get update
 - sudo apt-get install openjdk-7-jdk
-- node tools/mobilewebserver/app.js 8061 &
 - titanium build -p mobileweb --sdk 3.1.1.GA
+- node tools/mobilewebserver/app.js 8061 &
 - sleep 5
 script: phantomjs --web-security=no --local-to-remote-url-access=yes testrunner.js
