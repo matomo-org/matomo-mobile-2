@@ -17,5 +17,6 @@ before_script:
 - cd tools/mobilewebserver
 - npm install .
 - node app.js 8061 &
+- cd ../..
 - sleep 5
 script: phantomjs --web-security=no --local-to-remote-url-access=yes testrunner.js
