@@ -30,7 +30,9 @@ exports.definition = {
             "method": "MultiSites.getAll",
             "displayErrors": true
         },
-        "defaultParams": {}
+        "defaultParams": {
+            "enhanced": 1
+        }
     },      
 
     extendModel: function(Model) {      
