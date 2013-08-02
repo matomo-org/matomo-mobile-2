@@ -87,7 +87,7 @@ exports.selectWebsite = function (accountModel, callback)
 
     accountModel.select(function (account) {
         updateDefaultReportDateInSession(account);
-        if (account.startWithAllWebsitesDashboard()) {
+        if (account.startWithAllWebsitesDashboard() || !account.entrySiteId()) {
             openDashboard(account);
         } else {
             openEntrySite(account);
