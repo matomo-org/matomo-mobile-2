@@ -1,5 +1,7 @@
 # Piwik Mobile 2 - piwik.org
 
+[![Build Status](https://travis-ci.org/piwik/piwik-mobile-2.png?branch=master)](https://travis-ci.org/piwik/piwik-mobile-2)
+
 ## Description
 
 Piwik is a downloadable, open source (GPL licensed) real time web analytics 
