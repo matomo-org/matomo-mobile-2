@@ -207,7 +207,7 @@
         },
         
         createTestFinishedContainer: function(passed) {
-            jasmine.phantomjsXMLReporterPassed = passed
+            jasmine.phantomjsXMLReporterPassed = passed;
         },
 
         getFullName: function(suite, isFilename) {

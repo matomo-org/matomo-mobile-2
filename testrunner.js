@@ -88,10 +88,6 @@ function generateTestResultsOnceFinished(page)
 
         if (!suitesResults) {
             console.log('no tests registered or executed');
-        } else {
-            for (var index = 0; index < suitesResults.length; ++index ) {
-                saveResultOfTestInFile(suitesResults[index]);
-            }
         }
 
         // Return the correct exit status. '0' only if all the tests passed
@@ -102,18 +98,6 @@ function generateTestResultsOnceFinished(page)
         // or, once it timesout...
         phantom.exit(1);
     });
-}
-
-function saveResultOfTestInFile(suiteResult)
-{
-    try {
-        var file = fs.open(resultDir + '/' + suiteResult['xmlfilename'], "w");
-        file.write(suiteResult['xmlbody']);
-        file.close();
-    } catch (e) {
-        console.log(e);
-        console.log("phantomjs> Unable to save result of Suite '"+ suiteResult['xmlfilename'] +"'");
-    }
 }
 
 page.open('http://127.0.0.1:8061/index.html', function (status) {
