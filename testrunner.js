@@ -11,13 +11,6 @@ var resultDir = 'specs/result';
 
 page.onConsoleMessage = function(msg) {
 
-    if (msg && 0 !== msg.indexOf('JASMINE:')) {
-        return;
-    }
-
-    if (msg && 0 === msg.indexOf('JASMINE:  >> Jasmine waiting for')) {
-        return;
-    }
 
     console.log(msg);
 };
