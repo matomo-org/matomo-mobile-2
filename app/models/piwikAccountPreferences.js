@@ -84,7 +84,7 @@ exports.definition = {
 
             validResponse: function (response) {
 
-                return _.isArray(response) && _.has(response, 0) && _.has(response, 1);
+                return _.isArray(response) && _.has(response, 0) && _.has(response, 1) && response[0] && response[1];
             }
 
             // extended functions go here           
