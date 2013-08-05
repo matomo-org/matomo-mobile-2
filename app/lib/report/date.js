@@ -7,7 +7,8 @@
 
 function detectPeriodFromReportDate(reportDate)
 {
-    var reportDateToPeriodMapping = {week: 'week', month: 'month', year: 'year'};
+    var reportDateToPeriodMapping = {week: 'week', month: 'month', year: 'year', previous30: 'range', 
+                                     previous7: 'range', last7: 'range', last30: 'range'};
 
     if (reportDate && reportDateToPeriodMapping[reportDate]) {
         return reportDateToPeriodMapping[reportDate];
