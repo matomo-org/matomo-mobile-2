@@ -43,6 +43,11 @@
     touchEnabled: false,
 },
 
+"#description[platform=mobileweb]": {
+    ellipsize: false,
+    wordWrap: true
+},
+
 "#description[platform=android]": {
     font: {fontSize: '12sp'},
     left: '16dp',

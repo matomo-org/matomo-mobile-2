@@ -73,6 +73,10 @@
     touchEnabled: false,
 }
 
+"#websiteName[platform=mobileweb]": {
+    top: 3,
+}
+
 "#websiteName[platform=android]": {
     font: {fontSize: '15sp'},
     right: '42dp',

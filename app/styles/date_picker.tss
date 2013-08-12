@@ -73,6 +73,10 @@
     touchEnabled: false,
 }
 
+"#dateLabel[platform=mobileweb]": {
+    top: 3,
+}
+
 "#dateLabel[platform=android]": {
     font: {fontSize: '15sp'},
     right: '42dp',

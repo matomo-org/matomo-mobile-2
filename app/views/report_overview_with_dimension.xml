@@ -12,7 +12,7 @@
             <Label class="description_dimension" text="{dimension}"/>
             <Label class="description_metric" id="metric"/>
         </View>
-        <View class="separator" platform="ios,android"/>
+        <View class="separator"/>
         <View id="noData">
             <Label id="noDataDescription"/>
             <View class="separator"/>
