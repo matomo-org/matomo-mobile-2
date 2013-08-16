@@ -5,21 +5,29 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
-(function () {
+function updateReportDate()
+{
+    var settings  = Alloy.createCollection('AppSettings').settings();
+    var piwikDate = new (require('report/date'));
 
-    function updateReportDate()
-    {
-        var settings = Alloy.createCollection('AppSettings').settings();
-        if (settings.getReportDate() && settings.getReportPeriod()) {
-            var piwikDate = new (require('report/date'));
-            piwikDate.setDate(settings.getReportDate());
-            piwikDate.setPeriod(settings.getReportPeriod());
-            require('session').setReportDate(piwikDate);
-        }
+    if (settings.hasReportDate()) {
+        piwikDate.setDate(settings.getReportDate());
+        piwikDate.setPeriod(settings.getReportPeriod());
+    } else {
+        console.warn('There is no reportDate & reportPeriod setting yet, using fallback.');
+        // fallback in case no setting exists yet just to make sure we always have a report date.
+        // Do not set the period/date setting here, the default report date of the first added account will be used.
+        // See #4083.
+        piwikDate.setReportDate(Alloy.CFG.account.defaultReportDate);
     }
 
+    require('session').setReportDate(piwikDate);
+}
+
+(function () {
     var settings = Alloy.createCollection('AppSettings').settings();
     settings.on('change:reportDate', updateReportDate);
+
     updateReportDate();
 })();
 
@@ -58,7 +66,7 @@ function onCreatedAccount(account)
     accounts.off("add", onCreatedAccount);
 
     showEntryScreen(account);
-    
+
     if (firstLogin) {
         firstLogin.close();
     }

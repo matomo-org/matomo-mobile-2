@@ -85,6 +85,10 @@ exports.definition = {
                 return this.get('reportPeriod');
             },
 
+            hasReportDate: function () {
+                return this.getReportDate() && this.getReportPeriod();
+            },
+
             setReportDateAndPeriod: function (period, date) {
                 this.set('reportPeriod', period);
                 this.set('reportDate', date);

@@ -44,6 +44,10 @@ ReportDate.prototype.setDate = function (date) {
     this.date = date;
 };
 
+ReportDate.prototype.getDate = function () {
+    return this.date;
+};
+
 /**
  * Sets (overwrites) the current period.
  *

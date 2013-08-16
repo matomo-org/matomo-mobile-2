@@ -63,6 +63,20 @@ function openDashboard(account)
     dashboard.open();
 }
 
+function setDefaultReportDateIfNeeded(account)
+{
+    // see #4083
+    var settings = Alloy.createCollection('AppSettings').settings();
+
+    if (!settings.hasReportDate()) {
+        var reportDate = new (require('report/date'));
+        reportDate.setReportDate(account.getDefaultReportDate());
+
+        settings.setReportDateAndPeriod(reportDate.getPeriod(), reportDate.getDate());
+        settings.save();
+    }
+}
+
 exports.selectWebsite = function (accountModel, callback)
 {
     if (!accountModel) {
@@ -73,6 +87,8 @@ exports.selectWebsite = function (accountModel, callback)
     onSiteSelectedCallback = callback;
 
     accountModel.select(function (account) {
+        setDefaultReportDateIfNeeded(account);
+
         if (account.startWithAllWebsitesDashboard() || !account.entrySiteId()) {
             openDashboard(account);
         } else {
