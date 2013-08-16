@@ -277,12 +277,12 @@ function createSystem(visitor, accessUrl) {
 
             // TODO not all icons are 14x14
             if (pluginIcon.pluginIcon) {
-                row.add(Ti.UI.createImageView({image: accessUrl + pluginIcon.pluginIcon,
-                                               right: OS_ANDROID ? (right + 'dp') : right,
-                                               width: OS_ANDROID ? '14dp' : 14,
-                                               height: OS_ANDROID ? '14dp' : 14, 
-                                               top: OS_ANDROID ? '14dp' : 14,
-                                               className: 'pluginIcon'}));
+                var imageOptions = {
+                    classes: ['pluginIcon'],
+                    image: accessUrl + pluginIcon.pluginIcon,
+                    right: OS_ANDROID ? (right + 'dp') : right
+                };
+                row.add($.UI.create('ImageView', imageOptions));
             }
 
             right +=28;
@@ -347,19 +347,19 @@ function createActionDetails(visitor, accessUrl) {
  *
  * @param  {Object}  actionDetail
  */
-function createActionAction(actionDetail) {
-
-    var row = Ti.UI.createTableViewRow(helperVisitorActionActionTableViewRow());
+function createActionAction(actionDetail)
+{
+    var row = $.UI.create('TableViewRow', {classes: ['actionTableViewRow']});
     addNonSelectableSelectionStyleToRow(row);
 
     if (actionDetail.pageTitle) {
-        row.add(Ti.UI.createLabel(helperVisitorActionActionPageTitleLabel(actionDetail.pageTitle)));
+        row.add($.UI.create('Label', {classes: ['actionActionPageTitleLabel'], text: actionDetail.pageTitle + ''}));
     }
     if (actionDetail.url) {
-        row.add(Ti.UI.createLabel(helperVisitorActionActionUrlLabel(actionDetail.url)));
+        row.add($.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.url + ''}));
     }
     if (actionDetail.serverTimePretty) {
-        row.add(Ti.UI.createLabel(helperVisitorActionActionServerTimeLabel(actionDetail.serverTimePretty)));
+        row.add($.UI.create('Label', {classes: ['actionActionServerTimeLabel'], text: actionDetail.serverTimePretty + ''}));
     }
 
     rows.push(row);
@@ -376,15 +376,15 @@ function createActionAction(actionDetail) {
  *
  * @param  {Object}  actionDetail
  */
-function createDefaultAction(actionDetail, visitor, accessUrl) {
-
-    var row       = Ti.UI.createTableViewRow(helperVisitorActionDefaultTableViewRow());
+function createDefaultAction(actionDetail, visitor, accessUrl)
+{
+    var row = $.UI.create('TableViewRow', {classes: ['actionTableViewRow']});
     addNonSelectableSelectionStyleToRow(row);
 
-    var view      = Ti.UI.createView(helperVisitorActionDefaultHeadlineView());
+    var view = $.UI.create('View', {classes: ['actionHeadlineView']});
 
     if (accessUrl && actionDetail.icon) {
-        view.add(Ti.UI.createImageView(helperVisitorActionDefaultIconImageView(accessUrl + actionDetail.icon)));
+        view.add($.UI.create('ImageView', {classes: ['actionDefaultIconImageView'], image: (accessUrl + actionDetail.icon)}));
     }
 
     if (actionDetail.type) {
@@ -409,14 +409,14 @@ function createDefaultAction(actionDetail, visitor, accessUrl) {
                 break;
         }
 
-        view.add(Ti.UI.createLabel(helperVisitorActionDefaultTypeLabel(title)));
+        view.add($.UI.create('Label', {classes: ['actionDefaultTypeLabel'], text: title}));
     }
 
     row.add(view);
     view = null;
 
     if (actionDetail.url) {
-        row.add(Ti.UI.createLabel(helperVisitorActionDefaultUrlLabel(actionDetail.url)));
+        row.add($.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.url + '')}));
     }
 
     rows.push(row);
@@ -438,11 +438,11 @@ function createDefaultAction(actionDetail, visitor, accessUrl) {
  *
  * @param  {Object}  actionDetail
  */
-function createEcommerceAction(actionDetail, visitor, accessUrl) {
-
-    var row           = Ti.UI.createTableViewRow(helperVisitorActionEcommerceTableViewRow());
+function createEcommerceAction(actionDetail, visitor, accessUrl)
+{
+    var row = $.UI.create('TableViewRow', {classes: ['actionTableViewRow']});
     addNonSelectableSelectionStyleToRow(row);
-    var ecommerceView = Ti.UI.createView(helperVisitorActionEcommerceHeadlineView());
+    var ecommerceView = $.UI.create('View', {classes: ['actionHeadlineView']});
     var ecommerceText = '';
 
     switch (actionDetail.type) {
@@ -465,14 +465,15 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
     }
 
     if (accessUrl && actionDetail.icon) {
-        ecommerceView.add(Ti.UI.createImageView(helperVisitorActionEcommerceIconImageView(accessUrl + actionDetail.icon)));
+        ecommerceView.add($.UI.create('ImageView',
+                                      {classes: ['actionEcommerceIconImageView'], image: (accessUrl + actionDetail.icon)}));
     }
 
     if (ecommerceText) {
-        ecommerceView.add(Ti.UI.createLabel(helperVisitorActionEcommerceTypeLabel(ecommerceText)));
+        ecommerceView.add($.UI.create('Label', {classes: ['actionEcommerceTypeLabel'], text: (ecommerceText)}));
     }
 
-    var itemDetailsView = Ti.UI.createView(helperVisitorActionEcommerceDetailsView());
+    var itemDetailsView = $.UI.create('View', {classes: ['actionEcommerceDetailsView']});
 
     if (actionDetail.itemDetails) {
         for (var index = 0; index < actionDetail.itemDetails.length; index++) {
@@ -489,10 +490,10 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
                 itemText += ', ' + item.itemCategory;
             }
 
-            var itemView = Ti.UI.createView(helperVisitorActionEcommerceDetailsItemView());
+            var itemView = $.UI.create('View', {classes: ['actionEcommerceDetailsItemView']});
+            itemView.add($.UI.create('Label', {classes: ['actionEcommerceDetailsItemStarLabel'], text: ' * '}));
+            itemView.add($.UI.create('Label', {classes: ['actionEcommerceDetailsItemNameLabel'], text: itemText}));
 
-            itemView.add(Ti.UI.createLabel(helperVisitorActionEcommerceDetailsItemStarLabel(' * ')));
-            itemView.add(Ti.UI.createLabel(helperVisitorActionEcommerceDetailsItemNameLabel(itemText)));
             itemDetailsView.add(itemView);
             itemView = null;
 
@@ -510,7 +511,7 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
                 priceText += 'Quantity: ' + item.quantity;
             }
 
-            itemDetailsView.add(Ti.UI.createLabel(helperVisitorActionEcommerceDetailsPriceLabel(priceText)));
+            itemDetailsView.add($.UI.create('Label', {classes: ['actionEcommerceDetailsPriceLabel'], text: priceText}));
         }
     }
 
@@ -529,8 +530,8 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
     row.add(ecommerceView);
     ecommerceView = null;
     
-    row.add(Ti.UI.createLabel(helperVisitorActionEcommerceRevenueLabel(revenueText)));
-    row.add(Ti.UI.createLabel(helperVisitorActionEcommerceDetailsListLabel(listOfProductsText)));
+    row.add($.UI.create('Label', {classes: ['actionEcommerceStandardLabel'], text: revenueText}));
+    row.add($.UI.create('Label', {classes: ['actionEcommerceStandardLabel'], text: listOfProductsText}));
     row.add(itemDetailsView);
     itemDetailsView = null;
 
@@ -538,214 +539,4 @@ function createEcommerceAction(actionDetail, visitor, accessUrl) {
     row          = null;
     actionDetail = null;
     visitor      = null;
-}
-
-function toUnit(size)
-{
-    return OS_ANDROID ? (size + 'dp') : size;
-}
-
-function helperVisitorActionActionPageTitleLabel(text) {
-    return {
-        text: (text+'') || '',
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        font: {fontSize: toUnit(13), fontWeight: 'bold'},
-        top: toUnit(5),
-        color: '#333333',
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionActionUrlLabel(text) {
-    return {
-        text: (text+'') || '',
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        color: '#555555',
-        font: {fontSize: toUnit(13)},
-        top: toUnit(3),
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionActionServerTimeLabel(text) {
-    return {
-        text: (text+'') || '',
-        bottom: toUnit(5),
-        top: toUnit(3),
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        color: '#333333',
-        font: {fontSize: toUnit(13)},
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionActionTableViewRow() {
-    return {
-        layout: 'vertical',
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        selectionStyle: 0
-    };
-}
-
-function helperVisitorActionDefaultTableViewRow() {
-    return {
-        layout: 'vertical',
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        selectionStyle: 0};
-}
-
-function helperVisitorActionDefaultHeadlineView() {
-    return {
-        layout: 'horizontal',
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        top: toUnit(5),
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL};
-}
-
-function helperVisitorActionDefaultIconImageView(image) {
-    return {
-        image: image,
-        left: 0,
-        top: toUnit(4),
-        width: toUnit(10),
-        height: toUnit(9),
-        canScale: false,
-        enableZoomControls: false};
-}
-
-function helperVisitorActionDefaultTypeLabel(text) {
-    return {
-        text: (text+'') || '',
-        top: 0,
-        left: OS_ANDROID ? '10dp' : toUnit(10),
-        font: {fontSize: toUnit(13), fontWeight: 'bold'},
-        color: '#333333',
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionDefaultUrlLabel(text) {
-    return {
-        text: (text+'') || '',
-        color: '#808080',
-        bottom: toUnit(5),
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        top: toUnit(4),
-        font: {fontSize: toUnit(13)},
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionEcommerceTableViewRow() {
-    return {
-        layout: 'vertical',
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        selectionStyle: 0};
-}
-
-function helperVisitorActionEcommerceHeadlineView() {
-    return {
-        layout: 'horizontal',
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        top: toUnit(5),
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL};
-}
-
-function helperVisitorActionEcommerceIconImageView(image) {
-    return {
-        image: image,
-        top: toUnit(4),
-        left: 0,
-        width: toUnit(10),
-        height: toUnit(10),
-        canScale: false,
-        enableZoomControls: false};
-}
-
-function helperVisitorActionEcommerceTypeLabel(text) {
-    return {
-        text: (text+'') || '',
-        top: toUnit(1),
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        font: {fontSize: toUnit(13), fontWeight: 'bold'},
-        color: '#333333',
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionEcommerceDetailsView() {
-    return {
-        layout: 'vertical',
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        left: 0,
-        bottom: toUnit(5),
-        top: toUnit(4)};
-}
-
-function helperVisitorActionEcommerceDetailsItemView() {
-    return {
-        layout: 'horizontal',
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        left: toUnit(10)};
-}
-
-function helperVisitorActionEcommerceDetailsItemStarLabel(text) {
-    return {
-        text: (text+'') || '',
-        left: 0,
-        color: '#808080',
-        font: {fontSize: toUnit(13)},
-        top: toUnit(3),
-        width: toUnit(15),
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionEcommerceDetailsItemNameLabel(text) {
-    return {
-        text: (text+'') || '',
-        left: toUnit(5),
-        color: '#808080',
-        font: {fontSize: toUnit(13)},
-        top: toUnit(3),
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionEcommerceRevenueLabel(text) {
-    return {
-        text: (text+'') || '',
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        font: {fontSize: toUnit(13)},
-        top: toUnit(4),
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionEcommerceDetailsListLabel(text) {
-    return {
-        text: (text+'') || '',
-        left: OS_ANDROID ? '16dp' : toUnit(10),
-        font: {fontSize: toUnit(13)},
-        color: '#333333',
-        top: toUnit(4),
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
-}
-
-function helperVisitorActionEcommerceDetailsPriceLabel(text) {
-    return {
-        text: (text+'') || '',
-        left: OS_ANDROID ? '36dp' : toUnit(30),
-        color: '#808080',
-        font: {fontSize: toUnit(13)},
-        top: toUnit(4),
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE};
 }

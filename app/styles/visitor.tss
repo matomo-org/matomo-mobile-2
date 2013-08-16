@@ -19,3 +19,242 @@
 ".visitorTableViewRow": {
     selectionStyle: 0,
 }
+
+".actionActionPageTitleLabel": {
+    left: 10,
+    font: {fontSize: 13, fontWeight: 'bold'},
+    top: 5,
+    color: '#333333',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionActionPageTitleLabel[platform=android]": {
+    left: '16dp',
+    font: {fontSize: '13sp', fontWeight: 'bold'},
+    top: '5dp',
+}
+
+".actionActionUrlLabel": {
+    left: 10,
+    color: '#555555',
+    font: {fontSize: 13},
+    top: 3,
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionActionUrlLabel[platform=android]": {
+    left: '16dp',
+    font: {fontSize: '13sp'},
+    top: '3dp',
+}
+
+".actionActionServerTimeLabel": {
+    bottom: 5,
+    top: 3,
+    left: 10,
+    color: '#333333',
+    font: {fontSize: 13},
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionActionServerTimeLabel[platform=android]": {
+    bottom: '5dp',
+    top: '3dp',
+    left: '16dp',
+    font: {fontSize: '13sp'},
+}
+
+".actionTableViewRow": {
+    layout: 'vertical',
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
+    selectionStyle: 0,
+}
+
+".actionHeadlineView": {
+    layout: 'horizontal',
+    left: 10,
+    top: 5,
+    height: Ti.UI.SIZE,
+    width: Ti.UI.FILL
+}
+
+".actionHeadlineView[platform=android]": {
+    left: '16dp',
+    top: '5dp'
+}
+
+".actionDefaultIconImageView": {
+    left: 0,
+    top: 4,
+    width: 10,
+    height: 9,
+    canScale: false,
+    enableZoomControls: false
+}
+
+".actionDefaultIconImageView[platform=android]": {
+    top: '4dp',
+    width: '10dp',
+    height: '9dp'
+}
+
+".actionEcommerceIconImageView": {
+    top: 4,
+    left: 0,
+    width: 10,
+    height: 10,
+    canScale: false,
+    enableZoomControls: false,
+}
+
+".actionEcommerceIconImageView[platform=android]": {
+    top: '4dp',
+    width: '10dp',
+    height: '10dp',
+}
+
+".actionEcommerceDetailsItemView": {
+    layout: 'horizontal',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+    left: 10
+}
+
+".actionEcommerceDetailsItemView[platform=android]": {
+    left: '10dp'
+}
+
+".actionEcommerceStandardLabel": {
+    left: 10,
+    font: {fontSize: 13},
+    top: 4,
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionEcommerceStandardLabel[platform=android]": {
+    left: '16dp',
+    font: {fontSize: '13sp'},
+    top: '4dp',
+}
+
+".actionEcommerceDetailsPriceLabel": {
+    left: 30,
+    color: '#808080',
+    font: {fontSize: 13},
+    top: 4,
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionEcommerceDetailsPriceLabel[platform=android]": {
+    left: '36dp',
+    font: {fontSize: '13sp'},
+    top: '4dp',
+}
+
+".actionEcommerceDetailsItemStarLabel": {
+    left: 0,
+    color: '#808080',
+    font: {fontSize: 13},
+    top: 3,
+    width: 15,
+    height: Ti.UI.SIZE,
+}
+
+".actionEcommerceDetailsItemStarLabel[platform=android]": {
+    font: {fontSize: '13sp'},
+    top: '3dp',
+    width: '15dp',
+}
+
+".actionEcommerceDetailsItemNameLabel": {
+    left: 5,
+    color: '#808080',
+    font: {fontSize: 13},
+    top: 3,
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionEcommerceDetailsItemNameLabel[platform=android]": {
+    left: '5dp',
+    font: {fontSize: '13sp'},
+    top: '3dp',
+}
+
+".actionEcommerceDetailsView": {
+    layout: 'vertical',
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    left: 0,
+    bottom: 5,
+    top: 4,
+}
+
+".actionEcommerceDetailsView[platform=android]": {
+    bottom: '5dp',
+    top: '4dp',
+}
+
+".actionEcommerceTypeLabel": {
+    top: 1,
+    left: 10,
+    font: {fontSize: 13, fontWeight: 'bold'},
+    color: '#333333',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionEcommerceTypeLabel[platform=android]": {
+    top: '1dp',
+    left: '16dp',
+    font: {fontSize: '13sp', fontWeight: 'bold'},
+}
+
+".actionDefaultTypeLabel": {
+    top: 0,
+    left: 10,
+    font: {fontSize: 13, fontWeight: 'bold'},
+    color: '#333333',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionDefaultTypeLabel[platform=android]": {
+    left: '10dp',
+    font: {fontSize: '13sp', fontWeight: 'bold'},
+}
+
+".actionDefaultUrlLabel": {
+    color: '#808080',
+    bottom: 5,
+    left: 10,
+    top: 4,
+    font: {fontSize: 13},
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionDefaultUrlLabel[platform=android]": {
+    bottom: '5dp',
+    left: '16dp',
+    top: '4dp',
+    font: {fontSize: '13sp'},
+}
+
+".pluginIcon": {
+    width: 14,
+    height: 14,
+    top: 14,
+}
+
+".pluginIcon[platform=android]": {
+    width: '14dp',
+    height: '14dp',
+    top: '14dp',
+}
