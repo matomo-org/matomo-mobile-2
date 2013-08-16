@@ -63,19 +63,6 @@ function openDashboard(account)
     dashboard.open();
 }
 
-function updateDefaultReportDateInSession(accountModel)
-{
-    if (!accountModel) {
-        console.warn('Cannot update default report date in session, no account', 'account');
-        return;
-    }
-
-    var reportDate = new (require('report/date'));
-    reportDate.setReportDate(accountModel.getDefaultReportDate());
-
-    require('session').setReportDate(reportDate);
-}
-
 exports.selectWebsite = function (accountModel, callback)
 {
     if (!accountModel) {
@@ -86,7 +73,6 @@ exports.selectWebsite = function (accountModel, callback)
     onSiteSelectedCallback = callback;
 
     accountModel.select(function (account) {
-        updateDefaultReportDateInSession(account);
         if (account.startWithAllWebsitesDashboard() || !account.entrySiteId()) {
             openDashboard(account);
         } else {

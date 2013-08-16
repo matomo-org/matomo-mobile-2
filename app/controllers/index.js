@@ -5,6 +5,24 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+(function () {
+
+    function updateReportDate()
+    {
+        var settings = Alloy.createCollection('AppSettings').settings();
+        if (settings.getReportDate() && settings.getReportPeriod()) {
+            var piwikDate = new (require('report/date'));
+            piwikDate.setDate(settings.getReportDate());
+            piwikDate.setPeriod(settings.getReportPeriod());
+            require('session').setReportDate(piwikDate);
+        }
+    }
+
+    var settings = Alloy.createCollection('AppSettings').settings();
+    settings.on('change:reportDate', updateReportDate);
+    updateReportDate();
+})();
+
 var accounts = Alloy.Collections.appAccounts;
 accounts.fetch();
 
