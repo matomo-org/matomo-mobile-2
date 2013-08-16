@@ -13,7 +13,8 @@ function L(key)
 var callbacks = {changeLanguage: changeLanguage,
                  toggleTrackingEnabled: toggleTrackingEnabled,
                  toggleGraphsEnabled: toggleGraphsEnabled,
-                 changeHttpTimeout: changeHttpTimeout};
+                 changeHttpTimeout: changeHttpTimeout,
+                 changeReportDate: changeReportDate};
 
 if (OS_IOS) {
     var margin     = Alloy.isTablet ? 30 : 15
@@ -70,6 +71,13 @@ function changeLanguage()
     require('Piwik/Tracker').trackEvent({title: 'Settings - Change Language', url: '/settings/change/language'});
 }
 
+function changeReportDate()
+{
+    require('settings/changeReportDate').open();
+
+    require('Piwik/Tracker').trackEvent({title: 'Settings - Change ReportDate', url: '/settings/change/reportdate'});
+}
+
 function toggleTrackingEnabled()
 {
     require('settings/trackingEnabled').toggle();
@@ -122,18 +130,31 @@ function updateDisplayedHttpTimeoutValue()
     }
 }
 
+function updateDisplayedReportDateValue()
+{
+    var reportDate = require('settings/changeReportDate').getCurrentReportDate();
+
+    if (supportsListView()) {
+        setSubtitle($.basic, 1, reportDate ? reportDate : '');
+    } else if (reportDate) {
+        $.reportDate.title = String.format('%s (%s)', L('Mobile_DefaultReportDate'), '' + reportDate);
+    } else {
+        $.reportDate.title = L('Mobile_DefaultReportDate')
+    }
+}
+
 function updateDisplayedTrackingValue()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
 
-    setHasCheck($.tracking, 1, settings.isTrackingEnabled());
+    setHasCheck($.tracking, 2, settings.isTrackingEnabled());
 }
 
 function updateDisplayedGraphsValue()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
 
-    setHasCheck($.graphs, 2, settings.areGraphsEnabled());
+    setHasCheck($.graphs, 3, settings.areGraphsEnabled());
 }
 
 function setTitle(section, itemIndex, title)
@@ -223,8 +244,9 @@ function updateAllDisplayedSettingsValues()
 
     if (supportsListView()) {
         setTitle($.basic, 0, L('General_Language'));
-        setTitle($.basic, 1, L('Mobile_AnonymousTracking'));
-        setTitle($.basic, 2, L('Mobile_EnableGraphsLabel'));
+        setTitle($.basic, 1, L('Mobile_DefaultReportDate'));
+        setTitle($.basic, 2, L('Mobile_AnonymousTracking'));
+        setTitle($.basic, 3, L('Mobile_EnableGraphsLabel'));
         setTitle($.advanced, 0, L('Mobile_HttpTimeout'));
 
         updateDisplayedLanguageValue();
@@ -233,6 +255,7 @@ function updateAllDisplayedSettingsValues()
     updateDisplayedHttpTimeoutValue();
     updateDisplayedTrackingValue();
     updateDisplayedGraphsValue();
+    updateDisplayedReportDateValue();
 }
 
 exports.close = close;

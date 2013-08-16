@@ -88,10 +88,10 @@ function onReportDateChosen(event)
 
     var settings = getSettings();
     settings.setReportDateAndPeriod(reportDate.period, reportDate.date);
+    settings.save();
 
     trackReportDateChange(settings.getReportPeriod(), settings.getReportDate());
 }
-
 
 function trackReportDateChange(period, date)
 {
@@ -99,6 +99,17 @@ function trackReportDateChange(period, date)
     tracker.trackEvent({title: 'Default Report Date Change',
                         url: '/settings/change-defaultreportdate/' + period + '/' + date});
 }
+
+exports.getCurrentReportDate = function () {
+    var selectedReportDate = currentSelectedReportDateIndex();
+    var reportDate = getSelectedReportDateAndPeriodByIndex(selectedReportDate);
+
+    if (reportDate && reportDate.label) {
+        return reportDate.label;
+    }
+
+    return '';
+};
 
 exports.open = function () 
 {
@@ -115,5 +126,4 @@ exports.open = function ()
 
     dialog.show();
     dialog = null;
-
 };

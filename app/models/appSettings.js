@@ -18,7 +18,8 @@ exports.definition = {
             "trackingEnabled":"boolean",
             "graphsEnabled":"boolean",
             "preferEvolutionGraphs":"boolean",
-            "httpTimeout":"integer"
+            "httpTimeout":"integer",
+            "reportDate": "string"
         },
         "adapter": {
             "type": "properties",
@@ -75,6 +76,19 @@ exports.definition = {
             httpTimeout: function () {
                 return this.get('httpTimeout');
             },
+
+            getReportDate: function () {
+                return this.get('reportDate');
+            },
+
+            getReportPeriod: function () {
+                return this.get('reportPeriod');
+            },
+
+            setReportDateAndPeriod: function (period, date) {
+                this.set('reportPeriod', period);
+                this.set('reportDate', date);
+            }
                         
             // extended functions go here
 

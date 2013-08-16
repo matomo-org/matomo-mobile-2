@@ -35,6 +35,7 @@
             </Templates>
             <ListSection id="basic">
                 <ListItem id="language" callback="changeLanguage"/>
+                <ListItem id="reportDate" callback="changeReportDate"/>
                 <ListItem id="tracking" callback="toggleTrackingEnabled"/>
                 <ListItem id="graphs" callback="toggleGraphsEnabled"/>
             </ListSection>
@@ -48,6 +49,7 @@
                 <View class="footer"><Label id="loginHint"/></View>
             </FooterView>
             <TableViewRow id="language" onClick="changeLanguage"/>
+            <TableViewRow id="reportDate" onClick="changeReportDate"/>
             <TableViewRow id="tracking" onClick="toggleTrackingEnabled"/>
             <TableViewRow id="graphs" onClick="toggleGraphsEnabled"/>
             <Widget src="org.piwik.tableviewsection" id="advanced"/>
