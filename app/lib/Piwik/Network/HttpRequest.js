@@ -314,6 +314,9 @@ function convertXhrErrorMessageToHumanReadable (xhrError) {
     } else if (-1 != xhrError.indexOf('Connection timed out')) {
         // recvfrom failed:
         xhrError = 'ETIMEDOUT Connection timed out';
+    } else if (-1 != xhrError.indexOf('ETIMEDOUT')) {
+        // recvfrom failed:
+        xhrError = 'ETIMEDOUT Connection timed out';
     } else if (-1 != xhrError.indexOf('Connect to') && -1 != xhrError.indexOf('timed out')) {
         xhrError = 'Connect timed out';
     } else if (-1 != xhrError.indexOf('Connect to') && -1 != xhrError.indexOf('refused')) {
@@ -370,6 +373,7 @@ HttpRequest.prototype.error = function (e) {
             case 'request aborted':
             case 'timeout':
             case 'the request timed out':
+            case 'etimedout connection timed out':
             case 'chunked stream ended unexpectedly':
 
                 title   = L('Mobile_RequestTimedOutShort');
@@ -409,7 +413,7 @@ HttpRequest.prototype.error = function (e) {
                     errorType  += '-' + this.xhr.status;
                 }
                 
-                message = String.format(L('Mobile_NetworkErrorWithStatusCode'), e.error + '', statusText, baseUrl);
+                message = String.format(L('Mobile_NetworkErrorWithStatusCode'), errorMessage, statusText, baseUrl);
         }
     }
 
