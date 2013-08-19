@@ -130,6 +130,7 @@ module.exports = {
     General_Goal:                                                       'Goal',
     General_Help:                                                       'Help',
     General_Visitor:                                                    'Visitor',
+    General_Website:                                                    'Website',
     Mobile_AboutPiwikMobile:                                            'About Piwik Mobile',
     Mobile_Account:                                                     'Account',
     Mobile_Accounts:                                                    'Accounts',

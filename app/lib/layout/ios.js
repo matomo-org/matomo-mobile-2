@@ -26,12 +26,23 @@ function iOsLayout(rootWindow)
     }
 
     _.extend(this, Backbone.Events, {
-        close: function (win) {
+
+        /**
+         * @param win
+         * @param animated entryWebsite (offline) -> selectAccount (getting online) -> entryWebsite -> ReportComposite
+         *                 ---> results in black screen when animated is true, therefore it is possible to disable
+         *                      animation
+         */
+        close: function (win, animated) {
             if (!win || !navGroup) {
                 return;
             }
 
-            navGroup.close(win, {animated : true});
+            if (!_.isBoolean(animated)) {
+                animated = true;
+            }
+
+            navGroup.close(win, {animated : animated});
             win = null;
         },
         open: function (win) {
@@ -40,7 +51,7 @@ function iOsLayout(rootWindow)
             }
 
             if (isBootstrapped) {
-                navGroup.open(win, {animated : true});
+                navGroup.open(win, {animated : false});
             } else {
                 bootstrap(win);
             }

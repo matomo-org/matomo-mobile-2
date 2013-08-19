@@ -9,37 +9,10 @@ var onSiteSelectedCallback = null;
 
 function openEntrySite(account) 
 {
-    if (!account) {
-        console.warn('Cannot open entry site, no account given', 'account');
-        return;
-    }
-
-    var entrySiteId = account.entrySiteId();
-    var site        = Alloy.createCollection('PiwikWebsitesById');
-    site.fetch({
-        params: {idSite: entrySiteId},
-        account: account,
-        success: function (sites) {
-            if (!sites) {
-                console.warn('Failed to fetch entry site', 'account');
-                return;
-            }
-
-            onSiteSelected({site: sites.entrySite(), account: account});
-            account = null;
-        },
-        error: function (undefined, error) {
-            if (error && error.getError) {
-
-               var L      = require('L');
-               var dialog = Ti.UI.createAlertDialog({title: error.getError(), message: error.getMessage(), buttonNames: [L('Mobile_Refresh')]});
-               dialog.addEventListener('click', function () { openEntrySite(account);account = null; });
-               dialog.show();
-               dialog = null;
-
-            }
-        }
-    });
+    var entryWebsite = Alloy.createController('entry_website', {account: account});
+    entryWebsite.on('accountChosen', onAccountSelected);
+    entryWebsite.on('websiteLoaded', onSiteSelected);
+    entryWebsite.open();
 }
 
 function onSiteSelected(event)
@@ -77,6 +50,17 @@ function setDefaultReportDateIfNeeded(account)
     }
 }
 
+function onAccountSelected(accountModel)
+{
+    setDefaultReportDateIfNeeded(accountModel);
+
+    if (accountModel.startWithAllWebsitesDashboard() || !accountModel.entrySiteId()) {
+        openDashboard(accountModel);
+    } else {
+        openEntrySite(accountModel);
+    }
+}
+
 exports.selectWebsite = function (accountModel, callback)
 {
     if (!accountModel) {
@@ -86,13 +70,5 @@ exports.selectWebsite = function (accountModel, callback)
 
     onSiteSelectedCallback = callback;
 
-    accountModel.select(function (account) {
-        setDefaultReportDateIfNeeded(account);
-
-        if (account.startWithAllWebsitesDashboard() || !account.entrySiteId()) {
-            openDashboard(account);
-        } else {
-            openEntrySite(account);
-        }
-    });
+    accountModel.select(onAccountSelected);
 };

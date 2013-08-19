@@ -1,0 +1,15 @@
+<Alloy>
+    <Window id="index" onClose="onClose" onOpen="onOpen">
+        <RightNavButton platform="ios,mobileweb">
+            <Button id="accountsButton" onClick="chooseAccount"/>
+        </RightNavButton>
+
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
+                onActionItem1="chooseAccount"
+                platform="android" />
+
+        <View id="loading"><Label id="loadingLabel"/></View>
+
+    </Window>
+</Alloy>

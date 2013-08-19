@@ -27,12 +27,16 @@ function MobileWebLayout(rootWindow)
     }
 
     _.extend(this, Backbone.Events, {
-        close: function (win) {
+        close: function (win, animated) {
             if (!win || !navGroup) {
                 return;
             }
 
-            navGroup.close(win, {animated: true});
+            if (!_.isBoolean(animated)) {
+                animated = true;
+            }
+
+            navGroup.close(win, {animated: animated});
             win = null;
         },
         open: function (win) {

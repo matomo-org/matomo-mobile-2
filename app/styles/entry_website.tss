@@ -1,0 +1,41 @@
+"#accountsButton": {
+    backgroundImage: "ic_action_accounts.png",
+    width: 32,
+    height: 32
+}
+
+"#index": {
+    title: L('Mobile_LoadingReport', 'General_Website'),
+    backButtonTitle: L('Mobile_NavigationBack')
+},
+
+"#headerBar": {
+    title: L('Mobile_LoadingReport', 'General_Website'),
+    actionItem1: {icon: '/images/ic_action_accounts.png'}
+}
+
+"#index[platform=mobileweb]": {
+    fullscreen: false,
+}
+
+"#index[platform=ios]": {
+    fullscreen: false,
+}
+
+"#loadingLabel": {
+    text: L('Mobile_LoadingReport', 'General_Website')
+},
+
+"#loading[platform=android]": {
+    top: '48dp'
+}
+
+"#loading": {
+    left: 0,
+    top: 0,
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL,
+    visible: true,
+    backgroundColor: 'white',
+    zIndex: 5
+},

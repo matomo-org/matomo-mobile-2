@@ -163,7 +163,7 @@ function onClose ()
 
 function close () 
 {
-    require('layout').close($.index);
+    require('layout').close($.index, false);
 }
 
 exports.open = function ()

@@ -31,7 +31,7 @@ var checkAppShouldBeClosedTimeout = null;
 
 function AndroidLayout()
 {
-    function close (win) {
+    function close (win, animated) {
         if (!win) {
             return;
         }
