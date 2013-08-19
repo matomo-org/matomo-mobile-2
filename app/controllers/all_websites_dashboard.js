@@ -47,6 +47,8 @@ function onClose()
         $.websitesTable.setData([]);
     }
 
+    $.trigger('close');
+
     $.destroy();
     $.off();
 }
