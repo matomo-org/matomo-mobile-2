@@ -108,7 +108,7 @@ exports.close = function ()
 
 exports.open = function ()
 {
-    fetchEntrySite();
+    require('layout').open($.index, false);
 
-    require('layout').open($.index);
+    fetchEntrySite();
 };

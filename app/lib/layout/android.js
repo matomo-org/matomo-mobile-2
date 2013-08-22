@@ -31,6 +31,7 @@ var checkAppShouldBeClosedTimeout = null;
 
 function AndroidLayout()
 {
+    // @param animated see iOS layout
     function close (win, animated) {
         if (!win) {
             return;
@@ -52,7 +53,8 @@ function AndroidLayout()
         win = null;
     }
 
-    function open (win) {
+    // @param animated see iOS layout
+    function open (win, animated) {
         if (!win) {
             return;
         }

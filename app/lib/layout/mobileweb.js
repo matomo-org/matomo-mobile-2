@@ -27,19 +27,18 @@ function MobileWebLayout(rootWindow)
     }
 
     _.extend(this, Backbone.Events, {
+        // @param animated see iOS layout
         close: function (win, animated) {
             if (!win || !navGroup) {
                 return;
             }
 
-            if (!_.isBoolean(animated)) {
-                animated = true;
-            }
-
-            navGroup.close(win, {animated: animated});
+            navGroup.close(win, {animated: true});
             win = null;
         },
-        open: function (win) {
+
+        // @param animated see iOS layout
+        open: function (win, animated) {
             if (!win) {
                 return;
             }

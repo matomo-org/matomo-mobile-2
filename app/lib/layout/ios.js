@@ -31,7 +31,7 @@ function iOsLayout(rootWindow)
          * @param win
          * @param animated entryWebsite (offline) -> selectAccount (getting online) -> entryWebsite -> ReportComposite
          *                 ---> results in black screen when animated is true, therefore it is possible to disable
-         *                      animation
+         *                      animation. Afaik only used in entryWebsite controller
          */
         close: function (win, animated) {
             if (!win || !navGroup) {
@@ -45,13 +45,24 @@ function iOsLayout(rootWindow)
             navGroup.close(win, {animated : animated});
             win = null;
         },
-        open: function (win) {
+
+        /**
+         * @param win
+         * @param animated entryWebsite (offline) -> selectAccount (getting online) -> entryWebsite -> ReportComposite
+         *                 ---> results in black screen when animated is true, therefore it is possible to disable
+         *                      animation. Afaik only used in entryWebsite controller
+         */
+        open: function (win, animated) {
             if (!win) {
                 return;
             }
 
+            if (!_.isBoolean(animated)) {
+                animated = true;
+            }
+
             if (isBootstrapped) {
-                navGroup.open(win, {animated : false});
+                navGroup.open(win, {animated : animated});
             } else {
                 bootstrap(win);
             }
