@@ -1,7 +1,8 @@
 "Window": {
     barImage: "navbar.png",
     backgroundColor: "#FFFFFF",
-    barColor: "#CD1628"
+    barColor: "#CD1628",
+    navTintColor: "#ffffff",
 },
 
 "Window[platform=android]": {
