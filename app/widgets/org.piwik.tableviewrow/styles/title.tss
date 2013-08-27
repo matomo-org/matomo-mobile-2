@@ -19,6 +19,8 @@
 "#title[platform=android]": {
     left: '16dp',
     right: '16dp',
+    width: null,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     top: '10dp',
     font: {fontSize: '16sp', fontWeight: 'normal'},
     zIndex: 2,
