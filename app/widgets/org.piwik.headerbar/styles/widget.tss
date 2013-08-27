@@ -36,9 +36,9 @@
         fontFamily: 'Roboto-Thin'
     },
     height: Ti.UI.SIZE,
-    width: Ti.UI.SIZE,
     wordWrap: false,
-    ellipsize: true
+    ellipsize: true,
+    right: 0,
 }
 
 "#actionButtons": {
