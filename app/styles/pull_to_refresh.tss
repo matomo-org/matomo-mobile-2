@@ -1,7 +1,11 @@
 ".container": {
     backgroundColor: '#E2E7ED',
-    width: 320,
+    width: Ti.UI.FILL,
     height: 60
+},
+
+".container[platform=android]": {
+    height: '60dp'
 },
 
 "#arrow": {
@@ -12,16 +16,30 @@
     left: 20
 },
 
+"#arrow[platform=android]": {
+    backgroundImage: "/pull_arrow.png",
+    width: '23dp',
+    height: '60dp',
+    bottom: '10dp',
+    left: '20dp'
+},
+
 "#statusLabel": {
     shadowOffset: {x: 0, y: 1},
     text: L('Mobile_PullDownToRefresh'),
     width: 200,
     bottom: 30,
-    height: "SIZE",
+    height: Ti.UI.SIZE,
     color: "#576C89",
-    textAlign: "center",
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {fontSize: 13, fontWeight: 'bold'},
     shadowColor: "#fff"
+},
+
+"#statusLabel[platform=android]": {
+    width: '200dp',
+    bottom: '30dp',
+    font: {fontSize: '13sp', fontWeight: 'bold'},
 },
 
 "#lastUpdatedLabel": {
@@ -29,11 +47,17 @@
     text: "",
     width: 200,
     bottom: 15,
-    height: "SIZE",
+    height: Ti.UI.SIZE,
     color: "#576C89",
-    textAlign: "center",
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     font: {fontSize: 12},
     shadowColor: "#fff"
+},
+
+"#lastUpdatedLabel[platform=android]": {
+    width: '200dp',
+    bottom: '15dp',
+    font: {fontSize: '12sp'},
 },
 
 "#activityIndicator": {
@@ -42,6 +66,13 @@
     width: 30,
     height: 30
 },
+
+"#activityIndicator[platform=android]": {
+    left: '20dp',
+    bottom: '13dp',
+    width: '30dp',
+    height: '30dp'
+}
 
 "#activityIndicator[platform=ios]": {
     style: Ti.UI.iPhone.ActivityIndicatorStyle.DARK

@@ -9,6 +9,8 @@ $.reloading = false;
 $.pulling   = false;
 $.tableView = null;
 
+var offset = 0;
+
 function L(key)
 {
     return require('L')(key);
@@ -16,8 +18,10 @@ function L(key)
 
 function displayRefreshMessage()
 {
-    if ($.tableView) {
+    if (OS_IOS && $.tableView) {
         $.tableView.setContentInsets({top: 60});
+    } else if (OS_ANDROID && $.tableView) {
+        $.tableView.top = 0;
     }
 
     setStatusReloading();
@@ -55,8 +59,10 @@ function setStatusReloading()
     
     $.arrow.hide();
     $.arrow.transform = Ti.UI.create2DMatrix();
-    
-    $.activityIndicator.show();
+
+    if ($.activityIndicator) {
+        $.activityIndicator.show();
+    }
 }
 
 function setStatusReleaseToRefresh()
@@ -81,15 +87,22 @@ function setStatusPullDownToRefresh()
 function onScrollTable(event)
 {
     // fired each time the user scrolls within the tableview
+    if (OS_ANDROID) {
 
-    var offset = (event && event.contentOffset) ? event.contentOffset.y : 0;
+        offset = event.firstVisibleItem;
 
-    if (offset <= -65.0 && !$.pulling && !$.reloading) {
-        setStatusReleaseToRefresh();
+    } else if (OS_IOS) {
 
-    } else if ($.pulling && !$.reloading && offset > -65.0 && offset < 0) {
-        setStatusPullDownToRefresh();
+        offset = (event && event.contentOffset) ? event.contentOffset.y : 0;
+
+        if (offset <= -65.0 && !$.pulling && !$.reloading) {
+            setStatusReleaseToRefresh();
+
+        } else if ($.pulling && !$.reloading && offset > -65.0 && offset < 0) {
+            setStatusPullDownToRefresh();
+        }
     }
+
 }
 
 function onDragEnd()
@@ -102,23 +115,41 @@ function onDragEnd()
     }
 }
 
+function onSwipe(event)
+{
+    if (0 === offset && event && event.direction === 'down') {
+        doRefresh();
+    }
+}
+
 exports.refresh = displayRefreshMessage;
 
 exports.init = function (tableView)
 {
     $.tableView = tableView;
 
+    if (OS_ANDROID) {
+        $.tableView.top = '-60dp';
+        $.tableView.addEventListener('swipe', onSwipe);
+    }
+
     $.tableView.addEventListener('scroll', onScrollTable);
 
-    $.tableView.addEventListener('dragEnd', onDragEnd);
+    if (OS_IOS) {
+        $.tableView.addEventListener('dragEnd', onDragEnd);
+    }
 };
 
 exports.refreshDone = function () 
 {
     $.reloading = false;
 
-    if ($.tableView) {
+    if ($.tableView && OS_IOS) {
         $.tableView.setContentInsets({top: 0});
+    }
+
+    if ($.tableView && OS_ANDROID) {
+        $.tableView.top = '-60dp';
     }
     
     if ($.statusLabel) {

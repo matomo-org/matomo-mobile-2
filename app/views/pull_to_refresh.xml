@@ -3,6 +3,6 @@
         <View id="arrow"/>
         <Label id="statusLabel"/>
         <Label id="lastUpdatedLabel"/>
-        <ActivityIndicator id="activityIndicator"/>
+        <ActivityIndicator platform="ios" id="activityIndicator"/>
     </View>
 </Alloy>

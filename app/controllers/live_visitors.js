@@ -18,7 +18,7 @@ $.countdown.init(parseInt(refreshIntervalInMs / 1000, 10));
 
 var piwikLiveVisitors = Alloy.createCollection('piwikLiveVisitors');
 
-if (OS_IOS) {
+if ($.pullToRefresh) {
     $.pullToRefresh.init($.liveTable);
 }
 
@@ -155,7 +155,7 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
 
 function showReportContent()
 {
-    if (OS_IOS) {
+    if ($.pullToRefresh) {
         $.pullToRefresh.refreshDone();
     } 
 
@@ -174,7 +174,7 @@ function showReportHasNoVisitors(title, message)
 
 function showLoadingMessage()
 {
-    if (OS_IOS) {
+    if ($.pullToRefresh) {
         $.pullToRefresh.refresh();
     } 
 
