@@ -3,6 +3,7 @@
     backgroundColor: "#FFFFFF",
     barColor: "#CD1628",
     navTintColor: "#ffffff",
+    color: "#ffffff",
 },
 
 "Window[platform=android]": {
@@ -10,7 +11,8 @@
 },
 
 "Window[platform=ios]": {
-    navBarHidden: false
+    navBarHidden: false,
+    statusBarStyle: Ti.UI.iPhone.StatusBar.TRANSLUCENT_BLACK 
 },
 
 "NavigationGroup": {
