@@ -87,7 +87,7 @@
 },
 
 "#password": {
-    hintText: L('Login_Password'),
+    hintText: L('General_Password'),
     passwordMask: true,
     returnKeyType: Ti.UI.RETURNKEY_DONE
 },

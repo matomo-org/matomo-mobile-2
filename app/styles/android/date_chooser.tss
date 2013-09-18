@@ -45,7 +45,7 @@
 }
 
 "#toDateHeadline": {
-    text: L('General_DateRangeTo_js')
+    text: L('General_DateRangeTo')
 }
 
 "#toDatePicker": {

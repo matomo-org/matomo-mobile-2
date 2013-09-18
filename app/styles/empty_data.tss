@@ -84,7 +84,7 @@
 }
 
 "#refresh": {
-    title: L('Mobile_Refresh'),
+    title: L('General_Refresh'),
     width: Ti.UI.SIZE,
     height: Ti.UI.FILL,
     left: 50,

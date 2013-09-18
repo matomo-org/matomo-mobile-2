@@ -42,8 +42,8 @@ function setPeriod(selectedPeriod) {
 
     if ('range' == period) {
         $.toDateContainer.show();
-        $.fromDateHeadline.text = L('General_DateRangeFrom_js');
-        $.toDateHeadline.text   = L('General_DateRangeTo_js');
+        $.fromDateHeadline.text = L('General_DateRangeFrom');
+        $.toDateHeadline.text   = L('General_DateRangeTo');
     } else {
         $.toDateContainer.hide();
         $.fromDateHeadline.text = L('General_Date');

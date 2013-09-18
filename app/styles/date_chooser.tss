@@ -103,7 +103,7 @@
 }
 
 "#toDateLabel": {
-    title: L('General_DateRangeTo_js')
+    title: L('General_DateRangeTo')
 }
 
 "#toDatePicker": {

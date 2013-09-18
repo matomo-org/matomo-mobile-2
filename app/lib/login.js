@@ -61,7 +61,7 @@ function onError (accountModel, error) {
             url     = '/account/login/error/missing-username';
             break;
         case 'MissingPassword':
-            message = String.format(L('General_Required'), L('Login_Password'));
+            message = String.format(L('General_Required'), L('General_Password'));
             title   = 'Account Missing Password';
             url     = '/account/login/error/missing-password';
             break;

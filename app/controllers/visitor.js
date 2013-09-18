@@ -119,7 +119,7 @@ function createOverview (visitor, accessUrl)
 
                 if (visitor.visitCount) {
                     var visits = '' + (parseInt(visitor.visitCount, 10));
-                    visits     = String.format(L('VisitsSummary_NbVisits'), visits);
+                    visits     = String.format(L('General_NbVisits'), visits);
 
                     visitorTypeText += String.format(' (%s)', visits);
                 }
@@ -269,7 +269,7 @@ function createSystem(visitor, accessUrl) {
 
     if (visitor.pluginsIcons && visitor.pluginsIcons.length && accessUrl) {
 
-        var row = createRow({title: L('UserSettings_Plugins'), className: 'visitorTableViewRow'});
+        var row = createRow({title: L('General_Plugins'), className: 'visitorTableViewRow'});
 
         var right = 10;
         for (var index = 0; index < visitor.pluginsIcons.length; index++) {
@@ -515,7 +515,7 @@ function createEcommerceAction(actionDetail, visitor, accessUrl)
         }
     }
 
-    var revenueText = String.format('%s: %s %s', L('Live_GoalRevenue'),
+    var revenueText = String.format('%s: %s %s', L('General_ColumnRevenue'),
                                                  '' +  actionDetail.revenue,
                                                  '' + visitor.siteCurrency);
     

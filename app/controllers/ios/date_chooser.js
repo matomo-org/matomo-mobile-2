@@ -80,7 +80,7 @@ function createTableViewRows ()
                              value: L('General_Period')});
     fromDateRow = createRow({title: L('General_Date'),
                              value: getDisplayDate(fromDate)});
-    toDateRow   = createRow({title: L('General_DateRangeTo_js'),
+    toDateRow   = createRow({title: L('General_DateRangeTo'),
                              value: getDisplayDate(toDate)});
 }
 
@@ -94,7 +94,7 @@ function setPeriod (periodToSet)
     period = periodToSet;
 
     if ('range' == period) {
-        fromDateRow.changeTitle(L('General_DateRangeFrom_js'));
+        fromDateRow.changeTitle(L('General_DateRangeFrom'));
         $.datePickerTable.setData([periodRow.getView(), fromDateRow.getView(), toDateRow.getView()]);
     } else {
         fromDateRow.changeTitle(L('General_Date'));
