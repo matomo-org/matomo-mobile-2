@@ -24,6 +24,7 @@
             <TableViewRow id="documentation" onClick="openDocumentation"/>
             <TableViewRow id="forums" onClick="openForum"/>
             <TableViewRow id="email" onClick="emailUs"/>
+            <TableViewRow id="marketplace" onClick="openMarketplace"/>
         </TableView>
     </Window>
 </Alloy>

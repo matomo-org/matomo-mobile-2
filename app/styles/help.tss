@@ -57,6 +57,17 @@
     rightImage: '/images/navigation_next_item.png'
 }
 
+
+"#marketplace": {
+    hasChild: true,
+    title: L('Mobile_PiwikMarketplace')
+}
+
+"#marketplace[platform=android]": {
+    hasChild: false,
+    rightImage: '/images/navigation_next_item.png'
+}
+
 "#forums": {
     hasChild: true,
     title: L('General_Forums')

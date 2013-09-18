@@ -166,6 +166,7 @@ module.exports = {
     Mobile_NetworkErrorWithStatusCode:                                  'There was an error "%s". The request returned the status "%s". URL was "%s". Please check your entered URL and the error logs on this server for more information about the error and how to resolve it.',
     Mobile_NetworkErrorWithStatusCodeShort:                             'Network Error %s',
     Mobile_NetworkNotReachable:                                         'Network not reachable',
+    Mobile_PiwikMarketplace:                                            'Piwik Marketplace',
     Mobile_RequestTimedOutShort:                                        'Network Timeout Error',
     Mobile_NoAccountIsSelected:                                         "You have to select an account. Add a new account if you haven't configured one.",
     Mobile_NoDataShort:                                                 'No Data',

@@ -45,6 +45,12 @@ function openForum()
     Alloy.createController('webview', params).open();
 }
 
+function openMarketplace()
+{
+    var params = {title: L('Mobile_PiwikMarketplace'), url: 'http://plugins.piwik.org/'};
+    Alloy.createController('webview', params).open();
+}
+
 function openDocumentation()
 {
     var params = {title: L('General_Documentation'), url: 'http://piwik.org/docs/'};
