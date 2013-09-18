@@ -62,8 +62,14 @@ exports.definition = {
 
                 if (date) {
                     date = '' + date;
+
+                    if (0 === date.indexOf('last') || 0 === date.indexOf('previous')) {
+                        var reportDate = new (require('report/date'));
+                        reportDate.setReportDate(date);
+                        date = reportDate.toPiwikQueryString();
+                    }
+
                     var positionComma = date.indexOf(',');
-                    
                     // API does not support date range format 'YYYY-MM-DD,YYYY-MM-DD'.
                     if (-1 !== date.indexOf(',')) {
                         date = date.substr(0, positionComma);
