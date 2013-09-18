@@ -40,40 +40,4 @@
     width: '200dp',
     bottom: '30dp',
     font: {fontSize: '13sp', fontWeight: 'bold'},
-},
-
-"#lastUpdatedLabel": {
-    shadowOffset: {x: 0, y: 1},
-    text: "",
-    width: 200,
-    bottom: 15,
-    height: Ti.UI.SIZE,
-    color: "#576C89",
-    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-    font: {fontSize: 12},
-    shadowColor: "#fff"
-},
-
-"#lastUpdatedLabel[platform=android]": {
-    width: '200dp',
-    bottom: '15dp',
-    font: {fontSize: '12sp'},
-},
-
-"#activityIndicator": {
-    left: 20,
-    bottom: 13,
-    width: 30,
-    height: 30
-},
-
-"#activityIndicator[platform=android]": {
-    left: '20dp',
-    bottom: '13dp',
-    width: '30dp',
-    height: '30dp'
-}
-
-"#activityIndicator[platform=ios]": {
-    style: Ti.UI.iPhone.ActivityIndicatorStyle.DARK
 }

@@ -1,3 +1,7 @@
+"NavigationWindow": {
+    modal: true
+}
+
 ".iOSContainer": {
     backgroundColor: "white",
     title: L('General_ChooseDate')

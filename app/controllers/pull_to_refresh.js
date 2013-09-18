@@ -54,15 +54,10 @@ function setStatusReloading()
     
     var now = currentTime();
     
-    $.lastUpdatedLabel.text = String.format(L('Mobile_LastUpdated'), now);
-    $.statusLabel.text      = L('Mobile_Reloading');
+    $.statusLabel.text = L('Mobile_Reloading');
     
     $.arrow.hide();
     $.arrow.transform = Ti.UI.create2DMatrix();
-
-    if ($.activityIndicator) {
-        $.activityIndicator.show();
-    }
 }
 
 function setStatusReleaseToRefresh()
@@ -158,9 +153,5 @@ exports.refreshDone = function ()
     
     if ($.arrow) {
         $.arrow.show();
-    }
-    
-    if ($.activityIndicator) {
-        $.activityIndicator.hide();
     }
 };

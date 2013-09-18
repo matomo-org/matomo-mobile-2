@@ -2,7 +2,5 @@
     <View class="container">
         <View id="arrow"/>
         <Label id="statusLabel"/>
-        <Label id="lastUpdatedLabel"/>
-        <ActivityIndicator platform="ios" id="activityIndicator"/>
     </View>
 </Alloy>
