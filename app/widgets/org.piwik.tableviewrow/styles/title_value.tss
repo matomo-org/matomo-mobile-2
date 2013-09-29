@@ -16,6 +16,10 @@
     touchEnabled: false
 },
 
+"#title[platform=ios]": {
+    left: 15,
+}
+
 "#title[platform=android]": {
     left: '16dp',
     right: '16dp',

@@ -109,6 +109,11 @@
     color: '#7e7e7e',
 }
 
+"#noDataDescription[platform=ios]": {
+    left: 15,
+    font: {fontWeight: 'bold'},
+}
+
 "#noDataDescription[platform=android]": {
     top: '18dp',
     bottom: '18dp',
@@ -124,6 +129,10 @@
     bottom: 16,
     right: 95,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+}
+
+".report_title[platform=ios]": {
+    left: 15,
 }
 
 ".report_title[platform=android]": {

@@ -12,7 +12,7 @@
 
 "Window[platform=ios]": {
     navBarHidden: false,
-    statusBarStyle: Ti.UI.iPhone.StatusBar.TRANSLUCENT_BLACK 
+    statusBarStyle: Alloy.statusBarStyle
 },
 
 "NavigationGroup": {

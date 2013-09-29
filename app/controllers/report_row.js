@@ -29,6 +29,9 @@ function showLogo(processedReport)
 
     var iconWidth = processedReport.getLogoWidth() || 16;
     var iconLeft  = OS_ANDROID ? '8dp' : 10;
+    if (OS_IOS) {
+        iconLeft  = 15;
+    }
     
     $.icon.width  = iconWidth;
     $.icon.height = processedReport.getLogoHeight() || 16;

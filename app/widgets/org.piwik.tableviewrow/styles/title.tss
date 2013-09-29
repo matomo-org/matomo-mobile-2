@@ -2,7 +2,7 @@
     height: Ti.UI.SIZE,
 },
 
-"#title": {
+"#titleLabel": {
     textAlign: 'left',
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
@@ -16,7 +16,11 @@
     touchEnabled: false
 },
 
-"#title[platform=android]": {
+"#titleLabel[platform=ios]": {
+    left: 15,
+}
+
+"#titleLabel[platform=android]": {
     left: '16dp',
     right: '16dp',
     width: null,

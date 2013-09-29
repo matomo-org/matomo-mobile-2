@@ -18,6 +18,10 @@
     bottom: 12
 }
 
+"#title[platform=ios]": {
+    left: 15,
+}
+
 "#title[platform=android]": {
     touchEnabled: false,
     top: '12dp',

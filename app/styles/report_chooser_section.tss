@@ -22,6 +22,9 @@
     height: Ti.UI.SIZE,
     bottom: 8
 }
+"#title[platform=ios]": {
+    left: 15,
+}
 
 "#title[platform=android]": {
     top: '8dp',

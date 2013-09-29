@@ -16,7 +16,14 @@ function TabletSidebar(detailRootWindow)
         width: widthLeftSidebar, 
         barImage: "navbardark.png", 
         barColor: "#2D2D2D"
-    });
+    });    
+    
+    if (Alloy.isIOS7OrLater) {
+        // otherwise visible in status bar
+        leftSidebarWindow.top = 20;
+        leftSidebarWindow.statusBarStyle = Alloy.statusBarStyle;
+    }
+    
     leftSidebarWindow.open();
 
     this.setLeftSidebar = function(view)

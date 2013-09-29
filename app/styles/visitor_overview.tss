@@ -40,6 +40,10 @@
     height: Ti.UI.SIZE,
 },
 
+"#visittime[platform=ios]": {
+    left: 15,
+},
+
 "#visittime[platform=android]": {
     font: {fontSize: '14sp', fontWeight: 'bold'},
     left: '16dp',
@@ -124,6 +128,10 @@
     left: 10,
     textAlign: 'left',
     color: '#333333'
+},
+
+".visitorInfo[platform=ios]": {
+    left: 15,
 },
 
 ".visitorInfo[platform=android]": {

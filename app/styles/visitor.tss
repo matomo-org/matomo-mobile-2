@@ -29,6 +29,10 @@
     height: Ti.UI.SIZE,
 }
 
+".actionActionPageTitleLabel[platform=ios]": {
+    left: 15,
+},
+
 ".actionActionPageTitleLabel[platform=android]": {
     left: '16dp',
     font: {fontSize: '13sp', fontWeight: 'bold'},
@@ -44,6 +48,10 @@
     height: Ti.UI.SIZE,
 }
 
+".actionActionUrlLabel[platform=ios]": {
+    left: 15,
+},
+
 ".actionActionUrlLabel[platform=android]": {
     left: '16dp',
     font: {fontSize: '13sp'},
@@ -58,6 +66,10 @@
     font: {fontSize: 13},
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
+}
+
+".actionActionServerTimeLabel[platform=ios]": {
+    left: 15,
 }
 
 ".actionActionServerTimeLabel[platform=android]": {
@@ -80,6 +92,10 @@
     top: 5,
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL
+}
+
+".actionHeadlineView[platform=ios]": {
+    left: 15,
 }
 
 ".actionHeadlineView[platform=android]": {
@@ -124,6 +140,10 @@
     left: 10
 }
 
+".actionEcommerceDetailsItemView[platform=ios]": {
+    left: 15,
+}
+
 ".actionEcommerceDetailsItemView[platform=android]": {
     left: '10dp'
 }
@@ -134,6 +154,10 @@
     top: 4,
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
+}
+
+".actionEcommerceStandardLabel[platform=ios]": {
+    left: 15,
 }
 
 ".actionEcommerceStandardLabel[platform=android]": {
@@ -210,6 +234,10 @@
     height: Ti.UI.SIZE,
 }
 
+".actionEcommerceTypeLabel[platform=ios]": {
+    left: 15,
+}
+
 ".actionEcommerceTypeLabel[platform=android]": {
     top: '1dp',
     left: '16dp',
@@ -225,6 +253,10 @@
     height: Ti.UI.SIZE,
 }
 
+".actionDefaultTypeLabel[platform=ios]": {
+    left: 15,
+}
+
 ".actionDefaultTypeLabel[platform=android]": {
     left: '10dp',
     font: {fontSize: '13sp', fontWeight: 'bold'},
@@ -238,6 +270,10 @@
     font: {fontSize: 13},
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
+}
+
+".actionDefaultUrlLabel[platform=ios]": {
+    left: 15,
 }
 
 ".actionDefaultUrlLabel[platform=android]": {

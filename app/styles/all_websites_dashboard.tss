@@ -134,6 +134,10 @@
     wordWrap: false
 }
 
+".websiteNameLabel[platform=ios]": {
+    left: 15
+}
+
 ".websiteNameLabel[platform=android]": {
     left: '16dp', 
     right: '120dp',

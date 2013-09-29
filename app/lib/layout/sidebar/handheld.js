@@ -12,6 +12,13 @@ function HandheldSidebar(detailRootWindow)
     // we have to create this window before any other window, 
     // otherwise the menu will be always displayed on top of the root window.
     var leftSidebarWindow = Ti.UI.createWindow({left: 0, width: widthSidebar, visible: false});
+    
+    if (Alloy.isIOS7OrLater) {
+        // otherwise visible in status bar
+        leftSidebarWindow.top = 20;
+        leftSidebarWindow.statusBarStyle = Alloy.statusBarStyle;
+    }
+    
     leftSidebarWindow.open();
 
     var leftSidebarOuterWindow;
@@ -51,7 +58,13 @@ function HandheldSidebar(detailRootWindow)
 
         leftSidebarVisible = true;
 
-        leftSidebarOuterWindow = Ti.UI.createWindow({left: widthSidebar, right: 0, backgroundColor: 'transparent'});
+        leftSidebarOuterWindow = Ti.UI.createWindow({
+            left: widthSidebar, 
+            right: 0, 
+            backgroundColor: 'transparent',
+            statusBarStyle: Alloy.statusBarStyle
+        });
+
         leftSidebarOuterWindow.addEventListener('click', hideLeftSidebar);
         leftSidebarOuterWindow.open();
 
@@ -82,7 +95,19 @@ function HandheldSidebar(detailRootWindow)
 
     // we have to create this window before any other window, 
     // otherwise the menu will be always displayed on top of the root window.
-    var rightSidebarWindow = Ti.UI.createWindow({right: 0, width: widthSidebar, visible: false});
+    var rightSidebarWindow = Ti.UI.createWindow({
+        right: 0, 
+        width: widthSidebar, 
+        visible: false,
+        statusBarStyle: Alloy.statusBarStyle
+    });
+        
+    if (Alloy.isIOS7OrLater) {
+        // otherwise visible in status bar
+        rightSidebarWindow.top = 20;
+        rightSidebarWindow.statusBarStyle = Alloy.statusBarStyle;
+    }
+    
     rightSidebarWindow.open();
 
     var rightSidebarOuterWindow;
@@ -123,7 +148,12 @@ function HandheldSidebar(detailRootWindow)
 
         rightSidebarVisible = true;
 
-        rightSidebarOuterWindow = Ti.UI.createWindow({left: 0, right: widthSidebar, backgroundColor: 'transparent'});
+        rightSidebarOuterWindow = Ti.UI.createWindow({
+            left: 0, 
+            right: widthSidebar, 
+            backgroundColor: 'transparent',
+            statusBarStyle: Alloy.statusBarStyle
+        });
         rightSidebarOuterWindow.addEventListener('click', hideRightSidebar);
         rightSidebarOuterWindow.open();
 

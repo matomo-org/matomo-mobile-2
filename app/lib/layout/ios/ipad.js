@@ -5,7 +5,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
-var rootWindow = Ti.UI.createWindow();
+var rootWindow = Ti.UI.iOS.createNavigationWindow({statusBarStyle: Alloy.statusBarStyle});
 
 var iOSLayout = require('layout/ios');
 var layout    = new (iOSLayout)(rootWindow);

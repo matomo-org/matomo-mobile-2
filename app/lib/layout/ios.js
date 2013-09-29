@@ -11,13 +11,11 @@ var _ = Alloy._;
 
 function iOsLayout(rootWindow)
 {
-    var navGroup = null;
     var isBootstrapped = false;
 
     function bootstrap (win) 
     {
-        navGroup   = Ti.UI.iPhone.createNavigationGroup({window: win});
-        rootWindow.add(navGroup);
+        rootWindow.window = win;
         rootWindow.open();
 
         isBootstrapped = true;
@@ -34,7 +32,7 @@ function iOsLayout(rootWindow)
          *                      animation. Afaik only used in entryWebsite controller
          */
         close: function (win, animated) {
-            if (!win || !navGroup) {
+            if (!win) {
                 return;
             }
 
@@ -42,7 +40,7 @@ function iOsLayout(rootWindow)
                 animated = true;
             }
 
-            navGroup.close(win, {animated : animated});
+            rootWindow.closeWindow(win, {animated : animated});
             win = null;
         },
 
@@ -62,7 +60,7 @@ function iOsLayout(rootWindow)
             }
 
             if (isBootstrapped) {
-                navGroup.open(win, {animated : animated});
+                rootWindow.openWindow(win, {animated : animated});
             } else {
                 bootstrap(win);
             }

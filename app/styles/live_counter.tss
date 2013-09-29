@@ -23,6 +23,10 @@
     font: {fontSize: 14}
 },
 
+"#title[platform=ios]": {
+    left: 15,
+}
+
 "#title[platform=android]": {
     left: '16dp',
     top: '8dp',
@@ -38,6 +42,10 @@
     color: '#385487',
     font: {fontSize: 18}
 },
+
+"#counter[platform=ios]": {
+    left: 15,
+}
 
 "#counter[platform=android]": {
     left: '16dp',
