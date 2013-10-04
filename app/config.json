@@ -44,7 +44,7 @@
         "settings": {
             "locale": "en",
             "trackingEnabled": false,
-            "preferEvolutionGraphs": false,
+            "preferEvolutionGraphs": true,
             "graphsEnabled": true,
             "httpTimeout": 60000
         }
