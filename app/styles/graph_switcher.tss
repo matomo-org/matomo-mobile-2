@@ -22,7 +22,8 @@
     zIndex: 999,
     height: 20,
     opacity: 0.7,
-    visible: true
+    visible: true,
+    tintColor: '#222222'
 }
 
 "#closeButton[platform=ios]": {

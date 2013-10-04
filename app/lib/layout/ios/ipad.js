@@ -6,6 +6,14 @@
  */
 
 var rootWindow = Ti.UI.iOS.createNavigationWindow({statusBarStyle: Alloy.statusBarStyle});
+rootWindow.window = Ti.UI.createWindow({
+    barImage: "navbar.png",
+    backgroundColor: "#FFFFFF",
+    barColor: "#CD1628",
+    navTintColor: "#ffffff",
+    color: "#ffffff",
+    statusBarStyle: Alloy.statusBarStyle
+});
 
 var iOSLayout = require('layout/ios');
 var layout    = new (iOSLayout)(rootWindow);

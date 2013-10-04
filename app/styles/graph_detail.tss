@@ -6,7 +6,7 @@
 }
 
 "#index[platform=ios]": {
-    navBarHidden: true 
+    navBarHidden: true,
 }
 
 "#index[platform=mobileweb]": {

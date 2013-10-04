@@ -6,6 +6,9 @@
         <LeftNavButton platform="ios" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
+        <LeftNavButton platform="ios" formFactor="tablet">
+            <Button class="fakeButtonThatHidesBackButton"/>
+        </LeftNavButton>
         
         <RightNavButton platform="ios" formFactor="handheld">
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>

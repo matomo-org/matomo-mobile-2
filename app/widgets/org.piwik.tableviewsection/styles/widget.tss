@@ -30,6 +30,7 @@
 
 "#title[platform=ios]": {
     left: 15,
+    font: {fontSize: 15, fontWeight: 'normal'},
 }
 
 "#title[platform=android]": {

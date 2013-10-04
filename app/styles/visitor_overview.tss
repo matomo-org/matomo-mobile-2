@@ -30,6 +30,10 @@
     top: '8dp',
 },
 
+".dateContainer[platform=ios formFactor=tablet]": {
+    top: 13,
+},
+
 "#visittime": {
     top: 0,
     font: {fontSize: 14, fontWeight: 'bold'},
@@ -134,6 +138,10 @@
     left: 15,
 },
 
+".visitorInfo[platform=ios formFactor=tablet]": {
+    top: 7,
+},
+
 ".visitorInfo[platform=android]": {
     font: {fontSize: '13sp'},
     top: '3dp',
@@ -143,6 +151,10 @@
 
 "#pageViews": {
     bottom: 8,
+},
+
+"#pageViews[platform=ios formFactor=tablet]": {
+    bottom: 13,
 },
 
 "#pageViews[platform=android]": {

@@ -12,35 +12,35 @@ if (args.title && args.description) {
     exports.create = function ()
     {
         return Alloy.createWidget('org.piwik.tableviewrow', 'title_description', args);
-    }
+    };
 
     exports.getRow = function ()
     {
         return exports.create().getView();
-    }
+    };
 
 } else if (args.title && args.value) {
 
     exports.create = function ()
     {
         return Alloy.createWidget('org.piwik.tableviewrow', 'title_value', args);
-    }
+    };
 
     exports.getRow = function ()
     {
         return exports.create().getView();
-    }
+    };
 
 } else if (args.title) {
 
     exports.create = function ()
     {
         return Alloy.createWidget('org.piwik.tableviewrow', 'title', args);
-    }
+    };
 
     exports.getRow = function ()
     {
         return exports.create().getView();
-    }
+    };
 
 }

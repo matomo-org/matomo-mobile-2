@@ -6,6 +6,17 @@
     color: "#ffffff",
 },
 
+"Popover": {
+    barImage: "navbar.png",
+    backgroundColor: "#FFFFFF",
+    barColor: "#CD1628",
+    navTintColor: "#ffffff",
+    tintColor: "#ffffff",
+    color: "#ffffff",
+    navBarHidden: false,
+    statusBarStyle: Alloy.statusBarStyle
+}
+
 "Window[platform=android]": {
     exitOnClose: true
 },
@@ -29,6 +40,12 @@
 
 "Label[platform=android]": {
     font: {fontSize: '16sp'}
+}
+
+".fakeButtonThatHidesBackButton": {
+    backgroundImage: "blank.png",
+    width: 32,
+    height: 32
 }
 
 ".reportChooserButton": {

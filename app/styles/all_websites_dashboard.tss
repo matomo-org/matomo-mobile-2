@@ -7,7 +7,8 @@
 "#searchBar": {
     top: 0,
     barColor: "#cccccc",
-    showCancel: true
+    showCancel: true,
+    tintColor: '#222222'
 },
 
 "#searchBar[platform=android]": {
@@ -115,6 +116,10 @@
     right: 10,
     left: 10,
     text: L('Mobile_UseSearchBarHint', Alloy.CFG.numDisplayedWebsitesInDashboard)
+}
+
+"#useSearchHintLabel[platform=ios]": {
+    left: 15,
 }
 
 "#useSearchHintLabel[platform=android]": {

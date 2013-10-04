@@ -5,6 +5,11 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
+var args = arguments[0] || {};
+if (args && args.enableGoBack) {
+    $.index.leftNavButton = null;
+}
+
 function L(key, substitution)
 {
     var translation = require('L')(key);
@@ -154,9 +159,8 @@ function render()
         showMessageNoWebsitesFound(L('Mobile_NoWebsitesShort'), L('Mobile_NoWebsiteFound'));
     } else {
         showReportContent();
+        renderWebsites();
     }
-
-    renderWebsites();
 
     fetchImageGraphUrlToRenderGraph();
 

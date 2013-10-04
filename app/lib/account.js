@@ -25,15 +25,17 @@ function onSiteSelected(event)
     onSiteSelectedCallback(event.site, event.account);
 }
 
+var firstTime = true;
 function openDashboard(account)
 {
-    var dashboard = Alloy.createController('all_websites_dashboard');
+    var dashboard = Alloy.createController('all_websites_dashboard', {enableGoBack: !firstTime});
     dashboard.on('websiteChosen', onSiteSelected);
     dashboard.on('websiteChosen', function () {
         this.close();
     });
 
     dashboard.open();
+    firstTime = false;
 }
 
 function setDefaultReportDateIfNeeded(account)

@@ -18,6 +18,12 @@
 
 "#title[platform=ios]": {
     left: 15,
+    font: {fontSize: 18, fontWeight: 'normal'},
+}
+
+"#title[platform=ios formFactor=tablet]": {
+    top: 13,
+    bottom: 13,
 }
 
 "#title[platform=android]": {

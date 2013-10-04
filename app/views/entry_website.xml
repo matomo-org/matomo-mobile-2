@@ -1,5 +1,9 @@
 <Alloy>
     <Window id="index" onClose="onClose" onOpen="onOpen">
+        <LeftNavButton platform="ios">
+            <Button class="fakeButtonThatHidesBackButton"/>
+        </LeftNavButton>
+        
         <RightNavButton platform="ios,mobileweb">
             <Button id="accountsButton" onClick="chooseAccount"/>
         </RightNavButton>

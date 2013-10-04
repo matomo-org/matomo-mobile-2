@@ -3,7 +3,7 @@
 },
 
 "#titleLabel": {
-    textAlign: 'left',
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
     left: 10,
@@ -18,6 +18,12 @@
 
 "#titleLabel[platform=ios]": {
     left: 15,
+    font: {fontSize: 18, fontWeight: 'normal'},
+}
+
+"#title[platform=ios formFactor=tablet]": {
+    top: 13,
+    bottom: 13,
 }
 
 "#titleLabel[platform=android]": {

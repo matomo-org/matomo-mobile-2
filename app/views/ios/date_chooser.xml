@@ -1,6 +1,6 @@
 <Alloy>
     <NavigationWindow id="index">
-        <Window class="iOSContainer" id="index" onOpen="onOpen">
+        <Window class="iOSContainer" id="indexWin" onOpen="onOpen">
             <LeftNavButton>
                 <Button id="cancelButton" onClick="closeWindow"/>
             </LeftNavButton>

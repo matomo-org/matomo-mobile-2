@@ -10,7 +10,7 @@ var isOpened = false;
 
 function openAllWebsitesDashboard(onWebsiteChosenCallback) {
 
-    var websites = Alloy.createController('all_websites_dashboard');
+    var websites = Alloy.createController('all_websites_dashboard', {enableGoBack: true});
     websites.enableCanGoBack();
 
     if (onWebsiteChosenCallback) {

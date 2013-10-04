@@ -15,7 +15,7 @@ function iOsLayout(rootWindow)
 
     function bootstrap (win) 
     {
-        rootWindow.window = win;
+     //   rootWindow.window = win;
         rootWindow.open();
 
         isBootstrapped = true;
@@ -40,7 +40,7 @@ function iOsLayout(rootWindow)
                 animated = true;
             }
 
-            rootWindow.closeWindow(win, {animated : animated});
+            rootWindow.closeWindow(win, {animated : false});
             win = null;
         },
 
@@ -59,11 +59,11 @@ function iOsLayout(rootWindow)
                 animated = true;
             }
 
-            if (isBootstrapped) {
-                rootWindow.openWindow(win, {animated : animated});
-            } else {
+            if (!isBootstrapped) {
                 bootstrap(win);
             }
+            
+            rootWindow.openWindow(win, {animated : animated});
 
             this.trigger('open', win);
 

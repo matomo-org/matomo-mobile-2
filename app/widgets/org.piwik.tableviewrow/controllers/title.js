@@ -8,7 +8,6 @@
 var args = arguments[0] || {};
 
 $.titleLabel.text = args.title;
-
 if (args.hasChild) {
     $.row.hasChild = true;
 }

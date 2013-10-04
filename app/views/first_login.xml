@@ -2,6 +2,11 @@
     <Collection src="appAccounts"/>
     
     <Window id="index" onOpen="onOpen" onClose="onClose">
+        
+        <LeftNavButton platform="ios" formFactor="tablet">
+            <Button class="fakeButtonThatHidesBackButton"/>
+        </LeftNavButton>
+        
         <ScrollView class="container">
             <View id="mainView">
                 <View id="headerView">
