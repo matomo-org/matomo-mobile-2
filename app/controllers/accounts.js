@@ -32,7 +32,6 @@ function chooseAccount(event)
 
     account.select(function (accountModel) {
         $.trigger('accountChosen', accountModel);
-        close();
     });
 }
 

@@ -182,12 +182,14 @@ function chooseAccount()
  
 function onAccountChosen(account)
 {
+    var self = this;
     require('account').selectWebsite(account, function (siteModel, accountModel) {
+        self.close();
+        self.off('accountChosen');
         require('session').setWebsite(siteModel, accountModel);
         openEntryReport();
+        self = null;
     });
-
-    this.off('accountChosen');
 }
 
 function openCompositeReport(chosenReportModel)
