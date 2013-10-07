@@ -22,8 +22,8 @@
 }
 
 "#title[platform=ios formFactor=tablet]": {
-    top: 13,
-    bottom: 13,
+    top: 12,
+    bottom: 12,
 }
 
 "#title[platform=android]": {
