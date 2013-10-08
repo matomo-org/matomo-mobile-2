@@ -74,6 +74,7 @@ function chooseAccount()
 
 function onAccountChosen(account)
 {
+    this.close();
     require('Piwik/Tracker').trackEvent({title: 'Account Chosen', url: '/all-websites-dashboard/account-chosen'});
 
     accountModel = account;
