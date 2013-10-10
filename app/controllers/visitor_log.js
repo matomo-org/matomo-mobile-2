@@ -175,6 +175,10 @@ function getNoVisitorsRowParams()
         rowParams.bottom = '12dp';
     }
 
+    if (OS_MOBILEWEB) {
+        rowParams.left = 10;
+    }
+
     if (OS_IOS) {
         rowParams.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
     }
