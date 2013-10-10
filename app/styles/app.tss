@@ -3,7 +3,6 @@
     backgroundColor: "#FFFFFF",
     barColor: "#CD1628",
     navTintColor: "#ffffff",
-    color: "#ffffff",
 },
 
 "Popover": {
