@@ -71,8 +71,10 @@ function onOpen()
 
 function onClose()
 {
-    $.emptyData && $.emptyData.cleanupIfNeeded();
-    $.emptyData = null;
+    if ($.emptyData) {
+        $.emptyData && $.emptyData.cleanupIfNeeded();
+        $.emptyData = null;
+    }
 
     if (OS_ANDROID) {
         // this frees a lot of memory
