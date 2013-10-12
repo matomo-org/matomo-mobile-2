@@ -1,6 +1,5 @@
 "#index": {
-    title: L('Live_VisitorsInRealTime'),
-    backButtonTitle: L('Mobile_NavigationBack')
+    title: L('Live_VisitorsInRealTime')
 }
 
 "#liveTable": {

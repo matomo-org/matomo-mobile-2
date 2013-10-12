@@ -1,6 +1,5 @@
 "#index": {
-    title: L('UserCountryMap_RealTimeMap'),
-    backButtonTitle: L('Mobile_NavigationBack')
+    title: L('UserCountryMap_RealTimeMap')
 }
 
 "#headerBar": {

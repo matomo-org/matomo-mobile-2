@@ -1,6 +1,5 @@
 "#index": {
-    title: ' ',
-    backButtonTitle: L('Mobile_NavigationBack')
+    title: ' '
 }
 
 "#headerBar": {

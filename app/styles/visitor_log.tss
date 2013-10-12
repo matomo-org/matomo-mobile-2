@@ -1,6 +1,5 @@
 "#index": {
-    title: L('Live_VisitorLog'),
-    backButtonTitle: L('Mobile_NavigationBack')
+    title: L('Live_VisitorLog')
 }
 
 "#visitorLogTable": {

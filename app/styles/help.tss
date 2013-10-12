@@ -1,6 +1,5 @@
 "#index": {
-    title: L('General_Help'),
-    backButtonTitle: L('Mobile_NavigationBack')
+    title: L('General_Help')
 },
 
 "#headerBar": {
