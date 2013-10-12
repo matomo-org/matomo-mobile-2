@@ -63,6 +63,12 @@ function iOsLayout(rootWindow)
                 bootstrap(win);
             }
             
+            // TODO it would be nice to be able to make use of animations on the iPad. At the moment enabling animation 
+            // causes a weird issue at least on the iPad. To reproduce open Piwik Mobile and make sure All Websites
+            // Dashboard is displayed. Wait till the whole screen has finished loading including graph and so on.
+            // Open a website --> The right part of the window is too wide resulting in parts of the app is not visible.
+            // If you cannot reproduce it the first time, try it a second or a third time.
+            animated = animated && Alloy.isHandheld;
             rootWindow.openWindow(win, {animated : animated});
 
             this.trigger('open', win);
