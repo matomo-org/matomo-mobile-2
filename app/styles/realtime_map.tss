@@ -1,5 +1,6 @@
 "#index": {
-    title: L('UserCountryMap_RealTimeMap')
+    title: L('UserCountryMap_RealTimeMap'),
+    backButtonTitleImage: 'blank.png'
 }
 
 "#headerBar": {

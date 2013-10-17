@@ -1,5 +1,6 @@
 "#index": {
-    title: L('General_GiveUsYourFeedback')
+    title: L('General_GiveUsYourFeedback'),
+    backButtonTitleImage: 'blank.png'
 }
 
 "#headerBar": {

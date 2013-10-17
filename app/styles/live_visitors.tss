@@ -1,5 +1,6 @@
 "#index": {
-    title: L('Live_VisitorsInRealTime')
+    title: L('Live_VisitorsInRealTime'),
+    backButtonTitleImage: 'blank.png'
 }
 
 "#liveTable": {

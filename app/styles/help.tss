@@ -1,5 +1,6 @@
 "#index": {
-    title: L('General_Help')
+    title: L('General_Help'),
+    backButtonTitleImage: 'blank.png'
 },
 
 "#headerBar": {

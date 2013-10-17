@@ -1,5 +1,6 @@
 "#index": {
-    title: L('Live_VisitorLog')
+    title: L('Live_VisitorLog'),
+    backButtonTitleImage: 'blank.png'
 }
 
 "#visitorLogTable": {
