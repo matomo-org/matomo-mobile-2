@@ -80,6 +80,11 @@ function onError (accountModel, error) {
             title   = 'Account No View Access';
             url     = '/account/login/error/no-view-access';
             break;
+        case 'IncompatiblePiwikVersion':
+            message = L('The Piwik version you are using seems to be incompatible with Piwik Mobile 2. Please update your Piwik installation and try again or install Piwik Mobile 1.');
+            title   = 'Piwik Version Incomptaible';
+            url     = '/account/login/error/piwik-version-incompatible';
+            break;
         default:
             title   = 'Unknown error';
             url     = '/account/login/error/unknown/' + error;
@@ -138,6 +143,52 @@ exports.login = function(accounts, accessUrl, username, password)
     if (!account.isValid()) {
         return;
     }
+   
+    var actuallySaveAccount = function (accountModel) {
+        require('Piwik/Tracker').trackEvent({title: 'Account Login Success', url: '/account/login/success'});
+        
+        accountModel.save();
+        accountModel.off();
+        accounts.add(accountModel);
+        accountModel = null;        
+    };
+    
+    var saveAccountIfPiwikVersionIsGood = function (piwikVersionModel, accountModel)
+    {
+        if (piwikVersionModel.isFullyCompatible()) {
+            
+           actuallySaveAccount(accountModel);
+           
+        } else if (piwikVersionModel.isRestrictedCompatible()) {
+
+           var alertDialog = Ti.UI.createAlertDialog({
+                title: L('Restricted comptability'),
+                message: 'The Piwik version you are using is not fully supported by Piwik Mobile 2. You may experience some bugs. We recommend to either update Piwik to the latest version or to use Piwik Mobile 1.',
+                buttonNames: [L('Understood'), L('General_Cancel')],
+                cancel: 1,
+                selectedIndex: 1
+            });
+            
+            alertDialog.addEventListener('click', function (clickEvent) {
+                if (!clickEvent || clickEvent.cancel === clickEvent.index || true === clickEvent.cancel) {
+                        
+                    accountModel.clear({silent: true});
+                    accountModel = null;
+        
+                    return;
+                }
+
+                actuallySaveAccount(accountModel);
+            });
+            
+            alertDialog.show(); 
+            
+        } else {
+
+            accountModel.clear({silent: true});
+            accountModel.trigger('error', accountModel, 'IncompatiblePiwikVersion');
+        }
+    };
 
     var makeSureUserHasAccessToAtLeastOneWebsite = function (accountModel)
     {
@@ -160,12 +211,23 @@ exports.login = function(accounts, accessUrl, username, password)
                     return;
                 }
 
-                accountModel.save();
-                accountModel.off();
-                accounts.add(accountModel);
-                accountModel = null;
-
-                require('Piwik/Tracker').trackEvent({title: 'Account Login Success', url: '/account/login/success'});
+                var version = Alloy.createModel('piwikVersion');
+                version.fetch({
+                    account: accountModel,
+                    success: function(model) {
+                        
+                        saveAccountIfPiwikVersionIsGood(model, accountModel);
+                        accountModel = null;
+                        
+                    },
+                    error: function(undefined, error) {
+                        
+                        accountModel.clear({silent: true});
+                        accountModel = null;
+        
+                        onNetworkError(undefined, error);
+                    }
+                });
 
             }, error: function (undefined, error) {
 

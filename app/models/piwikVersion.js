@@ -38,6 +38,20 @@ exports.definition = {
             validResponse: function (response) {
 
                 return !!response && _.isObject(response) && _.has(response, 'value');
+            },
+            
+            isFullyCompatible: function ()
+            {
+                return require('Piwik').isVersionGreaterThanOrEqual('2.0', this.getVersion());
+            },
+            
+            isRestrictedCompatible: function ()
+            {
+                if (this.isFullyCompatible()) {
+                    return false;
+                }
+                
+                return require('Piwik').isVersionGreaterThanOrEqual('1.12', this.getVersion());
             }
 
         }); // end extend

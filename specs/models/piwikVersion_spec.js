@@ -14,6 +14,23 @@ function getFakeAccount()
     return require('specs/utils/account').getValidAccount();
 }
 
+function createPiwikVersionModel(version)
+{
+    return Alloy.createModel('piwikVersion', {value: version});
+}
+
+function expectVersionToBeRestritedCompatible(version, isRestricted)
+{
+    var model = createPiwikVersionModel(version);
+    expect(model.isRestrictedCompatible()).toEqual(isRestricted);
+}
+
+function expectVersionToBeFullyCompatible(version, isCompatible)
+{
+    var model = createPiwikVersionModel(version);
+    expect(model.isFullyCompatible()).toEqual(isCompatible);
+}
+
 describe('piwikVersion model integration', function() {
 
     it('should fetch the correct piwik version from demo.piwik.org', function() {
@@ -43,6 +60,9 @@ describe('piwikVersion model', function() {
 
     beforeEach(function() {
         piwikVersion = Alloy.createModel('piwikVersion');
+        piwik1Dot1Version = Alloy.createModel('piwikVersion', {value: '1.11.1'});
+        piwik1Dot1Version = Alloy.createModel('piwikVersion', {value: '1.12'});
+        piwik1Dot1Version = Alloy.createModel('piwikVersion', {value: '2.0'});
     });
 
     it('should be able to detect whether response is a valid response', function() {
@@ -51,6 +71,30 @@ describe('piwikVersion model', function() {
         expect(piwikVersion.validResponse({})).toBeFalsy();
         expect(piwikVersion.validResponse([])).toBeFalsy();
         expect(piwikVersion.validResponse(null)).toBeFalsy();
+    });
+
+    it('should be a restricted version in case Piwik version is 1.12', function() {
+        expectVersionToBeRestritedCompatible('1.12', true);
+        expectVersionToBeRestritedCompatible('1.12.0', true);
+        expectVersionToBeRestritedCompatible('1.12.1', true);
+        expectVersionToBeRestritedCompatible('1.12-beta', true);
+        expectVersionToBeRestritedCompatible('1.11', false);
+        expectVersionToBeRestritedCompatible('1.11.3', false);
+        expectVersionToBeRestritedCompatible('2.0', false);
+        expectVersionToBeRestritedCompatible('2.0.0', false);
+        expectVersionToBeRestritedCompatible('2.12.0', false);
+    });
+    
+    it('should be a fully compatible version in case Piwik version is 2.0', function() {
+        expectVersionToBeFullyCompatible('1.12', false);
+        expectVersionToBeFullyCompatible('1.12.0', false);
+        expectVersionToBeFullyCompatible('1.12.1', false);
+        expectVersionToBeFullyCompatible('1.12-beta', false);
+        expectVersionToBeFullyCompatible('1.11', false);
+        expectVersionToBeFullyCompatible('2.0', true);
+        expectVersionToBeFullyCompatible('2.0.0', true);
+        expectVersionToBeFullyCompatible('2.12.0', true);
+        expectVersionToBeFullyCompatible('2.0-a1', true);
     });
 });
 

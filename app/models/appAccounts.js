@@ -215,7 +215,7 @@ exports.definition = {
 
                         if (model && model.getVersion()) {
                             that.set({version: '' + model.getVersion()});
-                        } else if (!account.version) {
+                        } else if (!account.get('version')) {
                             that.set({version: ''});
                         } else {
                             // there went something wrong with the request. For example the network connection broke up.
