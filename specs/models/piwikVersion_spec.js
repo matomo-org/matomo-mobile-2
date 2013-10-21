@@ -74,23 +74,33 @@ describe('piwikVersion model', function() {
     });
 
     it('should be a restricted version in case Piwik version is 1.12', function() {
-        expectVersionToBeRestritedCompatible('1.12', true);
-        expectVersionToBeRestritedCompatible('1.12.0', true);
-        expectVersionToBeRestritedCompatible('1.12.1', true);
-        expectVersionToBeRestritedCompatible('1.12-beta', true);
+        expectVersionToBeRestritedCompatible(null, false);
+        expectVersionToBeRestritedCompatible(undefined, false);
+        expectVersionToBeRestritedCompatible('', false);
+        
         expectVersionToBeRestritedCompatible('1.11', false);
         expectVersionToBeRestritedCompatible('1.11.3', false);
         expectVersionToBeRestritedCompatible('2.0', false);
         expectVersionToBeRestritedCompatible('2.0.0', false);
         expectVersionToBeRestritedCompatible('2.12.0', false);
+        
+        expectVersionToBeRestritedCompatible('1.12', true);
+        expectVersionToBeRestritedCompatible('1.12.0', true);
+        expectVersionToBeRestritedCompatible('1.12.1', true);
+        expectVersionToBeRestritedCompatible('1.12-beta', true);
     });
     
     it('should be a fully compatible version in case Piwik version is 2.0', function() {
+        expectVersionToBeFullyCompatible(null, false);
+        expectVersionToBeFullyCompatible(undefined, false);
+        expectVersionToBeFullyCompatible('', false);
+        
+        expectVersionToBeFullyCompatible('1.11', false);
         expectVersionToBeFullyCompatible('1.12', false);
         expectVersionToBeFullyCompatible('1.12.0', false);
         expectVersionToBeFullyCompatible('1.12.1', false);
         expectVersionToBeFullyCompatible('1.12-beta', false);
-        expectVersionToBeFullyCompatible('1.11', false);
+        
         expectVersionToBeFullyCompatible('2.0', true);
         expectVersionToBeFullyCompatible('2.0.0', true);
         expectVersionToBeFullyCompatible('2.12.0', true);

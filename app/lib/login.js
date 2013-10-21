@@ -160,10 +160,12 @@ exports.login = function(accounts, accessUrl, username, password)
            actuallySaveAccount(accountModel);
            
         } else if (piwikVersionModel.isRestrictedCompatible()) {
+            var version    = piwikVersionModel.getVersion();
+            var bugWarning = 'The Piwik version %s you are using is not fully supported by Piwik Mobile 2. You may experience some bugs. We recommend to either update Piwik to the latest version or to use Piwik Mobile 1.';
 
-           var alertDialog = Ti.UI.createAlertDialog({
+            var alertDialog = Ti.UI.createAlertDialog({
                 title: L('Restricted comptability'),
-                message: 'The Piwik version you are using is not fully supported by Piwik Mobile 2. You may experience some bugs. We recommend to either update Piwik to the latest version or to use Piwik Mobile 1.',
+                message: String.format(bugWarning, version + ''),
                 buttonNames: [L('Understood'), L('General_Cancel')],
                 cancel: 1,
                 selectedIndex: 1

@@ -42,12 +42,16 @@ exports.definition = {
             
             isFullyCompatible: function ()
             {
+                if (!this.getVersion()) {
+                    return false;
+                }
+                
                 return require('Piwik').isVersionGreaterThanOrEqual('2.0', this.getVersion());
             },
             
             isRestrictedCompatible: function ()
             {
-                if (this.isFullyCompatible()) {
+                if (!this.getVersion() || this.isFullyCompatible()) {
                     return false;
                 }
                 
