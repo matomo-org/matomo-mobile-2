@@ -81,7 +81,7 @@ function onError (accountModel, error) {
             url     = '/account/login/error/no-view-access';
             break;
         case 'IncompatiblePiwikVersion':
-            message = L('The Piwik version you are using seems to be incompatible with Piwik Mobile 2. Please update your Piwik installation and try again or install Piwik Mobile 1.');
+            message = L('Mobile_IncompatiblePiwikVersion');
             title   = 'Piwik Version Incomptaible';
             url     = '/account/login/error/piwik-version-incompatible';
             break;
@@ -160,13 +160,12 @@ exports.login = function(accounts, accessUrl, username, password)
            actuallySaveAccount(accountModel);
            
         } else if (piwikVersionModel.isRestrictedCompatible()) {
-            var version    = piwikVersionModel.getVersion();
-            var bugWarning = 'The Piwik version %s you are using is not fully supported by Piwik Mobile 2. You may experience some bugs. We recommend to either update Piwik to the latest version or to use Piwik Mobile 1.';
-
+            var version = piwikVersionModel.getVersion();
+   
             var alertDialog = Ti.UI.createAlertDialog({
-                title: L('Restricted comptability'),
-                message: String.format(bugWarning, version + ''),
-                buttonNames: [L('Understood'), L('General_Cancel')],
+                title: L('Mobile_RestrictedCompatiblity'),
+                message: String.format(L('Mobile_RestrictedCompatiblityExplanation'), version + ''),
+                buttonNames: [L('General_Ok'), L('General_Cancel')],
                 cancel: 1,
                 selectedIndex: 1
             });
