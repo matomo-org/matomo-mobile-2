@@ -191,6 +191,27 @@ exports.login = function(accounts, accessUrl, username, password)
         }
     };
 
+    var makeSureUserHasGoodPiwikVersion = function (accountModel)
+    {
+        var version = Alloy.createModel('piwikVersion');
+        version.fetch({
+            account: accountModel,
+            success: function(model) {
+                
+                saveAccountIfPiwikVersionIsGood(model, accountModel);
+                accountModel = null;
+                
+            },
+            error: function(undefined, error) {
+                
+                accountModel.clear({silent: true});
+                accountModel = null;
+
+                onNetworkError(undefined, error);
+            }
+        });
+    };
+
     var makeSureUserHasAccessToAtLeastOneWebsite = function (accountModel)
     {
         if (!accountModel) {
@@ -212,23 +233,8 @@ exports.login = function(accounts, accessUrl, username, password)
                     return;
                 }
 
-                var version = Alloy.createModel('piwikVersion');
-                version.fetch({
-                    account: accountModel,
-                    success: function(model) {
-                        
-                        saveAccountIfPiwikVersionIsGood(model, accountModel);
-                        accountModel = null;
-                        
-                    },
-                    error: function(undefined, error) {
-                        
-                        accountModel.clear({silent: true});
-                        accountModel = null;
-        
-                        onNetworkError(undefined, error);
-                    }
-                });
+                makeSureUserHasGoodPiwikVersion(accountModel);
+                accountModel = null;
 
             }, error: function (undefined, error) {
 
