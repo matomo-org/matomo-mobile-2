@@ -198,6 +198,8 @@ exports.login = function(accounts, accessUrl, username, password)
             account: accountModel,
             success: function(model) {
                 
+                hideWaitingIndicator();
+
                 saveAccountIfPiwikVersionIsGood(model, accountModel);
                 accountModel = null;
                 
@@ -224,8 +226,6 @@ exports.login = function(accounts, accessUrl, username, password)
         site.fetch({
             account: accountModel,
             success: function (siteCollection) {
-
-                hideWaitingIndicator();
 
                 if (!siteCollection.hasAccessToAtLeastOneWebsite()) {
                     accountModel.trigger('error', accountModel, 'NoViewAccess');
