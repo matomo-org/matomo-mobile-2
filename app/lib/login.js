@@ -163,8 +163,8 @@ exports.login = function(accounts, accessUrl, username, password)
             var version = piwikVersionModel.getVersion();
    
             var alertDialog = Ti.UI.createAlertDialog({
-                title: L('Mobile_RestrictedCompatiblity'),
-                message: String.format(L('Mobile_RestrictedCompatiblityExplanation'), version + ''),
+                title: L('Mobile_RestrictedCompatibility'),
+                message: String.format(L('Mobile_RestrictedCompatibilityExplanation'), version + ''),
                 buttonNames: [L('General_Ok'), L('General_Cancel')],
                 cancel: 1,
                 selectedIndex: 1
