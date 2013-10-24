@@ -92,7 +92,7 @@ var navBarHeight = Ti.Platform.displayCaps.platformHeight - getViewHeight();
  * @returns {int} The width in px 
  */
 function getOrientationSpecificWidth() {
-    var pictureWidth = Ti.Platform.displayCaps.platformWidth - navBarHeight - 20;
+    var pictureWidth = Ti.Platform.displayCaps.platformWidth - navBarHeight - 50;
     
     return pictureWidth;
 }
@@ -104,7 +104,7 @@ function getOrientationSpecificWidth() {
  * @returns {int} The height in px 
  */
 function getOrientationSpecificHeight() {
-    var pictureHeight = Ti.Platform.displayCaps.platformHeight - navBarHeight - 20;
+    var pictureHeight = Ti.Platform.displayCaps.platformHeight - navBarHeight - 50;
     
     return pictureHeight;
 }
