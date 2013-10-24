@@ -355,6 +355,7 @@ function createActionAction(actionDetail)
     if (actionDetail.pageTitle) {
         row.add($.UI.create('Label', {classes: ['actionActionPageTitleLabel'], text: actionDetail.pageTitle + ''}));
     }
+    
     if (actionDetail.url) {
         row.add($.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.url + ''}));
     }
@@ -417,6 +418,8 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
 
     if (actionDetail.url) {
         row.add($.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.url + '')}));
+    } else if (actionDetail.siteSearchKeyword) {
+        row.add($.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.siteSearchKeyword + '')}));
     }
 
     rows.push(row);
