@@ -158,7 +158,7 @@ module.exports = {
     Mobile_LoadingReport:                                               'Loading %s',
     Mobile_LoginCredentials:                                            'Credentials',
     Mobile_LoginUseHttps:                                               'Use https',
-    Mobile_LoginToPiwikToChangeSettings:                                'Login to your Piwik server to create and update websites, users or to change General Settings like "Report to load by default" and "Report date to load by default".',
+    Mobile_LoginToPiwikToChangeSettings:                                'Login to your Piwik server to create and update websites, users or to change General Settings like "Report to load by default".',
     Mobile_MultiChartLabel:                                             'Display sparklines',
     Mobile_NavigationBack:                                              'Back',
     Mobile_NetworkError:                                                'Network Error',
