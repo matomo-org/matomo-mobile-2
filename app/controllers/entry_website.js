@@ -23,6 +23,8 @@ function L(key, substitution)
 function onOpen()
 {
     require('Piwik/Tracker').trackWindow('Open Entry Website', 'fetch-entry-website');
+
+    fetchEntrySite();
 }
 
 function onClose()
@@ -109,6 +111,4 @@ exports.close = function ()
 exports.open = function ()
 {
     require('layout').open($.index, false);
-
-    fetchEntrySite();
 };

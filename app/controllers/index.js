@@ -66,15 +66,16 @@ function onCreatedAccount(account)
     accounts.off("add", onCreatedAccount);
 
     showEntryScreen(account);
-
-    if (firstLogin) {
-        firstLogin.close();
-    }
 }
 
 function showEntryScreen(account)
 {
-    require('account').selectWebsite(account, openStatistics);
+    require('account').selectWebsite(account, openStatistics, function () {
+        if (firstLogin) {
+            firstLogin.close();
+            firstLogin = null;
+        }
+    });
 }
 
 function openStatistics(siteModel, accountModel)

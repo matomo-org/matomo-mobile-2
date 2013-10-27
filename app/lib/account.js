@@ -6,7 +6,7 @@
  */
 
 var onSiteSelectedCallback = null;
-
+var onFirstWindowOpenedCallback = null;
 function openEntrySite(account) 
 {
     var entryWebsite = Alloy.createController('entry_website', {account: account});
@@ -61,16 +61,22 @@ function onAccountSelected(accountModel)
     } else {
         openEntrySite(accountModel);
     }
+    
+    if (onFirstWindowOpenedCallback) { 
+        onFirstWindowOpenedCallback();
+        onFirstWindowOpenedCallback = null;
+    }
 }
 
-exports.selectWebsite = function (accountModel, callback)
+exports.selectWebsite = function (accountModel, onSuccessCallback, onWindowOpenedCallback)
 {
     if (!accountModel) {
         console.log('Cannot select website, no account given', 'account');
         return;
     }
 
-    onSiteSelectedCallback = callback;
+    onSiteSelectedCallback      = onSuccessCallback;
+    onFirstWindowOpenedCallback = onWindowOpenedCallback;
 
     accountModel.select(onAccountSelected);
 };
