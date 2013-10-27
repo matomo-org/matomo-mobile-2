@@ -17,6 +17,16 @@ exports.startsWithHttp = function(url)
     return (url && 0 === (''+url).indexOf('http'));
 };
 
+exports.startsWithHttps = function(url)
+{
+    return (url && 0 === (''+url).indexOf('https'));
+};
+
+exports.replaceHttpWithHttps = function(url)
+{
+    return 'https://' + url.substr(7);
+};
+
 exports.addHttpProtocol = function(url)
 {
     return 'http://' + url;

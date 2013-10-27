@@ -34,14 +34,52 @@ function onUsernameReturn ()
     $.password.focus();
 }
 
-function doLogin()
+function askToUseHttps()
 {
-    onUrlBlur();
+    // accessUrl starts with http://
+    var alertDialog = Ti.UI.createAlertDialog({
+        message: L('Mobile_HttpIsNotSecureWarning'),
+        buttonNames: [L('General_Yes'), L('Mobile_LoginUseHttps')]
+    });
 
+    alertDialog.show();
+
+    alertDialog.addEventListener('click', function (event) {
+        if (!event || (event.cancel === event.index) || (true === event.cancel)) {
+            // user pressed hardware back button or cancel button
+            return;
+        }
+
+        if (1 === event.index) {
+            // user pressed 'use secure https' button
+            $.url.value = require('url').replaceHttpWithHttps($.url.value);
+            login();
+        } else if (0 === event.index) {
+            login();
+        }
+        
+    });
+}
+
+function login()
+{
     require('login').login(
         accounts,
         $.url.value,
         $.username.value,
         $.password.value
     );
+}
+
+function doLogin()
+{
+    onUrlBlur();
+    
+    var url = require('url');
+
+    if ($.url.value && !url.startsWithHttps($.url.value)) {
+        askToUseHttps();
+    } else {
+        login();
+    }
 }
