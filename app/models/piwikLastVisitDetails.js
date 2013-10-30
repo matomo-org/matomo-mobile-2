@@ -116,7 +116,7 @@ exports.definition = {
                     account: account,
                     params: {filter_offset: this.currentOffset,
                              idSite: idSite,
-                             filter_limit: this.nextOffset, 
+                             filter_limit: filterLimit, 
                              period: this.getPeriod(),
                              date: this.parseDate()}
                 });
@@ -143,7 +143,7 @@ exports.definition = {
 
                 var params = {filter_offset: this.currentOffset,
                               idSite: idSite,
-                              filter_limit: this.nextOffset,
+                              filter_limit: filterLimit,
                               period: this.getPeriod(), 
                               date: this.parseDate()};
 
