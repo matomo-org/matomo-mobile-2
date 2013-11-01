@@ -314,13 +314,20 @@ function formatWebsite(model)
 
     var visitsEvolution = model.get('visits_evolution');
 
-    if (isNegativeEvolution(visitsEvolution)) {
+    if (!visitsEvolution) {
+        // visitsEvolution is not set in case lastX/previousX/range is used
+        model.set('evolution_color', '#8e8e93');
+    } else if (isNegativeEvolution(visitsEvolution)) {
         model.set('evolution_color', '#800000');
     } else {
         model.set('evolution_color', '#008000');
+    } 
+    
+    var evolution = model.get('nb_visits');
+    if (visitsEvolution) {
+        evolution = String.format('%s (%s)', '' + model.get('nb_visits'), '' + visitsEvolution);
     }
-
-    var evolution = String.format('%s (%s)', '' + model.get('nb_visits'), '' + visitsEvolution);
+    
     model.set('evolution', evolution);
 
     return model;
