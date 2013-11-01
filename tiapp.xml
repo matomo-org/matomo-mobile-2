@@ -29,6 +29,11 @@
     <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
     <ios>
         <min-ios-ver>7.0</min-ios-ver>
+        <plist>
+            <dict>
+                <key>UIStatusBarStyle</key><string>UIStatusBarStyleLightContent</string>
+            </dict>
+        </plist>
     </ios>
     <iphone>
         <orientations device="iphone">
