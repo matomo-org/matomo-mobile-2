@@ -11,12 +11,18 @@ function HandheldSidebar(detailRootWindow)
 {
     // we have to create this window before any other window, 
     // otherwise the menu will be always displayed on top of the root window.
-    var leftSidebarWindow = Ti.UI.createWindow({left: 0, width: widthSidebar, visible: false});
+    var leftSidebarWindow = Ti.UI.createWindow({
+        left: 0, width: widthSidebar, 
+            backgroundColor: 'transparent', barColor: 'transparent',
+         visible: false
+    });
     
     if (Alloy.isIOS7OrLater) {
-        // otherwise visible in status bar
-        leftSidebarWindow.top = 20;
+        // otherwise content visible in status bar
         leftSidebarWindow.statusBarStyle = Alloy.statusBarStyle;
+        leftSidebarWindow.add(Ti.UI.createView({
+            top: 0, height: 20, width: Ti.UI.FILL, backgroundColor: '#c32030'
+        }));
     }
     
     leftSidebarWindow.open();
@@ -80,6 +86,10 @@ function HandheldSidebar(detailRootWindow)
     this.setLeftSidebar = function(view)
     {
         if (view) {
+            if (Alloy.isIOS7OrLater) {
+                view.top = 20;
+            }
+            
             leftSidebarWindow.add(view);
         }
     };
@@ -104,8 +114,10 @@ function HandheldSidebar(detailRootWindow)
         
     if (Alloy.isIOS7OrLater) {
         // otherwise visible in status bar
-        rightSidebarWindow.top = 20;
         rightSidebarWindow.statusBarStyle = Alloy.statusBarStyle;
+        rightSidebarWindow.add(Ti.UI.createView({
+            top: 0, height: 20, width: Ti.UI.FILL, backgroundColor: '#c32030'
+        }));
     }
     
     rightSidebarWindow.open();
@@ -170,6 +182,10 @@ function HandheldSidebar(detailRootWindow)
     this.setRightSidebar = function(view)
     {
         if (view) {
+            if (Alloy.isIOS7OrLater) {
+                view.top = 20;
+            }
+            
             rightSidebarWindow.add(view);
         }
     };

@@ -1,12 +1,10 @@
 "Window": {
-    barImage: "navbar.png",
     backgroundColor: "#FFFFFF",
     barColor: "#CD1628",
     navTintColor: "#ffffff",
 },
 
 "Popover": {
-    barImage: "navbar.png",
     backgroundColor: "#FFFFFF",
     barColor: "#CD1628",
     navTintColor: "#ffffff",
