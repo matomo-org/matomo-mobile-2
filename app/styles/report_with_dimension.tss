@@ -30,6 +30,10 @@
     separatorColor: '#e8e8e8'
 },
 
+"#reportTable[platform=ios]": {
+    separatorInsets: {left:0,right:0}
+}
+
 "TableViewRow[platform=ios]": {
     height: Ti.UI.SIZE
 },

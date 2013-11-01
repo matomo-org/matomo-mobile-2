@@ -16,6 +16,10 @@
     separatorColor: '#e0e0e0'
 }
 
+"#visitorTable[platform=ios]": {
+    separatorInsets: {left:0,right:0}
+}
+
 ".visitorTableViewRow": {
     selectionStyle: 0,
 }

@@ -55,6 +55,10 @@
     separatorColor: '#e0e0e0'
 }
 
+"#websitesTable[platform=ios]": {
+    separatorInsets: {left:0,right:0}
+}
+
 ".quickInfoName": {
     top: 10,
     font: {fontSize: 13},
