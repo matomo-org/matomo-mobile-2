@@ -39,17 +39,7 @@ function platformInfo()
 
 function versionInfo()
 {
-    var version = Ti.App.version;
-
-    if (!version && OS_MOBILEWEB) {
-        if (Ti && Ti.App && Ti.App.__def__ && Ti.App.__def__.constants && Ti.App.__def__.constants.version) {
-            version = Ti.App.__def__.constants.version;
-        } else {
-            console.warn('There is a version hack in give_feedback that no longer works');
-        }
-    } else if (OS_MOBILEWEB) {
-        console.warn('There is a version hack in give_feedback that can be removed');
-    }
+    var version = require('Piwik').getAppVersion();
 
     return String.format("%s - %s %s", 
                          '' + version,

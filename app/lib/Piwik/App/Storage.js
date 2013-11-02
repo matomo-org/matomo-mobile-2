@@ -12,6 +12,8 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  * @version $Id$
  */
+
+var appVersion = require('Piwik').getAppVersion();
  
 /**
  * @class    Stores values beyond application sessions. It is possible to store any data except not 
@@ -82,7 +84,7 @@ function Storage () {
             throw new Error('Missing parameter key');
         }
 
-        var storeEntry = {value: value, version: Ti.App.version};
+        var storeEntry = {value: value, version: appVersion};
 
         key   = this._addStorageKeyPrefix(key);
         value = JSON.stringify(storeEntry);
@@ -122,10 +124,10 @@ function Storage () {
             // do not invalidate the storage cause of a version mismatch if the key starts with account. Otherwise 
             // previously added accounts will no longer be available and the user has to setup the accounts again
             // @todo we should handle this via an option / parameter in set(key, value, storeBeyondVersions=false) {}
-            if ((!storeEntry.version || Ti.App.version !== storeEntry.version)
+            if ((!storeEntry.version || appVersion !== storeEntry.version)
                  && 0 !== key.indexOf(this._addStorageKeyPrefix('account'))) {
 
-                console.debug('Store invalid because of new app version' + Ti.App.version, 
+                console.debug('Store invalid because of new app version' + appVersion, 
                                      'Piwik.App.Storage::get#invalid');
 
                 // clear stored entry because entry is not in valid time range

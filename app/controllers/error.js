@@ -22,7 +22,7 @@ message += "\nPlease, provide the following information:\n";
 message += "System: " + Ti.Platform.name + ' ' + Ti.Platform.version + "\n";
 
 message += String.format("Piwik Mobile Version: %s - %s %s\n",
-                         '' + Ti.App.version, '' + Ti.version, '' + Ti.buildHash);
+                         '' + require('Piwik').getAppVersion(), '' + Ti.version, '' + Ti.buildHash);
 message += "Available memory " + Ti.Platform.availableMemory + "\n";
 
 var caps =  Ti.Platform.displayCaps;

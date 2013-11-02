@@ -6,6 +6,7 @@
  */
 
 var url = require('url');
+var appVersion = require('Piwik').getAppVersion();
 
 function appendIndexPhpIfNecessary(accessUrl)
 {
@@ -60,8 +61,8 @@ exports.definition = {
         lastUsedAccountPropertyKey: "app_account_id_last_used",
         defaults: {
             active: true,
-            createVersionNumber: Ti.App.version,
-            changeVersionNumber: Ti.App.version,
+            createVersionNumber: appVersion,
+            changeVersionNumber: appVersion,
             defaultReport: Alloy.CFG.account.defaultReport,
             defaultReportDate: Alloy.CFG.account.defaultReportDate
         }

@@ -27,7 +27,7 @@ function platformMessage()
 function versionMessage()
 {
     return String.format("Version: %s - %s %s",
-                         '' + Ti.App.version,
+                         '' + require('Piwik').getAppVersion(),
                          '' + Ti.version,
                          '' + Ti.buildHash);
 }
