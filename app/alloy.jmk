@@ -70,6 +70,16 @@ function copyPhonegapConfiguration(dir)
     writeContentToFile(targetFile, content);
 }
 
+function copyFirefoxOSConfiguration(dir) 
+{
+    var sourceFile = require('path').join(dir.project, 'manifest.webapp');
+    var targetFile = require('path').join(dir.resources, 'manifest.webapp');
+
+    var content = readContentFromFile(sourceFile);
+
+    writeContentToFile(targetFile, content);
+}
+
 task("post:compile", function(event, logger) {
 
     if (isProduction(event.alloyConfig)) {
@@ -79,6 +89,7 @@ task("post:compile", function(event, logger) {
 
     if (isMobileWebPlatform(event.alloyConfig)) {
         copyPhonegapConfiguration(event.dir);
+        copyFirefoxOSConfiguration(event.dir);
     }
 
 });

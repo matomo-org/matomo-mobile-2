@@ -1,0 +1,19 @@
+{
+  "name": "Piwik Mobile 2",
+  "description": "Need your analytics on the go? Use our free Piwik Mobile app to check your stats from anywhere and show them to colleagues in meetings. Piwik Mobile offers all the same reports as the desktop interface, and displays your visitor data in real time!",
+  "launch_path": "/index.html",
+  "icons": {
+    "57": "/icons/ios/icon.png",
+    "144": "/icons/ios/icon_at_2x.png",
+    "62": "/icons/winphone/icon.png",
+    "36": "/icons/android/ldpi.png",
+    "48": "/icons/android/mdpi.png",
+    "72": "/icons/android/hdpi.png",
+    "96": "/icons/android/xdpi.png"
+  },
+  "developer": {
+    "name": "Piwik.org",
+    "url": "http://piwik.org"
+  },
+  "default_locale": "en"
+}
