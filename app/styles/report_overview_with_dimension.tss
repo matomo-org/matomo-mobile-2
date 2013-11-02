@@ -114,7 +114,6 @@
 }
 
 "#noDataDescription[platform=ios]": {
-    left: 15,
     font: {fontWeight: 'bold'},
 }
 
@@ -133,10 +132,6 @@
     bottom: 16,
     right: 95,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-}
-
-".report_title[platform=ios]": {
-    left: 15,
 }
 
 ".report_title[platform=android]": {
