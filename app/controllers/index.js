@@ -88,4 +88,8 @@ function openStatistics(siteModel, accountModel)
 
     require('layout').startRecordingWindows();
     Alloy.createController('report_composite').open();
+    
+    var Rating = require('Piwik/App/Rating');
+    var appRating = new Rating();
+    appRating.countLaunch();
 }

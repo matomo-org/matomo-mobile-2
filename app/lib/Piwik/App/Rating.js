@@ -109,10 +109,10 @@ Rating.prototype.askUserToRate = function () {
         return;
     }
 
-    var _       = require('L');
-    var message = String.format(_('Mobile_RatingPleaseRateUs'), this.getStoreName(), 'mobile@piwik.org');
-    var buttons = [_('Mobile_RatingNow'), _('Mobile_RatingNotNow'), _('Mobile_RatingDontRemindMe')];
-    _           = null;
+    var L       = require('L');
+    var message = String.format(L('Mobile_RatingPleaseRateUs'), this.getStoreName(), 'mobile@piwik.org');
+    var buttons = [L('Mobile_RatingNow'), L('Mobile_RatingNotNow'), L('Mobile_RatingDontRemindMe')];
+    L           = null;
     
     var dialog  = Ti.UI.createAlertDialog({message: message, 
                                            buttonNames: buttons,

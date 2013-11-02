@@ -35,7 +35,7 @@
         },
         "faqUrl": "http://piwik.org/mobile/faq",
         "appleAppStore": {
-            "appId": "385536442"
+            "appId": ""
         },
         "account": {
             "defaultReport": "MultiSites",
