@@ -190,6 +190,12 @@ function createOverview (visitor, accessUrl)
         // leftImage: {url: accessUrl + visitor.countryFlag}
     }
 
+    if (visitor.city) {
+        rows.push(createRow({title: L('UserCountry_City'),
+                             value: visitor.city,
+                             className: 'visitorTableViewRow'}));
+    }
+
     visitor = null;
 }
 

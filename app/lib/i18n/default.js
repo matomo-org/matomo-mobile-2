@@ -104,6 +104,7 @@ module.exports = {
     SitesManager_ExceptionInvalidUrl:                                   "The url '%s' is not a valid URL.",
     SitesManager_NotFound:                                              "No websites found for",
     UserCountry_Country:                                                'Country',
+    UserCountry_City:                                                   'City',
     UserCountryMap_RealTimeMap:                                         'Real-time Map',
     UsersManager_ManageAccess:                                          'Manage access',
     UsersManager_PrivView:                                              'View',
