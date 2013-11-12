@@ -49,6 +49,7 @@
             "httpTimeout": 60000
         }
     },
+    "adapters": ["localStorage", "properties", "sql", "piwikapi", "session"],
     "env:development": {},
     "env:test": {},
     "env:production": {},
