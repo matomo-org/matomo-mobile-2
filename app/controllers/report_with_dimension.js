@@ -126,7 +126,7 @@ function updateWindowTitle(title)
     }
 }
 
-exports.doRefresh = function()
+function doRefresh()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
@@ -168,6 +168,8 @@ exports.doRefresh = function()
         }
     });
 };
+
+exports.doRefresh = doRefresh;
 
 function open ()
 {

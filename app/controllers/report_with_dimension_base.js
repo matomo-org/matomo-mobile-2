@@ -30,6 +30,10 @@ function showReportContent()
 
 exports.showReportHasNoData = function (title, message)
 {
+    if (OS_IOS) {
+        $.pullToRefresh.refreshDone();
+    } 
+
     $.emptyData.show($.index, $.doRefresh, title, message);
 
     $.content.hide();
