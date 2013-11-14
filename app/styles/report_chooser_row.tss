@@ -20,6 +20,8 @@
 
 "#title[platform=ios]": {
     left: 15,
+    top: 17,
+    bottom: 17
 }
 
 "#title[platform=android]": {

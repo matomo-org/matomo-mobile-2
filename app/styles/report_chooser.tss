@@ -2,6 +2,7 @@
     separatorColor: '#2D2D2D',
     allowsSelection: true,
     backgroundColor: '#222222',
+    separatorInsets: {left:0,right:0}
 }
 
 "#reportsTable[platform=android]": {
