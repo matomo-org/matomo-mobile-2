@@ -28,12 +28,11 @@
 "#reportTable": {
     top: 0,
     separatorColor: '#e8e8e8'
-  //  left: 10,
-  //  right: 10,
-  //  bottom: 10,
-  //  borderRadius: 5,
-  //  borderColor: "#e6e6e6"
 },
+
+"#reportTable[platform=ios]": {
+    separatorInsets: {left:0,right:0}
+}
 
 "TableViewRow[platform=ios]": {
     height: Ti.UI.SIZE
