@@ -26,9 +26,9 @@
 
 "#title[platform=android]": {
     touchEnabled: false,
-    top: '12dp',
+    top: '16dp',
     left: '10dp',
     font: {fontSize: '15sp'},
     right: '10dp',
-    bottom: '12dp'
+    bottom: '16dp'
 }
