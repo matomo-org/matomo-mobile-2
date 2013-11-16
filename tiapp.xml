@@ -74,7 +74,6 @@
         </filesystem>
     </mobileweb>
     <modules>
-        <module platform="android" version="1.0">ti.physicalSizeCategory</module>
         <module platform="mobileweb" version="1.0">org.piwik.navigationgroup</module>
     </modules>
     <plugins>
