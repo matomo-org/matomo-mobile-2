@@ -30,9 +30,6 @@
                     </View>
                 </FooterView>
                 <TableViewRow>
-                    <Require src="graph" id="reportGraphCtrl"/>
-                </TableViewRow>
-                <TableViewRow>
                     <Require src="report_metadata" onMetricChosen="onMetricChosen" id="reportInfoCtrl"/>
                 </TableViewRow>
             </TableView>

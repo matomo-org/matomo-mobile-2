@@ -82,12 +82,14 @@ exports.renderProcessedReport = function (processedReportCollection)
 
     var accountModel = require('session').getAccount();
 
-    $.reportGraphCtrl.update(processedReportCollection, accountModel);
+    if ($.reportGraphCtrl) {
+        $.reportGraphCtrl.update(processedReportCollection, accountModel);
+    }
 
     var rows = [];
 
     var settings = Alloy.createCollection('AppSettings').settings();
-    if (settings.areGraphsEnabled()) {
+    if (settings.areGraphsEnabled() && $.reportGraphCtrl) {
         var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
         if (OS_IOS) {
             row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
