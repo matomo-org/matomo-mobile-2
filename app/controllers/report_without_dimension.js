@@ -115,7 +115,7 @@ function showReportContent()
     $.content.show();
     $.content.visible = true;
     $.loadingindicator.hide();
-    emptyData.cleanupIfNeeded();
+    emptyData && emptyData.cleanupIfNeeded();
 }
 
 function showReportHasNoData(title, message)
@@ -134,7 +134,7 @@ function showLoadingMessage()
 
     $.loadingindicator.show();
 
-    emptyData.cleanupIfNeeded();
+    emptyData && emptyData.cleanupIfNeeded();
 }
 
 function toggleReportChooserVisibility()

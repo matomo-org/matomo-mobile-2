@@ -92,14 +92,14 @@ function showLoadingIndicator()
 {
     $.loadingIndicator.show();
     $.content.hide();
-    $.emptyData.cleanupIfNeeded();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
 }
 
 function showReportContent()
 {
     $.content.show();
     $.loadingIndicator.hide();
-    $.emptyData.cleanupIfNeeded();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
 }
 
 function showReportHasNoData(title, message)

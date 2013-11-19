@@ -161,7 +161,7 @@ function showReportContent()
 
     $.content.show();
     $.loadingindicator.hide();
-    $.emptyData.cleanupIfNeeded();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
 }
 
 function showReportHasNoVisitors(title, message)
@@ -180,7 +180,7 @@ function showLoadingMessage()
 
     $.loadingindicator.show();
     $.content.hide();
-    $.emptyData.cleanupIfNeeded();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
     stopRefreshTimer();
 }
 

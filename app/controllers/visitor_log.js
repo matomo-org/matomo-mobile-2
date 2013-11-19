@@ -240,14 +240,14 @@ function showReportContent()
 {
     $.content.show();
     $.loadingIndicator.hide();
-    $.emptyData.cleanupIfNeeded();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
 }
 
 function showLoadingMessage()
 {
     $.loadingIndicator.show();
     $.content.hide();
-    $.emptyData.cleanupIfNeeded();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
 }
 
 function showReportHasNoVisitors(title, message)

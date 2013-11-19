@@ -176,7 +176,7 @@ function showReportContent()
     $.content.visible = true;
     $.loading.hide();
     $.loading.visible = false;
-    emptyData.cleanupIfNeeded();
+    emptyData && emptyData.cleanupIfNeeded();
 }
 
 function showLoadingMessage()

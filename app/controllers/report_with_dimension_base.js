@@ -25,7 +25,7 @@ function showReportContent()
 
     $.content.show();
     $.loadingindicator.hide();
-    $.emptyData.cleanupIfNeeded();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
 }
 
 exports.showReportHasNoData = function (title, message)
@@ -49,7 +49,7 @@ exports.showLoadingMessage = function ()
     
     $.loadingindicator.show();
     $.content.hide();
-    $.emptyData.cleanupIfNeeded();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
 };
 
 function onTogglePaginator()
