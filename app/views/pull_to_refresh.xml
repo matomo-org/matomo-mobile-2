@@ -1,6 +1,2 @@
 <Alloy>
-    <View class="container">
-        <View id="arrow"/>
-        <Label id="statusLabel"/>
-    </View>
 </Alloy>
