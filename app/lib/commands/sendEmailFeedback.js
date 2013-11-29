@@ -45,7 +45,9 @@ function resolutionMessage()
 
 function localeMessage()
 {
-    return String.format("Locale: %s", '' + Ti.Platform.locale);
+    var locale = require('Piwik/Locale');
+    
+    return String.format("Locale: %s", '' + locale.getLocale());
 }
 
 function networkMessage()
