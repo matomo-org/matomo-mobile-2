@@ -52,7 +52,7 @@
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <tool-api-level>14</tool-api-level>
         <manifest android:installLocation="preferExternal"
-            android:versionCode="1" android:versionName="2.0.0">
+            android:versionCode="2" android:versionName="2.0.0">
             <application android:theme="@android:style/Theme.Holo.Light.DarkActionBar"/>
             <supports-screens android:anyDensity="true"
                 android:largeScreens="true" android:normalScreens="true"
