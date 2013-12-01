@@ -26,17 +26,11 @@ exports.init = function (tableView)
 
     if (OS_IOS) {
         $.tableView.refreshControl = Ti.UI.createRefreshControl({
-            tintColor: '#CD1628',
-            title: Ti.UI.iOS.createAttributedString({
-                text: L('Mobile_PullDownToRefresh')
-            })
+            tintColor: '#CD1628'
         });
         
         $.tableView.refreshControl.addEventListener('refreshstart', function () {
             if (!$.reloading) {
-                $.tableView.refreshControl.title = Ti.UI.iOS.createAttributedString({
-                    text: L('Mobile_Reloading')
-                });
                 $.reloading = true;
                 $.trigger('refresh');
             }
@@ -48,9 +42,6 @@ exports.refreshDone = function ()
 {
     if ($.tableView.refreshControl) {
         $.tableView.refreshControl.endRefreshing();
-        $.tableView.refreshControl.title = Ti.UI.iOS.createAttributedString({
-            text: L('Mobile_PullDownToRefresh')
-        });
     }
     
     $.reloading = false;
