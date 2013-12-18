@@ -52,6 +52,10 @@ function updateAvailableReportsList()
             latestSection = currentSection;
         }
     });
+    
+    if (OS_MOBILEWEB && location && location.href) {
+        rows.push(Alloy.createController('report_chooser_row', {title: 'Desktop version', cid: 'desktop'}).getView());
+    }
 
     rows.push(Alloy.createController('report_chooser_section', {title: L('CoreAdminHome_MenuManage')}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
@@ -155,6 +159,8 @@ function doSelectReport(event)
         chooseAccount();
     } else if ('feedback' == cid) {
         openGiveFeedback();
+    } else if ('desktop' == cid) {
+        openDesktopVersion();
     } else {
         var report = $.reportsCollection.getByCid(cid);
         openCompositeReport(report);
@@ -178,6 +184,16 @@ function chooseAccount()
     var accounts = Alloy.createController('accounts');
     accounts.on('accountChosen', onAccountChosen);
     accounts.open();
+}
+
+function openDesktopVersion()
+{
+    if (!location || !location.href) {
+        return;
+    }
+    
+    var account = require('session').getAccount();
+    location.href = account.getBasePath() + '?desktop';
 }
  
 function onAccountChosen(account)

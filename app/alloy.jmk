@@ -80,16 +80,6 @@ function copyFirefoxOSConfiguration(dir)
     writeContentToFile(targetFile, content);
 }
 
-function copyPiwikPluginJson(dir)
-{
-    var sourceFile = require('path').join(dir.project, 'piwik-plugin.json');
-    var targetFile = require('path').join(dir.resources, 'plugin.json');
-
-    var content = readContentFromFile(sourceFile);
-
-    writeContentToFile(targetFile, content);
-}
-
 task("post:compile", function(event, logger) {
 
     if (isProduction(event.alloyConfig)) {
@@ -100,7 +90,6 @@ task("post:compile", function(event, logger) {
     if (isMobileWebPlatform(event.alloyConfig)) {
         copyPhonegapConfiguration(event.dir);
         copyFirefoxOSConfiguration(event.dir);
-        copyPiwikPluginJson(event.dir);
     }
 
 });
