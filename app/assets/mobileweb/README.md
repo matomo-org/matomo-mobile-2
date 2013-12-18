@@ -28,7 +28,7 @@ Yes, just open Piwik as usual.
 
 ## Changelog
 
-__1.0.0__
+__2.0.0__
 * Initial release
 
 ## License
