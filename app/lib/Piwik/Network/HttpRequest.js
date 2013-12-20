@@ -280,6 +280,8 @@ function convertXhrErrorMessageToHumanReadable (xhrError) {
         xhrError = 'A connection failure occurred';
     } else if (-1 != xhrError.indexOf('The request timed out')) {
         xhrError = 'The request timed out';
+    } else if (-1 != xhrError.indexOf('Authorization Required')) {
+        xhrError = 'Authentication needed';
     } else if (-1 != xhrError.indexOf('Authentication needed')) {
         xhrError = 'Authentication needed';
     } else if (-1 != xhrError.indexOf('Unable to create request')) {
@@ -337,7 +339,11 @@ HttpRequest.prototype.error = function (e) {
         e = null;
     }
 
-    console.warn(e, 'HttpRequest::error');
+    if (e) {
+        console.warn(e.error, 'HttpRequest::error');
+    } else {
+        console.warn('HttpRequest::error');
+    }
     
     var L         = require('L');
     // if set, the user will see a dialog containing this message
@@ -379,6 +385,11 @@ HttpRequest.prototype.error = function (e) {
                 title   = L('Mobile_RequestTimedOutShort');
                 message = String.format(L('General_RequestTimedOut'), baseUrl);
     
+                break;
+    
+            case 'authentication needed':
+
+                message = 'Authentication is needed. Please read more here: http://piwik.org/faq/mobile-app/#faq_16336';
                 break;
     
             case 'host is unresolved':
