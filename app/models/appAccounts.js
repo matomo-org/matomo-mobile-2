@@ -72,7 +72,16 @@ exports.definition = {
         _.extend(Model.prototype, {
             
             initialize: function () {
+                
+                if (this.get('tokenAuth') && this.get('password')) {
+                    this.resetPassword();
+                    this.save();
+                }
+                
                 this.on('change:accessUrl', this.completeAccessUrl);
+                this.on('change:tokenAuth', function (accountModel) {
+                    accountModel.resetPassword();
+                });
             },
 
             startWithAllWebsitesDashboard: function () {
@@ -136,7 +145,8 @@ exports.definition = {
                     return 'Unknown';
                 }
                 
-                if (attrs.username && !attrs.password) {
+                if (attrs.username && !attrs.password && !this.get('tokenAuth')) {
+                    // if we have the tokenAuth it is ok not to have the password.
                     return 'MissingPassword';
 
                 } else if (!attrs.username && attrs.password) {
@@ -172,6 +182,11 @@ exports.definition = {
                 if (accountId) {
                     Ti.App.Properties.setString(lastUsedAccountKey, accountId);
                 }
+            },
+            
+            resetPassword: function () {
+                this.set({password: '*'});
+                this.unset('password');
             },
 
             updatePreferences: function (callback) {
@@ -259,11 +274,13 @@ exports.definition = {
 
                 var onSuccess = function (model) {
                     if (model && model.getTokenAuth()) {
+                        account.resetPassword();
                         account.set({tokenAuth: model.getTokenAuth()});
                     }
                 };
 
                 var onError = function (model) {
+                    account.resetPassword();
                     return account.trigger('error', account, 'ReceiveAuthTokenError');
                 };
 
