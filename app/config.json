@@ -8,7 +8,8 @@
                 "nb_uniq_pageviews",
                 "nb_actions",
                 "nb_conversions",
-                "revenue"
+                "revenue",
+                "nb_events"
             ],
             "filterLimit": 30,
             "graph": {
