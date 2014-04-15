@@ -114,7 +114,9 @@ exports.definition = {
 
                     if (!sortOrder) {
                         for (var metricName in metrics) {
-                            sortOrder = metricName;
+                            if (metrics.hasOwnProperty(metricName)) {
+                                return metricName;
+                            }
                         }
                     }
                 }

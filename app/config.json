@@ -3,6 +3,8 @@
         "piwik": {
             "preferredMetrics": [
                 "nb_hits",
+                "entry_nb_visits",
+                "exit_nb_visits",
                 "nb_visits",
                 "nb_pageviews",
                 "nb_uniq_pageviews",
