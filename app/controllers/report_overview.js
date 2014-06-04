@@ -208,6 +208,7 @@ function renderOverviewReport()
     }
 
     params.processedReport = $.piwikProcessedReport;
+    params['$model'] = $model;
 
     var controller = $.piwikProcessedReport.hasDimension() ? 'report_overview_with_dimension' : 'report_overview_without_dimension';
     renderedReport = Alloy.createController(controller, params);
