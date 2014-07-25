@@ -6,6 +6,5 @@ var app     = connect();
 
 var serveStatic = require('serve-static');
 
-connect.createServer(
-    app.use(serveStatic(dir, {'index': ['index.html', 'index.htm']}))
-).listen(parseInt(port, 10));
+app.use(serveStatic(dir, {'index': ['index.html', 'index.htm']}));
+app.listen(parseInt(port, 10));
