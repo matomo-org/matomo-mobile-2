@@ -17,7 +17,12 @@ var loginform = Alloy.createController('login_form', {
     accounts: accounts
 });
 
+var accountCreatorFooter = Alloy.createController('account_creator_footer', {
+    accounts: accounts
+});
+
 $.loginform.add(loginform.getView());
+$.index.add(accountCreatorFooter.getView());
 
 function onOpen()
 {

@@ -7,21 +7,13 @@
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
         
-        <ScrollView class="container">
+        <ScrollView id="content">
             <View id="mainView">
                 <View id="headerView">
                     <ImageView id="logoImage"/>
                 </View>
                 <View id="loginform" />
                 <View class="footerSpacer" />
-            </View>
-            <View id="footerView">
-                <View class="tryItContainer" onClick="tryIt">
-                    <Label id="tryit" class="footerLink"/>
-                </View>
-                <View class="faqContainer" onClick="openFaq">
-                    <Label id="faq" class="footerLink"/>
-                </View>
             </View>
         </ScrollView>
     </Window>

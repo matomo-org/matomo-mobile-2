@@ -8,8 +8,13 @@
     canGoBack: true
 }
 
+".container": {
+    bottom: 40
+}
+
 ".container[platform=android]": {
-    top: '48dp'
+    top: '48dp',
+    bottom: '48dp'
 }
 
 "#loginform": {

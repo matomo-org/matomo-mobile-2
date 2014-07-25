@@ -21,26 +21,14 @@ var accounts = Alloy.Collections.appAccounts;
 
 var loginform = Alloy.createController('login_form', {accounts: accounts});
 
+var accountCreatorFooter = Alloy.createController('account_creator_footer', {
+    accounts: accounts
+});
+
 $.loginform.add(loginform.getView());
+$.content.add(accountCreatorFooter.getView());
 
-function tryIt ()
-{
-    require('Piwik/Tracker').trackEvent({title: 'Try it', url: '/first-login/try-it'});
 
-    require('login').login(
-        accounts,
-        'http://demo.piwik.org',
-        '',
-        ''
-    );
-}
-
-function openFaq () 
-{
-    require('Piwik/Tracker').trackEvent({title: 'Open FAQ', url: '/first-login/open-faq'});
-
-    require('commands/openFaq').execute();
-}
 
 function onOpen()
 {

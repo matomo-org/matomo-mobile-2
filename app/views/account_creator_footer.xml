@@ -1,0 +1,10 @@
+<Alloy>
+    <View id="footerView">
+        <View class="tryItContainer" onClick="tryIt">
+            <Label id="tryit" class="footerLink"/>
+        </View>
+        <View class="faqContainer" onClick="openFaq">
+            <Label id="faq" class="footerLink"/>
+        </View>
+    </View>
+</Alloy>
