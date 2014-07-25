@@ -363,7 +363,16 @@ function createActionAction(actionDetail)
     }
     
     if (actionDetail.url) {
-        row.add($.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.url + ''}));
+        var label = $.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.url + ''});
+        if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
+            label.addEventListener('click', (function (actionDetailUrl) {
+                return function () {
+                    Ti.Platform.openURL(actionDetailUrl);
+                };
+            })(actionDetail.url));
+        }
+        row.add(label);
+        label = null;
     }
     if (actionDetail.serverTimePretty) {
         row.add($.UI.create('Label', {classes: ['actionActionServerTimeLabel'], text: actionDetail.serverTimePretty + ''}));
