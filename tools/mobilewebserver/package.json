@@ -3,7 +3,8 @@
   "name": "MobileWebServer",
   "description": "Starts a webserver which serves the static files of the MobileWeb application",
   "dependencies": {
-    "connect": ">= 2.8.0"
+    "connect": ">= 2.8.0",
+    "serve-static": ">= 1.4.0"
   },
   "engines": {
     "node": ">= 0.8.0"
