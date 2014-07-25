@@ -13,7 +13,7 @@ before_script:
 - titanium sdk install  3.3.0.GA
 - sudo apt-get update
 - sudo apt-get install openjdk-7-jdk
-- titanium build -p mobileweb --sdk 3.3.3.GA
+- titanium build -p mobileweb --sdk 3.3.0.GA
 - cd tools/mobilewebserver
 - npm install .
 - node app.js 8061 &
