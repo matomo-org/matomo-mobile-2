@@ -6,6 +6,6 @@
                 onBack="close"
                 platform="android" />
                 
-        <WebView id="webview"></WebView>
+        <WebView id="browser"></WebView>
     </Window>
 </Alloy>
