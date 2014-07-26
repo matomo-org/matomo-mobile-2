@@ -19,7 +19,8 @@ exports.definition = {
             "graphsEnabled":"boolean",
             "preferEvolutionGraphs":"boolean",
             "httpTimeout":"integer",
-            "reportDate": "string"
+            "reportDate": "string",
+            "validateSsl": "boolean"
         },
         "adapter": {
             "type": "properties",
@@ -31,7 +32,8 @@ exports.definition = {
             trackingEnabled: settingDefaults.trackingEnabled,
             preferEvolutionGraphs: settingDefaults.preferEvolutionGraphs,
             graphsEnabled: settingDefaults.graphsEnabled,
-            httpTimeout: settingDefaults.httpTimeout
+            httpTimeout: settingDefaults.httpTimeout,
+            validateSsl: settingDefaults.validateSsl
         }
     },      
 
@@ -43,6 +45,14 @@ exports.definition = {
 
             languageCode: function () {
                 return this.get('language');
+            },
+
+            setValidateSsl: function (shouldValidateSsl) {
+                return this.set('validateSsl', shouldValidateSsl);
+            },
+
+            shouldValidateSsl: function () {
+                return this.get('validateSsl');
             },
 
             setTrackingEnabled: function (isTrackingEnabled) {

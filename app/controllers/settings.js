@@ -11,13 +11,14 @@ function L(key)
 }
 
 var callbacks = {changeLanguage: changeLanguage,
+                 toggleValidateSsl: toggleValidateSsl,
                  toggleTrackingEnabled: toggleTrackingEnabled,
                  toggleGraphsEnabled: toggleGraphsEnabled,
                  changeHttpTimeout: changeHttpTimeout,
                  changeReportDate: changeReportDate};
 
 if (OS_IOS) {
-    var margin     = Alloy.isTablet ? 30 : 15
+    var margin     = Alloy.isTablet ? 30 : 15;
     var footerView = Ti.UI.createView({left: margin, right: margin, height: Ti.UI.SIZE});
     footerView.add(Ti.UI.createLabel({text: L('Mobile_LoginToPiwikToChangeSettings')}));
     $.settingsTable.footerView = footerView;
@@ -78,18 +79,19 @@ function changeReportDate()
     require('Piwik/Tracker').trackEvent({title: 'Settings - Change ReportDate', url: '/settings/change/reportdate'});
 }
 
+function toggleValidateSsl()
+{
+    require('settings/validateSsl').toggle();
+}
+
 function toggleTrackingEnabled()
 {
     require('settings/trackingEnabled').toggle();
-
-    require('Piwik/Tracker').trackEvent({title: 'Settings - Toggle Tracking Enabled', url: '/settings/toggle/tracking-enabled'});
 }
 
 function toggleGraphsEnabled()
 {
     require('settings/graphsEnabled').toggle();
-
-    require('Piwik/Tracker').trackEvent({title: 'Settings - Toggle Graphs Enabled', url: '/settings/toggle/graphs-enabled'});
 }
 
 function changeHttpTimeout()
@@ -143,18 +145,25 @@ function updateDisplayedReportDateValue()
     }
 }
 
+function updateDisplayedValidateSslValue()
+{
+    var settings = Alloy.createCollection('AppSettings').settings();
+
+    setHasCheck($.validateSsl, 2, settings.shouldValidateSsl());
+}
+
 function updateDisplayedTrackingValue()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
 
-    setHasCheck($.tracking, 2, settings.isTrackingEnabled());
+    setHasCheck($.tracking, 3, settings.isTrackingEnabled());
 }
 
 function updateDisplayedGraphsValue()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
 
-    setHasCheck($.graphs, 3, settings.areGraphsEnabled());
+    setHasCheck($.graphs, 4, settings.areGraphsEnabled());
 }
 
 function setTitle(section, itemIndex, title)
@@ -245,14 +254,16 @@ function updateAllDisplayedSettingsValues()
     if (supportsListView()) {
         setTitle($.basic, 0, L('General_Language'));
         setTitle($.basic, 1, L('Mobile_DefaultReportDate'));
-        setTitle($.basic, 2, L('Mobile_AnonymousTracking'));
-        setTitle($.basic, 3, L('Mobile_EnableGraphsLabel'));
+        setTitle($.basic, 2, L('Mobile_ValidateSslCertificate'));
+        setTitle($.basic, 3, L('Mobile_AnonymousTracking'));
+        setTitle($.basic, 4, L('Mobile_EnableGraphsLabel'));
         setTitle($.advanced, 0, L('Mobile_HttpTimeout'));
 
         updateDisplayedLanguageValue();
     }
 
     updateDisplayedHttpTimeoutValue();
+    updateDisplayedValidateSslValue();
     updateDisplayedTrackingValue();
     updateDisplayedGraphsValue();
     updateDisplayedReportDateValue();

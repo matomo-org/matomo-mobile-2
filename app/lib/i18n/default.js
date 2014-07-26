@@ -195,6 +195,7 @@ module.exports = {
     Mobile_TryIt:                                                       'Try It!',
     Mobile_UseSearchBarHint:                                            'Only the first %s websites are displayed here. Please use the search bar to access your other websites.',
     Mobile_HttpTimeout:                                                 'HTTP Timeout',
+    Mobile_ValidateSslCertificate:                                      'Validate SSL Certificate',
     Mobile_VerifyAccount:                                               'Verifying Account',
     Mobile_VerifyLoginData:                                             'Make sure your username and password combination is correct.',
     Mobile_YouAreOffline:                                               'Sorry, you are currently offline'

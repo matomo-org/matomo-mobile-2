@@ -39,6 +39,7 @@
             <ListSection id="basic">
                 <ListItem id="language" callback="changeLanguage"/>
                 <ListItem id="reportDate" callback="changeReportDate"/>
+                <ListItem id="validateSsl" callback="toggleValidateSsl"/>
                 <ListItem id="tracking" callback="toggleTrackingEnabled"/>
                 <ListItem id="graphs" callback="toggleGraphsEnabled"/>
             </ListSection>
@@ -53,6 +54,7 @@
             </FooterView>
             <TableViewRow id="language" onClick="changeLanguage"/>
             <TableViewRow id="reportDate" onClick="changeReportDate"/>
+            <TableViewRow id="validateSsl" onClick="toggleValidateSsl"/>
             <TableViewRow id="tracking" onClick="toggleTrackingEnabled"/>
             <TableViewRow id="graphs" onClick="toggleGraphsEnabled"/>
             <Widget src="org.piwik.tableviewsection" id="advanced"/>

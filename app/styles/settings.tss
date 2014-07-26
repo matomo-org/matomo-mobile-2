@@ -141,6 +141,15 @@
     template: 'settingsTemplate',
 }
 
+"#validateSsl": {
+    hasCheck: false,
+    title: L('Mobile_ValidateSslCertificate')
+}
+
+"#validateSsl[platform=android]": {
+    template: 'uncheckedTemplate'
+}
+
 "#tracking": {
     hasCheck: true,
     title: L('Mobile_AnonymousTracking')

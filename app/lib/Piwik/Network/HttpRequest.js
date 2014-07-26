@@ -156,7 +156,10 @@ HttpRequest.prototype.handle = function () {
         return;
     }
 
-    this.xhr = Ti.Network.createHTTPClient({validatesSecureCertificate: false, enableKeepAlive: false});
+    var settings    = Alloy.createCollection('AppSettings').settings();
+    var validateSsl = settings.shouldValidateSsl();
+
+    this.xhr = Ti.Network.createHTTPClient({validatesSecureCertificate: validateSsl, enableKeepAlive: false});
     var that = this;
     
     this.xhr.onload  = function () { that.load(this); that = null; };
@@ -171,8 +174,6 @@ HttpRequest.prototype.handle = function () {
         }
     };
 
-    var settings = Alloy.createCollection('AppSettings').settings();
-    
     // override the iPhone default timeout
     var timeoutValue = parseInt(settings.httpTimeout(), 10);
     this.xhr.setTimeout(timeoutValue);
