@@ -147,6 +147,10 @@ function updateDisplayedReportDateValue()
 
 function updateDisplayedValidateSslValue()
 {
+    if (OS_MOBILEWEB) {
+        return;
+    }
+
     var settings = Alloy.createCollection('AppSettings').settings();
 
     setHasCheck($.validateSsl, 2, settings.shouldValidateSsl());
