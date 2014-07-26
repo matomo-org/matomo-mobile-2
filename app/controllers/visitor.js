@@ -329,6 +329,10 @@ function createActionDetails(visitor, accessUrl) {
                 createActionAction(actionDetail, visitor, accessUrl);
                 break;
 
+            case 'event':
+                createEventAction(actionDetail, visitor, accessUrl);
+                break;
+
             case 'ecommerceOrder':
             case 'ecommerceAbandonedCart':
                 createEcommerceAction(actionDetail, visitor, accessUrl);
@@ -341,6 +345,63 @@ function createActionDetails(visitor, accessUrl) {
     }
     
     visitor = null;
+}
+
+/**
+ * Renders the 'event' action.
+ * Output looks like:
+ * <br />
+ * $EVENTICON Event $EVENTCATEGORY<br />
+ * $EVENTNAME<br />
+ * Action "$EVENTACTION" - Value "$EVENTVALUE"<br />
+ *
+ * @param  {Object}  actionDetail
+ */
+function createEventAction(actionDetail, visitor, accessUrl)
+{
+    var row = $.UI.create('TableViewRow', {classes: ['actionTableViewRow']});
+    addNonSelectableSelectionStyleToRow(row);
+
+    var view = $.UI.create('View', {classes: ['actionHeadlineView']});
+
+    if (accessUrl && actionDetail.icon) {
+        view.add($.UI.create('ImageView', {classes: ['actionDefaultIconImageView'], image: (accessUrl + actionDetail.icon)}));
+    }
+
+    if (actionDetail.eventCategory) {
+        var category = L('Events_Event') + ' ' + actionDetail.eventCategory;
+        view.add($.UI.create('Label', {classes: ['actionActionPageTitleLabel'], text: category}));
+    }
+
+    row.add(view);
+    view = null;
+
+    if (actionDetail.eventName) {
+        row.add($.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.eventName + ''}));
+    }
+
+    var actionAndValue = '';
+    if (actionDetail.eventAction) {
+        actionAndValue += L('General_Action') + ' "' + actionDetail.eventAction + '"';
+    }
+    if (actionDetail.eventAction && actionDetail.eventValue) {
+        actionAndValue += ' - ';
+    }
+    if (actionDetail.eventValue) {
+        actionAndValue += L('General_Value') + ' "' + actionDetail.eventValue + '"';
+    }
+
+    if (actionAndValue) {
+        row.add($.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionAndValue}));
+    }
+
+    if (actionDetail.serverTimePretty) {
+        row.add($.UI.create('Label', {classes: ['actionActionServerTimeLabel'], text: actionDetail.serverTimePretty + ''}));
+    }
+
+    rows.push(row);
+    row = null;
+    actionDetail = null;
 }
 
 /**
