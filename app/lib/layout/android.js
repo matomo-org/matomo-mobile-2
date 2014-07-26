@@ -11,10 +11,6 @@ var _ = Alloy._;
 
 var numCurrentlyOpenedWindows = 0;
 
-// overlay splashscreen
-var win = Ti.UI.createWindow({backgroundColor: "#e5e5e5"});
-win.open();
-
 function forceCloseApp()
 {
     Ti.Android.currentActivity && Ti.Android.currentActivity.finish();
@@ -29,16 +25,16 @@ function quitAppIfNoNewWindowOpened()
 
 var checkAppShouldBeClosedTimeout = null;
 
-function AndroidLayout()
+function AndroidLayout(rootWin)
 {
     // @param animated see iOS layout
-    function close (win, animated) {
-        if (!win) {
+    function close (view, animated) {
+        if (!view) {
             return;
         }
 
-        win.removeEventListener('androidback', closeThisWindow);
-        win.close();
+        view.fireEvent('close', {type: 'close'});
+        rootWin.remove(view);
 
         if (checkAppShouldBeClosedTimeout) {
             clearTimeout(checkAppShouldBeClosedTimeout);
@@ -50,12 +46,12 @@ function AndroidLayout()
             checkAppShouldBeClosedTimeout = setTimeout(quitAppIfNoNewWindowOpened, 700);
         }
 
-        win = null;
+        view = null;
     }
 
     // @param animated see iOS layout
-    function open (win, animated) {
-        if (!win) {
+    function open (view, animated) {
+        if (!view) {
             return;
         }
 
@@ -64,22 +60,12 @@ function AndroidLayout()
         }
 
         numCurrentlyOpenedWindows++;
-        
-        win.addEventListener('androidback', closeThisWindow);
-        this.trigger('open', win);
 
-        if (win.left) {
-            win.open({left: win.left});
-        } else {
-            win.open();
-        }
+        this.trigger('open', view);
 
-        win = null;
-    }
+        rootWin.add(view);
 
-    function closeThisWindow()
-    {
-        close(this);
+        view = null;
     }
 
     _.extend(this, Backbone.Events, {

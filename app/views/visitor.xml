@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" class="container" onOpen="onOpen">
+    <Window module="xp.ui" id="index" class="container" onOpen="onOpen">
         
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 

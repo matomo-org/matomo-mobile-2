@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" onClose="onClose" onOpen="onOpen" onFocus="restartTimerIfSomeVisitorsAreAlreadyDisplayed">
+    <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen" onFocus="restartTimerIfSomeVisitorsAreAlreadyDisplayed">
         
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
@@ -20,7 +20,7 @@
         
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 
-                onHomeIconItemSelected="toggleReportChooserVisibility"
+                onHomeItemSelected="toggleReportChooserVisibility"
                 onActionItem1="toggleReportConfiguratorVisibility"
                 formFactor="handheld"
                 platform="android" />

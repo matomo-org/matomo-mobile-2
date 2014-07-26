@@ -1,8 +1,8 @@
 <Alloy>
-    <Window formFactor="handheld" id="index" onClose="destroy" onOpen="onOpen">
+    <Window module="xp.ui" formFactor="handheld" id="index" onClose="destroy" onOpen="onOpen">
         <Require id="graphWidget" type="widget" src="org.piwik.imageview"/>
     </Window>
-    <Window formFactor="tablet" id="index" onClose="destroy">
+    <Window module="xp.ui" formFactor="tablet" id="index" onClose="destroy">
         <View id="topContainer">
             <View class="labelContainer">
                 <Label id="reportName"/>

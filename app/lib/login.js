@@ -31,9 +31,17 @@ function showWaitingIndicator()
       style: style
     });
 
-    win = Ti.UI.createWindow({backgroundColor: '#ddd', opacity: 0.8, zIndex: 99999});
-    win.add(activityIndicator);
-    win.open();
+    var winParams = {backgroundColor: '#ddd', opacity: 0.8, zIndex: 99999};
+
+    if (OS_ANDROID) {
+        win = Ti.UI.createView(winParams);
+        win.add(activityIndicator);
+        require('layout').open(win);
+    } else {
+        win = Ti.UI.createWindow(winParams);
+        win.add(activityIndicator);
+        win.open();
+    }
 
     activityIndicator.show();
     activityIndicator = null;
@@ -41,10 +49,13 @@ function showWaitingIndicator()
 
 function hideWaitingIndicator()
 {
-    if (win) {
+    if (win && OS_ANDROID) {
+        require('layout').close(win);
+    } else if (win) {
         win.close();
-        win = null;
     }
+
+    win = null;
 }
 
 function onError (accountModel, error) {

@@ -52,6 +52,10 @@ function enableBackButton()
 {
     setBackAngleImage('/images/back.png');
 
+    try {
+        $.backButton.removeEventListener('click', onHomeItemSelected);
+    } catch (e) {}
+
     $.backButton.addEventListener('click', function (event) {
         event.cancelBubble = true;
         $.trigger('back');
@@ -81,12 +85,14 @@ function applyCustomProperties(args)
     setTitle(args.title);
 }
 
+function onHomeItemSelected(event) {
+    event.cancelBubble = true;
+    $.trigger('homeItemSelected');
+}
+
 applyCustomProperties(arguments[0] || {});
 
-$.backButton.addEventListener('click',function (event) {
-    event.cancelBubble = true;
-    $.trigger('homeIconItemSelected');
-});
+$.backButton.addEventListener('click', onHomeItemSelected);
 
 exports.setTitle = setTitle;
 exports.enableCanGoBack = enableBackButton;

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" onOpen="onOpen">
+    <Window module="xp.ui" id="index" onOpen="onOpen">
         <RightNavButton platform="mobileweb">
             <Button id="updateButton" onClick="doChooseDate"/>
         </RightNavButton>

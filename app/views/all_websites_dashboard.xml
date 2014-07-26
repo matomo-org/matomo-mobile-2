@@ -2,7 +2,7 @@
     <Collection src="piwikWebsites" id="piwikWebsites" instance="true"/>
     <Collection src="appAccounts"/>
     
-    <Window id="index" onClose="onClose" onOpen="onOpen">
+    <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen">
         <LeftNavButton platform="ios">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>

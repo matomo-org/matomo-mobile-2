@@ -43,6 +43,12 @@ function WindowRecorder() {
             this.close(recordedWindows.shift());
         }
     };
+
+    this.closeCurrentWindow = function () {
+        if (recordedWindows.length) {
+            this.close(recordedWindows.pop());
+        }
+    };
 }
 
 module.exports = WindowRecorder;

@@ -9,6 +9,13 @@ var widthSidebar = '250dp';
 
 function HandheldSidebar()
 {
+    var leftSidebarContainer  = false;
+    var rightSidebarContainer = false;
+
+    var leftSidebarView  = null;
+    var rightSidebarView = null;
+
+    var layout = this;
 
     function addLeftUnderlay(win)
     {
@@ -17,6 +24,9 @@ function HandheldSidebar()
         var background = Ti.UI.createView({backgroundColor: '#000', left: '252dp', opacity: 0.6});
         win.add(background);
         background.addEventListener('click', hideLeftSidebar);
+
+        separator  = null;
+        background = null;
     }
 
     function addRightUnderlay(win)
@@ -26,39 +36,35 @@ function HandheldSidebar()
         var background = Ti.UI.createView({backgroundColor: '#000', right: '252dp', opacity: 0.6});
         win.add(background);
         win.addEventListener('click', hideRightSidebar);
-    }
 
-    var leftSidebarView = null;
-    var leftSidebarWindow = null;
+        separator  = null;
+        background = null;
+    }
 
     function hideLeftSidebar()
     {
-        if (leftSidebarWindow) {
-            leftSidebarWindow.removeEventListener('androidback', hideLeftSidebar);
-            leftSidebarWindow.close();
-            leftSidebarWindow = null;
+        if (leftSidebarContainer) {
+            layout.close(leftSidebarContainer);
+            leftSidebarContainer = null;
         }
     }
 
     function toggleLeftSidebar()
     {
-        leftSidebarWindow ? hideLeftSidebar() : showLeftSidebar();
+        leftSidebarContainer ? hideLeftSidebar() : showLeftSidebar();
     }
 
     function showLeftSidebar()
     {
-        if (leftSidebarWindow || !leftSidebarView) {
+        if (leftSidebarContainer || !leftSidebarView) {
             return;
         }
 
-        hideRightSidebar();
+        leftSidebarContainer = Ti.UI.createView({top: '48dp', zIndex: 999});
+        leftSidebarContainer.add(leftSidebarView);
+        addLeftUnderlay(leftSidebarContainer);
 
-        leftSidebarWindow = Ti.UI.createWindow({top: '48dp', zIndex: 999});
-        leftSidebarWindow.addEventListener('androidback', hideLeftSidebar);
-        leftSidebarWindow.add(leftSidebarView);
-        addLeftUnderlay(leftSidebarWindow);
-
-        leftSidebarWindow.open();
+        layout.open(leftSidebarContainer);
     }
 
     this.setLeftSidebar = function(view)
@@ -73,33 +79,25 @@ function HandheldSidebar()
     this.hideLeftSidebar = hideLeftSidebar;
     this.toggleLeftSidebar = toggleLeftSidebar;
 
-
-    var rightSidebarView   = null;
-    var rightSidebarWindow = null;
-
     function hideRightSidebar()
     {
-        if (rightSidebarWindow) {
-            rightSidebarWindow.removeEventListener('androidback', hideRightSidebar);
-            rightSidebarWindow.close();
-            rightSidebarWindow = null;
+        if (rightSidebarContainer) {
+            layout.close(rightSidebarContainer);
+            rightSidebarContainer = null;
         }
     }
 
     function showRightSidebar()
     {
-        if (rightSidebarWindow || !rightSidebarView) {
+        if (rightSidebarContainer || !rightSidebarView) {
             return;
         }
 
-        hideLeftSidebar();
+        rightSidebarContainer = Ti.UI.createView({top: '48dp', zIndex: 998});
+        rightSidebarContainer.add(rightSidebarView);
+        addRightUnderlay(rightSidebarContainer);
 
-        rightSidebarWindow = Ti.UI.createWindow({top: '48dp', zIndex: 998});
-        rightSidebarWindow.addEventListener('androidback', hideRightSidebar);
-        rightSidebarWindow.add(rightSidebarView);
-        addRightUnderlay(rightSidebarWindow);
-
-        rightSidebarWindow.open();
+        layout.open(rightSidebarContainer);
     }
 
     this.setRightSidebar = function(view)
@@ -115,7 +113,7 @@ function HandheldSidebar()
 
     this.toggleRightSidebar = function()
     {
-        rightSidebarWindow ? hideRightSidebar() : showRightSidebar();
+        rightSidebarContainer ? hideRightSidebar() : showRightSidebar();
     };
 }
 

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="index" title=" ">
+    <Window module="xp.ui" id="index" title=" ">
         
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 

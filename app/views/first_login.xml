@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="appAccounts"/>
     
-    <Window id="index" onOpen="onOpen" onClose="onClose">
+    <Window module="xp.ui" id="index" onOpen="onOpen" onClose="onClose">
         
         <LeftNavButton platform="ios" formFactor="tablet">
             <Button class="fakeButtonThatHidesBackButton"/>

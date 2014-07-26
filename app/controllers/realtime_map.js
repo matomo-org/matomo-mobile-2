@@ -54,7 +54,7 @@ function openRealTimeMapInWebview()
     url    += "&period=month&date=today&disableLink=1&widget=1&token_auth=";
     url    += accountModel.getAuthToken();
 
-    $.webview.url = url;
+    $.browser.url = url;
 }
 
 exports.open = function () 

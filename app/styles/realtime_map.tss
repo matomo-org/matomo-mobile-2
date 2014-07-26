@@ -12,12 +12,12 @@
     hasNavigation: true,
 }
 
-"#webview": {
+"#browser": {
     disableBounce: true,
     scalesPageToFit: false,
     enableZoomControls: false
 }
 
-"#webview[platform=android]": {
+"#browser[platform=android]": {
     top: '48dp'
 }

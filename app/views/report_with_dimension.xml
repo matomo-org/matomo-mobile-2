@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="piwikProcessedReport" id="piwikProcessedReport" instance="true"/>
     
-    <Window title="" id="index" onClose="onClose" onOpen="onOpen">
+    <Window module="xp.ui" title="" id="index" onClose="onClose" onOpen="onOpen">
                 
         <RightNavButton platform="ios" formFactor="handheld">
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>

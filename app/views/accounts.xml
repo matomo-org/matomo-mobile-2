@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="appAccounts"/>
     
-    <Window class="container" id="index" onClose="onClose" onOpen="onOpen">
+    <Window module="xp.ui" class="container" id="index" onClose="onClose" onOpen="onOpen">
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
@@ -18,7 +18,7 @@
         
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 
-                onHomeIconItemSelected="toggleReportChooserVisibility"
+                onHomeItemSelected="toggleReportChooserVisibility"
                 onActionItem1="addAccount"
                 formFactor="handheld"
                 platform="android" />
