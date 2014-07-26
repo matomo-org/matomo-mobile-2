@@ -25,7 +25,7 @@ var webTitle = args.title || false;
 
 exports.open = function () {
     updateWindowTitle(webTitle);
-    $.webview.url = webUrl;
+    $.browser.url = webUrl;
 
     require('layout').open($.index);
 

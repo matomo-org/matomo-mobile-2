@@ -96,8 +96,8 @@ function onReportDateChosen(event)
 function trackReportDateChange(period, date)
 {
     var tracker = require('Piwik/Tracker');
-    tracker.setCustomVariable(1, 'period', '' + period, 'event');
-    tracker.setCustomVariable(2, 'date', '' + date, 'event');
+    tracker.setCustomVariable(1, 'period', period, 'event');
+    tracker.setCustomVariable(2, 'date', date, 'event');
     tracker.trackEvent({name: 'Default Report Date Changed', action: 'result', category: 'Settings'});
 }
 

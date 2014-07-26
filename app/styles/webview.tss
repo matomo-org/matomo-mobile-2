@@ -6,6 +6,6 @@
     canGoBack: true,
 }
 
-"#webview[platform=android]": {
+"#browser[platform=android]": {
     top: '48dp'
 }

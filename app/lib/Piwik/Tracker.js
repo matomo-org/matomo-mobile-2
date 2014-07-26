@@ -268,7 +268,7 @@ function Tracker () {
     this.trackEvent = function (event) {
 
         if (event.category) {
-            parameter.e_c = event.category;
+            parameter.e_c = '' + event.category;
         } else if (documentTitle) {
             parameter.e_c = documentTitle;
         } else {
@@ -276,13 +276,13 @@ function Tracker () {
         }
 
         if (event.action) {
-            parameter.e_a = event.action;
+            parameter.e_a = '' + event.action;
         } else {
             parameter.e_a = 'click';
         }
 
         if (event.name) {
-            parameter.e_n = event.name;
+            parameter.e_n = '' + event.name;
         }
 
         if (event.value) {
