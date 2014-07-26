@@ -36,7 +36,7 @@ function emailUs()
 {
     require('commands/sendEmailFeedback').execute();
 
-    require('Piwik/Tracker').trackEvent({title: 'Email Us', url: '/help/email-us'});
+    require('Piwik/Tracker').trackEvent({name: 'Email Us', category: 'Help'});
 }
 
 function openForum()
@@ -61,7 +61,7 @@ function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/help/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Help'});
 }
 
 exports.close = function ()

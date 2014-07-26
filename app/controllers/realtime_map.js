@@ -70,14 +70,14 @@ function toggleReportConfiguratorVisibility (event)
 {
     require('report/configurator').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/real-time-map/toggle/report-configurator'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Configurator', category: 'Real time map'});
 }
 
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
     
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/real-time-map/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Real time map'});
 }
 
 function close()

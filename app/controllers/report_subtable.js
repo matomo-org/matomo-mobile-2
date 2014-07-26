@@ -55,7 +55,8 @@ function onClose()
 
 function onMetricChosen(chosenMetric)
 {
-    require('Piwik/Tracker').trackEvent({title: 'Metric Changed', url: '/report/subtable/change/metric/' + chosenMetric});
+    require('Piwik/Tracker').setCustomVariable(1, 'metric', chosenMetric, 'event');
+    require('Piwik/Tracker').trackEvent({name: 'Metric Changed', action: 'result', category: 'Report Subtable'});
 
     currentMetric = chosenMetric;
     $.doRefresh();
@@ -65,7 +66,7 @@ function toggleReportConfiguratorVisibility (event)
 {
     require('report/configurator').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/composite/toggle/report-configurator'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Configurator', category: 'Report Subtable'});
 }
 
 function updateWindowTitle(title)

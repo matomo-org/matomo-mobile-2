@@ -34,13 +34,13 @@ function nextGraphUrl()
         currentUrl = evolutionUrl;
         
         getSettings().setPreferEvolutionGraphs(true);
-        require('Piwik/Tracker').trackEvent({title: 'Switch Graph Evolution', url: '/graph/switch/evolution'});
+        require('Piwik/Tracker').trackEvent({name: 'Switch Graph Evolution', category: 'Graph Switcher'});
         
     } else if (currentUrl == evolutionUrl) {
         currentUrl = staticUrl;
         
         getSettings().setPreferEvolutionGraphs(false);
-        require('Piwik/Tracker').trackEvent({title: 'Switch Graph Static', url: '/graph/switch/static'});
+        require('Piwik/Tracker').trackEvent({name: 'Switch Graph Static', category: 'Graph Switcher'});
     }
     
     return currentUrl;

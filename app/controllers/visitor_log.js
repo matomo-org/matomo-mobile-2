@@ -43,7 +43,7 @@ function openVisitor(event)
 
 function onWebsiteChanged(website)
 {
-    require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/visitor-log/change/website'});
+    require('Piwik/Tracker').trackEvent({name: 'Website Changed', action: 'result', category: 'Visitor Log'});
 
     doRefresh();
 }
@@ -54,7 +54,7 @@ function onDateChanged(date)
         return;
     }
 
-    require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/visitor-log/change/date'});
+    require('Piwik/Tracker').trackEvent({name: 'Date Changed', action: 'result', category: 'Visitor Log'});
 
     doRefresh();
 }
@@ -99,7 +99,7 @@ function fetchPrevious()
     showLoadingMessage();
     visitorLog.previous(accountModel, siteModel.id);
 
-    require('Piwik/Tracker').trackEvent({title: 'Previous Visitors', url: '/visitor-log/previous'});
+    require('Piwik/Tracker').trackEvent({name: 'Previous Visitors', category: 'Visitor Log'});
 }
 
 function fetchNext()
@@ -115,7 +115,7 @@ function fetchNext()
     showLoadingMessage();
     visitorLog.next(accountModel, siteModel.id);
 
-    require('Piwik/Tracker').trackEvent({title: 'Next Visitors', url: '/visitor-log/next'});
+    require('Piwik/Tracker').trackEvent({name: 'Next Visitors', category: 'Visitor Log'});
 }
 
 function scrollToTop()
@@ -289,14 +289,14 @@ function toggleReportConfiguratorVisibility()
 {
     require('report/configurator').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/visitor-log/toggle/report-configurator'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Configurator', category: 'Visitor Log'});
 }
 
 function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/visitor-log/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Visitor Log'});
 }
 
 exports.open = function () 

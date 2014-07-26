@@ -124,17 +124,17 @@ Rating.prototype.askUserToRate = function () {
             // user pressed the "Don't remind me" button
             remindMe = false;
             
-            getTracker().trackEvent({title: 'Dont remind me', url: '/rating/dont-remind-me'});
+            getTracker().trackEvent({name: 'Dont remind me', category: 'Rating'});
 
         } else if (0 == event.index) {
             remindMe = false;
 
             that.rate();
             
-            getTracker().trackEvent({title: 'Rate now', url: '/rating/rate-now'});
+            getTracker().trackEvent({name: 'Rate now', category: 'Rating'});
         
         } else if (1 == event.index) {
-            getTracker().trackEvent({title: 'Rate not now', url: '/rating/not-now'});
+            getTracker().trackEvent({name: 'Rate not now', category: 'Rating'});
         }
         
         that.store();

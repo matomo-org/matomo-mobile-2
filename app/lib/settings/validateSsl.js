@@ -15,6 +15,6 @@ exports.toggle = function ()
 
     var action  = enabled ? 'enabled' : 'disabled';
     var tracker = require('Piwik/Tracker');
-    tracker.trackEvent({title: 'Validate SSL ' + action,
-                        url: '/settings/changed/validate-ssl/' + action});
+    tracker.setCustomVariable(1, 'action', '' + action, 'event');
+    tracker.trackEvent({name: 'Validate SSL Changed', action: 'result', category: 'Settings'});
 };

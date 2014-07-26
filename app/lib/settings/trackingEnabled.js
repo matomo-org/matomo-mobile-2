@@ -20,8 +20,8 @@ exports.toggle = function ()
 
     var action  = enabled ? 'enabled' : 'disabled';
     var tracker = require('Piwik/Tracker');
-    tracker.trackEvent({title: 'Anonymous Tracking ' + action,
-                        url: '/settings/changed/anonymous-tracking/' + action});
+    tracker.setCustomVariable(1, 'action', '' + action, 'event');
+    tracker.trackEvent({name: 'Anonymous Tracking Changed', action: 'result', category: 'Settings'});
 
     var alertDialog = Ti.UI.createAlertDialog({
         message: L('Mobile_AskForAnonymousTrackingPermission'),

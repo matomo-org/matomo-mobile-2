@@ -116,19 +116,19 @@ function toggleReportConfiguratorVisibility ()
 {
     require('report/configurator').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/composite/toggle/report-configurator'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Configurator', category: 'Report Composite'});
 }
 
 function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/report/composite/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Report Composite'});
 }
 
 function onWebsiteChanged()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/report/composite/change/website'});
+    require('Piwik/Tracker').trackEvent({name: 'Website Changed', action: 'result', category: 'Report Composite'});
 
     websiteHasChanged = true;
     updateDisplayedReportsIfNeeded();
@@ -136,7 +136,7 @@ function onWebsiteChanged()
 
 function onDateChanged() 
 {
-    require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/composite/change/date'});
+    require('Piwik/Tracker').trackEvent({name: 'Date Changed', action: 'result', category: 'Report Composite'});
 
     dateHasChanged = true;
     updateDisplayedReportsIfNeeded();

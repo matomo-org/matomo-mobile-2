@@ -54,7 +54,7 @@ exports.showLoadingMessage = function ()
 
 function onTogglePaginator()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Paginator', url: '/report/with-dimension/toggle/paginator'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Paginator', category: 'Report With Dimension'});
 
     $.showAllEntries = !$.showAllEntries; 
     shouldScrollToPositionOfPaginator = $.showAllEntries;

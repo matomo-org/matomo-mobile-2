@@ -65,7 +65,7 @@ function websiteChosen(siteModel)
 
 function chooseAccount()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Choose Account', url: '/all-websites-dashboard/choose-account'});
+    require('Piwik/Tracker').trackEvent({name: 'Choose Account', category: 'All Websites Dashboard'});
 
     var accounts = Alloy.createController('accounts_selector');
     accounts.on('accountChosen', onAccountChosen);
@@ -75,7 +75,7 @@ function chooseAccount()
 function onAccountChosen(account)
 {
     this.close();
-    require('Piwik/Tracker').trackEvent({title: 'Account Chosen', url: '/all-websites-dashboard/account-chosen'});
+    require('Piwik/Tracker').trackEvent({name: 'Account Chosen', action: 'result', category: 'All Websites Dashboard'});
 
     accountModel = account;
     fetchListOfAvailableWebsites();
@@ -246,7 +246,7 @@ function searchWebsite()
 
     $.searchBar.blur();
 
-    require('Piwik/Tracker').trackEvent({title: 'Websites Search', url: '/all-websites-dashboard/search'});
+    require('Piwik/Tracker').trackEvent({name: 'Websites Search', category: 'All Websites Dashboard'});
 }
 
 function getNumberOfFoundWebsites()

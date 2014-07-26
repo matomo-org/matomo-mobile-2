@@ -15,7 +15,7 @@ var accounts = args.accounts;
 
 function tryIt ()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Try it', url: '/first-login/try-it'});
+    require('Piwik/Tracker').trackEvent({name: 'Try it', category: 'Account'});
 
     require('login').login(
         accounts,
@@ -27,7 +27,7 @@ function tryIt ()
 
 function openFaq ()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Open FAQ', url: '/first-login/open-faq'});
+    require('Piwik/Tracker').trackEvent({name: 'Open FAQ', category: 'Account'});
 
     require('commands/openFaq').execute();
 }

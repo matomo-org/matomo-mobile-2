@@ -266,10 +266,30 @@ function Tracker () {
      * @param  {string}  event.url    An absolute url to identify this event without protocol and so on.
      */
     this.trackEvent = function (event) {
-        
-        parameter.action_name = '' + event.title;
-        parameter.url         = baseUrl + '/event' + event.url;
-        event                 = null;
+
+        if (event.category) {
+            parameter.e_c = event.category;
+        } else if (documentTitle) {
+            parameter.e_c = documentTitle;
+        } else {
+            parameter.e_c = 'No Category';
+        }
+
+        if (event.action) {
+            parameter.e_a = event.action;
+        } else {
+            parameter.e_a = 'click';
+        }
+
+        if (event.name) {
+            parameter.e_n = event.name;
+        }
+
+        if (event.value) {
+            parameter.e_v = event.value;
+        }
+
+        event         = null;
 
         this._dispatch();
     };
@@ -340,20 +360,16 @@ function Tracker () {
             message = message.substr(0, 200);
         }
 
-        var url   = '/exception/' + type;
-        url      += '/' + errorCode;
-        url      += '/' + file;
-        url      += '/' + line;
-        url      += '/' + message;
+        var name = '/' + type;
+        name    += '/' + file;
+        name    += '/' + line;
+        name    += '/' + message;
 
-        var title = 'Exception ' + type;
-
-        parameter.action_name = '' + title;
-        parameter.url         = baseUrl + url;
-        
-        exception = null;
-
-        this._dispatch();
+        this.trackEvent({
+            action: 'exception',
+            name: name,
+            category: 'Error ' + errorCode
+        });
     };
 
     /**
@@ -415,6 +431,8 @@ function Tracker () {
             key = 'cvar';
         } else if (scope && 'visit' == scope) {
             key = '_cvar';
+        } else if (scope && 'event' == scope) {
+            key = 'e_cvar';
         }
 
         if (!parameter[key]) {

@@ -69,14 +69,14 @@ function changeLanguage()
 {
     require('settings/changeLanguage').open();
 
-    require('Piwik/Tracker').trackEvent({title: 'Settings - Change Language', url: '/settings/change/language'});
+    require('Piwik/Tracker').trackEvent({name: 'Change Language', category: 'Settings'});
 }
 
 function changeReportDate()
 {
     require('settings/changeReportDate').open();
 
-    require('Piwik/Tracker').trackEvent({title: 'Settings - Change ReportDate', url: '/settings/change/reportdate'});
+    require('Piwik/Tracker').trackEvent({name: 'Change ReportDate', category: 'Settings'});
 }
 
 function toggleValidateSsl()
@@ -98,14 +98,14 @@ function changeHttpTimeout()
 {
     require('settings/changeHttpTimeout').open();
 
-    require('Piwik/Tracker').trackEvent({title: 'Settings - Change HTTP Timeout', url: '/settings/change/http-timeout'});
+    require('Piwik/Tracker').trackEvent({name: 'Change HTTP Timeout', category: 'Settings'});
 }
 
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/settings/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Settings'});
 }
 
 function close() 

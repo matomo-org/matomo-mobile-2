@@ -15,6 +15,6 @@ exports.toggle = function ()
 
     var action  = enabled ? 'enabled' : 'disabled';
     var tracker = require('Piwik/Tracker');
-    tracker.trackEvent({title: 'Graphs ' + action,
-                        url: '/settings/changed/graphs/' + action});
+    tracker.setCustomVariable(1, 'action', '' + action, 'event');
+    tracker.trackEvent({name: 'Graphs Enabled Changed', action: 'result', category: 'Settings'});
 };

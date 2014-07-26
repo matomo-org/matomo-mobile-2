@@ -25,7 +25,7 @@ function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/give-feedback/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Give Feedback'});
 }
 
 function platformInfo()
@@ -51,14 +51,14 @@ function doSendEmailFeedback()
 {
     require('commands/sendEmailFeedback').execute();
 
-    require('Piwik/Tracker').trackEvent({title: 'Email Us', url: '/give-feedback/email-us'});
+    require('Piwik/Tracker').trackEvent({name: 'Email Us', category: 'Give Feedback'});
 }
 
 function doRateApp()
 {
     require('commands/rateApp').execute();
 
-    require('Piwik/Tracker').trackEvent({title: 'Rate-App', url: '/give-feedback/rate-app'});
+    require('Piwik/Tracker').trackEvent({name: 'Rate-App', category: 'Give Feedback'});
 }
 
 function doParticipate()

@@ -37,7 +37,7 @@ function onClose()
 
 function chooseAccount()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Choose Account', url: '/fetch-entry-website/choose-account'});
+    require('Piwik/Tracker').trackEvent({name: 'Choose Account', category: 'Entry Website'});
 
     var accounts = Alloy.createController('accounts_selector');
     accounts.on('accountChosen', onAccountChosen);
@@ -46,7 +46,7 @@ function chooseAccount()
 
 function onAccountChosen(accountModel)
 {
-    require('Piwik/Tracker').trackEvent({title: 'Account Chosen', url: '/fetch-entry-website/account-chosen'});
+    require('Piwik/Tracker').trackEvent({name: 'Account Chosen', action: 'result', category: 'Entry Website'});
 
     $.trigger('accountChosen', accountModel);
     $.close();

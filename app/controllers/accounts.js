@@ -21,8 +21,7 @@ function chooseAccount(event)
         return;
     }
 
-    require('Piwik/Tracker').trackEvent({title: 'Accounts - Account selected', 
-                                         url: '/accounts/account-selected'});
+    require('Piwik/Tracker').trackEvent({category: 'Accounts', name: 'Account selected'});
 
     var account = accounts.get(event.row.accountId);
 
@@ -61,7 +60,7 @@ function deleteAccount(event)
 
     displayNoAccountSelectedHintIfNoAccountIsSelected();
 
-    require('Piwik/Tracker').trackEvent({title: 'Accounts - Account Delete', url: '/accounts/account-deleted'});
+    require('Piwik/Tracker').trackEvent({name: 'Account Delete', category: 'Accounts'});
 }
 
 function deleteAccountIfUserConfirmsButNotOniOS(event)
@@ -123,7 +122,7 @@ var newAccountController = null;
 
 function addAccount()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Accounts - Add Account', url: '/accounts/add-account'});
+    require('Piwik/Tracker').trackEvent({category: 'Accounts', name: 'Add Account'});
 
     newAccountController = Alloy.createController('account_creator', {accounts: accounts});
     accounts.on('add', onCreatedAccount);
@@ -131,7 +130,7 @@ function addAccount()
 }
 
 function onCreatedAccount() {
-    require('Piwik/Tracker').trackEvent({title: 'Accounts - Account created', url: '/accounts/account-created'});
+    require('Piwik/Tracker').trackEvent({category: 'Accounts', action: 'result', name: 'Account created'});
 
     accounts.off("add", onCreatedAccount);
     newAccountController.close();
@@ -141,7 +140,7 @@ function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/accounts/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Accounts'});
 }
 
 function onOpen()

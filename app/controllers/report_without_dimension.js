@@ -70,7 +70,7 @@ function onClose()
 
 function onWebsiteChanged()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/report/without-dimension/change/website'});
+    require('Piwik/Tracker').trackEvent({name: 'Website Changed', action: 'result', category: 'Report Without Dimension'});
 
     doRefresh();
 }
@@ -81,7 +81,7 @@ function onDateChanged(changedReportDate)
         return;
     }
 
-    require('Piwik/Tracker').trackEvent({title: 'Date Changed', url: '/report/without-dimension/change/date'});
+    require('Piwik/Tracker').trackEvent({name: 'Date Changed', action: 'result', category: 'Report Without Dimension'});
 
     reportDate = changedReportDate;
     doRefresh();
@@ -93,7 +93,8 @@ function onMetricChosen(chosenMetric)
         return;
     }
 
-    require('Piwik/Tracker').trackEvent({title: 'Metric Changed', url: '/report/without-dimension/change/metric/' + chosenMetric});
+    require('Piwik/Tracker').setCustomVariable(1, 'metric', chosenMetric, 'event');
+    require('Piwik/Tracker').trackEvent({name: 'Metric Changed', action: 'result', category: 'Report Without Dimension'});
 
     currentMetric = chosenMetric;
     doRefresh();
@@ -141,14 +142,14 @@ function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/report/without-dimension/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Report Without Dimension'});
 }
 
 function toggleReportConfiguratorVisibility ()
 {
     require('report/configurator').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/report/without-dimension/toggle/report-configurator'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Configurator', category: 'Report Without Dimension'});
 }
 
 function removeAllChildrenFromContent()

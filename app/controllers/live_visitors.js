@@ -72,7 +72,7 @@ function onClose()
 
 function onWebsiteChanged()
 {
-    require('Piwik/Tracker').trackEvent({title: 'Website Changed', url: '/visitors-in-real-time/change/website'});
+    require('Piwik/Tracker').trackEvent({name: 'Website Changed', action: 'result', category: 'Visitors in real time'});
 
     doRefresh();
 }
@@ -264,14 +264,14 @@ function toggleReportConfiguratorVisibility ()
 {
     require('report/configurator').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Configurator', url: '/visitors-in-real-time/toggle/report-configurator'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Configurator', category: 'Visitors in real time'});
 }
 
 function toggleReportChooserVisibility()
 {
     require('report/chooser').toggleVisibility();
 
-    require('Piwik/Tracker').trackEvent({title: 'Toggle Report Chooser', url: '/visitors-in-real-time/toggle/report-chooser'});
+    require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Visitors in real time'});
 }
 
 exports.open = function () 
