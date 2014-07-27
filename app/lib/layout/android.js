@@ -64,6 +64,7 @@ function AndroidLayout(rootWin)
         this.trigger('open', view);
 
         rootWin.add(view);
+        view.fireEvent('open', {type: 'open'});
 
         view = null;
     }

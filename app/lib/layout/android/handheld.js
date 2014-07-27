@@ -5,7 +5,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
-var rootWin = Ti.UI.createWindow({backgroundColor: "#e5e5e5"});
+var rootWin = Ti.UI.createWindow({backgroundColor: "#e5e5e5", exitOnClose: true});
 rootWin.addEventListener('open', function(){
     rootWin.activity.actionBar.hide();
 });

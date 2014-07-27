@@ -7,22 +7,9 @@
 
 var widthLeftSidebar = '250dp';
 
-function TabletSidebar()
+function TabletSidebar(rootWindow)
 {
-    var isLeftSidebarSet  = false;
-
-    function initLeftSidebarWindow()
-    {
-        var leftSidebarWindow = Ti.UI.createWindow({
-            left: 0, 
-            backgroundColor: '#e5e5e5',
-            exitOnClose: true
-        });
-
-        leftSidebarWindow.open();
-
-        return leftSidebarWindow;
-    }
+    var isLeftSidebarSet = false;
 
     this.on('open', function (window) {
         if (isLeftSidebarSet) {
@@ -38,16 +25,13 @@ function TabletSidebar()
 
         isLeftSidebarSet = true;
 
-        var leftSidebarWindow = initLeftSidebarWindow();
-
         view.left  = 0;
         view.width = widthLeftSidebar;
-        leftSidebarWindow.add(view);
+        rootWindow.add(view);
     };
 
     this.hideLeftSidebar = function () {};
     this.toggleLeftSidebar = function () {};
-
 
     this.setRightSidebar = function() {};
     this.hideRightSidebar = function() {};

@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="piwikReports" instance="true" id="reportsCollection"/>
 
-    <Window module="xp.ui" title="" id="index" onClose="onClose" onOpen="onOpen" onBlur="onBlur" onFocus="onFocus">
+    <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen" onBlur="onBlur" onFocus="onFocus">
         
         <LeftNavButton platform="mobileweb" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>

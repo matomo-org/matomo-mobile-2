@@ -241,14 +241,20 @@ function destroy()
 
 function close()
 {
-    $.index.close();
+    if (OS_ANDROID) {
+        require('layout').close($.index);
+    } else {
+        $.index.close();
+    }
 }
 
 function open()
 {
-    if (OS_ANDROID) $.index.addEventListener('androidback', close);
-
-    $.index.open();
+    if (OS_ANDROID) {
+        require('layout').open($.index);
+    } else {
+        $.index.open();
+    }
 }
 
 exports.open = open;
