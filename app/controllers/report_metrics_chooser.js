@@ -34,7 +34,7 @@ if (!OS_ANDROID) {
 
 function doChangeMetric(event)
 {
-    if (!event || event.cancel === event.index || true === event.cancel || 0 > event.index) {
+    if (!event || event.cancel === event.index || true === event.cancel || 0 > event.index || event.button) {
 
         return;
     }
@@ -49,12 +49,17 @@ function doChangeMetric(event)
 
 exports.open = function()
 {
-    var dialog = Ti.UI.createOptionDialog({
-        options: options, 
-        title: L('Mobile_ChooseMetric'), 
+    var params = {
+        options: options,
+        title: L('Mobile_ChooseMetric'),
         cancel: OS_ANDROID ? -1 : options.length - 1
-    });
-    
+    };
+
+    if (OS_ANDROID) {
+        params.buttonNames = [L('General_Cancel')];
+    }
+
+    var dialog = Ti.UI.createOptionDialog(params);
     dialog.addEventListener('click', doChangeMetric);
     dialog.show();
 };

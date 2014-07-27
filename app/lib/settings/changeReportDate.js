@@ -24,8 +24,6 @@ function getAvailableReportDateNames()
     for (var index in availableReportDates) {
         reportNames.push(availableReportDates[index].label);
     }
-    
-    reportNames.push(L('General_Cancel'));
 
     return reportNames;
 }
@@ -70,7 +68,7 @@ function getSettings()
 function onReportDateChosen(event)
 {
     // android reports cancel = true whereas iOS returns the previous defined cancel index
-    if (!event || event.cancel === event.index || true === event.cancel) {
+    if (!event || event.cancel === event.index || true === event.cancel || event.button) {
 
         return;
     }
@@ -116,12 +114,19 @@ exports.open = function ()
 {
     var options = getAvailableReportDateNames();
 
-    var dialog  = Ti.UI.createOptionDialog({
+    var params = {
         title: L('Mobile_DefaultReportDate'),
-        options: options,
-        cancel: options.length - 1
-    });
+        options: options
+    };
 
+    if (OS_ANDROID) {
+        params.buttonNames = [L('General_Cancel')];
+    } else {
+        options.push(L('General_Cancel'));
+        params.cancel = (options.length - 1);
+    }
+
+    var dialog = Ti.UI.createOptionDialog(params);
     dialog.selectedIndex = currentSelectedReportDateIndex();
     dialog.addEventListener('click', onReportDateChosen);
 

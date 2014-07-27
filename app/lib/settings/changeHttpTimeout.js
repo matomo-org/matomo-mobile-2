@@ -13,7 +13,7 @@ function getTimeoutValues()
 function pressedCancel(event)
 {
     // android reports cancel = true whereas iOS returns the previous defined cancel index
-    return (!event || event.cancel === event.index || true === event.cancel);
+    return (!event || event.cancel === event.index || true === event.cancel || event.button);
 }
 
 function trackTimeoutChange(timeoutValue)
@@ -75,16 +75,21 @@ exports.open = function ()
 
     // an array of all available timeout options
     var timeoutValues = getTimeoutValues();
-    timeoutValues.push(L('General_Cancel'));
 
-    var timeoutDialog = Ti.UI.createOptionDialog({
+    var params = {
         title: L('Mobile_ChooseHttpTimeout'),
-        options: timeoutValues,
-        cancel: (timeoutValues.length - 1)
-    });
+        options: timeoutValues
+    };
 
+    if (OS_ANDROID) {
+        params.buttonNames = [L('General_Cancel')];
+    } else {
+        timeoutValues.push(L('General_Cancel'));
+        params.cancel = (timeoutValues.length - 1);
+    }
+
+    var timeoutDialog = Ti.UI.createOptionDialog(params);
     timeoutDialog.addEventListener('click', onTimeoutSelected);
-
     timeoutDialog.show();
     timeoutDialog = null;
 };

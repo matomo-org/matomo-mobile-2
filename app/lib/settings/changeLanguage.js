@@ -106,7 +106,7 @@ function getSettings()
 function pressedCancel(event)
 {
     // android reports cancel = true whereas iOS returns the previous defined cancel index
-    return (!event || event.cancel === event.index || true === event.cancel);
+    return (!event || event.cancel === event.index || true === event.cancel || event.button);
 }
 
 function userHasSelectedSameValueAsAlreadySelected(index)
@@ -138,13 +138,19 @@ exports.getCurrentLanguageName = currentLanguageName;
 exports.open = function () {
 
     var languageNames = availableLanguageNamesSortedByAlphabet();
-    languageNames.push(L('General_Cancel'));
-
-    var langDialog = Ti.UI.createOptionDialog({
+    var params = {
         title: L('General_ChooseLanguage'),
-        options: languageNames,
-        cancel: (languageNames.length - 1)
-    });
+        options: languageNames
+    };
+
+    if (OS_ANDROID) {
+        params.buttonNames = [L('General_Cancel')];
+    } else {
+        languageNames.push(L('General_Cancel'));
+        params.cancel = (languageNames.length - 1);
+    }
+
+    var langDialog = Ti.UI.createOptionDialog(params);
 
     var currentLangIndex = currentSelectedLanguageIndex();
     if (null !== currentLangIndex) {
