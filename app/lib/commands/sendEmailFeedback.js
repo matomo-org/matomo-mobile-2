@@ -79,7 +79,7 @@ exports.execute = function ()
     emailDialog.setSubject("Feedback Piwik Mobile");
     emailDialog.setToRecipients(['mobile@piwik.org']);
 
-    if (emailDialog.setBarColor) {
+    if (OS_IOS) {
         emailDialog.setBarColor('#CD1628');
     }
 

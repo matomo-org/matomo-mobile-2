@@ -169,6 +169,8 @@ exports.renderProcessedReport = function (processedReportCollection)
         if (OS_MOBILEWEB) showAllOptions.left = 10;
         if (OS_ANDROID) showAllOptions.leftImage = '/images/spacer_10x10.png';
         if (OS_ANDROID) showAllOptions.font = {fontSize: '16sp', fontWeight: 'bold'};
+        if (OS_ANDROID) showAllOptions.top = '16dp';
+        if (OS_ANDROID) showAllOptions.bottom = '16dp';
 
         if (OS_IOS) {
             showAllOptions.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;

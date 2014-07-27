@@ -260,6 +260,10 @@ exports.definition = {
                             label = metadata.shortLabel;
                         }
 
+                        if (label) {
+                            label = ('' + label).replace(/^\s+/g, "");
+                        }
+
                         row = report;
                         row.title = label;
                         row.value = value;

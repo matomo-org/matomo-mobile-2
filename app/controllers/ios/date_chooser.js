@@ -35,6 +35,8 @@ function onOpen()
 
 function createRow(params)
 {
+    params.selectable = true;
+
     return Alloy.createWidget('org.piwik.tableviewrow', null, params).create();
 }
 
