@@ -493,7 +493,19 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
     view = null;
 
     if (actionDetail.url) {
-        row.add($.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.url + '')}));
+        var label = $.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.url + '')});
+        row.add(label);
+
+        if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
+            label.addEventListener('click', (function (actionDetailUrl) {
+                return function () {
+                    Ti.Platform.openURL(actionDetailUrl);
+                };
+            })(actionDetail.url));
+        }
+
+        label = null;
+
     } else if (actionDetail.siteSearchKeyword) {
         row.add($.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.siteSearchKeyword + '')}));
     }
