@@ -98,24 +98,21 @@ function isAnAccountSelected()
 
 $.showNoAccountSelectedHint = function ()
 {
-    if (OS_MOBILEWEB) {
-        $.noAccountSelectedContainer.height = Ti.UI.SIZE;
-    }
-
-    if (OS_ANDROID) {
-        $.noAccountSelectedLabel.height = Ti.UI.SIZE;
-        $.noAccountSelectedLabel.show();
-        $.noAccountSelectedContainer.height = Ti.UI.SIZE;
-    }
-
-    $.noAccountSelectedContainer.show();
+    var header = $.UI.create('View', {classes: ['noAccountSelectedContainer']});
+    var label  = $.UI.create('Label', {classes: ['noAccountSelectedLabel']});
+    header.add(label);
+    header.show();
+    label.show();
+    $.accountsTable.setHeaderView(header);
+    header = null;
+    label  = null;
 };
 
 function displayNoAccountSelectedHintIfNoAccountIsSelected()
 {
     if (!isAnAccountSelected()) {
         $.showNoAccountSelectedHint();
-    } 
+    }
 }
 
 var newAccountController = null;
@@ -166,9 +163,9 @@ function close ()
 
 exports.open = function ()
 {
-    displayNoAccountSelectedHintIfNoAccountIsSelected();
-
     require('layout').open($.index);
+
+    displayNoAccountSelectedHintIfNoAccountIsSelected();
 
     accounts.fetch();
 };
