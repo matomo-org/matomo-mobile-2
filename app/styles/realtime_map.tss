@@ -19,5 +19,6 @@
 }
 
 "#browser[platform=android]": {
-    top: '48dp'
+    top: '48dp',
+    borderRadius: '1dp'
 }
