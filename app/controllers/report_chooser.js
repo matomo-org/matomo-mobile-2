@@ -270,7 +270,7 @@ exports.open = function()
 {
     require('layout').setLeftSidebar($.reportsTable);
 
-    require('session').on('accountChanged', refresh);
+    require('session').on('websiteChanged', refresh);
     Alloy.createCollection('AppSettings').settings().on('change:language', refresh);
 
     refresh();
