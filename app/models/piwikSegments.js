@@ -24,7 +24,7 @@ exports.definition = {
             "type": "piwikapi",
             "collection_name": "piwiksegments"
         },
-        "cache": {time: 60 * 60 * 24, type: 'session'}, // 24 hours
+        "cache": {time: 60 * 60 * 4, type: 'session'}, // 4 hours
         "settings": {
             "method": "SegmentEditor.getAll",
             "displayErrors": true
