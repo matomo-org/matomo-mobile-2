@@ -1,0 +1,84 @@
+"#index": {
+    title: L('Mobile_ChooseSegment'),
+    backButtonTitle: L('Mobile_NavigationBack')
+},
+
+"#index[platform=mobileweb]": {
+    fullscreen: false,
+}
+
+"#index[platform=ios]": {
+    fullscreen: false,
+    modal: true,
+}
+
+"#cancelButton": {
+    title: L('General_Cancel')
+}
+
+"#cancelButton[platform=ios]": {
+    style: Ti.UI.iPhone.SystemButtonStyle.CANCEL,
+    tintColor: '#ffffff'
+}
+
+"#segmentsTable": {
+    separatorColor: '#e0e0e0'
+}
+
+"#segmentsTable[platform=ios]": {
+    separatorInsets: {left:0,right:0}
+}
+
+"#loadingLabel": {
+    text: L('General_LoadingData')
+},
+
+"#loading": {
+    left: 0,
+    top: 0,
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL,
+    visible: true,
+    backgroundColor: 'white',
+    zIndex: 5
+},
+
+"#loading[platform=android]": {
+    top: '48dp'
+}
+
+"#content": {
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL,
+    backgroundColor: 'white',
+    zIndex: 3
+},
+
+"#content[platform=android]": {
+    top: '48dp'
+}
+
+"TableViewRow[platform=ios]": {
+    height: Ti.UI.SIZE,
+    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY,
+},
+
+"TableViewRow[platform=android]": {
+    leftImage: '/images/spacer_10x10.png',
+    right: '10dp',
+    top: '10dp',
+    bottom: '10dp',
+    color: '#333',
+    backgroundSelectedColor: '#a9a9a9'
+}
+
+"TableViewRow[platform=mobileweb]": {
+    left: 10,
+    right: 10,
+    color: '#333'
+}
+
+"#headerBar": {
+    title: L('Mobile_ChooseSegment'),
+    canGoBack: true
+}

@@ -79,7 +79,7 @@ exports.definition = {
                 return date;
             },
 
-            initial: function (account, idSite, period, date) {
+            initial: function (account, segment, idSite, period, date) {
                 if (!account) {
                     console.info('Unable to init lastVisitDetails, no account given');
                     return;
@@ -94,6 +94,7 @@ exports.definition = {
                 this.abortRunningRequests();
                 this.fetch({
                     account: account,
+                    segment: segment,
                     params: {filter_limit: numVisitorsToLoadInitially,
                              idSite: idSite,
                              period: this.getPeriod(),
@@ -101,7 +102,7 @@ exports.definition = {
                 });
             },
 
-            previous: function (account, idSite) {
+            previous: function (account, segment, idSite) {
                 if (!account) {
                     console.info('Unable to fetch previous lastVisitDetails, no account given');
                     return;
@@ -114,6 +115,7 @@ exports.definition = {
                 this.abortRunningRequests();
                 this.fetch({
                     account: account,
+                    segment: segment,
                     params: {filter_offset: this.currentOffset,
                              idSite: idSite,
                              filter_limit: filterLimit, 
@@ -122,7 +124,7 @@ exports.definition = {
                 });
             },
 
-            next: function (account, idSite) {
+            next: function (account, segment, idSite) {
                 if (!account) {
                     console.info('Unable to fetch next lastVisitDetails, no account given');
                     return;
@@ -148,7 +150,7 @@ exports.definition = {
                               date: this.parseDate()};
 
                 this.abortRunningRequests();
-                this.fetch({account: account, params: params});
+                this.fetch({account: account, segment: segment, params: params});
             },
 
             validResponse: function (response) {

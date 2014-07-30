@@ -17,6 +17,7 @@ $.reportsCollection.off("fetch destroy change add remove reset", renderListOfRep
 var lastYScrollPosition = 0;
 var dateHasChanged    = false;
 var websiteHasChanged = false;
+var segmentHasChanged = false;
 var reportIsDisplayed = true;
 
 $.emptyData = new (require('ui/emptydata'));
@@ -29,6 +30,7 @@ function registerEvents()
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
     session.on('reportDateChanged', onDateChanged);
+    session.on('segmentChanged', onSegmentChanged);
 
     $.content.addEventListener('scroll', notifyModelsAboutNewScrollPosition);
 }
@@ -42,6 +44,7 @@ function unregisterEvents()
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
     session.off('reportDateChanged', onDateChanged);
+    session.off('segmentChanged', onSegmentChanged);
 
     $.content.removeEventListener('scroll', notifyModelsAboutNewScrollPosition);
 }
@@ -134,6 +137,14 @@ function onWebsiteChanged()
     updateDisplayedReportsIfNeeded();
 }
 
+function onSegmentChanged()
+{
+    require('Piwik/Tracker').trackEvent({name: 'Segment Changed', action: 'result', category: 'Report Composite'});
+
+    segmentHasChanged = true;
+    updateDisplayedReportsIfNeeded();
+}
+
 function onDateChanged() 
 {
     require('Piwik/Tracker').trackEvent({name: 'Date Changed', action: 'result', category: 'Report Composite'});
@@ -144,13 +155,14 @@ function onDateChanged()
 
 function updateDisplayedReportsIfNeeded()
 {
-    if (reportIsDisplayed && websiteHasChanged) {
+    if (reportIsDisplayed && (websiteHasChanged || segmentHasChanged)) {
         // website has changed and the available reports maybe changes (Goals), we need to fetch the list of reports
         // for then new website
         notifyModelsAboutWindowClose();
         refresh();
         dateHasChanged    = false;
         websiteHasChanged = false;
+        segmentHasChanged = false;
 
     } else if (reportIsDisplayed && dateHasChanged) {
         // there is no need to fetch the list of reports again, we already have the list and there is no change

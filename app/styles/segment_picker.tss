@@ -1,0 +1,106 @@
+"#index": {
+    right: 0,
+    left: 0,
+    height: Ti.UI.SIZE,
+}
+
+".icon": {
+    image: "ic_action_menu_website.png",
+    right: 0,
+    width: 22,
+    height: 22,
+    touchEnabled: false,
+}
+
+".icon[platform=android]": {
+    image: "/images/ic_action_menu_website.png",
+    width: '22dp',
+    height: '22dp',
+}
+
+".topLine": {
+    backgroundColor: '#595959',
+    height: 1,
+    top: 0,
+    width: Ti.UI.FILL,
+}
+
+".topLine[platform=android]": {
+    top: '1dp',
+    height: '1dp',
+}
+
+".topLine[platform=ios]": {
+    top: 1,
+}
+
+".bottomLine": {
+    backgroundColor: '#272727',
+    height: 1,
+    bottom: 0,
+    width: Ti.UI.FILL,
+}
+
+".bottomLine[platform=android]": {
+    height: '1dp',
+    bottom: '1dp',
+}
+
+".bottomLine[platform=ios]": {
+    bottom: 1,
+}
+
+".button": {
+    backgroundImage: 'menu_button_background.png',
+    height: Ti.UI.SIZE,
+    borderColor: '#000',
+    borderRadius: 5,
+    borderWidth: 1,
+}
+
+".button[platform=android]": {
+    backgroundImage: '/images/menu_button_background.png',
+    borderWidth: '1dp',
+}
+
+"#segmentName": {
+    color: "#d5d5d5",
+    font: {fontSize: 15},
+    left: 0,
+    right: 42,
+    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+    height: Ti.UI.SIZE,
+    touchEnabled: false
+}
+
+"#segmentName[platform=mobileweb]": {
+    top: 3,
+}
+
+"#segmentName[platform=android]": {
+    font: {fontSize: '15sp'},
+    right: '42dp',
+}
+
+".inner": {
+    left: 8,
+    top: 5,
+    bottom: 5,
+    right: 5,
+    height: Ti.UI.SIZE,
+    touchEnabled: false,
+}
+
+".inner[platform=android]": {
+    left: '9dp',
+    top: '6dp',
+    bottom: '6dp',
+    right: '6dp',
+}
+
+".inner[platform=ios]": {
+    left: 9,
+    top: 6,
+    bottom: 6,
+    right: 6,
+}

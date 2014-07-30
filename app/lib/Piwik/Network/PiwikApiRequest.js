@@ -66,7 +66,7 @@ function PiwikApiRequest () {
      *
      * @type  string|null
      */
-    this.method        = null;
+    this.method = null;
 
     /**
      * The piwik account that will be used to execute the request. The account contains the piwik accessUrl as well
@@ -76,7 +76,14 @@ function PiwikApiRequest () {
      *
      * @type  Object|null
      */
-    this.account       = null;
+    this.account = null;
+
+    /**
+     * A piwik segment definition.
+     *
+     * @type string|null
+     */
+    this.segment = null;
 }
 
 var HttpRequest = require('Piwik/Network/HttpRequest');
@@ -128,6 +135,17 @@ PiwikApiRequest.prototype.setAccount = function (account) {
 };
 
 /**
+ * Sets (overwrites) the used account.
+ *
+ * @see    PiwikApiRequest#account
+ *
+ * @param  {Object}  account
+ */
+PiwikApiRequest.prototype.setSegment = function (segment) {
+    this.segment = segment;
+};
+
+/**
  * Mixins all required parameters to make a call to the piwik api. Sets default values for not set parameters and
  * adds some further parameters.
  *
@@ -165,6 +183,10 @@ PiwikApiRequest.prototype._mixinParameter = function (parameter) {
 
     if (!parameter.method) {
         parameter.method     = this.method;
+    }
+
+    if (!parameter.segment && this.segment) {
+        parameter.segment    = this.segment;
     }
 
     var settings = Alloy.createCollection('AppSettings').settings();

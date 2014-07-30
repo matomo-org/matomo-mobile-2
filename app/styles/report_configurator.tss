@@ -74,16 +74,29 @@
 }
 
 ".datePicker": {
-    top: 12,
+    left: 8,
+    right: 8,
     bottom: 24,
+    height: Ti.UI.SIZE,
+}
+
+".datePicker[platform=android]": {
+    bottom: '24dp',
+    left: '8dp',
+    right: '8dp',
+}
+
+".segmentPicker": {
+    top: 12,
+    bottom: 12,
     left: 8,
     right: 8,
     height: Ti.UI.SIZE,
 }
 
-".datePicker[platform=android]": {
+".segmentPicker[platform=android]": {
     top: '12dp',
-    bottom: '24dp',
+    bottom: '12dp',
     left: '8dp',
     right: '8dp',
 }

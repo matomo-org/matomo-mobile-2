@@ -102,6 +102,7 @@ function fetchProcessedReport()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+    var segmentModel = require('session').getSegment();
 
     if (!accountModel || !siteModel) {
         console.log('account or site not found, cannot refresh report overview with dimension');
@@ -110,6 +111,7 @@ function fetchProcessedReport()
 
     $.piwikProcessedReport.fetchProcessedReports(getMetric(), {
         account: accountModel,
+        segment: segmentModel,
         params: getRequestParams(),
         success: function () {
             isFetched = true;

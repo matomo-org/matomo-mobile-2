@@ -21,13 +21,15 @@ function registerEvents()
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
     session.on('reportDateChanged', onDateChanged);
+    session.on('segmentChanged', onSegmentChanged);
 }
 
 function unregisterEvents()
 {
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
-    session.off('reportDateChanged', onDateChanged);
+    session.off('reportDateChanged', onSegmentChanged);
+    session.off('segmentChanged', onSegmentChanged);
 }
 
 function openVisitor(event)
@@ -41,9 +43,16 @@ function openVisitor(event)
     visitor.open();
 }
 
-function onWebsiteChanged(website)
+function onWebsiteChanged()
 {
     require('Piwik/Tracker').trackEvent({name: 'Website Changed', action: 'result', category: 'Visitor Log'});
+
+    doRefresh();
+}
+
+function onSegmentChanged()
+{
+    require('Piwik/Tracker').trackEvent({name: 'Segment Changed', action: 'result', category: 'Visitor Log'});
 
     doRefresh();
 }
@@ -90,6 +99,7 @@ function fetchPrevious()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+    var segmentModel = require('session').getSegment();
 
     if (!accountModel || !siteModel) {
         console.log('account or site not found, cannot fetch previous visitors');
@@ -97,7 +107,7 @@ function fetchPrevious()
     }
 
     showLoadingMessage();
-    visitorLog.previous(accountModel, siteModel.id);
+    visitorLog.previous(accountModel, segmentModel, siteModel.id);
 
     require('Piwik/Tracker').trackEvent({name: 'Previous Visitors', category: 'Visitor Log'});
 }
@@ -106,6 +116,7 @@ function fetchNext()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+    var segmentModel = require('session').getSegment();
 
     if (!accountModel || !siteModel) {
         console.log('account or site not found, cannot fetch next visitors');
@@ -113,7 +124,7 @@ function fetchNext()
     }
 
     showLoadingMessage();
-    visitorLog.next(accountModel, siteModel.id);
+    visitorLog.next(accountModel, segmentModel, siteModel.id);
 
     require('Piwik/Tracker').trackEvent({name: 'Next Visitors', category: 'Visitor Log'});
 }
@@ -269,6 +280,7 @@ function doRefresh()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+    var segmentModel = require('session').getSegment();
 
     if (!accountModel || !siteModel) {
         console.log('account or site not found, cannot refresh visitor log');
@@ -282,7 +294,7 @@ function doRefresh()
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
-    visitorLog.initial(accountModel, siteModel.id, piwikPeriod, piwikDate);
+    visitorLog.initial(accountModel, segmentModel, siteModel.id, piwikPeriod, piwikDate);
 }
 
 function toggleReportConfiguratorVisibility()

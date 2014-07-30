@@ -27,6 +27,7 @@ function registerEvents()
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
     session.on('reportDateChanged', onDateChanged);
+    session.on('segmentChanged', onSegmentChanged);
 }
 
 function unregisterEvents()
@@ -34,6 +35,7 @@ function unregisterEvents()
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
     session.off('reportDateChanged', onDateChanged);
+    session.off('segmentChanged', onSegmentChanged);
 
     $.dimensions.removeEventListener('postlayout', fixVerticalSeparatorHeight);
 }
@@ -71,6 +73,13 @@ function onClose()
 function onWebsiteChanged()
 {
     require('Piwik/Tracker').trackEvent({name: 'Website Changed', action: 'result', category: 'Report Without Dimension'});
+
+    doRefresh();
+}
+
+function onSegmentChanged()
+{
+    require('Piwik/Tracker').trackEvent({name: 'Segment Changed', action: 'result', category: 'Report Without Dimension'});
 
     doRefresh();
 }
@@ -283,6 +292,7 @@ function doRefresh()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+    var segmentModel = require('session').getSegment();
 
     if (!accountModel || !siteModel) {
         console.log('account or site not found, cannot refresh report without dimension');
@@ -311,6 +321,7 @@ function doRefresh()
 
     processedReportCollection.fetchProcessedReports(metric, {
         account: accountModel,
+        segment: segmentModel,
         params: params,
         error: function (undefined, error) {
             if (error) {

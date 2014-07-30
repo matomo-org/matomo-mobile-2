@@ -7,6 +7,9 @@
                 <View class="websitePicker">
                     <Require src="website_picker" onSelected="hideLeftSidebar"/>
                 </View>
+                <View class="segmentPicker">
+                    <Require src="segment_picker" onSelected="hideLeftSidebar"/>
+                </View>
                 <View class="datePicker">
                     <Require src="date_picker" onSelected="hideLeftSidebar"/>
                 </View>

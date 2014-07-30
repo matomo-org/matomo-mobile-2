@@ -1,0 +1,37 @@
+<Alloy>
+    <Collection src="piwikSegments" id="piwikSegments" instance="true"/>
+    
+    <Window module="xp.ui" if="Alloy.Globals.isNotIpad" id="index" onClose="onClose" onOpen="onOpen">
+        <LeftNavButton platform="ios,mobileweb">
+            <Button id="cancelButton" onClick="closeWindow"/>
+        </LeftNavButton>
+
+        <Widget src="org.piwik.headerbar" 
+                id="headerBar"
+                onBack="closeWindow"
+                platform="android" />
+
+        <View id="loading"><Label id="loadingLabel"></Label></View>
+
+        <View id="content">
+            <TableView id="segmentsTable"
+                       dataCollection="$.piwikSegments"
+                       dataFunction="renderSegments"
+                       onClick="selectSegment">
+                <TableViewRow title="{name}" modelid="{idsegment}"/>
+            </TableView>
+        </View>
+    </Window>
+    <Popover class="iOSContainer" id="index" onOpen="onOpen" platform="ios" formFactor="tablet" width="320" height="400">
+        <View id="loading"><Label id="loadingLabel"></Label></View>
+
+        <View id="content">
+            <TableView id="segmentsTable"
+                       dataCollection="$.piwikSegments"
+                       dataFunction="renderSegments"
+                       onClick="selectSegment">
+                <TableViewRow title="{name}" modelid="{idsegment}"/>
+            </TableView>
+        </View>
+    </Popover>
+</Alloy>

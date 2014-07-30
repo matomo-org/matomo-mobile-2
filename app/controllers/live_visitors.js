@@ -26,12 +26,14 @@ function registerEvents()
 {
     var session = require('session');
     session.on('websiteChanged', onWebsiteChanged);
+    session.on('segmentChanged', onSegmentChanged);
 }
 
 function unregisterEvents()
 {
     var session = require('session');
     session.off('websiteChanged', onWebsiteChanged);
+    session.off('segmentChanged', onSegmentChanged);
 
     $.index.removeEventListener('focus', restartTimerIfSomeVisitorsAreAlreadyDisplayed);
     $.index.removeEventListener('open', onOpen);
@@ -73,6 +75,13 @@ function onClose()
 function onWebsiteChanged()
 {
     require('Piwik/Tracker').trackEvent({name: 'Website Changed', action: 'result', category: 'Visitors in real time'});
+
+    doRefresh();
+}
+
+function onSegmentChanged()
+{
+    require('Piwik/Tracker').trackEvent({name: 'Segment Changed', action: 'result', category: 'Visitors in real time'});
 
     doRefresh();
 }
@@ -195,6 +204,7 @@ function doRefresh()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+    var segmentModel = require('session').getSegment();
 
     if (!accountModel || !siteModel) {
         console.log('account or site not found, cannot refresh live visitors');
@@ -202,7 +212,7 @@ function doRefresh()
     }
 
     showLoadingMessage();
-    piwikLiveVisitors.fetchVisitors(accountModel, siteModel.id, render, onFetchError);
+    piwikLiveVisitors.fetchVisitors(accountModel, segmentModel, siteModel.id, render, onFetchError);
 }
 
 function restartTimerIfSomeVisitorsAreAlreadyDisplayed() {

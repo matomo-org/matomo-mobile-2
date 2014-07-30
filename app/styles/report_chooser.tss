@@ -28,6 +28,20 @@
     right: '8dp',
 }
 
+".segmentPicker": {
+    top: 12,
+    bottom: 0,
+    left: 8,
+    right: 8,
+    height: Ti.UI.SIZE,
+}
+
+".segmentPicker[platform=android]": {
+    top: '12dp',
+    left: '8dp',
+    right: '8dp',
+}
+
 ".datePicker": {
     top: 10,
     bottom: 12,

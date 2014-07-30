@@ -1,0 +1,12 @@
+<Alloy>
+    <View id="index" onClick="chooseSegment">
+        <View class="button">
+            <View class="topLine"/>
+            <View class="inner">
+                <Label id="segmentName" text=" - "/>
+                <ImageView class="icon"/>
+            </View>
+            <View class="bottomLine"/>
+        </View>
+    </View>
+</Alloy>

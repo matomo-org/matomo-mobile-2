@@ -45,16 +45,23 @@ exports.definition = {
     
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
-            fetchVisitors: function (account, idSite, onSuccess, onError) {
+            fetchVisitors: function (account, segment, idSite, onSuccess, onError) {
                 for (var index in this.config.defaultParams.urls) {
                     var defaultParam    = this.config.defaultParams.urls[index];
                     defaultParam.idSite = idSite;
+
+                    if (segment) {
+                        defaultParam.segment = segment.getDefinition();
+                    } else if (defaultParam.segment) {
+                        delete defaultParam.segment;
+                    }
                 }
 
                 this.abortRunningRequests();
 
                 this.fetch({
-                    account: account, 
+                    account: account,
+                    segment: segment,
                     success: function (collection, response) {
                         if (!_.isArray(response)) {
                             return;

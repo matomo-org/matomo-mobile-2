@@ -48,7 +48,7 @@ function readFromApi(preparedRequest, onSuccess, onError)
     onError   = null;
 }
 
-function prepareApiRequest(apiMethod, params, account)
+function prepareApiRequest(apiMethod, params, account, segmentModel)
 {
     var PiwikApiRequest = require('Piwik/Network/PiwikApiRequest');
 
@@ -59,6 +59,10 @@ function prepareApiRequest(apiMethod, params, account)
     if (account) {
         request.setBaseUrl(account.get('accessUrl'));
         request.setUserAuthToken(account.get('tokenAuth'));
+    }
+
+    if (segmentModel) {
+        request.setSegment(segmentModel.getDefinition());
     }
 
     return request;
@@ -110,7 +114,9 @@ function Sync(method, collection, opts)
         params = _.extend(_.clone(params), opts.params);
     }
 
-    collection.xhrRequest = prepareApiRequest(settings.method, params, opts.account);
+    var segment = opts.segment || null;
+
+    collection.xhrRequest = prepareApiRequest(settings.method, params, opts.account, segment);
 
     if (useCache) {
         var cacheKey       = collection.xhrRequest.getUrl();

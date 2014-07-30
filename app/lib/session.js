@@ -9,6 +9,7 @@ var Session = function () {
 
     var website = null;
     var account = null;
+    var segment = null;
     var reportDate = null;
 
     var Alloy = require('alloy'); 
@@ -50,6 +51,17 @@ var Session = function () {
             }
 
             return reportDate;
+        },
+
+        setSegment: function (segmentModel) {
+            segment = segmentModel;
+            this.trigger('segmentChanged', segment);
+        },
+        resetSegment: function () {
+            segment = null;
+        },
+        getSegment: function () {
+            return segment;
         }
     });
 };

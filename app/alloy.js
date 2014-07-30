@@ -8,6 +8,7 @@
 Alloy.isTablet = require('Piwik/Platform').isTablet;
 Alloy.isHandheld = !Alloy.isTablet;
 Alloy.isIOS7OrLater = OS_IOS && (7 <= parseInt(Ti.Platform.version, 10));
+Alloy.Globals.isNotIpad = !(OS_IOS && Alloy.isTablet);
 
 if (OS_IOS) {
     Alloy.statusBarStyle = Ti.UI.iPhone.StatusBar.LIGHT_CONTENT;
