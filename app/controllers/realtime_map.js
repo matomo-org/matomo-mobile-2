@@ -14,12 +14,14 @@ function registerEvents()
 {
     var session = require('session');
     session.on('websiteChanged', openRealTimeMapInWebview);
+    session.on('segmentChanged', openRealTimeMapInWebview);
 }
 
 function unregisterEvents()
 {
     var session = require('session');
     session.off('websiteChanged', openRealTimeMapInWebview);
+    session.off('segmentChanged', openRealTimeMapInWebview);
 }
 
 function trackWindowRequest()
@@ -43,6 +45,7 @@ function openRealTimeMapInWebview()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+    var segmentModel = require('session').getSegment();
 
     if (!accountModel || !siteModel) {
         return;
@@ -53,6 +56,10 @@ function openRealTimeMapInWebview()
     url    += siteModel.id;
     url    += "&period=month&date=today&disableLink=1&widget=1&token_auth=";
     url    += accountModel.getAuthToken();
+
+    if (segmentModel) {
+        url += '&segmentOverride=1&segment=' + segmentModel.getDefinition();
+    }
 
     $.browser.url = url;
 }
