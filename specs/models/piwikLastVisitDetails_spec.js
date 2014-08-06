@@ -105,13 +105,13 @@ describe('piwikLastVisitDetails Collection', function() {
     });
 
     it('should convert period to month if period is range', function() {
-        lastVisitors.initial(getValidAccount(), 3, 'range', 'today');
+        lastVisitors.initial(getValidAccount(), null, 3, 'range', 'today');
 
         expect(lastVisitors.getPeriod()).toEqual('month');
     });
 
     it('should only use the first date if date is a range date', function() {
-        lastVisitors.initial(getValidAccount(), 3, 'range', '2012-02-02,2013-03-03');
+        lastVisitors.initial(getValidAccount(), null, 3, 'range', '2012-02-02,2013-03-03');
 
         expect(lastVisitors.parseDate()).toEqual('2012-02-02');
     });
