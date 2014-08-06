@@ -54,7 +54,7 @@
         <tool-api-level>19</tool-api-level>
         <manifest android:installLocation="preferExternal"
             android:versionCode="4" android:versionName="2.1.0">
-            <application android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+            <application android:theme="@style/Theme.PiwikTheme"/>
             <supports-screens android:anyDensity="true"
                 android:largeScreens="true" android:normalScreens="true"
                 android:smallScreens="true" xlargeScreens="true"/>
