@@ -61,7 +61,7 @@ function prepareApiRequest(apiMethod, params, account, segmentModel)
         request.setUserAuthToken(account.get('tokenAuth'));
     }
 
-    if (segmentModel) {
+    if (segmentModel && segmentModel.getDefinition) {
         request.setSegment(segmentModel.getDefinition());
     }
 
