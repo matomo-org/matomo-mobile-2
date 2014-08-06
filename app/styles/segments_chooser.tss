@@ -64,10 +64,10 @@
 },
 
 "TableViewRow[platform=android]": {
-    leftImage: '/images/spacer_10x10.png',
-    right: '10dp',
-    top: '10dp',
-    bottom: '10dp',
+    leftImage: '/images/spacer_16x16.png',
+    right: '16dp',
+    top: '16dp',
+    bottom: '16dp',
     color: '#333',
     backgroundSelectedColor: '#a9a9a9'
 }
