@@ -1,8 +1,37 @@
 <Alloy>
     <Collection src="piwikSegments" id="piwikSegments" instance="true"/>
-    
-    <Window module="xp.ui" if="Alloy.Globals.isNotIpad" id="index" onClose="onClose" onOpen="onOpen">
-        <LeftNavButton platform="ios,mobileweb">
+    <NavigationWindow id="index" platform="ios" formFactor="handheld">
+        <Window id="indexWin" onClose="onClose" onOpen="onOpen">
+            <LeftNavButton>
+                <Button id="cancelButton" onClick="closeWindow"/>
+            </LeftNavButton>
+
+            <View id="loading"><Label id="loadingLabel"></Label></View>
+
+            <View id="content">
+                <TableView id="segmentsTable"
+                           dataCollection="$.piwikSegments"
+                           dataFunction="renderSegments"
+                           onClick="selectSegment">
+                    <TableViewRow title="{name}" modelid="{idsegment}"/>
+                </TableView>
+            </View>
+        </Window>
+    </NavigationWindow>
+    <Popover class="iOSContainer" id="index" onOpen="onOpen" platform="ios" formFactor="tablet" width="320" height="400">
+        <View id="loading"><Label id="loadingLabel"></Label></View>
+
+        <View id="content">
+            <TableView id="segmentsTable"
+                       dataCollection="$.piwikSegments"
+                       dataFunction="renderSegments"
+                       onClick="selectSegment">
+                <TableViewRow title="{name}" modelid="{idsegment}"/>
+            </TableView>
+        </View>
+    </Popover>
+    <Window module="xp.ui" platform="android,mobileweb" id="index" onClose="onClose" onOpen="onOpen">
+        <LeftNavButton platform="mobileweb">
             <Button id="cancelButton" onClick="closeWindow"/>
         </LeftNavButton>
 
@@ -22,16 +51,4 @@
             </TableView>
         </View>
     </Window>
-    <Popover class="iOSContainer" id="index" onOpen="onOpen" platform="ios" formFactor="tablet" width="320" height="400">
-        <View id="loading"><Label id="loadingLabel"></Label></View>
-
-        <View id="content">
-            <TableView id="segmentsTable"
-                       dataCollection="$.piwikSegments"
-                       dataFunction="renderSegments"
-                       onClick="selectSegment">
-                <TableViewRow title="{name}" modelid="{idsegment}"/>
-            </TableView>
-        </View>
-    </Popover>
 </Alloy>

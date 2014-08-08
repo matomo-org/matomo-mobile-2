@@ -107,7 +107,7 @@ function refresh()
 
 function showMessageNoSegmentsFound(title, message)
 {
-    emptyData.show($.index, refresh, title, message);
+    emptyData.show($.indexWin ? $.indexWin : $.index, refresh, title, message);
 
     $.loading.hide();
     $.loading.visible = false;
@@ -138,6 +138,12 @@ function closeWindow()
     } else if (OS_IOS) {
         $.index.close();
     } else {
+
+        if (OS_ANDROID && $.segmentsTable) {
+            // this prevents leaking tableViewRows
+            $.segmentsTable.setData([]);
+        }
+
         require('layout').close($.index);
     }
 }
