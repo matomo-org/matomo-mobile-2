@@ -33,7 +33,7 @@ exports.definition = {
             preferEvolutionGraphs: settingDefaults.preferEvolutionGraphs,
             graphsEnabled: settingDefaults.graphsEnabled,
             httpTimeout: settingDefaults.httpTimeout,
-            validateSsl: settingDefaults.validateSsl
+            validateSsl: null
         }
     },      
 
@@ -52,7 +52,15 @@ exports.definition = {
             },
 
             shouldValidateSsl: function () {
-                return this.get('validateSsl');
+                if (this.hasConfiguredValidateSsl()) {
+                    return this.get('validateSsl');
+                }
+
+                return settingDefaults.validateSsl;
+            },
+
+            hasConfiguredValidateSsl: function () {
+                return this.has('validateSsl');
             },
 
             setTrackingEnabled: function (isTrackingEnabled) {
@@ -111,7 +119,7 @@ exports.definition = {
         return Model;
     },
     
-    
+
     extendCollection: function(Collection) {        
         _.extend(Collection.prototype, {
             

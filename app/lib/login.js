@@ -108,12 +108,77 @@ function onError (accountModel, error) {
     alertDialog.show();
 }
 
-function onNetworkError(undefined, error) {
+function isSslValidationEnabled()
+{
+    var settings = Alloy.createCollection('AppSettings').settings();
+    return settings.shouldValidateSsl();
+}
+
+function disableSslValidation()
+{
+    var settings = Alloy.createCollection('AppSettings').settings();
+    settings.setValidateSsl(false);
+    settings.save();
+}
+
+function couldBeSslCertificateIssue(errorMessage)
+{
+    if (!isSslValidationEnabled()) {
+        return false;
+    }
+
+    var messageLower = errorMessage.toLowerCase();
+
+    return (-1 !== messageLower.indexOf('certificate') || -1 !== messageLower.indexOf('ssl'));
+}
+
+function offerPossibilityToDisableSslValidation(account, errorMessage)
+{
+    var dialog = Ti.UI.createAlertDialog({
+        title: L('Mobile_PossibleSslError'),
+        message: String.format(L('Mobile_PossibleSslErrorExplanation'), errorMessage),
+        cancel: 1,
+        buttonNames: [L('Mobile_IgnoreSslError'), L('General_Cancel')]});
+    dialog.addEventListener('click', function (event) {
+        if (!event || true === event.cancel || event.cancel === event.index) {
+            account.clear({silent: true});
+            return;
+        }
+
+        disableSslValidation();
+        account.set('tokenAuth', '', {silent: true});
+        showWaitingIndicator();
+
+        require('Piwik/Tracker').trackEvent({name: 'Ignore Ssl Error', category: 'Login'});
+
+        fetchAuthToken(account);
+    });
+    dialog.show();
+    dialog = null;
+}
+
+function onNetworkError(error, account) {
     hideWaitingIndicator();
 
-    if (error) {
+    if (!error) {
+        return;
+    }
 
-        var dialog = Ti.UI.createAlertDialog({title: error.getError(), message: error.getMessage(), buttonNames: [L('General_Ok')]});
+    if (couldBeSslCertificateIssue('' + error.getMessage()) ||
+        couldBeSslCertificateIssue('' + error.getPlatformErrorMessage())) {
+        require('Piwik/Tracker').trackEvent({name: 'Ssl Error', category: 'Login'});
+
+        offerPossibilityToDisableSslValidation(account, '' + error.getPlatformErrorMessage());
+
+    } else {
+
+        account.clear({silent: true});
+
+        var dialog = Ti.UI.createAlertDialog({
+            title: error.getError(),
+            message: error.getMessage(),
+            buttonNames: [L('General_Ok')]
+        });
         dialog.show();
         dialog = null;
     }
@@ -129,7 +194,10 @@ function fetchAuthToken(account)
         if (model && model.getTokenAuth()) {
             account.set({tokenAuth: model.getTokenAuth()});
         }
-    }, onNetworkError);
+    }, function (undefined, error) {
+        onNetworkError(error, account);
+        account = null;
+    });
 }
 
 exports.login = function(accounts, accessUrl, username, password)
@@ -209,11 +277,9 @@ exports.login = function(accounts, accessUrl, username, password)
                 
             },
             error: function(undefined, error) {
-                
-                accountModel.clear({silent: true});
-                accountModel = null;
 
-                onNetworkError(undefined, error);
+                onNetworkError(error, accountModel);
+                accountModel = null;
             }
         });
     };
@@ -242,10 +308,8 @@ exports.login = function(accounts, accessUrl, username, password)
 
             }, error: function (undefined, error) {
 
-                accountModel.clear({silent: true});
+                onNetworkError(error, accountModel);
                 accountModel = null;
-
-                onNetworkError(undefined, error);
             }
         });
     };

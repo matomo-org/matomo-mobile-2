@@ -50,7 +50,7 @@
             "preferEvolutionGraphs": true,
             "graphsEnabled": true,
             "httpTimeout": 60000,
-            "validateSsl": false
+            "validateSsl": true
         }
     },
     "adapters": ["localStorage", "properties", "sql", "piwikapi", "session"],

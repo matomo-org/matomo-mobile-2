@@ -7,6 +7,10 @@
     fullscreen: false,
 }
 
+"#indexWin[platform=ios]": {
+    title: L('Mobile_ChooseSegment')
+}
+
 "#index[platform=ios]": {
     fullscreen: false,
     modal: true,

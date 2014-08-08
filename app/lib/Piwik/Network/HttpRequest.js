@@ -356,16 +356,19 @@ HttpRequest.prototype.error = function (e) {
     // the type of the error, for example TypeError, SyntaxError, ...
     var errorType = 'RequestError';
     var baseUrl   = '' + this.baseUrl;
+    var platformErrorMessage = L('General_Unknown');
     
     if ((!e || !e.error) && this.xhr && 200 != this.xhr.status) {
         
         exception = this.xhr.statusText ? this.xhr.statusText : this.xhr.status;
         title     = convertXhrStatusCodeToHumanReadable(this.xhr.status);
-        message   = String.format(L('Mobile_NetworkErrorWithStatusCode'), 'Unknown', '' + exception, baseUrl);
+        message   = String.format(L('Mobile_NetworkErrorWithStatusCode'), platformErrorMessage, '' + exception, baseUrl);
+        platformErrorMessage = String.format(L('Mobile_NetworkErrorWithStatusCodeShort'), platformErrorMessage + ' (' + exception + ')');
         
     } else if (e && e.error) {
 
-        var errorMessage = convertXhrErrorMessageToHumanReadable('' + e.error);
+        platformErrorMessage = '' + e.error;
+        var errorMessage = convertXhrErrorMessageToHumanReadable(platformErrorMessage);
 
         switch (errorMessage.toLowerCase()) {
 
@@ -436,7 +439,7 @@ HttpRequest.prototype.error = function (e) {
 
     try {
         if (this.errorCallback) {
-            this.errorCallback.apply(this, [{error: title , message: message}]);
+            this.errorCallback.apply(this, [{error: title , message: message, platformErrorMessage: platformErrorMessage}]);
         }
 
     } catch (e) {

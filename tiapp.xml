@@ -80,6 +80,5 @@
     <plugins>
         <plugin>ti.alloy</plugin>
     </plugins>
-    <property name="ti.android.useLegacyWindow" type="bool">true</property>
     <property name="ti.deploytype">production</property>
 </ti:app>
