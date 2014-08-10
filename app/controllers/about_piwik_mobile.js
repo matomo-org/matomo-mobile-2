@@ -23,7 +23,7 @@ function followPiwik()
 
 function openSourceCode()
 {
-    require('commands/openLink').execute('https://github.com/piwik/piwik-mobile');
+    require('commands/openLink').execute('https://github.com/piwik/piwik-mobile-2');
 }
 
 function participate()
