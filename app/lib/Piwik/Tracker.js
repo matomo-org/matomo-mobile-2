@@ -380,7 +380,7 @@ function Tracker () {
      */
     this.trackLink = function (sourceUrl, linkType) {
 
-        parameter           = {url: currentUrl};
+        parameter           = {url: sourceUrl};
         parameter[linkType] = sourceUrl;
 
         this._dispatch();
