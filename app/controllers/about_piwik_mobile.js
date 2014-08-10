@@ -26,6 +26,11 @@ function openSourceCode()
     require('commands/openLink').execute('https://github.com/piwik/piwik-mobile-2');
 }
 
+function openIssues()
+{
+    require('commands/openLink').execute('https://github.com/piwik/piwik-mobile-2/issues');
+}
+
 function participate()
 {
     var params = {title: 'Contribute', url: 'http://piwik.org/contribute/'};
