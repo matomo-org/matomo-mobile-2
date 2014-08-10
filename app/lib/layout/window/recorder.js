@@ -15,6 +15,11 @@ function WindowRecorder() {
     function recordWindowIfEnabled(win)
     {
         if (recordWindows && win) {
+            if (OS_ANDROID && recordedWindows.length) {
+                recordedWindows[recordedWindows.length - 1].fireEvent('blur', {});
+                // as we no longer use events the new top view will no longer receive a blur event
+            }
+
             recordedWindows.push(win);
             win.addEventListener('close', removeWindowFromRecordedWindows);
         }
@@ -28,7 +33,12 @@ function WindowRecorder() {
         var index = _.indexOf(recordedWindows, this);
 
         if (-1 != index) {
-            delete recordedWindows[index];
+            recordedWindows.splice(index, 1);
+        }
+
+        if (OS_ANDROID && recordedWindows.length) {
+            recordedWindows[recordedWindows.length - 1].fireEvent('focus', {});
+            // as we no longer use events the new top view will no longer receive a focus event
         }
 
         this.removeEventListener('close', removeWindowFromRecordedWindows);
