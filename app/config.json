@@ -36,7 +36,7 @@
             "piwikServerUrl": "http://demo.piwik.org/piwik.php",
             "maxTracksPerDay": 200
         },
-        "faqUrl": "http://piwik.org/mobile/faq",
+        "faqUrl": "http://piwik.org/faq/mobile-app/",
         "appleAppStore": {
             "appId": "737216887"
         },
