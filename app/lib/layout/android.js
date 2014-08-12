@@ -33,8 +33,8 @@ function AndroidLayout(rootWin)
             return;
         }
 
-        view.fireEvent('close', {type: 'close'});
         rootWin.remove(view);
+        view.fireEvent('close', {type: 'close'});
 
         if (checkAppShouldBeClosedTimeout) {
             clearTimeout(checkAppShouldBeClosedTimeout);
