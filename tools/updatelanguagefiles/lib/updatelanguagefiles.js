@@ -28,7 +28,7 @@ function onAllAvailableLanguagesFetched(err, languages)
         return;
     }
 
-    var interval = 1000;
+    var interval = 2000;
     var delay    = interval;
 
     for (var index = 0; index < languages.length; index++) {
