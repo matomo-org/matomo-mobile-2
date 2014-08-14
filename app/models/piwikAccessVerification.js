@@ -32,7 +32,7 @@ exports.definition = {
             "method": "SitesManager.getSitesIdWithAtLeastViewAccess",
             "displayErrors": true
         },
-        "defaultParams": {"limit": 1}
+        "defaultParams": {"limit": 1, "filter_limit": 1}
     },      
 
     extendModel: function(Model) {      
