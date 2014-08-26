@@ -16,10 +16,11 @@ var visitor   = args.visitor || null;
 
 function goalConversionDescription(visitor)
 {
-    var goalsText = String.format(L('General_VisitConvertedNGoals'), 
-                                  '' + visitor.goalConversions);
+    if ('undefined' == (typeof visitor.goalConversions)) {
+        return '';
+    }
 
-    return goalsText;
+    return String.format(L('General_VisitConvertedNGoals'), '' + visitor.goalConversions);
 }
 
 function pageviewsDescription(visitor) 
@@ -67,7 +68,11 @@ function referrerDescription(visitor)
 
 function visitTime(visitor)
 {
-    return visitor.serverDatePretty + ' ' + visitor.serverTimePretty;
+    if (visitor.serverDatePretty && visitor.serverTimePretty) {
+        return visitor.serverDatePretty + ' ' + visitor.serverTimePretty;
+    }
+
+    return '';
 }
 
 function updateDisplayedValues(visitor)
@@ -82,9 +87,35 @@ function updateDisplayedValues(visitor)
     }
 
     $.visittime.text = visitTime(visitor);
-    $.referrer.text  = referrerDescription(visitor);
-    $.pageViews.text = goalConversionDescription(visitor);
-    $.goalConversions.text = pageviewsDescription(visitor);
+
+    var referrer       = referrerDescription(visitor);
+    var goalConversion = goalConversionDescription(visitor);
+
+    if (referrer) {
+        $.referrer.text  = referrerDescription(visitor);
+    } else {
+        $.referrer.top = 0;
+        $.referrer.height = 0;
+        $.referrer.hide();
+    }
+
+    var pageviews = pageviewsDescription(visitor);
+
+    if (pageviews) {
+        $.pageViews.text = pageviews;
+    } else {
+        $.pageViews.top = 0;
+        $.pageViews.height = 0;
+        $.pageViews.hide();
+    }
+
+    if (goalConversion) {
+        $.goalConversions.text = goalConversion;
+    } else {
+        $.goalConversions.top = 0;
+        $.goalConversions.height = 0;
+        $.goalConversions.hide();
+    }
 
     if (visitor.countryFlag) {
         $.countryFlag.image = accessUrl + visitor.countryFlag;

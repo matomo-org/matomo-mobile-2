@@ -139,7 +139,13 @@ function createOverview (visitor, accessUrl)
     }
 
     // @todo display more information about the referrer
-    var referrerValue = visitor.referrerName ? visitor.referrerName : visitor.referrerTypeName;
+    var referrerValue = '';
+
+    if (visitor.referrerName) {
+        referrerValue = visitor.referrerName;
+    } else if (visitor.referrerTypeName) {
+        referrerValue = visitor.referrerTypeName;
+    }
 
     if (referrerValue) {
         var referrerParams = {title: L('General_FromReferrer'),
@@ -170,14 +176,16 @@ function createOverview (visitor, accessUrl)
 
         var referrerRow = createSelectableRow(referrerParams);
 
-        referrerRow.addEventListener('click', (function (referrerUrl) {
-            return function () {
-                if (referrerUrl) {
-                    require('Piwik/Tracker').trackLink('/visitor/referrer-url', 'link');
-                    Ti.Platform.openURL(referrerUrl);
-                }
-            };
-        })(visitor.referrerUrl));
+        if (visitor.referrerUrl) {
+            referrerRow.addEventListener('click', (function (referrerUrl) {
+                return function () {
+                    if (referrerUrl) {
+                        require('Piwik/Tracker').trackLink('/visitor/referrer-url', 'link');
+                        Ti.Platform.openURL(referrerUrl);
+                    }
+                };
+            })(visitor.referrerUrl));
+        }
 
         rows.push(referrerRow);
         referrerRow = null;
@@ -258,8 +266,12 @@ function createSystem(visitor, accessUrl) {
                              value: visitor.browserName}));
         // leftImage: {url: accessUrl + visitor.browserIcon}
     }
-    
-    var resolution = visitor.resolution;
+
+    var resolution = '';
+    if (visitor.resolution) {
+        resolution = visitor.resolution;
+    }
+
     if (resolution &&
         visitor.screenType &&
         'normal' != ('' + visitor.screenType).toLowerCase()) {
