@@ -9,11 +9,7 @@
             <View id="loading"><Label id="loadingLabel"></Label></View>
 
             <View id="content">
-                <TableView id="segmentsTable"
-                           dataCollection="$.piwikSegments"
-                           dataFunction="renderSegments"
-                           onClick="selectSegment">
-                    <TableViewRow title="{name}" modelid="{idsegment}"/>
+                <TableView id="segmentsTable" onClick="selectSegment">
                 </TableView>
             </View>
         </Window>
@@ -22,11 +18,7 @@
         <View id="loading"><Label id="loadingLabel"></Label></View>
 
         <View id="content">
-            <TableView id="segmentsTable"
-                       dataCollection="$.piwikSegments"
-                       dataFunction="renderSegments"
-                       onClick="selectSegment">
-                <TableViewRow title="{name}" modelid="{idsegment}"/>
+            <TableView id="segmentsTable" onClick="selectSegment">
             </TableView>
         </View>
     </Popover>
@@ -35,7 +27,7 @@
             <Button id="cancelButton" onClick="closeWindow"/>
         </LeftNavButton>
 
-        <Widget src="org.piwik.headerbar" 
+        <Widget src="org.piwik.headerbar"
                 id="headerBar"
                 onBack="closeWindow"
                 platform="android" />
@@ -43,11 +35,7 @@
         <View id="loading"><Label id="loadingLabel"></Label></View>
 
         <View id="content">
-            <TableView id="segmentsTable"
-                       dataCollection="$.piwikSegments"
-                       dataFunction="renderSegments"
-                       onClick="selectSegment">
-                <TableViewRow title="{name}" modelid="{idsegment}"/>
+            <TableView id="segmentsTable" onClick="selectSegment">
             </TableView>
         </View>
     </Window>

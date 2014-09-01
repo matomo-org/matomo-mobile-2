@@ -43,6 +43,10 @@ exports.definition = {
                 return this.get('name');
             },
 
+            getIdSegment: function () {
+                return this.get('idsegment');
+            },
+
             getDefinition: function () {
                 return this.get('definition');
             }

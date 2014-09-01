@@ -14,7 +14,6 @@ var args = arguments[0] || {};
 var popoverSource = args.source || null;
 
 var emptyData = new (require('ui/emptydata'));
-$.piwikSegments.off("fetch destroy change add remove reset", renderSegments);
 $.piwikSegments.on('reset', render);
 $.piwikSegments.on('error', function (undefined, error) {
     if (error) {
@@ -33,6 +32,7 @@ function onClose()
 
     if ($.piwikSegments) {
         $.piwikSegments.abortRunningRequests();
+        $.piwikSegments.off('reset', render);
     }
 
     if (OS_ANDROID && $.segmentsTable) {
@@ -83,7 +83,19 @@ function render()
     /** This should be done by segments model */
 
     showReportContent();
-    renderSegments();
+
+    var rows = [];
+    $.piwikSegments.forEach(function (segment) {
+        var rowOptions = {
+            classes: [],
+            title: segment.getName(),
+            modelid: segment.getIdSegment()
+        };
+        rows.push($.UI.create('TableViewRow', rowOptions));
+    });
+
+    $.segmentsTable.setData(rows);
+    rows = [];
 }
 
 function showReportContent()
