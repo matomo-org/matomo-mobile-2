@@ -188,7 +188,7 @@ Rating.prototype.getStoreUrl = function () {
             return '';
         }
 
-        var url = 'itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=';
+        var url = 'itms-apps://itunes.apple.com/app/id';
         url     = url + appStore.appId;
         
         if (Ti.Platform.canOpenURL(url)) {
