@@ -11,7 +11,8 @@
                 "nb_actions",
                 "nb_conversions",
                 "revenue",
-                "nb_events"
+                "nb_events",
+                "nb_impressions"
             ],
             "filterLimit": 30,
             "graph": {
