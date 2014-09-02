@@ -1,6 +1,6 @@
 function isProduction(alloyConfig)
 {
-    return 'production' == alloyConfig.deployType;
+    return 'production' == alloyConfig.deploytype;
 }
 
 function isMobileWebPlatform(alloyConfig)
