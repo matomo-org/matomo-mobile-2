@@ -53,7 +53,7 @@
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <tool-api-level>19</tool-api-level>
         <manifest android:installLocation="preferExternal"
-            android:versionCode="4" android:versionName="2.1.0">
+            android:versionCode="5" android:versionName="2.1.0">
             <application android:theme="@style/Theme.PiwikTheme"/>
             <supports-screens android:anyDensity="true"
                 android:largeScreens="true" android:normalScreens="true"
