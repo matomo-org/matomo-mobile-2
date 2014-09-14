@@ -96,6 +96,23 @@ function isTablet () {
     return (screenSizeInch >= 6.0);
 };
 
+function isIphone6Plus()
+{
+    var width  = Ti.Platform.displayCaps.platformWidth;
+    var height = Ti.Platform.displayCaps.platformHeight;
+    var max    = Math.max(width, height);
+    
+    return 667 === parseInt(max, 10);
+}
+
+function getIOSScaleFactor()
+{
+    if (isIphone6Plus()) {
+        return 3;
+    }
+    return 2;
+}
+
 /**
  * True if the current device is considered to be a tablet. Currently, a device is considered to be a tablet if it is 
  * an iPad or if it is larger than 6 inch.
@@ -103,3 +120,4 @@ function isTablet () {
  * @type  boolean
  */
 module.exports.isTablet = isTablet();
+module.exports.getIOSScaleFactor = getIOSScaleFactor;

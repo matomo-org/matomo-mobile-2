@@ -179,11 +179,9 @@ function PiwikGraph () {
         }
 
         if (hires && OS_IOS) {
-            var factor = 2;
-            if (Ti.Platform.displayCaps.dpi >= 320) {
-                factor = 3;
-            }
-
+            
+            var factor = require('Piwik/Platform').getIOSScaleFactor();
+            
             parameter.legendFontSize = parameter.fontSize * factor;
             parameter.fontSize = parameter.fontSize * factor;
             parameter.width    = parameter.width * factor;
