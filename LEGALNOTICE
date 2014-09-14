@@ -45,11 +45,6 @@ CREDITS
 
 THIRD-PARTY COMPONENTS AND LIBRARIES
 =======
-Name: pull_arrow.png  
-Link: https://github.com/andmej/PullToRefresh
-License: See tools/licenses/MIT-LICENSE-pulltorefresh.txt
-
-=======
 Name: specs/jasmine/jasmine.js
 Name: specs/jasmine/jasmine-html.js
 License: See tools/licenses/JASMINE.MIT.LICENSE.txt
