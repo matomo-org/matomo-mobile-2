@@ -95,7 +95,7 @@ function PiwikGraph () {
      * Adds the current selected sort order to the given graph url.
      * 
      * @param    {string}  graphUrl   A Piwik graph url.
-     * @param    {string}  sortORder  The sort order that should be used, for example 'actions' or 'visits'
+     * @param    {string}  sortOrder  The sort order that should be used, for example 'actions' or 'visits'
      *
      * @returns  {string}  The updated Piwik graph url which will include the sort order
      */
@@ -123,13 +123,18 @@ function PiwikGraph () {
      */
     this.setParams = function (graphUrl, params) {
         
-        if (!graphUrl) {
+        if (!graphUrl || !params) {
             
             return '';
         }
         
         var urlGetParams      = '';
-        for (var paramName in params) {
+        var paramName;
+        for (paramName in params) {
+            if (!params.hasOwnProperty(paramName)) {
+                continue;
+            }
+
             if (urlGetParams) {
                 urlGetParams += '&';
             }
@@ -166,16 +171,23 @@ function PiwikGraph () {
     this.appendSize = function (graphUrl, width, height, hires) {
 
         var parameter = {width: width, height: height};
-        
-        for (var index in Alloy.CFG.piwik.graph) {
-            parameter[index] = Alloy.CFG.piwik.graph[index];
+        var index;
+        for (index in Alloy.CFG.piwik.graph) {
+            if (Alloy.CFG.piwik.graph.hasOwnProperty(index)) {
+                parameter[index] = Alloy.CFG.piwik.graph[index];
+            }
         }
-        
+
         if (hires && OS_IOS) {
-            parameter.legendFontSize = parameter.fontSize * 2;
-            parameter.fontSize = parameter.fontSize * 2;
-            parameter.width    = parameter.width * 2;
-            parameter.height   = parameter.height * 2;
+            var factor = 2;
+            if (Ti.Platform.displayCaps.dpi >= 320) {
+                factor = 3;
+            }
+
+            parameter.legendFontSize = parameter.fontSize * factor;
+            parameter.fontSize = parameter.fontSize * factor;
+            parameter.width    = parameter.width * factor;
+            parameter.height   = parameter.height * factor;
         } else if (OS_ANDROID) {
             var densityFaktor = parseFloat(Ti.Platform.displayCaps.logicalDensityFactor);
             parameter.legendFontSize = Math.round(parameter.fontSize * densityFaktor);

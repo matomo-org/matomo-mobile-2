@@ -8,10 +8,10 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.3.0.GA</sdk-version>
+    <sdk-version>3.4.0.v20140911135715</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Piwik Mobile 2</name>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
     <publisher>thomassteur</publisher>
     <url>http://piwik.org/mobile</url>
     <description>Need your analytics on the go? Use our free Piwik Mobile app to check your stats from anywhere and show them to colleagues in meetings. Piwik Mobile offers all the same reports as the desktop interface, and displays your visitor data in real time!</description>
@@ -53,7 +53,7 @@
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <tool-api-level>19</tool-api-level>
         <manifest android:installLocation="preferExternal"
-            android:versionCode="5" android:versionName="2.1.0">
+            android:versionCode="6" android:versionName="2.1.1">
             <application android:theme="@style/Theme.PiwikTheme"/>
             <supports-screens android:anyDensity="true"
                 android:largeScreens="true" android:normalScreens="true"

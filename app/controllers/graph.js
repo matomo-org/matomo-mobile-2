@@ -61,7 +61,7 @@ function showDetail ()
 function updateImage(graphUrl)
 {
     var graph = require('Piwik/PiwikGraph');
-    var imageWithSize = graph.appendSize(graphUrl, width($.image.getView()), height($.image.getView()), OS_IOS);
+    var imageWithSize = graph.appendSize(graphUrl, width($.image.getView()), height($.image.getView()), true);
     
     console.debug('imageUrlWithSize', imageWithSize);
 
