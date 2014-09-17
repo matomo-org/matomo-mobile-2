@@ -100,7 +100,7 @@ function isRetinaHDDisplay()
 {
     var dpi = Ti.Platform.displayCaps.dpi;
     
-    return 480 === parseInt(dpi, 10);
+    return 480 <= parseInt(dpi, 10);
 }
 
 function getIOSScaleFactor()
