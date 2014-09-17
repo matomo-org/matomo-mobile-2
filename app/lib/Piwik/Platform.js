@@ -96,18 +96,16 @@ function isTablet () {
     return (screenSizeInch >= 6.0);
 };
 
-function isIphone6Plus()
+function isRetinaHDDisplay()
 {
-    var width  = Ti.Platform.displayCaps.platformWidth;
-    var height = Ti.Platform.displayCaps.platformHeight;
-    var max    = Math.max(width, height);
+    var dpi = Ti.Platform.displayCaps.dpi;
     
-    return 667 === parseInt(max, 10);
+    return 480 === parseInt(dpi, 10);
 }
 
 function getIOSScaleFactor()
 {
-    if (isIphone6Plus()) {
+    if (isRetinaHDDisplay()) {
         return 3;
     }
     return 2;
