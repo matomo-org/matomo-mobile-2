@@ -63,7 +63,8 @@ function doRateApp()
 
 function doParticipate()
 {
-    require('commands/openLink').execute('http://piwik.org/contribute/');
+    var params = {title: 'Contribute', url: 'http://piwik.org/contribute/'};
+    Alloy.createController('webview', params).open();
 }
 
 function createRow(params)
