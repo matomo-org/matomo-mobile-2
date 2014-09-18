@@ -8,7 +8,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.4.0.v20140916181713</sdk-version>
+    <sdk-version>3.4.0.RC</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Piwik Mobile 2</name>
     <version>2.1.1</version>

@@ -10,10 +10,10 @@ before_script:
 - npm install -g titanium
 - npm install connect
 - titanium login "$TI_LOGIN" "$TI_PASS"
-- titanium sdk install  3.3.0.GA
+- titanium sdk install  3.4.0.RC
 - sudo apt-get update
 - sudo apt-get install openjdk-7-jdk
-- titanium build -p mobileweb --sdk 3.3.0.GA
+- titanium build -p mobileweb --sdk 3.4.0.RC
 - cd tools/mobilewebserver
 - npm install .
 - node app.js 8061 &
