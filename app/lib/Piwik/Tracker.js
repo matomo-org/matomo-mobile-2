@@ -525,6 +525,8 @@ function Tracker () {
         parameter.h      = now.getHours();
         parameter.m      = now.getMinutes();
         parameter.s      = now.getSeconds();
+        
+        parameter.send_image = '0';
 
         // 1 = record request, 0 = do not record request
         parameter.rec    = 1;
