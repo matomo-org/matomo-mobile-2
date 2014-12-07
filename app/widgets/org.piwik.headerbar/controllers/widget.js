@@ -56,10 +56,18 @@ function enableBackButton()
         $.backButton.removeEventListener('click', onHomeItemSelected);
     } catch (e) {}
 
-    $.backButton.addEventListener('click', function (event) {
+    try {
+        $.headerTitle.removeEventListener('click', onHomeItemSelected);
+    } catch (e) {}
+    
+    function onBack(event)
+    {
         event.cancelBubble = true;
         $.trigger('back');
-    });
+    }
+    
+    $.backButton.addEventListener('click', onBack);
+    $.headerTitle.addEventListener('click', onBack);
 }
 
 function showNavigationDrawer()
@@ -93,6 +101,7 @@ function onHomeItemSelected(event) {
 applyCustomProperties(arguments[0] || {});
 
 $.backButton.addEventListener('click', onHomeItemSelected);
+$.headerTitle.addEventListener('click', onHomeItemSelected);
 
 exports.setTitle = setTitle;
 exports.enableCanGoBack = enableBackButton;
