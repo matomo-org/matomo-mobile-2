@@ -204,6 +204,12 @@ function createOverview (visitor, accessUrl)
                              className: 'visitorTableViewRow'}));
     }
 
+    if (visitor.region) {
+        rows.push(createRow({title: L('UserCountry_Region'),
+                             value: visitor.region,
+                             className: 'visitorTableViewRow'}));
+    }
+
     visitor = null;
 }
 

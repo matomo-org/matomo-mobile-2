@@ -108,6 +108,7 @@ module.exports = {
     SitesManager_NotFound:                                              "No websites found for",
     UserCountry_Country:                                                'Country',
     UserCountry_City:                                                   'City',
+    UserCountry_Region:                                                 'Region',
     UserCountryMap_RealTimeMap:                                         'Real-time Map',
     UsersManager_ManageAccess:                                          'Manage access',
     UsersManager_PrivView:                                              'View',
