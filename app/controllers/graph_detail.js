@@ -9,6 +9,7 @@ var args = arguments[0] || {};
 
 var reportName = args.reportName || ' ';
 var reportDate = args.reportDate || ' ';
+var isTablet = require('alloy').isTablet;
 
 $.graph = $.graphWidget.getView();
 
@@ -74,7 +75,7 @@ function getPictureHeight() {
     var height        = getViewHeight();
     var pictureHeight = 0;
     
-    if (require('alloy').isTablet) {
+    if (isTablet) {
         pictureHeight = height -  Math.floor(height / 4) - 20; // 75% - 20px (10px space top and bottom)
     } else {
         pictureHeight = height - 20; // 10px space left and right
@@ -125,7 +126,7 @@ function getGraphUrlWithSize(width, height) {
     var graphUrlWithSize = graph.appendSize(graphSwitcher.currentGraphUrl(), width, height, true);
 
     var params = {showMetricTitle: 1, showLegend: 1, legendAppendMetric: 1};
-    if (require('alloy').isTablet) {
+    if (isTablet) {
         params.backgroundColor = 'ffffff';
     }
 
@@ -162,7 +163,7 @@ var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
 
 $.graph.image = graphUrlWithSize;
 
-if (require('alloy').isTablet) {
+if (isTablet) {
 
     var quarter = Math.floor(getViewHeight() / 4);
     $.topContainer.height = quarter;
@@ -234,7 +235,7 @@ function onOpen()
 
 function destroy()
 {
-    if (!require('alloy').isTablet) {
+    if (!isTablet) {
         Ti.Gesture.removeEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);
     }
 }
@@ -252,6 +253,9 @@ function open()
 {
     if (OS_ANDROID) {
         require('layout').open($.index);
+        if (isTablet) {
+            $.index.left = 0;
+        }
     } else {
         $.index.open();
     }
