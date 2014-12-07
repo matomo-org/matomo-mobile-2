@@ -15,7 +15,7 @@ function addActionBarItem(actionBarItem, index)
 
     var item = Ti.UI.createImageView({
         image: actionBarItem.icon, 
-        top: 0,
+        top: '4dp',
         width: '48dp',
         height: '48dp',
         left: 0,
@@ -44,22 +44,18 @@ function syncWidthOfTitleAndActionBar()
 
 function setBackAngleImage(image)
 {
-    $.backangle.backgroundImage = image;
+    $.homeIcon.backgroundImage = image;
     $.backButton.backgroundSelectedColor = '#a9a9a9';
 }
 
 function enableBackButton() 
 {
-    setBackAngleImage('/images/back.png');
+    setBackAngleImage('/images/ic_arrow_back_white_24dp.png');
 
     try {
         $.backButton.removeEventListener('click', onHomeItemSelected);
     } catch (e) {}
 
-    try {
-        $.headerTitle.removeEventListener('click', onHomeItemSelected);
-    } catch (e) {}
-    
     function onBack(event)
     {
         event.cancelBubble = true;
@@ -67,12 +63,11 @@ function enableBackButton()
     }
     
     $.backButton.addEventListener('click', onBack);
-    $.headerTitle.addEventListener('click', onBack);
 }
 
 function showNavigationDrawer()
 {
-    setBackAngleImage('/images/navigation_drawer.png');
+    setBackAngleImage('/images/ic_menu_white_24dp.png');
 }
 
 function applyCustomProperties(args)
@@ -101,7 +96,6 @@ function onHomeItemSelected(event) {
 applyCustomProperties(arguments[0] || {});
 
 $.backButton.addEventListener('click', onHomeItemSelected);
-$.headerTitle.addEventListener('click', onHomeItemSelected);
 
 exports.setTitle = setTitle;
 exports.enableCanGoBack = enableBackButton;

@@ -164,7 +164,7 @@
 },
 
 "#loading[platform=android]": {
-    top: '48dp'
+    top: '56dp'
 }
 
 "#content": {
@@ -175,7 +175,7 @@
 },
 
 "#content[platform=android]": {
-    top: '48dp'
+    top: '56dp'
 }
 
 ".evolutionContainer": {

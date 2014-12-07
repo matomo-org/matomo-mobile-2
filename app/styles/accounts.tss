@@ -20,7 +20,7 @@
 },
 
 "#accountsTable[platform=android]": {
-    top: '48dp',
+    top: '56dp',
     separatorColor: '#e0e0e0'
 }
 

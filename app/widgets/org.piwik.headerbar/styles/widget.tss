@@ -1,6 +1,6 @@
 "#headerBar": {
     top: 0,
-    height: '48dp',
+    height: '56dp',
     width: Ti.UI.FILL,
     backgroundImage: '/images/ab_solid_example.9.png',
     backgroundColor: '#CD1628'
@@ -8,28 +8,23 @@
 
 "#backButton": {
     left: 0,
-    width: '48dp',
-    height: '48dp',
+    width: '72dp',
+    height: '56dp',
     backgroundColor: "transparent",
 }
 
-"#backangle": {
-    left: '0dp',
-    height: '40dp',
-    width: '14dp',
-}
-
 "#homeIcon": {
-    left: '14dp',
-    height: '32dp',
-    width: '32dp',
+    top: '16dp',
+    left: '19dp',
+    height: '24dp',
+    width: '24dp',
     touchEnabled: false,
     backgroundColor: 'transparent',
     backgroundImage: '/images/appicon.png',
 }
 
 "#headerTitle": {
-    left: '53dp',
+    left: '72dp',
     color: '#ffffff',
     font: {
         fontSize: '18sp',
@@ -44,7 +39,7 @@
 "#actionButtons": {
     right: 0,
     width: Ti.UI.SIZE,
-    height: '48dp',
+    height: '56dp',
     backgroundColor: 'transparent',
     layout: 'horizontal'
 }

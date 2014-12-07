@@ -74,3 +74,9 @@ Name: navigation_next_item.png
 Name: nodata.png
 Link: http://android-ui-utils.googlecode.com/hg/asset-studio/dist/index.html
 License: Creative Commons Attribution 3.0 Unported License. See tools/licenses/CC30UNPORTED-LICENSE-AndroidAssetStudio.txt
+
+=======
+Name: ic_arrow_back_white_24dp.png
+Name: ic_menu_white_24dp.png
+Link: https://github.com/google/material-design-icons
+License: CC-BY. See tools/licenses/CC30UNPORTED-LICENSE-AndroidAssetStudio.txt

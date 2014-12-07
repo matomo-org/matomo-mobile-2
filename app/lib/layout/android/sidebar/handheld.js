@@ -64,7 +64,7 @@ function HandheldSidebar()
             hideRightSidebar();
         }
 
-        leftSidebarContainer = Ti.UI.createView({top: '48dp', zIndex: 999});
+        leftSidebarContainer = Ti.UI.createView({top: '56dp', zIndex: 999});
         leftSidebarContainer.add(leftSidebarView);
         addLeftUnderlay(leftSidebarContainer);
 
@@ -101,7 +101,7 @@ function HandheldSidebar()
             hideLeftSidebar();
         }
 
-        rightSidebarContainer = Ti.UI.createView({top: '48dp', zIndex: 998});
+        rightSidebarContainer = Ti.UI.createView({top: '56dp', zIndex: 998});
         rightSidebarContainer.add(rightSidebarView);
         addRightUnderlay(rightSidebarContainer);
 

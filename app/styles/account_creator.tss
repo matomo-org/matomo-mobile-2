@@ -13,7 +13,7 @@
 }
 
 ".container[platform=android]": {
-    top: '48dp',
+    top: '56dp',
     bottom: '48dp'
 }
 
