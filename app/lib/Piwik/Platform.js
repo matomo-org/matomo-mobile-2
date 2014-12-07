@@ -35,7 +35,28 @@ function pixelToDp(pixel) {
     dp      = Math.ceil(dp);
     
     return dp;
-};
+}
+
+function dpToPixel(dp) {
+    var factor = Ti.Platform.displayCaps.getLogicalDensityFactor();
+
+    if (factor) {
+        return Math.ceil(dp * factor);
+    }
+
+    // fallback
+    var dpi = Ti.Platform.displayCaps.dpi;
+
+    if (dpi > 160) {
+        var px = dp * (dpi / 160);
+        px = Math.ceil(px);
+
+        return px;
+    }
+
+    // another fallback
+    return Math.ceil(dp);
+}
 
 function getScreenSizeInInch()
 {
@@ -94,7 +115,7 @@ function isTablet () {
     var screenSizeInch = getScreenSizeInInch();
     
     return (screenSizeInch >= 6.0);
-};
+}
 
 function isRetinaHDDisplay()
 {
@@ -119,3 +140,4 @@ function getIOSScaleFactor()
  */
 module.exports.isTablet = isTablet();
 module.exports.getIOSScaleFactor = getIOSScaleFactor;
+module.exports.dpToPixel = dpToPixel;

@@ -233,6 +233,11 @@ function filterReports(collection)
     return collection.where({category: reportCategory});
 }
 
+var neededScrollChange = 70;
+
+if (OS_ANDROID) {
+    neededScrollChange = require('Piwik/Platform').dpToPixel(neededScrollChange);
+}
 
 function notifyModelsAboutNewScrollPosition (event)
 {
@@ -240,7 +245,7 @@ function notifyModelsAboutNewScrollPosition (event)
         return;
     }
 
-    if (lastYScrollPosition && event.y < (lastYScrollPosition + 50)) {
+    if (lastYScrollPosition && event.y < (lastYScrollPosition + neededScrollChange)) {
         // ignore if scroll change was only 50 pixel or less since last update. otherwise we end up firing
         // thousands of events
         return;
