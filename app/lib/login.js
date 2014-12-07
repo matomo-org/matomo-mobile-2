@@ -82,7 +82,7 @@ function onError (accountModel, error) {
             title   = 'Account Receive Token Error';
             break;
         case 'NoViewAccess':
-            message = String.format(L('General_ExceptionPrivilegeAtLeastOneWebsite'), L('UsersManager_PrivView'));
+            message = String.format(L('Mobile_ExceptionNoViewAccess'), L('UsersManager_PrivView'));
             title   = 'Account No View Access';
             break;
         case 'IncompatiblePiwikVersion':
