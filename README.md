@@ -23,14 +23,9 @@ That means same functionality and same look and feel.
 Or in short:
 > « Liberate Web Analytics »
 
-
 ## License
 
 Piwik Mobile is released under the GPL v3 license, see [LICENSE](LICENSE). 
-
-## Install
-
-See http://dev.piwik.org/trac/wiki/PiwikMobile
 
 ## Tests
 
@@ -39,10 +34,6 @@ See https://github.com/tsteur/titanium-alloy-jasmine-testing/
 ## Changelog
 
 See http://piwik.org/blog/category/piwik-mobile-changelog/
-
-## Issues
-
-Please report issues at http://dev.piwik.org/trac/milestone/Piwik%20Mobile%20Client
 
 ## Contact
 
