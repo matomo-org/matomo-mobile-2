@@ -125,7 +125,7 @@ exports.renderProcessedReport = function (processedReportCollection)
         };
 
         if (OS_ANDROID && Boolean(hasSubtable)) {
-            rowOptions.rightImage = '/images/ic_navigate_next_grey600_36dp.png';
+            rowOptions.rightImage = '/images/navigation_next_item.png';
         } else if (Boolean(hasSubtable)) {
             rowOptions.hasChild = true;
         }
