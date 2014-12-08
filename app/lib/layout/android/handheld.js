@@ -34,8 +34,10 @@ rootWin.addEventListener('androidback', function () {
         layout.showLeftSidebar(function () {
             aboutToExitApp = false;
         });
-        // before closing the last opened window we want to open the left sidebar.
-        // if the user presses back one more time we will close the app
+
+        var notification = Ti.UI.createNotification({message: require('L')('Mobile_HowtoExitAndroid')});
+        notification.duration = Ti.UI.NOTIFICATION_DURATION_SHORT;
+        notification.show();
 
     } else {
         aboutToExitApp = false;

@@ -157,6 +157,7 @@ module.exports = {
     Mobile_ExceptionNoViewAccess:                                       'Please check your username and password and make sure you have %s access for at least one website.',
     Mobile_StaticGraph:                                                 'Static Graph',
     Mobile_HelpUsToImprovePiwikMobile:                                  'Would you like to enable anonymous usage tracking in Piwik Mobile?',
+    Mobile_HowtoExitAndroid:                                            'Please click BACK again to exit',
     Mobile_HowtoDeleteAnAccount:                                        'Press long to remove an account.',
     Mobile_HowtoDeleteAnAccountOniOS:                                   'Swipe right to left to remove an account',
     Mobile_HowtoLoginAnonymous:                                         'Leave username and password empty for anonymous login',
