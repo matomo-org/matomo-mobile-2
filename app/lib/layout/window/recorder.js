@@ -7,7 +7,7 @@
 
 function WindowRecorder() {
 
-    var recordWindows    = false;
+    var recordWindows    = OS_ANDROID;
     var recordedWindows  = [];
 
     this.on('open', recordWindowIfEnabled);
