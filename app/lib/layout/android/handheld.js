@@ -17,8 +17,30 @@ var layout = new (AndroidLayout)(rootWin);
 require('layout/window/recorder').apply(layout, []);
 require('layout/android/sidebar/handheld').apply(layout, []);
 
+var aboutToExitApp = false;
+
 rootWin.addEventListener('androidback', function () {
-    layout.closeCurrentWindow();
+
+    if (2 === layout.getNumRecordedWindows()
+        && layout.isLeftSidebarVisible()
+        && aboutToExitApp) {
+        layout.closeRecordedWindows(); // exit app
+    } else if (1 === layout.getNumRecordedWindows()
+        && layout.hasLeftSidebar()
+        && !layout.isLeftSidebarVisible()) {
+
+        aboutToExitApp = true;
+
+        layout.showLeftSidebar(function () {
+            aboutToExitApp = false;
+        });
+        // before closing the last opened window we want to open the left sidebar.
+        // if the user presses back one more time we will close the app
+
+    } else {
+        aboutToExitApp = false;
+        layout.closeCurrentWindow();
+    }
 });
 
 module.exports = layout;

@@ -54,6 +54,10 @@ function WindowRecorder() {
         }
     };
 
+    this.getNumRecordedWindows = function () {
+        return recordedWindows.length;
+    };
+
     this.closeCurrentWindow = function () {
         if (recordedWindows.length) {
             this.close(recordedWindows.pop());
