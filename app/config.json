@@ -31,9 +31,9 @@
         },
         "tracking": {
             "enabled": true,
-            "siteId": 34,
+            "siteId": 48,
             "apiVersion": 1,
-            "baseUrl": "http://mobileapp.piwik.org",
+            "baseUrl": "http://mobileapp-beta.piwik.org",
             "piwikServerUrl": "http://demo.piwik.org/piwik.php",
             "maxTracksPerDay": 200
         },
