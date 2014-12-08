@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.PiwikTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>

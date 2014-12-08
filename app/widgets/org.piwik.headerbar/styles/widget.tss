@@ -27,7 +27,7 @@
     left: '72dp',
     color: '#ffffff',
     font: {
-        fontSize: '18sp',
+        fontSize: '19sp',
         fontFamily: 'Roboto-Thin'
     },
     height: Ti.UI.SIZE,

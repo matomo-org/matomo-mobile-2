@@ -8,7 +8,7 @@
         <target device="android">true</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>3.4.0.RC</sdk-version>
+    <sdk-version>3.4.1.GA</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Piwik Mobile 2</name>
     <version>2.1.1</version>
@@ -54,7 +54,14 @@
         <tool-api-level>19</tool-api-level>
         <manifest android:installLocation="preferExternal"
             android:versionCode="6" android:versionName="2.1.1">
-            <application android:theme="@style/Theme.PiwikTheme"/>
+            <application android:theme="@style/Theme.PiwikTheme">
+                <activity android:name=".PiwikMobile2Activity" android:label="@string/app_name" android:theme="@style/Theme.PiwikTheme" android:configChanges="keyboardHidden|orientation|screenSize">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                </activity>
+            </application>
             <supports-screens android:anyDensity="true"
                 android:largeScreens="true" android:normalScreens="true"
                 android:smallScreens="true" xlargeScreens="true"/>

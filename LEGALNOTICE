@@ -70,13 +70,18 @@ Name: btn_default_normal_holo_light.9.png
 Name: btn_check_on_focused_holo_light.png
 Name: btn_check_off_holo_light.png
 Name: btn_check_on_holo_light.png
-Name: navigation_next_item.png
 Name: nodata.png
 Link: http://android-ui-utils.googlecode.com/hg/asset-studio/dist/index.html
 License: Creative Commons Attribution 3.0 Unported License. See tools/licenses/CC30UNPORTED-LICENSE-AndroidAssetStudio.txt
 
 =======
 Name: ic_arrow_back_white_24dp.png
+Name: navigation_next_item.png
 Name: ic_menu_white_24dp.png
+Name: ic_check_grey600_36dp.png
+Name: ic_fullscreen_grey600_36dp.png
+Name: ic_more_vert_white_24dp.png
+Name: ic_person_add_white_24dp.png
+Name: ic_person_white_24dp.png
 Link: https://github.com/google/material-design-icons
 License: CC-BY. See tools/licenses/CC30UNPORTED-LICENSE-AndroidAssetStudio.txt

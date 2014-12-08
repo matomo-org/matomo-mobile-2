@@ -221,5 +221,5 @@
 
 "#headerBar": {
     title: L('General_AllWebsitesDashboard'),
-    actionItem1: {icon: '/images/ic_action_accounts.png'}
+    actionItem1: {icon: '/images/ic_person_white_24dp.png'}
 }

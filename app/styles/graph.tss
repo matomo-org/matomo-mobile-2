@@ -43,9 +43,9 @@
 }
 
 "#showDetailIcon[platform=android]": {
-    image: '/images/ic_action_fullscreen.png',
+    image: '/images/ic_fullscreen_grey600_36dp.png',
     bottom: '8dp',
     right: '8dp',
-    width: '32dp',
-    height: '32dp'
+    width: '36dp',
+    height: '36dp'
 }

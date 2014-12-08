@@ -73,7 +73,7 @@ function checkWebsite(tableViewRow)
         return;
     }
     
-    tableViewRow.rightImage = OS_ANDROID ? '/images/tick.png' : 'tick.png';
+    tableViewRow.rightImage = OS_ANDROID ? '/images/ic_check_grey600_36dp.png' : 'tick.png';
 }
 
 function transformWebsite(processedReport)

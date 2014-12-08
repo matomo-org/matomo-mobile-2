@@ -13,14 +13,17 @@ function addActionBarItem(actionBarItem, index)
         return;
     }
 
-    var item = Ti.UI.createImageView({
-        image: actionBarItem.icon, 
-        top: '4dp',
+    var view = Ti.UI.createView({
         width: '48dp',
-        height: '48dp',
-        left: 0,
-        right: 0,
-        backgroundSelectedColor: '#a9a9a9'
+        height: '56dp',
+        backgroundSelectedColor: '#E23E4E'
+    });
+
+    var item = Ti.UI.createImageView({
+        image: actionBarItem.icon,
+        width: '24dp',
+        height: '24dp',
+        left: '12dp'
     });
 
     item.addEventListener('click', function (event) {
@@ -28,7 +31,9 @@ function addActionBarItem(actionBarItem, index)
         $.trigger('actionItem' + index);
     });
 
-    $.actionButtons.add(item);
+    view.add(item);
+
+    $.actionButtons.add(view);
     widthOfActionBarItem += 48;
 }
 
@@ -45,7 +50,7 @@ function syncWidthOfTitleAndActionBar()
 function setBackAngleImage(image)
 {
     $.homeIcon.backgroundImage = image;
-    $.backButton.backgroundSelectedColor = '#a9a9a9';
+    $.backButton.backgroundSelectedColor = '#E23E4E';
 }
 
 function enableBackButton() 
