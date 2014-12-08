@@ -29,7 +29,9 @@
                 id="headerBar"
                 formFactor="tablet"
                 platform="android" />
-        
-        <WebView id="browser"></WebView>
+
+        <View id="loadingIndicator"><Label id="loadingLabel"></Label></View>
+
+        <WebView id="browser" onLoad="onLoaded" onSslError="onErrored" onError="onErrored"></WebView>
     </Window>
 </Alloy>

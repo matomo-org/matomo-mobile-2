@@ -10,6 +10,8 @@ function L(key)
     return require('L')(key);
 }
 
+var urlToLoad = null;
+
 function registerEvents()
 {
     var session = require('session');
@@ -29,6 +31,40 @@ function trackWindowRequest()
     require('Piwik/Tracker').trackWindow('Real-time Map', 'real-time-map');
 }
 
+$.emptyData = new (require('ui/emptydata'));
+
+function refresh()
+{
+    if (!urlToLoad) {
+        return;
+    }
+
+    $.loadingIndicator.show();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
+    $.browser.hide();
+
+    $.browser.url = urlToLoad;
+}
+
+function onErrored(event)
+{
+    if (event && event.error) {
+        var message = event.error + ' (code ' + event.code + ')';
+        $.emptyData.show($.index, refresh, L('Mobile_NetworkError'), message);
+        $.loadingIndicator.hide();
+        $.browser.hide();
+    } else {
+        onLoaded();
+    }
+}
+
+function onLoaded()
+{
+    $.browser.show();
+    $.loadingIndicator.hide();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
+}
+
 function onOpen()
 {
     trackWindowRequest();
@@ -37,6 +73,10 @@ function onOpen()
 function onClose()
 {
     unregisterEvents();
+    $.emptyData && $.emptyData.cleanupIfNeeded();
+    if (OS_ANDROID && $.browser.release) {
+        $.browser.release();
+    }
     $.destroy();
     $.off();
 }
@@ -61,7 +101,8 @@ function openRealTimeMapInWebview()
         url += '&segmentOverride=1&segment=' + segmentModel.getDefinition();
     }
 
-    $.browser.url = url;
+    urlToLoad = url;
+    refresh();
 }
 
 exports.open = function () 

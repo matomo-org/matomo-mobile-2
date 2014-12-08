@@ -1,11 +1,13 @@
 <Alloy>
-    <Window module="xp.ui" id="index" title=" ">
+    <Window module="xp.ui" id="index" title=" " onClose="onClose">
         
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 
                 onBack="close"
                 platform="android" />
+
+        <View id="loadingIndicator"><Label id="loadingLabel"></Label></View>
                 
-        <WebView id="browser"></WebView>
+        <WebView id="browser" onLoad="onLoaded" onSslError="onErrored" onError="onErrored"></WebView>
     </Window>
 </Alloy>

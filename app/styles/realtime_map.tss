@@ -22,3 +22,21 @@
     top: '56dp',
     borderRadius: '1dp'
 }
+
+"#loadingIndicator": {
+    left: 0,
+    top: 0,
+    height: Ti.UI.FILL,
+    width: Ti.UI.FILL,
+    visible: true,
+    backgroundColor: 'white',
+    zIndex: 5
+},
+
+"#loadingIndicator[platform=android]": {
+    top: '56dp'
+}
+
+"#loadingLabel": {
+    text: L('General_LoadingData')
+},
