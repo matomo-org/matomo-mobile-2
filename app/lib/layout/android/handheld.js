@@ -17,31 +17,28 @@ var layout = new (AndroidLayout)(rootWin);
 require('layout/window/recorder').apply(layout, []);
 require('layout/android/sidebar/handheld').apply(layout, []);
 
-var windowsBeforeClose = null;
+var aboutToExitApp = false;
 
 rootWin.addEventListener('androidback', function () {
-    console.warn(layout.getNumRecordedWindows() + 'xxx' + layout.hasLeftSidebar() + 'yyy' + layout.isLeftSidebarVisible());
 
     if (2 === layout.getNumRecordedWindows()
         && layout.isLeftSidebarVisible()
-        && windowsBeforeClose
-        && windowsBeforeClose.length
-        && windowsBeforeClose.length === 2
-        && windowsBeforeClose[0] === layout.getWindowAtIndex(0)
-        && windowsBeforeClose[1] === layout.getWindowAtIndex(1)) {
-        layout.closeRecordedWindows();
+        && aboutToExitApp) {
+        layout.closeRecordedWindows(); // exit app
     } else if (1 === layout.getNumRecordedWindows()
         && layout.hasLeftSidebar()
         && !layout.isLeftSidebarVisible()) {
 
-        layout.showLeftSidebar();
+        aboutToExitApp = true;
+
+        layout.showLeftSidebar(function () {
+            aboutToExitApp = false;
+        });
         // before closing the last opened window we want to open the left sidebar.
         // if the user presses back one more time we will close the app
 
-        windowsBeforeClose = layout.getRecordedWindows();
-
     } else {
-        windowsBeforeClose = null;
+        aboutToExitApp = false;
         layout.closeCurrentWindow();
     }
 });

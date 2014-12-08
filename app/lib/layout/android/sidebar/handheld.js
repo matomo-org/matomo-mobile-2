@@ -54,7 +54,7 @@ function HandheldSidebar()
         isLeftSidebarVisible() ? hideLeftSidebar() : showLeftSidebar();
     }
 
-    function showLeftSidebar()
+    function showLeftSidebar(onClose)
     {
         if (isLeftSidebarVisible() || !hasLeftSidebar()) {
             return;
@@ -68,6 +68,10 @@ function HandheldSidebar()
         leftSidebarContainer.add(leftSidebarView);
         leftSidebarContainer.addEventListener('close', function () {
             leftSidebarContainer = null;
+            if (onClose) {
+                onClose();
+            }
+            onClose = null;
         });
         addLeftUnderlay(leftSidebarContainer);
 
