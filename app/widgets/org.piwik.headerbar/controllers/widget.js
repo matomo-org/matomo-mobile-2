@@ -26,7 +26,7 @@ function addActionBarItem(actionBarItem, index)
         left: '16dp'
     });
 
-    item.addEventListener('click', function (event) {
+    view.addEventListener('click', function (event) {
         event.cancelBubble = true;
         $.trigger('actionItem' + index);
     });
