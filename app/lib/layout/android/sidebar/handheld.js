@@ -43,7 +43,7 @@ function HandheldSidebar()
 
     function hideLeftSidebar()
     {
-        if (leftSidebarContainer) {
+        if (isLeftSidebarVisible()) {
             layout.close(leftSidebarContainer);
             leftSidebarContainer = null;
         }
@@ -51,12 +51,12 @@ function HandheldSidebar()
 
     function toggleLeftSidebar()
     {
-        leftSidebarContainer ? hideLeftSidebar() : showLeftSidebar();
+        isLeftSidebarVisible() ? hideLeftSidebar() : showLeftSidebar();
     }
 
     function showLeftSidebar()
     {
-        if (leftSidebarContainer || !leftSidebarView) {
+        if (isLeftSidebarVisible() || !hasLeftSidebar()) {
             return;
         }
 
@@ -66,9 +66,22 @@ function HandheldSidebar()
 
         leftSidebarContainer = Ti.UI.createView({top: '56dp', zIndex: 999});
         leftSidebarContainer.add(leftSidebarView);
+        leftSidebarContainer.addEventListener('close', function () {
+            leftSidebarContainer = null;
+        });
         addLeftUnderlay(leftSidebarContainer);
 
         layout.open(leftSidebarContainer);
+    }
+
+    function isLeftSidebarVisible()
+    {
+        return !!leftSidebarContainer;
+    }
+
+    function hasLeftSidebar()
+    {
+        return !!leftSidebarView;
     }
 
     this.setLeftSidebar = function(view)
@@ -80,7 +93,10 @@ function HandheldSidebar()
         }
     };
 
+    this.hasLeftSidebar = hasLeftSidebar;
+    this.isLeftSidebarVisible = isLeftSidebarVisible;
     this.hideLeftSidebar = hideLeftSidebar;
+    this.showLeftSidebar = showLeftSidebar;
     this.toggleLeftSidebar = toggleLeftSidebar;
 
     function hideRightSidebar()
@@ -103,6 +119,9 @@ function HandheldSidebar()
 
         rightSidebarContainer = Ti.UI.createView({top: '56dp', zIndex: 998});
         rightSidebarContainer.add(rightSidebarView);
+        rightSidebarContainer.addEventListener('close', function () {
+            rightSidebarContainer = null;
+        });
         addRightUnderlay(rightSidebarContainer);
 
         layout.open(rightSidebarContainer);
