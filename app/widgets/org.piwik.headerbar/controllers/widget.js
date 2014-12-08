@@ -14,7 +14,7 @@ function addActionBarItem(actionBarItem, index)
     }
 
     var view = Ti.UI.createView({
-        width: '48dp',
+        width: '56dp',
         height: '56dp',
         backgroundSelectedColor: '#E23E4E'
     });
@@ -23,7 +23,7 @@ function addActionBarItem(actionBarItem, index)
         image: actionBarItem.icon,
         width: '24dp',
         height: '24dp',
-        left: '12dp'
+        left: '16dp'
     });
 
     item.addEventListener('click', function (event) {
@@ -34,7 +34,7 @@ function addActionBarItem(actionBarItem, index)
     view.add(item);
 
     $.actionButtons.add(view);
-    widthOfActionBarItem += 48;
+    widthOfActionBarItem += 56;
 }
 
 function setTitle(title)
