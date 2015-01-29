@@ -12,8 +12,11 @@ var supportsWidthDetectionOfImage = (OS_ANDROID || OS_IOS);
 
 function loadImageViaXhr(imageView, urlToLoad)
 {
+    var settings    = Alloy.createCollection('AppSettings').settings();
+    var validateSsl = settings.shouldValidateSsl();
+    
     // timeout?
-    var imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: false, 
+    var imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: validateSsl, 
                                                    enableKeepAlive: false});
 
     imageLoader.open('GET', urlToLoad);
