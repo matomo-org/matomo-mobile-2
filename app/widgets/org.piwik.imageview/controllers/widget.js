@@ -14,14 +14,19 @@ function loadImageViaXhr(imageView, urlToLoad)
 {
     var settings    = Alloy.createCollection('AppSettings').settings();
     var validateSsl = settings.shouldValidateSsl();
-    
-    // timeout?
-    var imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: validateSsl, 
-                                                   enableKeepAlive: false});
 
-    imageLoader.open('GET', urlToLoad);
+    if ($.imageLoader && $.imageLoader.abort) {
+        $.imageLoader.abort();
+        $.imageLoader = null;
+    }
 
-    imageLoader.onload = function () {
+    $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: validateSsl,
+                                                 enableKeepAlive: false});
+
+    $.imageLoader.setTimeout(1000 * 60 * 2); // 2 minutes
+    $.imageLoader.open('GET', urlToLoad);
+
+    $.imageLoader.onload = function () {
 
         if (imageView && this.responseData && (this.responseData.width || !supportsWidthDetectionOfImage)) {
             // image view not yet cleaned up?
@@ -29,75 +34,52 @@ function loadImageViaXhr(imageView, urlToLoad)
         } else if (imageView) {
             imageView.image = errorImage;
         }
-         
-        imageLoader = null;
-        imageView   = null;
+
+        $.imageLoader = null;
+        imageView = null;
     };
-    
-    imageLoader.onerror = function () {
-        
+
+    $.imageLoader.onerror = function () {
         if (imageView) {
             imageView.image = errorImage;
         }
-        
-        imageView   = null;
-        imageLoader = null;
+
+        imageView = null;
+        $.imageLoader = null;
     };
  
-    imageLoader.send();
+    $.imageLoader.send();
 }
 
 function doPostLayout() {
     $.trigger('postlayout');
 }
 
-function userHasNoInternetConnection()
+exports.loadImage = function (url) {
+    loadImageViaXhr($.image, url);
+};
+
+exports.setWidth = function (width) {
+    $.image.width = width;
+};
+
+exports.setHeight = function (height) {
+    $.image.height = height;
+};
+
+exports.getWidth = function()
 {
-    return (!Ti.Network || !Ti.Network.online);
-}
+    return require('ui/helper').getWidth($.image);
+};
 
-function startsNotWithHttp(url)
+exports.getHeight = function()
 {
-    url = '' + url;
-    url = url.toLowerCase();
+    return require('ui/helper').getHeight($.image);
+};
 
-    return (-1 == url.indexOf('http'));
-}
-
-var urlErrorHandled = null;
-
-function tryAlternativeDownloadMethod(event) {
-
-    if (this.image && errorImage == this.image) {
-        // there could be an error while loading the error image :)
-        
-        return;
-    }
-    
-    if (!this.image || startsNotWithHttp(this.image)) {
-        // no image is set or image is not a remote url
-        this.image = errorImage;
-        
-        return;
-    }
-
-    if (userHasNoInternetConnection()) {
-        this.image = errorImage;
-        
-        return;
-    }
-
-    if (urlErrorHandled == this.image) {
-        // don't handle the same error twice. Otherwise we could end up in a loop. But it should handle the error
-        // again if the url changes. for example if one sets another url with imageView.image='foo.bar';
-        this.image = errorImage;
-        
-        return;
-    }
-
-    urlErrorHandled = this.image;
-
-    loadImageViaXhr(this, this.image);
+if (args && args.image) {
+    exports.loadImage(args.image);
+    delete args.image;
 }
 
 $.image.applyProperties(_.omit(args, 'id', '__parentSymbol', '__itemTemplate', '$model'));

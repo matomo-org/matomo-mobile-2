@@ -20,7 +20,8 @@ $.index.add(graphSwitcher.getView());
 graphSwitcher.on('close', close);
 
 graphSwitcher.on('switch', function () {
-    $.graph.image = getGraphUrlWithSize(getPictureWidth(), getPictureHeight());
+    var url = getGraphUrlWithSize(getPictureWidth(), getPictureHeight());
+    $.graphWidget.loadImage(url);
 });
 
 $.index.addEventListener('click', function () {
@@ -161,7 +162,7 @@ var pictureWidth     = getPictureWidth();
 var pictureHeight    = getPictureHeight();
 var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
 
-$.graph.image = graphUrlWithSize;
+$.graphWidget.loadImage(graphUrlWithSize);
 
 if (isTablet) {
 
@@ -198,9 +199,7 @@ if (isTablet) {
             $.graph              = $.graphWidget.getView();
 
             $.graphWidget.setParent($.index);
-            
-       //    $.index.add($.graph);
-            
+
         } catch (e) {
             console.warn('Failed to update (remove and add) graph', 'graphdetail');
             console.warn(e, 'graphdetail');
@@ -211,11 +210,11 @@ if (isTablet) {
 
         var pictureWidth  = getPictureWidth();
         var pictureHeight = getPictureHeight();
+        var url = getGraphUrlWithSize(pictureWidth, pictureHeight);
 
-        $.graph.width   = pictureWidth;
-        $.graph.height  = pictureHeight;
-
-        $.graph.image   = getGraphUrlWithSize(pictureWidth, pictureHeight);
+        $.graphWidget.setWidth(pictureWidth);
+        $.graphWidget.setHeight(pictureHeight);
+        $.graphWidget.loadImage(url);
     }
 
     Ti.Gesture.addEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);

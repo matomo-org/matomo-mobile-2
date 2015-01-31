@@ -61,7 +61,7 @@ function showDetail ()
 function updateImage(graphUrl)
 {
     var graph = require('Piwik/PiwikGraph');
-    var imageWithSize = graph.appendSize(graphUrl, width($.image.getView()), height($.image.getView()), true);
+    var imageWithSize = graph.appendSize(graphUrl, $.image.getWidth(), $.image.getHeight(), true);
     
     console.debug('imageUrlWithSize', imageWithSize);
 
@@ -70,7 +70,7 @@ function updateImage(graphUrl)
     }
 
     if ($.image.getView()) {
-        $.image.getView().image = imageWithSize;
+        $.image.loadImage(imageWithSize);
     }
 }
 
@@ -177,7 +177,7 @@ exports.hide = hide;
 
 function renderIfPossibleAndNeeded()
 {
-    if (!currentGraphUrlToDislay || !width($.image.getView())) {
+    if (!currentGraphUrlToDislay || !$.image.getWidth()) {
         return;
     }
 
