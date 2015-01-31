@@ -10,11 +10,11 @@ var args = arguments[0] || {};
 var errorImage = OS_ANDROID ? '/images/image_load_error.png' : 'image_load_error.png';
 var supportsWidthDetectionOfImage = (OS_ANDROID || OS_IOS);
 
+var settings    = Alloy.createCollection('AppSettings').settings();
+var validateSsl = settings.shouldValidateSsl();
+
 function loadImageViaXhr(imageView, urlToLoad)
 {
-    var settings    = Alloy.createCollection('AppSettings').settings();
-    var validateSsl = settings.shouldValidateSsl();
-
     if ($.imageLoader && $.imageLoader.abort) {
         $.imageLoader.abort();
         $.imageLoader = null;
@@ -56,7 +56,11 @@ function doPostLayout() {
 }
 
 exports.loadImage = function (url) {
-    loadImageViaXhr($.image, url);
+    if (validateSsl) {
+        $.image.image = url;
+    } else {
+        loadImageViaXhr($.image, url);
+    }
 };
 
 exports.setWidth = function (width) {
