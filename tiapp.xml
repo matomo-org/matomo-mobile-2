@@ -11,7 +11,7 @@
     <sdk-version>3.4.1.GA</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Piwik Mobile 2</name>
-    <version>2.1.2</version>
+    <version>2.2.0</version>
     <publisher>thomassteur</publisher>
     <url>http://piwik.org/mobile</url>
     <description>Need your analytics on the go? Use our free Piwik Mobile app to check your stats from anywhere and show them to colleagues in meetings. Piwik Mobile offers all the same reports as the desktop interface, and displays your visitor data in real time!</description>
@@ -53,7 +53,7 @@
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <tool-api-level>21</tool-api-level>
         <manifest android:installLocation="preferExternal"
-            android:versionCode="7" android:versionName="2.1.2">
+            android:versionCode="8" android:versionName="2.2.0">
             <application android:theme="@style/Theme.PiwikTheme">
                 <activity android:name=".PiwikMobile2Activity" android:label="@string/app_name" android:theme="@style/Theme.PiwikTheme" android:configChanges="keyboardHidden|orientation|screenSize">
                     <intent-filter>
