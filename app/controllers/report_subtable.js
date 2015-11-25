@@ -19,6 +19,7 @@ var reportAction   = args.apiAction || '';
 var reportModule   = args.apiModule || '';
 var subtableId     = args.subtableId || '';
 var currentMetric  = args.metric;
+var reportModel    = args.reportModel || {};
 var reportDate     = require('session').getReportDate();
 
 updateWindowTitle(args.reportTitle);
@@ -94,15 +95,21 @@ function doRefresh()
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
 
+    var params = {period: piwikPeriod,
+                  date: piwikDate,
+                  idSite: siteModel.id,
+                  idSubtable: subtableId,
+                  filter_limit: $.showAllEntries ? -1 : $.rowsFilterLimit,
+                  apiModule: reportModule,
+                  apiAction: reportAction};
+
+    if (reportModel.hasParameters()) {
+        _.extend(params, reportModel.getParameters());
+    }
+
     $.piwikProcessedReport.fetchProcessedReports(currentMetric, {
         account: accountModel,
-        params: {period: piwikPeriod, 
-                 date: piwikDate, 
-                 idSite: siteModel.id, 
-                 idSubtable: subtableId,
-                 filter_limit: $.showAllEntries ? -1 : $.rowsFilterLimit,
-                 apiModule: reportModule, 
-                 apiAction: reportAction},
+        params: params,
         success: $.renderProcessedReport,
         error: function (undefined, error) {
             if (error) {

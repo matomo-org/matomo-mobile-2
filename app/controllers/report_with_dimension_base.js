@@ -5,6 +5,10 @@ exports.emptyData = new (require('ui/emptydata'));
 
 var shouldScrollToPositionOfPaginator = false;
 
+
+var args = arguments[0] || {};
+var reportModel  = args.report;
+
 function L(key)
 {
     return require('L')(key);
@@ -147,7 +151,8 @@ exports.renderProcessedReport = function (processedReportCollection)
                     apiAction: this.subtableAction,
                     subtableId: this.subtableId,
                     metric: this.currentMetric,
-                    reportTitle: this.reportTitle
+                    reportTitle: this.reportTitle,
+                    reportModel: reportModel
                 };
 
                 // TODO add possible report params (eg needed by goals)
