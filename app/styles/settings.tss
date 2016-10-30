@@ -12,7 +12,7 @@
 }
 
 "ListItem[platform=ios]": {
-    selectionStyle: Ti.UI.iPhone.ListViewCellSelectionStyle.NONE
+    selectionStyle: Ti.UI.iOS.ListViewCellSelectionStyle.NONE
 }
 
 "ListItem[platform=android]": {
@@ -59,7 +59,7 @@
 }
 
 "#settingsTable[platform=ios]": {
-    style: Ti.UI.iPhone.ListViewStyle.GROUPED
+    style: Ti.UI.iOS.ListViewStyle.GROUPED
 },
 
 ".titleLabel": {

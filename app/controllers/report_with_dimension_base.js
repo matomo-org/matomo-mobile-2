@@ -5,6 +5,10 @@ exports.emptyData = new (require('ui/emptydata'));
 
 var shouldScrollToPositionOfPaginator = false;
 
+
+var args = arguments[0] || {};
+var reportModel  = args.report;
+
 function L(key)
 {
     return require('L')(key);
@@ -92,7 +96,7 @@ exports.renderProcessedReport = function (processedReportCollection)
     if (settings.areGraphsEnabled() && $.reportGraphCtrl) {
         var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
         if (OS_IOS) {
-            row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+            row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
         }
         row.add($.reportGraphCtrl.getView());
         rows.push(row);
@@ -100,7 +104,7 @@ exports.renderProcessedReport = function (processedReportCollection)
 
     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
     if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
     }
     row.add($.reportInfoCtrl.getView());
     rows.push(row);
@@ -131,9 +135,9 @@ exports.renderProcessedReport = function (processedReportCollection)
         }
 
         if (OS_IOS && !Boolean(hasSubtable)) {
-            rowOptions.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+            rowOptions.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
         } else if (OS_IOS) {
-            rowOptions.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+            rowOptions.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
         }
 
         var row = Ti.UI.createTableViewRow(rowOptions);
@@ -147,7 +151,9 @@ exports.renderProcessedReport = function (processedReportCollection)
                     apiAction: this.subtableAction,
                     subtableId: this.subtableId,
                     metric: this.currentMetric,
-                    reportTitle: this.reportTitle
+                    reportTitle: this.reportTitle,
+                    reportModel: reportModel,
+                    report: reportModel
                 };
 
                 // TODO add possible report params (eg needed by goals)
@@ -173,7 +179,7 @@ exports.renderProcessedReport = function (processedReportCollection)
         if (OS_ANDROID) showAllOptions.bottom = '16dp';
 
         if (OS_IOS) {
-            showAllOptions.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+            showAllOptions.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
         } else {
             showAllOptions.backgroundSelectedColor = '#a9a9a9';
         }

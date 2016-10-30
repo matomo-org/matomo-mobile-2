@@ -2,6 +2,9 @@
     backgroundColor: "#FFFFFF",
     barColor: "#CD1628",
     navTintColor: "#ffffff",
+    titleAttributes: {
+	    color: '#fff'
+	}
 },
 
 "Popover": {

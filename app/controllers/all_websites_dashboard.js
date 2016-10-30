@@ -330,6 +330,10 @@ function formatWebsite(model)
     
     model.set('evolution', evolution);
 
+    model.name = model.get('name');
+    model.evolution = model.get('evolution');
+    model.evolution_color = model.get('evolution_color');
+
     return model;
 }
 

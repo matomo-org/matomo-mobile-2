@@ -84,6 +84,8 @@ function transformWebsite(processedReport)
         processedReport.idsite = null;
     }
 
+    processedReport.name = processedReport.getName();
+
     if (isCurrentWebsite(processedReport)) {
         checkWebsite(processedReport);
     } else {

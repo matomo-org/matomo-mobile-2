@@ -77,7 +77,7 @@ function createNonSelectableRow(params)
     var row = createRow(params);
 
     if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
     } else {
         row.backgroundSelectedColor = '#ffffff';
     }
@@ -90,7 +90,7 @@ function createSelectableRow(params)
     var row = createRow(params);
 
     if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
     } else {
         row.backgroundSelectedColor = '#dcdcdc';
     }

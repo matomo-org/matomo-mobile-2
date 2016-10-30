@@ -85,10 +85,8 @@ function onClose()
         $.emptyData = null;
     }
 
-    if (OS_ANDROID) {
         // this frees a lot of memory
         $.visitorLogTable.setData([]);
-    }
 
     unregisterEvents();
     $.destroy();
@@ -149,7 +147,7 @@ function getNextRowParams()
         nextRow.bottom = '12dp';
     }
     if (OS_IOS) {
-        nextRow.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+        nextRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
     } else {
         nextRow.backgroundSelectedColor = '#a9a9a9';
     }
@@ -168,7 +166,7 @@ function getPrevRowParams()
         prevRow.bottom = '12dp';
     }
     if (OS_IOS) {
-        prevRow.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+        prevRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
     } else {
         prevRow.backgroundSelectedColor = '#a9a9a9';
     }
@@ -193,7 +191,7 @@ function getNoVisitorsRowParams()
     }
 
     if (OS_IOS) {
-        rowParams.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+        rowParams.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
     }
 
     return rowParams;

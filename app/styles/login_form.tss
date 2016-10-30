@@ -14,7 +14,7 @@
 },
 
 "#loginbutton[platform=ios]": {
-    style: Ti.UI.iPhone.SystemButtonStyle.PLAIN
+    style: Ti.UI.iOS.SystemButtonStyle.PLAIN
 },
 
 "#loginbutton[platform=android]": {
