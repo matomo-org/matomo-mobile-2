@@ -189,7 +189,7 @@ function setTitle(section, itemIndex, title)
         item.properties.title = title;
     }
 
-    section.updateItemAt(itemIndex, item, {animated: true});
+    section.updateItemAt(itemIndex, item);
 }
 
 function setSubtitle(section, itemIndex, subtitle)
@@ -211,7 +211,7 @@ function setSubtitle(section, itemIndex, subtitle)
         item.properties.subtitle = subtitle;
     }
 
-    section.updateItemAt(itemIndex, item, {animated: true});
+    section.updateItemAt(itemIndex, item);
 }
 
 function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled) 
@@ -227,17 +227,21 @@ function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
         return;
     }
 
-    if (enabled && OS_ANDROID) {
-        item.template = 'checkedTemplate';
-    } else if (OS_ANDROID) {
-        item.template = 'uncheckedTemplate';
-    } else if (enabled) {
-        item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
+    if (OS_ANDROID) {
+        if (enabled) {
+            item.template = 'checkedTemplate';
+        } else {
+            item.template = 'uncheckedTemplate';
+        }
     } else {
-        item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
+        if (enabled) {
+            item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
+        } else {
+            item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
+        }
     }
-    
-    $.basic.updateItemAt(indexOfItemIfListView, item, {animated: true});
+
+    $.basic.updateItemAt(indexOfItemIfListView, item);
 }
 
 function updateWindowTitle()

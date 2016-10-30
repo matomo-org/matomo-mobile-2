@@ -83,6 +83,7 @@ function doRefresh()
 {
     var accountModel = require('session').getAccount();
     var siteModel    = require('session').getWebsite();
+    var segmentModel = require('session').getSegment();
 
     if (!siteModel || !accountModel) {
         console.log('account or site not found, cannot refresh report subtable');
@@ -109,6 +110,7 @@ function doRefresh()
 
     $.piwikProcessedReport.fetchProcessedReports(currentMetric, {
         account: accountModel,
+        segment: segmentModel,
         params: params,
         success: $.renderProcessedReport,
         error: function (undefined, error) {

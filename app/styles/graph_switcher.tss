@@ -28,7 +28,7 @@
 
 "#closeButton[platform=ios]": {
     title: L('General_Close'),
-    style: Ti.UI.iPhone.SystemButtonStyle.BORDERED,
+    style: Ti.UI.iOS.SystemButtonStyle.BORDERED,
     color: '#333333'
 }
 
@@ -42,7 +42,7 @@
 
 "#switchButton[platform=ios]": {
     title: ' - ',
-    style: Ti.UI.iPhone.SystemButtonStyle.BAR,
+    style: Ti.UI.iOS.SystemButtonStyle.BAR,
     color: '#333333'
 }
 

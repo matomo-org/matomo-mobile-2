@@ -52,7 +52,7 @@ function onOpen()
 function addNonSelectableSelectionStyleToRow(row)
 {
     if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.NONE;
+        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
     } else {
         row.backgroundSelectedColor = '#ffffff';
     }
@@ -65,7 +65,7 @@ function createSelectableRow(params)
     var row = Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
 
     if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
     } else {
         row.backgroundSelectedColor = '#a9a9a9';
     }
@@ -129,6 +129,11 @@ function createOverview (visitor, accessUrl)
         rows.push(createRow({title: L('General_VisitType'),
                              className: 'visitorTableViewRow',
                              value: visitorTypeText}));
+    }
+
+    if (visitor.userId) {
+        rows.push(createRow({title: 'User ID',
+                             className: 'visitorTableViewRow', value: '' + visitor.userId}));
     }
 
     if (visitor.goalConversions) {

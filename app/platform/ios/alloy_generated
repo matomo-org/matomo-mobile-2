@@ -1,0 +1,5 @@
+This directory is generated from the "/app/platform" and "/app/theme/<name>/platform" directories.
+
+Do not modify any files in this directory. Your changes will be lost on next build.
+
+Please make sure "/platform" is added to your version control's ignore list (i.e. .gitignore).

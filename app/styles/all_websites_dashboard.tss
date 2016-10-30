@@ -56,7 +56,7 @@
 }
 
 "#websitesTable[platform=ios]": {
-    separatorInsets: {left:0,right:0}
+    tableSeparatorInsets: {left:0,right:0}
 }
 
 ".quickInfoName": {
@@ -193,7 +193,7 @@
 
 "TableViewRow[platform=ios]": {
     height: Ti.UI.SIZE,
-    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY,
+    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
 },
 
 "TableViewRow[platform=android]": {

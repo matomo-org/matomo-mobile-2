@@ -15,7 +15,7 @@ if (args.hasChild) {
 }
 
 if (args.selectable && OS_IOS) {
-    $.row.selectionStyle = Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY;
+    $.row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
 }
 
 exports.changeTitle = function (title)

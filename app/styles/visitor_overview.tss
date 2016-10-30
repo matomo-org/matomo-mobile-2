@@ -5,7 +5,7 @@
 },
 
 "TableViewRow[platform=ios]": {
-    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY
+    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY
 },
 
 "TableViewRow[platform=android]": {

@@ -62,10 +62,8 @@ function onClose()
     stopHandleBackgroundEvents();
     stopRefreshTimer();
 
-    if (OS_ANDROID) {
-        // this frees a lot of memory
-        $.liveTable.setData([]);
-    }
+    // this frees a lot of memory
+    $.liveTable.setData([]);
 
     $.countdown && $.countdown.stop();
     $.destroy();

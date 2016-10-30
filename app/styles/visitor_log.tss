@@ -8,7 +8,7 @@
 }
 
 "#visitorLogTable[platform=ios]": {
-    separatorInsets: {left:0,right:0}
+    tableSeparatorInsets: {left:0,right:0}
 }
 
 "#headerBar": {

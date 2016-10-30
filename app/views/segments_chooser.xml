@@ -15,12 +15,14 @@
         </Window>
     </NavigationWindow>
     <Popover class="iOSContainer" id="index" onOpen="onOpen" platform="ios" formFactor="tablet" width="320" height="400">
-        <View id="loading"><Label id="loadingLabel"></Label></View>
+        <ContentView>
+            <View id="loading"><Label id="loadingLabel"></Label></View>
 
-        <View id="content">
-            <TableView id="segmentsTable" onClick="selectSegment">
-            </TableView>
-        </View>
+            <View id="content">
+                <TableView id="segmentsTable" onClick="selectSegment">
+                </TableView>
+            </View>
+        </ContentView>
     </Popover>
     <Window module="xp.ui" platform="android,mobileweb" id="index" onClose="onClose" onOpen="onOpen">
         <LeftNavButton platform="mobileweb">

@@ -12,7 +12,7 @@
 }
 
 "#index[platform=ios]": {
-    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
+    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.NONE
 }
 
 "#title": {

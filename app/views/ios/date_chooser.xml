@@ -17,17 +17,22 @@
             </TableView>
         </Window>
     </NavigationWindow>
-    <Popover class="iOSContainer" id="index" onOpen="onOpen" formFactor="tablet" width="320" height="400">
-        <RightNavButton>
-            <Button id="doneButton" onClick="doChooseDate"/>
-        </RightNavButton>
-        <Picker id="fromPicker" onChange="onFromDateChange">
-        </Picker>
-        <Picker id="toPicker" onChange="onToDateChange">
-        </Picker>
-        <Picker id="iOSPeriodPicker" onChange="onPeriodChange">
-        </Picker>
-        <TableView id="datePickerTable" onClick="doSelectPicker">
-        </TableView>
+    <Popover class="iOSContainer" id="index" onOpen="onOpen" formFactor="tablet" width="320" height="440">
+        <ContentView>
+            <NavigationWindow>          <Window>
+                <RightNavButton>
+                    <Button id="doneButton" onClick="doChooseDate"/>
+                </RightNavButton>
+                <Picker id="fromPicker" onChange="onFromDateChange">
+                </Picker>
+                <Picker id="toPicker" onChange="onToDateChange">
+                </Picker>
+                <Picker id="iOSPeriodPicker" onChange="onPeriodChange">
+                </Picker>
+                <TableView id="datePickerTable" onClick="doSelectPicker">
+                </TableView>
+            </Window>
+            </NavigationWindow>
+        </ContentView>
     </Popover>
 </Alloy>

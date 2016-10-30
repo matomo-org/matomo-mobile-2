@@ -21,7 +21,7 @@
 }
 
 "#cancelButton[platform=ios]": {
-    style: Ti.UI.iPhone.SystemButtonStyle.CANCEL,
+    style: Ti.UI.iOS.SystemButtonStyle.CANCEL,
     tintColor: '#ffffff'
 }
 
@@ -30,7 +30,7 @@
 }
 
 "#segmentsTable[platform=ios]": {
-    separatorInsets: {left:0,right:0}
+    tableSeparatorInsets: {left:0,right:0}
 }
 
 "#loadingLabel": {
@@ -64,7 +64,7 @@
 
 "TableViewRow[platform=ios]": {
     height: Ti.UI.SIZE,
-    selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY,
+    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
 },
 
 "TableViewRow[platform=android]": {

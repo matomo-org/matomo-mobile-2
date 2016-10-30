@@ -179,7 +179,7 @@ function doRefresh()
             }
         }
     });
-};
+}
 
 exports.doRefresh = doRefresh;
 

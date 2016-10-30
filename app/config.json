@@ -12,6 +12,7 @@
                 "nb_conversions",
                 "revenue",
                 "nb_events",
+                "nb_plays",
                 "nb_impressions"
             ],
             "filterLimit": 30,

@@ -25,7 +25,7 @@ function onUrlBlur ()
     var url = require('url');
 
     if ($.url.value && !url.startsWithHttp($.url.value)) {
-        $.url.value = url.addHttpProtocol($.url.value);
+        $.url.value = trim(url.addHttpProtocol($.url.value));
     }
 }
 
@@ -52,7 +52,7 @@ function askToUseHttps()
 
         if (1 === event.index) {
             // user pressed 'use secure https' button
-            $.url.value = require('url').replaceHttpWithHttps($.url.value);
+            $.url.value = require('url').replaceHttpWithHttps(trim($.url.value));
             login();
         } else if (0 === event.index) {
             login();
@@ -65,10 +65,15 @@ function login()
 {
     require('login').login(
         accounts,
-        $.url.value,
+        trim($.url.value),
         $.username.value,
         $.password.value
     );
+}
+function trim(str)
+{
+    str = str + '';
+    return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 }
 
 function doLogin()
@@ -77,7 +82,7 @@ function doLogin()
     
     var url = require('url');
 
-    if ($.url.value && !url.startsWithHttps($.url.value)) {
+    if ($.url.value && !url.startsWithHttps(trim($.url.value))) {
         askToUseHttps();
     } else {
         login();
