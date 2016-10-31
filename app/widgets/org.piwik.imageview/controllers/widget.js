@@ -10,57 +10,12 @@ var args = arguments[0] || {};
 var errorImage = OS_ANDROID ? '/images/image_load_error.png' : 'image_load_error.png';
 var supportsWidthDetectionOfImage = (OS_ANDROID || OS_IOS);
 
-var settings    = Alloy.createCollection('AppSettings').settings();
-var validateSsl = settings.shouldValidateSsl();
-
-function loadImageViaXhr(imageView, urlToLoad)
-{
-    if ($.imageLoader && $.imageLoader.abort) {
-        $.imageLoader.abort();
-        $.imageLoader = null;
-    }
-
-    $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: validateSsl,
-                                                 enableKeepAlive: false});
-
-    $.imageLoader.setTimeout(1000 * 60 * 2); // 2 minutes
-    $.imageLoader.open('GET', urlToLoad);
-
-    $.imageLoader.onload = function () {
-
-        if (imageView && this.responseData && (this.responseData.width || !supportsWidthDetectionOfImage)) {
-            // image view not yet cleaned up?
-            imageView.image = this.responseData;
-        } else if (imageView) {
-            imageView.image = errorImage;
-        }
-
-        $.imageLoader = null;
-        imageView = null;
-    };
-
-    $.imageLoader.onerror = function () {
-        if (imageView) {
-            imageView.image = errorImage;
-        }
-
-        imageView = null;
-        $.imageLoader = null;
-    };
- 
-    $.imageLoader.send();
-}
-
 function doPostLayout() {
     $.trigger('postlayout');
 }
 
 exports.loadImage = function (url) {
-    if (validateSsl) {
-        $.image.image = url;
-    } else {
-        loadImageViaXhr($.image, url);
-    }
+    $.image.image = url;
 };
 
 exports.setWidth = function (width) {

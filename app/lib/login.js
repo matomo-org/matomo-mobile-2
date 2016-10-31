@@ -108,25 +108,8 @@ function onError (accountModel, error) {
     alertDialog.show();
 }
 
-function isSslValidationEnabled()
-{
-    var settings = Alloy.createCollection('AppSettings').settings();
-    return settings.shouldValidateSsl();
-}
-
-function disableSslValidation()
-{
-    var settings = Alloy.createCollection('AppSettings').settings();
-    settings.setValidateSsl(false);
-    settings.save();
-}
-
 function couldBeSslCertificateIssue(errorMessage)
 {
-    if (!isSslValidationEnabled()) {
-        return false;
-    }
-
     var messageLower = errorMessage.toLowerCase();
 
     return (-1 !== messageLower.indexOf('certificate') || -1 !== messageLower.indexOf('ssl'));
@@ -136,22 +119,11 @@ function offerPossibilityToDisableSslValidation(account, errorMessage)
 {
     var dialog = Ti.UI.createAlertDialog({
         title: L('Mobile_PossibleSslError'),
-        message: String.format(L('Mobile_PossibleSslErrorExplanation'), errorMessage),
+        message: String.format(L('Mobile_PossibleSslErrorExplanation2'), errorMessage),
         cancel: 1,
-        buttonNames: [L('Mobile_IgnoreSslError'), L('General_Cancel')]});
-    dialog.addEventListener('click', function (event) {
-        if (!event || true === event.cancel || event.cancel === event.index) {
-            account.clear({silent: true});
-            return;
-        }
-
-        disableSslValidation();
-        account.set('tokenAuth', '', {silent: true});
-        showWaitingIndicator();
-
-        require('Piwik/Tracker').trackEvent({name: 'Ignore Ssl Error', category: 'Login'});
-
-        fetchAuthToken(account);
+        buttonNames: [L('General_Ok')]});
+    dialog.addEventListener('click', function () {
+        account.clear({silent: true});
     });
     dialog.show();
     dialog = null;

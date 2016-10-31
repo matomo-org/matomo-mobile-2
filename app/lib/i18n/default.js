@@ -174,7 +174,7 @@ module.exports = {
     Mobile_NetworkNotReachable:                                         'Network not reachable',
     Mobile_PiwikMarketplace:                                            'Piwik Marketplace',
     Mobile_PossibleSslError:                                            'Possible SSL certificate error',
-    Mobile_PossibleSslErrorExplanation:                                 'An error occurred that could be caused by an invalid or self signed certificate: "%s". Login might work for you when ignoring SSL validation but it is less secure. You can change SSL validation at any time in the settings.',
+    Mobile_PossibleSslErrorExplanation2:                                'An error occurred that could be caused by an invalid or self signed certificate: "%s". Please check your SSL certificate and replace it if needed. You may also consider downloading Piwik Mobile 2.2 from piwik.org/faq/mobile-app which allows you to ignore invalid SSL certificates.',
     Mobile_IgnoreSslError:                                              'Ignore SSL Error',
     Mobile_RequestTimedOutShort:                                        'Network Timeout Error',
     Mobile_RestrictedCompatibility:                                     'Restricted compatibility',
@@ -204,7 +204,6 @@ module.exports = {
     Mobile_TryIt:                                                       'Try It!',
     Mobile_UseSearchBarHint:                                            'Only the first %s websites are displayed here. Please use the search bar to access your other websites.',
     Mobile_HttpTimeout:                                                 'HTTP Timeout',
-    Mobile_ValidateSslCertificate:                                      'Validate SSL Certificate',
     Mobile_VerifyAccount:                                               'Verifying Account',
     Mobile_VerifyLoginData:                                             'Make sure your username and password combination is correct.',
     Mobile_YouAreOffline:                                               'Sorry, you are currently offline'

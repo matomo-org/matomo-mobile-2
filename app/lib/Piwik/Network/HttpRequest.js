@@ -156,10 +156,9 @@ HttpRequest.prototype.handle = function () {
         return;
     }
 
-    var settings    = Alloy.createCollection('AppSettings').settings();
-    var validateSsl = settings.shouldValidateSsl();
+    var settings = Alloy.createCollection('AppSettings').settings();
 
-    this.xhr = Ti.Network.createHTTPClient({validatesSecureCertificate: validateSsl, enableKeepAlive: false});
+    this.xhr = Ti.Network.createHTTPClient({enableKeepAlive: false});
     var that = this;
     
     this.xhr.onload  = function () { that.load(this); that = null; };

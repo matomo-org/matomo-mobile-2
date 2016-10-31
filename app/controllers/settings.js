@@ -11,7 +11,6 @@ function L(key)
 }
 
 var callbacks = {changeLanguage: changeLanguage,
-                 toggleValidateSsl: toggleValidateSsl,
                  toggleTrackingEnabled: toggleTrackingEnabled,
                  toggleGraphsEnabled: toggleGraphsEnabled,
                  changeHttpTimeout: changeHttpTimeout,
@@ -79,11 +78,6 @@ function changeReportDate()
     require('Piwik/Tracker').trackEvent({name: 'Change ReportDate', category: 'Settings'});
 }
 
-function toggleValidateSsl()
-{
-    require('settings/validateSsl').toggle();
-}
-
 function toggleTrackingEnabled()
 {
     require('settings/trackingEnabled').toggle();
@@ -145,29 +139,18 @@ function updateDisplayedReportDateValue()
     }
 }
 
-function updateDisplayedValidateSslValue()
-{
-    if (OS_MOBILEWEB) {
-        return;
-    }
-
-    var settings = Alloy.createCollection('AppSettings').settings();
-
-    setHasCheck($.validateSsl, 2, settings.shouldValidateSsl());
-}
-
 function updateDisplayedTrackingValue()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
 
-    setHasCheck($.tracking, 3, settings.isTrackingEnabled());
+    setHasCheck($.tracking, 2, settings.isTrackingEnabled());
 }
 
 function updateDisplayedGraphsValue()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
 
-    setHasCheck($.graphs, 4, settings.areGraphsEnabled());
+    setHasCheck($.graphs, 3, settings.areGraphsEnabled());
 }
 
 function setTitle(section, itemIndex, title)
@@ -262,16 +245,14 @@ function updateAllDisplayedSettingsValues()
     if (supportsListView()) {
         setTitle($.basic, 0, L('General_Language'));
         setTitle($.basic, 1, L('Mobile_DefaultReportDate'));
-        setTitle($.basic, 2, L('Mobile_ValidateSslCertificate'));
-        setTitle($.basic, 3, L('Mobile_AnonymousTracking'));
-        setTitle($.basic, 4, L('Mobile_EnableGraphsLabel'));
+        setTitle($.basic, 2, L('Mobile_AnonymousTracking'));
+        setTitle($.basic, 3, L('Mobile_EnableGraphsLabel'));
         setTitle($.advanced, 0, L('Mobile_HttpTimeout'));
 
         updateDisplayedLanguageValue();
     }
 
     updateDisplayedHttpTimeoutValue();
-    updateDisplayedValidateSslValue();
     updateDisplayedTrackingValue();
     updateDisplayedGraphsValue();
     updateDisplayedReportDateValue();

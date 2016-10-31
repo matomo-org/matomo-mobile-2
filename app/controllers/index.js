@@ -27,24 +27,10 @@ function updateReportDate()
     require('session').setReportDate(piwikDate);
 }
 
-function makeValidateSslSettingBackwardsCompatibleForPre2_1_0Users(settings)
-{
-    if (!settings.hasConfiguredValidateSsl() && accounts.hasAccount()) {
-        settings.setValidateSsl(false);
-        settings.save();
-
-    } else if (!settings.hasConfiguredValidateSsl()) {
-        settings.setValidateSsl(Alloy.CFG.settings.validateSsl);
-        settings.save();
-    }
-}
-
 (function () {
     var settings = Alloy.createCollection('AppSettings').settings();
     settings.on('change:reportDate', updateReportDate);
     updateReportDate();
-
-    makeValidateSslSettingBackwardsCompatibleForPre2_1_0Users(settings);
 })();
 
 
