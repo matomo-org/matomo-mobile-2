@@ -11,7 +11,7 @@ exports.execute = function ()
 
     var link = '';
     if (OS_IOS) {
-        link = 'http://piwik.org/faq/mobile-app/faq_16332/';
+        link = 'http://ios.piwik.org#faqs';
     } else {
         link = 'http://piwik.org/faq/mobile-app/';
     }

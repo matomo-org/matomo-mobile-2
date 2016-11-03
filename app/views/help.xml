@@ -24,10 +24,10 @@
         <TableView id="helpTable">
             <TableViewRow id="about" onClick="openAboutPiwikMobile"/>
             <TableViewRow id="faq" onClick="openFaq"/>
-            <TableViewRow id="documentation" onClick="openDocumentation"/>
-            <TableViewRow id="forums" onClick="openForum"/>
+            <TableViewRow id="documentation" platform="android" onClick="openDocumentation"/>
+            <TableViewRow id="forums" platform="android" onClick="openForum"/>
             <TableViewRow id="email" onClick="emailUs"/>
-            <TableViewRow id="marketplace" onClick="openMarketplace"/>
+            <TableViewRow id="marketplace" platform="android" onClick="openMarketplace"/>
         </TableView>
     </Window>
 </Alloy>

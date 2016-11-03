@@ -39,7 +39,13 @@ function participate()
 
 function openLicense()
 {
-    var params  = {title: 'Piwik Mobile License', url: 'http://piwik.org/free-software/mobile/'};
+    var url = 'http://piwik.org/free-software/mobile/';
+
+    if (OS_IOS) {
+        url = 'https://www.gnu.org/licenses/gpl-3.0.html';
+    }
+
+    var params  = {title: 'Piwik Mobile License', url: url};
     var license = Alloy.createController('webview', params);
     license.open();
 }

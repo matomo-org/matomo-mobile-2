@@ -123,13 +123,16 @@ function render()
         row.addEventListener('click', doRateApp);
         rows.push(row);
     }
-
-    row = createSelectableRow({
-        title: 'Learn how you can participate', 
-        description: 'Piwik is a project made by the community, you can participate in the Piwik Mobile App or Piwik.'
-    });
-    row.addEventListener('click', doParticipate);
-    rows.push(row);
+    
+    if (!OS_IOS) {
+    	
+	    row = createSelectableRow({
+	        title: 'Learn how you can participate', 
+	        description: 'Piwik is a project made by the community, you can participate in the Piwik Mobile App or Piwik.'
+	    });
+	    row.addEventListener('click', doParticipate);
+	    rows.push(row);
+    }
 
     rows.push(createSection({title: 'About', style: 'native'}));
     rows.push(createNonSelectableRow({title: 'Version', description: versionInfo()}));

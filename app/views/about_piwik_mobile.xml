@@ -7,10 +7,10 @@
 
         <TableView id="aboutPiwikTable">
             <TableViewRow id="website" platform="android" onClick="openWebsite"/>
-            <TableViewRow id="participate" onClick="participate"/>
+            <TableViewRow id="participate" platform="android" onClick="participate"/>
             <TableViewRow id="license" onClick="openLicense"/>
             <TableViewRow id="follow" onClick="followPiwik" platform="ios,android"/>
-            <TableViewRow id="sourceCode" onClick="openSourceCode" platform="ios,android"/>
+            <TableViewRow id="sourceCode" onClick="openSourceCode" platform="android"/>
             <TableViewRow id="issues" onClick="openIssues" platform="android"/>
         </TableView>
     </Window>
