@@ -30,7 +30,7 @@ exports.definition = {
             "displayErrors": true
         },
         "defaultParams": {
-            "enhanced": 1
+            "enhanced": 1,"filter_limit": -1
         }
     },      
 
