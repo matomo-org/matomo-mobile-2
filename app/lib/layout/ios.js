@@ -15,6 +15,7 @@ function iOsLayout(rootWindow)
 
     function bootstrap (win) 
     {
+        rootWindow.window = win;
         rootWindow.open({animated : false});
 
         isBootstrapped = true;
