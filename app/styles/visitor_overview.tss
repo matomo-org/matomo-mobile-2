@@ -117,15 +117,13 @@
     left: 6,
     canScale: false,
     enableZoomControls: false,
-    borderWidth: 1,
-    borderColor: '#dddddd'
+    borderWidth: 0
 },
 
 ".followingIcon[platform=android]": {
     left: '6dp',
     canScale: true,
-    enableZoomControls: false,
-    borderWidth: '1dp'
+    enableZoomControls: false
 },
 
 ".visitorInfo": {
