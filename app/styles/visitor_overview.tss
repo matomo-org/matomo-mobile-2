@@ -102,26 +102,28 @@
     left: 12,
     canScale: false,
     enableZoomControls: false,
-    borderWidth: 0,
+    borderWidth: 1,
+    borderColor: '#dddddd'
 },
 
 ".firstIcon[platform=android]": {
     left: '12dp',
     canScale: true,
     enableZoomControls: false,
+    borderWidth: '1dp'
 },
 
 ".followingIcon": {
     left: 6,
     canScale: false,
     enableZoomControls: false,
-    borderWidth: 0,
+    borderWidth: 0
 },
 
 ".followingIcon[platform=android]": {
     left: '6dp',
     canScale: true,
-    enableZoomControls: false,
+    enableZoomControls: false
 },
 
 ".visitorInfo": {
