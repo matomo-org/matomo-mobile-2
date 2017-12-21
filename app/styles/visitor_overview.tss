@@ -10,6 +10,7 @@
 
 "TableViewRow[platform=android]": {
     hasChild: false,
+    height: Ti.UI.SIZE,
     rightImage: '/images/navigation_next_item.png',
     backgroundSelectedColor: '#a9a9a9',
 },

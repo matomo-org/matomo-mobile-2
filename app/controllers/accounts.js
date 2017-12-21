@@ -79,7 +79,7 @@ function deleteAccountIfUserConfirmsButNotOniOS(event)
 
     dialog.addEventListener('click', function (clickEvent) {
         if (!clickEvent || 
-            clickEvent.cancel === clickEvent.index || 
+            clickEvent.source.cancel === clickEvent.index || 
             true === clickEvent.cancel) {
 
             return;

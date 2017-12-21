@@ -177,6 +177,7 @@ exports.renderProcessedReport = function (processedReportCollection)
         if (OS_ANDROID) showAllOptions.font = {fontSize: '16sp', fontWeight: 'bold'};
         if (OS_ANDROID) showAllOptions.top = '16dp';
         if (OS_ANDROID) showAllOptions.bottom = '16dp';
+        if (OS_ANDROID) showAllOptions.height = Ti.UI.SIZE;
 
         if (OS_IOS) {
             showAllOptions.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;

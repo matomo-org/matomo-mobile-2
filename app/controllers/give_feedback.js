@@ -41,10 +41,9 @@ function versionInfo()
 {
     var version = require('Piwik').getAppVersion();
 
-    return String.format("%s - %s %s", 
+    return String.format("%s - %s", 
                          '' + version,
-                         '' + Ti.version, 
-                         '' + Ti.buildHash);
+                         '' + Ti.version);
 }
 
 function doSendEmailFeedback()

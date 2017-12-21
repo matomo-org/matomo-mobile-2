@@ -65,6 +65,7 @@
 ".titleLabel": {
     left: '16dp',
     width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
     top: '16dp',
     bottom: '16dp',
     color: '#333333',
@@ -83,6 +84,7 @@
     top: '16dp',
     bottom: '16dp',
     color: '#0099CC',
+    height: Ti.UI.SIZE,
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     touchEnabled: false
 }

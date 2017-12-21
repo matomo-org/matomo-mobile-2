@@ -35,11 +35,13 @@
 }
 
 "TableViewRow[platform=android]": {
-    font: {fontSize: '16sp'}
+    font: {fontSize: '16sp'},
+    height: Ti.UI.SIZE
 }
 
 "Label[platform=android]": {
-    font: {fontSize: '16sp'}
+    font: {fontSize: '16sp'},
+    height: Ti.UI.SIZE,
 }
 
 ".fakeButtonThatHidesBackButton": {

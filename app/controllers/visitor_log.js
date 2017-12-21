@@ -145,6 +145,7 @@ function getNextRowParams()
         nextRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
         nextRow.top    = '12dp';
         nextRow.bottom = '12dp';
+        nextRow.height = Ti.UI.SIZE;
     }
     if (OS_IOS) {
         nextRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
@@ -164,6 +165,7 @@ function getPrevRowParams()
         prevRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
         prevRow.top    = '12dp';
         prevRow.bottom = '12dp';
+        prevRow.height = Ti.UI.SIZE;
     }
     if (OS_IOS) {
         prevRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
@@ -184,6 +186,7 @@ function getNoVisitorsRowParams()
         rowParams.font   = {fontSize: '16sp', fontWeight: 'bold'};
         rowParams.top    = '12dp';
         rowParams.bottom = '12dp';
+        rowParams.height = Ti.UI.SIZE;
     }
 
     if (OS_MOBILEWEB) {

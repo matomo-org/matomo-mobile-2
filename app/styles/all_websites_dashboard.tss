@@ -12,39 +12,12 @@
 },
 
 "#searchBar[platform=android]": {
-    backgroundColor: '#efefef'
-},
-
-".searchBarInnerContainer": {
-    borderRadius: 5,
-    borderColor: '#E6E6E6',
-    borderWidth: 2,
-    height: Ti.UI.SIZE,
-    left: 5,
-    right: 5,
-    top: 5,
-    bottom: 5,
-    backgroundColor: '#fff',
-}
-
-"#searchBar[platform=mobileweb]": {
-    borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
-    autocorrect: false,
-    left: 5,
-    right: 5,
-    color: '#7e7e7e',
-    height: Ti.UI.SIZE,
-    hintText: L('Mobile_SearchWebsite')
-}
-
-".searchBarContainer": {
-    height: Ti.UI.SIZE,
-    width: Ti.UI.FILL,
-    backgroundColor: '#cccccc'
-}
-
-"#searchBar[platform=android]": {
-    height: '43dp'
+    backgroundColor: '#efefef',
+    height: '43dp',
+    width: '100%',
+    hintText: L('Mobile_SearchWebsite'),
+    iconifiedByDefault: false,
+    iconified: false
 },
 
 ".container": {

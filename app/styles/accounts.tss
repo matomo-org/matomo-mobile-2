@@ -34,6 +34,7 @@
     top: '10dp',
     bottom: '10dp',
     color: '#333',
+    height : Ti.UI.SIZE,
     backgroundSelectedColor: '#a9a9a9'
 }
 

@@ -12,7 +12,7 @@ function L(key)
 
 function openWebsite()
 {
-    var params = {title: 'Piwik', url: 'http://piwik.org/'};
+    var params = {title: 'Piwik', url: 'https://piwik.org/'};
     Alloy.createController('webview', params).open();
 }
 
@@ -33,13 +33,13 @@ function openIssues()
 
 function participate()
 {
-    var params = {title: 'Contribute', url: 'http://piwik.org/contribute/'};
+    var params = {title: 'Contribute', url: 'https://piwik.org/contribute/'};
     Alloy.createController('webview', params).open();
 }
 
 function openLicense()
 {
-    var params  = {title: 'Piwik Mobile License', url: 'http://piwik.org/free-software/mobile/'};
+    var params  = {title: 'Piwik Mobile License', url: 'https://piwik.org/free-software/mobile/'};
     var license = Alloy.createController('webview', params);
     license.open();
 }
