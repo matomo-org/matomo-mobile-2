@@ -20,8 +20,6 @@ function showWaitingIndicator()
 
     var style = '';
     if (OS_IOS){
-      style = Ti.UI.iPhone.ActivityIndicatorStyle.DARK;
-    } else {
       style = Ti.UI.ActivityIndicatorStyle.DARK;
     }
 

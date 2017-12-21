@@ -17,5 +17,5 @@
 }
 
 "#feedbackTable[platform=ios]": {
-    style: Ti.UI.iPhone.TableViewStyle.GROUPED
+    style: Ti.UI.iOS.TableViewStyle.GROUPED
 }

@@ -48,8 +48,8 @@ exports.definition = {
             "displayErrors": true
         },
         "defaultParams": {
-            "urls": [{method: "API.getReportMetadata", hideMetricsDoc: 1, showSubtableReports: 0, format: "JSON",filter_limit: -1},
-                     {method: "Dashboard.getDashboards", format: "JSON",filter_limit: -1}]
+            "urls": [{method: "API.getReportMetadata", hideMetricsDoc: 1, showSubtableReports: 0, format: "JSON",filter_limit: "-1"},
+                     {method: "Dashboard.getDashboards", format: "JSON",filter_limit: "-1"}]
         }
     },        
 

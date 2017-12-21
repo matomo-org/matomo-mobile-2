@@ -42,7 +42,7 @@
 }
 
 "#datePickerTable[platform=ios]": {
-    style: Titanium.UI.iPhone.TableViewStyle.GROUPED,
+    style: Titanium.UI.iOS.TableViewStyle.GROUPED,
 }
 
 "#doneButton": {

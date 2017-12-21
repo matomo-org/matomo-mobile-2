@@ -65,7 +65,7 @@ function selectSegment(event)
         console.log('segmentsModel not found in collection, cannot select segment');
         return;
     }
-
+    
     segmentChosen(siteModel);
 }
 
