@@ -16,7 +16,5 @@ exports.execute = function ()
         link = 'http://piwik.org/faq/mobile-app/';
     }
     
-    var webview = {title: L('General_Faq'), url: link};
-    var faq     = Alloy.createController('webview', webview);
-    faq.open();
+    require('commands/openLink').execute(link);
 };

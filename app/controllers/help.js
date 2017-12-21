@@ -41,20 +41,17 @@ function emailUs()
 
 function openForum()
 {
-    var params = {title: L('General_Forums'), url: 'http://forum.piwik.org/'};
-    Alloy.createController('webview', params).open();
+    require('commands/openLink').execute('https://forum.piwik.org/');
 }
 
 function openMarketplace()
 {
-    var params = {title: L('Mobile_PiwikMarketplace'), url: 'http://plugins.piwik.org/'};
-    Alloy.createController('webview', params).open();
+    require('commands/openLink').execute('https://plugins.piwik.org/');
 }
 
 function openDocumentation()
 {
-    var params = {title: L('General_Documentation'), url: 'http://piwik.org/docs/'};
-    Alloy.createController('webview', params).open();
+    require('commands/openLink').execute('https://piwik.org/docs/');
 }
 
 function toggleReportChooserVisibility(event)
