@@ -442,11 +442,20 @@ function createActionAction(actionDetail)
     var row = $.UI.create('TableViewRow', {classes: ['actionTableViewRow']});
     addNonSelectableSelectionStyleToRow(row);
 
-    if (actionDetail.pageTitle) {
+    if ('title' in actionDetail && actionDetail.title) {
+        row.add($.UI.create('Label', {classes: ['actionActionPageTitleLabel'], text: actionDetail.title + ''}));
+    } else if ('pageTitle' in actionDetail && actionDetail.pageTitle) {
         row.add($.UI.create('Label', {classes: ['actionActionPageTitleLabel'], text: actionDetail.pageTitle + ''}));
     }
     
-    if (actionDetail.url) {
+    var label = null;
+    if ('subtitle' in actionDetail && actionDetail.subtitle) {
+        label = $.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.subtitle + ''});
+        row.add(label);
+        label = null;
+    }
+    
+    if ('url' in actionDetail && actionDetail.url) {
         var label = $.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.url + ''});
         if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
             label.addEventListener('click', (function (actionDetailUrl) {
@@ -458,7 +467,7 @@ function createActionAction(actionDetail)
         row.add(label);
         label = null;
     }
-    if (actionDetail.serverTimePretty) {
+    if ('serverTimePretty' in actionDetail && actionDetail.serverTimePretty) {
         row.add($.UI.create('Label', {classes: ['actionActionServerTimeLabel'], text: actionDetail.serverTimePretty + ''}));
     }
 
@@ -486,8 +495,11 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
     if (accessUrl && actionDetail.icon) {
         view.add($.UI.create('ImageView', {classes: ['actionDefaultIconImageView'], image: (accessUrl + actionDetail.icon)}));
     }
-
-    if (actionDetail.type) {
+    
+    var title = '';
+    if ('title' in actionDetail && actionDetail.title) {
+    	title = actionDetail.title;
+    } else if (actionDetail.type) {
 
         var title = '' + actionDetail.type;
 
@@ -507,16 +519,35 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
             case 'search':
                 title = L('Actions_SubmenuSitesearch');
                 break;
-        }
 
+			case 'form':
+            case 95:
+                title = 'Form';
+                break;
+                
+			case 'media':
+            case 94:
+                title = 'Media';
+                break;
+        }
+    }
+    
+    if (title) {
         view.add($.UI.create('Label', {classes: ['actionDefaultTypeLabel'], text: title}));
     }
 
     row.add(view);
     view = null;
+    
+    var label;
+    if ('subtitle' in actionDetail && actionDetail.subtitle) {
+        label = $.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.subtitle + '')});
+        row.add(label);
+        label = null;
+    }
 
     if (actionDetail.url) {
-        var label = $.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.url + '')});
+        label = $.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.url + '')});
         row.add(label);
 
         if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
@@ -533,6 +564,10 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
         row.add($.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.siteSearchKeyword + '')}));
     }
 
+    if ('serverTimePretty' in actionDetail && actionDetail.serverTimePretty) {
+        row.add($.UI.create('Label', {classes: ['actionActionServerTimeLabel'], text: actionDetail.serverTimePretty + ''}));
+    }
+    
     rows.push(row);
     row          = null;
     actionDetail = null;

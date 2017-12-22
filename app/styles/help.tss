@@ -53,8 +53,7 @@
 }
 
 "#email[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
+    hasChild: false
 }
 
 
@@ -64,8 +63,7 @@
 }
 
 "#marketplace[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
+    hasChild: false
 }
 
 "#forums": {
@@ -74,8 +72,7 @@
 }
 
 "#forums[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
+    hasChild: false
 }
 
 "#documentation": {
@@ -84,8 +81,7 @@
 }
 
 "#documentation[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
+    hasChild: false
 }
 
 "#faq": {
@@ -94,6 +90,5 @@
 }
 
 "#faq[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
+    hasChild: false
 }

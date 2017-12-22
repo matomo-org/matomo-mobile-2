@@ -39,8 +39,7 @@
 }
 
 "#website[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
+    hasChild: false
 }
 
 "#follow": {
@@ -54,8 +53,7 @@
 }
 
 "#participate[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
+    hasChild: false
 }
 
 "#sourceCode": {
@@ -74,6 +72,5 @@
 }
 
 "#license[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
+    hasChild: false
 }
