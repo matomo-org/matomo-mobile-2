@@ -15,9 +15,7 @@
     backgroundColor: '#efefef',
     height: '43dp',
     width: '100%',
-    hintText: L('Mobile_SearchWebsite'),
-    iconifiedByDefault: false,
-    iconified: false
+    hintText: L('Mobile_SearchWebsite')
 },
 
 ".container": {
