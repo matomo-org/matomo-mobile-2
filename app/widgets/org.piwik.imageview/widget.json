@@ -4,7 +4,7 @@
 	"description" : "",
 	"author": "",
 	"version": "1.0",
-	"copyright":"Piwik Web Analytics (c) 2013",
+	"copyright":"Matomo Web Analytics (c) 2013",
 	"license":"piwik.org/free-software/mobile/ Gpl v3 or later",
 	"min-alloy-version": "1.0",
 	"min-titanium-version":"3.1",

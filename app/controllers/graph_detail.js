@@ -144,7 +144,7 @@ function getGraphUrlWithSize(width, height) {
  */
 function getImageView(url, width, height) {
 
-    console.debug('piwik graphUrl is ' + url, 'graphdetail::getImageView');
+    console.debug('matomo graphUrl is ' + url, 'graphdetail::getImageView');
 
     var options = {width: width,
                    height: height,

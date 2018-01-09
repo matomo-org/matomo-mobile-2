@@ -9,5 +9,5 @@ exports.execute = function ()
 {
     var L = require('L');
     
-    require('commands/openLink').execute('https://piwik.org/faq/mobile-app/');
+    require('commands/openLink').execute('https://matomo.org/faq/mobile-app/');
 };

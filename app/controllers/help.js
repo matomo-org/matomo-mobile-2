@@ -41,17 +41,17 @@ function emailUs()
 
 function openForum()
 {
-    require('commands/openLink').execute('https://forum.piwik.org/');
+    require('commands/openLink').execute('https://forum.matomo.org/');
 }
 
 function openMarketplace()
 {
-    require('commands/openLink').execute('https://plugins.piwik.org/');
+    require('commands/openLink').execute('https://plugins.matomo.org/');
 }
 
 function openDocumentation()
 {
-    require('commands/openLink').execute('https://piwik.org/docs/');
+    require('commands/openLink').execute('https://matomo.org/docs/');
 }
 
 function toggleReportChooserVisibility(event)

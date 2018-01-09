@@ -392,7 +392,7 @@ HttpRequest.prototype.error = function (e) {
     
             case 'authentication needed':
 
-                message = 'Authentication is needed. Please read more here: http://piwik.org/faq/mobile-app/#faq_16336';
+                message = 'Authentication is needed. Please read more here: https://matomo.org/faq/mobile-app/#faq_16336';
                 break;
     
             case 'host is unresolved':

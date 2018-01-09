@@ -19,7 +19,7 @@ function tryIt ()
 
     require('login').login(
         accounts,
-        'http://demo.piwik.org',
+        'https://demo.matomo.org',
         '',
         ''
     );
