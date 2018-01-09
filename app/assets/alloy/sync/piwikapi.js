@@ -99,7 +99,7 @@ function cacheResponse(cacheKey, cache, response)
 function Sync(method, collection, opts)
 {
     if ('read' !== method) {
-        console.debug('PiwikApiAdapter supports only reading');
+        console.debug('MatomoApiAdapter supports only reading');
         return;
     }
 

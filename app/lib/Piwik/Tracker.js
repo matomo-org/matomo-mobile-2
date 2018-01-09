@@ -454,7 +454,7 @@ function Tracker () {
         this.setCustomVariable(1, 'OS', Ti.Platform.osname + ' ' + Ti.Platform.version, 'visit');
 
         // Piwik Version
-        this.setCustomVariable(2, 'Piwik Mobile Version', require('Piwik').getAppVersion(), 'visit');
+        this.setCustomVariable(2, 'Matomo Mobile Version', require('Piwik').getAppVersion(), 'visit');
 
         // Locale of the device + configured locale
         this.setCustomVariable(3, 'Locale', locale.getPlatformLocale() + '::' + locale.getLocale(), 'visit');
