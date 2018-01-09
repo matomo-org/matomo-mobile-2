@@ -34,7 +34,7 @@
 
 "#logoImage": {
     image: "logo-png-page.png",
-    width: 140,
+    width: 207,
     height: 51,
     zIndex: 1
 },
@@ -45,7 +45,7 @@
 
 "#logoImage[platform=android]": {
     image: "/images/logo-png-page.png",
-    width: '140dp',
+    width: '173dp',
     height: '48dp',
 },
 

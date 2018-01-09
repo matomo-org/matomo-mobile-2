@@ -37,6 +37,6 @@ GPL v3 or later
 
 ## Support
 
-* [mobile@piwik.org](mailto:mobile@piwik.org)
+* [mobile@matomo.org](mailto:mobile@matomo.org)
 * [https://github.com/piwik/piwik-mobile-2](https://github.com/piwik/piwik-mobile-2)
 * [https://www.twitter.com/piwik](https://www.twitter.com/piwik)

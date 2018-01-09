@@ -5,14 +5,14 @@
         versionCode="1" 
         version   = "2.0.0">
 
-    <name>Piwik Mobile 2</name>
+    <name>Matomo Mobile 2</name>
 
     <description>
-        Piwik is a downloadable, open source (GPL licensed) real time web analytics software program. It provides you with detailed reports on your website visitors: the search engines and keywords they used, the language they speak, your popular pages... and so much more. Piwik aims to be an open source alternative to Google Analytics. You can access these reports by using this mobile client.
+        Matomo is a downloadable, open source (GPL licensed) real time web analytics software program. It provides you with detailed reports on your website visitors: the search engines and keywords they used, the language they speak, your popular pages... and so much more. Piwik aims to be an open source alternative to Google Analytics. You can access these reports by using this mobile client.
     </description>
 
-    <author href="http://piwik.org" email="mobile@piwik.org">
-        The Piwik Team
+    <author href="http://piwik.org" email="mobile@matomo.org">
+        The Matomo Team
     </author>
 
     <access origin="*" />

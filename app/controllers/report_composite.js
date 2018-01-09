@@ -282,15 +282,15 @@ function addPiwikIcon()
         $.content.add(Ti.UI.createImageView({
             top: '10dp',
             bottom: '25dp',
-            width: '56dp',
-            height: '20dp',
+            width: '75dp',
+            height: '19dp',
             image: '/images/piwik_logo_dark_footer.png'
         }));
     } else {
         $.content.add(Ti.UI.createImageView({
             top: 12,
             bottom: 25,
-            width: 55,
+            width: 80,
             height: 19,
             image: 'piwik_logo_dark_footer.png'
         }));

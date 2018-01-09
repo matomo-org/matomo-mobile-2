@@ -85,7 +85,7 @@ function onError (accountModel, error) {
             break;
         case 'IncompatiblePiwikVersion':
             message = L('Mobile_IncompatiblePiwikVersion');
-            title   = 'Piwik Version Incomptaible';
+            title   = 'Matomo Version Incomptaible';
             break;
         default:
             title   = 'Unknown error';

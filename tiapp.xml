@@ -10,11 +10,11 @@
     </deployment-targets>
     <sdk-version>7.0.0.GA</sdk-version>
     <id>org.piwik.mobile2</id>
-    <name>Piwik Mobile 2</name>
+    <name>Matomo Mobile 2</name>
     <version>2.3.1</version>
     <publisher>thomassteur</publisher>
-    <url>https://piwik.org/mobile</url>
-    <description>Need your analytics on the go? Use our free Piwik Mobile app to check your stats from anywhere and show them to colleagues in meetings. Piwik Mobile offers all the same reports as the desktop interface, and displays your visitor data in real time!</description>
+    <url>https://matomo.org/mobile</url>
+    <description>Need your analytics on the go? Use our free Matomo Mobile (formerly Piwik Mobile) app to check your stats from anywhere and show them to colleagues in meetings. Matomo Mobile offers all the same reports as the Matomo (Piwik) desktop interface, and displays your visitor data in real time!</description>
     <copyright>2016 by thomassteur</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>

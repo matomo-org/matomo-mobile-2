@@ -12,7 +12,7 @@ function L(key)
 
 function openWebsite()
 {
-    require('commands/openLink').execute('https://piwik.org/');
+    require('commands/openLink').execute('https://matomo.org/');
 }
 
 function followPiwik()
@@ -32,12 +32,13 @@ function openIssues()
 
 function participate()
 {
-    require('commands/openLink').execute('https://piwik.org/contribute/');
+    require('commands/openLink').execute('https://matomo.org/contribute/');
 }
 
 function openLicense()
 {
-    var url = 'https://piwik.org/free-software/mobile/';
+
+    var url = 'https://matomo.org/free-software/mobile/';
 
     if (OS_IOS) {
         url = 'https://www.gnu.org/licenses/gpl-3.0.html';
@@ -48,7 +49,7 @@ function openLicense()
 
 function onOpen()
 {
-    require('Piwik/Tracker').trackWindow('About Piwik Mobile', 'about-piwik-mobile');
+    require('Piwik/Tracker').trackWindow('About Matomo Mobile', 'about-piwik-mobile');
 }
 
 function onClose()

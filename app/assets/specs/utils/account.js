@@ -8,13 +8,13 @@
 module.exports = {
     getValidAccount: function () {
         return require('alloy').createModel('appAccounts', {
-            accessUrl: 'http://demo.piwik.org/index.php',
+            accessUrl: 'http://demo.matomo.org/index.php',
             tokenAuth: 'anonymous'
         });
     },
     getInvalidAccount: function () {
         return require('alloy').createModel('appAccounts', {
-            accessUrl: 'http://demo.piwik.org/index.php',
+            accessUrl: 'http://demo.matomo.org/index.php',
             tokenAuth: 'c4ca4238a0b923820dcc509a6f75849b'
         });
     }

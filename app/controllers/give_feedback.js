@@ -63,7 +63,7 @@ function doRateApp()
 
 function doParticipate()
 {
-    var params = {title: 'Contribute', url: 'http://piwik.org/contribute/'};
+    var params = {title: 'Contribute', url: 'https://matomo.org/contribute/'};
     Alloy.createController('webview', params).open();
 }
 
@@ -118,17 +118,16 @@ function render()
     if (appRating.canRate()) {
         row = createSelectableRow({
             title: 'Rate us on the App Store', 
-            description: 'Piwik Mobile App is a Free Software, we would really appreciate if you took 1 minute to rate us.'
+            description: 'Matomo Mobile App is a Free Software, we would really appreciate if you took 1 minute to rate us.'
         });
         row.addEventListener('click', doRateApp);
         rows.push(row);
     }
-    
+
     if (!OS_IOS) {
-    	
 	    row = createSelectableRow({
 	        title: 'Learn how you can participate', 
-	        description: 'Piwik is a project made by the community, you can participate in the Piwik Mobile App or Piwik.'
+	        description: 'Matomo is a project made by the community, you can participate in the Matomo Mobile App or Matomo.'
 	    });
 	    row.addEventListener('click', doParticipate);
 	    rows.push(row);

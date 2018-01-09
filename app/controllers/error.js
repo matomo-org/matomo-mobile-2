@@ -7,7 +7,7 @@
 
 var args = arguments[0] || {};
 
-var message   = "Please, contact mobile@piwik.org or visit http://piwik.org/mobile\n";
+var message   = "Please, contact mobile@matomo.org or visit https://matomo.org/mobile\n";
 var exception = args.error;
 
 message      += "Error: ";
@@ -21,7 +21,7 @@ if ('undefined' !== (typeof exception) && exception) {
 message += "\nPlease, provide the following information:\n";
 message += "System: " + Ti.Platform.name + ' ' + Ti.Platform.version + "\n";
 
-message += String.format("Piwik Mobile Version: %s - %s %s\n",
+message += String.format("Matomo Mobile Version: %s - %s %s\n",
                          '' + require('Piwik').getAppVersion(), '' + Ti.version, '' + Ti.buildHash);
 message += "Available memory " + Ti.Platform.availableMemory + "\n";
 

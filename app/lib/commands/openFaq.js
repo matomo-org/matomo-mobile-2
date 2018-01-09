@@ -13,7 +13,7 @@ exports.execute = function ()
     if (OS_IOS) {
         link = 'http://ios.piwik.org#faqs';
     } else {
-        link = 'http://piwik.org/faq/mobile-app/';
+        link = 'https://matomo.org/faq/mobile-app/';
     }
     
     require('commands/openLink').execute(link);

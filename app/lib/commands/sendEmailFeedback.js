@@ -26,10 +26,9 @@ function platformMessage()
 
 function versionMessage()
 {
-    return String.format("Version: %s - %s %s",
+    return String.format("Version: %s - %s",
                          '' + require('Piwik').getAppVersion(),
-                         '' + Ti.version,
-                         '' + Ti.buildHash);
+                         '' + Ti.version);
 }
 
 function resolutionMessage()
@@ -76,8 +75,8 @@ function emailMessageBody()
 exports.execute = function () 
 {
     var emailDialog = Ti.UI.createEmailDialog();
-    emailDialog.setSubject("Feedback Piwik Mobile");
-    emailDialog.setToRecipients(['mobile@piwik.org']);
+    emailDialog.setSubject("Feedback Matomo Mobile");
+    emailDialog.setToRecipients(['mobile@matomo.org']);
 
     if (OS_IOS) {
         emailDialog.setBarColor('#CD1628');
