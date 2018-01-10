@@ -1,5 +1,5 @@
 {
-  "author": "(c) piwik.org",
+  "author": "(c) matomo.org",
   "name": "MobileWebServer",
   "description": "Starts a webserver which serves the static files of the MobileWeb application",
   "dependencies": {

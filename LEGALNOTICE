@@ -1,10 +1,10 @@
 COPYRIGHT
 
-    Piwik - Open Source Web Analytics
+    Matomo - Open Source Web Analytics
 
     The software package is:
 
-        Copyright (C) 2013 The Piwik Team http://piwik.org/the-piwik-team/
+        Copyright (C) 2018 The Matomo Team https://matomo.org/the-piwik-team/
 
     Individual contributions, components, and libraries are copyright
     their respective authors.
@@ -12,17 +12,17 @@ COPYRIGHT
 
 SOFTWARE LICENSE
 
-    The free software license of Piwik Mobile is GNU General Public License v3
+    The free software license of Matomo Mobile is GNU General Public License v3
     or later.  A copy of GNU GPL v3 should have been included in this
     software package in Resources/license.html.
 
 
 TRADEMARK
 
-    Piwik (TM) is an internationally registered trademark.
+    Matomo (TM) is an internationally registered trademark.
 
     The software license does not grant any rights under trademark
-    law for use of the trademark. Refer to http://piwik.org/trademark/
+    law for use of the trademark. Refer to https://matomo.org/trademark/
     for up-to-date trademark licensing information.
 
 *
@@ -36,11 +36,11 @@ TRADEMARK
 CREDITS
 
         The software consists of contributions made by many individuals.
-        Major contributors are listed in http://piwik.org/the-piwik-team/.
+        Major contributors are listed in https://matomo.org/the-piwik-team/.
 
         For detailed contribution history, refer to the source, tickets,
         patches, and git revision history, available at
-        https://github.com/piwik/piwik-mobile .
+        https://github.com/matomo-org/piwik-mobile-2 .
 
 
 THIRD-PARTY COMPONENTS AND LIBRARIES

@@ -1,7 +1,7 @@
 /**
- * Piwik - Open source web analytics
+ * Matomo - Open source web analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
@@ -143,7 +143,7 @@ module.exports = {
     Mobile_Advanced:                                                    'Advanced',
     Mobile_AnonymousAccess:                                             'Anonymous access',
     Mobile_AnonymousTracking:                                           'Anonymous tracking',
-    Mobile_AccessUrlLabel:                                              'URL eg http://demo.piwik.org',
+    Mobile_AccessUrlLabel:                                              'URL eg https://demo.matomo.org',
     Mobile_AskForAnonymousTrackingPermission:                           'When enabled, Matomo Mobile will send anonymous usage data to matomo.org. The intent is to use this data to help Matomo Mobile developers better understand how the app is used. Information sent is: menus and settings clicked on, OS name and version, any error displayed in Matomo Mobile. We will NOT track any of your analytics data. This anonymous data will never be made public. You can disable/enable anonymous tracking in Settings at any time.',
     Mobile_ChooseHttpTimeout:                                           'Choose HTTP timeout value',
     Mobile_ChooseMetric:                                                'Choose Metric',

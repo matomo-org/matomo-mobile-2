@@ -18,7 +18,7 @@ function updateTranslationsForAllAvailableLanguages(callback)
 function getPiwikClient()
 {
     var PiwikClient = require('piwik-client');
-    return new PiwikClient('http://demo.piwik.org', 'anonymous');
+    return new PiwikClient('https://demo.matomo.org', 'anonymous');
 }
 
 function onAllAvailableLanguagesFetched(err, languages)
@@ -109,7 +109,7 @@ function writeTranslationKeysToFile(languageCode, translations)
         return;
     }
 
-    var header = ['/**', ' * Piwik - Open source web analytics', ' *', ' * @link http://piwik.org',
+    var header = ['/**', ' * Matomo - Open source web analytics', ' *', ' * @link https://matomo.org',
                   ' * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later', ' */', ''];
 
     var content = header.join('\n') + 'module.exports = ' + JSON.stringify(translations) + ';';

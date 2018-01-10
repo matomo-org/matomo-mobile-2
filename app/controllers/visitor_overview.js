@@ -1,7 +1,7 @@
 /**
- * Piwik - Open source web analytics
+ * Matomo - Open source web analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
@@ -11,7 +11,7 @@ function L(key)
 }
 
 var args      = arguments[0] || {};
-var accessUrl = args.account ? args.account.getBasePath() : 'http://demo.piwik.org/';
+var accessUrl = args.account ? args.account.getBasePath() : 'https://demo.matomo.org/';
 var visitor   = args.visitor || null;
 
 function goalConversionDescription(visitor)

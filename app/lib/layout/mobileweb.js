@@ -1,7 +1,7 @@
 /**
- * Piwik - Open source web analytics
+ * Matomo - Open source web analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 

@@ -1,7 +1,7 @@
 /**
- * Piwik - Open source web analytics
+ * Matomo - Open source web analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
@@ -11,7 +11,7 @@ exports.execute = function ()
 
     var link = '';
     if (OS_IOS) {
-        link = 'http://ios.piwik.org#faqs';
+        link = 'http://ios.matomo.org#faqs';
     } else {
         link = 'https://matomo.org/faq/mobile-app/';
     }

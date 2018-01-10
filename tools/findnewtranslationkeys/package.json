@@ -1,5 +1,5 @@
 {
-  "author": "(c) piwik.org",
+  "author": "(c) matomo.org",
   "contributors": [
     "Thomas Steur <thomas.steur@gmail.com>"
   ],
@@ -11,11 +11,11 @@
   ],
   "description": "Finds new translation keys which are not added to Piwik languagefiles yet",
   "version": "0.0.1",
-  "homepage": "http://piwik.org",
-  "bugs": "http://dev.piwik.org",
+  "homepage": "https://matomo.org",
+  "bugs": "https://github.com/matomo-org/piwik-mobile-2",
   "repository": {
     "type": "git",
-    "url": "git://github.com/piwik/piwik-mobile-2.git"
+    "url": "git://github.com/matomo-org/piwik-mobile-2.git"
   },
   "directories" : {
     "lib" : "lib"

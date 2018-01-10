@@ -1,14 +1,14 @@
 /**
- * Piwik - Open source web analytics
+ * Matomo - Open source web analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
 /**
- * Piwik - Web Analytics
+ * Matomo - Web Analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  * @version $Id$
  */
@@ -32,7 +32,7 @@ function PiwikApiRequest () {
     /**
      * Defines the format of the output when fetching data from the piwik rest api.
      * 
-     * @see      <a href="http://dev.piwik.org/trac/wiki/API/Reference#Standardparameters">Piwik Api Reference</a>
+     * @see      <a href="http://dev.matomo.org/trac/wiki/API/Reference#Standardparameters">Piwik Api Reference</a>
      *
      * @default  "json"
      * @type     string
