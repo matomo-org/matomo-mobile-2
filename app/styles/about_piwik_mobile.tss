@@ -44,12 +44,12 @@
 
 "#follow": {
     hasDetail: true,
-    title: 'Follow @piwik'
+    title: 'Follow @matomo_org'
 }
 
 "#participate": {
     hasChild: true,
-    title: 'Participate to Piwik'
+    title: 'Participate to Matomo'
 }
 
 "#participate[platform=android]": {

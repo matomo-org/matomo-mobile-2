@@ -17,7 +17,7 @@ function openWebsite()
 
 function followPiwik()
 {
-    require('commands/openLink').execute('https://www.twitter.com/piwik');
+    require('commands/openLink').execute('https://www.twitter.com/matomo_org');
 }
 
 function openSourceCode()
@@ -32,12 +32,11 @@ function openIssues()
 
 function participate()
 {
-    require('commands/openLink').execute('https://matomo.org/contribute/');
+    require('commands/openLink').execute('https://matomo.org/get-involved/');
 }
 
 function openLicense()
 {
-
     var url = 'https://matomo.org/free-software/mobile/';
 
     if (OS_IOS) {

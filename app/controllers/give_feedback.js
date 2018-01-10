@@ -63,8 +63,7 @@ function doRateApp()
 
 function doParticipate()
 {
-    var params = {title: 'Contribute', url: 'https://matomo.org/contribute/'};
-    Alloy.createController('webview', params).open();
+    require('commands/openLink').execute('https://matomo.org/get-involved/');
 }
 
 function createRow(params)
