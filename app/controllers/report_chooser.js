@@ -68,7 +68,7 @@ function updateAvailableReportsList()
     makeSureSelectedRowIsStillSelected();
 
     if ($.reportsTable.scrollToTop) {
-        // fix "iPhone 4s, iOS 8: Left sidebar is positioned too far down after opening it" see https://github.com/piwik/piwik-mobile-2/issues/5306
+        // fix "iPhone 4s, iOS 8: Left sidebar is positioned too far down after opening it" see https://github.com/matomo-org/matomo-mobile-2/issues/5306
         $.reportsTable.scrollToTop(0);
     }
     
