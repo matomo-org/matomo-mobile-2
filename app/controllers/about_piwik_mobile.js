@@ -22,12 +22,12 @@ function followPiwik()
 
 function openSourceCode()
 {
-    require('commands/openLink').execute('https://github.com/piwik/piwik-mobile-2');
+    require('commands/openLink').execute('https://github.com/matomo-org/matomo-mobile-2');
 }
 
 function openIssues()
 {
-    require('commands/openLink').execute('https://github.com/piwik/piwik-mobile-2/issues');
+    require('commands/openLink').execute('https://github.com/matomo-org/matomo-mobile-2/issues');
 }
 
 function participate()

@@ -12,10 +12,10 @@
   "description": "Creates a file for each available language within the i18n directory.",
   "version": "0.0.1",
   "homepage": "https://matomo.org",
-  "bugs": "https://github.com/matomo-org/piwik-mobile-2",
+  "bugs": "https://github.com/matomo-org/matomo-mobile-2",
   "repository": {
     "type": "git",
-    "url": "git://github.com/matomo-org/piwik-mobile-2.git"
+    "url": "git://github.com/matomo-org/matomo-mobile-2.git"
   },
   "directories" : {
     "lib" : "lib"

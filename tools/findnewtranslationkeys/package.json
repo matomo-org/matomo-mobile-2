@@ -12,10 +12,10 @@
   "description": "Finds new translation keys which are not added to Piwik languagefiles yet",
   "version": "0.0.1",
   "homepage": "https://matomo.org",
-  "bugs": "https://github.com/matomo-org/piwik-mobile-2",
+  "bugs": "https://github.com/matomo-org/matomo-mobile-2",
   "repository": {
     "type": "git",
-    "url": "git://github.com/matomo-org/piwik-mobile-2.git"
+    "url": "git://github.com/matomo-org/matomo-mobile-2.git"
   },
   "directories" : {
     "lib" : "lib"
