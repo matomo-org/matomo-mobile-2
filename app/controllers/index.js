@@ -72,6 +72,41 @@ if (accounts.hasAccount()) {
         require('Piwik/Tracker').askForPermission();
 
         Ti.App.Properties.setInt('asked_for_tracking_permission', 1);
+    } else if (!Ti.App.Properties.hasProperty('piwik_is_now_matomo')) {
+
+        Ti.App.Properties.setInt('piwik_is_now_matomo', 1);
+        
+        if (!accounts.hasAccount()) {
+        	// user has no account set up yet, we do not show it for new users
+        	return;
+        }
+        
+        // users has already been using this app, we show a notification
+        
+        var alertDialog = Ti.UI.createAlertDialog({
+            title: 'Piwik is now Matomo',
+            message: 'Want to learn more and read the official announcement?',
+            buttonNames: ['Yes', 'No'],
+            cancel: 1
+        });
+
+        alertDialog.addEventListener('click', function (event) {
+
+	         if (!event || 
+	            event.source.cancel === event.index || 
+	            true === event.cancel) {
+	
+	            return;
+	        }
+	        
+            try {
+		        Ti.Platform.openURL('https://matomo.org/blog/2018/01/piwik-is-now-matomo/');
+		    } catch (e) {
+		    }
+        });
+
+        alertDialog.show();
+
     }
 })();
 
