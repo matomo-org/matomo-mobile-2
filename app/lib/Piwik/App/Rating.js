@@ -1,14 +1,14 @@
 /**
- * Piwik - Open source web analytics
+ * Matomo - Open source web analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
 /**
- * Piwik - Web Analytics
+ * Matomo - Web Analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  * @version $Id$
  */
@@ -110,7 +110,7 @@ Rating.prototype.askUserToRate = function () {
     }
 
     var L       = require('L');
-    var message = String.format(L('Mobile_RatingPleaseRateUs'), this.getStoreName(), 'mobile@piwik.org');
+    var message = String.format(L('Mobile_RatingPleaseRateUs'), this.getStoreName(), 'mobile@matomo.org');
     var buttons = [L('Mobile_RatingNow'), L('Mobile_RatingNotNow'), L('Mobile_RatingDontRemindMe')];
     L           = null;
     

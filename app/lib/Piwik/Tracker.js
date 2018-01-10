@@ -1,14 +1,14 @@
 /**
- * Piwik - Open source web analytics
+ * Matomo - Open source web analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
 /**
- * Piwik - Web Analytics
+ * Matomo - Web Analytics
  *
- * @link http://piwik.org
+ * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  * @version $Id$
  */
@@ -533,7 +533,7 @@ function Tracker () {
         parameter.apiv   = this.apiVersion;
         parameter.cookie = '';
 
-        parameter.urlref = 'http://' + Ti.Platform.osname + '.mobileapp.piwik.org';
+        parameter.urlref = 'http://' + Ti.Platform.osname + '.mobileapp.matomo.org';
 
         // visitor based
         parameter._id    = uuid;

@@ -1,4 +1,4 @@
-# Piwik Mobile Plugin
+# Matomo Mobile Plugin
 
 ## Description
 
@@ -6,7 +6,7 @@ This plugins provides a UI optimized for smartphones and tablets. It works for m
 
 ### Limitations
 
-There is currently only one limitation due to the Same Origin Policy. You can add only Piwik accounts that belong to the same protocol and some host under which the mobile app is running. For instance if Piwik Mobile is running under “http://piwik.example.com/mobileweb”, you can only add Piwik accounts from “http://piwik.example.com/” and not accounts from let’s say “http://demo.piwik.org”.
+There is currently only one limitation due to the Same Origin Policy. You can add only Piwik accounts that belong to the same protocol and some host under which the mobile app is running. For instance if Piwik Mobile is running under “http://piwik.example.com/mobileweb”, you can only add Piwik accounts from “http://piwik.example.com/” and not accounts from let’s say “http://demo.matomo.org”.
 
 ## Installation
 

@@ -7,7 +7,7 @@ if (readPathToI18nDirFromCommandLineArgument()) {
 function getPiwikClient()
 {
     var PiwikClient = require('piwik-client');
-    return new PiwikClient('http://demo.piwik.org', 'anonymous');
+    return new PiwikClient('https://demo.matomo.org', 'anonymous');
 }
 
 function fetchEnglishTranslation()

@@ -1,4 +1,4 @@
-# Matomo Mobile 2 - piwik.org
+# Matomo Mobile 2 - matomo.org
 
 ## Description
 
