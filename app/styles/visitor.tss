@@ -266,6 +266,25 @@
     font: {fontSize: '13sp', fontWeight: 'bold'},
 }
 
+".actionGenericTypeLabel": {
+    top: 0,
+    left: 6,
+    font: {fontSize: 13, fontWeight: 'bold'},
+    color: '#333333',
+    width: Ti.UI.SIZE,
+    height: Ti.UI.SIZE,
+}
+
+".actionGenericTypeLabel[platform=ios]": {
+    left: 10,
+}
+
+".actionGenericTypeLabel[platform=android]": {
+    left: '8dp',
+    font: {fontSize: '13sp', fontWeight: 'bold'},
+}
+
+
 ".actionDefaultUrlLabel": {
     color: '#808080',
     bottom: 5,

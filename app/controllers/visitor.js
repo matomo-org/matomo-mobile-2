@@ -347,6 +347,17 @@ function createActionDetails(visitor, accessUrl) {
             continue;
         }
 
+        if ('title' in actionDetail
+            && actionDetail.title
+            && actionDetail.type !== 'ecommerceOrder'
+            && actionDetail.type !== 'ecommerceAbandonedCart') {
+            // since Matomo 3.7.0
+            // we prefer to still render ecommerce action manually
+            createGenericAction(actionDetail, visitor, accessUrl);
+            continue;
+        }
+
+        // pre Matomo 3.7.0
         switch (actionDetail.type) {
             case 'action':
                 createActionAction(actionDetail, visitor, accessUrl);
@@ -568,6 +579,65 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
         row.add($.UI.create('Label', {classes: ['actionActionServerTimeLabel'], text: actionDetail.serverTimePretty + ''}));
     }
     
+    rows.push(row);
+    row          = null;
+    actionDetail = null;
+}
+
+/**
+ * Renders any generic action
+ * <br />
+ * $ICON $TITLE<br />
+ * $SUBTITLE<br />
+ * $TIMESTAMP<br />
+ *
+ * @param  {Object}  actionDetail
+ */
+function createGenericAction(actionDetail, visitor, accessUrl)
+{
+    var row = $.UI.create('TableViewRow', {classes: ['actionTableViewRow']});
+    addNonSelectableSelectionStyleToRow(row);
+
+    if (accessUrl && 'icon' in actionDetail && actionDetail.icon) {
+	    var view = $.UI.create('View', {classes: ['actionHeadlineView']});
+	
+	    if (accessUrl && 'icon' in actionDetail && actionDetail.icon) {
+	        view.add($.UI.create('ImageView', {classes: ['actionDefaultIconImageView'], image: (accessUrl + actionDetail.icon)}));
+	    }
+	
+	    if ('title' in actionDetail && actionDetail.title) {
+	        view.add($.UI.create('Label', {classes: ['actionGenericTypeLabel'], text: (actionDetail.title + '')}));
+	    }
+	    row.add(view);
+	    view = null;
+    } else if ('title' in actionDetail && actionDetail.title) {
+        row.add($.UI.create('Label', {classes: ['actionActionPageTitleLabel'], text: (actionDetail.title + '')}));
+    }
+
+
+    var label;
+    if ('subtitle' in actionDetail && actionDetail.subtitle) {
+    		var subtitle = actionDetail.subtitle + '';
+        label = $.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: subtitle});
+        row.add(label);
+
+		var containsWhitespace = !!subtitle.match(/\s/);
+        var isUrlLike = subtitle && !containsWhitespace && (subtitle.toLowerCase().indexOf('http://') === 0 || subtitle.toLowerCase().indexOf('https://') === 0);
+
+        if (isUrlLike) {
+            label.addEventListener('click', (function (actionDetailUrl) {
+                return function () {
+                    Ti.Platform.openURL(actionDetailUrl);
+                };
+            })(subtitle));
+        }
+        label = null;
+    }
+
+    if ('serverTimePretty' in actionDetail && actionDetail.serverTimePretty) {
+        row.add($.UI.create('Label', {classes: ['actionActionServerTimeLabel'], text: actionDetail.serverTimePretty + ''}));
+    }
+
     rows.push(row);
     row          = null;
     actionDetail = null;
