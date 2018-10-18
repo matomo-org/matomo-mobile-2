@@ -1,5 +1,5 @@
 "#index[platform=ios]": {
-    navBarHidden: true
+    navBarHidden: false
 },
 
 "#index[platform=mobileweb]": {
