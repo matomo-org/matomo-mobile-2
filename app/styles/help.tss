@@ -32,7 +32,7 @@
 "TableViewRow[platform=android]": {
     top: '16dp',
     bottom: '16dp',
-    color: '#333333',
+    color: '#212121',
     leftImage: '/images/spacer_10x10.png',
     backgroundSelectedColor: '#dcdcdc',
     height : Ti.UI.SIZE

@@ -2,7 +2,7 @@
     backgroundColor: "white"
 }
 "#index[formFactor=handheld]": {
-    backgroundColor: "#efefef"
+    backgroundColor: "#eff0f1"
 }
 
 "#index[platform=ios]": {
@@ -74,7 +74,7 @@
     text: ' ',
     ellipsize: true,
     wordWrap: false,
-    color: '#333333',
+    color: '#212121',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     left: 20,
     right: 20,

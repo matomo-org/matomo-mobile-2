@@ -18,12 +18,7 @@ function showWaitingIndicator()
         return win;
     }
 
-    var style = '';
-    if (OS_IOS){
-      style = Ti.UI.iPhone.ActivityIndicatorStyle.DARK;
-    } else {
-      style = Ti.UI.ActivityIndicatorStyle.DARK;
-    }
+    var style = Ti.UI.ActivityIndicatorStyle.DARK;
 
     var activityIndicator = Ti.UI.createActivityIndicator({
       font: {fontSize: OS_ANDROID ? '18dp' : 26, fontWeight:'bold'},

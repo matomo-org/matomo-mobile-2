@@ -79,7 +79,7 @@ exports.execute = function ()
     emailDialog.setToRecipients(['mobile@matomo.org']);
 
     if (OS_IOS) {
-        emailDialog.setBarColor('#CD1628');
+        emailDialog.setBarColor('#3450A3');
     }
 
     if (!emailDialog.isSupported()) {

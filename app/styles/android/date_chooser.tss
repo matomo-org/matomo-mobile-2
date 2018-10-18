@@ -21,7 +21,7 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     ellipsize: false,
     wordWrap: true,
-    color: '#333333',
+    color: '#212121',
 }
 
 "#periodHeadline": {

@@ -51,6 +51,6 @@
     left: '16dp',
     top: '3dp',
     bottom: '8dp',
-    color: '#0099CC',
+    color: '#43a047',
     font: {fontSize: '18sp'}
 }

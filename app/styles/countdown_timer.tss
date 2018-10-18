@@ -2,7 +2,7 @@
     height: 20,
     bottom: 0,
     opacity: 0.8,
-    backgroundColor: '#333333'
+    backgroundColor: '#212121'
 }
 
 ".container[platform=android]": {

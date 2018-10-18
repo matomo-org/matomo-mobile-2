@@ -1,6 +1,6 @@
 "Window": {
     backgroundColor: "#FFFFFF",
-    barColor: "#CD1628",
+    barColor: "#3450A3",
     navTintColor: "#ffffff",
     titleAttributes: {
 	    color: '#fff'
@@ -9,7 +9,7 @@
 
 "Popover": {
     backgroundColor: "#FFFFFF",
-    barColor: "#CD1628",
+    barColor: "#3450A3",
     navTintColor: "#ffffff",
     tintColor: "#ffffff",
     color: "#ffffff",
@@ -26,12 +26,8 @@
     statusBarStyle: Alloy.statusBarStyle
 },
 
-"NavigationGroup": {
-    barImage: "navbar.png"
-},
-
 "Label": {
-    color: "#333333"
+    color: "#212121"
 }
 
 "TableViewRow[platform=android]": {
