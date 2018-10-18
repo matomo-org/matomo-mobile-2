@@ -138,7 +138,7 @@ function scrollToTop()
 
 function getNextRowParams()
 {
-    var nextRow = {title: L('General_Next'), color: '#336699', className: 'visitorlogPaginator'};
+    var nextRow = {title: L('General_Next'), color: '#3450A3', className: 'visitorlogPaginator'};
     if (OS_MOBILEWEB) nextRow.left = 10;
     if (OS_ANDROID) {
         nextRow.leftImage = '/images/spacer_10x10.png';
@@ -157,7 +157,7 @@ function getNextRowParams()
 
 function getPrevRowParams()
 {
-    var prevRow = {title: L('General_Previous'), color: '#336699', className: 'visitorlogPaginator'};
+    var prevRow = {title: L('General_Previous'), color: '#3450A3', className: 'visitorlogPaginator'};
     if (OS_MOBILEWEB) prevRow.left = 10;
     if (OS_ANDROID) {
         prevRow.leftImage = '/images/spacer_10x10.png';
