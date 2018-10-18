@@ -8,11 +8,11 @@
     top: 0,
     barColor: "#cccccc",
     showCancel: true,
-    tintColor: '#222222'
+    tintColor: '#212121'
 },
 
 "#searchBar[platform=android]": {
-    backgroundColor: '#efefef'
+    backgroundColor: '#eff0f1'
 },
 
 ".searchBarInnerContainer": {

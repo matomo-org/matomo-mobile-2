@@ -17,14 +17,6 @@ function HandheldSidebar(detailRootWindow)
          visible: false
     });
     
-    if (Alloy.isIOS7OrLater) {
-        // otherwise content visible in status bar
-        leftSidebarWindow.statusBarStyle = Alloy.statusBarStyle;
-        leftSidebarWindow.add(Ti.UI.createView({
-            top: 0, height: 20, width: Ti.UI.FILL, backgroundColor: '#c32030'
-        }));
-    }
-    
     leftSidebarWindow.open();
 
     var leftSidebarOuterWindow;
@@ -86,10 +78,6 @@ function HandheldSidebar(detailRootWindow)
     this.setLeftSidebar = function(view)
     {
         if (view) {
-            if (Alloy.isIOS7OrLater) {
-                view.top = 20;
-            }
-            
             leftSidebarWindow.add(view);
         }
     };
@@ -112,14 +100,6 @@ function HandheldSidebar(detailRootWindow)
         statusBarStyle: Alloy.statusBarStyle
     });
         
-    if (Alloy.isIOS7OrLater) {
-        // otherwise visible in status bar
-        rightSidebarWindow.statusBarStyle = Alloy.statusBarStyle;
-        rightSidebarWindow.add(Ti.UI.createView({
-            top: 0, height: 20, width: Ti.UI.FILL, backgroundColor: '#c32030'
-        }));
-    }
-    
     rightSidebarWindow.open();
 
     var rightSidebarOuterWindow;
@@ -182,10 +162,6 @@ function HandheldSidebar(detailRootWindow)
     this.setRightSidebar = function(view)
     {
         if (view) {
-            if (Alloy.isIOS7OrLater) {
-                view.top = 20;
-            }
-            
             rightSidebarWindow.add(view);
         }
     };

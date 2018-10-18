@@ -24,7 +24,7 @@
     color: '#ffffff',
     left: 10,
     font: {fontSize: 15, fontWeight: 'bold'},
-    shadowColor: '#333333',
+    shadowColor: '#212121',
     shadowOffset: {x: 1, y: 1}
 },
 

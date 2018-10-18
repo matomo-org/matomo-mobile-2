@@ -28,7 +28,7 @@
     left: 10,
     font: {fontSize: 13, fontWeight: 'bold'},
     top: 5,
-    color: '#333333',
+    color: '#212121',
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
 }
@@ -45,7 +45,7 @@
 
 ".actionActionUrlLabel": {
     left: 10,
-    color: '#555555',
+    color: '#212121',
     font: {fontSize: 13},
     top: 3,
     width: Ti.UI.SIZE,
@@ -66,7 +66,7 @@
     bottom: 5,
     top: 3,
     left: 10,
-    color: '#333333',
+    color: '#212121',
     font: {fontSize: 13},
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
@@ -233,7 +233,7 @@
     top: 1,
     left: 10,
     font: {fontSize: 13, fontWeight: 'bold'},
-    color: '#333333',
+    color: '#212121',
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
 }
@@ -252,7 +252,7 @@
     top: 0,
     left: 10,
     font: {fontSize: 13, fontWeight: 'bold'},
-    color: '#333333',
+    color: '#212121',
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
 }
@@ -270,7 +270,7 @@
     top: 0,
     left: 6,
     font: {fontSize: 13, fontWeight: 'bold'},
-    color: '#333333',
+    color: '#212121',
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
 }

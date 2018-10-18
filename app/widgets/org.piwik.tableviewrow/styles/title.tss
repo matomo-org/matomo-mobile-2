@@ -7,7 +7,7 @@
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
     left: 10,
-    color: '#333333',
+    color: '#212121',
     ellipsize: true,
     wordWrap: false,
     font: {fontSize: 18, fontWeight: 'bold'},

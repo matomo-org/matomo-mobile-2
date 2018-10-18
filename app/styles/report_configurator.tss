@@ -35,7 +35,7 @@
     left: 10,
     wordWrap: true,
     ellipsize: false,
-    color: '#e5e5e5',
+    color: '#eff0f1',
     font: {fontSize: 13},
     right: 10,
     height: Ti.UI.SIZE,
@@ -103,11 +103,11 @@
 
 ".websiteRow": {
     left: 10,
-    color: '#e5e5e5',
+    color: '#eff0f1',
     font: {fontSize: 14, fontWeight: 'bold'},
     right: 10,
     height: Ti.UI.SIZE,
-    selectedBackgroundColor: '#333333',
+    selectedBackgroundColor: '#212121',
 }
 
 ".websiteRow[platform=android]": {

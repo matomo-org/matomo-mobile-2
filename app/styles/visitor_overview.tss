@@ -39,7 +39,7 @@
     font: {fontSize: 14, fontWeight: 'bold'},
     left: 10,
     textAlign: 'left',
-    color: '#333333',
+    color: '#212121',
     width: Ti.UI.SIZE,
     height: Ti.UI.SIZE,
 },
@@ -133,7 +133,7 @@
     width: Ti.UI.SIZE,
     left: 10,
     textAlign: 'left',
-    color: '#333333'
+    color: '#212121'
 },
 
 ".visitorInfo[platform=ios]": {
@@ -148,7 +148,7 @@
     font: {fontSize: '13sp'},
     top: '3dp',
     left: '16dp',
-    color: '#333333',
+    color: '#212121',
 },
 
 "#pageViews": {

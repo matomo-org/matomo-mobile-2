@@ -29,11 +29,11 @@
 "#closeButton[platform=ios]": {
     title: L('General_Close'),
     style: Ti.UI.iOS.SystemButtonStyle.BORDERED,
-    color: '#333333'
+    color: '#212121'
 }
 
 "#closeButton[platform=mobileweb]": {
-    color: '#333333',
+    color: '#212121',
     left: 16,
     top: 1,
     height: 38,
@@ -43,11 +43,11 @@
 "#switchButton[platform=ios]": {
     title: ' - ',
     style: Ti.UI.iOS.SystemButtonStyle.BAR,
-    color: '#333333'
+    color: '#212121'
 }
 
 "#switchButton[platform=android]": {
-    color: '#333333',
+    color: '#212121',
     right: '16dp',
     top: '1dp',
     height: '38dp',
@@ -58,7 +58,7 @@
 }
 
 "#switchButton[platform=mobileweb]": {
-    color: '#333333',
+    color: '#212121',
     right: 16,
     top: 1,
     height: 38,

@@ -1,8 +1,8 @@
 "#loginbutton": {
-    backgroundColor: "#CD1628",
+    backgroundColor: "#43a047",
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: "#CD1628",
+    borderColor: "#43a047",
     width: Ti.UI.FILL,
     height: 40,
     top: 10,

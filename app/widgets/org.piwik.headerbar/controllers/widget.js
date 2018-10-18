@@ -16,7 +16,7 @@ function addActionBarItem(actionBarItem, index)
     var view = Ti.UI.createView({
         width: '56dp',
         height: '56dp',
-        backgroundSelectedColor: '#E23E4E'
+        backgroundSelectedColor: '#2e4893'
     });
 
     var item = Ti.UI.createImageView({
@@ -50,7 +50,7 @@ function syncWidthOfTitleAndActionBar()
 function setBackAngleImage(image)
 {
     $.homeIcon.backgroundImage = image;
-    $.backButton.backgroundSelectedColor = '#E23E4E';
+    $.backButton.backgroundSelectedColor = '#2e4893';
 }
 
 function enableBackButton() 

@@ -16,7 +16,7 @@
 }
 
 "ListItem[platform=android]": {
-    color: '#333333',
+    color: '#212121',
     font: {fontSize: '16sp'}
 }
 
@@ -82,7 +82,7 @@
     width: '80dp',
     top: '16dp',
     bottom: '16dp',
-    color: '#0099CC',
+    color: '#43a047',
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     touchEnabled: false
 }

@@ -198,7 +198,8 @@ function renderMetricTile (processedReportModel, index)
     var sortColumnModel  = processedReportModel.getSortOrder();
     var sortColumnReport = processedReportCollection.getSortOrder(); 
 
-    var labelColor = (sortColumnReport == sortColumnModel) ? '#cb2026' : 'black';
+    var labelColor = (sortColumnReport == sortColumnModel) ? '#43a047' : '#212121';
+    var valueColor = (sortColumnReport == sortColumnModel) ? '#53a859' : '#7e7e7e';
 
     if (0 == (index % 2)) {
         containerRow = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, layout: 'horizontal'});
@@ -207,7 +208,7 @@ function renderMetricTile (processedReportModel, index)
     var outerContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: OS_ANDROID ? '49%' : '49.8%', backgroundSelectedColor: '#dcdcdc'});
     var metricContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, top: toUnit(22), bottom: toUnit(25), layout: 'vertical', touchEnabled: false});
     var value = Ti.UI.createLabel({text: value, textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 0, font: {fontSize: toUnit(25), fontWeight: 'bold'}, color: labelColor, left: toUnit(10), right: toUnit(10), height: Ti.UI.SIZE, touchEnabled: false});
-    var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: toUnit(13), fontWeight: 'bold'}, height: Ti.UI.SIZE, top: toUnit(5), color: '#7e7e7e', left: toUnit(10), right: toUnit(10), touchEnabled: false});
+    var label = Ti.UI.createLabel({text: (title + '').toUpperCase(), textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, font: {fontSize: toUnit(13), fontWeight: 'bold'}, height: Ti.UI.SIZE, top: toUnit(5), color: valueColor, left: toUnit(10), right: toUnit(10), touchEnabled: false});
     metricContainer.add(value);
     metricContainer.add(label);
     label = null;

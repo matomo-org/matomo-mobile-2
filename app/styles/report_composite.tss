@@ -1,5 +1,5 @@
 "#index": {
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#eff0f1",
     backButtonTitleImage: 'blank.png'
 }
 
@@ -28,7 +28,7 @@
 
 "#content": {
     layout: "vertical",
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#eff0f1",
     contentHeight: 'auto',
     showVerticalScrollIndicator: true
 }

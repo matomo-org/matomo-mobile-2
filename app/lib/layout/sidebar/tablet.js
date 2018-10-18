@@ -14,7 +14,6 @@ function TabletSidebar(detailRootWindow)
     var leftSidebarWindow = Ti.UI.createWindow({
         left: 0, 
         width: widthLeftSidebar, 
-        barImage: "navbardark.png", 
         barColor: "#2D2D2D"
     });    
     

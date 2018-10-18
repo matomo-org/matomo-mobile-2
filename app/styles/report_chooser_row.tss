@@ -1,7 +1,7 @@
 "#index": {
     backgroundColor: '#222222',
-    selectedBackgroundColor: '#333333',
-    backgroundSelectedColor: '#333333',
+    selectedBackgroundColor: '#212121',
+    backgroundSelectedColor: '#212121',
     backgroundFocusedColor: 'black',
     height: Ti.UI.SIZE,
 }
@@ -11,7 +11,7 @@
     left: 10,
     wordWrap: true,
     ellipsize: false,
-    color: '#e5e5e5',
+    color: '#eff0f1',
     font: {fontSize: 15},
     right: 10,
     height: Ti.UI.SIZE,
