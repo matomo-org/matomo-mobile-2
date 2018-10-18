@@ -318,9 +318,9 @@ function formatWebsite(model)
         // visitsEvolution is not set in case lastX/previousX/range is used
         model.set('evolution_color', '#8e8e93');
     } else if (isNegativeEvolution(visitsEvolution)) {
-        model.set('evolution_color', '#800000');
+        model.set('evolution_color', '#d4291f');
     } else {
-        model.set('evolution_color', '#008000');
+        model.set('evolution_color', '#43a047');
     } 
     
     var evolution = model.get('nb_visits');
