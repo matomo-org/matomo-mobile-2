@@ -53,7 +53,7 @@
 ".footerLogo": {
     top: 12,
     bottom: 25,
-    width: 80,
+    width: 146,
     height: 19,
     image: 'piwik_logo_light_footer.png'
 }
@@ -61,7 +61,7 @@
 ".footerLogo[platform=android]": {
     top: '12dp',
     bottom: '25dp',
-    width: '75dp',
+    width: '145dp',
     height: '19dp',
     image: '/images/piwik_logo_light_footer.png'
 }
