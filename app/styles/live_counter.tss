@@ -39,7 +39,7 @@
     top: 3,
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-    color: '#385487',
+    color: '#43a047',
     font: {fontSize: 18}
 },
 
