@@ -5,11 +5,12 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html Gpl v3 or later
  */
 
-function PiwikApiError(error, message, platformErrorMessage)
+function PiwikApiError(error, message, platformErrorMessage, httpStatusCode)
 {
     this.error   = error;
     this.message = message;
     this.platformErrorMessage = platformErrorMessage;
+    this.httpStatusCode = httpStatusCode;
 }
 
 PiwikApiError.prototype.getError = function()
@@ -29,6 +30,11 @@ PiwikApiError.prototype.getPlatformErrorMessage = function()
     }
 
     return this.getMessage();
+};
+
+PiwikApiError.prototype.getHttpStatusCode = function()
+{
+    return this.httpStatusCode;
 };
 
 module.exports = PiwikApiError;
