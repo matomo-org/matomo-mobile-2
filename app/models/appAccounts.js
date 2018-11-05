@@ -45,6 +45,7 @@ exports.definition = {
             "accessUrl":"string",
             "username":"string",
             "tokenAuth":"string",
+            "authCode":"string",
             "name":"string",
             "active":"boolean",
             "createVersionNumber":"string",
@@ -113,6 +114,14 @@ exports.definition = {
 
             getPassword: function () {
                 return this.get('password');
+            },
+
+            getAuthCode: function () {
+                return this.get('getAuthCode');
+            },
+
+            setAuthCode: function (authCode) {
+                return this.set('getAuthCode', authCode);
             },
 
             getName: function () {
@@ -271,6 +280,7 @@ exports.definition = {
             updateAuthToken: function () {
                 var username = this.get('username');
                 var password = this.get('password');
+                var authCode = this.get('authCode');
                 var account  = this;
 
                 var onSuccess = function (model) {
@@ -286,7 +296,7 @@ exports.definition = {
                 };
 
                 var tokenAuth = Alloy.createModel('piwikTokenAuth');
-                tokenAuth.fetchToken(this, username, password, onSuccess, onError);
+                tokenAuth.fetchToken(this, username, password, authCode, onSuccess, onError);
             }
 
         }); // end extend

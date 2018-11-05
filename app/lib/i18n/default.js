@@ -29,6 +29,7 @@ module.exports = {
     General_DateRangeFrom:                                              'From',
     General_DateRangeTo:                                                'To',
     General_Documentation:                                              'Documentation',
+    General_Verify:                                                     'Verify',
     General_Period:                                                     'Period',
     General_Error:                                                      'Error',
     General_Details:                                                    'Details',
@@ -208,5 +209,8 @@ module.exports = {
     Mobile_ValidateSslCertificate:                                      'Validate SSL Certificate',
     Mobile_VerifyAccount:                                               'Verifying Account',
     Mobile_VerifyLoginData:                                             'Make sure your username and password combination is correct.',
-    Mobile_YouAreOffline:                                               'Sorry, you are currently offline'
+    Mobile_YouAreOffline:                                               'Sorry, you are currently offline',
+    Mobile_EnterAuthCode:                                               'Enter authentication code',
+    Mobile_EnterCorrectAuthCode:                                        'Enter correct authentication code',
+    Mobile_EnterAuthCodeExplanation:                                    'It looks like you may be using two-factor authentication. Please enter the six-digit code to log in to your account.'
 };

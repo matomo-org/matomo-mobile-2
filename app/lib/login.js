@@ -152,14 +152,56 @@ function offerPossibilityToDisableSslValidation(account, errorMessage)
     dialog = null;
 }
 
+function askForAuthCode(account)
+{
+	var theTitle = L('Mobile_EnterAuthCode');
+	if (account.getAuthCode()) {
+		theTitle = L('Mobile_EnterCorrectAuthCode');
+	}
+	var textfield;
+    var dialog = Ti.UI.createAlertDialog({
+        title: theTitle,
+        message: L('Mobile_EnterAuthCodeExplanation'),
+        cancel: 1,
+        buttonNames: [L('General_Verify'), L('General_Cancel')]});
+    dialog.addEventListener('click', function (event) {
+        if (!event || true === event.cancel || event.cancel === event.index) {
+            account.clear({silent: true});
+            return;
+        }
+        
+        if (OS_IOS) {
+        	    account.setAuthCode(event.text);
+        } else if (textfield) {
+        	    account.setAuthCode(textfield.value);
+        }
+
+        fetchAuthToken(account);
+    });
+    if (OS_IOS) {
+       	dialog.style = Ti.UI.iOS.AlertDialogStyle.PLAIN_TEXT_INPUT;
+    } else {
+		textfield = Ti.UI.createTextField({
+		    value : ''
+		});
+		dialog.androidView = textfield;
+    }
+    dialog.show();
+    dialog = null;
+}
+
 function onNetworkError(error, account) {
     hideWaitingIndicator();
 
     if (!error) {
         return;
     }
-
-    if (couldBeSslCertificateIssue('' + error.getMessage()) ||
+    
+    if (error && error.getHttpStatusCode() && error.getHttpStatusCode() == 401) {
+    		// show auth code
+    		askForAuthCode(account);
+    		
+    } else if (couldBeSslCertificateIssue('' + error.getMessage()) ||
         couldBeSslCertificateIssue('' + error.getPlatformErrorMessage())) {
         require('Piwik/Tracker').trackEvent({name: 'Ssl Error', category: 'Login'});
 
@@ -183,9 +225,10 @@ function fetchAuthToken(account)
 {
     var username = account.getUsername();
     var password = account.getPassword();
+    var authCode = account.getAuthCode();
 
     var tokenAuth = Alloy.createModel('piwikTokenAuth');
-    tokenAuth.fetchToken(account, username, password, function (model) {
+    tokenAuth.fetchToken(account, username, password, authCode, function (model) {
         if (model && model.getTokenAuth()) {
             account.set({tokenAuth: model.getTokenAuth()});
         }

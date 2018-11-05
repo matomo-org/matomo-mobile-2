@@ -148,7 +148,7 @@ function Sync(method, collection, opts)
     }, function (error) {
 
         cleanupApiRequest(collection);
-        error && opts.error && opts.error(new PiwikApiError(error.error, error.message, error.platformErrorMessage));
+        error && opts.error && opts.error(new PiwikApiError(error.error, error.message, error.platformErrorMessage, error.httpStatusCode));
         collection = null;
         opts       = null;
         cache      = null;

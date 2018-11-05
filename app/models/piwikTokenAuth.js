@@ -39,7 +39,7 @@ exports.definition = {
                 return 'anonymous';
             },
 
-            fetchToken: function (accountModel, username, password, onSuccess, onError) {
+            fetchToken: function (accountModel, username, password, authCode, onSuccess, onError) {
 
                 if (!username && !password) {
                     this.set({value: this.getAnonymousLoginToken()});
@@ -54,10 +54,14 @@ exports.definition = {
                     }
 
                     var passwordHash = this.getPasswordHash(password);
+                    var params = {userLogin: username, md5Password: passwordHash};
+                    if (authCode) {
+                    	    params.authCode = authCode;
+                    }
                     
                     this.fetch({
                         account: accountModel,
-                        params: {userLogin: username, md5Password: passwordHash},
+                        params: params,
                         success: onSuccess, 
                         error: onError
                     });
