@@ -131,11 +131,25 @@ function askForAuthCode(account)
 		theTitle = L('Mobile_EnterCorrectAuthCode');
 	}
 	var textfield;
-    var dialog = Ti.UI.createAlertDialog({
+	var dialogParams = {
         title: theTitle,
         message: L('Mobile_EnterAuthCodeExplanation'),
         cancel: 1,
-        buttonNames: [L('General_Verify'), L('General_Cancel')]});
+        buttonNames: [L('General_Verify'), L('General_Cancel')]
+    };
+    if (OS_IOS) {
+       	dialogParams.style = Ti.UI.iOS.AlertDialogStyle.PLAIN_TEXT_INPUT;
+    } else {
+		textfield = Ti.UI.createTextField({
+			left: '16dp',
+			right: '16dp',
+		    value : '',
+		    keyboardType: Titanium.UI.KEYBOARD_TYPE_NUMBER_PAD,
+		    autoCorrect: false
+		});
+		dialogParams.androidView = textfield;
+    }
+    var dialog = Ti.UI.createAlertDialog(dialogParams);
     dialog.addEventListener('click', function (event) {
         if (!event || true === event.cancel || event.cancel === event.index) {
             account.clear({silent: true});
@@ -150,14 +164,7 @@ function askForAuthCode(account)
 
         fetchAuthToken(account);
     });
-    if (OS_IOS) {
-       	dialog.style = Ti.UI.iOS.AlertDialogStyle.PLAIN_TEXT_INPUT;
-    } else {
-		textfield = Ti.UI.createTextField({
-		    value : ''
-		});
-		dialog.androidView = textfield;
-    }
+    
     dialog.show();
     dialog = null;
 }
