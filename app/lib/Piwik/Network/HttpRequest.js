@@ -357,6 +357,7 @@ HttpRequest.prototype.error = function (e) {
     var errorType = 'RequestError';
     var baseUrl   = '' + this.baseUrl;
     var platformErrorMessage = L('General_Unknown');
+    var httpStatusCode = this.xhr.status;
     
     if ((!e || !e.error) && this.xhr && 200 != this.xhr.status) {
         
@@ -439,7 +440,7 @@ HttpRequest.prototype.error = function (e) {
 
     try {
         if (this.errorCallback) {
-            this.errorCallback.apply(this, [{error: title , message: message, platformErrorMessage: platformErrorMessage}]);
+            this.errorCallback.apply(this, [{error: title , message: message, platformErrorMessage: platformErrorMessage, httpStatusCode: httpStatusCode}]);
         }
 
     } catch (e) {
