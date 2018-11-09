@@ -1,8 +1,8 @@
-#appname: Matomo Mobile 2
-#publisher: matomo.org
-#url: https://matomo.org
-#image: appicon.png
-#appid: org.piwik.mobile2
-#desc: Matomo is a downloadable, open source (GPL licensed) real time web analytics software program. It provides you with detailed reports on your website visitors: the search engines and keywords they used, the language they speak, your popular pages... and so much more. Matomo aims to be an open source alternative to Google Analytics. You can access these reports by using this mobile client.
-#type: mobile
-#guid: 024a65cf-84ce-4ace-bd18-cacf73bbbd91
+#appname:Matomo Mobile 2
+#publisher:thomassteur
+#url:https://matomo.org/mobile
+#image:appicon.png
+#appid:org.piwik.mobile2
+#desc:Need your analytics on the go? Use our free Matomo Mobile (formerly Piwik Mobile) app to check your stats from anywhere and show them to colleagues in meetings. Matomo Mobile offers all the same reports as the Matomo (Piwik) desktop interface, and displays your visitor data in real time!
+#type:mobile
+#guid:024a65cf-84ce-4ace-bd18-cacf73bbbd91
