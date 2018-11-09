@@ -357,7 +357,11 @@ HttpRequest.prototype.error = function (e) {
     var errorType = 'RequestError';
     var baseUrl   = '' + this.baseUrl;
     var platformErrorMessage = L('General_Unknown');
-    var httpStatusCode = this.xhr.status;
+    
+    var httpStatusCode = 0;
+    if (this.xhr && this.xhr.status) {
+        httpStatusCode = this.xhr.status;
+    }
     
     if ((!e || !e.error) && this.xhr && 200 != this.xhr.status) {
         
