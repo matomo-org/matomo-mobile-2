@@ -182,24 +182,7 @@ exports.addSwitchGraph = function(showCloseButton)
         $.switchButton.title = getNextGraphType();
         
        return;
-    }
-
-    if (OS_MOBILEWEB) {
-
-        if (!showCloseButton && !canSwitch()) {
-            $.index.hide();
-        } else if (!canSwitch()) {
-            $.switchButton.hide();
-        } else if (!showCloseButton) {
-            $.closeButton.hide();
-        }
-
-        if (canSwitch()) {
-            $.switchButton.title = getNextGraphType();
-        }
-
-        return;
-    }
+    } 
 
     var items = $.index.items;
     

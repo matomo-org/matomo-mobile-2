@@ -7,6 +7,7 @@
 
 "#index[platform=ios]": {
     navBarHidden: true,
+    extendSafeArea: false
 }
 
 "#index[platform=mobileweb]": {
