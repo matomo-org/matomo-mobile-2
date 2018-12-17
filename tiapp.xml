@@ -5,7 +5,7 @@
         <target device="ipad">true</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>7.5.0.v20181108144133</sdk-version>
+    <sdk-version>7.5.1.v20181212151150</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Matomo Mobile 2</name>
     <version>2.4.4</version>
