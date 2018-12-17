@@ -86,10 +86,4 @@ task("post:compile", function(event, logger) {
         logger.warn("Removing Unimportant Log Calls");
         removeUnimportantLogCallsFromJsFiles(event.dir);
     }
-
-    if (isMobileWebPlatform(event.alloyConfig)) {
-        copyPhonegapConfiguration(event.dir);
-        copyFirefoxOSConfiguration(event.dir);
-    }
-
 });
