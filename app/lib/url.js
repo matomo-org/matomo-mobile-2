@@ -95,8 +95,8 @@ exports.buildEncodedUrlQuery = function (parameter)
 
         return '';
     }
-
-    var requestUrl = '?';
+    
+    var requestUrl = '';
 
     for (var paramName in parameter) {
         // hack for PiwikBulkApiRequests

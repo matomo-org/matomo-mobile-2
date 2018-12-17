@@ -129,7 +129,7 @@ HttpRequest.prototype.onError = function (callback) {
 HttpRequest.prototype.getRequestUrl = function () {
 
     var buildEncodedUrlQuery = require('url').buildEncodedUrlQuery;
-    var requestUrl = this.baseUrl + buildEncodedUrlQuery(this.parameter || {});
+    var requestUrl = buildEncodedUrlQuery(this.parameter || {});
     
     console.debug('RequestUrl is ' + requestUrl, 'HttpRequest::handle');
 
@@ -177,13 +177,15 @@ HttpRequest.prototype.handle = function () {
     var timeoutValue = parseInt(settings.httpTimeout(), 10);
     this.xhr.setTimeout(timeoutValue);
 
-    this.xhr.open('GET', this.getRequestUrl());
-
+    this.xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
+    this.xhr.open('POST', this.baseUrl);
+    
     if (this.userAgent) {
         this.xhr.setRequestHeader('User-Agent', this.userAgent);
     }
 
-    this.xhr.send({});
+    this.xhr.send(this.getRequestUrl());
     
     settings = null;
 };
@@ -361,7 +363,7 @@ HttpRequest.prototype.error = function (e) {
     if (this.xhr && this.xhr.status) {
         httpStatusCode = this.xhr.status;
     }
-    
+
     if ((!e || !e.error) && this.xhr && 200 != this.xhr.status) {
         
         exception = this.xhr.statusText ? this.xhr.statusText : this.xhr.status;
