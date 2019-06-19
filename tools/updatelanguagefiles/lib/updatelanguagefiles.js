@@ -51,6 +51,7 @@ function updateTranslationForLanguageCode(languageCode)
     getPiwikClient().api({
       method:   'LanguagesManager.getTranslationsForLanguage',
       languageCode: languageCode,
+      filter_limit: '-1',
       period:   'day',
       date:     'today'
     }, function (err, translations) {
