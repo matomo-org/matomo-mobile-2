@@ -57,7 +57,7 @@ function updateAvailableReportsList()
         rows.push(Alloy.createController('report_chooser_row', {title: 'Desktop version', cid: 'desktop'}).getView());
     }
 
-    rows.push(Alloy.createController('report_chooser_section', {title: L('CoreAdminHome_MenuManage')}).getView());
+    rows.push(Alloy.createController('report_chooser_section', {title: L('SitesManager_MenuManage')}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_Settings'), cid: 'settings'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_Help'), cid: 'help'}).getView());
