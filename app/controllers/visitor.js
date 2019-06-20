@@ -262,7 +262,7 @@ function createCustomVariables(visitor, accessUrl) {
  */
 function createSystem(visitor, accessUrl) {
 
-    rows.push(createSection({title: L('UserSettings_VisitorSettings')}));
+    rows.push(createSection({title: L('General_VisitorSettings')}));
 
     if (visitor.operatingSystem) {
         rows.push(createRow({title: 'OS',
@@ -272,7 +272,7 @@ function createSystem(visitor, accessUrl) {
     }
 
     if (visitor.browserName) {
-        rows.push(createRow({title: L('UserSettings_ColumnBrowser'),
+        rows.push(createRow({title: L('DevicesDetection_ColumnBrowser'),
                              className: 'visitorTableViewRow',
                              value: visitor.browserName}));
         // leftImage: {url: accessUrl + visitor.browserIcon}
@@ -291,7 +291,7 @@ function createSystem(visitor, accessUrl) {
     }
 
     if (resolution) {
-        rows.push(createRow({title: L('UserSettings_ColumnResolution'),
+        rows.push(createRow({title: L('Resolution_ColumnResolution'),
                              className: 'visitorTableViewRow',
                              value: resolution}));
     }

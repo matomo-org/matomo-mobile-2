@@ -58,22 +58,22 @@
 }
 
 "#period_day": {
-    title: L('CoreHome_PeriodDay'),
+    title: L('Intl_PeriodDay'),
     period: 'day'
 }
 
 "#period_week": {
-    title: L('CoreHome_PeriodWeek'),
+    title: L('Intl_PeriodWeek'),
     period: 'week'
 }
 
 "#period_month": {
-    title: L('CoreHome_PeriodMonth'),
+    title: L('Intl_PeriodMonth'),
     period: 'month'
 }
 
 "#period_year": {
-    title: L('CoreHome_PeriodYear'),
+    title: L('Intl_PeriodYear'),
     period: 'year'
 }
 

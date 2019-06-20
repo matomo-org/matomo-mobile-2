@@ -163,7 +163,7 @@ function askForAuthCode(account)
         title: theTitle,
         message: L('Mobile_EnterAuthCodeExplanation'),
         cancel: 1,
-        buttonNames: [L('General_Verify'), L('General_Cancel')]
+        buttonNames: [L('TwoFactorAuth_Verify'), L('General_Cancel')]
     };
     if (OS_IOS) {
        	dialogParams.style = Ti.UI.iOS.AlertDialogStyle.PLAIN_TEXT_INPUT;

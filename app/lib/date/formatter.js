@@ -58,7 +58,7 @@ exports.getPrettyDate = function (reportDate) {
             return moment(fromDate).format('LL');
 
         case 'week':
-            var period = require('L')('CoreHome_PeriodWeek');
+            var period = require('L')('Intl_PeriodWeek');
             var formattedFromDate = moment(fromDate).format('ll');
             var formattedToDate   = moment(toDate).format('ll');
 

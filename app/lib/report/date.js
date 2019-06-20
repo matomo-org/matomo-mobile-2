@@ -163,8 +163,8 @@ ReportDate.prototype.getAvailableDateRanges = function () {
 
     var L = require('L');
     
-    var ranges = [{label: L('General_Today'), period: 'day', date: 'today'},
-                  {label: L('General_Yesterday'), period: 'day', date: 'yesterday'},
+    var ranges = [{label: L('Intl_Today'), period: 'day', date: 'today'},
+                  {label: L('Intl_Yesterday'), period: 'day', date: 'yesterday'},
                   {label: String.format(L('General_PreviousDaysShort'), '7'), period: 'range', date: 'previous7'},
                   {label: String.format(L('General_PreviousDaysShort'), '30'), period: 'range', date: 'previous30'},
                   {label: String.format(L('General_LastDaysShort'), '7'), period: 'range', date: 'last7'},
@@ -188,10 +188,10 @@ ReportDate.prototype.getAvailablePeriods = function () {
     
     var L = require('L');
     
-    var periods = {day:   L('CoreHome_PeriodDay'),
-                   week:  L('CoreHome_PeriodWeek'),
-                   month: L('CoreHome_PeriodMonth'),
-                   year:  L('CoreHome_PeriodYear'),
+    var periods = {day:   L('Intl_PeriodDay'),
+                   week:  L('Intl_PeriodWeek'),
+                   month: L('Intl_PeriodMonth'),
+                   year:  L('Intl_PeriodYear'),
                    range: L('CoreHome_PeriodRange')};
 
     return periods;
