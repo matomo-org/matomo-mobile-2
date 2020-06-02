@@ -29,6 +29,24 @@ function onUrlBlur ()
     }
 }
 
+function showAppSpecificLogin() {
+    $.username.hide();
+    $.password.hide();
+    $.usernameLine.hide();
+    $.appSpecificLoginNotice.hide();
+    $.usernameLoginNotice.show();
+    $.appSpecificToken.show();
+}
+
+function showUsernameSpecificLogin() {
+    $.usernameLoginNotice.hide();
+    $.appSpecificToken.hide();
+    $.appSpecificLoginNotice.show();
+    $.usernameLine.show();
+    $.username.show();
+    $.password.show();
+}
+
 function onUsernameReturn () 
 {
     $.password.focus();
@@ -63,11 +81,22 @@ function askToUseHttps()
 
 function login()
 {
+    var username = $.username.value;
+    var password = $.password.value;
+    var tokenAuth = '';
+
+    if ($.appSpecificToken.visible) {
+        username = '';
+        password = '';
+        tokenAuth = $.appSpecificToken.value;
+    }
+
     require('login').login(
         accounts,
         trim($.url.value),
-        $.username.value,
-        $.password.value
+        username,
+        password,
+        tokenAuth
     );
 }
 function trim(str)

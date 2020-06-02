@@ -52,7 +52,9 @@ exports.definition = {
 
                 for (var index in this.config.defaultParams.urls) {
                     var defaultParam = this.config.defaultParams.urls[index];
-                    defaultParam.userLogin = account.get('username');
+                    if (account.get('username')) {
+                        defaultParam.userLogin = account.get('username');
+                    }
                 }
 
                 this.fetch({
@@ -63,7 +65,13 @@ exports.definition = {
                         }
 
                         var defaultReport     = response[0];
+                        if (typeof defaultReport === 'object' && typeof defaultReport.value !== 'undefined') {
+                            defaultReport = defaultReport.value;
+                        }
                         var defaultReportDate = response[1];
+                        if (typeof defaultReportDate === 'object' && typeof defaultReportDate.value !== 'undefined') {
+                            defaultReportDate = defaultReportDate.value;
+                        }
 
                         if (success) {
                             success(account, defaultReport, defaultReportDate);

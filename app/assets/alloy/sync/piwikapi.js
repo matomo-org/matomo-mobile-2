@@ -116,7 +116,8 @@ function Sync(method, collection, opts)
 
     var segment = opts.segment || null;
 
-    collection.xhrRequest = prepareApiRequest(settings.method, params, opts.account, segment);
+    var apiMethod = settings.method || params.method;
+    collection.xhrRequest = prepareApiRequest(apiMethod, params, opts.account, segment);
 
     if (useCache) {
         var cacheKey       = collection.xhrRequest.getUrl();
@@ -131,6 +132,15 @@ function Sync(method, collection, opts)
     }
 
     readFromApi(collection.xhrRequest, function (response) {
+
+        if (apiMethod === 'SitesManager.getSiteFromId'
+            && typeof response === 'object'
+            && typeof response.idsite !== 'undefined' && response.idsite
+            && typeof response.name !== 'undefined' && response.name) {
+            // there was a breaking change in Matomo 4 where it now returns a single object vs previously an array with
+            // one object
+            response = [response];
+        }
 
         cleanupApiRequest(collection);
 
