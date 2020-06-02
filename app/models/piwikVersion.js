@@ -57,7 +57,6 @@ exports.definition = {
                 
                 return require('Piwik').isVersionGreaterThanOrEqual('1.12', this.getVersion());
             }
-
         }); // end extend
         
         return Model;

@@ -52,7 +52,8 @@
 }
 
 ".line[platform=android]": {
-    height: '2dp'
+    height: '2dp',
+    hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
 }
 
 ".textfield": {
@@ -72,6 +73,7 @@
     left: '10dp',
     right: '10dp',
     backgroundColor: '#fff',
+    hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
 },
 
 "#url": {
@@ -101,6 +103,69 @@
     text: L('Mobile_HowtoLoginAnonymous'),
     wordWrap: true,
     left: 0, 
+    right: 0
+},
+
+"#appSpecificToken": {
+    hintText: L('UsersManager_TokenAuth'),
+    visible: false,
+    keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+    returnKeyType: Ti.UI.RETURNKEY_DONE
+},
+
+"#usernameLoginNotice": {
+    visible: false
+},
+
+"#appSpecificLoginNotice": {
+    top: 10,
+    font: {
+        fontSize: 12
+    },
+    text: L('Mobile_LoginUsingTokenAuth'),
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    wordWrap: true,
+    left: 0,
+    right: 0
+},
+"#appSpecificLoginNotice[platform=android]": {
+    top: '16dp',
+    font: {
+        fontSize: '13sp'
+    },
+    hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
+},
+
+"#usernameLoginNotice": {
+    top: 10,
+    font: {
+        fontSize: 12
+    },
+    visible: false,
+    text: L('Mobile_LoginUsingUsernamePassword'),
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    wordWrap: true,
+    left: 0,
+    right: 0
+},
+
+"#usernameLoginNotice[platform=android]": {
+    top: '16dp',
+    font: {
+        fontSize: '13sp'
+    },
+    hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
+},
+
+"#anonymousLoginNotice": {
+    top: 10,
+    font: {
+        fontSize: 12
+    },
+    textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+    text: L('Mobile_HowtoLoginAnonymous'),
+    wordWrap: true,
+    left: 0,
     right: 0
 },
 
