@@ -71,6 +71,8 @@ exports.definition = {
                         var defaultReportDate = response[1];
                         if (typeof defaultReportDate === 'object' && typeof defaultReportDate.value !== 'undefined') {
                             defaultReportDate = defaultReportDate.value;
+                        } else if (defaultReportDate === 'object') {
+                            defaultReportDate = 'yesterday';
                         }
 
                         if (success) {
@@ -91,8 +93,18 @@ exports.definition = {
             },
 
             validResponse: function (response) {
+                if (_.isArray(response) && _.has(response, 0) && _.has(response, 1) && response[0] && response[1]) {
+                    // error response in bulk requests aren't detected automatically just yet
+                    // likely a Matomo 3.13.5 install or older that is trying to authenticate using token auth but no username is given
+                    if (typeof response[0] === 'object'
+                        && typeof response[0].result === 'string'
+                        && response[0].result === 'error') {
+                        return false;
+                    }
+                    return true;
+                }
 
-                return _.isArray(response) && _.has(response, 0) && _.has(response, 1) && response[0] && response[1];
+                return false;
             }
 
             // extended functions go here           
