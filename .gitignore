@@ -11,6 +11,8 @@ tmp
 *.apk
 *.ap_
 node_modules
+/i18n
+/.settings
 
 .settings/com.appcelerator.titanium.mobile.prefs
 Resources
