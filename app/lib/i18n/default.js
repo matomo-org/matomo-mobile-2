@@ -101,10 +101,13 @@ module.exports = {
     UsersManager_ManageAccess:                                          'Manage access',
     UsersManager_PrivView:                                              'View',
     DevicesDetection_ColumnBrowser:                                     'Browser',
+    UsersManager_TokenAuth:                                             'API Authentication Token',
+    UserSettings_ColumnBrowser:                                         'Browser',
     General_Plugins:                                                    'Plugins',
     Resolution_ColumnResolution:                                        'Resolution',
     General_VisitorSettings:                                            'Visitor Settings',
     General_NVisits:                                                    '%s visits',
+    General_NbVisits:                                                   '%s visits',
     VisitsSummary_NbActionsDescription:                                 '%s actions',
 
     // New Strings
@@ -153,6 +156,8 @@ module.exports = {
     Mobile_LoadingReport:                                               'Loading %s',
     Mobile_LoginCredentials:                                            'Credentials',
     Mobile_LoginUseHttps:                                               'Use https',
+    Mobile_LoginUsingTokenAuth:                                         'Click to log in using app specific auth token',
+    Mobile_LoginUsingUsernamePassword:                                  'Click to log in using username and password',
     Mobile_LoginToPiwikToChangeSettings:                                'Login to your Matomo server to create and update websites, users or to change General Settings like "Report to load by default".',
     Mobile_MultiChartLabel:                                             'Display sparklines',
     Mobile_NavigationBack:                                              'Back',

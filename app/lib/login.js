@@ -245,17 +245,23 @@ function fetchAuthToken(account)
     });
 }
 
-exports.login = function(accounts, accessUrl, username, password)
+exports.login = function(accounts, accessUrl, username, password, appSpecificAuthToken)
 {
     var account = Alloy.createModel('AppAccounts');
     account.on('error', onError);
-    
-    account.set({
+
+    var accountParams = {
         accessUrl: accessUrl,
         username: username,
         password: password,
         name: accessUrl
-    });
+    };
+
+    if (appSpecificAuthToken) {
+        accountParams.tokenAuth = appSpecificAuthToken
+    }
+
+    account.set(accountParams);
 
     if (!account.isValid()) {
         return;
@@ -363,5 +369,10 @@ exports.login = function(accounts, accessUrl, username, password)
 
     showWaitingIndicator();
 
-    fetchAuthToken(account);
+    if ('' === username && ('' === password || '*' === password) && appSpecificAuthToken) {
+        // user is logging in with app specific token auth
+        makeSureUserHasAccessToAtLeastOneWebsite(account);
+    } else {
+        fetchAuthToken(account);
+    }
 };

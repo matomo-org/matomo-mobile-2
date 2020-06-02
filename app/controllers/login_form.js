@@ -29,6 +29,44 @@ function onUrlBlur ()
     }
 }
 
+function hideElement(element) {
+    element.hide();
+    if (OS_IOS) {
+        element.old_height = element.height;
+        element.height = 0;
+    }
+}
+
+function showElement(element, height) {
+    element.show();
+    if (OS_IOS) {
+        element.height = element.old_height;
+    }
+}
+
+function showAppSpecificLogin() {
+    hideElement($.username);
+    hideElement($.password);
+    hideElement($.usernameLine);
+    hideElement($.appSpecificLoginNotice);
+    showElement($.usernameLoginNotice);
+    showElement($.appSpecificToken);
+}
+
+function showUsernameSpecificLogin() {
+    hideElement($.usernameLoginNotice);
+    hideElement($.appSpecificToken);
+    showElement($.appSpecificLoginNotice);
+    showElement($.usernameLine);
+    showElement($.username);
+    showElement($.password);
+}
+
+if (OS_IOS) {
+    hideElement($.usernameLoginNotice);
+    hideElement($.appSpecificToken);
+}
+
 function onUsernameReturn () 
 {
     $.password.focus();
@@ -63,11 +101,22 @@ function askToUseHttps()
 
 function login()
 {
+    var username = $.username.value;
+    var password = $.password.value;
+    var tokenAuth = '';
+
+    if ($.appSpecificToken.visible) {
+        username = '';
+        password = '';
+        tokenAuth = $.appSpecificToken.value;
+    }
+
     require('login').login(
         accounts,
         trim($.url.value),
-        $.username.value,
-        $.password.value
+        username,
+        password,
+        tokenAuth
     );
 }
 function trim(str)
