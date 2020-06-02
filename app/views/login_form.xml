@@ -2,12 +2,15 @@
     <View id="formView">
         <View id="textFieldContainer">
             <TextField id="url" class="textfield" onReturn="onUrlReturn" onBlur="onUrlBlur"/>
-            <View class="line"/>
+            <View class="line" id="usernameLine"/>
             <TextField id="username" class="textfield" onReturn="onUsernameReturn"/>
             <View class="line"/>
             <TextField id="password" class="textfield" onReturn="doLogin"/>
+            <TextField id="appSpecificToken" class="textfield" onReturn="doLogin"/>
         </View>
         <Button id="loginbutton" onClick="doLogin" title="Login" />
+        <Label id="appSpecificLoginNotice" onClick="showAppSpecificLogin"/>
+        <Label id="usernameLoginNotice" onClick="showUsernameSpecificLogin"/>
         <Label id="anonymousLoginNotice"/>
     </View>
 </Alloy>

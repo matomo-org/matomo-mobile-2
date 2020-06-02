@@ -69,7 +69,6 @@ exports.definition = {
             },
             
             validResponse: function (response) {
-
                 return _.isArray(response) && _.has(response, 0);
             }
 

@@ -153,7 +153,12 @@ exports.definition = {
                 if (!attrs) {
                     return 'Unknown';
                 }
-                
+
+                if (attrs.username === '' && attrs.password === '' && attrs.tokenAuth) {
+                    // if we have the tokenAuth it is ok not to have the password.
+                    return; // valid
+                }
+
                 if (attrs.username && !attrs.password && !this.get('tokenAuth')) {
                     // if we have the tokenAuth it is ok not to have the password.
                     return 'MissingPassword';
