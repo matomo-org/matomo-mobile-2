@@ -88,7 +88,7 @@ exports.definition = {
                 var self = this;
 
                 this.forEach(function (model) {
-                    if (model.isExpired()) {
+                    if (model && model.isExpired()) {
                         self.cleanupModel(model);
                     }
                 });
@@ -123,7 +123,7 @@ exports.definition = {
                 var self = this;
 
                 var entries = this.where({key: key}).filter(function (model) {
-                    if (model.isExpired()) {
+                    if (model && model.isExpired()) {
                         self.cleanupModel(model);
                         return false;
                     }
