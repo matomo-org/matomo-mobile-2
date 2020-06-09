@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ti:app xmlns:ti="http://ti.appcelerator.org">
+<?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
     <deployment-targets>
         <target device="iphone">true</target>
         <target device="ipad">true</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>9.0.1.GA</sdk-version>
+    <sdk-version>9.0.2.GA</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Matomo Mobile 2</name>
     <version>2.4.7</version>
@@ -50,24 +49,17 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:installLocation="preferExternal"
-            android:versionCode="16" android:versionName="2.4.7">
+        <manifest android:installLocation="preferExternal" android:versionCode="16" android:versionName="2.4.7">
             <application android:theme="@style/Theme.PiwikTheme">
-                <activity
-                    android:configChanges="keyboardHidden|orientation|screenSize"
-                    android:label="@string/app_name"
-                    android:name=".MatomoMobile2Activity" android:theme="@style/Theme.PiwikTheme">
+                <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/app_name" android:name=".MatomoMobile2Activity" android:theme="@style/Theme.PiwikTheme">
                     <intent-filter>
                         <action android:name="android.intent.action.MAIN"/>
                         <category android:name="android.intent.category.LAUNCHER"/>
                     </intent-filter>
                 </activity>
             </application>
-            <supports-screens android:anyDensity="true"
-                android:largeScreens="true" android:normalScreens="true"
-                android:smallScreens="true" xlargeScreens="true"/>
-            <uses-sdk android:installLocation="preferExternal"
-                android:minSdkVersion="24" android:targetSdkVersion="28"/>
+            <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" xlargeScreens="true"/>
+            <uses-sdk android:installLocation="preferExternal" android:minSdkVersion="24" android:targetSdkVersion="28"/>
         </manifest>
     </android>
     <plugins>

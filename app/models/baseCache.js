@@ -88,7 +88,7 @@ exports.definition = {
                 var self = this;
 
                 this.forEach(function (model) {
-                    if (model.isExpired()) {
+                    if (model && model.isExpired()) {
                         self.cleanupModel(model);
                     }
                 });
