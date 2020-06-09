@@ -94,6 +94,9 @@
     separatorColor: "#dcdcdc",
 }
 
+"#content[platform=android]": {
+    layout: 'vertical'
+}
 "#content[platform=ios]": {
     tableSeparatorInsets: {left:0,right:0}
 }

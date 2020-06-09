@@ -158,7 +158,7 @@ HttpRequest.prototype.handle = function () {
 
     var settings = Alloy.createCollection('AppSettings').settings();
 
-    this.xhr = Ti.Network.createHTTPClient({enableKeepAlive: false});
+    this.xhr = Ti.Network.createHTTPClient();
     var that = this;
     
     this.xhr.onload  = function () { that.load(this); that = null; };

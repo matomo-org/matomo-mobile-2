@@ -31,7 +31,7 @@
         fontFamily: 'Roboto-Thin'
     },
     height: Ti.UI.SIZE,
-    wordWrap: false,
+    maxLines: 1,
     ellipsize: true,
     right: 0,
 }

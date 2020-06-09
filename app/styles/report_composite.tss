@@ -35,6 +35,7 @@
 
 "#content[platform=android]": {
     top: '56dp',
+    scrollType: 'vertical'
 }
 
 "#content[platform=mobileweb]": {

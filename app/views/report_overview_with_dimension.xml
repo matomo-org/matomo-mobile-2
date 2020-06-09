@@ -17,15 +17,13 @@
             <Label id="noDataDescription"/>
             <View class="separator"/>
         </View>
-        <TableView id="content" dataCollection="$.piwikProcessedReport" dataFunction="renderStatistics">
-            <TableViewRow>
-                <View class="report_row">
-                    <Label class="report_title" text="{title}"></Label>
-                    <Label class="report_value" text="{value}"></Label>
-                </View>
-            </TableViewRow>
-        </TableView>
-        <View class="separator" platform="android"/>
+        <View id="content" dataCollection="$.piwikProcessedReport" dataFunction="renderStatistics">
+            <View class="report_row">
+                <Label class="report_title" text="{title}"></Label>
+                <Label class="report_value" text="{value}"></Label>
+            </View>
+            <View class="separator" platform="android"/>
+        </View>
         <View id="footer" class="footer" onClick="openReport">
             <Label class="more"/>
         </View>

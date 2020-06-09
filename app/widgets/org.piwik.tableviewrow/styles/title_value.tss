@@ -9,7 +9,7 @@
     left: 10,
     color: '#212121',
     ellipsize: true,
-    wordWrap: false,
+    maxLines: 1,
     font: {fontSize: 18, fontWeight: 'bold'},
     top: 11,
     bottom: 11,

@@ -74,7 +74,7 @@
 "#reportName": {
     text: ' ',
     ellipsize: true,
-    wordWrap: false,
+    maxLines: 1,
     color: '#212121',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     left: 20,
@@ -95,7 +95,7 @@
 "#reportDate": {
     text: ' ',
     ellipsize: true,
-    wordWrap: false,
+    maxLines: 1,
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     top: 25,
     left: 20,

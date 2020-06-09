@@ -14,7 +14,7 @@
     right: 10,
     color: '#212121',
     ellipsize: true,
-    wordWrap: false,
+    maxLines: 1,
     font: {fontSize: 18, fontWeight: 'bold'},
     top: 11,
     touchEnabled: false,
@@ -43,7 +43,7 @@
     bottom: 11,
     color: '#808080',
     ellipsize: true,
-    wordWrap: false,
+    maxLines: 1,
     touchEnabled: false,
 },
 

@@ -79,8 +79,4 @@ exports.open = function ()
 
 exports.close = function ()
 {
-    if (OS_ANDROID && $.content) {
-        // prevent leaking tableViewRows
-        $.content.setData([]);
-    }
 };

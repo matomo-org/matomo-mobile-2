@@ -79,7 +79,7 @@
 "#settingsValue": {
     right: '24dp',
     ellipsize: true,
-    wordWrap: false,
+    maxLines: 1,
     width: '80dp',
     top: '16dp',
     bottom: '16dp',
