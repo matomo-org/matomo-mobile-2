@@ -13,19 +13,6 @@ function L(key)
 var args = arguments[0] || {};
 var accounts = args.accounts;
 
-function tryIt ()
-{
-    require('Piwik/Tracker').trackEvent({name: 'Try it', category: 'Account'});
-
-    require('login').login(
-        accounts,
-        'https://demo.matomo.org',
-        '',
-        '',
-        ''
-    );
-}
-
 function openFaq ()
 {
     require('Piwik/Tracker').trackEvent({name: 'Open FAQ', category: 'Account'});
