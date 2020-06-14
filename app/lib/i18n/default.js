@@ -205,7 +205,6 @@ module.exports = {
     Mobile_ShowAll:                                                     'Show all',
     Mobile_ShowLess:                                                    'Show less',
     Mobile_TopVisitedWebsites:                                          'Top visited websites',
-    Mobile_TryIt:                                                       'Try It!',
     Mobile_UseSearchBarHint:                                            'Only the first %s websites are displayed here. Please use the search bar to access your other websites.',
     Mobile_HttpTimeout:                                                 'HTTP Timeout',
     Mobile_VerifyAccount:                                               'Verifying Account',
