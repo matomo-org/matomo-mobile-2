@@ -76,6 +76,10 @@
     hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
 },
 
+".textfield[platform=ios]": {
+    hintTextColor: '#555'
+},
+
 "#url": {
     hintText: L('Mobile_AccessUrlLabel'),
     keyboardType: Ti.UI.KEYBOARD_URL,
