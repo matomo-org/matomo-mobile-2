@@ -27,6 +27,10 @@
         <use-app-thinning>true</use-app-thinning>
         <plist>
             <dict>
+                <key>UIUserInterfaceStyle</key>
+                <string>Light</string>
+            </dict>
+            <dict>
                 <key>UIStatusBarStyle</key>
                 <string>UIStatusBarStyleLightContent</string>
             </dict>
