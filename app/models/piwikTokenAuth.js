@@ -91,7 +91,6 @@ exports.definition = {
             },
 
             validResponse: function (response) {
-                console.warn(response);
                 if (typeof response === 'string' && response) {
                     // matomo4
                     return response;
