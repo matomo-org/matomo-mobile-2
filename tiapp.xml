@@ -4,10 +4,10 @@
         <target device="ipad">true</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>9.2.1.GA</sdk-version>
+    <sdk-version>9.2.2.GA</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Matomo Mobile 2</name>
-    <version>2.4.10</version>
+    <version>2.4.11</version>
     <publisher>thomassteur</publisher>
     <url>https://matomo.org/mobile</url>
     <description>Need your analytics on the go? Use our free Matomo Mobile (formerly Piwik Mobile) app to check your stats from anywhere and show them to colleagues in meetings. Matomo Mobile offers all the same reports as the Matomo (Piwik) desktop interface, and displays your visitor data in real time!</description>

@@ -25,7 +25,6 @@ function updateAvailableReportsList()
     var latestSection  = null;
 
     rows.push(Alloy.createController('report_chooser_section', {title: L('General_Live')}).getView());
-    rows.push(Alloy.createController('report_chooser_row', {title: L('UserCountryMap_RealTimeMap'), cid: 'visitormap'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Live_VisitorsInRealTime'), cid: 'live'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Live_VisitorLog'), cid: 'visitorlog'}).getView());
     rows.push(Alloy.createController('report_chooser_section', {title: L('General_Reports')}).getView());
@@ -154,8 +153,6 @@ function doSelectReport(event)
         openLiveVisitors();
     } else if ('visitorlog' == cid) {
         openVisitorLog();
-    } else if ('visitormap' == cid) {
-        openVisitorMap();
     } else if ('settings' == cid) {
         openSettings();
     } else if ('help' == cid) {
@@ -235,12 +232,6 @@ function openVisitorLog()
 {
     var log = Alloy.createController('visitor_log');
     log.open();
-}
-
-function openVisitorMap()
-{
-    var realtimemap = Alloy.createController('realtime_map');
-    realtimemap.open();
 }
 
 function openGiveFeedback()
