@@ -73,7 +73,9 @@ exports.definition = {
                                     'description': 'Matomo Mobile 2',
                                     'method': 'UsersManager.createAppSpecificTokenAuth'
                                 };
-
+                    if (authCode) {
+                    	    params.authCode = authCode;
+                    }
                                 that.fetch({
                                     account: accountModel,
                                     params: params,
@@ -89,7 +91,10 @@ exports.definition = {
             },
 
             validResponse: function (response) {
-
+                if (typeof response === 'string' && response) {
+                    // matomo4
+                    return response;
+                }
                 return _.isObject(response) && _.has(response, 'value');
             }
 
