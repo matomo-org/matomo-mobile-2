@@ -18,7 +18,8 @@
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
     left: 0,
-    type: Ti.UI.PICKER_TYPE_DATE
+    type: Ti.UI.PICKER_TYPE_DATE,
+    datePickerStyle: Ti.UI.iOS.DATE_PICKER_STYLE_WHEELS,
 }
 
 "#toPicker": {
@@ -28,6 +29,7 @@
     width: Ti.UI.FILL,
     zIndex: 8,
     type: Ti.UI.PICKER_TYPE_DATE,
+    datePickerStyle: Ti.UI.iOS.DATE_PICKER_STYLE_WHEELS,
     visible: false
 }
 
