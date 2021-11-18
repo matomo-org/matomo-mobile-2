@@ -78,4 +78,4 @@ function iOsLayout(rootWindow)
     });
 }
 
-exports = iOsLayout;
+module.exports  = iOsLayout;

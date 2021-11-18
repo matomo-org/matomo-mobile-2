@@ -114,7 +114,7 @@ exports.buildEncodedUrlQuery = function (parameter)
             continue;
         }
 
-        requestUrl += encode(paramName) + '=' + encode(parameter[paramName]) + '&';
+        requestUrl += encodeURIComponent(paramName) + '=' + encodeURIComponent(parameter[paramName]) + '&';
     }
 
     return requestUrl;
