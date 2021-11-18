@@ -105,7 +105,7 @@ exports.buildEncodedUrlQuery = function (parameter)
                 var url = parameter.urls[index];
                 requestUrl += encode('urls[' + index + ']') + '=';
                 for (var key in url) {
-                    requestUrl += encode(key) + '%3d' + encode(url[key]) + '%26';
+                    requestUrl += encodeURIComponent(key) + '%3d' + encodeURIComponent(url[key]) + '%26';
                 }
 
                 requestUrl += '&';
