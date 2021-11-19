@@ -97,11 +97,6 @@
     left: '16dp',
 }
 
-"#fromDatePicker[platform=mobileweb]": {
-    right: 16,
-    height: 50
-}
-
 "#toDateLabel": {
     title: L('General_DateRangeTo')
 }
@@ -113,9 +108,6 @@
     right: 16,
 }
 
-"#toDatePicker[platform=mobileweb]": {
-    height: 50
-}
 
 "#toDatePicker[platform=android]": {
     top: '8dp',

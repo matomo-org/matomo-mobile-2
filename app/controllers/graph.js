@@ -61,7 +61,7 @@ function showDetail ()
 function updateImage(graphUrl)
 {
     var graph = require('Piwik/PiwikGraph');
-    var imageWithSize = graph.appendSize(graphUrl, $.image.getWidth(), $.image.getHeight(), true);
+    var imageWithSize = graph.appendSize(graphUrl, $.image.width, $.image.height, true);
     
     console.debug('imageUrlWithSize', imageWithSize);
 
@@ -177,7 +177,7 @@ exports.hide = hide;
 
 function renderIfPossibleAndNeeded()
 {
-    if (!currentGraphUrlToDislay || !$.image.getWidth()) {
+    if (!currentGraphUrlToDislay || !$.image.width) {
         return;
     }
 

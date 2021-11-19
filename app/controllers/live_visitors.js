@@ -245,8 +245,8 @@ function handleBackgroundEvents()
         var activity = require('ui/helper').getAndroidActivity($.index);
 
         if (activity) {
-            activity.setOnPause(stopRefreshTimer);
-            activity.setOnStop(stopRefreshTimer);
+            activity.onPause = stopRefreshTimer;
+            activity.onStop = stopRefreshTimer;
         }
     }
 }
@@ -262,8 +262,8 @@ function stopHandleBackgroundEvents()
         var activity = require('ui/helper').getAndroidActivity($.index);
 
         if (activity) {
-            activity.setOnPause(function () {});
-            activity.setOnStop(function () {});
+            activity.onPause = function () {};
+            activity.onStop = function () {};
         }
     }
 }

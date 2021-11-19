@@ -4,7 +4,7 @@
         <target device="ipad">true</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>9.2.2.GA</sdk-version>
+    <sdk-version>10.1.0.GA</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Matomo Mobile 2</name>
     <version>2.4.11</version>

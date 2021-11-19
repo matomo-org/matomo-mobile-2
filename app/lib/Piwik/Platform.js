@@ -38,7 +38,7 @@ function pixelToDp(pixel) {
 }
 
 function dpToPixel(dp) {
-    var factor = Ti.Platform.displayCaps.getLogicalDensityFactor();
+    var factor = Ti.Platform.displayCaps.logicalDensityFactor;
 
     if (factor) {
         return Math.ceil(dp * factor);

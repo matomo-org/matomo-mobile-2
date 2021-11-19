@@ -151,7 +151,7 @@ function getImageView(url, width, height) {
                    touchEnabled: false,
                    canScale: !OS_ANDROID,
                    hires: !OS_ANDROID,
-                   defaultImage: '/images/graphDefault.png',
+                   defaultImage: '/images/graphdefault.png',
                    enableZoomControls: false,
                    image: url};
 
@@ -212,8 +212,8 @@ if (isTablet) {
         var pictureHeight = getPictureHeight();
         var url = getGraphUrlWithSize(pictureWidth, pictureHeight);
 
-        $.graphWidget.setWidth(pictureWidth);
-        $.graphWidget.setHeight(pictureHeight);
+        $.graphWidget.width = pictureWidth;
+        $.graphWidget.height = pictureHeight;
         $.graphWidget.loadImage(url);
     }
 

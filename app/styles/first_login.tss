@@ -33,18 +33,14 @@
 },
 
 "#logoImage": {
-    image: "logo-png-page.png",
+    image: "logo_png_page.png",
     width: 314,
     height: 51,
     zIndex: 1
 },
 
-"#logoImage[platform=mobileweb]": {
-    image: "logo-png-page.png"
-},
-
 "#logoImage[platform=android]": {
-    image: "/images/logo-png-page.png",
+    image: "/images/logo_png_page.png",
     width: '294dp',
     height: '48dp',
 },

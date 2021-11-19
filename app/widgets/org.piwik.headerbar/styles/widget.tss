@@ -20,7 +20,7 @@
     width: '24dp',
     touchEnabled: false,
     backgroundColor: 'transparent',
-    backgroundImage: '/images/appicon.png',
+    backgroundImage: '/images/appicon2.png',
 }
 
 "#headerTitle": {

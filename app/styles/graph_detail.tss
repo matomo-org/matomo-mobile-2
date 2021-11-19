@@ -19,7 +19,7 @@
    touchEnabled: false,
    canScale: false,
    hires: false,
-   defaultImage: 'graphDefault.png',
+   defaultImage: 'graphdefault.png',
    enableZoomControls: false,
    left: 10,
    right: 10,
@@ -33,7 +33,7 @@
 }
 
 "#graphWidget[platform=android]": {
-    defaultImage: '/images/graphDefault.png',
+    defaultImage: '/images/graphdefault.png',
     left: '10dp',
     right: '10dp',
     top: '10dp',

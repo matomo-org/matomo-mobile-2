@@ -17,13 +17,9 @@
     hires: true
 },
 
-"#image[platform=mobileweb]": {
-    image: 'graphDefault.png'
-},
-
 "#image[platform=android]": {
     top: '15dp',
-    image: '/images/graphDefault.png',
+    image: '/images/graphdefault.png',
     left: '16dp',
     right: '16dp',
     height: '150dp',

@@ -13,6 +13,8 @@
 
 "#searchBar[platform=android]": {
     backgroundColor: '#eff0f1',
+    color: '#000',
+    hintTextColor: '#666',
     height: '43dp',
     width: '100%',
     hintText: L('Mobile_SearchWebsite')

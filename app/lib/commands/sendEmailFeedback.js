@@ -75,11 +75,11 @@ function emailMessageBody()
 exports.execute = function () 
 {
     var emailDialog = Ti.UI.createEmailDialog();
-    emailDialog.setSubject("Feedback Matomo Mobile");
-    emailDialog.setToRecipients(['mobile@matomo.org']);
+    emailDialog.subject = "Feedback Matomo Mobile";
+    emailDialog.toRecipients = ['mobile@matomo.org'];
 
     if (OS_IOS) {
-        emailDialog.setBarColor('#3450A3');
+        emailDialog.barColor = '#3450A3';
     }
 
     if (!emailDialog.isSupported()) {
@@ -89,7 +89,7 @@ exports.execute = function ()
         return;
     }
 
-    emailDialog.setMessageBody(emailMessageBody());
+    emailDialog.messageBody = emailMessageBody();
     emailDialog.addEventListener('complete', onEmailSent);
     emailDialog.open();
     emailDialog = null;

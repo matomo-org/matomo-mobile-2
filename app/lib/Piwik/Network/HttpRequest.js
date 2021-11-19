@@ -175,7 +175,7 @@ HttpRequest.prototype.handle = function () {
 
     // override the iPhone default timeout
     var timeoutValue = parseInt(settings.httpTimeout(), 10);
-    this.xhr.setTimeout(timeoutValue);
+    this.xhr.timeout = timeoutValue;
 
     this.xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     
