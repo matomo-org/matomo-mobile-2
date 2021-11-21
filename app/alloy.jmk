@@ -3,87 +3,34 @@ function isProduction(alloyConfig)
     return 'production' == alloyConfig.deploytype;
 }
 
-function isMobileWebPlatform(alloyConfig)
-{
-    return 'mobileweb' == alloyConfig.platform;
-}
-
-function readContentFromFile(file)
-{
-    return require('fs').readFileSync(file).toString();
-}
-
-function writeContentToFile(file, content)
-{
-    require('fs').writeFileSync(file, content);
-}
-
-function removeUnimportantLogCallsFromContent(content)
-{
-    if (!content) {
-        return;
-    }
-
-    content = content.replace(/console.debug/g, '');
-    content = content.replace(/console.log/g, '');
-
-    return content;
-}
-
-function removeUnimportantLogCallsFromFile(file)
-{
-    var resourceContent = readContentFromFile(file);
-    var replacedContent = removeUnimportantLogCallsFromContent(resourceContent);
-
-    writeContentToFile(file, replacedContent);
-}
-
-function isJsFile(filename)
-{
-    return (filename.match(/\.js$/));
-}
-
-function removeUnimportantLogCallsFromJsFiles(dir) 
-{
-    var path   = require('path');
-    var wrench = require('wrench');
-    var resourcesPath = dir.resources;
-
-    wrench.readdirSyncRecursive(resourcesPath).forEach(function(target) {
-
-        if (!isJsFile(target)) {
-            return;
-        }
-
-        var jsFile = path.join(resourcesPath, target);
-        removeUnimportantLogCallsFromFile(jsFile);
-    });
-}
-
-function copyPhonegapConfiguration(dir) 
-{
-    var sourceFile = require('path').join(dir.project, 'config.xml');
-    var targetFile = require('path').join(dir.resources, 'config.xml');
-
-    var content = readContentFromFile(sourceFile);
-
-    writeContentToFile(targetFile, content);
-}
-
-function copyFirefoxOSConfiguration(dir) 
-{
-    var sourceFile = require('path').join(dir.project, 'manifest.webapp');
-    var targetFile = require('path').join(dir.resources, 'manifest.webapp');
-
-    var content = readContentFromFile(sourceFile);
-
-    writeContentToFile(targetFile, content);
-}
-
 task("post:compile", function(event, logger) {
 
     if (isProduction(event.alloyConfig)) {
         logger.warn("Removing Unimportant Log Calls");
-        removeUnimportantLogCallsFromJsFiles(event.dir);
+        var resourcesPath = event.dir.resources;
+
+        var path   = require('path');
+        var wrench = require('wrench');
+        var fs     = require('fs');
+
+        wrench.readdirSyncRecursive(resourcesPath).forEach(function(target) {
+
+            if (!(target.match(/\.js$/))) {
+                return;
+            }
+
+            var jsFile = path.join(resourcesPath, target);
+
+            var resourceContent = fs.readFileSync(jsFile).toString();
+
+            if (resourceContent) {
+                resourceContent = resourceContent.replace(/console.debug/g, '');
+                resourceContent = resourceContent.replace(/console.log/g, '');
+            }
+            fs.writeFileSync(jsFile, resourceContent);
+
+        });
+
+        logger.warn("Removing Unimportant Log Calls Done");
     }
 });
