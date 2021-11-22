@@ -281,10 +281,10 @@ function fixVerticalSeparatorHeight()
                 if (!$ || !$.verticalSeparator || !$.dimensions) {
                     return;
                 }
-                $.verticalSeparator.setHeight($.dimensions.size.height);
+                $.verticalSeparator.height = $.dimensions.size.height;
             }, 100);
         } else {
-            $.verticalSeparator.setHeight($.dimensions.size.height);
+            $.verticalSeparator.height = $.dimensions.size.height;
         }
     } 
 }

@@ -69,9 +69,7 @@ function updateImage(graphUrl)
         return;
     }
 
-    if ($.image.getView()) {
-        $.image.loadImage(imageWithSize);
-    }
+    $.image.loadImage(imageWithSize);
 }
 
 function addGraphSwitcher(switcher)
@@ -96,9 +94,6 @@ function addGraphSwitcher(switcher)
         $.showDetailIcon.hide();
     });
 
-    if (OS_MOBILEWEB) {
-        graphSwitcher.fadeOut();
-    }
 }
 
 function completeGraphUrl(graphUrl, processedReportCollection, accountModel)
@@ -188,10 +183,6 @@ function renderIfPossibleAndNeeded()
     $.image.off('postlayout', renderIfPossibleAndNeeded);
 
     updateImage(currentGraphUrlToDislay);
-
-    if (OS_MOBILEWEB) {
-        hideDetailIcon();
-    }
 }
 
 exports.update = function (processedReportCollection, accountModel, additonalParams)

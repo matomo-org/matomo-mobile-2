@@ -72,6 +72,8 @@
     height: '45dp',
     left: '10dp',
     right: '10dp',
+    color: '#000',
+    hintTextColor: '#666',
     backgroundColor: '#fff',
     hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
 },

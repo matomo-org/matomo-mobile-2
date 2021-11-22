@@ -1,5 +1,4 @@
 "#index": {
-    backgroundColor: 'white',
     contentWidth: 'auto',
     contentHeight: 'auto',
     layout: 'vertical',
@@ -21,7 +20,7 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
     ellipsize: false,
     wordWrap: true,
-    color: '#212121',
+    color: '#fff',
 }
 
 "#periodHeadline": {
@@ -53,6 +52,7 @@
     left: '16dp',
     bottom: '16dp',
     type: Ti.UI.PICKER_TYPE_DATE,
+    height: Titanium.UI.SIZE
 }
 
 "#period_day": {
