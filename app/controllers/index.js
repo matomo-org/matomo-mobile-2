@@ -48,17 +48,17 @@ if (accounts.hasAccount()) {
 }
 
 (function () {
-    var Rating = require('Piwik/App/Rating');
-    var rating = new Rating();
-    rating.countLaunch();
+    //var Rating = require('Piwik/App/Rating');
+    //var rating = new Rating();
+    // rating.countLaunch();
 })();
 
 (function () {
-    if (!Ti.App.Properties.hasProperty('asked_for_tracking_permission')) {
-        require('Piwik/Tracker').askForPermission();
+    //if (!Ti.App.Properties.hasProperty('asked_for_tracking_permission')) {
+      //  require('Piwik/Tracker').askForPermission();
 
-        Ti.App.Properties.setInt('asked_for_tracking_permission', 1);
-    }
+        //Ti.App.Properties.setInt('asked_for_tracking_permission', 1);
+    //}
 })();
 
 function onCreatedAccount(account) 
