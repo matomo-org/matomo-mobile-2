@@ -82,7 +82,9 @@ function updateDisplayedValues(visitor)
         return;
     }
 
-    if (visitor.goalConversions) {
+    if (visitor.visitEcommerceStatus && visitor.visitEcommerceStatus === 'ordered') {
+        $.index.backgroundColor = '#d5ffc4';
+    } else if (visitor.goalConversions) {
         $.index.backgroundColor = '#FFFFC4';
     }
 

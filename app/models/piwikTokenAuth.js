@@ -53,6 +53,7 @@ exports.definition = {
                     }
 
                     var passwordHash = this.getPasswordHash(password);
+
                     var params = {userLogin: username, md5Password: passwordHash, method: 'UsersManager.getTokenAuth'};
                     if (authCode) {
                     	    params.authCode = authCode;

@@ -13,4 +13,4 @@ var layout = new (MobileWebLayout)(rootWindow);
 require('layout/window/recorder').apply(layout, []);
 require('layout/sidebar/handheld').apply(layout, [rootWindow]);
 
-exports = layout;
+module.exports = layout;
