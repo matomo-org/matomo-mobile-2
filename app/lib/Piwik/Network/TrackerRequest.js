@@ -41,7 +41,6 @@ TrackerRequest.prototype.send = function () {
         this.parameter = {};
     }
 
-    this.handle();
 };
 
 /**

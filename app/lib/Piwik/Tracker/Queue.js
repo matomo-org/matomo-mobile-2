@@ -99,23 +99,7 @@ function TrackerQueue () {
      * @returns  {boolean}  true if it is a new day, false otherwise.
      */
     this.isNewDay = function () {
-        var now     = new Date();
-        var dateNow = now.toDateString();
-        // dateNow is like 'Sun Jul 17 2011'
-
-        if (!dateStringToday) {
-            // initialize dateStringToday
-            dateStringToday = dateNow;
-        }
-
-        if (dateNow != dateStringToday) {
-            // it is a new day
-            dateStringToday = dateNow;
-            
-            return true;
-        }
-
-        return false;
+       
     };
     
     /**
@@ -125,33 +109,6 @@ function TrackerQueue () {
      */
     this.offer = function (parameter) {
 
-        if (!parameter) {
-            
-            return;
-        }
-
-        if (this.isNewDay()) {
-            // reset num tracks today and allow again maxTracksPerDay
-            numTracksToday = 0;
-        }
-
-        if (maxTracksPerDay && maxTracksPerDay <= numTracksToday) {
-            // set maxTracksPerDay to 0 for unlimited tracks per day. Do not dispatch more than configured
-
-            return;
-        }
-
-        numTracksToday++;
-        
-        // add parameter to the actual queue.
-        queue.push(parameter);
-        
-        parameter = null;
-        
-        if (!this.isRunning()) {
-            // never start the queue if already running. 
-            this.start();
-        }
     };
     
     /**
@@ -169,12 +126,7 @@ function TrackerQueue () {
      * @returns  {null|Object}  null if queue is empty, the next parameter otherwise.
      */
     this.poll = function () {
-        if (this.isEmpty()) {
-
-            return;
-        }
-        
-        return queue.shift();
+      
     };
     
     /**
@@ -182,9 +134,6 @@ function TrackerQueue () {
      */
     this.clear = function () {
         
-        if (!this.isEmpty()) {
-            queue = [];
-        }
     };
     
     /**
@@ -192,9 +141,7 @@ function TrackerQueue () {
      * Otherwise you start the queue twice or even more often. 
      */
     this.start = function () {
-        isQueueRunning = true;
-        
-        this.dispatch();
+      
     };
     
     /**
@@ -210,7 +157,7 @@ function TrackerQueue () {
      * @returns  {boolean}  true if the queue is running, false otherwise.
      */
     this.isRunning = function () {
-        return isQueueRunning;
+        return false;
     };
     
     /**
@@ -218,27 +165,7 @@ function TrackerQueue () {
      * If queue is empty, it'll make a pause.
      */
     this.delayNextDispatch = function () {
-                
-        if (!this.isRunning()) {
-            // do not delay the next dispatch process if queue is stopped.
-            
-            return;
-        }
-        
-        if (this.isEmpty()) {
-            this.pause();
-            
-            return;
-        }
-
-        setTimeout((function (that) {
-            
-            return function () {
-                that.dispatch();
-                that = null;
-            }
-
-        })(this), delayInMs);
+               
     };
 
     /**
@@ -261,26 +188,6 @@ function TrackerQueue () {
      */
     this.pause = function () {
         
-        if (!this.isRunning()) {
-            
-            return;
-        }
-        
-        setTimeout((function (that) {
-            
-            return function () {
-                if (that.isEmpty()) {
-                    // queue is still empty, stop queue now.
-                    that.stop();
-                } else {
-                    // there was a new offer within the last 2 seconds, dispatch it now
-                    that.dispatch();
-                }
-                
-                that = null;
-            }
-            
-        })(this), delayInMs);
     };
 
     /**
@@ -291,37 +198,6 @@ function TrackerQueue () {
      */
     this.dispatch = function () {
         
-        if (!this.isRunning()) {
-            // queue is not running.
-            
-            return;
-        }
-        
-        if (!Ti.Network || !Ti.Network.online) {
-            this.stop();
-            
-            return;
-        }
-        
-        if (this.isEmpty()) {
-            // This should just happen if one clear's the queue. If the queue is empty it'll never delay the
-            // dispatch process. 
-            this.pause();
-            
-            return;
-        }
-        
-        var parameter = this.poll();
-        var TrackerRequest = require('Piwik/Network/TrackerRequest');
-        var tracker   = new TrackerRequest();
-        
-        tracker.setParameter(parameter);
-        tracker.send();
-
-        tracker   = null;
-        parameter = null;
-        
-        this.delayNextDispatch();
     };
 }
 

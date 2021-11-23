@@ -67,13 +67,6 @@ if (accounts.hasAccount()) {
     rating.countLaunch();
 })();
 
-(function () {
-    if (!Ti.App.Properties.hasProperty('asked_for_tracking_permission')) {
-        require('Piwik/Tracker').askForPermission();
-
-        Ti.App.Properties.setInt('asked_for_tracking_permission', 1);
-    }
-})();
 
 function onCreatedAccount(account) 
 {

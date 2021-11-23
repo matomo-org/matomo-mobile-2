@@ -29,106 +29,12 @@ function getSettings()
  */
 function Tracker () {
 
-    var queue          = require('Piwik/Tracker/Queue');
-    var trackingConfig = require('alloy').CFG.tracking;
-
-    /**
-     * The siteId of the Piwik Server installation. It'll track everything into this site.
-     *
-     * @type  number
-     */
-    this.siteId         = trackingConfig.siteId;
-
-    /**
-     * The api version of the Piwik Server installation.
-     *
-     * @type  number
-     */
-    this.apiVersion     = trackingConfig.apiVersion;
-
-    /**
-     * Holds the current document title. This document title will be used in all trackings until another document
-     * title is set.
-     * 
-     * @see       Piwik.Tracker#setDocumentTitle
-     *
-     * @defaults  ""
-     *
-     * @type      string
-     * 
-     * @private
-     */
-    var documentTitle   = '';
-
-    /**
-     * Holds the current url. This url will be used in all trackings until another current url is set.
-     *
-     * @see       Piwik.Tracker#setCurrentUrl
-     *
-     * @defaults  ""
-     *
-     * @type      string
-     * 
-     * @private
-     */
-    var currentUrl      = '';
-
-    /**
-     * Holds the number of how often the user has already started the app (visits). We store this value in application
-     * storage and increase it by one on each app start.
-     *
-     * @see       Piwik.Tracker#_getVisitCount
-     *
-     * @defaults  0
-     *
-     * @type      number
-     * 
-     * @private
-     */
-    var visitCount      = 0;
-
-    /**
-     * Holds the visitor uuid. The uuid is an anonymous / pseudo unique ID to fingerprint an user. We create an
-     * uuid for each user on app start and store this uuid in application store afterwards. This makes sure we always
-     * use the same uuid for an user.
-     *
-     * @see   Piwik.Tracker#_getUniqueId
-     *
-     * @type  null|string
-     * 
-     * @private
-     */
-    var uuid            = null;
-
-    /**
-     * This is the baseUrl which will be prepended to absolute/relative paths. If you set - for example - the current
-     * Url to '/x/y' it will prepend this url. This makes sure we have a uri including protocol and so on.
-     *
-     * @type  string
-     * 
-     * @private
-     */
-    var baseUrl         = trackingConfig.baseUrl;
-
-    /**
-     * These parameters holds all tracking information and will be send to the Piwik Server installation. Will be reset
-     * after each tracking.
-     *
-     * @type  Object
-     * 
-     * @private
-     */
-    var parameter       = {};
 
     /**
      * Initializes the tracker.
      */
     this.init = function () {
 
-        visitCount = this._getVisitCount();
-        uuid       = this._getUniqueId();
-        
-        this.prepareVisitCustomVariables();
     };
 
     /**
@@ -140,23 +46,7 @@ function Tracker () {
      */
     this._getUniqueId = function () {
 
-        if (uuid) {
-
-            return uuid;
-        }
-
-        // have a look whether there is an already created uuid
-        var storage    = require('Piwik/App/Storage');
-        var cachedUUid = storage.get('tracking_visitor_uuid');
-
-        if (cachedUUid && storage.KEY_NOT_FOUND !== cachedUUid) {
-
-            uuid  = cachedUUid;
-
-            return uuid;
-        }
-
-        return this._generateUniqueId();
+        
     };
 
     /**
@@ -170,19 +60,7 @@ function Tracker () {
      */
     this._generateUniqueId = function () {
 
-        var now   = new Date();
-        var nowTs = Math.round(now.getTime() / 1000);
-
-        // generate uuid for this visitor
-        uuid      = '';
-        uuid      = Ti.Platform.osname + Ti.Platform.id + nowTs + Ti.Platform.model;
-        uuid      = Ti.Utils.md5HexDigest(uuid).slice(0, 16);
-
-        var storage = require('Piwik/App/Storage');
-        storage.set('tracking_visitor_uuid', uuid);
-        storage     = null;
-
-        return uuid;
+        return;
     };
 
     /**
@@ -195,33 +73,7 @@ function Tracker () {
      */
     this._getVisitCount = function () {
 
-        if (visitCount) {
-
-            return visitCount;
-        }
-
-        // have a look whether there is already a visit count number
-        var storage          = require('Piwik/App/Storage');
-        var cachedVisitCount = storage.get('tracking_visit_count');
-
-        if (cachedVisitCount && storage.KEY_NOT_FOUND !== cachedVisitCount) {
-
-            visitCount = cachedVisitCount;
-
-            visitCount++;
-        }
-
-        // first visit
-        if (!visitCount) {
-
-            visitCount = 1;
-        }
-
-        storage.set('tracking_visit_count', visitCount);
-        
-        storage = null;
-
-        return visitCount;
+        return 1;
     };
     
     /**
@@ -235,14 +87,6 @@ function Tracker () {
      */
     this.trackWindow = function (title, windowUrl) {
         
-        if (!windowUrl) {
-            
-            return;
-        }
-        
-        var url = '/window/' + windowUrl;
-        
-        this.setDocumentTitle(title).setCurrentUrl(url).trackPageView();
     };
 
     /**
@@ -252,10 +96,6 @@ function Tracker () {
      */
     this.trackPageView = function () {
 
-        parameter.action_name = '' + documentTitle;
-        parameter.url         = currentUrl;
-
-        this._dispatch();
     };
 
     /**
@@ -267,31 +107,6 @@ function Tracker () {
      */
     this.trackEvent = function (event) {
 
-        if (event.category) {
-            parameter.e_c = '' + event.category;
-        } else if (documentTitle) {
-            parameter.e_c = documentTitle;
-        } else {
-            parameter.e_c = 'No Category';
-        }
-
-        if (event.action) {
-            parameter.e_a = '' + event.action;
-        } else {
-            parameter.e_a = 'click';
-        }
-
-        if (event.name) {
-            parameter.e_n = '' + event.name;
-        }
-
-        if (event.value) {
-            parameter.e_v = event.value;
-        }
-
-        event         = null;
-
-        this._dispatch();
     };
 
     /**
@@ -301,10 +116,6 @@ function Tracker () {
      */
     this.trackGoal = function (goalId) {
 
-        parameter.idgoal = '' + goalId;
-        parameter.url    = currentUrl;
-
-        this._dispatch();
     };
 
     /**
@@ -320,56 +131,6 @@ function Tracker () {
      */
     this.trackException = function (exception) {
 
-        if (!exception) {
-            
-            return;
-        }
-
-        var error     = exception.error || null;
-        var line      = exception.line || 'unknown';
-        var file      = exception.file || 'unknown';
-        var type      = exception.type || 'unknown';
-        var errorCode = exception.errorCode || '0';
-        var message   = '' + error;
-
-        var Piwik = require('Piwik');
-        if (error && Piwik.isError(error)) {
-
-            if (error.name) {
-                type  = error.name;
-            }
-
-            if (error.sourceURL) {
-                file  = error.sourceURL;
-            }
-
-            if (error.line) {
-                line  = error.line;
-            }
-        }
-
-        file = '' + file;
-
-        if (file && 60 < file.length) {
-            // use max 60 chars
-            file = file.substr(file.length - 60);
-        }
-
-        if (message && 200 < message.length) {
-            // use max 200 chars
-            message = message.substr(0, 200);
-        }
-
-        var name = '/' + type;
-        name    += '/' + file;
-        name    += '/' + line;
-        name    += '/' + message;
-
-        this.trackEvent({
-            action: 'exception',
-            name: name,
-            category: 'Error ' + errorCode
-        });
     };
 
     /**
@@ -380,10 +141,6 @@ function Tracker () {
      */
     this.trackLink = function (sourceUrl, linkType) {
 
-        parameter           = {url: sourceUrl};
-        parameter[linkType] = sourceUrl;
-
-        this._dispatch();
     };
 
     /**
@@ -426,20 +183,6 @@ function Tracker () {
      */
     this.setCustomVariable = function (index, name, value, scope) {
 
-        var key = 'cvar';
-        if (scope && 'page' == scope) {
-            key = 'cvar';
-        } else if (scope && 'visit' == scope) {
-            key = '_cvar';
-        } else if (scope && 'event' == scope) {
-            key = 'e_cvar';
-        }
-
-        if (!parameter[key]) {
-            parameter[key] = {};
-        }
-
-        parameter[key]['' + index] = ['' + name, '' + value];
     };
     
     /**
@@ -447,20 +190,6 @@ function Tracker () {
      */
     this.prepareVisitCustomVariables = function () {
         
-        var locale      = require('Piwik/Locale');
-        var Alloy       = require("alloy");
-        var numAccounts = Alloy.Collections.instance("appAccounts").length;
-            
-        this.setCustomVariable(1, 'OS', Ti.Platform.osname + ' ' + Ti.Platform.version, 'visit');
-
-        // Piwik Version
-        this.setCustomVariable(2, 'Matomo Mobile Version', require('Piwik').getAppVersion(), 'visit');
-
-        // Locale of the device + configured locale
-        this.setCustomVariable(3, 'Locale', locale.getPlatformLocale() + '::' + locale.getLocale(), 'visit');
-        this.setCustomVariable(4, 'Num Accounts', numAccounts, 'visit');
-        
-        locale   = null;
     };
 
     /**
@@ -470,17 +199,7 @@ function Tracker () {
      * @returns  {boolean}  true if tracking is enabled, false otherwise.
      */
     this.isEnabled = function () {
-
-        if (!trackingConfig || !trackingConfig.enabled) {
-
-            return false;
-        }
-
-        var settings  = getSettings();
-        var isEnabled = settings.isTrackingEnabled();
-        settings      = null;
-
-        return isEnabled;
+		return false;
     };
 
     /**
@@ -492,19 +211,6 @@ function Tracker () {
      */
     this._dispatch = function () {
 
-        if (!this.isEnabled()) {
-            
-            // make sure nothing will be tracked from now on. Cancel even previous offered requests.
-            queue.clear();
-
-            return;
-        }
-        
-        this._mixinDefaultParameter();
-
-        queue.offer(parameter);
-
-        parameter = {};
     };
 
     /**
@@ -513,44 +219,6 @@ function Tracker () {
      */
     this._mixinDefaultParameter = function () {
 
-        if (!parameter) {
-            parameter    = {};
-        }
-        
-        var now          = new Date();
-
-        // session based parameters
-        parameter.idsite = this.siteId;
-        parameter.rand   = String(Math.random()).slice(2,8);
-        parameter.h      = now.getHours();
-        parameter.m      = now.getMinutes();
-        parameter.s      = now.getSeconds();
-        
-        parameter.send_image = '0';
-
-        // 1 = record request, 0 = do not record request
-        parameter.rec    = 1;
-        parameter.apiv   = this.apiVersion;
-        parameter.cookie = '';
-
-        parameter.urlref = 'http://' + Ti.Platform.osname + '.mobileapp.matomo.org';
-
-        // visitor based
-        parameter._id    = uuid;
-
-        // visit count
-        parameter._idvc  = visitCount;
-
-        var caps         = Ti.Platform.displayCaps;
-        parameter.res    = caps.platformWidth + 'x' + caps.platformHeight;
-
-        if (parameter._cvar) {
-            parameter._cvar = JSON.stringify(parameter._cvar);
-        }
-
-        if (parameter.cvar) {
-            parameter.cvar  = JSON.stringify(parameter.cvar);
-        }
     };
 
     /**
@@ -560,47 +228,6 @@ function Tracker () {
      */
     this.askForPermission = function () {
 
-        if (!trackingConfig || !trackingConfig.enabled) {
-
-            return;
-        }
-
-        var _ = require('L');
-
-        // uuid does not exist, this means user starts the app the first time.
-        // ask user whether he wants to enable or disable tracking
-        var alertDialog = Ti.UI.createAlertDialog({
-            title: _('Mobile_HelpUsToImprovePiwikMobile'),
-            message: _('Mobile_AskForAnonymousTrackingPermission'),
-            buttonNames: [_('General_Yes'), _('General_No')],
-            cancel: 1
-        });
-
-        alertDialog.addEventListener('click', function (event) {
-
-            if (!event) {
-
-                return;
-            }
-
-            var settings = getSettings();
-
-            switch (event.index) {
-                case 0:
-
-                    settings.setTrackingEnabled(true);
-
-                    Ti.UI.createAlertDialog({message: _('Feedback_ThankYou'), ok: _('General_Ok') }).show();
-                    break;
-
-                default:
-
-                    settings.setTrackingEnabled(false);
-                    break;
-            }
-        });
-
-        alertDialog.show();
     };
 
     this.init();

@@ -31,11 +31,11 @@
             "enabled": true
         },
         "tracking": {
-            "enabled": true,
+            "enabled": false,
             "siteId": 34,
             "apiVersion": 1,
-            "baseUrl": "http://mobileapp.matomo.org",
-            "piwikServerUrl": "https://demo.matomo.org/piwik.php",
+            "baseUrl": "",
+            "piwikServerUrl": "",
             "maxTracksPerDay": 200
         },
         "faqUrl": "https://matomo.org/faq/mobile-app/",

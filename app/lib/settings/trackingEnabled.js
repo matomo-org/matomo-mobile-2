@@ -12,22 +12,5 @@ function L(key)
 
 exports.toggle = function ()
 {
-    var settings = Alloy.createCollection('AppSettings').settings();
 
-    var enabled  = !settings.isTrackingEnabled();
-    settings.setTrackingEnabled(enabled);
-    settings.save();
-
-    var action  = enabled ? 'enabled' : 'disabled';
-    var tracker = require('Piwik/Tracker');
-    tracker.setCustomVariable(1, 'action', '' + action, 'event');
-    tracker.trackEvent({name: 'Anonymous Tracking Changed', action: 'result', category: 'Settings'});
-
-    var alertDialog = Ti.UI.createAlertDialog({
-        message: L('Mobile_AskForAnonymousTrackingPermission'),
-        buttonNames: [L('General_Ok')]
-    });
-    
-    alertDialog.show();
-    alertDialog = null;
 };
