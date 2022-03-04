@@ -29,6 +29,14 @@ Matomo Mobile is released under the GPL v3 license, see [LICENSE](LICENSE).
 
 See https://matomo.org/blog/category/piwik-mobile-changelog/
 
+## How to build
+
+See [Titanium CLI docs](https://docs.axway.com/bundle/Titanium_SDK_allOS_en/page/titanium_command-line_interface_reference.html). Note: This assumes that the Titanium SDK has been installed at some point. I haven't looked into steps to set this up from scratch yet. It may require something like `titanium sdk update --default --install`.
+
+* npm install -g titanium
+* npm install -g alloy
+* ti build --platform ios
+
 ## Contact
 
 https://matomo.org
