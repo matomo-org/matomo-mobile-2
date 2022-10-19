@@ -25,7 +25,7 @@ function showReportContent()
 {
     if (OS_IOS) {
         $.pullToRefresh.refreshDone();
-    } 
+    }
 
     $.content.show();
     $.loadingindicator.hide();
@@ -36,7 +36,7 @@ exports.showReportHasNoData = function (title, message)
 {
     if (OS_IOS) {
         $.pullToRefresh.refreshDone();
-    } 
+    }
 
     $.emptyData.show($.index, $.doRefresh, title, message);
 
@@ -50,7 +50,7 @@ exports.showLoadingMessage = function ()
     if (OS_IOS) {
         $.pullToRefresh.refresh();
     }
-    
+
     $.loadingindicator.show();
     $.content.hide();
     $.emptyData && $.emptyData.cleanupIfNeeded();
@@ -60,7 +60,7 @@ function onTogglePaginator()
 {
     require('Piwik/Tracker').trackEvent({name: 'Toggle Paginator', category: 'Report With Dimension'});
 
-    $.showAllEntries = !$.showAllEntries; 
+    $.showAllEntries = !$.showAllEntries;
     shouldScrollToPositionOfPaginator = $.showAllEntries;
     $.doRefresh();
 }
@@ -73,7 +73,7 @@ exports.renderProcessedReport = function (processedReportCollection)
 {
     showReportContent();
 
-    $.reportTable.setData([]);
+    $.reportTable.data = [];
 
     if (!hasReportData(processedReportCollection)) {
         exports.showReportHasNoData(L('Mobile_NoDataShort'), L('CoreHome_ThereIsNoDataForThisReport'));
@@ -108,7 +108,7 @@ exports.renderProcessedReport = function (processedReportCollection)
     }
     row.add($.reportInfoCtrl.getView());
     rows.push(row);
-    
+
     processedReportCollection.forEach(function (processedReport) {
         if (!processedReport) {
             return;
@@ -147,7 +147,7 @@ exports.renderProcessedReport = function (processedReportCollection)
 
                 var params = {
                     backButtonTitle: this.currentReportName || L('Mobile_NavigationBack'),
-                    apiModule: this.subtableModule, 
+                    apiModule: this.subtableModule,
                     apiAction: this.subtableAction,
                     subtableId: this.subtableId,
                     metric: this.currentMetric,
@@ -172,7 +172,6 @@ exports.renderProcessedReport = function (processedReportCollection)
         // a show all or show less button only makes sense if there are more or equal results than the used
         // filter limit value...
         var showAllOptions = {color: '#43a047', title: $.showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')};
-        if (OS_MOBILEWEB) showAllOptions.left = 10;
         if (OS_ANDROID) showAllOptions.leftImage = '/images/spacer_10x10.png';
         if (OS_ANDROID) showAllOptions.font = {fontSize: '16sp', fontWeight: 'bold'};
         if (OS_ANDROID) showAllOptions.top = '16dp';
@@ -188,8 +187,8 @@ exports.renderProcessedReport = function (processedReportCollection)
         row.addEventListener('click', onTogglePaginator);
         rows.push(row);
     }
-    
-    $.reportTable.setData(rows);
+
+    $.reportTable.data = rows;
     row  = null;
     rows = null;
 

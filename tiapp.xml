@@ -4,7 +4,7 @@
         <target device="ipad">true</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>10.1.1.GA</sdk-version>
+    <sdk-version>11.1.1.GA</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Matomo Mobile 2</name>
     <version>2.5.0.1</version>
@@ -54,7 +54,7 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal" android:versionCode="14" android:versionName="2.4.5">
-            <application android:theme="@style/Theme.PiwikTheme">
+            <application android:theme="@style/Theme.PiwikTheme" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" >
                 <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/app_name" android:name=".MatomoMobile2Activity" android:theme="@style/Theme.PiwikTheme">
                     <intent-filter>
                         <action android:name="android.intent.action.MAIN"/>
@@ -70,5 +70,4 @@
         <plugin>ti.alloy</plugin>
     </plugins>
     <property name="ti.deploytype">production</property>
-    <property name="appc-app-id" type="string">55dac5c5d667761943cdb798</property>
 </ti:app>

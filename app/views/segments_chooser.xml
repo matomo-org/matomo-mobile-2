@@ -24,10 +24,7 @@
             </View>
         </ContentView>
     </Popover>
-    <Window module="xp.ui" platform="android,mobileweb" id="index" onClose="onClose" onOpen="onOpen">
-        <LeftNavButton platform="mobileweb">
-            <Button id="cancelButton" onClick="closeWindow"/>
-        </LeftNavButton>
+    <Window module="xp.ui" platform="android" id="index" onClose="onClose" onOpen="onOpen">
 
         <Widget src="org.piwik.headerbar"
                 id="headerBar"

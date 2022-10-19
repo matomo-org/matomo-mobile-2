@@ -15,7 +15,7 @@
 
 /**
  * @class    The module contains a few methods for querying device locale information.
- * 
+ *
  * @static
  */
 function Locale () {
@@ -37,7 +37,7 @@ function Locale () {
         bg:         'Български',
         ca:         'Català',
         cs:         'Česky',
-        cy:         'Cymraeg', 
+        cy:         'Cymraeg',
         da:         'Dansk',
         de:         'Deutsch',
         el:         'Ελληνικά',
@@ -85,18 +85,6 @@ function Locale () {
         this.AVAILABLE_LANGUAGES.th = 'ไทย';
     }
 
-    // see http://dev.piwik.org/trac/ticket/4008
-    if (OS_MOBILEWEB) {
-        this.AVAILABLE_LANGUAGES = {
-            de: 'Deutsch',
-            en: 'English',
-            es: 'Español',
-            fr: 'Français',
-            it: 'Italiano',
-            ja: '日本語',
-        };
-    }
-
     /**
      * Returns a map of all available/supported languages.
      *
@@ -109,7 +97,7 @@ function Locale () {
 
     /**
      * Verifies whether the given language exists.
-     * 
+     *
      * @param    {string}  lang  A language key, for example 'de' or 'en'
      *
      * @returns  {boolen}  True if the given language exists/is valid, false otherwise.
@@ -157,7 +145,7 @@ function Locale () {
         if (Ti.Platform.locale) {
 
             var locale = Ti.Platform.locale;
-            
+
             if (locale && locale.getCurrentLocale) {
                 // mobile web
                 return locale.getCurrentLocale();

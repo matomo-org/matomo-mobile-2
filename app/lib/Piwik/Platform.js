@@ -23,9 +23,9 @@ function isIpad()
 
 /**
  * Converts a screen pixel to density-independent pixels.
- * 
+ *
  * @param    {int}  pixel   Screen pixels.
- * 
+ *
  * @returns  {int}  Converted value in dp. The value is rounded upward to it's nearest integer.
  */
 function pixelToDp(pixel) {
@@ -33,12 +33,12 @@ function pixelToDp(pixel) {
     var dpi = Ti.Platform.displayCaps.dpi;
     var dp  = (pixel / dpi) * 160;
     dp      = Math.ceil(dp);
-    
+
     return dp;
 }
 
 function dpToPixel(dp) {
-    var factor = Ti.Platform.displayCaps.getLogicalDensityFactor();
+    var factor = Ti.Platform.displayCaps.logicalDensityFactor;
 
     if (factor) {
         return Math.ceil(dp * factor);
@@ -83,13 +83,13 @@ function isWideEnoughToConsiderItAsATablet(width)
 
 /**
  * Detects whether current device is a tablet.
- * 
+ *
  * @private
  */
 function isTablet () {
-    
+
     if (isIpad()) {
-        
+
         return true;
     }
 
@@ -97,30 +97,22 @@ function isTablet () {
     var height = Ti.Platform.displayCaps.platformHeight;
     var min    = Math.min(width, height);
 
-    if (OS_MOBILEWEB && isWideEnoughToConsiderItAsATablet(min)) {
-        return true;
-
-    } else if (OS_MOBILEWEB) {
-
-        return false;
-    }
-
     // android
     var widthInDp = pixelToDp(min);
     if (!isWideEnoughToConsiderItAsATablet(widthInDp)) {
-        
+
         return false;
     }
-     
+
     var screenSizeInch = getScreenSizeInInch();
-    
+
     return (screenSizeInch >= 6.0);
 }
 
 function isRetinaHDDisplay()
 {
     var dpi = Ti.Platform.displayCaps.dpi;
-    
+
     return 480 <= parseInt(dpi, 10);
 }
 
@@ -133,7 +125,7 @@ function getIOSScaleFactor()
 }
 
 /**
- * True if the current device is considered to be a tablet. Currently, a device is considered to be a tablet if it is 
+ * True if the current device is considered to be a tablet. Currently, a device is considered to be a tablet if it is
  * an iPad or if it is larger than 6 inch.
  *
  * @type  boolean

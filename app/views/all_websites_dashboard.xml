@@ -1,30 +1,25 @@
 <Alloy>
     <Collection src="piwikWebsites" id="piwikWebsites" instance="true"/>
     <Collection src="appAccounts"/>
-    
+
     <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen">
         <LeftNavButton platform="ios">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
-        
-        <RightNavButton platform="ios,mobileweb">
+
+        <RightNavButton platform="ios">
             <Button id="accountsButton" onClick="chooseAccount"/>
         </RightNavButton>
-        
-        <Widget src="org.piwik.headerbar" 
-                id="headerBar" 
+
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
                 onActionItem1="chooseAccount"
                 platform="android" />
 
         <View id="loading"><Label id="loadingLabel"></Label></View>
-        
+
         <View id="content" class="container">
-            <SearchBar id="searchBar" onReturn="searchWebsite" onCancel="cancelSearchWebsite" platform="android,ios"/>
-            <View class="searchBarContainer" platform="mobileweb">
-                <View class="searchBarInnerContainer">
-                    <TextField id="searchBar" onReturn="searchWebsite"/>
-                </View>
-            </View>
+            <SearchBar id="searchBar" onReturn="searchWebsite" onCancel="cancelSearchWebsite"/>
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
             <View class="shadow" formFactor="tablet"></View>
             <TableView id="websitesTable" dataCollection="$.piwikWebsites" dataFunction="renderWebsites"

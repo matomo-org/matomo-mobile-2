@@ -49,7 +49,7 @@ function onClose()
 
     if (OS_ANDROID && $.websitesTable) {
         // prevent tableViewRows from leaking memory
-        $.websitesTable.setData([]);
+        $.websitesTable.data = [];
     }
 
     $.trigger('close');
@@ -58,7 +58,7 @@ function onClose()
     $.off();
 }
 
-function websiteChosen(siteModel) 
+function websiteChosen(siteModel)
 {
     $.trigger('websiteChosen', {site: siteModel, account: accountModel});
 }
@@ -154,7 +154,7 @@ function render()
 {
     if (!hasFoundWebsites() && hasUsedSearch()) {
         var params = {title: L('SitesManager_NotFound') + ' ' + getSearchText()};
-        $.websitesTable.setData([Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow()]);
+        $.websitesTable.data = [Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow()];
         showReportContent();
     } else if (!hasFoundWebsites()) {
         showMessageNoWebsitesFound(L('Mobile_NoWebsitesShort'), L('Mobile_NoWebsiteFound'));
@@ -184,13 +184,13 @@ function showLoadingMessage()
     $.loading.show();
 }
 
-function cancelSearchWebsite() 
+function cancelSearchWebsite()
 {
     if (!$.searchBar) {
 
         return;
     }
-    
+
     $.searchBar.value = '';
     $.searchBar.blur();
 
@@ -228,7 +228,7 @@ function searchWebsite()
     }
 
     showLoadingMessage();
-    
+
     var reportDate  = require('session').getReportDate();
     var piwikPeriod = reportDate ? reportDate.getPeriodQueryString() : 'day';
     var piwikDate   = reportDate ? reportDate.getDateQueryString() : 'today';
@@ -236,8 +236,8 @@ function searchWebsite()
     $.piwikWebsites.fetchWebsites('nb_visits', {
         account: accountModel,
         params: {
-            period: piwikPeriod, 
-            date: piwikDate, 
+            period: piwikPeriod,
+            date: piwikDate,
             enhanced: 1,
             pattern: getSearchText(),
             filter_limit: Alloy.CFG.numDisplayedWebsitesInDashboard
@@ -292,7 +292,7 @@ function fetchListOfAvailableWebsites()
     $.piwikWebsites.fetchWebsites("nb_visits", {
         account: accountModel,
         params: {
-            period: piwikPeriod, 
+            period: piwikPeriod,
             date: piwikDate,
             showColumns: 'nb_visits,visits_evolution',
             filter_limit: Alloy.CFG.numDisplayedWebsitesInDashboard
@@ -321,13 +321,13 @@ function formatWebsite(model)
         model.set('evolution_color', '#d4291f');
     } else {
         model.set('evolution_color', '#43a047');
-    } 
-    
+    }
+
     var evolution = model.get('nb_visits');
     if (visitsEvolution) {
         evolution = String.format('%s (%s)', '' + model.get('nb_visits'), '' + visitsEvolution);
     }
-    
+
     model.set('evolution', evolution);
 
     model.name = model.get('name');

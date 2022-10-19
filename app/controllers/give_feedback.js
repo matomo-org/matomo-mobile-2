@@ -30,10 +30,10 @@ function toggleReportChooserVisibility(event)
 
 function platformInfo()
 {
-    return String.format('%s %s %s (%s)', 
-                         '' + Ti.Platform.name, 
-                         '' + Ti.Platform.version, 
-                         '' + Ti.Platform.model, 
+    return String.format('%s %s %s (%s)',
+                         '' + Ti.Platform.name,
+                         '' + Ti.Platform.version,
+                         '' + Ti.Platform.model,
                          '' + Ti.Platform.locale);
 }
 
@@ -41,9 +41,9 @@ function versionInfo()
 {
     var version = require('Piwik').getAppVersion();
 
-    return String.format("%s - %s %s", 
+    return String.format("%s - %s %s",
                          '' + version,
-                         '' + Ti.version, 
+                         '' + Ti.version,
                          '' + Ti.buildHash);
 }
 
@@ -107,7 +107,7 @@ function render()
     var rows = [];
 
     var row = createSelectableRow({
-        title: 'Email Us', 
+        title: 'Email Us',
         description: 'Send us feedback, report a bug or a feature wish.'
     });
     row.addEventListener('click', doSendEmailFeedback);
@@ -116,7 +116,7 @@ function render()
     var appRating = new (require('Piwik/App/Rating'));
     if (appRating.canRate()) {
         row = createSelectableRow({
-            title: 'Rate us on the App Store', 
+            title: 'Rate us on the App Store',
             description: 'Matomo Mobile App is a Free Software, we would really appreciate if you took 1 minute to rate us.'
         });
         row.addEventListener('click', doRateApp);
@@ -125,7 +125,7 @@ function render()
 
     if (!OS_IOS) {
 	    row = createSelectableRow({
-	        title: 'Learn how you can participate', 
+	        title: 'Learn how you can participate',
 	        description: 'Matomo is a project made by the community, you can participate in the Matomo Mobile App or Matomo.'
 	    });
 	    row.addEventListener('click', doParticipate);
@@ -136,7 +136,7 @@ function render()
     rows.push(createNonSelectableRow({title: 'Version', description: versionInfo()}));
     rows.push(createNonSelectableRow({title: 'Platform', description: platformInfo()}));
 
-    $.feedbackTable.setData(rows);
+    $.feedbackTable.data = rows;
     rows = null;
     row  = null;
 }

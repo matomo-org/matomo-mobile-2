@@ -107,7 +107,7 @@
     font: {fontSize: 14, fontWeight: 'bold'},
     right: 10,
     height: Ti.UI.SIZE,
-    selectedBackgroundColor: '#212121',
+    backgroundSelectedColor: '#212121',
 }
 
 ".websiteRow[platform=android]": {

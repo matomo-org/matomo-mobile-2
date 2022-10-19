@@ -67,7 +67,7 @@ function onClose()
 
     if (OS_ANDROID) {
         // this frees a lot of memory
-        $.reportTable.setData([]);
+        $.reportTable.data = [];
     }
 
     $.destroy();
@@ -88,12 +88,12 @@ function onSegmentChanged()
     $.doRefresh();
 }
 
-function onDateChanged(changedReportDate) 
+function onDateChanged(changedReportDate)
 {
     if (!changedReportDate) {
         return;
     }
-    
+
     require('Piwik/Tracker').trackEvent({name: 'Date Changed', action: 'result', category: 'Report With Dimension'});
 
     reportDate = changedReportDate;

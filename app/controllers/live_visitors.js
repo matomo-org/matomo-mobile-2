@@ -63,7 +63,7 @@ function onClose()
     stopRefreshTimer();
 
     // this frees a lot of memory
-    $.liveTable.setData([]);
+    $.liveTable.data = [];
 
     $.countdown && $.countdown.stop();
     $.destroy();
@@ -90,7 +90,7 @@ function stopRefreshTimer() {
         // do no longer execute autoRefresh if user opens another app or returns the home screen (only for iOS)
         clearTimeout(refreshTimer);
     }
-    
+
     $.countdown.stop();
 }
 
@@ -150,7 +150,7 @@ function render(account, counter30Min, counter24Hours, visitorDetails)
         visitorOverview = null;
     });
 
-    $.liveTable.setData(rows);
+    $.liveTable.data = rows;
     rows = null;
     account = null;
     visitorDetails = null;
@@ -164,7 +164,7 @@ function showReportContent()
 {
     if ($.pullToRefresh) {
         $.pullToRefresh.refreshDone();
-    } 
+    }
 
     $.content.show();
     $.loadingindicator.hide();
@@ -183,7 +183,7 @@ function showLoadingMessage()
 {
     if ($.pullToRefresh) {
         $.pullToRefresh.refresh();
-    } 
+    }
 
     $.loadingindicator.show();
     $.content.hide();
@@ -216,7 +216,7 @@ function doRefresh()
 function restartTimerIfSomeVisitorsAreAlreadyDisplayed() {
     if ($.liveTable && $.liveTable.data && $.liveTable.data.length) {
         // start auto refresh again if user returns to this window from a previous displayed window
-        
+
         startRefreshTimer(20000);
     }
 }
@@ -245,8 +245,8 @@ function handleBackgroundEvents()
         var activity = require('ui/helper').getAndroidActivity($.index);
 
         if (activity) {
-            activity.setOnPause(stopRefreshTimer);
-            activity.setOnStop(stopRefreshTimer);
+            activity.onPause = stopRefreshTimer;
+            activity.onStop = stopRefreshTimer;
         }
     }
 }
@@ -262,8 +262,8 @@ function stopHandleBackgroundEvents()
         var activity = require('ui/helper').getAndroidActivity($.index);
 
         if (activity) {
-            activity.setOnPause(function () {});
-            activity.setOnStop(function () {});
+            activity.onPause = function () {};
+            activity.onStop = function () {};
         }
     }
 }
@@ -282,7 +282,7 @@ function toggleReportChooserVisibility()
     require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Visitors in real time'});
 }
 
-exports.open = function () 
+exports.open = function ()
 {
     registerEvents();
     handleBackgroundEvents();

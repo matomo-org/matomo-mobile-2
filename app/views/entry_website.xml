@@ -3,8 +3,8 @@
         <LeftNavButton platform="ios">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
-        
-        <RightNavButton platform="ios,mobileweb">
+
+        <RightNavButton platform="ios">
             <Button id="accountsButton" onClick="chooseAccount"/>
         </RightNavButton>
 

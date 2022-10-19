@@ -27,11 +27,14 @@
 },
 
 "Label": {
-    color: "#212121"
+    color: "#212121",
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE
 }
 
 "TableViewRow[platform=android]": {
-    font: {fontSize: '16sp'}
+    font: {fontSize: '16sp'},
+    height: Ti.UI.SIZE
 }
 
 "Label[platform=android]": {

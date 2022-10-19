@@ -1,16 +1,13 @@
 <Alloy>
     <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen">
-        <LeftNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
-        </LeftNavButton>
         <LeftNavButton platform="ios" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         <LeftNavButton platform="ios" formFactor="tablet">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
-        
-        <Widget src="org.piwik.headerbar" 
+
+        <Widget src="org.piwik.headerbar"
                 id="headerBar"
                 onHomeItemSelected="toggleReportChooserVisibility"
                 formFactor="handheld"
@@ -21,7 +18,7 @@
                 formFactor="tablet"
                 platform="android" />
 
-        <ListView id="settingsTable" platform="ios,android" onItemclick="onItemClick">
+        <ListView id="settingsTable" onItemclick="onItemClick">
             <Templates platform="android">
                 <ItemTemplate name="settingsTemplate">
                     <Label bindId="title" class="titleLabel" id="settingsLabel"/>
@@ -46,17 +43,5 @@
                 <ListItem id="timeout" callback="changeHttpTimeout"/>
             </ListSection>
         </ListView>
-        
-        <TableView id="settingsTable" platform="mobileweb">
-            <FooterView>
-                <View class="footer"><Label id="loginHint"/></View>
-            </FooterView>
-            <TableViewRow id="language" onClick="changeLanguage"/>
-            <TableViewRow id="reportDate" onClick="changeReportDate"/>
-            <TableViewRow id="tracking" onClick="toggleTrackingEnabled"/>
-            <TableViewRow id="graphs" onClick="toggleGraphsEnabled"/>
-            <Widget src="org.piwik.tableviewsection" id="advanced"/>
-            <TableViewRow id="timeout" onClick="changeHttpTimeout"/>
-        </TableView>
     </Window>
 </Alloy>

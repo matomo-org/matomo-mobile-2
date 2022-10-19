@@ -19,7 +19,7 @@ function updateAvailableReportsList()
     if (!$.reportsCollection) {
         return;
     }
-    
+
     var rows = [];
     var currentSection = null;
     var latestSection  = null;
@@ -51,10 +51,6 @@ function updateAvailableReportsList()
             latestSection = currentSection;
         }
     });
-    
-    if (OS_MOBILEWEB && location && location.href) {
-        rows.push(Alloy.createController('report_chooser_row', {title: 'Desktop version', cid: 'desktop'}).getView());
-    }
 
     rows.push(Alloy.createController('report_chooser_section', {title: L('SitesManager_MenuManage')}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('Mobile_Accounts'), cid: 'accounts'}).getView());
@@ -62,7 +58,7 @@ function updateAvailableReportsList()
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_Help'), cid: 'help'}).getView());
     rows.push(Alloy.createController('report_chooser_row', {title: L('General_GiveUsYourFeedback'), cid: 'feedback'}).getView());
 
-    $.reportsTable.setData(rows);
+    $.reportsTable.data = rows;
 
     makeSureSelectedRowIsStillSelected();
 
@@ -70,7 +66,7 @@ function updateAvailableReportsList()
         // fix "iPhone 4s, iOS 8: Left sidebar is positioned too far down after opening it" see https://github.com/matomo-org/matomo-mobile-2/issues/5306
         $.reportsTable.scrollToTop(0);
     }
-    
+
     rows = null;
 }
 
@@ -87,7 +83,7 @@ function makeSureSelectedRowIsStillSelected()
             if (!section || !section.rows) {
                 return;
             }
-            
+
             _.forEach(section.rows, function (row) {
                 if (cidToSelect == row.cid) {
                     $.reportsTable.selectRow(index);
@@ -131,12 +127,12 @@ function isActionThatRequiresAnAccount(cid)
     return (-1 === cidsWhichDontRequireAnAccount.indexOf(cid));
 }
 
-function doSelectReport(event) 
+function doSelectReport(event)
 {
     if (!event || !event.rowData || !event.rowData.cid) {
         return;
     }
-    
+
     var cid = event.rowData.cid;
 
     if (!isAnAccountSelected() && isActionThatRequiresAnAccount(cid)) {
@@ -193,11 +189,11 @@ function openDesktopVersion()
     if (!location || !location.href) {
         return;
     }
-    
+
     var account = require('session').getAccount();
     location.href = account.getBasePath() + '?desktop';
 }
- 
+
 function onAccountChosen(account)
 {
     var self = this;
@@ -257,12 +253,12 @@ function openEntryReport()
 {
     var compositeReport = Alloy.createController('report_composite');
     compositeReport.open();
-    
+
     setCurrentlySelectedCid(getCidOfEntryReport($.reportsCollection));
     makeSureSelectedRowIsStillSelected();
 }
 
-exports.open = function() 
+exports.open = function()
 {
     require('layout').setLeftSidebar($.reportsTable);
 

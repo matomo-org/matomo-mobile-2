@@ -1,6 +1,5 @@
 "#index": {
     backgroundColor: '#222222',
-    selectedBackgroundColor: '#212121',
     backgroundSelectedColor: '#212121',
     backgroundFocusedColor: 'black',
     height: Ti.UI.SIZE,
