@@ -31,7 +31,7 @@ See https://matomo.org/blog/category/piwik-mobile-changelog/
 
 ## How to build
 
-See [Titanium CLI docs](https://docs.axway.com/bundle/Titanium_SDK_allOS_en/page/titanium_command-line_interface_reference.html). Note: This assumes that the Titanium SDK has been installed at some point. I haven't looked into steps to set this up from scratch yet. It may require something like `titanium sdk update --default --install`.
+See [Titanium CLI docs](https://titaniumsdk.com/guide/Titanium_SDK/Titanium_SDK_Guide/Titanium_Command-Line_Interface_Reference/). Note: This assumes that the Titanium SDK has been installed at some point. To set up Titanium locally you can follow the [Installation and Configuration guide](https://titaniumsdk.com/guide/Titanium_SDK/Titanium_SDK_Getting_Started/Installation_and_Configuration/) or follow the [community guide on fromzerotoapp.com](https://fromzerotoapp.com/how-to-install-appcelerator-titanium/)
 
 * npm install -g titanium
 * npm install -g alloy
