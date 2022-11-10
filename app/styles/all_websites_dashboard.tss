@@ -137,7 +137,7 @@
 ".websiteNameLabel": {
     verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    left: 10, 
+    left: 10,
     right: 120,
     ellipsize: true,
     wordWrap: false
@@ -148,7 +148,7 @@
 }
 
 ".websiteNameLabel[platform=android]": {
-    left: '16dp', 
+    left: '16dp',
     right: '120dp',
     touchEnabled: false
 }

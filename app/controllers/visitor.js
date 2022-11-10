@@ -23,7 +23,7 @@ createCustomVariables(visitor, accessUrl);
 createSystem(visitor, accessUrl);
 createActionDetails(visitor, accessUrl);
 
-$.visitorTable.setData(rows);
+$.visitorTable.data = rows;
 rows = null;
 
 function open()
@@ -37,7 +37,7 @@ function close()
 
     if (OS_ANDROID) {
         // this prevents the tableViewRows from leaking memory
-        $.visitorTable.setData([]);
+        $.visitorTable.data = [];
     }
 }
 
@@ -87,15 +87,15 @@ function createSection(params)
 
 function createFirstVisitTimeRow(visitor)
 {
-    var visitDateLabel = String.format('%s %s - (%s)', 
+    var visitDateLabel = String.format('%s %s - (%s)',
                                         '' + visitor.serverDatePrettyFirstAction,
-                                        '' + visitor.serverTimePrettyFirstAction, 
+                                        '' + visitor.serverTimePrettyFirstAction,
                                         '' + visitor.visitDurationPretty);
 
     return createRow({title: visitDateLabel, className: 'visitorTableViewRow'});
 }
 
-function createOverview (visitor, accessUrl) 
+function createOverview (visitor, accessUrl)
 {
     rows.push(createFirstVisitTimeRow(visitor));
 
@@ -104,10 +104,10 @@ function createOverview (visitor, accessUrl)
                              className: 'visitorTableViewRow',
                              value: visitor.visitIp}));
     }
-    
+
     if (visitor.visitorType) {
         var visitorTypeText = visitor.visitorType;
-        
+
         switch (visitorTypeText) {
             case 'new':
                 visitorTypeText = L('General_NewVisitor');
@@ -246,7 +246,7 @@ function createCustomVariables(visitor, accessUrl) {
                              className: 'visitorTableViewRow',
                              value: customVariableValue}));
     }
-    
+
     visitor = null;
 }
 
@@ -320,7 +320,7 @@ function createSystem(visitor, accessUrl) {
         rows.push(row);
         row = null;
     }
-    
+
     visitor = null;
 }
 
@@ -336,7 +336,7 @@ function createActionDetails(visitor, accessUrl) {
     }
 
     var numActions = parseInt(visitor.actions, 10);
-    
+
     rows.push(createSection({title: String.format(L('VisitsSummary_NbActionsDescription'),
                              '' + numActions)}));
 
@@ -377,7 +377,7 @@ function createActionDetails(visitor, accessUrl) {
                 break;
         }
     }
-    
+
     visitor = null;
 }
 
@@ -458,14 +458,14 @@ function createActionAction(actionDetail)
     } else if ('pageTitle' in actionDetail && actionDetail.pageTitle) {
         row.add($.UI.create('Label', {classes: ['actionActionPageTitleLabel'], text: actionDetail.pageTitle + ''}));
     }
-    
+
     var label = null;
     if ('subtitle' in actionDetail && actionDetail.subtitle) {
         label = $.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.subtitle + ''});
         row.add(label);
         label = null;
     }
-    
+
     if ('url' in actionDetail && actionDetail.url) {
         var label = $.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.url + ''});
         if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
@@ -506,7 +506,7 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
     if (accessUrl && actionDetail.icon) {
         view.add($.UI.create('ImageView', {classes: ['actionDefaultIconImageView'], image: (accessUrl + actionDetail.icon)}));
     }
-    
+
     var title = '';
     if ('title' in actionDetail && actionDetail.title) {
     	title = actionDetail.title;
@@ -518,7 +518,7 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
             case 'goal':
                 title = L('General_Goal');
                 break;
-            
+
             case 'download':
                 title = L('General_Download');
                 break;
@@ -535,21 +535,21 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
             case 95:
                 title = 'Form';
                 break;
-                
+
 			case 'media':
             case 94:
                 title = 'Media';
                 break;
         }
     }
-    
+
     if (title) {
         view.add($.UI.create('Label', {classes: ['actionDefaultTypeLabel'], text: title}));
     }
 
     row.add(view);
     view = null;
-    
+
     var label;
     if ('subtitle' in actionDetail && actionDetail.subtitle) {
         label = $.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.subtitle + '')});
@@ -578,7 +578,7 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
     if ('serverTimePretty' in actionDetail && actionDetail.serverTimePretty) {
         row.add($.UI.create('Label', {classes: ['actionActionServerTimeLabel'], text: actionDetail.serverTimePretty + ''}));
     }
-    
+
     rows.push(row);
     row          = null;
     actionDetail = null;
@@ -600,11 +600,11 @@ function createGenericAction(actionDetail, visitor, accessUrl)
 
     if (accessUrl && 'icon' in actionDetail && actionDetail.icon) {
 	    var view = $.UI.create('View', {classes: ['actionHeadlineView']});
-	
+
 	    if (accessUrl && 'icon' in actionDetail && actionDetail.icon) {
 	        view.add($.UI.create('ImageView', {classes: ['actionDefaultIconImageView'], image: (accessUrl + actionDetail.icon)}));
 	    }
-	
+
 	    if ('title' in actionDetail && actionDetail.title) {
 	        view.add($.UI.create('Label', {classes: ['actionGenericTypeLabel'], text: (actionDetail.title + '')}));
 	    }
@@ -737,7 +737,7 @@ function createEcommerceAction(actionDetail, visitor, accessUrl)
     var revenueText = String.format('%s: %s %s', L('General_ColumnRevenue'),
                                                  '' +  actionDetail.revenue,
                                                  '' + visitor.siteCurrency);
-    
+
     if (actionDetail.revenueSubTotal) {
         revenueText += String.format(', %s: %s %s', L('General_Subtotal'),
                                                     '' + actionDetail.revenueSubTotal,
@@ -748,7 +748,7 @@ function createEcommerceAction(actionDetail, visitor, accessUrl)
 
     row.add(ecommerceView);
     ecommerceView = null;
-    
+
     row.add($.UI.create('Label', {classes: ['actionEcommerceStandardLabel'], text: revenueText}));
     row.add($.UI.create('Label', {classes: ['actionEcommerceStandardLabel'], text: listOfProductsText}));
     row.add(itemDetailsView);

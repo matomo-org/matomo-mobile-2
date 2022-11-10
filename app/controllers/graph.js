@@ -22,17 +22,14 @@ $.image.getView().addEventListener('click', function () {
     }
 });
 
-if (!OS_MOBILEWEB) {
-    // we need to wait till view is visible otherwise animation will never be executed.
-    // load event is not supported on MobileWeb
-    $.image.getView().addEventListener('load', function () {
-        animateFadeOutDetailIcon();
+// we need to wait till view is visible otherwise animation will never be executed.
+$.image.getView().addEventListener('load', function () {
+    animateFadeOutDetailIcon();
 
-        if (graphSwitcher) {
-            graphSwitcher.fadeOut();
-        }
-    });
-}
+    if (graphSwitcher) {
+        graphSwitcher.fadeOut();
+    }
+});
 
 function width(image)
 {
@@ -48,7 +45,7 @@ function getGraphOptions()
 {
     return {imageGraphUrl: imageGraphUrl,
             imageGraphEvolutionUrl: imageGraphEvolutionUrl,
-            reportName: reportName, 
+            reportName: reportName,
             reportDate: reportDate};
 }
 
@@ -62,7 +59,7 @@ function updateImage(graphUrl)
 {
     var graph = require('Piwik/PiwikGraph');
     var imageWithSize = graph.appendSize(graphUrl, $.image.getWidth(), $.image.getHeight(), true);
-    
+
     console.debug('imageUrlWithSize', imageWithSize);
 
     if (!imageWithSize || !require('ui/helper').isTitaniumCompatibleImageUrl(imageWithSize)) {
@@ -89,16 +86,13 @@ function addGraphSwitcher(switcher)
         if (!event || !event.graphUrl) {
             return;
         }
-        
+
         updateImage(event.graphUrl);
-        
+
         graphSwitcher.toggleVisibility();
         $.showDetailIcon.hide();
     });
 
-    if (OS_MOBILEWEB) {
-        graphSwitcher.fadeOut();
-    }
 }
 
 function completeGraphUrl(graphUrl, processedReportCollection, accountModel)
@@ -144,7 +138,7 @@ function hideDetailIcon()
     if (!$.showDetailIcon) {
         return;
     }
-    
+
     $.showDetailIcon.hide();
     $.showDetailIcon.opacity = 1;
 }
@@ -189,9 +183,6 @@ function renderIfPossibleAndNeeded()
 
     updateImage(currentGraphUrlToDislay);
 
-    if (OS_MOBILEWEB) {
-        hideDetailIcon();
-    }
 }
 
 exports.update = function (processedReportCollection, accountModel, additonalParams)

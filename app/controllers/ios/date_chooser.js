@@ -24,7 +24,7 @@ var toDateRow   = null;
 function trackWindowRequest()
 {
     require('Piwik/Tracker').setCustomVariable(1, 'period', period, 'page');
-    
+
     require('Piwik/Tracker').trackWindow('Date Chooser', 'date-chooser');
 }
 
@@ -43,14 +43,14 @@ function createRow(params)
 function doSelectPicker (event)
 {
     if (!$.toPicker || !$.fromPicker || !$.iOSPeriodPicker || !event) {
-        
+
         return;
     }
-    
+
     selectRow(event.index);
-    
+
     if (0 === event.index) {
-        
+
         $.toPicker.hide();
         $.fromPicker.hide();
         $.iOSPeriodPicker.show();
@@ -59,19 +59,19 @@ function doSelectPicker (event)
         $.datePickerTable.applyProperties({bottom: $.iOSPeriodPicker.size.height});
 
     } else if (1 == event.index) {
-        
+
         $.toPicker.hide();
         $.iOSPeriodPicker.hide();
         $.fromPicker.show();
-        
+
         $.datePickerTable.applyProperties({bottom: $.fromPicker.size.height});
-        
+
     } else if (2 == event.index) {
-        
+
         $.iOSPeriodPicker.hide();
         $.fromPicker.hide();
         $.toPicker.show();
-        
+
         $.datePickerTable.applyProperties({bottom: $.toPicker.size.height});
     }
 }
@@ -86,10 +86,10 @@ function createTableViewRows ()
                              value: getDisplayDate(toDate)});
 }
 
-function setPeriod (periodToSet) 
+function setPeriod (periodToSet)
 {
     if (!periodToSet || !fromDateRow || !periodRow || !toDateRow) {
-        
+
         return;
     }
 
@@ -97,34 +97,34 @@ function setPeriod (periodToSet)
 
     if ('range' == period) {
         fromDateRow.changeTitle(L('General_DateRangeFrom'));
-        $.datePickerTable.setData([periodRow.getView(), fromDateRow.getView(), toDateRow.getView()]);
+        $.datePickerTable.data = [periodRow.getView(), fromDateRow.getView(), toDateRow.getView()];
     } else {
         fromDateRow.changeTitle(L('General_Date'));
-        $.datePickerTable.setData([periodRow.getView(), fromDateRow.getView()]);
+        $.datePickerTable.data = [periodRow.getView(), fromDateRow.getView()];
     }
 }
 
 function onPeriodChange(event)
 {
     if (!event || !event.row || !periodRow) {
-        
+
         return;
     }
-    
+
     periodRow.changeValue(event.row.title);
     setPeriod(event.row.period);
-    
+
     event = null;
 }
 
-function createPeriodPicker () 
+function createPeriodPicker ()
 {
     var piwikDate  = new (require('report/date'));
     var periods    = piwikDate.getAvailablePeriods();
-    
+
     var pickerRows = [];
     var findPeriod = null;
-    
+
     for (findPeriod in periods) {
         pickerRows.push({title: periods[findPeriod], period: findPeriod});
     }
@@ -132,7 +132,7 @@ function createPeriodPicker ()
     $.iOSPeriodPicker.bottom = 0;
 
     $.iOSPeriodPicker.add(pickerRows);
-    
+
     var index = 0;
     for (findPeriod in periods) {
         if (period == findPeriod) {
@@ -140,16 +140,16 @@ function createPeriodPicker ()
             periodRow.changeValue(periods[findPeriod]);
             break;
         }
-        
+
         index++;
     }
-    
+
     $.iOSPeriodPicker.hide();
-   
+
     for (var rowIndex = 0; rowIndex < pickerRows.length; rowIndex++) {
         pickerRows[rowIndex] = null;
     }
-    
+
     pickerRows = null;
     periods    = null;
     piwikDate  = null;
@@ -158,33 +158,33 @@ function createPeriodPicker ()
 function onFromDateChange(event)
 {
     if (!event) {
-        
+
         return;
     }
-    
+
     fromDate        = event.value;
     var displayDate = getDisplayDate(event.value);
     event           = null;
-    
+
     if (!fromDateRow) {
-        
+
         return;
     }
-    
+
     fromDateRow.changeValue(displayDate);
 }
 
-function createFromDatePicker (params) 
+function createFromDatePicker (params)
 {
     if (!params) {
-        
+
         return;
     }
 
     $.fromPicker.applyProperties({
-        value: fromDate, 
-        bottom: 0, 
-        minDate: params.minDate, 
+        value: fromDate,
+        bottom: 0,
+        minDate: params.minDate,
         maxDate: params.maxDate
     });
 
@@ -194,49 +194,49 @@ function createFromDatePicker (params)
 function onToDateChange(event)
 {
     if (!event) {
-        
+
         return;
     }
-    
+
     toDate          = event.value;
     var displayDate = getDisplayDate(event.value);
     event           = null;
-    
+
     if (!toDateRow) {
-        
+
         return;
     }
-    
+
     toDateRow.changeValue(displayDate);
 }
 
 function createToDatePicker (params)
 {
     if (!params) {
-        
+
         return;
     }
 
     $.toPicker.applyProperties({
-        value: toDate, 
-        bottom: 0, 
-        minDate: params.minDate, 
+        value: toDate,
+        bottom: 0,
+        minDate: params.minDate,
         maxDate: params.maxDate
     });
 }
 
-function selectRow (index) 
+function selectRow (index)
 {
     // yes, I know... there exists a tableView.selectRow() method which does exactly the same but native.
     // but this method is ... everytime the tableView renders again the selected row is no longer selected. Also, cause
     // the re-render process is async a selectRow() does not always work. Too make it short: It's not a good idea to use
     // this. At least at the moment.
-    
+
     if (!fromDateRow || !toDateRow || !periodRow) {
-        
+
         return;
     }
-    
+
     if (0 === index) {
         fromDateRow.getView().backgroundColor = '#ffffff';
         toDateRow.getView().backgroundColor   = '#ffffff';
@@ -251,13 +251,13 @@ function selectRow (index)
         periodRow.getView().backgroundColor   = '#ffffff';
     }
 }
-function getDisplayDate (selectedDate) 
+function getDisplayDate (selectedDate)
 {
     if (!selectedDate) {
-        
+
         return '';
     }
-    
+
     return selectedDate.toLocaleDateString();
 }
 
@@ -273,15 +273,15 @@ function closeWindow ()
     $.off();
 }
 
-function doChooseDate () 
+function doChooseDate ()
 {
     try {
 
         var myEvent = {from: fromDate, to: toDate, period: period, type: 'onSet'};
         $.trigger('onSet', myEvent);
-        
+
         closeWindow();
-        
+
     } catch (e) {
         console.warn('Failed to close site chooser window', 'datechooser::dochoosedate', e);
     }

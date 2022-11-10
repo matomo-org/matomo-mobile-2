@@ -84,7 +84,7 @@ function onSegmentChanged()
     doRefresh();
 }
 
-function onDateChanged(changedReportDate) 
+function onDateChanged(changedReportDate)
 {
     if (!changedReportDate) {
         return;
@@ -187,7 +187,7 @@ function toUnit(size)
 }
 
 var containerRow = null;
-function renderMetricTile (processedReportModel, index) 
+function renderMetricTile (processedReportModel, index)
 {
     if (!processedReportModel) {
         return;
@@ -196,7 +196,7 @@ function renderMetricTile (processedReportModel, index)
     var title = processedReportModel.getTitle();
     var value = processedReportModel.getValue();
     var sortColumnModel  = processedReportModel.getSortOrder();
-    var sortColumnReport = processedReportCollection.getSortOrder(); 
+    var sortColumnReport = processedReportCollection.getSortOrder();
 
     var labelColor = (sortColumnReport == sortColumnModel) ? '#43a047' : '#212121';
     var valueColor = (sortColumnReport == sortColumnModel) ? '#53a859' : '#7e7e7e';
@@ -204,7 +204,7 @@ function renderMetricTile (processedReportModel, index)
     if (0 == (index % 2)) {
         containerRow = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, layout: 'horizontal'});
         $.dimensions.add(containerRow);
-    } 
+    }
     var outerContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: OS_ANDROID ? '49%' : '49.8%', backgroundSelectedColor: '#dcdcdc'});
     var metricContainer = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, top: toUnit(22), bottom: toUnit(25), layout: 'vertical', touchEnabled: false});
     var value = Ti.UI.createLabel({text: value, textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 0, font: {fontSize: toUnit(25), fontWeight: 'bold'}, color: labelColor, left: toUnit(10), right: toUnit(10), height: Ti.UI.SIZE, touchEnabled: false});
@@ -254,7 +254,7 @@ function onStatisticsFetched(processedReportCollection)
     var accountModel = require('session').getAccount();
 
     updateWindowTitle(processedReportCollection.getReportName());
-    
+
     showReportContent();
 
     $.reportGraphCtrl.update(processedReportCollection, accountModel);
@@ -274,19 +274,8 @@ function fixVerticalSeparatorHeight()
     var height = parseInt($.dimensions.size.height, 10);
 
     if (5 < height) {
-
-        if (OS_MOBILEWEB) {
-            // don't know why but on MobileWeb height will be only changed if there is a small delay. Tried lots of different implementations but didn't find a better solution
-            setTimeout(function () {
-                if (!$ || !$.verticalSeparator || !$.dimensions) {
-                    return;
-                }
-                $.verticalSeparator.setHeight($.dimensions.size.height);
-            }, 100);
-        } else {
-            $.verticalSeparator.setHeight($.dimensions.size.height);
-        }
-    } 
+        $.verticalSeparator.setHeight($.dimensions.size.height);
+    }
 }
 
 function doRefresh()
@@ -333,7 +322,7 @@ function doRefresh()
     });
 }
 
-function open() 
+function open()
 {
     registerEvents();
 
@@ -342,7 +331,7 @@ function open()
     onReportChosen(reportModel);
 }
 
-function close() 
+function close()
 {
     require('layout').close($.index);
 }

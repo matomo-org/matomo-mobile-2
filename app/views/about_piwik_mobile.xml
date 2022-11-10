@@ -1,7 +1,7 @@
 <Alloy>
     <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen">
-        <Widget src="org.piwik.headerbar" 
-                id="headerBar" 
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
                 onBack="close"
                 platform="android" />
 
@@ -9,7 +9,7 @@
             <TableViewRow id="website" platform="android" onClick="openWebsite"/>
             <TableViewRow id="participate" platform="android" onClick="participate"/>
             <TableViewRow id="license" onClick="openLicense"/>
-            <TableViewRow id="follow" onClick="followPiwik" platform="ios,android"/>
+            <TableViewRow id="follow" onClick="followPiwik"/>
             <TableViewRow id="sourceCode" onClick="openSourceCode" platform="android"/>
             <TableViewRow id="issues" onClick="openIssues" platform="android"/>
         </TableView>

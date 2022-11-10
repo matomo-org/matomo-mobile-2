@@ -4,12 +4,9 @@
         <RightNavButton platform="ios" formFactor="handheld">
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
-        <RightNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
-        </RightNavButton>
 
-        <Widget src="org.piwik.headerbar" 
-                id="headerBar" 
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
                 onBack="close"
                 onActionItem1="toggleReportConfiguratorVisibility"
                 formFactor="handheld"

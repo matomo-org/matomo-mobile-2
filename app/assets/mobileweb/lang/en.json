@@ -1,9 +1,0 @@
-{
-    "PiwikMobile": {
-        "RedirectIfTabletTitle": "Redirect tablets",
-        "RedirectIfTabletDescription": "Automatically open Matomo Mobile if a tablet is detected?",
-        "RedirectIfSmartphoneTitle": "Redirect smartphones",
-        "RedirectIfSmartphoneDescription": "Automatically open Matomo Mobile if a smartphone is detected?",
-        "SettingsIntroduction": "Here you can define your custom PiwikMobile settings. If you change your settings, it does not effect any other users. Note: Detection of mobile devices is currently experimental and might not work for your device. Changes will be applied after next log in."
-    }
-}

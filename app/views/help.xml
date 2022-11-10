@@ -1,16 +1,13 @@
 <Alloy>
     <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen">
-        <LeftNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
-        </LeftNavButton>
         <LeftNavButton platform="ios" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         <LeftNavButton platform="ios" formFactor="tablet">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
-        
-        <Widget src="org.piwik.headerbar" 
+
+        <Widget src="org.piwik.headerbar"
                 id="headerBar"
                 onHomeItemSelected="toggleReportChooserVisibility"
                 formFactor="handheld"
@@ -20,7 +17,7 @@
                 id="headerBar"
                 formFactor="tablet"
                 platform="android" />
-        
+
         <TableView id="helpTable">
             <TableViewRow id="about" onClick="openAboutPiwikMobile"/>
             <TableViewRow id="faq" onClick="openFaq"/>

@@ -51,7 +51,7 @@ function deleteAccount(event)
     var currentActiveAccount = require('session').getAccount();
     if (currentActiveAccount && currentActiveAccount.isSameAccount(account)) {
         require('session').setWebsite(null, null);
-    } 
+    }
 
     if (account) {
         accounts.remove(account);
@@ -78,8 +78,8 @@ function deleteAccountIfUserConfirmsButNotOniOS(event)
     });
 
     dialog.addEventListener('click', function (clickEvent) {
-        if (!clickEvent || 
-            clickEvent.cancel === clickEvent.index || 
+        if (!clickEvent ||
+            clickEvent.cancel === clickEvent.index ||
             true === clickEvent.cancel) {
 
             return;
@@ -98,10 +98,6 @@ function isAnAccountSelected()
 
 $.showNoAccountSelectedHint = function ()
 {
-    if (OS_MOBILEWEB) {
-        $.noAccountSelectedContainer.height = Ti.UI.SIZE;
-    }
-
     if (OS_ANDROID) {
         $.noAccountSelectedLabel.height = Ti.UI.SIZE;
         $.noAccountSelectedLabel.show();
@@ -115,7 +111,7 @@ function displayNoAccountSelectedHintIfNoAccountIsSelected()
 {
     if (!isAnAccountSelected()) {
         $.showNoAccountSelectedHint();
-    } 
+    }
 }
 
 var newAccountController = null;
@@ -152,14 +148,14 @@ function onClose ()
 {
     if (OS_ANDROID && $.accountsTable) {
         // this prevents leaking tableViewRows
-        $.accountsTable.setData([]);
+        $.accountsTable.data = [];
     }
 
     $.destroy();
     $.off();
 }
 
-function close () 
+function close ()
 {
     require('layout').close($.index);
 }

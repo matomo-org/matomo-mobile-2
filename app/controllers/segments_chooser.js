@@ -37,7 +37,7 @@ function onClose()
 
     if (OS_ANDROID && $.segmentsTable) {
         // prevent tableViewRows from leaking memory
-        $.segmentsTable.setData([]);
+        $.segmentsTable.data = [];
     }
 
     $.trigger('close');
@@ -65,7 +65,7 @@ function selectSegment(event)
         console.log('segmentsModel not found in collection, cannot select segment');
         return;
     }
-    
+
     segmentChosen(siteModel);
 }
 
@@ -94,7 +94,7 @@ function render()
         rows.push($.UI.create('TableViewRow', rowOptions));
     });
 
-    $.segmentsTable.setData(rows);
+    $.segmentsTable.data = rows;
     rows = [];
 }
 
@@ -153,7 +153,7 @@ function closeWindow()
 
         if (OS_ANDROID && $.segmentsTable) {
             // this prevents leaking tableViewRows
-            $.segmentsTable.setData([]);
+            $.segmentsTable.data = [];
         }
 
         require('layout').close($.index);

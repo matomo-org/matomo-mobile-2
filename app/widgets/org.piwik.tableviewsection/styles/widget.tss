@@ -1,8 +1,8 @@
 "#index": {
     className: "tableViewSection",
     height: Ti.UI.SIZE,
-    selectedBackgroundColor: '#B2AEA5',
-    selectedBackgroundImage: 'org.piwik.tableviewsection/tableviewsectionbackground.png',
+    backgroundSelectedColor: '#B2AEA5',
+    backgroundSelectedImage: '/images/tableviewsection_background_dark.png',
     opacity: 0.95,
 },
 

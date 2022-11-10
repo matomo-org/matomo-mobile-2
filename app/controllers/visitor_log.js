@@ -86,7 +86,7 @@ function onClose()
     }
 
         // this frees a lot of memory
-        $.visitorLogTable.setData([]);
+        $.visitorLogTable.data = [];
 
     unregisterEvents();
     $.destroy();
@@ -129,22 +129,20 @@ function fetchNext()
 
 function scrollToTop()
 {
-    $.visitorLogTable.setData([]);
-    
-    if (OS_MOBILEWEB) {
-        $.visitorLogTable.scrollToTop(0);
-    }
+    $.visitorLogTable.data = [];
+
 }
 
 function getNextRowParams()
 {
     var nextRow = {title: L('General_Next'), color: '#3450A3', className: 'visitorlogPaginator'};
-    if (OS_MOBILEWEB) nextRow.left = 10;
     if (OS_ANDROID) {
         nextRow.leftImage = '/images/spacer_10x10.png';
         nextRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
         nextRow.top    = '12dp';
         nextRow.bottom = '12dp';
+        nextRow.height = Ti.UI.SIZE;
+
     }
     if (OS_IOS) {
         nextRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
@@ -158,12 +156,12 @@ function getNextRowParams()
 function getPrevRowParams()
 {
     var prevRow = {title: L('General_Previous'), color: '#3450A3', className: 'visitorlogPaginator'};
-    if (OS_MOBILEWEB) prevRow.left = 10;
     if (OS_ANDROID) {
         prevRow.leftImage = '/images/spacer_10x10.png';
         prevRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
         prevRow.top    = '12dp';
         prevRow.bottom = '12dp';
+        prevRow.height = Ti.UI.SIZE;
     }
     if (OS_IOS) {
         prevRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
@@ -184,10 +182,7 @@ function getNoVisitorsRowParams()
         rowParams.font   = {fontSize: '16sp', fontWeight: 'bold'};
         rowParams.top    = '12dp';
         rowParams.bottom = '12dp';
-    }
-
-    if (OS_MOBILEWEB) {
-        rowParams.left = 10;
+        rowParams.height = Ti.UI.SIZE;
     }
 
     if (OS_IOS) {
@@ -236,7 +231,7 @@ function render()
     rows.push(prevRow);
     prevRow = null;
 
-    $.visitorLogTable.setData(rows);
+    $.visitorLogTable.data = rows;
 
     if (OS_IOS && $.visitorLogTable && $.visitorLogTable.scrollToTop) {
         $.visitorLogTable.scrollToTop();
@@ -309,7 +304,7 @@ function toggleReportChooserVisibility()
     require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Visitor Log'});
 }
 
-exports.open = function () 
+exports.open = function ()
 {
     registerEvents();
     require('layout').open($.index);

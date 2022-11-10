@@ -1,24 +1,19 @@
 <Alloy>
     <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen">
-        <LeftNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
-        </LeftNavButton>
+
         <LeftNavButton platform="ios" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         <LeftNavButton platform="ios" formFactor="tablet">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
-        
+
         <RightNavButton platform="ios" formFactor="handheld">
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
-        <RightNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
-        </RightNavButton>
-        
-        <Widget src="org.piwik.headerbar" 
-                id="headerBar" 
+
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
                 onHomeItemSelected="toggleReportChooserVisibility"
                 onActionItem1="toggleReportConfiguratorVisibility"
                 formFactor="handheld"
@@ -28,7 +23,7 @@
                 id="headerBar"
                 formFactor="tablet"
                 platform="android" />
-        
+
         <Require src="loading_indicator" id="loadingIndicator"/>
 
         <View id="content">

@@ -1,23 +1,20 @@
 <Alloy>
     <Collection src="appAccounts"/>
-    
+
     <Window module="xp.ui" class="container" id="index" onClose="onClose" onOpen="onOpen">
-        <LeftNavButton platform="mobileweb" formFactor="handheld">
-            <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
-        </LeftNavButton>
         <LeftNavButton platform="ios" formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
         <LeftNavButton platform="ios" formFactor="tablet">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
-        
-        <RightNavButton platform="ios,mobileweb">
+
+        <RightNavButton platform="ios">
             <Button id="addAccountButton" onClick="addAccount"/>
         </RightNavButton>
-        
-        <Widget src="org.piwik.headerbar" 
-                id="headerBar" 
+
+        <Widget src="org.piwik.headerbar"
+                id="headerBar"
                 onHomeItemSelected="toggleReportChooserVisibility"
                 onActionItem1="addAccount"
                 formFactor="handheld"
@@ -35,7 +32,7 @@
                     <Label id="noAccountSelectedLabel"/>
                 </View>
             </HeaderView>
-            <FooterView platform="android,mobileweb">
+            <FooterView platform="android">
                 <View class="footer">
                     <Label id="howToDeleteHint"/>
                 </View>

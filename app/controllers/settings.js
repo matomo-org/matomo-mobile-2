@@ -102,10 +102,10 @@ function toggleReportChooserVisibility(event)
     require('Piwik/Tracker').trackEvent({name: 'Toggle Report Chooser', category: 'Settings'});
 }
 
-function close() 
+function close()
 {
     callbacks = null;
-    
+
     require('layout').close($.index);
 }
 
@@ -141,10 +141,6 @@ function updateDisplayedReportDateValue()
 
 function updateDisplayedValidateSslValue()
 {
-    if (OS_MOBILEWEB) {
-        return;
-    }
-
     var settings = Alloy.createCollection('AppSettings').settings();
 
     setHasCheck($.validateSsl, 2, settings.shouldValidateSsl());
@@ -162,7 +158,7 @@ function setTitle(section, itemIndex, title)
     if (!supportsListView() || !section) {
         return;
     }
-    
+
     var item = section.getItemAt(itemIndex);
 
     if (!item) {
@@ -172,6 +168,7 @@ function setTitle(section, itemIndex, title)
 
     if (OS_ANDROID) {
         item.title = {text: title};
+        item.properties.height = Ti.UI.SIZE;
     } else {
         item.properties.title = title;
     }
@@ -184,7 +181,7 @@ function setSubtitle(section, itemIndex, subtitle)
     if (!supportsListView() || !section) {
         return;
     }
-    
+
     var item = section.getItemAt(itemIndex);
 
     if (!item) {
@@ -194,6 +191,7 @@ function setSubtitle(section, itemIndex, subtitle)
 
     if (OS_ANDROID) {
         item.subtitle = {text: subtitle};
+        item.properties.height = Ti.UI.SIZE;
     } else {
         item.properties.subtitle = subtitle;
     }
@@ -201,7 +199,7 @@ function setSubtitle(section, itemIndex, subtitle)
     section.updateItemAt(itemIndex, item);
 }
 
-function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled) 
+function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
 {
     if (!supportsListView()) {
         return uiRowIfTableView.setHasCheck(enabled);
@@ -264,7 +262,7 @@ function updateAllDisplayedSettingsValues()
 
 exports.close = close;
 
-exports.open = function() 
+exports.open = function()
 {
     var settings = Alloy.createCollection('AppSettings').settings();
     settings.on('change', updateAllDisplayedSettingsValues);
@@ -272,6 +270,6 @@ exports.open = function()
 
     updateAllDisplayedSettingsValues();
     updateWindowTitle();
-    
+
     require('layout').open($.index);
 };

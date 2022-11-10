@@ -115,12 +115,12 @@
     touchEnabled: false,
 }
 
-"ItemTemplate[platform=android]": {
+"ListItem[platform=android]": {
     height: Ti.UI.SIZE,
 }
 
 "#language": {
-    accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE, 
+    accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE,
     template: Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS,
     hasChild: true,
     title: L('General_Language')
@@ -169,7 +169,7 @@
 }
 
 "#timeout": {
-    accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE, 
+    accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_DISCLOSURE,
     template: Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS,
     hasChild: true,
     title: L('Mobile_HttpTimeout')
