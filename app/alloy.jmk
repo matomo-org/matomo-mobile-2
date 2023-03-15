@@ -10,26 +10,28 @@ task("post:compile", function(event, logger) {
         var resourcesPath = event.dir.resources;
 
         var path   = require('path');
-        var wrench = require('wrench');
         var fs     = require('fs');
+        function processFiles(dir) {
+            fs.readdirSync(dir).forEach(function(target) {
 
-        wrench.readdirSyncRecursive(resourcesPath).forEach(function(target) {
+                var jsFile = path.join(dir, target);
 
-            if (!(target.match(/\.js$/))) {
-                return;
-            }
+                var stats = fs.statSync(jsFile);
+                if (stats.isDirectory()) {
+                    processFiles(jsFile);
+                } else if (stats.isFile() && jsFile.endsWith('.js')) {
+                    var resourceContent = fs.readFileSync(jsFile).toString();
+                    if (resourceContent) {
+                        resourceContent = resourceContent.replace(/console.debug/g, '');
+                        resourceContent = resourceContent.replace(/console.log/g, '');
+                    }
+                    fs.writeFileSync(jsFile, resourceContent);
+                }
 
-            var jsFile = path.join(resourcesPath, target);
 
-            var resourceContent = fs.readFileSync(jsFile).toString();
-
-            if (resourceContent) {
-                resourceContent = resourceContent.replace(/console.debug/g, '');
-                resourceContent = resourceContent.replace(/console.log/g, '');
-            }
-            fs.writeFileSync(jsFile, resourceContent);
-
-        });
+            });
+        }
+        processFiles(resourcesPath);
 
         logger.warn("Removing Unimportant Log Calls Done");
     }
