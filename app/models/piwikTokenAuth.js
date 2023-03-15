@@ -52,30 +52,32 @@ exports.definition = {
                         return;
                     }
 
-                    var passwordHash = this.getPasswordHash(password);
-                    var params = {userLogin: username, md5Password: passwordHash, method: 'UsersManager.getTokenAuth'};
+                    var params = {
+                        'userLogin': username,
+                        'passwordConfirmation': password,
+                        'description': 'Matomo Mobile 2',
+                        'method': 'UsersManager.createAppSpecificTokenAuth'
+                    };
                     if (authCode) {
-                    	    params.authCode = authCode;
+                        params.authCode = authCode;
                     }
 
-                    //first test using matomo 3.X
+                    //first test using matomo 4.X
                     var that = this;
                     this.fetch({
                         account: accountModel,
                         params: params,
                         success: onSuccess, 
                         error: function (undefined, error) {
-                            if (error && error.getMessage() && error.getMessage().indexOf('getTokenAuth') > 0) {
-                                // now test for matomo 4.x
-                                var params = {
-                                    'userLogin': username,
-                                    'passwordConfirmation': password,
-                                    'description': 'Matomo Mobile 2',
-                                    'method': 'UsersManager.createAppSpecificTokenAuth'
-                                };
-                    if (authCode) {
-                    	    params.authCode = authCode;
-                    }
+                            if (error && error.getMessage() && error.getMessage().indexOf('createAppSpecificTokenAuth') > 0) {
+                                // now test for matomo 3.x
+
+                                var passwordHash = this.getPasswordHash(password);
+                                var params = {userLogin: username, md5Password: passwordHash, method: 'UsersManager.getTokenAuth'};
+                                if (authCode) {
+                                    params.authCode = authCode;
+                                }
+
                                 that.fetch({
                                     account: accountModel,
                                     params: params,

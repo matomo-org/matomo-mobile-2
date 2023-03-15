@@ -44,7 +44,7 @@ function HttpRequest () {
      *
      * @type     string
      */
-    this.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1';
+    this.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36';
 
     /**
      * An object containing key/value pairs. These are used as GET parameters when executing the request.
@@ -162,7 +162,7 @@ HttpRequest.prototype.handle = function () {
     var that = this;
     
     this.xhr.onload  = function () { that.load(this); that = null; };
-    this.xhr.onerror = function (e) { 
+    this.xhr.onerror = function (e) {
         if ('undefined' == (typeof e)) {
             e = null;
         }
