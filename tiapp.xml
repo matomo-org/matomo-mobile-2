@@ -11,7 +11,7 @@
     <publisher>thomassteur</publisher>
     <url>https://matomo.org/mobile</url>
     <description>Need your analytics on the go? Use our free Matomo Mobile (formerly Piwik Mobile) app to check your stats from anywhere and show them to colleagues in meetings. Matomo Mobile offers all the same reports as the Matomo (Piwik) desktop interface, and displays your visitor data in real time!</description>
-    <copyright>2022 by matomo</copyright>
+    <copyright>2023 by matomo</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>
