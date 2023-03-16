@@ -20,7 +20,7 @@
     <fullscreen>false</fullscreen>
     <navbar-hidden>true</navbar-hidden>
     <analytics>false</analytics>
-    <guid>f8041c02-5dbe-421b-9444-22c928e5a549</guid>
+    <guid>a7b6c646-6cf6-40b4-a9e2-7ed0f67f510b</guid>
     <property name="ti.ui.defaultunit">system</property>
     <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
     <ios>
