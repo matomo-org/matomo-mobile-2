@@ -14,9 +14,9 @@ function HandheldSidebar(detailRootWindow)
     var leftSidebarWindow = Ti.UI.createWindow({
         left: 0, width: widthSidebar, 
             backgroundColor: 'transparent', barColor: 'transparent',
-         visible: false, extendSafeArea: false
+         visible: false, extendSafeArea: Titanium.Gesture.landscape
     });
-    
+
     leftSidebarWindow.open();
 
     var leftSidebarOuterWindow;

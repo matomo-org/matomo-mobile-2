@@ -28,7 +28,7 @@
 
 "#closeButton[platform=ios]": {
     title: L('General_Close'),
-    style: Ti.UI.iOS.SystemButtonStyle.BORDERED,
+    style: Ti.UI.BUTTON_STYLE_OPTION_NEUTRAL,
     color: '#212121'
 }
 
