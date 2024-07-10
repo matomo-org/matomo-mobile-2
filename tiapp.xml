@@ -4,7 +4,7 @@
         <target device="ipad">true</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>12.0.0.GA</sdk-version>
+    <sdk-version>12.3.1.GA</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Matomo Mobile 2</name>
     <version>2.5.2</version>
@@ -63,7 +63,7 @@
                 </activity>
             </application>
             <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" xlargeScreens="true"/>
-            <uses-sdk android:installLocation="preferExternal" android:minSdkVersion="23" android:targetSdkVersion="26"/>
+            <uses-sdk android:installLocation="preferExternal" android:minSdkVersion="23" android:targetSdkVersion="34"/>
         </manifest>
     </android>
     <plugins>
