@@ -53,7 +53,7 @@ exports.definition = {
 
             shouldValidateSsl: function () {
                 if (this.hasConfiguredValidateSsl()) {
-                    return this.get('validateSsl');
+                    return Boolean(this.get('validateSsl'));
                 }
 
                 return settingDefaults.validateSsl;

@@ -274,7 +274,7 @@ function fixVerticalSeparatorHeight()
     var height = parseInt($.dimensions.size.height, 10);
 
     if (5 < height) {
-        $.verticalSeparator.setHeight($.dimensions.size.height);
+        $.verticalSeparator.height = ($.dimensions.size.height);
     }
 }
 
