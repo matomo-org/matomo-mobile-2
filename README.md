@@ -41,6 +41,12 @@ If you don't have Titanium SDK installed on your system have a look at [From zer
 ### Build the app
 * `ti build -p ios` or `ti build -p android` to build the app
 
+### Build for release on Android
+
+```
+ti build -p android -b -K $pathKeyStoreFile -P $keystorePassword -L $alias -D production -T dist-playstore -O $outputDirectory 
+```
+
 ## Contact
 
 https://matomo.org
