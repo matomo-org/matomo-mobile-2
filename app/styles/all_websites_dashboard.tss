@@ -6,6 +6,7 @@
 
 "#searchBar": {
     top: 0,
+    width: Ti.UI.FILL,
     barColor: "#cccccc",
     showCancel: true,
     tintColor: '#212121'
