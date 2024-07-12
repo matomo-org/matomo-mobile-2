@@ -2,7 +2,7 @@
     <Window module="xp.ui" formFactor="handheld" id="index" onClose="destroy" onPostlayout="onPostlayout"  onOpen="onOpen">
         <Require id="graphWidget" type="widget" src="org.piwik.imageview"/>
     </Window>
-    <Window module="xp.ui" formFactor="tablet" id="index" onClose="destroy">
+    <Window module="xp.ui" formFactor="tablet" id="index" onClose="destroy"  onPostlayout="onPostlayout">
         <View id="topContainer">
             <View class="labelContainer">
                 <Label id="reportName"/>
