@@ -1,5 +1,5 @@
 <Alloy>
-    <Window module="xp.ui" formFactor="handheld" id="index" onClose="destroy" onOpen="onOpen">
+    <Window module="xp.ui" formFactor="handheld" id="index" onClose="destroy" onPostlayout="onPostlayout"  onOpen="onOpen">
         <Require id="graphWidget" type="widget" src="org.piwik.imageview"/>
     </Window>
     <Window module="xp.ui" formFactor="tablet" id="index" onClose="destroy">

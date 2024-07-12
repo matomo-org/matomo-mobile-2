@@ -21,6 +21,7 @@ graphSwitcher.on('close', close);
 
 graphSwitcher.on('switch', function () {
     var url = getGraphUrlWithSize(getPictureWidth(), getPictureHeight());
+    console.debug('imageDetailUrlWithSize', url);
     $.graphWidget.loadImage(url);
 });
 
@@ -81,7 +82,7 @@ function getPictureHeight() {
     } else {
         pictureHeight = height - 20; // 10px space left and right
     }
-    
+
     return pictureHeight;
 }
 
@@ -158,11 +159,15 @@ function getImageView(url, width, height) {
     return Alloy.createWidget('org.piwik.imageview', 'widget', options);
 }
 
-var pictureWidth     = getPictureWidth();
-var pictureHeight    = getPictureHeight();
-var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
+function onPostlayout() {
 
-$.graphWidget.loadImage(graphUrlWithSize);
+    var pictureWidth     = getPictureWidth();
+    var pictureHeight    = getPictureHeight();
+    var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
+
+    console.debug('imageDetailUrlWithSize', graphUrlWithSize);
+    $.graphWidget.loadImage(graphUrlWithSize);
+}
 
 if (isTablet) {
 
@@ -185,7 +190,6 @@ if (isTablet) {
         try {
             var pictureWidth  = getOrientationSpecificWidth();
             var pictureHeight = getOrientationSpecificHeight();
-            
             $.index.remove($.graph);
             $.graph = null;
 
