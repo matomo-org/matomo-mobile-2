@@ -73,18 +73,17 @@ function deleteAccountIfUserConfirmsButNotOniOS(event)
         cancel: 1,
         buttonNames: [L('General_Yes'), L('General_No')],
         selectedIndex: 1,
-        destructive: 0,
         title: L('Mobile_ConfirmRemoveAccount')
     });
 
     dialog.addEventListener('click', function (clickEvent) {
-        if (!clickEvent ||
-            clickEvent.cancel === clickEvent.index ||
-            true === clickEvent.cancel) {
-
+        if (!clickEvent) {
             return;
         }
 
+        if (clickEvent.index == 1) {
+            return;
+        }
         deleteAccount(event);
     });
 

@@ -11,7 +11,7 @@ function L(key)
 }
 
 var args      = arguments[0] || {};
-var accessUrl = args.account ? args.account.getBasePath() : 'https://demo.matomo.org/';
+var accessUrl = args.account ? args.account.getBasePath() : 'https://demo.matomo.cloud/';
 var visitor   = args.visitor || null;
 
 function goalConversionDescription(visitor)

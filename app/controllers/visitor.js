@@ -14,7 +14,7 @@ var args    = arguments[0] || {};
 var visitor = args.visitor;
 
 var accountModel = require('session').getAccount();
-var accessUrl    = accountModel ? accountModel.getBasePath() : 'https://demo.matomo.org/';
+var accessUrl    = accountModel ? accountModel.getBasePath() : 'https://demo.matomo.cloud/';
 
 var rows = [];
 

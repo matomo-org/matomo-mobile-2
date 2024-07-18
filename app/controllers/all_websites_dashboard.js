@@ -184,17 +184,19 @@ function showLoadingMessage()
     $.loading.show();
 }
 
-function cancelSearchWebsite()
+function changeSearchWebsite()
 {
     if (!$.searchBar) {
 
         return;
     }
 
-    $.searchBar.value = '';
-    $.searchBar.blur();
+    if (!$.searchBar.value) {
 
-    fetchListOfAvailableWebsites();
+        $.searchBar.blur();
+
+        fetchListOfAvailableWebsites();
+    }
 }
 
 function getSearchText()

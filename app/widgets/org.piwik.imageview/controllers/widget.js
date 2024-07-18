@@ -20,10 +20,10 @@ function loadImageViaXhr(imageView, urlToLoad)
         $.imageLoader = null;
     }
 
-    $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: validateSsl,
+    $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: !!validateSsl,
                                                  enableKeepAlive: false});
 
-    $.imageLoader.setTimeout(1000 * 60 * 2); // 2 minutes
+    $.imageLoader.timeout = (1000 * 60 * 2); // 2 minutes
     $.imageLoader.open('GET', urlToLoad);
 
     $.imageLoader.onload = function () {

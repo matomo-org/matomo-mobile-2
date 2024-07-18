@@ -51,7 +51,6 @@
 "#toDatePicker": {
     top: '8dp',
     left: '16dp',
-    bottom: '16dp',
     type: Ti.UI.PICKER_TYPE_DATE,
 }
 

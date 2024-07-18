@@ -26,7 +26,7 @@
                 formFactor="tablet"
                 platform="android" />
 
-        <TableView id="accountsTable" onDelete="deleteAccount" onLongpress="deleteAccountIfUserConfirmsButNotOniOS" onClick="chooseAccount" dataCollection="appAccounts">
+        <TableView id="accountsTable" onLongpress="deleteAccountIfUserConfirmsButNotOniOS" onClick="chooseAccount" dataCollection="appAccounts">
             <HeaderView>
                 <View id="noAccountSelectedContainer">
                     <Label id="noAccountSelectedLabel"/>

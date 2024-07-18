@@ -19,7 +19,7 @@ function tryIt ()
 
     require('login').login(
         accounts,
-        'https://demo.matomo.org',
+        'https://demo.matomo.cloud',
         '',
         '',
         ''
