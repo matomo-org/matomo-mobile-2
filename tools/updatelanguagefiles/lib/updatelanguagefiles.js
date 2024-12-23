@@ -18,7 +18,7 @@ function updateTranslationsForAllAvailableLanguages(callback)
 function getPiwikClient()
 {
     var PiwikClient = require('piwik-client');
-    return new PiwikClient('https://demo.matomo.org', 'anonymous');
+    return new PiwikClient('https://demo.matomo.cloud', 'anonymous');
 }
 
 function onAllAvailableLanguagesFetched(err, languages)
