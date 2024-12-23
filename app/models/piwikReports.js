@@ -212,6 +212,7 @@ exports.definition = {
                 }
 
                 this.config.defaultParams.urls[0].idSites = siteModel.get('idsite');
+                this.config.defaultParams.urls[0].idSite = siteModel.get('idsite');
                 this.config.defaultParams.urls[1].idSite  = siteModel.get('idsite');
 
                 this.abortRunningRequests();
