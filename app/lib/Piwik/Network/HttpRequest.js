@@ -19,7 +19,7 @@
  *
  * @example
  * var request = require('Piwik/Network/HttpRequest');
- * request.setBaseUrl('http://demo.matomo.org/');
+ * request.setBaseUrl('http://demo.matomo.cloud/');
  * request.setParameter({siteId: 5});
  * request.setCallback(function (response, parameters) {});
  * request.handle();
