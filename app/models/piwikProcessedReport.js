@@ -9,6 +9,10 @@ function doesNotContainWhitespace (url) {
     return -1 == ('' + url).indexOf(' ');
 }
 
+function removeTokenAuthFromUrl(url) {
+    return url.replace(/([?&])token_auth=[^&]*&?/, (match, p1) => p1 === '?' ? '?' : '&')
+}
+
 exports.definition = {
     // TODO get filter limit from config
     config: {
@@ -172,14 +176,14 @@ exports.definition = {
                     return '';
                 }
 
-                return this.metadata.imageGraphEvolutionUrl;
+                return removeTokenAuthFromUrl(this.metadata.imageGraphEvolutionUrl);
             },
             getImageGraphUrl: function () {
                 if (!this.metadata || !this.metadata.imageGraphUrl) {
                     return '';
                 }
 
-                return this.metadata.imageGraphUrl;
+                return removeTokenAuthFromUrl(this.metadata.imageGraphUrl);
             },
 
             getSortOrder: function () {
