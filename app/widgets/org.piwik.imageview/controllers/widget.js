@@ -22,6 +22,9 @@ function loadImageViaXhr(imageView, urlToLoad)
 
     var accountsCollection = Alloy.Collections.appAccounts;
     var accountModel = accountsCollection.lastUsedAccount();
+    if (!accountModel) {
+        return;
+    }
     var tokenAuth = accountModel.getAuthToken();
 
     $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: !!validateSsl,
