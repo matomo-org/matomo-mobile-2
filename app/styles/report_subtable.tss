@@ -53,7 +53,7 @@
 ".footerLogo": {
     top: 12,
     bottom: 25,
-    width: 80,
+    width: 146,
     height: 19,
     image: 'piwik_logo_light_footer.png'
 }
