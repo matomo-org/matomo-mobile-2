@@ -10,12 +10,62 @@ var args = arguments[0] || {};
 var errorImage = OS_ANDROID ? '/images/image_load_error.png' : 'image_load_error.png';
 var supportsWidthDetectionOfImage = (OS_ANDROID || OS_IOS);
 
+var validateSsl = true;
+
+function loadImageViaXhr(imageView, urlToLoad)
+{
+    if ($.imageLoader && $.imageLoader.abort) {
+        $.imageLoader.abort();
+        $.imageLoader = null;
+    }
+
+    var accountsCollection = Alloy.Collections.appAccounts;
+    var accountModel = accountsCollection.lastUsedAccount();
+    if (!accountModel) {
+        return;
+    }
+    var tokenAuth = accountModel.getAuthToken();
+
+    $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: !!validateSsl,
+        enableKeepAlive: false});
+
+    $.imageLoader.timeout = (1000 * 60 * 2); // 2 minutes
+
+    $.imageLoader.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    $.imageLoader.open('POST', urlToLoad);
+
+    $.imageLoader.onload = function () {
+
+        if (imageView && this.responseData && (this.responseData.width || !supportsWidthDetectionOfImage)) {
+            // image view not yet cleaned up?
+            imageView.image = this.responseData;
+        } else if (imageView) {
+            imageView.image = errorImage;
+        }
+
+        $.imageLoader = null;
+        imageView = null;
+    };
+
+    $.imageLoader.onerror = function () {
+        if (imageView) {
+            imageView.image = errorImage;
+        }
+
+        imageView = null;
+        $.imageLoader = null;
+    };
+
+    $.imageLoader.send('token_auth=' + encodeURIComponent(tokenAuth));
+}
+
 function doPostLayout() {
     $.trigger('postlayout');
 }
 
 exports.loadImage = function (url) {
-    $.image.image = url;
+    loadImageViaXhr($.image, url);
 };
 
 exports.setWidth = function (width) {
