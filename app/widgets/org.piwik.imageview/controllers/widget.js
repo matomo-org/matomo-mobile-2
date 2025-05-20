@@ -20,11 +20,21 @@ function loadImageViaXhr(imageView, urlToLoad)
         $.imageLoader = null;
     }
 
+    var accountsCollection = Alloy.Collections.appAccounts;
+    var accountModel = accountsCollection.lastUsedAccount();
+    if (!accountModel) {
+        return;
+    }
+    var tokenAuth = accountModel.getAuthToken();
+
     $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: !!validateSsl,
                                                  enableKeepAlive: false});
 
     $.imageLoader.timeout = (1000 * 60 * 2); // 2 minutes
-    $.imageLoader.open('GET', urlToLoad);
+
+    $.imageLoader.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    $.imageLoader.open('POST', urlToLoad);
 
     $.imageLoader.onload = function () {
 
@@ -48,7 +58,7 @@ function loadImageViaXhr(imageView, urlToLoad)
         $.imageLoader = null;
     };
  
-    $.imageLoader.send();
+    $.imageLoader.send('token_auth=' + encodeURIComponent(tokenAuth));
 }
 
 function doPostLayout() {
@@ -56,11 +66,7 @@ function doPostLayout() {
 }
 
 exports.loadImage = function (url) {
-    if (validateSsl) {
-        $.image.image = url;
-    } else {
-        loadImageViaXhr($.image, url);
-    }
+    loadImageViaXhr($.image, url);
 };
 
 exports.setWidth = function (width) {
