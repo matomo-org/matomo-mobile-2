@@ -10,11 +10,6 @@
     extendSafeArea: false
 }
 
-"#index[platform=mobileweb]": {
-    modal: true,
-    navBarHidden: true 
-}
-
 "#graphWidget": {
    touchEnabled: false,
    canScale: false,
@@ -79,7 +74,7 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     left: 20,
     right: 20,
-    font: { 
+    font: {
         fontSize: 48
     }
 }
@@ -87,7 +82,7 @@
 "#reportName[platform=android]": {
     left: '20dp',
     right: '20dp',
-    font: { 
+    font: {
         fontSize: '48sp'
     }
 }
@@ -101,7 +96,7 @@
     left: 20,
     right: 20,
     color: '#666666',
-    font: { 
+    font: {
         fontSize: 36
     }
 }
@@ -110,7 +105,7 @@
     top: '25dp',
     left: '20dp',
     right: '20dp',
-    font: { 
+    font: {
         fontSize: '36sp'
     }
 }

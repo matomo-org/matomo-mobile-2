@@ -116,8 +116,3 @@
     top: '13dp',
     bottom: '13dp',
 }
-
-".websiteRow[platform=mobileweb]": {
-    top: 10,
-    bottom: 10,
-}

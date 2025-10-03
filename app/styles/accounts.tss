@@ -37,12 +37,6 @@
     backgroundSelectedColor: '#a9a9a9'
 }
 
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10,
-    color: '#333'
-}
-
 "#accountsTable[platform=ios]": {
     style: Ti.UI.iOS.TableViewStyle.GROUPED,
     footerTitle: L('Mobile_HowtoDeleteAnAccountOniOS')
@@ -57,10 +51,6 @@
 "#noAccountSelectedContainer[platform=android]": {
     backgroundColor: '#a9a9a9',
     height: 0,
-}
-
-"#noAccountSelectedContainer[platform=mobileweb]": {
-    height: 0
 }
 
 "#noAccountSelectedLabel": {

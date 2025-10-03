@@ -45,18 +45,6 @@
     touchEnabled: false,
 }
 
-".headline[platform=mobileweb]": {
-    wordWrap: true,
-    left: 0,
-    right: 0,
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    width: null,
-}
-
-".headline[platform=android]": {
-    font: {fontWeight: 'bold', fontSize: '16sp'},
-}
-
 ".header": {
     top: 18,
     bottom: 18,

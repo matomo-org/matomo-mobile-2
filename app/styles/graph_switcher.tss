@@ -1,5 +1,5 @@
 ".container": {
-    opacity: 0.9, 
+    opacity: 0.9,
     visible: true,
     top: 0,
     left: 0,
@@ -32,14 +32,6 @@
     color: '#212121'
 }
 
-"#closeButton[platform=mobileweb]": {
-    color: '#212121',
-    left: 16,
-    top: 1,
-    height: 38,
-    title: L('General_Close')
-}
-
 "#switchButton[platform=ios]": {
     title: ' - ',
     style: Ti.UI.iOS.SystemButtonStyle.BAR,
@@ -55,11 +47,4 @@
     backgroundFocusedImage: '/images/btn_default_focused_holo_light.9.png',
     backgroundSelectedImage: '/images/btn_default_focused_holo_light.9.png',
     backgroundDisabledImage: '/images/btn_default_disabled_holo_light.9.png',
-}
-
-"#switchButton[platform=mobileweb]": {
-    color: '#212121',
-    right: 16,
-    top: 1,
-    height: 38,
 }

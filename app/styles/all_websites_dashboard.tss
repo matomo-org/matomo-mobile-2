@@ -28,16 +28,6 @@
     backgroundColor: '#fff',
 }
 
-"#searchBar[platform=mobileweb]": {
-    borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
-    autocorrect: false,
-    left: 5,
-    right: 5,
-    color: '#7e7e7e',
-    height: Ti.UI.SIZE,
-    hintText: L('Mobile_SearchWebsite')
-}
-
 ".searchBarContainer": {
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
@@ -92,10 +82,6 @@
     title: L('General_AllWebsitesDashboard'),
     backButtonTitle: L('Mobile_NavigationBack')
 },
-
-"#index[platform=mobileweb]": {
-    fullscreen: false,
-}
 
 "#index[platform=ios]": {
     fullscreen: false,
