@@ -2,11 +2,6 @@
     navBarHidden: false
 },
 
-"#index[platform=mobileweb]": {
-    navBarHidden: true,
-    modal: true
-},
-
 "#index[platform=android]": {
     exitOnClose: true
 },
@@ -37,10 +32,6 @@
     width: 314,
     height: 51,
     zIndex: 1
-},
-
-"#logoImage[platform=mobileweb]": {
-    image: "logo-png-page.png"
 },
 
 "#logoImage[platform=android]": {

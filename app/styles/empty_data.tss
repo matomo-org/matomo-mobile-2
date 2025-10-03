@@ -1,7 +1,3 @@
-".container[platform=mobileweb]": {
-    height: Ti.UI.FILL
-}
-
 ".container[platform=ios]": {
     height: Ti.UI.FILL
 }

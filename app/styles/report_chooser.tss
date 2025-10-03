@@ -10,10 +10,6 @@
     backgroundColor: '#222222',
 }
 
-"#reportsTable[platform=mobileweb]": {
-    separatorColor: '#2D2D2D'
-}
-
 ".websitePicker": {
     top: 12,
     bottom: 0,

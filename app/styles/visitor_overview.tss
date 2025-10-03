@@ -14,10 +14,6 @@
     backgroundSelectedColor: '#a9a9a9',
 },
 
-"TableViewRow[platform=mobileweb]": {
-    backgroundSelectedColor: '#a9a9a9',
-},
-
 ".dateContainer": {
     top: 8,
     layout: 'horizontal',

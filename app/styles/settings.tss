@@ -20,11 +20,6 @@
     font: {fontSize: '16sp'}
 }
 
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10
-}
-
 "#loginHint": {
     text: L('Mobile_LoginToPiwikToChangeSettings'),
     font: {fontWeight: 'bold', fontSize: 14},
@@ -55,7 +50,8 @@
 "#settingsTable[platform=android]": {
     top: '56dp',
     separatorColor: '#e0e0e0',
-    footerTitle: L('Mobile_LoginToPiwikToChangeSettings')
+    footerTitle: L('Mobile_LoginToPiwikToChangeSettings'),
+    fontSize: '18sp'
 }
 
 "#settingsTable[platform=ios]": {
