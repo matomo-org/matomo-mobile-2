@@ -8,7 +8,7 @@
 var rootWindow = Ti.UI.iOS.createNavigationWindow({statusBarStyle: Alloy.statusBarStyle});
 rootWindow.window = Ti.UI.createWindow({
     backgroundColor: "#FFFFFF",
-    barColor: "#3450A3",
+    barColor: "#0e1328",
     navTintColor: "#ffffff",
     color: "#ffffff",
     statusBarStyle: Alloy.statusBarStyle,
