@@ -52,7 +52,7 @@
 }
 
 "#doneButton[platform=ios]": {
-    style: Ti.UI.iOS.SystemButtonStyle.DONE,
+    systemButton: Ti.UI.iOS.SystemButton.DONE,
     tintColor: '#ffffff'
 }
 
@@ -61,6 +61,6 @@
 }
 
 "#cancelButton[platform=ios]": {
-    style: Ti.UI.iOS.SystemButtonStyle.CANCEL,
+    systemButton: Ti.UI.iOS.SystemButton.CANCEL,
     tintColor: '#ffffff'
 }

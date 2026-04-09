@@ -21,7 +21,7 @@
 }
 
 "#cancelButton[platform=ios]": {
-    style: Ti.UI.iOS.SystemButtonStyle.CANCEL,
+    systemButton: Ti.UI.iOS.SystemButton.CANCEL,
     tintColor: '#ffffff'
 }
 

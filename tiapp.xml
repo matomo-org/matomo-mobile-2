@@ -35,6 +35,10 @@
                 <string>UIStatusBarStyleLightContent</string>
             </dict>
             <dict>
+                <key>UIStatusBarHidden</key>
+                <false/>
+            </dict>
+            <dict>
                 <key>UISupportedInterfaceOrientations~iphone</key>
                 <array>
                     <string>UIInterfaceOrientationPortrait</string>

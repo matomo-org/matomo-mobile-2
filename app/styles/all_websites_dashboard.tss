@@ -8,7 +8,7 @@
     top: 0,
     width: Ti.UI.FILL,
     barColor: "#cccccc",
-    showCancel: true,
+    showCancel: false,
     tintColor: '#212121'
 },
 
