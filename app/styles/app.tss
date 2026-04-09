@@ -1,6 +1,6 @@
 "Window": {
     backgroundColor: "#FFFFFF",
-    barColor: "#3450A3",
+    barColor: "#0e1328",
     navTintColor: "#ffffff",
     titleAttributes: {
 	    color: '#fff'
@@ -9,7 +9,7 @@
 
 "Popover": {
     backgroundColor: "#FFFFFF",
-    barColor: "#3450A3",
+    barColor: "#0e1328",
     navTintColor: "#ffffff",
     tintColor: "#ffffff",
     color: "#ffffff",

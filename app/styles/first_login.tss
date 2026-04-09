@@ -34,8 +34,8 @@
 
 "#logoImage": {
     image: "logo-png-page.png",
-    width: 314,
-    height: 51,
+    width: 295,
+    height: 48,
     zIndex: 1
 },
 

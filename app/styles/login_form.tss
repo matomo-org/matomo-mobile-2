@@ -1,8 +1,8 @@
 "#loginbutton": {
-    backgroundColor: "#43a047",
+    backgroundColor: "#01b4b8",
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: "#43a047",
+    borderColor: "#01b4b8",
     width: Ti.UI.FILL,
     height: 40,
     top: 10,
@@ -14,7 +14,6 @@
 },
 
 "#loginbutton[platform=ios]": {
-    style: Ti.UI.iOS.SystemButtonStyle.PLAIN
 },
 
 "#loginbutton[platform=android]": {

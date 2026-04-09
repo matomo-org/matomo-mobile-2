@@ -99,7 +99,6 @@
 },
 
 "#refresh[platform=ios]": {
-    style: Ti.UI.iOS.SystemButtonStyle.PLAIN
 },
 
 "#refresh[platform=android]": {

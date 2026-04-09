@@ -39,7 +39,7 @@
     top: 3,
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-    color: '#43a047',
+    color: '#01b4b8',
     font: {fontSize: 18}
 },
 
@@ -51,6 +51,6 @@
     left: '16dp',
     top: '3dp',
     bottom: '8dp',
-    color: '#43a047',
+    color: '#01b4b8',
     font: {fontSize: '18sp'}
 }

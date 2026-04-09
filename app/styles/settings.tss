@@ -82,7 +82,7 @@
     width: '80dp',
     top: '16dp',
     bottom: '16dp',
-    color: '#43a047',
+    color: '#01b4b8',
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
     touchEnabled: false
 }

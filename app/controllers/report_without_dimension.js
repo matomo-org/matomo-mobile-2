@@ -198,8 +198,8 @@ function renderMetricTile (processedReportModel, index)
     var sortColumnModel  = processedReportModel.getSortOrder();
     var sortColumnReport = processedReportCollection.getSortOrder();
 
-    var labelColor = (sortColumnReport == sortColumnModel) ? '#43a047' : '#212121';
-    var valueColor = (sortColumnReport == sortColumnModel) ? '#53a859' : '#7e7e7e';
+    var labelColor = (sortColumnReport == sortColumnModel) ? '#01b4b8' : '#212121';
+    var valueColor = (sortColumnReport == sortColumnModel) ? '#01b4b8' : '#7e7e7e';
 
     if (0 == (index % 2)) {
         containerRow = Ti.UI.createView({height: Ti.UI.SIZE, width: Ti.UI.FILL, layout: 'horizontal'});

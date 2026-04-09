@@ -42,7 +42,7 @@
 
 "#switchButton[platform=ios]": {
     title: ' - ',
-    style: Ti.UI.iOS.SystemButtonStyle.BAR,
+    style: Titanium.UI.BUTTON_STYLE_FILLED,
     color: '#212121'
 }
 
