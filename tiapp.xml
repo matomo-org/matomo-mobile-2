@@ -23,38 +23,6 @@
     <guid>f8041c02-5dbe-421b-9444-22c928e5a549</guid>
     <property name="ti.ui.defaultunit">system</property>
     <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
-    <ios>
-        <min-ios-ver>13.0</min-ios-ver>
-        <plist>
-            <dict>
-                <key>UIStatusBarStyle</key>
-                <string>UIStatusBarStyleLightContent</string>
-            </dict>
-            <dict>
-                <key>UIStatusBarHidden</key>
-                <false/>
-            </dict>
-            <dict>
-                <key>UISupportedInterfaceOrientations~iphone</key>
-                <array>
-                    <string>UIInterfaceOrientationPortrait</string>
-                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
-                    <string>UIInterfaceOrientationLandscapeLeft</string>
-                    <string>UIInterfaceOrientationLandscapeRight</string>
-                </array>
-                <key>UISupportedInterfaceOrientations~ipad</key>
-                <array>
-                    <string>UIInterfaceOrientationPortrait</string>
-                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
-                    <string>UIInterfaceOrientationLandscapeLeft</string>
-                    <string>UIInterfaceOrientationLandscapeRight</string>
-                </array>
-            </dict>
-            <dict>
-            </dict>
-
-        </plist>
-    </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal" android:versionCode="37" android:versionName="2.6.0">
             <application android:theme="@style/Theme.PiwikTheme">
@@ -66,7 +34,7 @@
                 </activity>
             </application>
             <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" xlargeScreens="true"/>
-            <uses-sdk android:installLocation="preferExternal" android:minSdkVersion="30" />
+            <uses-sdk android:installLocation="preferExternal" android:minSdkVersion="32" />
         </manifest>
     </android>
     <plugins>
