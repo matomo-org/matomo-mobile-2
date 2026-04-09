@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
     <deployment-targets>
-        <target device="iphone">true</target>
-        <target device="ipad">true</target>
+        <target device="iphone">false</target>
+        <target device="ipad">false</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>12.7.0.GA</sdk-version>
+    <sdk-version>13.2.0.GA</sdk-version>
     <id>org.piwik.mobile2</id>
     <name>Matomo Mobile 2</name>
-    <version>2.5.6</version>
+    <version>2.6.0</version>
     <publisher>thomassteur</publisher>
     <url>https://matomo.org/mobile</url>
     <description>Need your analytics on the go? Use our free Matomo Mobile (formerly Piwik Mobile) app to check your stats from anywhere and show them to colleagues in meetings. Matomo Mobile offers all the same reports as the Matomo (Piwik) desktop interface, and displays your visitor data in real time!</description>
@@ -24,11 +24,15 @@
     <property name="ti.ui.defaultunit">system</property>
     <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
     <ios>
-        <min-ios-ver>10.3</min-ios-ver>
+        <min-ios-ver>13.0</min-ios-ver>
         <plist>
             <dict>
                 <key>UIStatusBarStyle</key>
                 <string>UIStatusBarStyleLightContent</string>
+            </dict>
+            <dict>
+                <key>UIStatusBarHidden</key>
+                <false/>
             </dict>
             <dict>
                 <key>UISupportedInterfaceOrientations~iphone</key>
@@ -46,10 +50,13 @@
                     <string>UIInterfaceOrientationLandscapeRight</string>
                 </array>
             </dict>
+            <dict>
+            </dict>
+
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:installLocation="preferExternal" android:versionCode="36" android:versionName="2.5.6">
+        <manifest android:installLocation="preferExternal" android:versionCode="37" android:versionName="2.6.0">
             <application android:theme="@style/Theme.PiwikTheme">
                 <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/app_name" android:name=".MatomoMobile2Activity" android:theme="@style/Theme.PiwikTheme">
                     <intent-filter>
