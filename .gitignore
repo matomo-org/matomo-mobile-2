@@ -13,6 +13,7 @@ tmp
 node_modules
 /i18n
 /.settings
+/platform
 
 .settings/com.appcelerator.titanium.mobile.prefs
 Resources
