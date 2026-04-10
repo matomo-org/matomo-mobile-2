@@ -39,7 +39,7 @@ If you don't have Titanium SDK installed on your system have a look at [From zer
 * `ti sdk install latest --default` to install the Titanium SDK
 
 ### Build the app
-* `ti build -p ios` or `ti build -p android` to build the app
+* `ti build -p ios` or `ti build -p android` to build the app using simulator/emulator.
 
 ### Build for release on Android
 
@@ -47,10 +47,22 @@ If you don't have Titanium SDK installed on your system have a look at [From zer
 ti build -p android -b -K $pathKeyStoreFile -P $keystorePassword -L $alias -D production -T dist-playstore -O $outputDirectory 
 ```
 
+To install APK on your connected Android device:
+
+```
+adb install Matomo\ Mobile\ 2.apk
+```
+
 ### Build for release on iOS
 
 ```
 ti build -p ios --deploy-type production -T dist-appstore
+```
+
+### Build for release on iOS Device
+
+```
+ ti build -p ios -T device -C $UUID$
 ```
 
 ## Contact
