@@ -65,10 +65,8 @@ function onClose()
     $.emptyData && $.emptyData.cleanupIfNeeded();
     $.emptyData = null;
 
-    if (OS_ANDROID) {
         // this frees a lot of memory
-        $.reportTable.setData([]);
-    }
+    $.reportTable.setData([]);
 
     $.destroy();
     $.off();
@@ -129,11 +127,7 @@ function toggleReportChooserVisibility()
 
 function updateWindowTitle(title)
 {
-    if (OS_ANDROID) {
-        $.headerBar.setTitle(title || '');
-    } else {
-        $.index.title = title || '';
-    }
+    $.headerBar.setTitle(title || '');
 }
 
 function doRefresh()

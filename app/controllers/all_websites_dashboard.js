@@ -47,7 +47,7 @@ function onClose()
         processedReport.abortRunningRequests();
     }
 
-    if (OS_ANDROID && $.websitesTable) {
+    if ($.websitesTable) {
         // prevent tableViewRows from leaking memory
         $.websitesTable.setData([]);
     }
@@ -339,12 +339,10 @@ function formatWebsite(model)
 
 exports.enableCanGoBack = function ()
 {
-    if (OS_ANDROID) {
-        $.headerBar.enableCanGoBack();
-        $.headerBar.on('back', function () {
-            $.close();
-        });
-    }
+    $.headerBar.enableCanGoBack();
+    $.headerBar.on('back', function () {
+        $.close();
+    });
 };
 
 exports.close = function () {

@@ -12,11 +12,7 @@ function L(key)
 
 function updateWindowTitle(title)
 {
-    if (OS_ANDROID) {
-        $.headerBar.setTitle(title || '');
-    } else {
-        $.index.title = title || '';
-    }
+    $.headerBar.setTitle(title || '');
 }
 
 var args     = arguments[0] || {};
@@ -67,7 +63,7 @@ function onLoaded()
 function onClose()
 {
     $.emptyData && $.emptyData.cleanupIfNeeded();
-    if (OS_ANDROID && $.browser.release) {
+    if ($.browser.release) {
         $.browser.release();
     }
     $.destroy();

@@ -7,14 +7,7 @@
     canGoBack: true,
 }
 
-"TableViewRow[platform=ios]": {
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
-}
 
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10
-}
 
 "TableViewRow[platform=android]": {
     top: '16dp',
@@ -24,9 +17,6 @@
     backgroundSelectedColor: '#dcdcdc',
 }
 
-"#aboutPiwikTable[platform=ios]": {
-    style: Ti.UI.iPhone.TableViewStyle.GROUPED
-}
 
 "#aboutPiwikTable[platform=android]": {
     top: '56dp',

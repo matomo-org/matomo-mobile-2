@@ -35,7 +35,7 @@ function onClose()
         $.piwikSegments.off('reset', render);
     }
 
-    if (OS_ANDROID && $.segmentsTable) {
+    if ($.segmentsTable) {
         // prevent tableViewRows from leaking memory
         $.segmentsTable.setData([]);
     }
@@ -145,32 +145,19 @@ function fetchListOfAvailableSegments()
 
 function closeWindow()
 {
-    if (OS_IOS && Alloy.isTablet) {
-        $.index.hide();
-    } else if (OS_IOS) {
-        $.index.close();
-    } else {
-
-        if (OS_ANDROID && $.segmentsTable) {
-            // this prevents leaking tableViewRows
-            $.segmentsTable.setData([]);
-        }
-
-        require('layout').close($.index);
+    if ($.segmentsTable) {
+        // this prevents leaking tableViewRows
+        $.segmentsTable.setData([]);
     }
+
+    require('layout').close($.index);
 }
 
 exports.close = closeWindow;
 
 exports.open = function () {
 
-    if (OS_IOS && Alloy.isTablet) {
-        $.index.show({view: popoverSource});
-    } else if (OS_IOS) {
-        $.index.open({modal: true});
-    } else {
-        require('layout').open($.index);
-    }
+    require('layout').open($.index);
 
     fetchListOfAvailableSegments();
 };

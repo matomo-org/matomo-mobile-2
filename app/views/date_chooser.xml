@@ -1,8 +1,5 @@
 <Alloy>
     <Window module="xp.ui" id="index" onOpen="onOpen">
-        <RightNavButton platform="mobileweb">
-            <Button id="updateButton" onClick="doChooseDate"/>
-        </RightNavButton>
 
         <ScrollView class="container">
             <View id="periodContainer" class="section">
@@ -30,7 +27,7 @@
                 </Picker>
             </View>
 
-            <View id="buttonContainer" platform="android">
+            <View id="buttonContainer" >
                 <Button id="updateButton" onClick="doChooseDate"/>
             </View>
         </ScrollView>

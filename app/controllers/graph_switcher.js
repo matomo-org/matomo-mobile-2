@@ -150,7 +150,7 @@ exports.fadeOut = function()
     $.index.animate({opacity: 0, delay: 600, duration: 600}, function () {
 
         $.index.hide();
-        $.index.opacity = OS_ANDROID ? 0.9 : 0.7;
+        $.index.opacity = 0.9;
     });
 };
 
@@ -169,32 +169,13 @@ exports.fadeOut = function()
  */
 exports.addSwitchGraph = function(showCloseButton) 
 {
-    if (OS_ANDROID) {
+    if (!canSwitch()) {
+        $.index.height  = 0;
+        $.index.visible = false;
+        $.index.hide();
 
-        if (!canSwitch()) {
-            $.index.height  = 0;
-            $.index.visible = false;
-            $.index.hide();
-            
-            return;
-        }
-
-        $.switchButton.title = getNextGraphType();
-        
-       return;
-    } 
-
-    var items = $.index.items;
-    
-    if (!showCloseButton) {
-        items.shift();
+        return;
     }
 
-    if (canSwitch()) {
-        $.switchButton.title = getNextGraphType();
-    } else {
-        items.pop();
-    }
-
-    $.index.items = items;
+    $.switchButton.title = getNextGraphType();
 };

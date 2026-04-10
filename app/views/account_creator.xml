@@ -3,7 +3,7 @@
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 
                 onBack="close"
-                platform="android" />
+                 />
 
         <ScrollView class="container">
             <View id="loginform" />

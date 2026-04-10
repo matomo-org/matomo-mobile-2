@@ -21,10 +21,6 @@ function chooseSegment()
 
     var params = {};
 
-    if (Alloy.isTablet && OS_IOS) {
-        params.source = $.index;
-    }
-
     require('commands/openSegmentChooser').execute(params, onSegmentChosen);
 
     $.trigger('selected', {});

@@ -97,14 +97,6 @@ function isTablet () {
     var height = Ti.Platform.displayCaps.platformHeight;
     var min    = Math.min(width, height);
 
-    if (OS_MOBILEWEB && isWideEnoughToConsiderItAsATablet(min)) {
-        return true;
-
-    } else if (OS_MOBILEWEB) {
-
-        return false;
-    }
-
     // android
     var widthInDp = pixelToDp(min);
     if (!isWideEnoughToConsiderItAsATablet(widthInDp)) {

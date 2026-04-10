@@ -85,18 +85,6 @@ function Locale () {
         this.AVAILABLE_LANGUAGES.th = 'ไทย';
     }
 
-    // see http://dev.piwik.org/trac/ticket/4008
-    if (OS_MOBILEWEB) {
-        this.AVAILABLE_LANGUAGES = {
-            de: 'Deutsch',
-            en: 'English',
-            es: 'Español',
-            fr: 'Français',
-            it: 'Italiano',
-            ja: '日本語',
-        };
-    }
-
     /**
      * Returns a map of all available/supported languages.
      *

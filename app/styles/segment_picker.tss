@@ -30,9 +30,6 @@
     height: '1dp',
 }
 
-".topLine[platform=ios]": {
-    top: 1,
-}
 
 ".bottomLine": {
     backgroundColor: '#272727',
@@ -46,9 +43,6 @@
     bottom: '1dp',
 }
 
-".bottomLine[platform=ios]": {
-    bottom: 1,
-}
 
 ".button": {
     backgroundImage: 'menu_button_background.png',
@@ -73,9 +67,6 @@
     touchEnabled: false
 }
 
-"#segmentName[platform=mobileweb]": {
-    top: 3,
-}
 
 "#segmentName[platform=android]": {
     font: {fontSize: '15sp'},
@@ -98,9 +89,3 @@
     right: '6dp',
 }
 
-".inner[platform=ios]": {
-    left: 9,
-    top: 6,
-    bottom: 6,
-    right: 6,
-}

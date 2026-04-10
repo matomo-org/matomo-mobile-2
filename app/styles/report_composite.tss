@@ -38,9 +38,6 @@
     scrollType: 'vertical'
 }
 
-"#content[platform=mobileweb]": {
-    disableBounce: true,
-}
 
 "#headerBar[formFactor=handheld]": {
     actionItem1: {icon: '/images/ic_more_vert_white_24dp.png'},

@@ -78,10 +78,6 @@ exports.execute = function ()
     emailDialog.subject = "Feedback Matomo Mobile";
     emailDialog.toRecipients = ['mobile@matomo.org'];
 
-    if (OS_IOS) {
-        emailDialog.barColor = '#0e1328';
-    }
-
     if (!emailDialog.isSupported()) {
         var L = require('L');
         Ti.UI.createAlertDialog({message: 'Please install an email app', ok: L('General_Ok')}).show();

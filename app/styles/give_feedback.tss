@@ -16,6 +16,3 @@
     separatorColor: '#e0e0e0'
 }
 
-"#feedbackTable[platform=ios]": {
-    style: Ti.UI.iPhone.TableViewStyle.GROUPED
-}

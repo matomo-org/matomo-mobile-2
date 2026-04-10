@@ -28,9 +28,6 @@
     separatorColor: '#e0e0e0'
 }
 
-"#websitesTable[platform=ios]": {
-    tableSeparatorInsets: {left:0,right:0}
-}
 
 ".quickInfoName": {
     top: 10,
@@ -65,13 +62,7 @@
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
-"#index[platform=mobileweb]": {
-    fullscreen: false,
-}
 
-"#index[platform=ios]": {
-    fullscreen: false,
-}
 
 "#loadingLabel": {
     text: L('General_LoadingData')
@@ -95,9 +86,6 @@
     text: L('Mobile_UseSearchBarHint', Alloy.CFG.numDisplayedWebsitesInDashboard)
 }
 
-"#useSearchHintLabel[platform=ios]": {
-    left: 15,
-}
 
 "#useSearchHintLabel[platform=android]": {
     font: {fontSize: '13sp'},
@@ -116,9 +104,6 @@
     maxLines: 1
 }
 
-".websiteNameLabel[platform=ios]": {
-    left: 15
-}
 
 ".websiteNameLabel[platform=android]": {
     left: '16dp', 
@@ -164,10 +149,6 @@
     touchEnabled: false
 }
 
-"TableViewRow[platform=ios]": {
-    height: Ti.UI.SIZE,
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
-},
 
 "TableViewRow[platform=android]": {
     height: Ti.UI.SIZE,

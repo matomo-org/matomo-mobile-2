@@ -55,9 +55,7 @@ exports.open = function()
         cancel: OS_ANDROID ? -1 : options.length - 1
     };
 
-    if (OS_ANDROID) {
-        params.buttonNames = [L('General_Cancel')];
-    }
+    params.buttonNames = [L('General_Cancel')];
 
     var dialog = Ti.UI.createOptionDialog(params);
     dialog.addEventListener('click', doChangeMetric);

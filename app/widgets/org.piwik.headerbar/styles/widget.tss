@@ -9,7 +9,7 @@
     left: 0,
     width: '72dp',
     height: '56dp',
-    backgroundColor: "transparent",
+    backgroundColor: "transparent"
 }
 
 "#homeIcon": {

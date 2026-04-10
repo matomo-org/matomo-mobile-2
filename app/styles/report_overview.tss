@@ -9,9 +9,6 @@
     right: 10,
 }
 
-"#index[platform=mobileweb]": {
-    width: null,
-}
 
 "#index[platform=android]": {
     height: '352dp',

@@ -54,19 +54,7 @@ exports.isVersionGreaterThanOrEqual = function (expected, actual) {
 };
 
 exports.getAppVersion = function () {
-    var version = Ti.App.version;
-
-    if (!version && OS_MOBILEWEB) {
-        if (Ti && Ti.App && Ti.App.__def__ && Ti.App.__def__.constants && Ti.App.__def__.constants.version) {
-            version = Ti.App.__def__.constants.version;
-        } else {
-            console.warn('There is a version hack in give_feedback that no longer works');
-        }
-    } else if (OS_MOBILEWEB) {
-        console.warn('There is a version hack in give_feedback that can be removed');
-    }
-    
-    return version;
+    return Ti.App.version;
 };
 
 /**
@@ -86,12 +74,6 @@ exports.isError = function (err) {
         return true;
     }
 
-    if (OS_IOS) {
-        err = null;
-        
-        return false;
-    }
-    
     // workaround for Android
 
     var errToString = Object.prototype.toString.call(err);

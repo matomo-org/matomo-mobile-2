@@ -7,9 +7,6 @@
     separatorColor: '#e0e0e0'
 }
 
-"#visitorLogTable[platform=ios]": {
-    tableSeparatorInsets: {left:0,right:0}
-}
 
 "#headerBar": {
     title: L('Live_VisitorLog'),

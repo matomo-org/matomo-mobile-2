@@ -1,10 +1,4 @@
-".container[platform=mobileweb]": {
-    height: Ti.UI.FILL
-}
 
-".container[platform=ios]": {
-    height: Ti.UI.FILL
-}
 
 ".container[platform=android]": {
     top: '56dp',
@@ -98,9 +92,6 @@
     }
 },
 
-"#refresh[platform=ios]": {
-    style: Ti.UI.iOS.SystemButtonStyle.PLAIN
-},
 
 "#refresh[platform=android]": {
     left: '50dp',

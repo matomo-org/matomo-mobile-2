@@ -11,19 +11,12 @@
     hasNavigation: true,
 }
 
-"ListItem[platform=ios]": {
-    selectionStyle: Ti.UI.iOS.ListViewCellSelectionStyle.NONE
-}
 
 "ListItem[platform=android]": {
     color: '#212121',
     font: {fontSize: '16sp'}
 }
 
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10
-}
 
 "#loginHint": {
     text: L('Mobile_LoginToPiwikToChangeSettings'),
@@ -58,9 +51,6 @@
     footerTitle: L('Mobile_LoginToPiwikToChangeSettings')
 }
 
-"#settingsTable[platform=ios]": {
-    style: Ti.UI.iOS.ListViewStyle.GROUPED
-},
 
 ".titleLabel": {
     left: '16dp',
@@ -172,9 +162,6 @@
     template: 'settingsTemplate'
 }
 
-"#advanced[platform=ios]": {
-    headerTitle: L('Mobile_Advanced')
-}
 
 "#advanced[platform=android]": {
     headerTitle: L('Mobile_Advanced')

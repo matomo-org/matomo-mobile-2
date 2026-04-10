@@ -20,10 +20,6 @@
     touchEnabled: false,
 },
 
-"#title[platform=ios]": {
-    left: 15,
-}
-
 "#title[platform=android]": {
     left: '16dp',
     right: '16dp',
@@ -45,15 +41,6 @@
     ellipsize: true,
     maxLines: 1,
     touchEnabled: false,
-},
-
-"#description[platform=ios]": {
-    left: 15,
-}
-
-"#description[platform=mobileweb]": {
-    ellipsize: false,
-    wordWrap: true
 },
 
 "#description[platform=android]": {

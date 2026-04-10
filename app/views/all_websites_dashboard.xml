@@ -6,12 +6,12 @@
         <Widget src="org.piwik.headerbar"
                 id="headerBar"
                 onActionItem1="chooseAccount"
-                platform="android" />
+                 />
 
         <View id="loading"><Label id="loadingLabel"></Label></View>
         
         <View id="content" class="container">
-            <SearchView id="searchBar" onSubmit="searchWebsite" onCancel="cancelSearchWebsite" ns="Ti.UI.Android" platform="android"/>
+            <SearchView id="searchBar" onSubmit="searchWebsite" onCancel="cancelSearchWebsite" ns="Ti.UI.Android" />
             <Require src="graph" id="reportGraphCtrl" formFactor="tablet"/>
             <View class="shadow" formFactor="tablet"></View>
             <TableView id="websitesTable" dataCollection="$.piwikWebsites" dataFunction="renderWebsites"

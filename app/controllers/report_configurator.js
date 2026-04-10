@@ -64,7 +64,7 @@ function uncheckWebsite(tableViewRow)
         return;
     }
 
-    tableViewRow.rightImage = OS_ANDROID ? '/images/blank.png' : null;
+    tableViewRow.rightImage = '/images/blank.png';
 }
 
 function checkWebsite(tableViewRow)
@@ -73,7 +73,7 @@ function checkWebsite(tableViewRow)
         return;
     }
     
-    tableViewRow.rightImage = OS_ANDROID ? '/images/ic_check_grey600_36dp.png' : 'tick.png';
+    tableViewRow.rightImage = '/images/ic_check_grey600_36dp.png';
 }
 
 function transformWebsite(processedReport)

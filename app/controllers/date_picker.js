@@ -16,10 +16,6 @@ function chooseDate()
     var date   = reportDate ? reportDate.getDateQueryString() : 'today';
     var params = {date: date, period: period};
 
-    if (Alloy.isTablet && OS_IOS) {
-        params.source = $.index;
-    }
-
     require('commands/openDateChooser').execute(params, onDateChosen);
 
     $.trigger('selected', {});

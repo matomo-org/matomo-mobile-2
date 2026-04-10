@@ -16,17 +16,10 @@ function L(key)
 
 exports.initLoadingMessage = function ()
 {
-    if (OS_IOS) {
-        $.pullToRefresh.init($.reportTable);
-    }
 };
 
 function showReportContent()
 {
-    if (OS_IOS) {
-        $.pullToRefresh.refreshDone();
-    } 
-
     $.content.show();
     $.loadingindicator.hide();
     $.emptyData && $.emptyData.cleanupIfNeeded();
@@ -34,10 +27,6 @@ function showReportContent()
 
 exports.showReportHasNoData = function (title, message)
 {
-    if (OS_IOS) {
-        $.pullToRefresh.refreshDone();
-    } 
-
     $.emptyData.show($.index, $.doRefresh, title, message);
 
     $.content.hide();
@@ -47,10 +36,6 @@ exports.showReportHasNoData = function (title, message)
 
 exports.showLoadingMessage = function ()
 {
-    if (OS_IOS) {
-        $.pullToRefresh.refresh();
-    }
-    
     $.loadingindicator.show();
     $.content.hide();
     $.emptyData && $.emptyData.cleanupIfNeeded();
@@ -95,17 +80,11 @@ exports.renderProcessedReport = function (processedReportCollection)
     var settings = Alloy.createCollection('AppSettings').settings();
     if (settings.areGraphsEnabled() && $.reportGraphCtrl) {
         var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-        if (OS_IOS) {
-            row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
-        }
         row.add($.reportGraphCtrl.getView());
         rows.push(row);
     }
 
     var row = Ti.UI.createTableViewRow({height: Ti.UI.SIZE});
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-    }
     row.add($.reportInfoCtrl.getView());
     rows.push(row);
     
@@ -132,12 +111,6 @@ exports.renderProcessedReport = function (processedReportCollection)
             rowOptions.rightImage = '/images/navigation_next_item.png';
         } else if (Boolean(hasSubtable)) {
             rowOptions.hasChild = true;
-        }
-
-        if (OS_IOS && !Boolean(hasSubtable)) {
-            rowOptions.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
-        } else if (OS_IOS) {
-            rowOptions.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
         }
 
         var row = Ti.UI.createTableViewRow(rowOptions);
@@ -172,18 +145,13 @@ exports.renderProcessedReport = function (processedReportCollection)
         // a show all or show less button only makes sense if there are more or equal results than the used
         // filter limit value...
         var showAllOptions = {color: '#01b4b8', title: $.showAllEntries ? L('Mobile_ShowLess') : L('Mobile_ShowAll')};
-        if (OS_MOBILEWEB) showAllOptions.left = 10;
-        if (OS_ANDROID) showAllOptions.leftImage = '/images/spacer_10x10.png';
-        if (OS_ANDROID) showAllOptions.font = {fontSize: '16sp', fontWeight: 'bold'};
-        if (OS_ANDROID) showAllOptions.top = '16dp';
-        if (OS_ANDROID) showAllOptions.bottom = '16dp';
-        if (OS_ANDROID) showAllOptions.height = Ti.UI.SIZE;
+        showAllOptions.leftImage = '/images/spacer_10x10.png';
+        showAllOptions.font = {fontSize: '16sp', fontWeight: 'bold'};
+        showAllOptions.top = '16dp';
+        showAllOptions.bottom = '16dp';
+        showAllOptions.height = Ti.UI.SIZE;
 
-        if (OS_IOS) {
-            showAllOptions.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-        } else {
-            showAllOptions.backgroundSelectedColor = '#a9a9a9';
-        }
+        showAllOptions.backgroundSelectedColor = '#a9a9a9';
 
         var row = Ti.UI.createTableViewRow(showAllOptions);
         row.addEventListener('click', onTogglePaginator);

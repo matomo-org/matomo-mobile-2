@@ -7,9 +7,6 @@
     width: Ti.UI.FILL,
 }
 
-"TableViewRow[platform=ios]": {
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.NONE,
-}
 
 "#loadingIndicator": {
     height: 160,
@@ -45,13 +42,6 @@
     touchEnabled: false,
 }
 
-".headline[platform=mobileweb]": {
-    wordWrap: true,
-    left: 0,
-    right: 0,
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-    width: null,
-}
 
 ".headline[platform=android]": {
     font: {fontWeight: 'bold', fontSize: '16sp'},
@@ -97,9 +87,6 @@
 "#content[platform=android]": {
     layout: 'vertical'
 }
-"#content[platform=ios]": {
-    tableSeparatorInsets: {left:0,right:0}
-}
 
 "#noData": {
     visible: false,
@@ -116,9 +103,6 @@
     color: '#7e7e7e',
 }
 
-"#noDataDescription[platform=ios]": {
-    font: {fontWeight: 'bold'},
-}
 
 "#noDataDescription[platform=android]": {
     top: '18dp',

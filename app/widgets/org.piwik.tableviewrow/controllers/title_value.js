@@ -14,10 +14,6 @@ if (args.hasChild) {
     $.index.hasChild = true;
 }
 
-if (args.selectable && OS_IOS) {
-    $.row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-}
-
 exports.changeTitle = function (title)
 {
     $.title.text = title;

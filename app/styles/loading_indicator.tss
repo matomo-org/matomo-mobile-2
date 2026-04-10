@@ -6,9 +6,6 @@
     zIndex: 5
 },
 
-"#loading[platform=ios]": {
-    visible: false
-},
 
 "#loadingLabel": {
     top: 16,

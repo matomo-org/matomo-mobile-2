@@ -16,7 +16,7 @@ var renderedReport = null;
 $.loading.text = String.format(L('Mobile_LoadingReport'), '' + $model.getReportName());
 
 if (!hasDimension) {
-    $.index.height = OS_ANDROID ? '281dp' : 265;
+    $.index.height = '281dp';
 }
 
 $model.on('scrollPosition', updateParentYPositionAndTryToRender);
@@ -133,8 +133,8 @@ function sizeBoxToContent()
 function showErrorMessage(message)
 {
     $.loading.text   = String.format('%s (%s)', message + '', $model.getReportName() + '');
-    $.loading.top    = OS_ANDROID ? '16dp' : 10;
-    $.loading.bottom = OS_ANDROID ? '16dp' : 10;
+    $.loading.top    = '16dp';
+    $.loading.bottom = '16dp';
     $.loading.height = Ti.UI.SIZE;
     sizeBoxToContent();
     close();

@@ -35,10 +35,8 @@ function close()
 {
     require('layout').close($.index);
 
-    if (OS_ANDROID) {
-        // this prevents the tableViewRows from leaking memory
-        $.visitorTable.setData([]);
-    }
+    // this prevents the tableViewRows from leaking memory
+    $.visitorTable.setData([]);
 }
 
 exports.open  = open;
@@ -51,11 +49,7 @@ function onOpen()
 
 function addNonSelectableSelectionStyleToRow(row)
 {
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
-    } else {
-        row.backgroundSelectedColor = '#ffffff';
-    }
+    row.backgroundSelectedColor = '#ffffff';
 
     return row;
 }
@@ -63,12 +57,7 @@ function addNonSelectableSelectionStyleToRow(row)
 function createSelectableRow(params)
 {
     var row = Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
-
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-    } else {
-        row.backgroundSelectedColor = '#a9a9a9';
-    }
+    row.backgroundSelectedColor = '#a9a9a9';
 
     return row;
 }
@@ -309,7 +298,7 @@ function createSystem(visitor, accessUrl) {
                 var imageOptions = {
                     classes: ['pluginIcon'],
                     image: accessUrl + pluginIcon.pluginIcon,
-                    right: OS_ANDROID ? (right + 'dp') : right
+                    right: (right + 'dp')
                 };
                 row.add($.UI.create('ImageView', imageOptions));
             }

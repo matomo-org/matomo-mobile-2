@@ -16,9 +16,6 @@
     separatorColor: '#e0e0e0'
 }
 
-"#visitorTable[platform=ios]": {
-    tableSeparatorInsets: {left:0,right:0}
-}
 
 ".visitorTableViewRow": {
     selectionStyle: 0,
@@ -33,9 +30,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionActionPageTitleLabel[platform=ios]": {
-    left: 15,
-},
 
 ".actionActionPageTitleLabel[platform=android]": {
     left: '16dp',
@@ -52,9 +46,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionActionUrlLabel[platform=ios]": {
-    left: 15,
-},
 
 ".actionActionUrlLabel[platform=android]": {
     left: '16dp',
@@ -72,9 +63,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionActionServerTimeLabel[platform=ios]": {
-    left: 15,
-}
 
 ".actionActionServerTimeLabel[platform=android]": {
     bottom: '5dp',
@@ -98,9 +86,6 @@
     width: Ti.UI.FILL
 }
 
-".actionHeadlineView[platform=ios]": {
-    left: 15,
-}
 
 ".actionHeadlineView[platform=android]": {
     left: '16dp',
@@ -144,9 +129,6 @@
     left: 10
 }
 
-".actionEcommerceDetailsItemView[platform=ios]": {
-    left: 15,
-}
 
 ".actionEcommerceDetailsItemView[platform=android]": {
     left: '10dp'
@@ -160,9 +142,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionEcommerceStandardLabel[platform=ios]": {
-    left: 15,
-}
 
 ".actionEcommerceStandardLabel[platform=android]": {
     left: '16dp',
@@ -238,9 +217,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionEcommerceTypeLabel[platform=ios]": {
-    left: 15,
-}
 
 ".actionEcommerceTypeLabel[platform=android]": {
     top: '1dp',
@@ -257,9 +233,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionDefaultTypeLabel[platform=ios]": {
-    left: 15,
-}
 
 ".actionDefaultTypeLabel[platform=android]": {
     left: '10dp',
@@ -275,9 +248,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionGenericTypeLabel[platform=ios]": {
-    left: 10,
-}
 
 ".actionGenericTypeLabel[platform=android]": {
     left: '8dp',
@@ -295,9 +265,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionDefaultUrlLabel[platform=ios]": {
-    left: 15,
-}
 
 ".actionDefaultUrlLabel[platform=android]": {
     bottom: '5dp',

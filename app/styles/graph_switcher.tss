@@ -13,38 +13,9 @@
     height: '40dp'
 }
 
-"#index[platform=ios]": {
-    top: 0,
-    borderTop: false,
-    borderBottom: false,
-    barColor: '#bbb',
-    translucent: true,
-    zIndex: 999,
-    height: 20,
-    opacity: 0.7,
-    visible: true,
-    tintColor: '#222222'
-}
 
-"#closeButton[platform=ios]": {
-    title: L('General_Close'),
-    style: Ti.UI.iOS.SystemButtonStyle.BORDERED,
-    color: '#212121'
-}
 
-"#closeButton[platform=mobileweb]": {
-    color: '#212121',
-    left: 16,
-    top: 1,
-    height: 38,
-    title: L('General_Close')
-}
 
-"#switchButton[platform=ios]": {
-    title: ' - ',
-    style: Ti.UI.iOS.SystemButtonStyle.BAR,
-    color: '#212121'
-}
 
 "#switchButton[platform=android]": {
     color: '#212121',
@@ -57,9 +28,3 @@
     backgroundDisabledImage: '/images/btn_default_disabled_holo_light.9.png',
 }
 
-"#switchButton[platform=mobileweb]": {
-    color: '#212121',
-    right: 16,
-    top: 1,
-    height: 38,
-}

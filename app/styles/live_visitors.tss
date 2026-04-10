@@ -7,9 +7,6 @@
     separatorColor: '#e0e0e0'
 }
 
-"#liveTable[platform=ios]": {
-    tableSeparatorInsets: {left:0,right:0}
-}
 
 "#headerBar": {
     title: L('Live_VisitorsInRealTime'),

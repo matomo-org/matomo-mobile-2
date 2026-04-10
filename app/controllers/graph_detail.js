@@ -205,19 +205,8 @@ if (isTablet) {
             console.warn(e, 'graphdetail');
         }
     }
-    
-    function rotateImage () {
 
-        var pictureWidth  = getPictureWidth();
-        var pictureHeight = getPictureHeight();
-        var url = getGraphUrlWithSize(pictureWidth, pictureHeight);
-
-        $.graphWidget.width = pictureWidth;
-        $.graphWidget.height = pictureHeight;
-        $.graphWidget.loadImage(url);
-    }
-
-    Ti.Gesture.addEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);
+    Ti.Gesture.addEventListener('orientationchange', rotateImageOnAndroid);
 }
 
 function trackWindowRequest()
@@ -235,28 +224,20 @@ function onOpen()
 function destroy()
 {
     if (!isTablet) {
-        Ti.Gesture.removeEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);
+        Ti.Gesture.removeEventListener('orientationchange', rotateImageOnAndroid);
     }
 }
 
 function close()
 {
-    if (OS_ANDROID) {
-        require('layout').close($.index);
-    } else {
-        $.index.close();
-    }
+    require('layout').close($.index);
 }
 
 function open()
 {
-    if (OS_ANDROID) {
-        require('layout').open($.index);
-        if (isTablet) {
-            $.index.left = 0;
-        }
-    } else {
-        $.index.open();
+    require('layout').open($.index);
+    if (isTablet) {
+        $.index.left = 0;
     }
 }
 

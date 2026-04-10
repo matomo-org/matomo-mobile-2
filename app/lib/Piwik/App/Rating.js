@@ -151,16 +151,7 @@ Rating.prototype.askUserToRate = function () {
  */
 Rating.prototype.getStoreName = function () {
     
-    var storeName = '';
-    
-    if (OS_ANDROID) {
-
-        storeName = 'Google Play Store';
-
-    } else if (OS_IOS) {
-
-        storeName = 'App Store';
-    }
+    var storeName = 'Google Play Store';
     
     return storeName;
 };
@@ -173,31 +164,9 @@ Rating.prototype.getStoreName = function () {
  */
 Rating.prototype.getStoreUrl = function () {
 
-    if (OS_ANDROID) {
-        // @todo what if android market isn't installed?
+    // @todo what if android market isn't installed?
 
-        return 'market://details?id=' + Ti.App.id;
-
-    } else if (OS_IOS) {
-
-        var appStore = require('alloy').CFG.appleAppStore;
-        
-        if (!appStore || !appStore.appId) {
-            // no app store id configured.
-            
-            return '';
-        }
-
-        var url = 'itms-apps://itunes.apple.com/app/id';
-        url     = url + appStore.appId;
-        
-        if (Ti.Platform.canOpenURL(url)) {
-            
-            return url;
-        }
-    }
-    
-    return '';
+    return 'market://details?id=' + Ti.App.id;
 };
 
 /**

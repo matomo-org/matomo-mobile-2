@@ -174,16 +174,12 @@ function removeAllChildrenFromContent()
 
 function updateWindowTitle(title)
 {
-    if (OS_ANDROID) {
-        $.headerBar.setTitle(title || '');
-    } else {
-        $.index.title = title || '';
-    }
+    $.headerBar.setTitle(title || '');
 }
 
 function toUnit(size)
 {
-    return OS_ANDROID ? (size + 'dp') : size;
+    return (size + 'dp');
 }
 
 var containerRow = null;
@@ -274,18 +270,7 @@ function fixVerticalSeparatorHeight()
     var height = parseInt($.dimensions.size.height, 10);
 
     if (5 < height) {
-
-        if (OS_MOBILEWEB) {
-            // don't know why but on MobileWeb height will be only changed if there is a small delay. Tried lots of different implementations but didn't find a better solution
-            setTimeout(function () {
-                if (!$ || !$.verticalSeparator || !$.dimensions) {
-                    return;
-                }
-                $.verticalSeparator.height = $.dimensions.size.height;
-            }, 100);
-        } else {
-            $.verticalSeparator.height = $.dimensions.size.height;
-        }
+        $.verticalSeparator.height = $.dimensions.size.height;
     } 
 }
 

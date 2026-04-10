@@ -3,9 +3,6 @@
     width: Ti.UI.FILL
 },
 
-"TableViewRow[platform=ios]": {
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.NONE
-},
 
 ".container": {
     layout: 'vertical',
@@ -23,9 +20,6 @@
     font: {fontSize: 14}
 },
 
-"#title[platform=ios]": {
-    left: 15,
-}
 
 "#title[platform=android]": {
     left: '16dp',
@@ -43,9 +37,6 @@
     font: {fontSize: 18}
 },
 
-"#counter[platform=ios]": {
-    left: 15,
-}
 
 "#counter[platform=android]": {
     left: '16dp',

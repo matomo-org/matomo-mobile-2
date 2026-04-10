@@ -24,9 +24,6 @@
     separatorColor: '#e0e0e0'
 }
 
-"TableViewRow[platform=ios]": {
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY
-}
 
 "TableViewRow[platform=android]": {
     leftImage: '/images/spacer_10x10.png',
@@ -38,16 +35,7 @@
     backgroundSelectedColor: '#a9a9a9'
 }
 
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10,
-    color: '#333'
-}
 
-"#accountsTable[platform=ios]": {
-    style: Ti.UI.iPhone.TableViewStyle.GROUPED,
-    footerTitle: L('Mobile_HowtoDeleteAnAccountOniOS')
-}
 
 "#noAccountSelectedContainer": {
     visible: false,
@@ -60,9 +48,6 @@
     height: 0,
 }
 
-"#noAccountSelectedContainer[platform=mobileweb]": {
-    height: 0
-}
 
 "#noAccountSelectedLabel": {
     text: L("Mobile_NoAccountIsSelected"),

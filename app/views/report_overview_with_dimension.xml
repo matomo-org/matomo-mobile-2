@@ -22,7 +22,7 @@
                 <Label class="report_title" text="{title}"></Label>
                 <Label class="report_value" text="{value}"></Label>
             </View>
-            <View class="separator" platform="android"/>
+            <View class="separator" />
         </View>
         <View id="footer" class="footer" onClick="openReport">
             <Label class="more"/>

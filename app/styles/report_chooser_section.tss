@@ -1,11 +1,8 @@
 "#index": {
-    backgroundImage: 'tableviewsection_background_dark.png',
+    backgroundImage: '/images/tableviewsection_background_dark.png',
     height: Ti.UI.SIZE,
 }
 
-"#index[platform=ios]": {
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.NONE,
-}
 
 "#index[platform=android]": {
     backgroundImage: '/images/tableviewsection_background_dark.png'

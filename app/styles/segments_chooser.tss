@@ -3,35 +3,18 @@
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
-"#index[platform=mobileweb]": {
-    fullscreen: false,
-}
 
-"#indexWin[platform=ios]": {
-    title: L('Mobile_ChooseSegment')
-}
 
-"#index[platform=ios]": {
-    fullscreen: false,
-    modal: true,
-}
 
 "#cancelButton": {
     title: L('General_Cancel')
 }
 
-"#cancelButton[platform=ios]": {
-    style: Ti.UI.iOS.SystemButtonStyle.CANCEL,
-    tintColor: '#ffffff'
-}
 
 "#segmentsTable": {
     separatorColor: '#e0e0e0'
 }
 
-"#segmentsTable[platform=ios]": {
-    tableSeparatorInsets: {left:0,right:0}
-}
 
 "#loadingLabel": {
     text: L('General_LoadingData')
@@ -62,10 +45,6 @@
     top: '56dp'
 }
 
-"TableViewRow[platform=ios]": {
-    height: Ti.UI.SIZE,
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
-},
 
 "TableViewRow[platform=android]": {
     leftImage: '/images/spacer_16x16.png',
@@ -76,11 +55,6 @@
     backgroundSelectedColor: '#a9a9a9'
 }
 
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10,
-    color: '#333'
-}
 
 "#headerBar": {
     title: L('Mobile_ChooseSegment'),

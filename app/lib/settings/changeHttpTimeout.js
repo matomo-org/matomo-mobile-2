@@ -81,12 +81,7 @@ exports.open = function ()
         options: timeoutValues
     };
 
-    if (OS_ANDROID) {
-        params.buttonNames = [L('General_Cancel')];
-    } else {
-        timeoutValues.push(L('General_Cancel'));
-        params.cancel = (timeoutValues.length - 1);
-    }
+    params.buttonNames = [L('General_Cancel')];
 
     var timeoutDialog = Ti.UI.createOptionDialog(params);
     timeoutDialog.addEventListener('click', onTimeoutSelected);

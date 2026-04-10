@@ -21,22 +21,16 @@ function showWaitingIndicator()
     var style = Ti.UI.ActivityIndicatorStyle.DARK;
 
     var activityIndicator = Ti.UI.createActivityIndicator({
-      font: {fontSize: OS_ANDROID ? '18dp' : 26, fontWeight:'bold'},
+      font: {fontSize: '18dp', fontWeight:'bold'},
       message: L('Mobile_VerifyAccount'),
       style: style
     });
 
     var winParams = {backgroundColor: '#ddd', opacity: 0.8, zIndex: 99999};
 
-    if (OS_ANDROID) {
-        win = Ti.UI.createView(winParams);
-        win.add(activityIndicator);
-        require('layout').open(win);
-    } else {
-        win = Ti.UI.createWindow(winParams);
-        win.add(activityIndicator);
-        win.open();
-    }
+    win = Ti.UI.createView(winParams);
+    win.add(activityIndicator);
+    require('layout').open(win);
 
     activityIndicator.show();
     activityIndicator = null;
@@ -44,10 +38,8 @@ function showWaitingIndicator()
 
 function hideWaitingIndicator()
 {
-    if (win && OS_ANDROID) {
+    if (win) {
         require('layout').close(win);
-    } else if (win) {
-        win.close();
     }
 
     win = null;
@@ -137,30 +129,23 @@ function askForAuthCode(account)
         cancel: 1,
         buttonNames: [L('General_Verify'), L('General_Cancel')]
     };
-    if (OS_IOS) {
-       	dialogParams.style = Ti.UI.iOS.AlertDialogStyle.PLAIN_TEXT_INPUT;
-    } else {
-		textfield = Ti.UI.createTextField({
-			left: '16dp',
-			right: '16dp',
-		    value : '',
-		    keyboardType: Titanium.UI.KEYBOARD_TYPE_NUMBER_PAD,
-		    autoCorrect: false
-		});
-		dialogParams.androidView = textfield;
-    }
+
+    textfield = Ti.UI.createTextField({
+        left: '16dp',
+        right: '16dp',
+        value : '',
+        keyboardType: Titanium.UI.KEYBOARD_TYPE_NUMBER_PAD,
+        autoCorrect: false
+    });
+    dialogParams.androidView = textfield;
     var dialog = Ti.UI.createAlertDialog(dialogParams);
     dialog.addEventListener('click', function (event) {
         if (!event || true === event.cancel || event.cancel === event.index) {
             account.clear({silent: true});
             return;
         }
-        
-        if (OS_IOS) {
-        	    account.setAuthCode(event.text);
-        } else if (textfield) {
-        	    account.setAuthCode(textfield.value);
-        }
+
+        account.setAuthCode(textfield.value);
 
         fetchAuthToken(account);
     });

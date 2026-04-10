@@ -11,9 +11,6 @@
     backgroundSelectedImage: '/images/tableviewsection_background_dark.png'
 }
 
-"#index[platform=ios]": {
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.NONE
-}
 
 "#title": {
     height: Ti.UI.SIZE,

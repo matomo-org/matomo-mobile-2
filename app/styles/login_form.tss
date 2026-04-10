@@ -13,9 +13,6 @@
     }
 },
 
-"#loginbutton[platform=ios]": {
-    style: Ti.UI.iOS.SystemButtonStyle.PLAIN
-},
 
 "#loginbutton[platform=android]": {
     borderWidth: '1dp',

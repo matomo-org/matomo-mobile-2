@@ -73,12 +73,7 @@ function createRow(params)
 function createNonSelectableRow(params)
 {
     var row = createRow(params);
-
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
-    } else {
-        row.backgroundSelectedColor = '#ffffff';
-    }
+    row.backgroundSelectedColor = '#ffffff';
 
     return row;
 }
@@ -86,12 +81,7 @@ function createNonSelectableRow(params)
 function createSelectableRow(params)
 {
     var row = createRow(params);
-
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-    } else {
-        row.backgroundSelectedColor = '#dcdcdc';
-    }
+    row.backgroundSelectedColor = '#dcdcdc';
 
     return row;
 }

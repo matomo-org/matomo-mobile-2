@@ -5,15 +5,7 @@
     backgroundColor: "#eff0f1"
 }
 
-"#index[platform=ios]": {
-    navBarHidden: true,
-    extendSafeArea: false
-}
 
-"#index[platform=mobileweb]": {
-    modal: true,
-    navBarHidden: true 
-}
 
 "#graphWidget": {
    touchEnabled: false,
@@ -27,10 +19,6 @@
    bottom: 10
 }
 
-"#graphWidget[platform=ios]": {
-   canScale: true,
-   hires: true,
-}
 
 "#graphWidget[platform=android]": {
     defaultImage: '/images/graphdefault.png',

@@ -39,10 +39,6 @@ function openLicense()
 {
     var url = 'https://matomo.org/free-software/mobile/';
 
-    if (OS_IOS) {
-        url = 'https://www.gnu.org/licenses/gpl-3.0.html';
-    }
-
     require('commands/openLink').execute(url);
 }
 

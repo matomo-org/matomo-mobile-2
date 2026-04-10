@@ -22,17 +22,13 @@ $.image.getView().addEventListener('click', function () {
     }
 });
 
-if (!OS_MOBILEWEB) {
-    // we need to wait till view is visible otherwise animation will never be executed.
-    // load event is not supported on MobileWeb
-    $.image.getView().addEventListener('load', function () {
-        animateFadeOutDetailIcon();
+$.image.getView().addEventListener('load', function () {
+    animateFadeOutDetailIcon();
 
-        if (graphSwitcher) {
-            graphSwitcher.fadeOut();
-        }
-    });
-}
+    if (graphSwitcher) {
+        graphSwitcher.fadeOut();
+    }
+});
 
 function width(image)
 {

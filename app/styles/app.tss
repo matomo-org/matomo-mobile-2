@@ -21,10 +21,6 @@
     exitOnClose: true
 },
 
-"Window[platform=ios]": {
-    navBarHidden: false,
-    statusBarStyle: Alloy.statusBarStyle
-},
 
 "Label": {
     color: "#212121"
@@ -52,14 +48,4 @@
     height: 32
 }
 
-".reportConfiguratorButton[platform=ios]": {
-    backgroundImage: "ic_action_reportmenu.png",
-    width: 32,
-    height: 32
-},
 
-".reportConfiguratorButton[platform=mobileweb]": {
-    backgroundImage: "ic_action_reportmenu.png",
-    width: 32,
-    height: 32
-}

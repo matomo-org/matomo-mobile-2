@@ -1,11 +1,4 @@
-"#index[platform=ios]": {
-    navBarHidden: true
-},
 
-"#index[platform=mobileweb]": {
-    navBarHidden: true,
-    modal: true
-},
 
 "#index[platform=android]": {
     exitOnClose: true

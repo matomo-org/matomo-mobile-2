@@ -16,16 +16,6 @@
     touchEnabled: false
 },
 
-"#titleLabel[platform=ios]": {
-    left: 15,
-    font: {fontSize: 18, fontWeight: 'normal'},
-}
-
-"#title[platform=ios formFactor=tablet]": {
-    top: 12,
-    bottom: 12,
-}
-
 "#titleLabel[platform=android]": {
     left: '16dp',
     right: '16dp',

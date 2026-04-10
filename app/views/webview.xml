@@ -4,7 +4,7 @@
         <Widget src="org.piwik.headerbar" 
                 id="headerBar" 
                 onBack="close"
-                platform="android" />
+                 />
 
         <View id="loadingIndicator"><Label id="loadingLabel"></Label></View>
                 

@@ -7,8 +7,8 @@
 
 var args = arguments[0] || {};
 
-var errorImage = OS_ANDROID ? '/images/image_load_error.png' : 'image_load_error.png';
-var supportsWidthDetectionOfImage = (OS_ANDROID || OS_IOS);
+var errorImage = '/images/image_load_error.png';
+var supportsWidthDetectionOfImage = true;
 
 var validateSsl = true;
 

@@ -65,10 +65,6 @@ function deleteAccount(event)
 
 function deleteAccountIfUserConfirmsButNotOniOS(event)
 {
-    if (OS_IOS) {
-        return;
-    }
-
     var dialog = Ti.UI.createAlertDialog({
         cancel: 1,
         buttonNames: [L('General_Yes'), L('General_No')],
@@ -98,15 +94,9 @@ function isAnAccountSelected()
 
 $.showNoAccountSelectedHint = function ()
 {
-    if (OS_MOBILEWEB) {
-        $.noAccountSelectedContainer.height = Ti.UI.SIZE;
-    }
-
-    if (OS_ANDROID) {
-        $.noAccountSelectedLabel.height = Ti.UI.SIZE;
-        $.noAccountSelectedLabel.show();
-        $.noAccountSelectedContainer.height = Ti.UI.SIZE;
-    }
+    $.noAccountSelectedLabel.height = Ti.UI.SIZE;
+    $.noAccountSelectedLabel.show();
+    $.noAccountSelectedContainer.height = Ti.UI.SIZE;
 
     $.noAccountSelectedContainer.show();
 };
@@ -150,7 +140,7 @@ function onOpen()
 
 function onClose ()
 {
-    if (OS_ANDROID && $.accountsTable) {
+    if ($.accountsTable) {
         // this prevents leaking tableViewRows
         $.accountsTable.setData([]);
     }

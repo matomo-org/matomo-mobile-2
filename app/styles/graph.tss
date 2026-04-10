@@ -13,9 +13,6 @@
     bottom: 10,
 },
 
-"#image[platform=ios]": {
-    hires: true
-},
 
 "#image[platform=android]": {
     top: '15dp',

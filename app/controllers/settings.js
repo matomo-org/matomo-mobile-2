@@ -16,13 +16,6 @@ var callbacks = {changeLanguage: changeLanguage,
                  changeHttpTimeout: changeHttpTimeout,
                  changeReportDate: changeReportDate};
 
-if (OS_IOS) {
-    var margin     = Alloy.isTablet ? 30 : 15;
-    var footerView = Ti.UI.createView({left: margin, right: margin, height: Ti.UI.SIZE});
-    footerView.add(Ti.UI.createLabel({text: L('Mobile_LoginToPiwikToChangeSettings')}));
-    $.settingsTable.footerView = footerView;
-    footerView = null;
-}
 
 function onOpen()
 {
@@ -61,7 +54,7 @@ function onItemClick(event)
 
 function supportsListView()
 {
-    return (OS_IOS || OS_ANDROID);
+    return true;
 }
 
 function changeLanguage()
@@ -166,11 +159,7 @@ function setTitle(section, itemIndex, title)
         return;
     }
 
-    if (OS_ANDROID) {
-        item.title = {text: title};
-    } else {
-        item.properties.title = title;
-    }
+    item.title = {text: title};
 
     section.updateItemAt(itemIndex, item);
 }
@@ -188,11 +177,7 @@ function setSubtitle(section, itemIndex, subtitle)
         return;
     }
 
-    if (OS_ANDROID) {
-        item.subtitle = {text: subtitle};
-    } else {
-        item.properties.subtitle = subtitle;
-    }
+    item.subtitle = {text: subtitle};
 
     section.updateItemAt(itemIndex, item);
 }
@@ -210,18 +195,10 @@ function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
         return;
     }
 
-    if (OS_ANDROID) {
-        if (enabled) {
-            item.template = 'checkedTemplate';
-        } else {
-            item.template = 'uncheckedTemplate';
-        }
+    if (enabled) {
+        item.template = 'checkedTemplate';
     } else {
-        if (enabled) {
-            item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
-        } else {
-            item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
-        }
+        item.template = 'uncheckedTemplate';
     }
 
     $.basic.updateItemAt(indexOfItemIfListView, item);
@@ -231,11 +208,7 @@ function updateWindowTitle()
 {
     var title = L('General_Settings');
 
-    if (OS_ANDROID) {
-        $.headerBar.setTitle(title || '');
-    } else {
-        $.index.title = title || '';
-    }
+    $.headerBar.setTitle(title || '');
 }
 
 function updateAllDisplayedSettingsValues()

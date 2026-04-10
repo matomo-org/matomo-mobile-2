@@ -29,14 +29,10 @@ function showLogo(processedReport)
 
     var iconWidth  = processedReport.getLogoWidth() || 16;
     var iconHeight = processedReport.getLogoHeight() || 16;
-    var iconLeft   = OS_ANDROID ? '8dp' : 10;
-    
-    if (OS_IOS) {
-        iconLeft  = 15;
-    } else if (OS_ANDROID) {
-        iconWidth  = Ti.UI.convertUnits(iconWidth + 'dp', Ti.UI.UNIT_PX);
-        iconHeight = Ti.UI.convertUnits(iconHeight + 'dp', Ti.UI.UNIT_PX);
-    }
+    var iconLeft   = '8dp';
+
+    iconWidth  = Ti.UI.convertUnits(iconWidth + 'dp', Ti.UI.UNIT_PX);
+    iconHeight = Ti.UI.convertUnits(iconHeight + 'dp', Ti.UI.UNIT_PX);
     
     $.icon.width  = iconWidth;
     $.icon.height = iconHeight;
