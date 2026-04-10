@@ -457,13 +457,13 @@ function createActionAction(actionDetail)
     
     if ('url' in actionDetail && actionDetail.url) {
         var label = $.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.url + ''});
-        if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
-            label.addEventListener('click', (function (actionDetailUrl) {
-                return function () {
-                    Ti.Platform.openURL(actionDetailUrl);
-                };
-            })(actionDetail.url));
-        }
+
+        label.addEventListener('click', (function (actionDetailUrl) {
+            return function () {
+                Ti.Platform.openURL(actionDetailUrl);
+            };
+        })(actionDetail.url));
+
         row.add(label);
         label = null;
     }
@@ -550,13 +550,11 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
         label = $.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.url + '')});
         row.add(label);
 
-        if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
-            label.addEventListener('click', (function (actionDetailUrl) {
-                return function () {
-                    Ti.Platform.openURL(actionDetailUrl);
-                };
-            })(actionDetail.url));
-        }
+        label.addEventListener('click', (function (actionDetailUrl) {
+            return function () {
+                Ti.Platform.openURL(actionDetailUrl);
+            };
+        })(actionDetail.url));
 
         label = null;
 

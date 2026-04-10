@@ -28,10 +28,6 @@ for (var metricInternalName in metrics) {
     internalNames.push(String(metricInternalName));
 }
 
-if (!OS_ANDROID) {
-    options.push(L('General_Cancel'));
-}
-
 function doChangeMetric(event)
 {
     if (!event || event.cancel === event.index || true === event.cancel || 0 > event.index || event.button) {
@@ -52,7 +48,7 @@ exports.open = function()
     var params = {
         options: options,
         title: L('Mobile_ChooseMetric'),
-        cancel: OS_ANDROID ? -1 : options.length - 1
+        cancel:  -1
     };
 
     params.buttonNames = [L('General_Cancel')];
