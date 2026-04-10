@@ -20,10 +20,6 @@
     color: '#212121',
 }
 
-".headline[platform=android]": {
-    left: '16dp',
-    font: {fontSize: '18sp'},
-}
 
 ".section": {
     left: 0,
@@ -33,9 +29,6 @@
     height: Ti.UI.SIZE,
 }
 
-".section[platform=android]": {
-    top: '16dp'
-}
 
 "#periodLabel": {
     title: L('General_Period')
@@ -47,15 +40,7 @@
     right: 16,
 }
 
-"#periodPicker[platform=android]": {
-    top: '8dp',
-    left: '16dp',
-    right: '16dp',
-}
 
-"#periodPicker[platform=mobileweb]": {
-    height: 150
-}
 
 "#period_day": {
     title: L('Intl_PeriodDay'),
@@ -92,15 +77,7 @@
     left: 16,
 }
 
-"#fromDatePicker[platform=android]": {
-    top: '8dp',
-    left: '16dp',
-}
 
-"#fromDatePicker[platform=mobileweb]": {
-    right: 16,
-    height: 50
-}
 
 "#toDateLabel": {
     title: L('General_DateRangeTo')
@@ -113,15 +90,7 @@
     right: 16,
 }
 
-"#toDatePicker[platform=mobileweb]": {
-    height: 50
-}
 
-"#toDatePicker[platform=android]": {
-    top: '8dp',
-    left: '16dp',
-    right: '16dp',
-}
 
 "#updateButton": {
     title: L('CoreUpdater_UpdateTitle')

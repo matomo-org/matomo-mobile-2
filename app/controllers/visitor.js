@@ -51,11 +51,7 @@ function onOpen()
 
 function addNonSelectableSelectionStyleToRow(row)
 {
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
-    } else {
-        row.backgroundSelectedColor = '#ffffff';
-    }
+    row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
 
     return row;
 }
@@ -64,11 +60,7 @@ function createSelectableRow(params)
 {
     var row = Alloy.createWidget('org.piwik.tableviewrow', null, params).getRow();
 
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-    } else {
-        row.backgroundSelectedColor = '#a9a9a9';
-    }
+    row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
 
     return row;
 }

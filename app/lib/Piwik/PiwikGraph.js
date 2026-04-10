@@ -178,7 +178,7 @@ function PiwikGraph () {
             }
         }
 
-        if (hires && OS_IOS) {
+        if (hires) {
             
             var factor = require('Piwik/Platform').getIOSScaleFactor();
             
@@ -186,11 +186,7 @@ function PiwikGraph () {
             parameter.fontSize = parameter.fontSize * factor;
             parameter.width    = parameter.width * factor;
             parameter.height   = parameter.height * factor;
-        } else if (OS_ANDROID) {
-            var densityFaktor = parseFloat(Ti.Platform.displayCaps.logicalDensityFactor);
-            parameter.legendFontSize = Math.round(parameter.fontSize * densityFaktor);
-            parameter.fontSize = Math.round(parameter.fontSize * densityFaktor);
-        } 
+        }
         
         // prevents graph from caching
         parameter.cacherand = Math.floor(Math.random() * 9999999);

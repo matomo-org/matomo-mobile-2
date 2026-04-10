@@ -145,18 +145,10 @@ function fetchListOfAvailableSegments()
 
 function closeWindow()
 {
-    if (OS_IOS && Alloy.isTablet) {
+    if (Alloy.isTablet) {
         $.index.hide();
-    } else if (OS_IOS) {
+    } else  {
         $.index.close();
-    } else {
-
-        if (OS_ANDROID && $.segmentsTable) {
-            // this prevents leaking tableViewRows
-            $.segmentsTable.data = [];
-        }
-
-        require('layout').close($.index);
     }
 }
 
@@ -164,12 +156,10 @@ exports.close = closeWindow;
 
 exports.open = function () {
 
-    if (OS_IOS && Alloy.isTablet) {
+    if (Alloy.isTablet) {
         $.index.show({view: popoverSource});
-    } else if (OS_IOS) {
-        $.index.open({modal: true});
     } else {
-        require('layout').open($.index);
+        $.index.open({modal: true});
     }
 
     fetchListOfAvailableSegments();

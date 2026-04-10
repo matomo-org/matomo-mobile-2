@@ -17,13 +17,6 @@
     touchEnabled: false
 },
 
-"#name[platform=android]": {
-    top: '20dp',
-    bottom: '20dp',
-    font: {
-        fontSize: '20sp'
-    }
-}
 
 ".top_separator": {
     backgroundColor: "#dcdcdc",
@@ -31,6 +24,3 @@
     top: 0
 }
 
-".top_separator[platform=android]": {
-    height: '1dp',
-}

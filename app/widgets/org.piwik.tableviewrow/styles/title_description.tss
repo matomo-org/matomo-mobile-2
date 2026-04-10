@@ -24,13 +24,6 @@
     left: 15,
 }
 
-"#title[platform=android]": {
-    left: '16dp',
-    right: '16dp',
-    top: '10dp',
-    font: {fontSize: '16sp', fontWeight: 'normal'},
-    zIndex: 2,
-},
 
 "#description": {
     font: {fontSize: 13},
@@ -49,20 +42,4 @@
 
 "#description[platform=ios]": {
     left: 15,
-}
-
-"#description[platform=mobileweb]": {
-    ellipsize: false,
-    wordWrap: true
-},
-
-"#description[platform=android]": {
-    font: {fontSize: '12sp'},
-    left: '16dp',
-    right: '16dp',
-    top: '4dp',
-    bottom: '10dp',
-    ellipsize: false,
-    wordWrap: true,
-    zIndex: 3,
 }

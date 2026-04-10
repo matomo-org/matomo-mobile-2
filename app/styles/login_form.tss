@@ -16,16 +16,6 @@
 "#loginbutton[platform=ios]": {
 },
 
-"#loginbutton[platform=android]": {
-    borderWidth: '1dp',
-    borderRadius: 5,
-    top: '16dp',
-    height: '45dp',
-    font: { 
-        fontSize: '18sp',
-        fontWeight: "bold"
-    }
-},
 
 "#formView": {
     layout: "vertical",
@@ -50,10 +40,6 @@
     backgroundColor: '#E6E6E6'
 }
 
-".line[platform=android]": {
-    height: '2dp',
-    hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
-}
 
 ".textfield": {
     top: 2,
@@ -66,14 +52,6 @@
     clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS
 },
 
-".textfield[platform=android]": {
-    top: '5dp',
-    height: '45dp',
-    left: '10dp',
-    right: '10dp',
-    backgroundColor: '#fff',
-    hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
-},
 
 ".textfield[platform=ios]": {
     hintTextColor: '#555'
@@ -131,13 +109,6 @@
     left: 0,
     right: 0
 },
-"#appSpecificLoginNotice[platform=android]": {
-    top: '16dp',
-    font: {
-        fontSize: '13sp'
-    },
-    hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
-},
 
 "#usernameLoginNotice": {
     top: 10,
@@ -152,13 +123,6 @@
     right: 0
 },
 
-"#usernameLoginNotice[platform=android]": {
-    top: '16dp',
-    font: {
-        fontSize: '13sp'
-    },
-    hiddenBehavior: Titanium.UI.HIDDEN_BEHAVIOR_GONE
-},
 
 "#anonymousLoginNotice": {
     top: 10,
@@ -172,9 +136,3 @@
     right: 0
 },
 
-"#anonymousLoginNotice[platform=android]": {
-    top: '16dp',
-    font: { 
-        fontSize: '13sp'
-    }
-},

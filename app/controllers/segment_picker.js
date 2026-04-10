@@ -21,7 +21,7 @@ function chooseSegment()
 
     var params = {};
 
-    if (Alloy.isTablet && OS_IOS) {
+    if (Alloy.isTablet) {
         params.source = $.index;
     }
 

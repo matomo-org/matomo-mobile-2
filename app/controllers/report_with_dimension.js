@@ -129,11 +129,7 @@ function toggleReportChooserVisibility()
 
 function updateWindowTitle(title)
 {
-    if (OS_ANDROID) {
-        $.headerBar.setTitle(title || '');
-    } else {
-        $.index.title = title || '';
-    }
+    $.index.title = title || '';
 }
 
 function doRefresh()

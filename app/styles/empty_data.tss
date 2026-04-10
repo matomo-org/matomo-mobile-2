@@ -1,15 +1,8 @@
-".container[platform=mobileweb]": {
-    height: Ti.UI.FILL
-}
 
 ".container[platform=ios]": {
     height: Ti.UI.FILL
 }
 
-".container[platform=android]": {
-    top: '56dp',
-    bottom: 0
-}
 
 ".centerContainer": {
     height: Ti.UI.SIZE,
@@ -23,12 +16,6 @@
     top: 20,
 }
 
-"#icon[platform=android]": {
-    top: '16dp',
-    image: '/images/nodata.png',
-    height: '48dp',
-    width: '48dp'
-}
 
 "#title": {
     font: {fontWeight: 'bold', fontSize: 20},
@@ -37,10 +24,6 @@
     height: Ti.UI.SIZE
 }
 
-"#title[platform=android]": {
-    top: '20dp',
-    font: {fontWeight: 'bold', fontSize: '20sp'},
-}
 
 "#message": {
     font: {fontSize: 16},
@@ -52,19 +35,7 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 }
 
-"#message[platform=android]": {
-    left: '30dp',
-    right: '30dp',
-    top: '20dp',
-    font: {fontSize: '16sp'},
-}
 
-".refreshContainer[platform=android]": {
-    left: '30dp',
-    right: '30dp',
-    top: '20dp',
-    font: {fontSize: '16sp'},
-}
 
 ".refreshContainer": {
     borderWidth: 1,
@@ -77,11 +48,6 @@
     backgroundColor: "#c0c0c0",
 }
 
-".refreshContainer[platform=android]": {
-    height: '40dp',
-    top: '40dp',
-    bottom: '16dp'
-}
 
 "#refresh": {
     title: L('General_Refresh'),
@@ -101,11 +67,3 @@
 "#refresh[platform=ios]": {
 },
 
-"#refresh[platform=android]": {
-    left: '50dp',
-    right: '50dp',
-    font: {
-        fontSize: '16sp',
-        fontWeight: "bold"
-    }
-},

@@ -24,18 +24,16 @@ exports.init = function (tableView)
 {
     $.tableView = tableView;
 
-    if (OS_IOS) {
-        $.tableView.refreshControl = Ti.UI.createRefreshControl({
-            tintColor: '#CD1628'
-        });
-        
-        $.tableView.refreshControl.addEventListener('refreshstart', function () {
-            if (!$.reloading) {
-                $.reloading = true;
-                $.trigger('refresh');
-            }
-        });
-    }
+    $.tableView.refreshControl = Ti.UI.createRefreshControl({
+        tintColor: '#CD1628'
+    });
+
+    $.tableView.refreshControl.addEventListener('refreshstart', function () {
+        if (!$.reloading) {
+            $.reloading = true;
+            $.trigger('refresh');
+        }
+    });
 };
 
 exports.refreshDone = function () 

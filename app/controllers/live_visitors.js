@@ -39,9 +39,6 @@ function unregisterEvents()
     $.index.removeEventListener('open', onOpen);
     $.liveTable.removeEventListener('click', openVisitor);
 
-    if (OS_ANDROID) {
-        $.headerBar.off();
-    }
 }
 
 function trackWindowRequest()
@@ -236,36 +233,14 @@ function onPause () {
 
 function handleBackgroundEvents()
 {
-    if (OS_IOS) {
-        Ti.App.addEventListener('resume', onResume);
-        Ti.App.addEventListener('pause', onPause);
-    }
-
-    if (OS_ANDROID) {
-        var activity = require('ui/helper').getAndroidActivity($.index);
-
-        if (activity) {
-            activity.onPause = stopRefreshTimer;
-            activity.onStop = stopRefreshTimer;
-        }
-    }
+    Ti.App.addEventListener('resume', onResume);
+    Ti.App.addEventListener('pause', onPause);
 }
 
 function stopHandleBackgroundEvents()
 {
-    if (OS_IOS) {
-        Ti.App.removeEventListener('resume', onResume);
-        Ti.App.removeEventListener('pause', onPause);
-    }
-
-    if (OS_ANDROID) {
-        var activity = require('ui/helper').getAndroidActivity($.index);
-
-        if (activity) {
-            activity.onPause = function () {};
-            activity.onStop = function () {};
-        }
-    }
+    Ti.App.removeEventListener('resume', onResume);
+    Ti.App.removeEventListener('pause', onPause);
 }
 
 function toggleReportConfiguratorVisibility ()

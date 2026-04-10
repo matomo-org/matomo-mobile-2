@@ -151,18 +151,7 @@ Rating.prototype.askUserToRate = function () {
  */
 Rating.prototype.getStoreName = function () {
     
-    var storeName = '';
-    
-    if (OS_ANDROID) {
-
-        storeName = 'Google Play Store';
-
-    } else if (OS_IOS) {
-
-        storeName = 'App Store';
-    }
-    
-    return storeName;
+    return 'App Store';
 };
 
 /**
@@ -173,28 +162,20 @@ Rating.prototype.getStoreName = function () {
  */
 Rating.prototype.getStoreUrl = function () {
 
-    if (OS_ANDROID) {
-        // @todo what if android market isn't installed?
+    var appStore = require('alloy').CFG.appleAppStore;
 
-        return 'market://details?id=' + Ti.App.id;
+    if (!appStore || !appStore.appId) {
+        // no app store id configured.
 
-    } else if (OS_IOS) {
+        return '';
+    }
 
-        var appStore = require('alloy').CFG.appleAppStore;
-        
-        if (!appStore || !appStore.appId) {
-            // no app store id configured.
-            
-            return '';
-        }
+    var url = 'itms-apps://itunes.apple.com/app/id';
+    url     = url + appStore.appId;
 
-        var url = 'itms-apps://itunes.apple.com/app/id';
-        url     = url + appStore.appId;
-        
-        if (Ti.Platform.canOpenURL(url)) {
-            
-            return url;
-        }
+    if (Ti.Platform.canOpenURL(url)) {
+
+        return url;
     }
     
     return '';

@@ -14,9 +14,6 @@
     actionItem1: {icon: '/images/ic_person_white_24dp.png'}
 }
 
-"#index[platform=mobileweb]": {
-    fullscreen: false,
-}
 
 "#index[platform=ios]": {
     fullscreen: false,
@@ -26,9 +23,6 @@
     text: L('Mobile_LoadingReport', 'General_Website')
 },
 
-"#loading[platform=android]": {
-    top: '56dp'
-}
 
 "#loading": {
     left: 0,

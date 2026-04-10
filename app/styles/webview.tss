@@ -6,9 +6,6 @@
     canGoBack: true,
 }
 
-"#browser[platform=android]": {
-    top: '56dp'
-}
 
 "#loadingIndicator": {
     left: 0,
@@ -20,9 +17,6 @@
     zIndex: 5
 },
 
-"#loadingIndicator[platform=android]": {
-    top: '56dp'
-}
 
 "#loadingLabel": {
     text: L('General_LoadingData')

@@ -9,9 +9,6 @@
     zIndex: 999,
 }
 
-".container[platform=android]": {
-    height: '40dp'
-}
 
 "#index[platform=ios]": {
     top: 0,
@@ -32,13 +29,6 @@
     color: '#212121'
 }
 
-"#closeButton[platform=mobileweb]": {
-    color: '#212121',
-    left: 16,
-    top: 1,
-    height: 38,
-    title: L('General_Close')
-}
 
 "#switchButton[platform=ios]": {
     title: ' - ',
@@ -46,20 +36,4 @@
     color: '#212121'
 }
 
-"#switchButton[platform=android]": {
-    color: '#212121',
-    right: '16dp',
-    top: '1dp',
-    height: '38dp',
-    backgroundImage: '/images/btn_default_normal_holo_light.9.png',
-    backgroundFocusedImage: '/images/btn_default_focused_holo_light.9.png',
-    backgroundSelectedImage: '/images/btn_default_focused_holo_light.9.png',
-    backgroundDisabledImage: '/images/btn_default_disabled_holo_light.9.png',
-}
 
-"#switchButton[platform=mobileweb]": {
-    color: '#212121',
-    right: 16,
-    top: 1,
-    height: 38,
-}

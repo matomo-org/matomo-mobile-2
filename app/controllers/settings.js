@@ -61,7 +61,7 @@ function onItemClick(event)
 
 function supportsListView()
 {
-    return (OS_IOS || OS_ANDROID);
+    return true;
 }
 
 function changeLanguage()
@@ -166,12 +166,7 @@ function setTitle(section, itemIndex, title)
         return;
     }
 
-    if (OS_ANDROID) {
-        item.title = {text: title};
-        item.properties.height = Ti.UI.SIZE;
-    } else {
-        item.properties.title = title;
-    }
+    item.properties.title = title;
 
     section.updateItemAt(itemIndex, item);
 }
@@ -189,12 +184,7 @@ function setSubtitle(section, itemIndex, subtitle)
         return;
     }
 
-    if (OS_ANDROID) {
-        item.subtitle = {text: subtitle};
-        item.properties.height = Ti.UI.SIZE;
-    } else {
-        item.properties.subtitle = subtitle;
-    }
+    item.properties.subtitle = subtitle;
 
     section.updateItemAt(itemIndex, item);
 }
@@ -212,18 +202,10 @@ function setHasCheck(uiRowIfTableView, indexOfItemIfListView, enabled)
         return;
     }
 
-    if (OS_ANDROID) {
-        if (enabled) {
-            item.template = 'checkedTemplate';
-        } else {
-            item.template = 'uncheckedTemplate';
-        }
+    if (enabled) {
+        item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
     } else {
-        if (enabled) {
-            item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
-        } else {
-            item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
-        }
+        item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
     }
 
     $.basic.updateItemAt(indexOfItemIfListView, item);
@@ -233,11 +215,7 @@ function updateWindowTitle()
 {
     var title = L('General_Settings');
 
-    if (OS_ANDROID) {
-        $.headerBar.setTitle(title || '');
-    } else {
-        $.index.title = title || '';
-    }
+    $.index.title = title || '';
 }
 
 function updateAllDisplayedSettingsValues()

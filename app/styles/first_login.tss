@@ -2,14 +2,7 @@
     navBarHidden: false
 },
 
-"#index[platform=mobileweb]": {
-    navBarHidden: true,
-    modal: true
-},
 
-"#index[platform=android]": {
-    exitOnClose: true
-},
 
 "#content": {
     backgroundColor: "#ffffff",
@@ -28,9 +21,6 @@
     height: 180
 },
 
-"#headerView[platform=android]": {
-    height: '180dp'
-},
 
 "#logoImage": {
     image: "logo-png-page.png",
@@ -39,15 +29,7 @@
     zIndex: 1
 },
 
-"#logoImage[platform=mobileweb]": {
-    image: "logo-png-page.png"
-},
 
-"#logoImage[platform=android]": {
-    image: "/images/logo-png-page.png",
-    width: '294dp',
-    height: '48dp',
-},
 
 "#loginform": {
     left: 20,
@@ -55,15 +37,8 @@
     height: Ti.UI.SIZE
 },
 
-"#loginform[platform=android]": {
-    left: '16dp',
-    right: '16dp'
-},
 
 ".footerSpacer": {
     height: 40,
 },
 
-".footerSpacer[platform=android]": {
-    height: '40dp',
-}

@@ -24,10 +24,6 @@
     height: 0,
 }
 
-"#verticalSeparator[platform=android]": {
-    width: '1dp', 
-    top: '17dp', 
-}
 
 "#content": {
     top: 0,
@@ -35,9 +31,6 @@
     contentHeight: 'auto',
 }
 
-"#content[platform=android]": {
-    top: '56dp'
-}
 
 ".innerContainer": {
     top: 0,
@@ -51,9 +44,6 @@
     top: 0
 }
 
-".separator[platform=android]": {
-    height: '1dp',
-}
 
 ".footerLogo": {
     top: 2,
@@ -63,13 +53,6 @@
     image: 'piwik_logo_light_footer.png'
 }
 
-".footerLogo[platform=android]": {
-    top: '2dp',
-    bottom: '25dp',
-    width: '145dp',
-    height: '19dp',
-    image: '/images/piwik_logo_light_footer.png'
-}
 
 "#outerContent": {
     height: Ti.UI.SIZE,
@@ -90,11 +73,3 @@
     borderColor: "#e6e6e6"
 }
 
-"#dimensions[platform=android]": {
-    top: '17dp',
-    left: '10dp',
-    right: '10dp',
-    bottom: '10dp',
-    borderWidth: '1dp',
-    borderRadius: 0,
-}

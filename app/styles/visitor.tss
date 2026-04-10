@@ -11,10 +11,6 @@
     canGoBack: true
 }
 
-"#visitorTable[platform=android]": {
-    top: '56dp',
-    separatorColor: '#e0e0e0'
-}
 
 "#visitorTable[platform=ios]": {
     tableSeparatorInsets: {left:0,right:0}
@@ -37,11 +33,6 @@
     left: 15,
 },
 
-".actionActionPageTitleLabel[platform=android]": {
-    left: '16dp',
-    font: {fontSize: '13sp', fontWeight: 'bold'},
-    top: '5dp',
-}
 
 ".actionActionUrlLabel": {
     left: 10,
@@ -56,11 +47,6 @@
     left: 15,
 },
 
-".actionActionUrlLabel[platform=android]": {
-    left: '16dp',
-    font: {fontSize: '13sp'},
-    top: '3dp',
-}
 
 ".actionActionServerTimeLabel": {
     bottom: 5,
@@ -76,12 +62,6 @@
     left: 15,
 }
 
-".actionActionServerTimeLabel[platform=android]": {
-    bottom: '5dp',
-    top: '3dp',
-    left: '16dp',
-    font: {fontSize: '13sp'},
-}
 
 ".actionTableViewRow": {
     layout: 'vertical',
@@ -102,10 +82,6 @@
     left: 15,
 }
 
-".actionHeadlineView[platform=android]": {
-    left: '16dp',
-    top: '5dp'
-}
 
 ".actionDefaultIconImageView": {
     left: 0,
@@ -116,11 +92,6 @@
     enableZoomControls: false
 }
 
-".actionDefaultIconImageView[platform=android]": {
-    top: '4dp',
-    width: '10dp',
-    height: '9dp'
-}
 
 ".actionEcommerceIconImageView": {
     top: 4,
@@ -131,11 +102,6 @@
     enableZoomControls: false,
 }
 
-".actionEcommerceIconImageView[platform=android]": {
-    top: '4dp',
-    width: '10dp',
-    height: '10dp',
-}
 
 ".actionEcommerceDetailsItemView": {
     layout: 'horizontal',
@@ -148,9 +114,6 @@
     left: 15,
 }
 
-".actionEcommerceDetailsItemView[platform=android]": {
-    left: '10dp'
-}
 
 ".actionEcommerceStandardLabel": {
     left: 10,
@@ -164,11 +127,6 @@
     left: 15,
 }
 
-".actionEcommerceStandardLabel[platform=android]": {
-    left: '16dp',
-    font: {fontSize: '13sp'},
-    top: '4dp',
-}
 
 ".actionEcommerceDetailsPriceLabel": {
     left: 30,
@@ -179,11 +137,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionEcommerceDetailsPriceLabel[platform=android]": {
-    left: '36dp',
-    font: {fontSize: '13sp'},
-    top: '4dp',
-}
 
 ".actionEcommerceDetailsItemStarLabel": {
     left: 0,
@@ -194,11 +147,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionEcommerceDetailsItemStarLabel[platform=android]": {
-    font: {fontSize: '13sp'},
-    top: '3dp',
-    width: '15dp',
-}
 
 ".actionEcommerceDetailsItemNameLabel": {
     left: 5,
@@ -209,11 +157,6 @@
     height: Ti.UI.SIZE,
 }
 
-".actionEcommerceDetailsItemNameLabel[platform=android]": {
-    left: '5dp',
-    font: {fontSize: '13sp'},
-    top: '3dp',
-}
 
 ".actionEcommerceDetailsView": {
     layout: 'vertical',
@@ -224,10 +167,6 @@
     top: 4,
 }
 
-".actionEcommerceDetailsView[platform=android]": {
-    bottom: '5dp',
-    top: '4dp',
-}
 
 ".actionEcommerceTypeLabel": {
     top: 1,
@@ -242,11 +181,6 @@
     left: 15,
 }
 
-".actionEcommerceTypeLabel[platform=android]": {
-    top: '1dp',
-    left: '16dp',
-    font: {fontSize: '13sp', fontWeight: 'bold'},
-}
 
 ".actionDefaultTypeLabel": {
     top: 0,
@@ -261,10 +195,6 @@
     left: 15,
 }
 
-".actionDefaultTypeLabel[platform=android]": {
-    left: '10dp',
-    font: {fontSize: '13sp', fontWeight: 'bold'},
-}
 
 ".actionGenericTypeLabel": {
     top: 0,
@@ -279,10 +209,6 @@
     left: 10,
 }
 
-".actionGenericTypeLabel[platform=android]": {
-    left: '8dp',
-    font: {fontSize: '13sp', fontWeight: 'bold'},
-}
 
 
 ".actionDefaultUrlLabel": {
@@ -299,12 +225,6 @@
     left: 15,
 }
 
-".actionDefaultUrlLabel[platform=android]": {
-    bottom: '5dp',
-    left: '16dp',
-    top: '4dp',
-    font: {fontSize: '13sp'},
-}
 
 ".pluginIcon": {
     width: 14,
@@ -312,8 +232,3 @@
     top: 14,
 }
 
-".pluginIcon[platform=android]": {
-    width: '14dp',
-    height: '14dp',
-    top: '14dp',
-}

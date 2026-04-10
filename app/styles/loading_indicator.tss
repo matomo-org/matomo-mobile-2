@@ -20,10 +20,3 @@
     text: L('General_LoadingData')
 },
 
-"#loadingLabel[platform=android]": {
-    top: '16dp',
-    bottom: '16dp',
-    left: '16dp',
-    right: '16dp',
-    font: {fontSize: '16sp'}
-}

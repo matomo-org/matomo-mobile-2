@@ -7,7 +7,7 @@
 
 function onEmailSent(event)
 {
-    if (OS_IOS && event && event.result && event.result == this.SENT) {
+    if (event && event.result && event.result == this.SENT) {
         // android doesn't give us useful result codes. it anyway shows a toast.
         
         var L = require('L');
@@ -78,9 +78,7 @@ exports.execute = function ()
     emailDialog.subject = "Feedback Matomo Mobile";
     emailDialog.toRecipients = ['mobile@matomo.org'];
 
-    if (OS_IOS) {
-        emailDialog.barColor = '#0e1328';
-    }
+    emailDialog.barColor = '#0e1328';
 
     if (!emailDialog.isSupported()) {
         var L = require('L');

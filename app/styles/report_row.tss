@@ -10,10 +10,6 @@
     bottom: 16,
 },
 
-"#stats[platform=android]": {
-    top: '16dp',
-    bottom: '18dp',
-}
 
 "#icon": {
     top: 18,
@@ -23,9 +19,6 @@
     left: 0,
 }
 
-"#icon[platform=android]": {
-    top: '22dp',
-}
 
 "#title": {
     height: Ti.UI.SIZE,
@@ -39,11 +32,6 @@
     left: 15,
 },
 
-"#title[platform=android]": {
-    left: '16dp',
-    right: '100dp',
-    font: {fontSize: '16sp', fontWeight: 'bold'}
-},
 
 "#value": {
     height: Ti.UI.SIZE,
@@ -54,9 +42,3 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
 },
 
-"#value[platform=android]": {
-    right: '16dp',
-    width: '75dp',
-    color: '#191919',
-    font: {fontSize: '16sp', fontWeight: 'bold'}
-}

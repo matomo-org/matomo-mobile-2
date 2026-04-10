@@ -27,11 +27,6 @@
     left: 15,
 }
 
-"#title[platform=android]": {
-    left: '16dp',
-    top: '8dp',
-    font: {fontSize: '14sp'}
-},
 
 "#counter": {
     bottom: 8,
@@ -47,10 +42,3 @@
     left: 15,
 }
 
-"#counter[platform=android]": {
-    left: '16dp',
-    top: '3dp',
-    bottom: '8dp',
-    color: '#01b4b8',
-    font: {fontSize: '18sp'}
-}

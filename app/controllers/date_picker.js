@@ -16,7 +16,7 @@ function chooseDate()
     var date   = reportDate ? reportDate.getDateQueryString() : 'today';
     var params = {date: date, period: period};
 
-    if (Alloy.isTablet && OS_IOS) {
+    if (Alloy.isTablet) {
         params.source = $.index;
     }
 

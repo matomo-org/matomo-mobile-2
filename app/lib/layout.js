@@ -8,14 +8,10 @@
 var layoutName = '';
 var alloy      = require('alloy');
 
-if (OS_IOS && alloy.isHandheld) {
+if (alloy.isHandheld) {
     layoutName = 'layout/ios/iphone';
-} else if (OS_IOS && alloy.isTablet) {
+} else if (alloy.isTablet) {
     layoutName = 'layout/ios/ipad';
-} else if (OS_ANDROID && alloy.isTablet) {
-    layoutName = 'layout/android/tablet';
-} else if (OS_ANDROID) {
-    layoutName = 'layout/android/handheld';
 }
 
 module.exports = require(layoutName);

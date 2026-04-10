@@ -11,10 +11,6 @@
     hasNavigation: true,
 }
 
-"#helpTable[platform=android]": {
-    top: '56dp',
-    separatorColor: '#e0e0e0'
-}
 
 "#helpTable[platform=ios]": {
     style: Ti.UI.iOS.TableViewStyle.GROUPED
@@ -24,37 +20,19 @@
     selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
 }
 
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10
-}
 
-"TableViewRow[platform=android]": {
-    top: '16dp',
-    bottom: '16dp',
-    color: '#212121',
-    leftImage: '/images/spacer_10x10.png',
-    backgroundSelectedColor: '#dcdcdc',
-}
 
 "#about": {
     hasChild: true,
     title: L('Mobile_AboutPiwikMobile')
 }
 
-"#about[platform=android]": {
-    hasChild: false,
-    rightImage: '/images/navigation_next_item.png'
-}
 
 "#email": {
     hasChild: true,
     title: L('Mobile_EmailUs')
 }
 
-"#email[platform=android]": {
-    hasChild: false
-}
 
 
 "#marketplace": {
@@ -62,33 +40,21 @@
     title: L('Mobile_PiwikMarketplace')
 }
 
-"#marketplace[platform=android]": {
-    hasChild: false
-}
 
 "#forums": {
     hasChild: true,
     title: L('General_Forums')
 }
 
-"#forums[platform=android]": {
-    hasChild: false
-}
 
 "#documentation": {
     hasChild: true,
     title: L('General_Documentation')
 }
 
-"#documentation[platform=android]": {
-    hasChild: false
-}
 
 "#faq": {
     hasChild: true,
     title: L('General_Faq')
 }
 
-"#faq[platform=android]": {
-    hasChild: false
-}

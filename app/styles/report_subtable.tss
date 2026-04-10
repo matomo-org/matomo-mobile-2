@@ -21,9 +21,6 @@
     layout: "vertical"
 }
 
-"#content[platform=android]": {
-    top: '56dp'
-}
 
 "#reportTable": {
     top: 0,
@@ -35,9 +32,6 @@
 }
 
 "TableViewRow[platform=ios]": {
-    height: Ti.UI.SIZE
-},
-"TableViewRow[platform=android]": {
     height: Ti.UI.SIZE
 },
 
@@ -58,11 +52,4 @@
     image: 'piwik_logo_light_footer.png'
 }
 
-".footerLogo[platform=android]": {
-    top: '12dp',
-    bottom: '25dp',
-    width: '75dp',
-    height: '19dp',
-    image: '/images/piwik_logo_light_footer.png'
-}
 

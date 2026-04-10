@@ -12,11 +12,6 @@
     touchEnabled: false,
 }
 
-".icon[platform=android]": {
-    image: "/images/ic_action_menu_date.png",
-    width: '22dp',
-    height: '22dp',
-}
 
 ".topLine": {
     backgroundColor: '#595959',
@@ -25,10 +20,6 @@
     width: Ti.UI.FILL,
 }
 
-".topLine[platform=android]": {
-    height: '1dp',
-    top: '1dp',
-}
 
 ".topLine[platform=ios]": {
     top: 1,
@@ -41,10 +32,6 @@
     width: Ti.UI.FILL,
 }
 
-".bottomLine[platform=android]": {
-    height: '1dp',
-    bottom: '1dp',
-}
 
 ".bottomLine[platform=ios]": {
     bottom: 1,
@@ -58,10 +45,6 @@
     borderWidth: 1,
 }
 
-".button[platform=android]": {
-    backgroundImage: '/images/menu_button_background.png',
-    borderWidth: '1dp',
-}
 
 "#dateLabel": {
     color: "#d5d5d5",
@@ -73,14 +56,7 @@
     touchEnabled: false,
 }
 
-"#dateLabel[platform=mobileweb]": {
-    top: 3,
-}
 
-"#dateLabel[platform=android]": {
-    font: {fontSize: '15sp'},
-    right: '42dp',
-}
 
 ".inner": {
     left: 8,
@@ -91,12 +67,6 @@
     touchEnabled: false,
 }
 
-".inner[platform=android]": {
-    left: '9dp',
-    top: '6dp',
-    bottom: '6dp',
-    right: '6dp',
-}
 
 ".inner[platform=ios]": {
     left: 9,

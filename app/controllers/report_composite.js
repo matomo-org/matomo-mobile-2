@@ -202,11 +202,7 @@ function render()
 
 function updateWindowTitle(title)
 {
-    if (OS_ANDROID) {
-        $.headerBar.setTitle(title || '');
-    } else {
-        $.index.title = title || '';
-    }
+    $.index.title = title || '';
 }
 
 function filterReports(collection)
@@ -234,10 +230,6 @@ function filterReports(collection)
 }
 
 var neededScrollChange = 70;
-
-if (OS_ANDROID) {
-    neededScrollChange = require('Piwik/Platform').dpToPixel(neededScrollChange);
-}
 
 function notifyModelsAboutNewScrollPosition (event)
 {
@@ -278,23 +270,13 @@ function hasReportsToShow()
 
 function addPiwikIcon()
 {
-    if (OS_ANDROID) {
-        $.content.add(Ti.UI.createImageView({
-            top: '10dp',
-            bottom: '25dp',
-            width: '145dp',
-            height: '19dp',
-            image: '/images/piwik_logo_dark_footer.png'
-        }));
-    } else {
-        $.content.add(Ti.UI.createImageView({
-            top: 12,
-            bottom: 25,
-            width: 145,
-            height: 19,
-            image: 'piwik_logo_dark_footer.png'
-        }));
-    }
+    $.content.add(Ti.UI.createImageView({
+        top: 12,
+        bottom: 25,
+        width: 145,
+        height: 19,
+        image: 'piwik_logo_dark_footer.png'
+    }));
 }
 
 function open()
@@ -303,7 +285,7 @@ function open()
     // this animation causes the window title in report composite views to be not displayed. It'll work only
     // once but as soon as a windows is closed shortly before (happening when choosing a report in sidebar)
     // the title will be no longer displayed.
-    var animated = OS_IOS ? false : true;
+    var animated = true;
 
     registerEvents();
     require('layout').open($.index, animated);

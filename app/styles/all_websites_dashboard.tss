@@ -12,9 +12,6 @@
     tintColor: '#212121'
 },
 
-"#searchBar[platform=android]": {
-    backgroundColor: '#eff0f1'
-},
 
 ".searchBarInnerContainer": {
     borderRadius: 5,
@@ -28,15 +25,6 @@
     backgroundColor: '#fff',
 }
 
-"#searchBar[platform=mobileweb]": {
-    borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
-    autocorrect: false,
-    left: 5,
-    right: 5,
-    color: '#7e7e7e',
-    height: Ti.UI.SIZE,
-    hintText: L('Mobile_SearchWebsite')
-}
 
 ".searchBarContainer": {
     height: Ti.UI.SIZE,
@@ -44,9 +32,6 @@
     backgroundColor: '#cccccc'
 }
 
-"#searchBar[platform=android]": {
-    height: '43dp'
-},
 
 ".container": {
     layout: "vertical"
@@ -69,10 +54,6 @@
     left: 0
 }
 
-".quickInfoName[platform=android]": {
-    font: {fontSize: '13sp'},
-    top: '10dp',
-}
 
 ".quickInfoValue": {
     font: {fontSize: 13},
@@ -82,20 +63,12 @@
     bottom: 10
 }
 
-".quickInfoValue[platform=android]": {
-    font: {fontSize: '13sp'},
-    touchEnabled: false,
-    bottom: '10dp',
-}
 
 "#index": {
     title: L('General_AllWebsitesDashboard'),
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
-"#index[platform=mobileweb]": {
-    fullscreen: false,
-}
 
 "#index[platform=ios]": {
     fullscreen: false,
@@ -127,13 +100,6 @@
     left: 15,
 }
 
-"#useSearchHintLabel[platform=android]": {
-    font: {fontSize: '13sp'},
-    top: '5dp',
-    bottom: '5dp',
-    right: '10dp',
-    left: '10dp',
-}
 
 ".websiteNameLabel": {
     verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
@@ -148,11 +114,6 @@
     left: 15
 }
 
-".websiteNameLabel[platform=android]": {
-    left: '16dp',
-    right: '120dp',
-    touchEnabled: false
-}
 
 "#loading": {
     left: 0,
@@ -164,9 +125,6 @@
     zIndex: 5
 },
 
-"#loading[platform=android]": {
-    top: '56dp'
-}
 
 "#content": {
     height: Ti.UI.FILL,
@@ -175,9 +133,6 @@
     zIndex: 3
 },
 
-"#content[platform=android]": {
-    top: '56dp'
-}
 
 ".evolutionContainer": {
     right: 10,
@@ -186,39 +141,23 @@
     height: Ti.UI.SIZE,
 }
 
-".evolutionContainer[platform=android]": {
-    right: '10dp',
-    width: '100dp',
-    touchEnabled: false
-}
 
 "TableViewRow[platform=ios]": {
     height: Ti.UI.SIZE,
     selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
 },
 
-"TableViewRow[platform=android]": {
-    height: Ti.UI.SIZE,
-    backgroundSelectedColor: '#a9a9a9'
-},
 
 ".space": {
     height: 10
 },
 
-".space[platform=android]": {
-    height: '10dp',
-    touchEnabled: false
-},
 
 ".shadow": {
     height: 1,
     backgroundColor: "#cccccc"
 },
 
-".shadow[platform=android]": {
-    height: '1dp'
-}
 
 "#headerBar": {
     title: L('General_AllWebsitesDashboard'),

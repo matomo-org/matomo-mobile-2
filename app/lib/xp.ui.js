@@ -6,5 +6,5 @@
  */
 
 exports.createWindow = function(args) {
-    return Ti.UI[OS_ANDROID ? 'createView' : 'createWindow'](args);
+    return Ti.UI['createWindow'](args);
 };

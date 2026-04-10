@@ -9,18 +9,7 @@
     right: 10
 }
 
-"#index[platform=mobileweb]": {
-    width: null,
-}
 
-"#index[platform=android]": {
-    height: '352dp',
-    borderRadius: 0,
-    borderWidth: '1dp',
-    top: '8dp',
-    left: '8dp',
-    right: '8dp'
-}
 
 "#loading": {
     text: '',
@@ -30,8 +19,3 @@
     right: 10,
 }
 
-"#loading[platform=android]": {
-    left: '16dp',
-    right: '16dp',
-    font: {fontSize: '16sp'}
-}

@@ -136,19 +136,8 @@ function scrollToTop()
 function getNextRowParams()
 {
     var nextRow = {title: L('General_Next'), color: '#0e1328', className: 'visitorlogPaginator'};
-    if (OS_ANDROID) {
-        nextRow.leftImage = '/images/spacer_10x10.png';
-        nextRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
-        nextRow.top    = '12dp';
-        nextRow.bottom = '12dp';
-        nextRow.height = Ti.UI.SIZE;
 
-    }
-    if (OS_IOS) {
-        nextRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-    } else {
-        nextRow.backgroundSelectedColor = '#a9a9a9';
-    }
+    nextRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
 
     return nextRow;
 }
@@ -156,18 +145,8 @@ function getNextRowParams()
 function getPrevRowParams()
 {
     var prevRow = {title: L('General_Previous'), color: '#0e1328', className: 'visitorlogPaginator'};
-    if (OS_ANDROID) {
-        prevRow.leftImage = '/images/spacer_10x10.png';
-        prevRow.font   = {fontSize: '15sp', fontWeight: 'bold'};
-        prevRow.top    = '12dp';
-        prevRow.bottom = '12dp';
-        prevRow.height = Ti.UI.SIZE;
-    }
-    if (OS_IOS) {
-        prevRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-    } else {
-        prevRow.backgroundSelectedColor = '#a9a9a9';
-    }
+
+    prevRow.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
 
     return prevRow;
 }
@@ -176,18 +155,7 @@ function getNoVisitorsRowParams()
 {
     var rowParams = {title: L('Mobile_NoVisitorsShort')};
 
-    if (OS_ANDROID) {
-        rowParams.leftImage = '/images/spacer_10x10.png';
-        rowParams.color  = '#cccccc';
-        rowParams.font   = {fontSize: '16sp', fontWeight: 'bold'};
-        rowParams.top    = '12dp';
-        rowParams.bottom = '12dp';
-        rowParams.height = Ti.UI.SIZE;
-    }
-
-    if (OS_IOS) {
-        rowParams.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
-    }
+    rowParams.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
 
     return rowParams;
 }
@@ -233,7 +201,7 @@ function render()
 
     $.visitorLogTable.data = rows;
 
-    if (OS_IOS && $.visitorLogTable && $.visitorLogTable.scrollToTop) {
+    if ($.visitorLogTable && $.visitorLogTable.scrollToTop) {
         $.visitorLogTable.scrollToTop();
     }
 

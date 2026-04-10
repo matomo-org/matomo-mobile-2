@@ -10,10 +10,6 @@
     extendSafeArea: false
 }
 
-"#index[platform=mobileweb]": {
-    modal: true,
-    navBarHidden: true 
-}
 
 "#graphWidget": {
    touchEnabled: false,
@@ -32,13 +28,6 @@
    hires: true,
 }
 
-"#graphWidget[platform=android]": {
-    defaultImage: '/images/graphDefault.png',
-    left: '10dp',
-    right: '10dp',
-    top: '10dp',
-    bottom: '10dp'
-}
 
 ".separator": {
     bottom: 0,
@@ -48,9 +37,6 @@
     right: 0,
 }
 
-".separator[platform=android]": {
-    height: '2dp'
-}
 
 "#bottomContainer": {
     bottom: 0,
@@ -84,13 +70,6 @@
     }
 }
 
-"#reportName[platform=android]": {
-    left: '20dp',
-    right: '20dp',
-    font: { 
-        fontSize: '48sp'
-    }
-}
 
 "#reportDate": {
     text: ' ',
@@ -106,11 +85,3 @@
     }
 }
 
-"#reportDate[platform=android]": {
-    top: '25dp',
-    left: '20dp',
-    right: '20dp',
-    font: { 
-        fontSize: '36sp'
-    }
-}

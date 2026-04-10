@@ -11,36 +11,18 @@
     selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
 }
 
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10
-}
 
-"TableViewRow[platform=android]": {
-    top: '16dp',
-    bottom: '16dp',
-    color: '#212121',
-    leftImage: '/images/spacer_10x10.png',
-    backgroundSelectedColor: '#dcdcdc',
-}
 
 "#aboutPiwikTable[platform=ios]": {
     style: Ti.UI.iOS.TableViewStyle.GROUPED
 }
 
-"#aboutPiwikTable[platform=android]": {
-    top: '56dp',
-    separatorColor: '#e0e0e0'
-}
 
 "#website": {
     hasChild: true,
     title: 'Visit our Website'
 }
 
-"#website[platform=android]": {
-    hasChild: false
-}
 
 "#follow": {
     hasDetail: true,
@@ -52,9 +34,6 @@
     title: 'Participate to Matomo'
 }
 
-"#participate[platform=android]": {
-    hasChild: false
-}
 
 "#sourceCode": {
     hasDetail: true,
@@ -71,6 +50,3 @@
     title: 'View License'
 }
 
-"#license[platform=android]": {
-    hasChild: false
-}

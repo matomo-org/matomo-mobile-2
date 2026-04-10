@@ -75,11 +75,7 @@ function createNonSelectableRow(params)
 {
     var row = createRow(params);
 
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
-    } else {
-        row.backgroundSelectedColor = '#ffffff';
-    }
+    row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.NONE;
 
     return row;
 }
@@ -88,11 +84,7 @@ function createSelectableRow(params)
 {
     var row = createRow(params);
 
-    if (OS_IOS) {
-        row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
-    } else {
-        row.backgroundSelectedColor = '#dcdcdc';
-    }
+    row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
 
     return row;
 }
@@ -121,15 +113,6 @@ function render()
         });
         row.addEventListener('click', doRateApp);
         rows.push(row);
-    }
-
-    if (!OS_IOS) {
-	    row = createSelectableRow({
-	        title: 'Learn how you can participate',
-	        description: 'Matomo is a project made by the community, you can participate in the Matomo Mobile App or Matomo.'
-	    });
-	    row.addEventListener('click', doParticipate);
-	    rows.push(row);
     }
 
     rows.push(createSection({title: 'About', style: 'native'}));

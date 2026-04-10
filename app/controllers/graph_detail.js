@@ -185,31 +185,6 @@ if (isTablet) {
 
 } else {
 
-    function rotateImageOnAndroid (event) {
-
-        try {
-            var pictureWidth  = getOrientationSpecificWidth();
-            var pictureHeight = getOrientationSpecificHeight();
-            $.index.remove($.graph);
-            $.graph = null;
-
-            if ($.graphWidget) {
-                $.graphWidget.destroy();
-                $.graphWidget = null;
-            }
-
-            var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
-            $.graphWidget        = getImageView(graphUrlWithSize, pictureWidth, pictureHeight);
-            $.graph              = $.graphWidget.getView();
-
-            $.graphWidget.setParent($.index);
-
-        } catch (e) {
-            console.warn('Failed to update (remove and add) graph', 'graphdetail');
-            console.warn(e, 'graphdetail');
-        }
-    }
-    
     function rotateImage () {
 
         var pictureWidth  = getPictureWidth();
@@ -239,29 +214,18 @@ function onOpen()
 function destroy()
 {
     if (!isTablet) {
-        Ti.Gesture.removeEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);
+        Ti.Gesture.removeEventListener('orientationchange', rotateImage);
     }
 }
 
 function close()
 {
-    if (OS_ANDROID) {
-        require('layout').close($.index);
-    } else {
-        $.index.close();
-    }
+    $.index.close();
 }
 
 function open()
 {
-    if (OS_ANDROID) {
-        require('layout').open($.index);
-        if (isTablet) {
-            $.index.left = 0;
-        }
-    } else {
-        $.index.open();
-    }
+    $.index.open();
 }
 
 exports.open = open;

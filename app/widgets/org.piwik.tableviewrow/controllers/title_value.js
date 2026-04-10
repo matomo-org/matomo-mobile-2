@@ -14,7 +14,7 @@ if (args.hasChild) {
     $.index.hasChild = true;
 }
 
-if (args.selectable && OS_IOS) {
+if (args.selectable) {
     $.row.selectionStyle = Ti.UI.iOS.TableViewCellSelectionStyle.GRAY;
 }
 

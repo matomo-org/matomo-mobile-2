@@ -174,16 +174,12 @@ function removeAllChildrenFromContent()
 
 function updateWindowTitle(title)
 {
-    if (OS_ANDROID) {
-        $.headerBar.setTitle(title || '');
-    } else {
-        $.index.title = title || '';
-    }
+    $.index.title = title || '';
 }
 
 function toUnit(size)
 {
-    return OS_ANDROID ? (size + 'dp') : size;
+    return size;
 }
 
 var containerRow = null;

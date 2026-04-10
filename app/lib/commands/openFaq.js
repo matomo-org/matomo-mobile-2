@@ -9,12 +9,7 @@ exports.execute = function ()
 {
     var L = require('L');
 
-    var link = '';
-    if (OS_IOS) {
-        link = 'http://ios.matomo.org#faqs';
-    } else {
-        link = 'https://matomo.org/faq/mobile-app/';
-    }
+    var link = 'http://ios.matomo.org#faqs';
     
     require('commands/openLink').execute(link);
 };

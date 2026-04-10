@@ -143,12 +143,8 @@ exports.open = function () {
         options: languageNames
     };
 
-    if (OS_ANDROID) {
-        params.buttonNames = [L('General_Cancel')];
-    } else {
-        languageNames.push(L('General_Cancel'));
-        params.cancel = (languageNames.length - 1);
-    }
+    languageNames.push(L('General_Cancel'));
+    params.cancel = (languageNames.length - 1);
 
     var langDialog = Ti.UI.createOptionDialog(params);
 

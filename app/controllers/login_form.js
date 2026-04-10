@@ -31,17 +31,13 @@ function onUrlBlur ()
 
 function hideElement(element) {
     element.hide();
-    if (OS_IOS) {
-        element.old_height = element.height;
-        element.height = 0;
-    }
+    element.old_height = element.height;
+    element.height = 0;
 }
 
 function showElement(element, height) {
     element.show();
-    if (OS_IOS) {
-        element.height = element.old_height;
-    }
+    element.height = element.old_height;
 }
 
 function showAppSpecificLogin() {

@@ -119,12 +119,8 @@ exports.open = function ()
         options: options
     };
 
-    if (OS_ANDROID) {
-        params.buttonNames = [L('General_Cancel')];
-    } else {
-        options.push(L('General_Cancel'));
-        params.cancel = (options.length - 1);
-    }
+    options.push(L('General_Cancel'));
+    params.cancel = (options.length - 1);
 
     var dialog = Ti.UI.createOptionDialog(params);
     dialog.selectedIndex = currentSelectedReportDateIndex();

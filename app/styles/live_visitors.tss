@@ -28,6 +28,3 @@
     layout: 'vertical'
 }
 
-"#content[platform=android]": {
-    top: '56dp'
-}

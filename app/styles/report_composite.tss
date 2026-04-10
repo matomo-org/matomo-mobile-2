@@ -14,9 +14,6 @@
     zIndex: 5
 },
 
-"#loadingIndicator[platform=android]": {
-    top: '56dp'
-}
 
 "#loadingLabel": {
     text: L('General_LoadingData')
@@ -34,13 +31,7 @@
     showVerticalScrollIndicator: true
 }
 
-"#content[platform=android]": {
-    top: '56dp',
-}
 
-"#content[platform=mobileweb]": {
-    disableBounce: true,
-}
 
 "#headerBar[formFactor=handheld]": {
     actionItem1: {icon: '/images/ic_more_vert_white_24dp.png'},

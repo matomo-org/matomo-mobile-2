@@ -17,18 +17,7 @@
     hires: true
 },
 
-"#image[platform=mobileweb]": {
-    image: 'graphDefault.png'
-},
 
-"#image[platform=android]": {
-    top: '15dp',
-    image: '/images/graphDefault.png',
-    left: '16dp',
-    right: '16dp',
-    height: '150dp',
-    bottom: '10dp',
-}
 
 "#showDetailIcon": {
     image: 'ic_action_fullscreen.png',
@@ -42,10 +31,3 @@
     zIndex: 10,
 }
 
-"#showDetailIcon[platform=android]": {
-    image: '/images/ic_fullscreen_grey600_36dp.png',
-    bottom: '8dp',
-    right: '8dp',
-    width: '36dp',
-    height: '36dp'
-}

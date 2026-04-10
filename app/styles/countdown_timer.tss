@@ -5,16 +5,9 @@
     backgroundColor: '#212121'
 }
 
-".container[platform=android]": {
-    height: "20dp",
-    bottom: "0dp"
-}
 
 "#title": {
     font: {fontSize: 14},
     color: 'white',
 }
 
-"#title[platform=android]": {
-    font: {fontSize: '14sp'},
-}
