@@ -20,10 +20,8 @@
     font: {fontSize: 13},
     right: 10,
     height: Ti.UI.SIZE,
-    bottom: 8
-}
-"#title[platform=ios]": {
-    left: 15,
+    bottom: 8,
+    textTransform: 'uppercase'
 }
 
 "#title[platform=android]": {
@@ -31,5 +29,6 @@
     left: '10dp',
     font: {fontSize: '13sp'},
     right: '10dp',
-    bottom: '8dp'
+    bottom: '8dp',
+    textTransform: 'uppercase'
 }

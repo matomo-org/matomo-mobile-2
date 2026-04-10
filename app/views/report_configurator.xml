@@ -1,4 +1,4 @@
-<Alloy>
+Ø<Alloy>
     <Collection src="piwikWebsites" id="piwikWebsites" instance="true"/>
 
     <View id="index">

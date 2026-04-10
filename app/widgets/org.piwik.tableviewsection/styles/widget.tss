@@ -25,19 +25,15 @@
     left: 10,
     font: {fontSize: 15, fontWeight: 'bold'},
     shadowColor: '#212121',
-    shadowOffset: {x: 1, y: 1}
+    shadowOffset: {x: 1, y: 1},
+    textTransform: 'uppercase'
 },
-
-"#title[platform=ios]": {
-    left: 15,
-    font: {fontSize: 15, fontWeight: 'normal'},
-}
 
 "#title[platform=android]": {
     top: '3dp',
     bottom: '4dp',
     left: '16dp',
-    font: {fontSize: '15sp', fontWeight: 'bold'},
+    font: {fontSize: '15sp', fontWeight: 'normal'},
 },
 
 ".headerView": {

@@ -1,18 +1,9 @@
-"#reportsTable[platform=ios]": {
-    separatorColor: '#2D2D2D',
-    allowsSelection: true,
-    backgroundColor: '#222222',
-    tableSeparatorInsets: {left:0,right:0}
-}
 
 "#reportsTable[platform=android]": {
-    separatorColor: '#2D2D2D',
-    backgroundColor: '#222222',
+    separatorColor: '#0f1429',
+    backgroundColor: '#0e1328',
 }
 
-"#reportsTable[platform=mobileweb]": {
-    separatorColor: '#2D2D2D'
-}
 
 ".websitePicker": {
     top: 12,
@@ -61,13 +52,13 @@
     layout: 'vertical',
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-    backgroundColor: '#222222',
+    backgroundColor: '#0e1328',
 }
 
 ".separator": {
     height: 1,
     width: Ti.UI.FILL,
-    backgroundColor: '#2d2d2d'
+    backgroundColor: '#0f1429'
 }
 
 ".separator[platform=android]": {
