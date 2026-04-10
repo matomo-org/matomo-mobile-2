@@ -25,7 +25,6 @@
                 </View>
             </TableViewRow>
         </TableView>
-        <View class="separator" platform="android"/>
         <View id="footer" class="footer" onClick="openReport">
             <Label class="more"/>
         </View>

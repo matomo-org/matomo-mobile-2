@@ -7,7 +7,7 @@
 
 var args = arguments[0] || {};
 
-if (OS_IOS && args.style && 'native' == args.style) {
+if (args.style && 'native' == args.style) {
 
     exports.getSection = function () 
     {

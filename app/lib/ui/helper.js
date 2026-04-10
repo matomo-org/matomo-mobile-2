@@ -41,23 +41,6 @@ exports.getHeight = function (view)
     return 0;
 };
 
-exports.getAndroidActivity = function (window) 
-{
-    var activity = null;
-
-    if (Ti.Android && Ti.Android.currentActivity) {
-        activity = Ti.Android.currentActivity;
-    } else if (!activity && Ti.UI.currentWindow && Ti.UI.currentWindow.activity) {
-        activity = Ti.UI.currentWindow.activity;
-    } else if (!activity && window && window.activity) {
-        activity = window.activity;
-    }
-
-    window = null;
-
-    return activity;
-};
-
 function doesNotContainWhitespace (url) {
     return -1 == ('' + url).indexOf(' ');
 }

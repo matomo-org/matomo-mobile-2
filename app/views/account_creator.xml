@@ -1,10 +1,5 @@
 <Alloy>
     <Window module="xp.ui" id="index" onOpen="onOpen" onClose="onClose">
-        <Widget src="org.piwik.headerbar" 
-                id="headerBar" 
-                onBack="close"
-                platform="android" />
-
         <ScrollView class="container">
             <View id="loginform" />
         </ScrollView>

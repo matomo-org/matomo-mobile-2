@@ -3,7 +3,7 @@
     
     <Window module="xp.ui" id="index" onOpen="onOpen" onClose="onClose">
         
-        <LeftNavButton platform="ios" formFactor="tablet">
+        <LeftNavButton  formFactor="tablet">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
         

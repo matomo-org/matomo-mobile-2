@@ -16,13 +16,11 @@ var callbacks = {changeLanguage: changeLanguage,
                  changeHttpTimeout: changeHttpTimeout,
                  changeReportDate: changeReportDate};
 
-if (OS_IOS) {
-    var margin     = Alloy.isTablet ? 30 : 15;
-    var footerView = Ti.UI.createView({left: margin, right: margin, height: Ti.UI.SIZE});
-    footerView.add(Ti.UI.createLabel({text: L('Mobile_LoginToPiwikToChangeSettings')}));
-    $.settingsTable.footerView = footerView;
-    footerView = null;
-}
+var margin     = Alloy.isTablet ? 30 : 15;
+var footerView = Ti.UI.createView({left: margin, right: margin, height: Ti.UI.SIZE});
+footerView.add(Ti.UI.createLabel({text: L('Mobile_LoginToPiwikToChangeSettings')}));
+$.settingsTable.footerView = footerView;
+footerView = null;
 
 function onOpen()
 {

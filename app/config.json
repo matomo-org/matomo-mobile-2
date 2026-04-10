@@ -65,7 +65,6 @@
     "dependencies": {
         "org.piwik.tableviewrow": "1.0",
         "org.piwik.tableviewsection": "1.0",
-        "org.piwik.imageview": "1.0",
-        "org.piwik.headerbar": "1.0"
+        "org.piwik.imageview": "1.0"
     }
 }

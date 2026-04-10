@@ -2,14 +2,14 @@
     <Collection src="appAccounts"/>
 
     <Window module="xp.ui" class="container" id="index" onClose="onClose" onOpen="onOpen">
-        <LeftNavButton platform="ios" formFactor="handheld">
+        <LeftNavButton  formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
-        <LeftNavButton platform="ios" formFactor="tablet">
+        <LeftNavButton  formFactor="tablet">
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
 
-        <RightNavButton platform="ios">
+        <RightNavButton >
             <Button id="addAccountButton" onClick="addAccount"/>
         </RightNavButton>
 
@@ -19,11 +19,6 @@
                     <Label id="noAccountSelectedLabel"/>
                 </View>
             </HeaderView>
-            <FooterView platform="android">
-                <View class="footer">
-                    <Label id="howToDeleteHint"/>
-                </View>
-            </FooterView>
             <TableViewRow title="{name}" accountId="{id}"/>
         </TableView>
     </Window>

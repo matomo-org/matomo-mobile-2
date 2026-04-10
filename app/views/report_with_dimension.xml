@@ -3,7 +3,7 @@
 
     <Window module="xp.ui" title="" id="index" onClose="onClose" onOpen="onOpen">
 
-        <RightNavButton platform="ios" formFactor="handheld">
+        <RightNavButton  formFactor="handheld">
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
 
@@ -12,7 +12,7 @@
         <View id="content">
 
             <TableView id="reportTable" class="container">
-                <HeaderPullView platform="ios">
+                <HeaderPullView >
                     <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
                 </HeaderPullView>
                 <FooterView>

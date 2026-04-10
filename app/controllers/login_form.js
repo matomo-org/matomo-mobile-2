@@ -58,10 +58,8 @@ function showUsernameSpecificLogin() {
     showElement($.password);
 }
 
-if (OS_IOS) {
-    hideElement($.usernameLoginNotice);
-    hideElement($.appSpecificToken);
-}
+hideElement($.usernameLoginNotice);
+hideElement($.appSpecificToken);
 
 function onUsernameReturn () 
 {

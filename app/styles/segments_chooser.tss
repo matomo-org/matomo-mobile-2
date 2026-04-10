@@ -57,10 +57,3 @@
     height: Ti.UI.SIZE,
     selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY,
 },
-
-
-
-"#headerBar": {
-    title: L('Mobile_ChooseSegment'),
-    canGoBack: true
-}

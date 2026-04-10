@@ -150,8 +150,8 @@ function getImageView(url, width, height) {
     var options = {width: width,
                    height: height,
                    touchEnabled: false,
-                   canScale: !OS_ANDROID,
-                   hires: !OS_ANDROID,
+                   canScale: true,
+                   hires: true,
                    defaultImage: '/images/graphDefault.png',
                    enableZoomControls: false,
                    image: url};
@@ -196,7 +196,7 @@ if (isTablet) {
         $.graphWidget.loadImage(url);
     }
 
-    Ti.Gesture.addEventListener('orientationchange', OS_ANDROID ? rotateImageOnAndroid : rotateImage);
+    Ti.Gesture.addEventListener('orientationchange', rotateImage);
 }
 
 function trackWindowRequest()

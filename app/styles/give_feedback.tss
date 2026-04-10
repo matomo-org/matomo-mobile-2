@@ -3,15 +3,6 @@
     backButtonTitleImage: 'blank.png'
 }
 
-"#headerBar": {
-    title: L('General_GiveUsYourFeedback')
-}
-
-"#headerBar[formFactor=handheld]": {
-    hasNavigation: true,
-}
-
-
 "#feedbackTable[platform=ios]": {
     style: Ti.UI.iOS.TableViewStyle.GROUPED
 }

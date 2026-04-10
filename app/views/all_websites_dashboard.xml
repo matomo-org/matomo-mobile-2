@@ -3,18 +3,13 @@
     <Collection src="appAccounts"/>
 
     <Window module="xp.ui" id="index" onClose="onClose" onOpen="onOpen">
-        <LeftNavButton platform="ios">
+        <LeftNavButton >
             <Button class="fakeButtonThatHidesBackButton"/>
         </LeftNavButton>
 
-        <RightNavButton platform="ios">
+        <RightNavButton >
             <Button id="accountsButton" onClick="chooseAccount"/>
         </RightNavButton>
-
-        <Widget src="org.piwik.headerbar"
-                id="headerBar"
-                onActionItem1="chooseAccount"
-                platform="android" />
 
         <View id="loading"><Label id="loadingLabel"></Label></View>
 

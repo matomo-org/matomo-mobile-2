@@ -63,9 +63,6 @@ function onLoaded()
 function onClose()
 {
     $.emptyData && $.emptyData.cleanupIfNeeded();
-    if (OS_ANDROID && $.browser.release) {
-        $.browser.release();
-    }
     $.destroy();
     $.off();
 }

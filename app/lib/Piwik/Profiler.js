@@ -14,7 +14,7 @@
  */
  
 /**
- * @class    Provides a simple profiler. The profiler logs all profiling information to the standard iOS/Android SDK log
+ * @class    Provides a simple profiler. The profiler logs all profiling information to the standard iOS SDK log
  *           which is accessible for example in Titanium Developer.
  * 
  * @static

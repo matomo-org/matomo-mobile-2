@@ -38,9 +38,7 @@ function showWaitingIndicator()
 
 function hideWaitingIndicator()
 {
-    if (win && OS_ANDROID) {
-        require('layout').close(win);
-    } else if (win) {
+    if (win) {
         win.close();
     }
 

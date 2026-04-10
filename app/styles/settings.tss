@@ -3,14 +3,6 @@
     backButtonTitleImage: 'blank.png'
 }
 
-"#headerBar": {
-    title: L('General_Settings')
-}
-
-"#headerBar[formFactor=handheld]": {
-    hasNavigation: true,
-}
-
 "ListItem[platform=ios]": {
     selectionStyle: Ti.UI.iOS.ListViewCellSelectionStyle.NONE
 }

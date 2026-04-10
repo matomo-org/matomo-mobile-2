@@ -3,15 +3,6 @@
     backButtonTitleImage: 'blank.png'
 },
 
-"#headerBar": {
-    title: L('General_Help')
-}
-
-"#headerBar[formFactor=handheld]": {
-    hasNavigation: true,
-}
-
-
 "#helpTable[platform=ios]": {
     style: Ti.UI.iOS.TableViewStyle.GROUPED
 }

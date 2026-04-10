@@ -26,14 +26,6 @@
     bottom: 12,
 }
 
-"#title[platform=android]": {
-    left: '16dp',
-    right: '16dp',
-    top: '10dp',
-    font: {fontSize: '16sp', fontWeight: 'normal'},
-    zIndex: 2,
-    bottom: '11dp'
-},
 
 "#value": {
     right: 10,
@@ -44,10 +36,3 @@
     color: '#01b4b8',
     touchEnabled: false
 },
-
-"#value[platform=android]": {
-    right: '16dp',
-    font: {fontSize: '16sp', fontWeight: 'normal'},
-    color: '#01b4b8',
-    zIndex: 5
-}

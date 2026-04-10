@@ -31,9 +31,3 @@
     showVerticalScrollIndicator: true
 }
 
-
-
-"#headerBar[formFactor=handheld]": {
-    actionItem1: {icon: '/images/ic_more_vert_white_24dp.png'},
-    hasNavigation: true,
-}

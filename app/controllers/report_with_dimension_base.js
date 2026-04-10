@@ -116,9 +116,7 @@ exports.renderProcessedReport = function (processedReportCollection)
             reportTitle: processedReport.getTitle()
         };
 
-        if (OS_ANDROID && Boolean(hasSubtable)) {
-            rowOptions.rightImage = '/images/navigation_next_item.png';
-        } else if (Boolean(hasSubtable)) {
+        if (Boolean(hasSubtable)) {
             rowOptions.hasChild = true;
         }
 

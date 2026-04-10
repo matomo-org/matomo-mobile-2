@@ -1,22 +1,9 @@
 <Alloy>
     <Window module="xp.ui" title="" id="index" onClose="onClose" onOpen="onOpen">
 
-        <RightNavButton platform="ios" formFactor="handheld">
+        <RightNavButton  formFactor="handheld">
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>
         </RightNavButton>
-
-        <Widget src="org.piwik.headerbar"
-                id="headerBar"
-                onBack="close"
-                onActionItem1="toggleReportConfiguratorVisibility"
-                formFactor="handheld"
-                platform="android" />
-
-        <Widget src="org.piwik.headerbar"
-                id="headerBar"
-                onBack="close"
-                formFactor="tablet"
-                platform="android" />
 
         <Require src="loading_indicator" id="loadingindicator"/>
 

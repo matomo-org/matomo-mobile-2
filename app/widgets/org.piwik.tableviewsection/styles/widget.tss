@@ -6,11 +6,6 @@
     opacity: 0.95,
 },
 
-"#index[platform=android]": {
-    backgroundSelectedColor: '#B2AEA5',
-    backgroundSelectedImage: '/images/tableviewsection_background_dark.png'
-}
-
 "#index[platform=ios]": {
     selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.NONE
 }
@@ -33,19 +28,9 @@
     font: {fontSize: 15, fontWeight: 'normal'},
 }
 
-"#title[platform=android]": {
-    top: '3dp',
-    bottom: '4dp',
-    left: '16dp',
-    font: {fontSize: '15sp', fontWeight: 'bold'},
-},
 
 ".headerView": {
     height: Ti.UI.SIZE,
     opacity: 0.95,
     backgroundImage: 'org.piwik.tableviewsection/tableviewsectionbackground.png',
-}
-
-".headerView[platform=android]": {
-    backgroundImage: '/images/tableviewsection_background_dark.png',
 }

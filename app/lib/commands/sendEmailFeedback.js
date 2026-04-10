@@ -8,8 +8,6 @@
 function onEmailSent(event)
 {
     if (event && event.result && event.result == this.SENT) {
-        // android doesn't give us useful result codes. it anyway shows a toast.
-        
         var L = require('L');
 
         Ti.UI.createAlertDialog({message: L('Feedback_ThankYou'), ok: L('General_Ok')}).show();

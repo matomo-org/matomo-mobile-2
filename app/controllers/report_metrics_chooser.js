@@ -50,7 +50,7 @@ exports.open = function()
     var params = {
         options: options,
         title: L('Mobile_ChooseMetric'),
-        cancel: OS_ANDROID ? -1 : options.length - 1
+        cancel: options.length - 1
     };
 
     var dialog = Ti.UI.createOptionDialog(params);

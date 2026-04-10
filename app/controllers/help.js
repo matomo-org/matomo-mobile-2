@@ -39,21 +39,6 @@ function emailUs()
     require('Piwik/Tracker').trackEvent({name: 'Email Us', category: 'Help'});
 }
 
-function openForum()
-{
-    require('commands/openLink').execute('https://forum.matomo.org/');
-}
-
-function openMarketplace()
-{
-    require('commands/openLink').execute('https://plugins.matomo.org/');
-}
-
-function openDocumentation()
-{
-    require('commands/openLink').execute('https://matomo.org/docs/');
-}
-
 function toggleReportChooserVisibility(event)
 {
     require('report/chooser').toggleVisibility();

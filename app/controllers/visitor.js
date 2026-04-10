@@ -301,7 +301,7 @@ function createSystem(visitor, accessUrl) {
                 var imageOptions = {
                     classes: ['pluginIcon'],
                     image: accessUrl + pluginIcon.pluginIcon,
-                    right: OS_ANDROID ? (right + 'dp') : right
+                    right: right
                 };
                 row.add($.UI.create('ImageView', imageOptions));
             }
@@ -460,7 +460,7 @@ function createActionAction(actionDetail)
 
     if ('url' in actionDetail && actionDetail.url) {
         var label = $.UI.create('Label', {classes: ['actionActionUrlLabel'], text: actionDetail.url + ''});
-        if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
+        if (Ti.Platform.canOpenURL(actionDetail.url)) {
             label.addEventListener('click', (function (actionDetailUrl) {
                 return function () {
                     Ti.Platform.openURL(actionDetailUrl);
@@ -553,7 +553,7 @@ function createDefaultAction(actionDetail, visitor, accessUrl)
         label = $.UI.create('Label', {classes: ['actionDefaultUrlLabel'], text: (actionDetail.url + '')});
         row.add(label);
 
-        if (OS_ANDROID || Ti.Platform.canOpenURL(actionDetail.url)) {
+        if (Ti.Platform.canOpenURL(actionDetail.url)) {
             label.addEventListener('click', (function (actionDetailUrl) {
                 return function () {
                     Ti.Platform.openURL(actionDetailUrl);

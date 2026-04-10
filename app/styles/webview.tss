@@ -2,10 +2,6 @@
     backButtonTitle: L('Mobile_NavigationBack')
 }
 
-"#headerBar": {
-    canGoBack: true,
-}
-
 
 "#loadingIndicator": {
     left: 0,

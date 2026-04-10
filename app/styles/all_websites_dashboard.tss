@@ -158,8 +158,3 @@
     backgroundColor: "#cccccc"
 },
 
-
-"#headerBar": {
-    title: L('General_AllWebsitesDashboard'),
-    actionItem1: {icon: '/images/ic_person_white_24dp.png'}
-}

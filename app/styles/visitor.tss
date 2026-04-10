@@ -6,11 +6,6 @@
     title: L('General_Visitor')
 }
 
-"#headerBar": {
-    title: L('General_Visitor'),
-    canGoBack: true
-}
-
 
 "#visitorTable[platform=ios]": {
     tableSeparatorInsets: {left:0,right:0}

@@ -3,11 +3,6 @@
     title: L('Mobile_AddAccount')
 }
 
-"#headerBar": {
-    title: L('Mobile_AddAccount'),
-    canGoBack: true
-}
-
 ".container": {
     bottom: 40
 }

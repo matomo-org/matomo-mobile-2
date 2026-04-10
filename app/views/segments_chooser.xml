@@ -1,6 +1,6 @@
 <Alloy>
     <Collection src="piwikSegments" id="piwikSegments" instance="true"/>
-    <NavigationWindow id="index" platform="ios" formFactor="handheld">
+    <NavigationWindow id="index"  formFactor="handheld">
         <Window id="indexWin" onClose="onClose" onOpen="onOpen">
             <LeftNavButton>
                 <Button id="cancelButton" onClick="closeWindow"/>
@@ -14,7 +14,7 @@
             </View>
         </Window>
     </NavigationWindow>
-    <Popover class="iOSContainer" id="index" onOpen="onOpen" platform="ios" formFactor="tablet" width="320" height="400">
+    <Popover class="iOSContainer" id="index" onOpen="onOpen"  formFactor="tablet" width="320" height="400">
         <ContentView>
             <View id="loading"><Label id="loadingLabel"></Label></View>
 
@@ -24,18 +24,4 @@
             </View>
         </ContentView>
     </Popover>
-    <Window module="xp.ui" platform="android" id="index" onClose="onClose" onOpen="onOpen">
-
-        <Widget src="org.piwik.headerbar"
-                id="headerBar"
-                onBack="closeWindow"
-                platform="android" />
-
-        <View id="loading"><Label id="loadingLabel"></Label></View>
-
-        <View id="content">
-            <TableView id="segmentsTable" onClick="selectSegment">
-            </TableView>
-        </View>
-    </Window>
 </Alloy>

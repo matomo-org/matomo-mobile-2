@@ -341,12 +341,6 @@ function formatWebsite(model)
 
 exports.enableCanGoBack = function ()
 {
-    if (OS_ANDROID) {
-        $.headerBar.enableCanGoBack();
-        $.headerBar.on('back', function () {
-            $.close();
-        });
-    }
 };
 
 exports.close = function () {

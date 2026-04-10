@@ -27,9 +27,6 @@
                 </Picker>
             </View>
 
-            <View id="buttonContainer" platform="android">
-                <Button id="updateButton" onClick="doChooseDate"/>
-            </View>
         </ScrollView>
     </Window>
 </Alloy>

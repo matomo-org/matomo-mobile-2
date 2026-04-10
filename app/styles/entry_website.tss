@@ -9,11 +9,6 @@
     backButtonTitle: L('Mobile_NavigationBack')
 },
 
-"#headerBar": {
-    title: L('Mobile_LoadingReport', 'General_Website'),
-    actionItem1: {icon: '/images/ic_person_white_24dp.png'}
-}
-
 
 "#index[platform=ios]": {
     fullscreen: false,
