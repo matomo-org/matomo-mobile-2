@@ -18,9 +18,6 @@
         <View id="content">
 
             <TableView id="liveTable" onClick="openVisitor">
-                <HeaderPullView platform="ios">
-                    <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
-                </HeaderPullView>
             </TableView>
         </View>
 

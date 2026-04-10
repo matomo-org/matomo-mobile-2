@@ -12,7 +12,7 @@
                 formFactor="tablet"
                  />
 
-        <ListView id="settingsTable" platform="ios,android" onItemclick="onItemClick">
+        <ListView id="settingsTable" platform="android" onItemclick="onItemClick">
             <Templates >
                 <ItemTemplate name="settingsTemplate">
                     <Label bindId="title" class="titleLabel" id="settingsLabel"/>

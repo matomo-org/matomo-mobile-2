@@ -10,8 +10,4 @@ Alloy.isHandheld = !Alloy.isTablet;
 Alloy.isIOS7OrLater = false;
 Alloy.Globals.isNotIpad = !(OS_IOS && Alloy.isTablet);
 
-if (OS_IOS) {
-    Alloy.statusBarStyle = Ti.UI.iOS.StatusBar.LIGHT_CONTENT;
-} else {
-    Alloy.statusBarStyle = null;
-}
+Alloy.statusBarStyle = null;

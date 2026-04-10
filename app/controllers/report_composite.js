@@ -287,7 +287,7 @@ function open()
     // this animation causes the window title in report composite views to be not displayed. It'll work only
     // once but as soon as a windows is closed shortly before (happening when choosing a report in sidebar)
     // the title will be no longer displayed.
-    var animated = OS_IOS ? false : true;
+    var animated = true;
 
     registerEvents();
     require('layout').open($.index, animated);

@@ -76,15 +76,6 @@ function Locale () {
         'zh-tw':    '台灣語'
     };
 
-    // these languages are not supported / don't work on android
-    if (OS_IOS) {
-        this.AVAILABLE_LANGUAGES.ar = '\u0627\u0644\u0639\u0631\u0628\u064a\u0629';
-        this.AVAILABLE_LANGUAGES.ka = '\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8';
-        this.AVAILABLE_LANGUAGES.he = '\u05e2\u05d1\u05e8\u05d9\u05ea';
-        this.AVAILABLE_LANGUAGES.te = '\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41';
-        this.AVAILABLE_LANGUAGES.th = 'ไทย';
-    }
-
     /**
      * Returns a map of all available/supported languages.
      *

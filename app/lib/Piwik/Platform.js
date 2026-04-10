@@ -116,13 +116,6 @@ function isRetinaHDDisplay()
     return 480 <= parseInt(dpi, 10);
 }
 
-function getIOSScaleFactor()
-{
-    if (isRetinaHDDisplay()) {
-        return 3;
-    }
-    return 2;
-}
 
 /**
  * True if the current device is considered to be a tablet. Currently, a device is considered to be a tablet if it is 
@@ -131,5 +124,4 @@ function getIOSScaleFactor()
  * @type  boolean
  */
 module.exports.isTablet = isTablet();
-module.exports.getIOSScaleFactor = getIOSScaleFactor;
 module.exports.dpToPixel = dpToPixel;
