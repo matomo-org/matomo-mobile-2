@@ -1,6 +1,6 @@
 "#index": {
-    backgroundColor: '#222222',
-    backgroundSelectedColor: '#212121',
+    backgroundColor: '#0e1328',
+    backgroundSelectedColor: '#0e1328',
     backgroundFocusedColor: 'black',
     height: Ti.UI.SIZE,
 }
@@ -21,13 +21,4 @@
     left: 15,
     top: 17,
     bottom: 17
-}
-
-"#title[platform=android]": {
-    touchEnabled: false,
-    top: '16dp',
-    left: '10dp',
-    font: {fontSize: '15sp'},
-    right: '10dp',
-    bottom: '16dp'
 }

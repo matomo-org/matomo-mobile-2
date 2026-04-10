@@ -1,5 +1,5 @@
 "#index": {
-    layout: 'vertical',
+    layout: 'vertical'
 }
 
 "TableViewRow": {

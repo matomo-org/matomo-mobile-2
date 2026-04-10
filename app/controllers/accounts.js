@@ -63,12 +63,8 @@ function deleteAccount(event)
     require('Piwik/Tracker').trackEvent({name: 'Account Delete', category: 'Accounts'});
 }
 
-function deleteAccountIfUserConfirmsButNotOniOS(event)
+function deleteAccountIfUserConfirms(event)
 {
-    if (OS_IOS) {
-        return;
-    }
-
     var dialog = Ti.UI.createAlertDialog({
         cancel: 1,
         buttonNames: [L('General_Yes'), L('General_No')],
@@ -81,10 +77,9 @@ function deleteAccountIfUserConfirmsButNotOniOS(event)
             return;
         }
 
-        if (clickEvent.index == 1) {
-            return;
+        if (clickEvent.index == 0) {
+            deleteAccount(event);
         }
-        deleteAccount(event);
     });
 
     dialog.show();
@@ -97,12 +92,6 @@ function isAnAccountSelected()
 
 $.showNoAccountSelectedHint = function ()
 {
-    if (OS_ANDROID) {
-        $.noAccountSelectedLabel.height = Ti.UI.SIZE;
-        $.noAccountSelectedLabel.show();
-        $.noAccountSelectedContainer.height = Ti.UI.SIZE;
-    }
-
     $.noAccountSelectedContainer.show();
 };
 

@@ -65,6 +65,12 @@ ti build -p ios --deploy-type production -T dist-appstore
  ti build -p ios -T device -C $UUID$
 ```
 
+### Build on a specific simulator
+
+```
+ti  build -p ios -C $UUID$
+```
+
 ## Contact
 
 https://matomo.org

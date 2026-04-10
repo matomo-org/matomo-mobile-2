@@ -13,20 +13,7 @@
             <Button id="addAccountButton" onClick="addAccount"/>
         </RightNavButton>
 
-        <Widget src="org.piwik.headerbar"
-                id="headerBar"
-                onHomeItemSelected="toggleReportChooserVisibility"
-                onActionItem1="addAccount"
-                formFactor="handheld"
-                platform="android" />
-
-        <Widget src="org.piwik.headerbar"
-                id="headerBar"
-                onActionItem1="addAccount"
-                formFactor="tablet"
-                platform="android" />
-
-        <TableView id="accountsTable" onLongpress="deleteAccountIfUserConfirmsButNotOniOS" onClick="chooseAccount" dataCollection="appAccounts">
+        <TableView id="accountsTable" onLongpress="deleteAccountIfUserConfirms" onClick="chooseAccount" dataCollection="appAccounts">
             <HeaderView>
                 <View id="noAccountSelectedContainer">
                     <Label id="noAccountSelectedLabel"/>

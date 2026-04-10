@@ -23,7 +23,7 @@
                 "legendAppendMetric": 0,
                 "backgroundColor": "efefef",
                 "gridColor": "dcdcdc",
-                "colors": "0e1328,01b4b8"
+                "colors": "01b4b8,0e1328"
             }
         },
         "numDisplayedWebsitesInDashboard": 50,

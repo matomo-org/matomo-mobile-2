@@ -7,10 +7,6 @@
     selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.NONE,
 }
 
-"#index[platform=android]": {
-    backgroundImage: '/images/tableviewsection_background_dark.png'
-}
-
 "#title": {
     top: 8,
     left: 10,
@@ -20,16 +16,9 @@
     font: {fontSize: 13},
     right: 10,
     height: Ti.UI.SIZE,
-    bottom: 8
+    bottom: 8,
+    textTransform: 'uppercase'
 }
 "#title[platform=ios]": {
     left: 15,
-}
-
-"#title[platform=android]": {
-    top: '8dp',
-    left: '10dp',
-    font: {fontSize: '13sp'},
-    right: '10dp',
-    bottom: '8dp'
 }

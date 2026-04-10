@@ -3,14 +3,10 @@
     width: 250
 }
 
-"#index[platform=android]": {
-    width: '250dp'
-}
-
 "TableView": {
-    backgroundColor: '#222222',
-    backgroundSelectedColor: '#222222',
-    separatorColor: '#2d2d2d'
+    backgroundColor: '#0e1328',
+    allowsSelection: true,
+    separatorColor: '#0f1429'
 }
 
 ".headerView": {
@@ -22,11 +18,7 @@
 ".separator": {
     height: 1,
     width: Ti.UI.FILL,
-    backgroundColor: '#2d2d2d'
-}
-
-".separator[platform=android]": {
-    height: '1dp',
+    backgroundColor: '#0f1429'
 }
 
 "#siteTitle": {
@@ -39,24 +31,13 @@
     font: {fontSize: 13},
     right: 10,
     height: Ti.UI.SIZE,
-    bottom: 8
-},
-
-"#siteTitle[platform=android]": {
-    top: '8dp',
-    left: '12dp',
-    font: {fontSize: '13sp'},
-    right: '10dp',
-    bottom: '8dp'
+    bottom: 8,
+    textTransform: 'uppercase'
 },
 
 ".siteHeader": {
     backgroundImage: 'tableviewsection_background_dark.png',
     height: Ti.UI.SIZE,
-}
-
-".siteHeader[platform=android]": {
-    backgroundImage: '/images/tableviewsection_background_dark.png',
 }
 
 ".websitePicker": {
@@ -67,23 +48,12 @@
     height: Ti.UI.SIZE,
 }
 
-".websitePicker[platform=android]": {
-    top: '24dp',
-    left: '8dp',
-    right: '8dp',
-}
 
 ".datePicker": {
     left: 8,
     right: 8,
     bottom: 24,
     height: Ti.UI.SIZE,
-}
-
-".datePicker[platform=android]": {
-    bottom: '24dp',
-    left: '8dp',
-    right: '8dp',
 }
 
 ".segmentPicker": {
@@ -94,13 +64,6 @@
     height: Ti.UI.SIZE,
 }
 
-".segmentPicker[platform=android]": {
-    top: '12dp',
-    bottom: '12dp',
-    left: '8dp',
-    right: '8dp',
-}
-
 ".websiteRow": {
     left: 10,
     color: '#eff0f1',
@@ -108,16 +71,4 @@
     right: 10,
     height: Ti.UI.SIZE,
     backgroundSelectedColor: '#212121',
-}
-
-".websiteRow[platform=android]": {
-    leftImage: '/images/spacer_8x8.png',
-    font: {fontSize: '14sp', fontWeight: 'bold'},
-    top: '13dp',
-    bottom: '13dp',
-}
-
-".websiteRow[platform=mobileweb]": {
-    top: 10,
-    bottom: 10,
 }

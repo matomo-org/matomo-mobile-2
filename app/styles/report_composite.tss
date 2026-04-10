@@ -1,6 +1,7 @@
 "#index": {
     backgroundColor: "#eff0f1",
-    backButtonTitleImage: 'blank.png'
+    backButtonTitleImage: 'blank.png',
+    hidesBackButton: true
 }
 
 "#loadingIndicator": {

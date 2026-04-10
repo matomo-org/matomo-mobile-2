@@ -19,48 +19,21 @@
     editable: true,
 },
 
-"#accountsTable[platform=android]": {
-    top: '56dp',
-    separatorColor: '#e0e0e0'
-}
 
 "TableViewRow[platform=ios]": {
     selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.GRAY
 }
 
-"TableViewRow[platform=android]": {
-    leftImage: '/images/spacer_10x10.png',
-    right: '10dp',
-    top: '10dp',
-    bottom: '10dp',
-    color: '#333',
-    backgroundSelectedColor: '#a9a9a9'
-}
-
-"TableViewRow[platform=mobileweb]": {
-    left: 10,
-    right: 10,
-    color: '#333'
-}
 
 "#accountsTable[platform=ios]": {
     style: Ti.UI.iOS.TableViewStyle.GROUPED,
-    footerTitle: L('Mobile_HowtoDeleteAnAccountOniOS')
+    footerTitle: L('Mobile_HowtoDeleteAnAccount')
 }
 
 "#noAccountSelectedContainer": {
     visible: false,
     width: Ti.UI.FILL,
     height: Ti.UI.SIZE,
-}
-
-"#noAccountSelectedContainer[platform=android]": {
-    backgroundColor: '#a9a9a9',
-    height: 0,
-}
-
-"#noAccountSelectedContainer[platform=mobileweb]": {
-    height: 0
 }
 
 "#noAccountSelectedLabel": {
@@ -75,17 +48,6 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
 }
 
-"#noAccountSelectedLabel[platform=android]": {
-    height: 0,
-    visible: false,
-    left: '16dp',
-    right: '16dp',
-    top: '12dp',
-    bottom: '12dp',
-    color: '#ffffff',
-    font: {fontSize: '14sp'},
-    textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-}
 
 "#howToDeleteHint": {
     text: L('Mobile_HowtoDeleteAnAccount'),
@@ -95,16 +57,6 @@
     right: 10,
 }
 
-"#howToDeleteHint[platform=android]": {
-    left: '16dp',
-    right: '16dp',
-    font: {fontSize: '14sp'},
-    color: '#ffffff',
-    top: '8dp',
-    bottom: '8dp',
-    height: Ti.UI.SIZE,
-}
-
 ".footer": {
     top: 10,
     bottom: 10,
@@ -112,12 +64,6 @@
     right: 0,
     height: Ti.UI.SIZE,
     width: Ti.UI.FILL,
-}
-
-".footer[platform=android]": {
-    top: '10dp',
-    bottom: '10dp',
-    backgroundColor: '#a9a9a9',
 }
 
 "#addAccountButton": {
