@@ -30,20 +30,9 @@
     separatorColor: '#e8e8e8'
 },
 
-"#reportTable[platform=ios]": {
-    tableSeparatorInsets: {left:0,right:0}
-}
-
-"TableViewRow[platform=ios]": {
-    height: Ti.UI.SIZE
-},
 "TableViewRow[platform=android]": {
     height: Ti.UI.SIZE
 },
-
-"TableViewRow[platform=ios]": {
-    selectionStyle: Ti.UI.iOS.TableViewCellSelectionStyle.NONE
-}
 
 ".footerView": {
     height: Ti.UI.SIZE,

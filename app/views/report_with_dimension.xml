@@ -26,11 +26,7 @@
         <Require src="loading_indicator" id="loadingindicator"/>
 
         <View id="content">
-            
             <TableView id="reportTable" class="container">
-                <HeaderPullView platform="ios">
-                    <Require src="pull_to_refresh" id="pullToRefresh" onRefresh="doRefresh"/>
-                </HeaderPullView>
                 <FooterView>
                     <View class="footerView">
                         <ImageView class="footerLogo"/>
