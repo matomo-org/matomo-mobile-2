@@ -4,9 +4,6 @@
         <LeftNavButton  formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
-        <LeftNavButton  formFactor="tablet">
-            <Button class="fakeButtonThatHidesBackButton"/>
-        </LeftNavButton>
 
         <RightNavButton  formFactor="handheld">
             <Button class="reportConfiguratorButton" onClick="toggleReportConfiguratorVisibility"/>

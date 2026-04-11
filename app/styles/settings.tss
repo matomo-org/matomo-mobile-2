@@ -1,6 +1,13 @@
 "#index": {
     title: ' ',
+}
+
+"#index[formFactor=handheld]": {
     backButtonTitleImage: 'blank.png'
+}
+
+"#index[formFactor=tablet]": {
+    hidesBackButton: true
 }
 
 "ListItem[platform=ios]": {

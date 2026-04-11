@@ -3,10 +3,6 @@
     
     <Window module="xp.ui" id="index" onOpen="onOpen" onClose="onClose">
         
-        <LeftNavButton  formFactor="tablet">
-            <Button class="fakeButtonThatHidesBackButton"/>
-        </LeftNavButton>
-        
         <ScrollView id="content">
             <View id="mainView">
                 <View id="headerView">

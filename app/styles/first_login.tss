@@ -1,7 +1,9 @@
 "#index[platform=ios]": {
     navBarHidden: false
 },
-
+"#index[formFactor=tablet]": {
+    hidesBackButton: true
+}
 
 
 "#content": {

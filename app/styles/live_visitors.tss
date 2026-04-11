@@ -1,6 +1,13 @@
 "#index": {
-    title: L('Live_VisitorsInRealTime'),
+    title: L('Live_VisitorsInRealTime')
+}
+
+"#index[formFactor=handheld]": {
     backButtonTitleImage: 'blank.png'
+}
+
+"#index[formFactor=tablet]": {
+    hidesBackButton: true
 }
 
 "#liveTable": {

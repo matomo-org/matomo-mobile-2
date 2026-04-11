@@ -3,10 +3,6 @@
         <LeftNavButton  formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
-        <LeftNavButton  formFactor="tablet">
-            <Button class="fakeButtonThatHidesBackButton"/>
-        </LeftNavButton>
-
         <ListView id="settingsTable" onItemclick="onItemClick">
             <ListSection id="basic">
                 <ListItem id="language" callback="changeLanguage"/>

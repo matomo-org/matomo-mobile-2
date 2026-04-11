@@ -1,6 +1,13 @@
 "#index": {
-    title: L('General_GiveUsYourFeedback'),
+    title: L('General_GiveUsYourFeedback')
+}
+
+"#index[formFactor=handheld]": {
     backButtonTitleImage: 'blank.png'
+}
+
+"#index[formFactor=tablet]": {
+    hidesBackButton: true
 }
 
 "#feedbackTable[platform=ios]": {

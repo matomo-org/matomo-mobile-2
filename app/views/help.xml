@@ -3,9 +3,6 @@
         <LeftNavButton  formFactor="handheld">
             <Button class="reportChooserButton" onClick="toggleReportChooserVisibility"/>
         </LeftNavButton>
-        <LeftNavButton  formFactor="tablet">
-            <Button class="fakeButtonThatHidesBackButton"/>
-        </LeftNavButton>
 
         <TableView id="helpTable">
             <TableViewRow id="about" onClick="openAboutPiwikMobile"/>

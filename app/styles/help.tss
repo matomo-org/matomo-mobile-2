@@ -1,7 +1,14 @@
 "#index": {
-    title: L('General_Help'),
-    backButtonTitleImage: 'blank.png'
+    title: L('General_Help')
 },
+
+"#index[formFactor=handheld]": {
+    backButtonTitleImage: 'blank.png'
+}
+
+"#index[formFactor=tablet]": {
+    hidesBackButton: true
+}
 
 "#helpTable[platform=ios]": {
     style: Ti.UI.iOS.TableViewStyle.GROUPED
