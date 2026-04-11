@@ -78,12 +78,28 @@ exports.setHeight = function (height) {
 
 exports.getWidth = function()
 {
-    return require('ui/helper').getWidth($.image);
+    var width = require('ui/helper').getWidth($.image);
+    // when changing metric in a report, it's not able to get any size somehow
+    if (!width && $.image.lastKnownWidth) {
+        return $.image.lastKnownWidth;
+    }
+    if (width) {
+        $.image.lastKnownWidth = width;
+    }
+    return width;
 };
 
 exports.getHeight = function()
 {
-    return require('ui/helper').getHeight($.image);
+    var height = require('ui/helper').getHeight($.image);
+    // when changing metric in a report, it's not able to get any size somehow
+    if (!height && $.image.lastKnownHeight) {
+        return $.image.lastKnownHeight;
+    }
+    if (height) {
+        $.image.lastKnownHeight = height;
+    }
+    return height;
 };
 
 if (args && args.image) {

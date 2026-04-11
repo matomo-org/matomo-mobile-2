@@ -14,8 +14,8 @@ exports.getWidth = function (view)
 
     if (view.size && view.size.width) {
         return view.size.width;
-    } else if (view.width) {
-        return view.width;
+    } else if (view.rect && view.rect.width) {
+        return view.rect.width;
     } else {
         console.warn('TODO NOT ABLE TO GET WIDTH');
     }
@@ -32,8 +32,8 @@ exports.getHeight = function (view)
 
     if (view.size && view.size.height) {
         return view.size.height;
-    } else if (view.height) {
-        return view.height;
+    } else if (view.rect && view.rect.height) {
+        return view.rect.height;
     } else {
         console.warn('TODO NOT ABLE TO GET HEIGHT');
     }
