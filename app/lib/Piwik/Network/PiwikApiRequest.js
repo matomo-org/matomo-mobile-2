@@ -243,8 +243,15 @@ PiwikApiRequest.prototype.send = function () {
     }
 
     this.parameter = this._mixinParameter(this.parameter);
-    
+
+    var baseUrlBackup = this.baseUrl;
+    if (this.segment && this.baseUrl.indexOf('?') === -1) {
+        // workaround for https://github.com/matomo-org/matomo/issues/24354
+        // sending it as GET and as POST
+        this.baseUrl = this.baseUrl + '?segment=' + encodeURIComponent(this.segment);
+    }
     this.handle();
+    this.baseUrl = baseUrlBackup;
 };
 
 module.exports = PiwikApiRequest;

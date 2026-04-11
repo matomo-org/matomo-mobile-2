@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
-    <deployment-targets>
-        <target device="iphone">true</target>
-        <target device="ipad">true</target>
-        <target device="android">false</target>
-    </deployment-targets>
-    <sdk-version>13.2.0.GA</sdk-version>
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.tidev.io">
     <id>org.piwik.mobile2</id>
     <name>Matomo Mobile 2</name>
     <version>2.6.0</version>
@@ -13,32 +8,25 @@
     <description>Need your analytics on the go? Use our free Matomo Mobile (formerly Piwik Mobile) app to check your stats from anywhere and show them to colleagues in meetings. Matomo Mobile offers all the same reports as the Matomo (Piwik) desktop interface, and displays your visitor data in real time!</description>
     <copyright>2010 by matomo</copyright>
     <icon>appicon.png</icon>
-    <persistent-wifi>false</persistent-wifi>
-    <prerendered-icon>true</prerendered-icon>
-    <statusbar-style>default</statusbar-style>
-    <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
-    <navbar-hidden>true</navbar-hidden>
-    <analytics>false</analytics>
+    <navbar-hidden>false</navbar-hidden>
     <guid>a7b6c646-6cf6-40b4-a9e2-7ed0f67f510b</guid>
-    <property name="ti.ui.defaultunit">system</property>
-    <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <property name="run-on-main-thread" type="bool">true</property>
+    <property name="ti.deploytype">production</property>
     <ios>
+        <enable-launch-screen-storyboard>true</enable-launch-screen-storyboard>
         <use-app-thinning>true</use-app-thinning>
         <plist>
             <dict>
-                <key>UIUserInterfaceStyle</key>
-                <string>Light</string>
-            </dict>
-            <dict>
                 <key>UIStatusBarStyle</key>
-                <string>UIStatusBarStyleLightContent</string>
-            </dict>
-            <dict>
+                <string>UIStatusBarStyleDefault</string>
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
                 <key>UIStatusBarHidden</key>
                 <false/>
-            </dict>
-            <dict>
                 <key>UISupportedInterfaceOrientations~iphone</key>
                 <array>
                     <string>UIInterfaceOrientationPortrait</string>
@@ -53,8 +41,13 @@
             </dict>
         </plist>
     </ios>
+    <deployment-targets>
+        <target device="iphone">true</target>
+        <target device="ipad">true</target>
+        <target device="android">false</target>
+    </deployment-targets>
+    <sdk-version>13.2.0.GA</sdk-version>
     <plugins>
         <plugin>ti.alloy</plugin>
     </plugins>
-    <property name="ti.deploytype">production</property>
 </ti:app>

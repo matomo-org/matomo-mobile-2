@@ -14,12 +14,12 @@ function TabletSidebar(detailRootWindow)
     var leftSidebarWindow = Ti.UI.createWindow({
         left: 0, 
         width: widthLeftSidebar, 
-        barColor: "#2D2D2D"
+        barColor: "#0e1328",
+        backgroundColor: '#0e1328'
     });    
     
     if (Alloy.isIOS7OrLater) {
         // otherwise visible in status bar
-        leftSidebarWindow.top = 20;
         leftSidebarWindow.statusBarStyle = Alloy.statusBarStyle;
     }
     
