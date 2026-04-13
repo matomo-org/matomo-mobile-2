@@ -162,7 +162,6 @@
     template: 'settingsTemplate'
 }
 
-
 "#advanced[platform=android]": {
     headerTitle: L('Mobile_Advanced')
 }

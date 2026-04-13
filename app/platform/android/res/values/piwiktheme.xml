@@ -9,5 +9,8 @@
         <item name="materialCalendarStyle">@style/Widget.MaterialComponents.MaterialCalendar</item>
         <item name="materialCalendarFullscreenTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen</item>
         <item name="materialCalendarTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar</item>
+        <item name="ti_headerTitleSize">@string/titleSize</item>
+        <item name="ti_footerTitleSize">@string/titleSize</item>
     </style>
+    <string name="titleSize">14dip</string>
 </resources> 
