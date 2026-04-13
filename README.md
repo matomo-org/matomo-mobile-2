@@ -34,9 +34,9 @@ See https://matomo.org/blog/category/piwik-mobile-changelog/
 If you don't have Titanium SDK installed on your system have a look at [From zero to app - Install Titanium Mobile](https://fromzerotoapp.com/how-to-install-appcelerator-titanium/). See [Titanium CLI docs](https://titaniumsdk.com/guide/Titanium_SDK/Titanium_SDK_Guide/Titanium_Command-Line_Interface_Reference/) for the CLI commands.
 
 ### Quick Titanium setup:
-* install nodejs (14 or 16)
+* install nodejs (24)
 * run `sudo npm i -g titanium alloy` to install the Titanium CLI
-* `ti sdk install latest --default` to install the Titanium SDK
+* `ti sdk install latest` to install the Titanium SDK
 
 ### Build the app
 * `ti build -p ios` or `ti build -p android` to build the app using simulator/emulator.
