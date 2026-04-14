@@ -45,7 +45,7 @@
 
 
 ".footer": {
-    height: 35,
+    height: 47,
     backgroundSelectedColor: '#dcdcdc',
 }
 
