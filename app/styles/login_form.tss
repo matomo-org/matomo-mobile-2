@@ -103,6 +103,7 @@
     font: {
         fontSize: 12
     },
+    width: Ti.UI.FILL,
     text: L('Mobile_LoginUsingTokenAuth'),
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     wordWrap: true,
@@ -116,6 +117,7 @@
         fontSize: 12
     },
     visible: false,
+    width: Ti.UI.FILL,
     text: L('Mobile_LoginUsingUsernamePassword'),
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     wordWrap: true,
@@ -129,6 +131,7 @@
     font: {
         fontSize: 12
     },
+    width: Ti.UI.FILL,
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     text: L('Mobile_HowtoLoginAnonymous'),
     wordWrap: true,
