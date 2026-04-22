@@ -30,6 +30,7 @@
     color: '#7e7e7e',
     top: 20,
     height: Ti.UI.SIZE,
+    width: Ti.UI.FILL,
     left: 30,
     right: 30,
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
