@@ -65,6 +65,8 @@ ti build -p ios --deploy-type production -T dist-appstore
  ti build -p ios -T device -C $UUID$
 ```
 
+To get UUID run `ti info`.
+
 ### Build on a specific simulator
 
 ```
