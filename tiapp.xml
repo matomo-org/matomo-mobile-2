@@ -34,7 +34,7 @@
                 </activity>
             </application>
             <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" xlargeScreens="true"/>
-            <uses-sdk android:installLocation="preferExternal" android:minSdkVersion="32" />
+            <uses-sdk android:installLocation="preferExternal" android:minSdkVersion="32" android:targetSdkVersion="36" />
         </manifest>
     </android>
     <plugins>
