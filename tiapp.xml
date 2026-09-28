@@ -46,7 +46,7 @@
         <target device="ipad">true</target>
         <target device="android">false</target>
     </deployment-targets>
-    <sdk-version>13.2.0.GA</sdk-version>
+    <sdk-version>13.4.1.GA</sdk-version>
     <plugins>
         <plugin>ti.alloy</plugin>
     </plugins>
