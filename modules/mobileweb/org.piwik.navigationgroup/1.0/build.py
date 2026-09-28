@@ -323,7 +323,7 @@ class Compiler(object):
 					if self.minify:
 						os.rename(file_path, source)
 						print '[INFO] Minifying include %s' % file_path
-						p = subprocess.Popen('java -Xms256m -Xmx256m -jar "%s" --compilation_level SIMPLE_OPTIMIZATIONS --js "%s" --js_output_file "%s"' % (os.path.join(sdk_path, 'mobileweb', 'closureCompiler', 'compiler.jar'), source, file_path), shell=True, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+						p = subprocess.Popen(['java', '-Xms256m', '-Xmx256m', '-jar', os.path.join(sdk_path, 'mobileweb', 'closureCompiler', 'compiler.jar'), '--compilation_level', 'SIMPLE_OPTIMIZATIONS', '--js', source, '--js_output_file', file_path], shell=False, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
 						stdout, stderr = p.communicate()
 						if p.returncode != 0:
 							print '[ERROR] Failed to minify "%s"' % file_path
@@ -368,12 +368,11 @@ class Compiler(object):
 		os.rename(tmp, main_file)
 	
 	def minify_js(self):
-		subprocess.call('java -Xms256m -Xmx256m -cp "%s%s%s" -Djava.awt.headless=true minify "%s"' % (
+		subprocess.call(['java', '-Xms256m', '-Xmx256m', '-cp', '%s%s%s' % (
 			os.path.join(sdk_path, 'mobileweb', 'minify'),
 			os.pathsep,
-			os.path.join(sdk_path, 'mobileweb', 'closureCompiler', 'compiler.jar'),
-			self.build_path
-		), shell=True)
+			os.path.join(sdk_path, 'mobileweb', 'closureCompiler', 'compiler.jar')
+		), '-Djava.awt.headless=true', 'minify', self.build_path], shell=False)
 	
 	def generate_doc(self):
 		docdir = os.path.join(self.module_path, 'documentation')
