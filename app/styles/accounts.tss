@@ -31,15 +31,6 @@
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
 }
 
-
-"#howToDeleteHint": {
-    text: L('Mobile_HowtoDeleteAnAccount'),
-    font: {fontWeight: 'bold', fontSize: 14},
-    color: '#7e7e7e',
-    left: 10,
-    right: 10,
-}
-
 ".footer": {
     top: 10,
     bottom: 10,
