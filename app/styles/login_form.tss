@@ -40,18 +40,17 @@
     backgroundColor: '#E6E6E6'
 }
 
-
 ".textfield": {
     top: 2,
     height: 40,
     left: 10, 
     right: 10,
+    color: "#212121",
     autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
     borderStyle: Ti.UI.INPUT_BORDERSTYLE_NONE,
     autocorrect: false,
     clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS
 },
-
 
 ".textfield[platform=ios]": {
     hintTextColor: '#555'
