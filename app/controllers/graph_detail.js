@@ -20,8 +20,7 @@ $.index.add(graphSwitcher.getView());
 graphSwitcher.on('close', close);
 
 graphSwitcher.on('switch', function () {
-    var url = getGraphUrlWithSize(getPictureWidth(), getPictureHeight());
-    $.graphWidget.loadImage(url);
+    renderIfPossibleAndNeeded();
 });
 
 $.index.addEventListener('click', function () {
@@ -51,65 +50,28 @@ function getViewWidth() {
  * @returns {int} The height in px 
  */
 function getViewHeight() {
-    if ($.index && $.index.size && $.index.size.height) {
-        return $.index.size.height;
+    return $.graphWidget.getHeight();
+}
+
+function renderIfPossibleAndNeeded()
+{
+    if (!$.graphWidget) {
+        return;
     }
 
-    return Ti.Platform.displayCaps.platformHeight;
-}
-
-/**
- * Gets the calculated width of the graph.
- * 
- * @returns {int} The width in px 
- */
-function getPictureWidth() {
-    return getViewWidth() - 20; // 10px space top and bottom
-}
-
-/**
- * Gets the calculated height of the graph.
- * 
- * @returns {int} The height in px 
- */
-function getPictureHeight() {
-    var height        = getViewHeight();
-    var pictureHeight = 0;
-    
-    if (isTablet) {
-        pictureHeight = height -  Math.floor(height / 4) - 20; // 75% - 20px (10px space top and bottom)
-    } else {
-        pictureHeight = height - 20; // 10px space left and right
+    var pictureWidth     = $.graphWidget.getWidth();
+    var pictureHeight    = $.graphWidget.getHeight();
+    if (!pictureWidth || !pictureHeight) {
+        return;
     }
-    
-    return pictureHeight;
+
+    var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
+
+    $.graphWidget.off('postlayout', renderIfPossibleAndNeeded);
+
+    $.graphWidget.loadImage(graphUrlWithSize);
 }
 
-var navBarHeight = Ti.Platform.displayCaps.platformHeight - getViewHeight();
-
-/**
- * Gets the calculated width of the graph after a window orientation change on Android. We have to detect 
- * current width/height cause 'this.size' is not correct after an orientation change.
- * 
- * @returns {int} The width in px 
- */
-function getOrientationSpecificWidth() {
-    var pictureWidth = Ti.Platform.displayCaps.platformWidth - navBarHeight - 50;
-    
-    return pictureWidth;
-}
-
-/**
- * Gets the calculated height of the graph after a window orientation change on Android. We have to detect 
- * current width/height cause 'this.size' is not correct after an orientation change.
- * 
- * @returns {int} The height in px 
- */
-function getOrientationSpecificHeight() {
-    var pictureHeight = Ti.Platform.displayCaps.platformHeight - navBarHeight - 50;
-    
-    return pictureHeight;
-}
 
 /**
  * Gets the graph url for the given width and height.
@@ -158,11 +120,6 @@ function getImageView(url, width, height) {
     return Alloy.createWidget('org.piwik.imageview', 'widget', options);
 }
 
-var pictureWidth     = getPictureWidth();
-var pictureHeight    = getPictureHeight();
-var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
-
-$.graphWidget.loadImage(graphUrlWithSize);
 
 if (isTablet) {
 
@@ -180,12 +137,13 @@ if (isTablet) {
 
 } else {
 
+
     function rotateImageOnAndroid (event) {
 
         try {
-            var pictureWidth  = getOrientationSpecificWidth();
-            var pictureHeight = getOrientationSpecificHeight();
-            
+            var width = $.graphWidget.getWidth();
+            var height = $.graphWidget.getHeight();
+
             $.index.remove($.graph);
             $.graph = null;
 
@@ -194,8 +152,8 @@ if (isTablet) {
                 $.graphWidget = null;
             }
 
-            var graphUrlWithSize = getGraphUrlWithSize(pictureWidth, pictureHeight);
-            $.graphWidget        = getImageView(graphUrlWithSize, pictureWidth, pictureHeight);
+            var graphUrlWithSize = getGraphUrlWithSize(width, height);
+            $.graphWidget        = getImageView(graphUrlWithSize, width, height);
             $.graph              = $.graphWidget.getView();
 
             $.graphWidget.setParent($.index);

@@ -6,7 +6,7 @@
  */
 
 var rootWin = Ti.UI.createWindow({
-    backgroundColor: "#eff0f1",
+    backgroundColor: "#0e1328",
     exitOnClose: true,
     windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_STATE_HIDDEN
 });

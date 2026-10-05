@@ -1,6 +1,6 @@
 <Alloy>
     <Window module="xp.ui" formFactor="handheld" id="index" onClose="destroy" onOpen="onOpen">
-        <Require id="graphWidget" type="widget" src="org.piwik.imageview"/>
+        <Require id="graphWidget" type="widget" onPostlayout="renderIfPossibleAndNeeded"  src="org.piwik.imageview"/>
     </Window>
     <Window module="xp.ui" formFactor="tablet" id="index" onClose="destroy">
         <View id="topContainer">
@@ -11,7 +11,7 @@
         </View>
         <View class="separator"/>
         <View id="bottomContainer">
-            <Require id="graphWidget" type="widget" src="org.piwik.imageview"/>
+            <Require id="graphWidget" type="widget" onPostlayout="renderIfPossibleAndNeeded"  src="org.piwik.imageview"/>
         </View>
     </Window>
 </Alloy>
