@@ -10,8 +10,6 @@ var args = arguments[0] || {};
 var errorImage = '/images/image_load_error.png';
 var supportsWidthDetectionOfImage = true;
 
-var validateSsl = true;
-
 function loadImageViaXhr(imageView, urlToLoad)
 {
     if ($.imageLoader && $.imageLoader.abort) {
@@ -26,7 +24,7 @@ function loadImageViaXhr(imageView, urlToLoad)
     }
     var tokenAuth = accountModel.getAuthToken();
 
-    $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: !!validateSsl,
+    $.imageLoader = Ti.Network.createHTTPClient({validatesSecureCertificate: true,
         enableKeepAlive: false});
 
     $.imageLoader.timeout = (1000 * 60 * 2); // 2 minutes
@@ -101,6 +99,18 @@ exports.getHeight = function()
     }
     return height;
 };
+
+function forgetLastKnownSizes() {
+    $.image.lastKnownHeight = null;
+    $.image.lastKnownWidth = null;
+}
+
+Ti.Gesture.addEventListener('orientationchange', forgetLastKnownSizes);
+
+function destroy()
+{
+    Ti.Gesture.removeEventListener('orientationchange', forgetLastKnownSizes);
+}
 
 if (args && args.image) {
     exports.loadImage(args.image);
