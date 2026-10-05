@@ -38,15 +38,6 @@ function HttpRequest () {
     this.baseUrl = null;
 
     /**
-     * The user agent used when sending requests.
-     * 
-     * @default  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1"
-     *
-     * @type     string
-     */
-    this.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36';
-
-    /**
      * An object containing key/value pairs. These are used as GET parameters when executing the request.
      *
      * @see   HttpRequest#setParameter
@@ -181,8 +172,9 @@ HttpRequest.prototype.handle = function () {
     
     this.xhr.open('POST', this.baseUrl);
     
-    if (this.userAgent) {
-        this.xhr.setRequestHeader('User-Agent', this.userAgent);
+    if (Alloy.Globals.userAgent) {
+        this.xhr.setRequestHeader('User-Agent', null);
+        this.xhr.setRequestHeader('User-Agent', Alloy.Globals.userAgent);
     }
 
     this.xhr.send(this.getRequestUrl());

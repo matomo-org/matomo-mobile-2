@@ -21,8 +21,6 @@
 function TrackerRequest () {
 
     this.baseUrl    = require('alloy').CFG.tracking.piwikServerUrl;
-
-    this.userAgent  = Ti.userAgent;
 }
 
 var HttpRequest = require('Piwik/Network/HttpRequest');
