@@ -20,5 +20,5 @@ Alloy.statusBarStyle = null;
 //   HTTPClient force-injects its own "Titanium SDK/..." header on every open() call, then only
 //   ever appends (never replaces) any header set afterwards. HttpRequest.js works around this
 //   per-request by clearing the header before re-setting it (see HttpRequest.prototype.send).
-Alloy.Globals.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36';
+Alloy.Globals.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36';
 Ti.userAgent = Alloy.Globals.userAgent;
