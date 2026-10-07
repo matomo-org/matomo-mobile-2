@@ -17,7 +17,7 @@
             ],
             "filterLimit": 30,
             "graph": {
-                "fontSize": 9,
+                "fontSize": 10,
                 "showMetricTitle": 0,
                 "aliasedGraph": 1,
                 "legendAppendMetric": 0,
